@@ -13,12 +13,13 @@ body {
 	background: rgb(49, 123, 113);
 	color: #fff;
 	text-align: center;
-	font-family: 'Open Sans', 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+	font-family: 'Open Sans', 'Calibri', 'Trebuchet MS', sans-serif;
 	font-weight: lighter;
 	font-size: 1.5em;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	cursor: default;
 }
 
 h1 {
@@ -39,7 +40,6 @@ header, footer {
 	display: flex;
 	flex-direction: column;
 	font-size: .7em;
-	align: center;
 }
 
 footer {
@@ -49,7 +49,6 @@ footer {
 header > a {
 	border-top: none;
 	border-bottom: .1em solid #fff;
-
 }
 
 footer > a {
@@ -76,4 +75,16 @@ a:active {
 
 a:visited {
 	color: white;
+}
+
+strong {
+	font-size: 1.5em;
+	color: #ff2211;
+	-webkit-transition: color .2s;
+	-o-transition: color .2s;
+	transition: color .2s;
+}
+
+strong:hover {
+	color: #fff;
 }
