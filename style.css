@@ -6,16 +6,19 @@
 	background: #fff;
 }
 
+html, body {
+	height: 100%;
+}
+
 body {
 	margin: 0;
 	padding: 0;
-	height: 100vh;
 	background: rgb(49, 123, 113);
 	color: #fff;
 	text-align: center;
 	font-family: 'Open Sans', 'Calibri', 'Trebuchet MS', sans-serif;
 	font-weight: lighter;
-	font-size: 1.5em;
+	font-size: 3vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
