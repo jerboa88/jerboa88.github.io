@@ -1,8 +1,79 @@
+::-moz-selection {
+	background: #fff;
+}
+
+::selection {
+	background: #fff;
+}
+
 body {
-	background: #000;
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	background: rgb(49, 123, 113);
 	color: #fff;
 	text-align: center;
-	font-family: 'Roboto', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-family: 'Open Sans', 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+	font-weight: lighter;
+	font-size: 1.5em;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+}
+
+h1 {
+	text-shadow: .05em .05em .1em rgba(0,0,0,.5);
+}
+
+p {
+	font-size: .75em;
+	text-shadow: .04em .04em .07em rgba(0,0,0,.5);
+}
+
+b {
+	font-weight: 400;
+}
+
+header, footer {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	font-size: .7em;
+	align: center;
+}
+
+footer {
+	justify-content: flex-end;
+}
+
+header > a {
+	border-top: none;
+	border-bottom: .1em solid #fff;
+
+}
+
+footer > a {
+	border-top: .1em solid #fff;
+	border-bottom: none;
+}
+
+a:link {
+	color: #fff;
+	text-decoration: none;
+	border-radius: 50%;
+	width: 20%;
+	max-width: 10em;
+	align-self: center;
+}
+
+a:hover {
+	opacity: .7;
+}
+
+a:active {
+	opacity: 1;
+}
+
+a:visited {
+	color: white;
 }
