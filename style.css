@@ -119,9 +119,38 @@ section > a {
 }
 
 section a:link, section a:visited {
+	border-bottom: 1px solid #317b71;
 	color: #317b71;
 }
 
 .fa-angle-down {
 	transition: transform .5s;
+}
+
+.fab {
+	margin-right: .3em;
+}
+
+nav {
+	display: flex;
+	justify-content: space-evenly;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+}
+
+nav a {
+	font-size: .8em;
+	padding: 1em;
+	border: 1px solid #fff;
+	border-radius: .5em;
+	transition: transform .5s;
+}
+
+nav a:hover {
+	transform: scale(1.1);
+	opacity: 1;
+}
+
+nav a:active {
+	opacity: .8;
 }
