@@ -13,7 +13,7 @@ html, body {
 body {
 	margin: 0;
 	padding: 0;
-	background: rgb(49, 123, 113);
+	background: #317b71;
 	color: #fff;
 	text-align: center;
 	font-family: 'Open Sans', 'Calibri', 'Trebuchet MS', sans-serif;
@@ -23,7 +23,6 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	cursor: default;
-	transition: background 2s cubic-bezier(0.645, 0.045, 0.355, 1);
 	overflow: hidden;
 }
 
