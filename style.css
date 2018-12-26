@@ -97,5 +97,26 @@ strong {
 }
 
 strong:hover {
-	color: #fff;
+	color: #111;
+}
+
+section {
+	position: fixed;
+	top: -100%;
+	left: 10%;
+	right: 10%;
+	height: 60%;
+	background: #fff;
+	border-radius: .8em;
+	box-shadow: .05em .05em .1em rgba(0,0,0,.5);
+	transition: top .5s;
+}
+
+.open {
+	top: 20%;
+}
+
+h2, section > p {
+	color: #111;
+	text-shadow: none;
 }

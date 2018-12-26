@@ -1,8 +1,7 @@
-var body = document.getElementsByTagName('body')[0],
-		max = 150
+var buttons = [document.getElementById('about_button'), document.getElementsByTagName('section')[0]]
 
-function getVal() {
-	return Math.round(Math.random() * max)
+for (let i = 0; i < 2; i++) {
+	buttons[i].addEventListener('click', function() {
+		buttons[1].classList.toggle('open')
+	})
 }
-
-document.body.style.background = 'rgb(' + getVal() + ', ' + getVal() + ', ' + getVal() + ')'
