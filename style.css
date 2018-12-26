@@ -56,13 +56,16 @@ footer {
 	justify-content: flex-end;
 }
 
-a:link {
-	color: #fff;
-	text-decoration: none;
-	border-radius: 50%;
+header > a:link, footer > a:link {
 	width: 20%;
 	max-width: 10em;
 	align-self: center;
+	padding: 1em;
+}
+
+a:link {
+	color: #fff;
+	text-decoration: none;
 }
 
 a:hover {
@@ -117,4 +120,8 @@ section > a {
 
 section a:link, section a:visited {
 	color: #317b71;
+}
+
+.fa-angle-down {
+	transition: transform .5s;
 }
