@@ -56,16 +56,6 @@ footer {
 	justify-content: flex-end;
 }
 
-header > a {
-	border-top: none;
-	border-bottom: .1em solid #fff;
-}
-
-footer > a {
-	border-top: .1em solid #fff;
-	border-bottom: none;
-}
-
 a:link {
 	color: #fff;
 	text-decoration: none;
@@ -84,7 +74,7 @@ a:active {
 }
 
 a:visited {
-	color: white;
+	color: #fff;
 }
 
 strong {
@@ -105,6 +95,7 @@ section {
 	left: 10%;
 	right: 10%;
 	height: 60%;
+	padding: 1.2em;
 	background: #fff;
 	border-radius: .8em;
 	box-shadow: .05em .05em .1em rgba(0,0,0,.5);
@@ -118,4 +109,12 @@ section {
 h2, section > p {
 	color: #111;
 	text-shadow: none;
+}
+
+section > a {
+	color: #111;
+}
+
+section a:link, section a:visited {
+	color: #317b71;
 }
