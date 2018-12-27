@@ -6,12 +6,8 @@
 for (let i = 0; i < 2; i++) {
 	buttons[i].addEventListener('click', function() {
 		buttons[1].classList.toggle('open')
-		toggleArrow()
+		deg += 180
+		arrow.style.transform = 'rotate(' + deg + 'deg)'
 	})
-}
-
-function toggleArrow() {
-	deg += 180
-	arrow.style.transform = 'rotate(' + deg + 'deg)'
 }
 })();
