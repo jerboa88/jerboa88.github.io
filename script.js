@@ -1,7 +1,6 @@
 (function(){
 	var buttons = [document.getElementById('about_button'), document.getElementsByTagName('section')[0]],
 		arrow = document.getElementsByClassName('fa-angle-down')[0],
-		up = false,
 		deg = 0
 
 for (let i = 0; i < 2; i++) {
@@ -14,6 +13,5 @@ for (let i = 0; i < 2; i++) {
 function toggleArrow() {
 	deg += 180
 	arrow.style.transform = 'rotate(' + deg + 'deg)'
-	up = !up
 }
 })();
