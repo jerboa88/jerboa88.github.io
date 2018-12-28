@@ -12,7 +12,7 @@ html, body {
 
 body {
 	margin: 0;
-	padding: 0;
+	padding: 0 1em;
 	background: #317b71;
 	color: #fff;
 	text-align: center;
@@ -179,6 +179,7 @@ nav {
 
 nav a {
 	font-size: .8em;
+	margin: .2em;
 	padding: 1em;
 	border: 1px solid #fff;
 	border-radius: .5em;
