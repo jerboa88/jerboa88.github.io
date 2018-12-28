@@ -146,6 +146,11 @@ section a:link, section a:visited {
 	color: #317b71;
 }
 
+i {
+	display: inline-block;
+	font-size: 1.3em;
+}
+
 .fa-angle-down {
 	-webkit-transition: -webkit-transform .5s;
 	transition: -webkit-transform .5s;
@@ -156,6 +161,7 @@ section a:link, section a:visited {
 
 .fab {
 	margin-right: .3em;
+	vertical-align: bottom;
 }
 
 nav {
