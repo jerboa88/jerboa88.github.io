@@ -6,4 +6,4 @@
 My personal/portfolio site. More coming soon!
 
 ## License
-This project is licensed under the MIT License. See [LICENSE.md](LICENSE.md) for details.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
