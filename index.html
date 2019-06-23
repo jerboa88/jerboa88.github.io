@@ -1,67 +1,40 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
-	<title>John Goodliff</title>
-	<meta name="description" content="My personal page. Still under construction">
-	<meta name="author" content="John Goodliff">
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131464775-1"></script>
-	<script>
-		window.dataLayer = window.dataLayer || []
-		function gtag(){dataLayer.push(arguments)}
-		gtag('js', new Date())
-
-		gtag('config', 'UA-131464775-1')
-	</script>
-	<script type="application/ld+json">
-		{
-			"@context": "http://schema.org",
-			"@type": "Person",
-			"name": "John Goodliff",
-			"url": "https://jerboa88.github.io",
-			"sameAs" : [
-				"https://github.com/jerboa88",
-				"https://instagram.com/jerboa88",
-				"https://www.facebook.com/jerboa88"
-			]
-		}
-		</script>
-
-	<link rel="stylesheet" href="./style.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Montserrat:900">
-
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
-	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#317b71">
-	<meta name="msapplication-navbutton-color" content="#317b71">
-	<meta name="msapplication-TileColor" content="#317b71">
-	<meta name="theme-color" content="#317b71">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-</head>
-
+---
+layout: main
+title: Portfolio
+---
 <body>
 	<header>
-		<a href="#" id="about_button"><b>About<br><i class="fas fa-angle-down"></i></b></a>
+		<h1>John Goodliff</h1>
+		<p>I am a passionate Computing Science student currently working towards my Bachelors at the University of Alberta. I am interested in a wide variety of compute related topics including programming, 2d/3d graphic design, audio production, and web design. I have experience with both web technologies and classical programming. I am most comfortable with vanilla HTML, CSS, and Javascript but I'm excited to learning more technologies in the future.</p>
+
+		<a href="#projects"><b>Projects<br><i class="fas fa-angle-down"></i></b></a>
 	</header>
-	<h1>John Goodliff</h1>
-	<p>My personal site. Check out my projects on GitHub or creep me on social media. More coming soon!</p>
-	<nav>
-		<a rel="external" href="https://github.com/jerboa88"><b><i class="fab fa-github-square"></i> Github</b></a>
-		<a rel="external" href="https://instagram.com/jerboa88"><b><i class="fab fa-instagram"></i> Instagram</b></a>
-		<a rel="external" href="https://www.facebook.com/jerboa88"><b><i class="fab fa-facebook-square"></i> Facebook</b></a>
-	</nav>
-	<footer>
-		<a href="https://github.com/jerboa88/jerboa88.github.io"><b><i class="fas fa-angle-up"></i><br>This project on GitHub</b></a>
-	</footer>
-	<section>
-		<h2>About</h2>
-		<p>Handmade with <strong>♥</strong> by John Goodliff. All icons from the <a rel="external" href="https://fontawesome.com/start">Font Awesome</a> icon set and packaged by <a rel="external" href="https://icomoon.io/">IcoMoon</a>. Proudly hosted by <a rel="external" href="https://pages.github.com/">GitHub Pages</a>. This project is licensed under the <a rel="license" href="LICENSE.md">MIT License</a>.<br><br>Copyright © 2018 John Goodliff</p>
+
+	<section id="projects" class="{% assign value = site.projects | size %}{% if value == 1 %}one {% endif %}{% assign value = value | modulo: 2 %}{% unless value == 0 %}two-odd {% endunless %}{% assign value = site.projects | size | modulo: 3 %}{% if value == 1 %}three-odd-one{% elsif value == 2 %}three-odd-two{% endif %}">
+		<h2>Featured Projects</h2>
+		<div class="project-container">
+			{% assign projects = site.projects | sort: 'importance' %}
+			{% for project in projects %}
+				{% if project.importance %}
+					{% include project_tile.html %}
+				{% endif %}
+			{% endfor %}
+			{% for project in projects %}
+				{% unless project.importance %}
+					{% include project_tile.html %}
+				{% endunless %}
+			{% endfor %}
+		</div>
 	</section>
-	<script src="./script.js"></script>
+
+	<footer>
+		<h2>Contact</h2>
+		<p>Feel free to contact me on social media for the moment.</p>
+		<nav>
+			<a rel="external" href="https://github.com/jerboa88"><b><i class="fab fa-github-square"></i> Github</b></a>
+			<a rel="external" href="https://instagram.com/jerboa88"><b><i class="fab fa-instagram"></i> Instagram</b></a>
+			<a rel="external" href="https://www.facebook.com/jerboa88"><b><i class="fab fa-facebook-square"></i> Facebook</b></a>
+		</nav>
+		<p>Handmade with <strong>♥</strong> by John Goodliff. All icons from the <a rel="external" href="https://fontawesome.com/start">Font Awesome</a> icon set and packaged by <a rel="external" href="https://icomoon.io/">IcoMoon</a>. Proudly hosted by <a rel="external" href="https://pages.github.com/">GitHub Pages</a>. This project is licensed under the <a rel="license" href="LICENSE.md">MIT License</a>. Copyright © 2018 John Goodliff</p>
+	</footer>
 </body>
-</html>

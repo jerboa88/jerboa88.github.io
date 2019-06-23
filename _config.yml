@@ -1,0 +1,17 @@
+# Site settings
+title: John's Portfolio
+author: John Goodliff
+description: "John Goodliff's personal portfolio"
+url: "jerboa88.github.io"
+# File structure settings
+image_path: /img
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+# Collection definitions and settings
+collections:
+  projects:
+    output: false
+    permalink: /projects/:path/

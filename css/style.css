@@ -1,0 +1,331 @@
+:root {
+	--bg-color: #317b71;
+	--text-color: #fff;
+	--alt-text-color: #000;
+	--project-bg-color: #252525;
+	--selection-color: rgba(255, 34, 17, 0.8);
+	--heart-color: rgba(255, 34, 17, 1)
+}
+
+::-moz-selection {
+	background: var(--selection-color);
+}
+
+::selection {
+	background: var(--selection-color);
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+	body {
+		scroll-behavior: auto;
+	}
+}
+
+@media (min-width: 1024px) {
+	.project-container {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+
+	.three-odd-one > .project-container > .project:last-child,
+	.three-odd-one > .project-container > .project:nth-last-child(4),
+	.three-odd-two > .project-container > .project:last-child {
+		grid-column: span 2;
+	}
+
+	.one > .project-container > .project:last-child {
+		grid-column: span 3;
+	}
+}
+
+@media (min-width: 690px) and (max-width: 1024px) {
+	.project-container {
+		grid-template-columns: 1fr 1fr;
+	}
+	.two-odd > .project-container > .project:last-child {
+		grid-column: span 2;
+	}
+}
+
+@media (max-width: 690px) {
+	.project-container {
+		grid-template-columns: 100%;
+	}
+}
+
+html, body {
+	margin: 0;
+}
+
+body {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background: var(--bg-color);
+	color: var(--text-color);
+	text-align: center;
+	font-family: 'Open Sans', 'Calibri', 'Trebuchet MS', sans-serif;
+	font-weight: lighter;
+	font-size: 3vh;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+}
+
+header, footer {
+	min-height: 100vh;
+	margin: 0 4vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+header > a:link {
+	font-size: .8em;
+}
+
+h1 {
+	margin: 20vh 0 0 0;
+	text-shadow: .05em .05em .1em rgba(0,0,0,.5);
+	-webkit-transition: -webkit-transform .5s;
+	transition: -webkit-transform .5s;
+	-o-transition: transform .5s;
+	transition: transform .5s;
+	transition: transform .5s, -webkit-transform .5s;
+}
+
+h1:hover {
+	-webkit-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	transform: scale(1.1);
+}
+
+h2 {
+	margin: 0;
+	padding: 1em;
+}
+
+h1, h2, h4 {
+	font-family: 'Montserrat';
+	text-shadow: .05em .05em .1em rgba(0,0,0,.5);
+}
+
+p {
+	margin: 0;
+	font-size: .8em;
+	text-shadow: .04em .04em .07em rgba(0,0,0,.5);
+}
+
+footer > p:last-child {
+	font-size: .6em;
+	margin-bottom: 2em;
+}
+
+strong {
+	font-size: 1.3em;
+	color: var(--heart-color);
+	-webkit-transition: color .2s;
+	-o-transition: color .2s;
+	transition: color .2s;
+}
+
+strong:hover {
+	color: var(--text-color);
+}
+
+footer a:link {
+	border-bottom: 1px solid var(--text-color);
+}
+
+a:link {
+	color: var(--text-color);
+	text-decoration: none;
+}
+
+a:hover {
+	opacity: .7;
+}
+
+a:active {
+	opacity: 1;
+}
+
+a:visited {
+	color: var(--text-color);
+}
+
+nav a {
+	display: inline-block;
+	margin: .2em;
+	padding: 1em;
+	font-size: .8em;
+	border: 1px solid var(--text-color);
+	border-radius: .5em;
+	-webkit-transition: -webkit-transform .5s;
+	transition: -webkit-transform .5s;
+	-o-transition: transform .5s;
+	transition: transform .5s;
+	transition: transform .5s, -webkit-transform .5s;
+}
+
+nav a:hover {
+	-webkit-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	transform: scale(1.1);
+	opacity: 1;
+}
+
+nav a:active {
+	opacity: .7;
+}
+
+img {
+	max-width: 50%;
+}
+
+h4 {
+	font-family: 'Open Sans', 'Calibri', 'Trebuchet MS', sans-serif;
+	font-size: 1.3em;
+	font-weight: lighter;
+}
+
+.project {
+	background-color: var(--project-bg-color);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	text-align: left;
+}
+
+.project-container {
+	display: grid;
+}
+
+.project:hover {
+	opacity: 1;
+}
+
+.project-type {
+	width: max-content;
+	padding: .4em;
+	font-size: .7em;
+	font-style: italic;
+	border-radius: .5em;
+	border-radius: 0 0 .5em 0;
+}
+
+.project > div {
+	height: 100%;
+	transition: background .5s;
+	background: rgba(0,0,0,.2);
+}
+
+h4, .project-text > p {
+	height: 40vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0;
+	text-align: center;
+}
+
+.project-text {
+	margin: 0 2em;
+}
+
+.project-text > p {
+	height: 0;
+	flex: 1;
+	opacity: 0;
+	overflow-y: hidden;
+}
+
+.project:hover > div > .project-text > h4 {
+	height: 0;
+	opacity: 0;
+	transition: opacity .25s 0s ease-out, height 0s .25s step-end;
+}
+
+.project:hover > div > .project-text > p {
+	height: 40vh;
+	opacity: 1;
+	transition: height 0s .25s step-end, opacity .25s .25s ease-in;
+}
+
+.web, .web-h:hover {
+	background: rgba(255, 152, 0, .75);
+	color: var(--text-color);
+}
+
+.extension, .extension-h:hover {
+	background: rgba(255, 235, 59, .75);
+	color: var(--alt-text-color);
+}
+
+.python, .python-h:hover {
+	background: rgba(63, 81, 181, .75);
+	color: var(--text-color);
+}
+
+.c, .c-h:hover {
+	background: rgba(244, 67, 54, .75);
+	color: var(--text-color);
+}
+
+.node, .node-h:hover {
+	background: rgba(76, 175, 80, .75);
+	color: var(--text-color);
+}
+
+.blender, .blender-h:hover {
+	background: rgba(156, 39, 176, .5);
+	color: var(--text-color);
+}
+
+.unknown, .unknown-h:hover {
+	background: rgba(51, 51, 51, .5);
+	color: var(--text-color);
+}
+
+
+
+/* IcoMoon icon font styles */
+@font-face {
+	font-family: 'icomoon';
+	src:  url('/fonts/icomoon.eot?cty8cc');
+	src:  url('/fonts/icomoon.eot?cty8cc#iefix') format('embedded-opentype'),
+		url('/fonts/icomoon.ttf?cty8cc') format('truetype'),
+		url('/fonts/icomoon.woff?cty8cc') format('woff'),
+		url('/fonts/icomoon.svg?cty8cc#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+i {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'icomoon' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.fa-facebook-square:before {
+	content: '\f082';
+}
+.fa-github-square:before {
+	content: '\f092';
+}
+.fa-angle-up:before {
+	content: '\2bc5';
+}
+.fa-angle-down:before {
+	content: '\2bc6';
+}
+.fa-instagram:before {
+	content: '\f16d';
+}
