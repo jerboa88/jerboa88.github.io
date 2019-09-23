@@ -6,6 +6,6 @@ type: Python
 category: python
 date: September 29, 2014
 image: minicalc.png
-external: https://github.com/jerboa88/MiniCalc
+external:
 ---
 # Markdown goes here

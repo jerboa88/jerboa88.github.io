@@ -5,6 +5,6 @@ description: A tool to simplify development in MIPS. Use easy to remember variab
 type: Python
 category: python
 date: September 29, 2014
-external: https://github.com/jerboa88/mips-variable-replacer
+external:
 ---
 # Markdown goes here

@@ -6,7 +6,7 @@ type: Extension
 category: extension
 date: September 22, 2018
 image: tally-extension.png
-external: https://github.com/jerboa88/-Extension
+external: https://github.com/jerboa88/Tally-Extension
 importance: 4
 ---
 # Markdown goes here
