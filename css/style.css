@@ -4,7 +4,9 @@
 	--alt-text-color: #000;
 	--project-bg-color: #252525;
 	--selection-color: rgba(255, 34, 17, 0.8);
-	--heart-color: rgba(255, 34, 17, 1)
+	--heart-color: rgba(255, 34, 17, 1);
+	--text-shadow: .04em .04em .07em rgba(0,0,0,.5);
+	--text-shadow2: .02em .02em .05em rgba(0,0,0,.4);
 }
 
 ::-moz-selection {
@@ -16,7 +18,7 @@
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
-	body {
+	html, body {
 		scroll-behavior: auto;
 	}
 }
@@ -35,6 +37,10 @@
 	.one > .project-container > .project:last-child {
 		grid-column: span 3;
 	}
+
+	header, footer {
+		height: 100vh;
+	}
 }
 
 @media (min-width: 690px) and (max-width: 1024px) {
@@ -44,16 +50,27 @@
 	.two-odd > .project-container > .project:last-child {
 		grid-column: span 2;
 	}
+
+	header, footer {
+		height: 100vh;
+	}
 }
 
 @media (max-width: 690px) {
 	.project-container {
 		grid-template-columns: 100%;
 	}
+
+	header, footer {
+		height: -moz-available;
+		height: -webkit-fill-available;
+		height: fill-available;
+	}
 }
 
 html, body {
 	margin: 0;
+	scroll-behavior: smooth;
 }
 
 body {
@@ -67,11 +84,9 @@ body {
 	font-weight: lighter;
 	font-size: 3vh;
 	overflow-x: hidden;
-	scroll-behavior: smooth;
 }
 
 header, footer {
-	min-height: 100vh;
 	margin: 0 4vw;
 	display: flex;
 	flex-direction: column;
@@ -80,11 +95,11 @@ header, footer {
 
 header > a:link {
 	font-size: .8em;
+	padding-bottom: 1em;
 }
 
 h1 {
 	margin: 20vh 0 0 0;
-	text-shadow: .05em .05em .1em rgba(0,0,0,.5);
 	-webkit-transition: -webkit-transform .5s;
 	transition: -webkit-transform .5s;
 	-o-transition: transform .5s;
@@ -104,14 +119,14 @@ h2 {
 }
 
 h1, h2, h4 {
-	font-family: 'Montserrat';
-	text-shadow: .05em .05em .1em rgba(0,0,0,.5);
+	font-family: 'Montserrat', Arial, Impact, Helvetica, sans-serif;
+	text-shadow: var(--text-shadow);
 }
 
 p {
 	margin: 0;
 	font-size: .8em;
-	text-shadow: .04em .04em .07em rgba(0,0,0,.5);
+	text-shadow: var(--text-shadow2);
 }
 
 footer > p:last-child {
