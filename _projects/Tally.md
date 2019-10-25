@@ -1,12 +1,15 @@
 ---
-layout: project
+layout: project_page
 title: Tally Word Counter
 description: Your favorite character counter, with a dark mode! Count the number of words, sentences, and paragraphs in your text instantly.
 type: HTML, CSS, JS
 category: web
-date: September 22, 2018
+date: March 14, 2019
 image: tally.png
-external: https://github.com/jerboa88/Tally
+github_link: https://github.com/jerboa88/Tally
+visit_link: https://tallywordcounter.online
 importance: 3
 ---
-# Markdown goes here
+A site that counts the number of words, sentences, and paragraphs in inputted text. A personal project,
+created partly because there is a lack of dark character counters online, and also to practice using CSS grid
+layouts, parsing, and cookie handling in Javascript.

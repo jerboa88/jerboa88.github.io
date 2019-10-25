@@ -1,0 +1,17 @@
+<nav>
+{% if page.github_link %}
+	<a rel="external" href="{{ page.github_link }}" target="_blank"><i class="fa-github-square"></i> Github</a>
+{% endif %}
+
+{% if page.chrome_link %}
+	<a rel="external" href="{{ page.chrome_link }}" target="_blank"><i class="fa-chrome"></i> Chrome Extension</a>
+{% endif %}
+
+{% if page.firefox_link %}
+	<a rel="external" href="{{ page.firefox_link }}" target="_blank"><i class="fa-firefox"></i> Add-on for Firefox</a>
+{% endif %}
+
+{% if page.visit_link %}
+	<a rel="external" href="{{ page.visit_link }}" target="_blank"><i class="fa-globe"></i> {{ page.visit_name | default: 'Visit' }}</a>
+{% endif %}
+</nav>

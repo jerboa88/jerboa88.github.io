@@ -1,4 +1,5 @@
-<a href="{{ site.baseurl }}{{ project.external }}" class="project" style="background-image: url({{ site.image_path }}/{{ project.image | default: 'unknown.png' }})">
+{% if project.hidden != true %}
+<a href="{{ site.baseurl }}{{ project.url | default: '404'}}" class="project" style="background-image: url({{ site.image_path }}/{{ project.image | default: 'unknown.png' }})">
 	<div class="{{ project.category | default: 'unknown' }}-h">
 		<div class="project-type {{ project.category | default: 'unknown' }}"><p>{{ project.type | default: 'Unknown' }}</p></div>
 		<div class="project-text">
@@ -7,3 +8,4 @@
 		</div>
 	</div>
 </a>
+{% endif %}

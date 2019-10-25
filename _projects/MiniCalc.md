@@ -1,11 +1,10 @@
 ---
-layout: project
+layout: project_page
 title: MiniCalc
 description: A complete command line calculator and parser implemented in Python
 type: Python
 category: python
-date: September 29, 2014
+date: February 28, 2019
 image: minicalc.png
-external:
 ---
-# Markdown goes here
+A complete command line calculator and parser implemented in Python. Compatible with both Python 2 and Python 3. Allows complex expressions to be evaluated in the terminal.

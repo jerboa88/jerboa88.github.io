@@ -2,7 +2,11 @@
 title: John's Portfolio
 author: John Goodliff
 description: "John Goodliff's personal portfolio"
-url: "jerboa88.github.io"
+url: "johng.io"
+
+# Change the primary color of the entire site
+theme_color: "#317b71"
+
 # File structure settings
 image_path: /img
 
@@ -13,5 +17,5 @@ permalink: pretty
 # Collection definitions and settings
 collections:
   projects:
-    output: false
+    output: true
     permalink: /projects/:path/

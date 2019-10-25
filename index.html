@@ -2,39 +2,41 @@
 layout: main
 title: Portfolio
 ---
-<body>
-	<header>
-		<h1>John Goodliff</h1>
-		<p>I am a passionate Computing Science student currently working towards my Bachelors at the University of Alberta. I am interested in a wide variety of compute related topics including programming, 2d/3d graphic design, audio production, and web design. I have experience with both web technologies and classical programming. I am most comfortable with vanilla HTML, CSS, and Javascript but I'm excited to learning more technologies in the future.</p>
 
-		<a href="#projects"><b>Projects<br><i class="fas fa-angle-down"></i></b></a>
-	</header>
+<header>
+	<h1>John Goodliff</h1>
+	<p>I am a passionate Computing Science student currently working towards my Bachelors at the University of Alberta. I am interested in a wide variety of compute related topics including programming, 2d/3d graphic design, audio production, and web design. I have experience with both web technologies and classical programming. I am most comfortable with vanilla HTML, CSS, and Javascript but I'm excited to learning more technologies in the future.</p>
 
-	<section id="projects" class="{% assign value = site.projects | size %}{% if value == 1 %}one {% endif %}{% assign value = value | modulo: 2 %}{% unless value == 0 %}two-odd {% endunless %}{% assign value = site.projects | size | modulo: 3 %}{% if value == 1 %}three-odd-one{% elsif value == 2 %}three-odd-two{% endif %}">
-		<h2>Featured Projects</h2>
-		<div class="project-container">
-			{% assign projects = site.projects | sort: 'importance' %}
-			{% for project in projects %}
-				{% if project.importance %}
-					{% include project_tile.html %}
-				{% endif %}
-			{% endfor %}
-			{% for project in projects %}
-				{% unless project.importance %}
-					{% include project_tile.html %}
-				{% endunless %}
-			{% endfor %}
-		</div>
-	</section>
+	{% include down_button.html %}
+</header>
 
-	<footer>
-		<h2>Contact</h2>
-		<p>Feel free to contact me on social media for the moment.</p>
-		<nav>
-			<a rel="external" href="https://github.com/jerboa88"><b><i class="fab fa-github-square"></i> Github</b></a>
-			<a rel="external" href="https://instagram.com/jerboa88"><b><i class="fab fa-instagram"></i> Instagram</b></a>
-			<a rel="external" href="https://www.facebook.com/jerboa88"><b><i class="fab fa-facebook-square"></i> Facebook</b></a>
-		</nav>
-		<p>Handmade with <strong>♥</strong> by John Goodliff. All icons from the <a rel="external" href="https://fontawesome.com/start">Font Awesome</a> icon set and packaged by <a rel="external" href="https://icomoon.io/">IcoMoon</a>. Proudly hosted by <a rel="external" href="https://pages.github.com/">GitHub Pages</a>. This project is licensed under the <a rel="license" href="LICENSE.md">MIT License</a>. Copyright © 2018 John Goodliff</p>
-	</footer>
-</body>
+{% assign num_elems_hidden = site.projects | where: 'hidden', true | size %}
+{% assign num_elems = site.projects | size | minus: num_elems_hidden %}
+
+<section id="next" class="{% if num_elems == 1 %}one {% endif %}{% assign value = num_elems | modulo: 2 %}{% unless value == 0 %}two-odd {% endunless %}{% assign value = num_elems | modulo: 3 %}{% if value == 1 %}three-odd-one{% elsif value == 2 %}three-odd-two{% endif %}">
+	<h2>Featured Projects</h2>
+	<div class="project-tile-container">
+		{% assign projects = site.projects | sort: 'importance' %}
+		{% for project in projects %}
+			{% if project.importance %}
+				{% include project_tile.html %}
+			{% endif %}
+		{% endfor %}
+		{% for project in projects %}
+			{% unless project.importance %}
+				{% include project_tile.html %}
+			{% endunless %}
+		{% endfor %}
+	</div>
+</section>
+
+<footer>
+	<h2>About</h2>
+	<p>Feel free to contact me on social media for the moment.<br><br>
+	Handmade with <i class="fab fa-heart"></i> by John Goodliff. All icons from the <a rel="external" href="https://fontawesome.com/start">Font Awesome</a> icon set and packaged by <a rel="external" href="https://icomoon.io/">IcoMoon</a>. Proudly hosted by <a rel="external" href="https://pages.github.com/">GitHub Pages</a>. This project is licensed under the <a rel="license" href="LICENSE.md">MIT License</a>.</p>
+	<nav>
+		<a rel="external" href="https://github.com/jerboa88"><i class="fa-github-square"></i> Github</a>
+		<a rel="external" href="https://instagram.com/jerboa88"><i class="fa-instagram"></i> Instagram</a>
+		<a rel="external" href="https://www.facebook.com/jerboa88"><i class="fa-facebook-square"></i> Facebook</a>
+	</nav>
+</footer>
