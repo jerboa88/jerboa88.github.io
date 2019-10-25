@@ -217,10 +217,17 @@ nav > a:active {
 	margin: 0;
 	justify-content: end;
 	justify-content: flex-end;
-
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+}
+
+.error-header {
+	justify-content: space-around;
+}
+
+.error-header > p {
+	margin-bottom: 20vh;
 }
 
 .down-button {
