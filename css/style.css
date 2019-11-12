@@ -52,7 +52,7 @@
 		grid-column: span 3;
 	}
 
-	header, footer, .full-height {
+	header, .full-height {
 		height: 100vh;
 	}
 }
@@ -65,7 +65,7 @@
 		grid-column: span 2;
 	}
 
-	header, footer, .full-height {
+	header, .full-height {
 		height: 100vh;
 	}
 }
@@ -75,7 +75,7 @@
 		grid-template-columns: 100%;
 	}
 
-	header, footer, .full-height {
+	header, .full-height {
 		height: -moz-available;
 		height: -webkit-fill-available;
 		height: fill-available;
@@ -98,13 +98,38 @@ body {
 	overflow-x: hidden;
 }
 
-header, footer, .full-height {
+header, .full-height {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 }
 
-header > p, header > h1, footer > p, footer > h2, .full-height {
+footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	bottom: 0;
+	font-size: .8em;
+}
+
+.full-height > footer {
+	margin: 0;
+}
+
+footer > * {
+	padding: 1em 0;
+	flex: 1;
+
+}
+
+.about {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	height: 100%;
+}
+
+header > p, header > h1, footer > p, footer > h2, .full-height > * {
 	margin-left: var(--page-margin);
 	margin-right: var(--page-margin);
 }
@@ -236,7 +261,7 @@ nav > a:active {
 	padding: .7em;
 }
 
-.fade {
+.fade, footer {
 	background: rgba(0,0,0,.2);
 }
 
