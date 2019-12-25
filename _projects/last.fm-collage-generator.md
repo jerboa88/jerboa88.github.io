@@ -5,7 +5,7 @@ description: Generate a collage of your favorite albums based on Last.fm scrobbl
 type: Python
 category: python
 date: December 25, 2019
-image: last.fm-collage-generator.jpg
+image: last.fm-collage-generator.png
 github_link: https://github.com/jerboa88/Last.fm-Collage-Generator
 importance: 5
 ---
