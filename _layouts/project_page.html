@@ -1,5 +1,5 @@
 ---
-layout: main
+layout: scrolling_page
 ---
 <header class="project-header" style="background-image: url('{{ site.image_path }}/{{ page.image | default: 'unknown.png' }}')">
 	{% include down_button.html %}
@@ -8,9 +8,7 @@ layout: main
 <section id="next" class="full-height">
 	<h1>{{- page.title -}}</h1>
 	<p>{{- content -}}</p>
-	<nav>
-		{% include link_buttons.html %}
-	</nav>
 
+	{% include link_buttons.html %}
 	{% include footer.html %}
 </section>

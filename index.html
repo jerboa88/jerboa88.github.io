@@ -1,5 +1,5 @@
 ---
-layout: main
+layout: scrolling_page
 title: Portfolio
 ---
 
@@ -30,17 +30,19 @@ title: Portfolio
 	</div>
 </section>
 
-<section class="full-height">
-	<section class="about">
-		<h2>About</h2>
-		<p>Feel free to email me at <a href="#" class="email" data-name="hello" data-domain="johng.io" onclick="window.location.href = 'mailto:' + this.dataset.name + '@' + this.dataset.domain; return false;"></a> or contact me on social media.
-		<br><br>
-		Handmade with <i class="fab fa-heart"></i> by John Goodliff. All icons from the <a rel="external" href="https://fontawesome.com/start">Font Awesome</a> icon set and packaged by <a rel="external" href="https://icomoon.io/">IcoMoon</a>. Proudly hosted by <a rel="external" href="https://pages.github.com/">GitHub Pages</a>. This project is licensed under the <a rel="license" href="LICENSE.md">MIT License</a>.</p>
-		<nav>
-			<a rel="external" href="https://instagram.com/jerboa88"><i class="fa-instagram"></i> Instagram</a>
-			<a rel="external" href="https://www.facebook.com/jerboa88"><i class="fa-facebook-square"></i> Facebook</a>
-		</nav>
-	</section>
+<section id="next" class="full-height">
+	<h1>About</h1>
 
+	<p>Feel free to shoot me a message at <a href="#" class="email" data-name="hello" data-domain="johng.io" onclick="window.location.href = 'mailto:' + this.dataset.name + '@' + this.dataset.domain; return false;"></a> or contact me on social media.</p>
+
+	<p>Handmade with <i class="fab fa-heart"></i> by John Goodliff. All icons from the <a rel="external" href="https://fontawesome.com/start">Font Awesome</a> icon set and packaged by <a rel="external" href="https://icomoon.io/">IcoMoon</a>. Proudly hosted by <a rel="external" href="https://pages.github.com/">GitHub Pages</a>. This project is licensed under the <a rel="license" href="LICENSE.md">MIT License</a>.</p>
+	</p>
+
+	<nav>
+		<a rel="external" href="https://instagram.com/jerboa88"><i class="fa-instagram"></i> Instagram</a>
+		<a rel="external" href="https://www.facebook.com/jerboa88"><i class="fa-facebook-square"></i> Facebook</a>
+	</nav>
+
+	{% include link_buttons.html %}
 	{% include footer.html %}
 </section>

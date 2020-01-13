@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html style="--bg-color: {{ site.theme_color }}">
+	{% include common_head.html %}
+
+	<body>
+		{{ content }}
+	</body>
+
+	<!-- Use JS to handle scrolling page instead of anchor links if possible -->
+	<script>
+		let down_button = document.getElementById('down-button'),
+				next = document.getElementById('next')
+
+		down_button.setAttribute('href', 'javascript:;')
+		down_button.addEventListener('click', function() {
+			next.scrollIntoView(true)
+		})
+	</script>
+
+	{% if page.title != 'Portfolio' %}
+	<script>
+		if (location.hash == '#next') {
+			let port = window.location.port
+			location.replace(window.location.protocol + '//' + window.location.hostname + (port ? ':' + port : '') + window.location.pathname)
+		}
+
+		else {
+			setTimeout(function() {
+				location.replace(window.location.href + '#next')
+			}, 2000)
+		}
+
+
+	</script>
+	{% endif %}
+</html>
