@@ -1,5 +1,4 @@
 ---
-layout: project_page
 title: Gimp Average Layers
 description: GIMP plugin that merges all layers in an image by taking the average value of each pixel. Useful for noise reduction.
 type: Python

@@ -20,3 +20,12 @@ collections:
   projects:
     output: true
     permalink: /projects/:path/
+
+# Set default layout for projects
+defaults:
+  -
+    scope:
+      path: "" # An empty string here means all files in the project
+      type: projects
+    values:
+      layout: project_page

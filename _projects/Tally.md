@@ -1,5 +1,4 @@
 ---
-layout: project_page
 title: Tally Word Counter
 description: Your favorite character counter, with a dark mode! Count the number of words, sentences, and paragraphs in your text instantly.
 type: HTML, CSS, JS

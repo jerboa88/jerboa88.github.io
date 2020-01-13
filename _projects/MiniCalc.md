@@ -1,5 +1,4 @@
 ---
-layout: project_page
 title: MiniCalc
 description: A complete command line calculator and parser implemented in Python
 type: Python

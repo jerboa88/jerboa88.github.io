@@ -1,5 +1,4 @@
 ---
-layout: project_page
 title: Dark Mode for Outlook
 description: A Chrome extension that applies a better dark mode to Outlook and removes the ad sidebar
 type: Extension

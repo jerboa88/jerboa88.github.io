@@ -1,5 +1,4 @@
 ---
-layout: project_page
 title: Last.fm Collage Generator
 description: Generate a collage of your favorite albums based on Last.fm scrobbles
 type: Python
