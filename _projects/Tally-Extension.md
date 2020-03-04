@@ -9,4 +9,4 @@ github_link: https://github.com/jerboa88/Tally-Extension
 chrome_link: https://chrome.google.com/webstore/detail/tally-word-counter/eggkmbghbmjmbdjloifaklghfiecjbnk
 importance: 4
 ---
-A Chrome extension port of my online character counter [Tally](https://tallywordcounter.online). A tool to easily count the number of words, characters, and paragraphs on any site. Just right click on any selected text and click Count. The project has over 200 daily users.
+A Chrome extension port of my online character counter [Tally](https://tallywordcounter.online). A tool to easily count the number of words, characters, and paragraphs on any site. Just right click on any selected text and click Count. The project has over 300 daily users.

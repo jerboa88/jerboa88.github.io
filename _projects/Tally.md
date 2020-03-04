@@ -6,7 +6,7 @@ category: web
 date: March 14, 2019
 image: tally.png
 github_link: https://github.com/jerboa88/Tally
-visit_link: https://tallywordcounter.online
+visit_link: https://tally.johng.io
 importance: 3
 ---
 A site that counts the number of words, sentences, and paragraphs in inputted text. A personal project,
