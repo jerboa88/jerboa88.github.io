@@ -6,6 +6,7 @@ category: python
 date: November 13, 2018
 image: gimp-average-layers.png
 github_link: https://github.com/jerboa88/gimp-average-layers
+show_links: true
 ---
 This GIMP plugin merges all layers in an image by taking the average value of each pixel. Useful for noise reduction.
 

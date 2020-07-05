@@ -1,17 +1,25 @@
 <nav>
+{% if page.instagram_link %}
+	<a href="{{ page.instagram_link }}" class="icon-instagram" rel="external" target="_blank"></a>
+{% endif %}
+
+{% if page.linkedin_link %}
+	<a href="{{ page.linkedin_link }}" class="icon-linkedin-square" rel="external" target="_blank"></a>
+{% endif %}
+
 {% if page.github_link %}
-	<a rel="external" href="{{ page.github_link }}" target="_blank"><i class="fa-github-square"></i> Github</a>
+	<a href="{{ page.github_link }}" class="icon-github-square" rel="external" target="_blank"></a>
 {% endif %}
 
 {% if page.chrome_link %}
-	<a rel="external" href="{{ page.chrome_link }}" target="_blank"><i class="fa-chrome"></i> Chrome Extension</a>
+	<a href="{{ page.chrome_link }}" class="icon-chrome" rel="external" target="_blank"></a>
 {% endif %}
 
 {% if page.firefox_link %}
-	<a rel="external" href="{{ page.firefox_link }}" target="_blank"><i class="fa-firefox"></i> Add-on for Firefox</a>
+	<a href="{{ page.firefox_link }}" class="icon-firefox" rel="external" target="_blank"></a>
 {% endif %}
 
 {% if page.visit_link %}
-	<a rel="external" href="{{ page.visit_link }}" target="_blank"><i class="fa-globe"></i> {{ page.visit_name | default: 'Visit' }}</a>
+	<a href="{{ page.visit_link }}" class="icon-globe" rel="external" target="_blank">{{ page.visit_name | default: '' }}</a>
 {% endif %}
 </nav>

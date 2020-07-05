@@ -1,14 +1,31 @@
 ---
 layout: scrolling_page
 ---
-<header class="project-header" style="background-image: url('{{ site.image_path }}/{{ page.image | default: 'unknown.png' }}')">
-	{% include down_button.html %}
+
+
+<div class="background project-image" style="background-image: url('{{ site.image_path }}/{{ page.image | default: 'unknown.png' }}')"></div>
+
+<header class="project-header" data-bg="{{ site.image_path }}/{{ page.image | default: 'unknown.png' }}">
+	<a href="/#projects" class="back-button icon-arrow_back_ios"></a>
+	<div class="project-type {{ page.category | default: 'unknown' }}"><p>{{ page.type | default: 'Unknown' }}</p></div>
+	<h1>{{- page.title -}}</h1>
+	<p>{{- page.description -}}</p>
+
+	<!-- {% include down_button.html %} -->
 </header>
 
-<section id="next" class="full-height">
-	<h1>{{- page.title -}}</h1>
+<section id="about" class="full-height">
+	<h2>About</h2>
+
 	<p>{{- content -}}</p>
+</section>
+
+{% if page.show_links %}
+<section id="links" class="full-height">
+	<h2>Links</h2>
 
 	{% include link_buttons.html %}
-	{% include footer.html %}
 </section>
+{% endif %}
+
+{% include footer.html %}

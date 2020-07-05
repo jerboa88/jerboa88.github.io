@@ -8,6 +8,7 @@ image: dark-mode-for-outlook.png
 github_link: https://github.com/jerboa88/dark-mode-for-outlook
 chrome_link: https://chrome.google.com/webstore/detail/dark-mode-for-outlook/kjfbefcenipnnpbcbbklcidpjiamlcpl
 firefox_link: https://addons.mozilla.org/en-US/firefox/addon/dark-mode-for-outlook/
+show_links: true
 importance: 2
 ---
 A Chrome/Firefox extension that removes the ad sidebar and applies a dark theme to Microsoft's

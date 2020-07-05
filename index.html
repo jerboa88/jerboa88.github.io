@@ -1,20 +1,30 @@
 ---
 layout: scrolling_page
 title: Portfolio
+instagram_link: https://www.instagram.com/jerboa88/
+linkedin_link: https://www.linkedin.com/in/johngoodliff/
+github_link: https://github.com/jerboa88
 ---
 
 <header>
+	<p class="yolo">Space is cool, but cats are cooler (sorry Elon)</p>
 	<h1>John Goodliff</h1>
-	<p>I am a passionate Computing Science student currently working towards my Bachelors Specialization at the University of Alberta. I am interested in a wide variety of compute related topics including programming, 2d/3d graphic design, audio production, and web design. I have experience with both web technologies and classical programming. I am most comfortable with vanilla HTML, CSS, Javascript, and Python but I am always busy learning more!</p>
+	<p>Software Developer & Student</p>
 
-	{% include down_button.html %}
+	<!-- {% include down_button.html %} -->
 </header>
+
+<section id="about" class="full-height">
+	<h2>About</h2>
+
+	<p>I am a passionate Computing Science student currently working towards my Bachelors Specialization at the University of Alberta. I am interested in a wide variety of compute related topics including programming, 2d/3d graphic design, audio production, and web design. I have experience with both web technologies and classical programming. I am most comfortable with vanilla HTML, CSS, Javascript, and Python but I am always busy learning more!</p>
+</section>
 
 {% assign num_elems_hidden = site.projects | where: 'hidden', true | size %}
 {% assign num_elems = site.projects | size | minus: num_elems_hidden %}
 
-<section id="next" class="{% if num_elems == 1 %}one {% endif %}{% assign value = num_elems | modulo: 2 %}{% unless value == 0 %}two-odd {% endunless %}{% assign value = num_elems | modulo: 3 %}{% if value == 1 %}three-odd-one{% elsif value == 2 %}three-odd-two{% endif %}">
-	<h2>Featured Projects</h2>
+<section id="projects" class="{% if num_elems == 1 %}one {% endif %}{% assign value = num_elems | modulo: 2 %}{% unless value == 0 %}two-odd {% endunless %}{% assign value = num_elems | modulo: 3 %}{% if value == 1 %}three-odd-one{% elsif value == 2 %}three-odd-two{% endif %}">
+	<h2>My Projects</h2>
 	<div class="project-tile-container">
 		{% assign projects = site.projects | sort: 'importance' %}
 		{% for project in projects %}
@@ -30,19 +40,20 @@ title: Portfolio
 	</div>
 </section>
 
-<section id="next" class="full-height">
-	<h1>About</h1>
+<section id="work" class="full-height">
+	<h2>My Work</h2>
 
-	<p>Feel free to shoot me a message at <a href="#" class="email" data-name="hello" data-domain="johng.io" onclick="window.location.href = 'mailto:' + this.dataset.name + '@' + this.dataset.domain; return false;"></a> or contact me on social media.</p>
+	<p>I am currently completing my internship in software development at Haemonetics in Edmonton, Alberta.</p>
+</section>
 
-	<p>Handmade with <i class="fab fa-heart"></i> by John Goodliff. All icons from the <a rel="external" href="https://fontawesome.com/start">Font Awesome</a> icon set and packaged by <a rel="external" href="https://icomoon.io/">IcoMoon</a>. Proudly hosted by <a rel="external" href="https://pages.github.com/">GitHub Pages</a>. This project is licensed under the <a rel="license" href="LICENSE.md">MIT License</a>.</p>
-	</p>
+<section id="credits" class="full-height">
+	<h2>Credits</h2>
 
-	<nav>
-		<a rel="external" href="https://instagram.com/jerboa88"><i class="fa-instagram"></i> Instagram</a>
-		<a rel="external" href="https://www.facebook.com/jerboa88"><i class="fa-facebook-square"></i> Facebook</a>
-	</nav>
+	<p>Thanks to everyone who has helped me reach the stars, as well as the following groups for making this site possible: <a rel="external" href="https://fontawesome.com/start">Font Awesome</a>, <a rel="external" href="https://icomoon.io/">Icomoon</a>, <a rel="external" href="https://pages.github.com/">Github Pages</a>, and <a rel="external" href="https://fonts.google.com/specimen/Montserrat#about">the makers of Montserrat</a>. This project is licensed under the <a rel="license" href="LICENSE.md">MIT License</a>.</p>
+
+	<p>Handmade with <i class="fab fa-heart"></i> by John Goodliff. Feel free to shoot me a message at <a href="#" class="email" data-name="hello" data-domain="johng.io" onclick="window.location.assign('mailto:' + this.getAttribute('data-name') + '@' + this.getAttribute('data-domain'))"></a> or contact me on social media if you wish to say hi!</p>
 
 	{% include link_buttons.html %}
-	{% include footer.html %}
 </section>
+
+{% include footer.html %}

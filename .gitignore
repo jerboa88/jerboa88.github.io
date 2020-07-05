@@ -1,3 +1,5 @@
 _site
 _projects/testing
 *~
+.jekyll-cache/
+css/.jekyll-cache/
