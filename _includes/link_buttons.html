@@ -19,6 +19,10 @@
 	<a href="{{ page.firefox_link }}" class="icon-firefox" rel="external" target="_blank"></a>
 {% endif %}
 
+{% if page.edge_link %}
+	<a href="{{ page.edge_link }}" class="icon-edge" rel="external" target="_blank"></a>
+{% endif %}
+
 {% if page.visit_link %}
 	<a href="{{ page.visit_link }}" class="icon-globe" rel="external" target="_blank">{{ page.visit_name | default: '' }}</a>
 {% endif %}

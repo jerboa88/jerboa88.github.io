@@ -8,6 +8,7 @@ image: dark-mode-for-outlook.png
 github_link: https://github.com/jerboa88/dark-mode-for-outlook
 chrome_link: https://chrome.google.com/webstore/detail/dark-mode-for-outlook/kjfbefcenipnnpbcbbklcidpjiamlcpl
 firefox_link: https://addons.mozilla.org/en-US/firefox/addon/dark-mode-for-outlook/
+edge_link: https://microsoftedge.microsoft.com/addons/detail/dark-mode-for-outlook%E2%84%A2/ncmfoiokkfipenppipihehpoikhacpep
 show_links: true
 importance: 2
 ---
