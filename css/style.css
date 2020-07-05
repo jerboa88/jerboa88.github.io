@@ -1,5 +1,5 @@
 :root {
-	--bg-color: #317b71;
+	--bg-color: #040609;
 	--text-color: #fff;
 	--alt-text-color: #000;
 	--project-bg-color: #252525;
@@ -92,6 +92,11 @@
 	}
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html, body {
 	margin: 0;
 }
@@ -100,6 +105,7 @@ body {
 	width: 100%;
 	padding: 0;
 	background: var(--bg-color);
+	background: linear-gradient(180deg, var(--bg-color) 0%, #080b12 20%, #291427 75%, #3c1427 100%);
 	color: var(--text-color);
 	text-align: center;
 	font-family: 'Open Sans', 'Calibri', 'Trebuchet MS', sans-serif;
@@ -141,19 +147,13 @@ footer {
 footer > * {
 	padding: 1em 0;
 	-webkit-box-flex: 1;
-					flex: 1;
-
+							flex: 1;
 }
 
 header > p, header > h1, footer > p, footer > h2, .full-height > * {
 	margin-left: var(--page-margin);
 	margin-right: var(--page-margin);
 }
-
-/* header > a:link {
-	font-size: var(--font-size);
-	padding-bottom: 1em;
-} */
 
 h1, section > h2, section > p {
 	margin: 0 0 3vh 0;
@@ -184,7 +184,6 @@ h1, h2, h4 {
 }
 
 p, ul {
-	/* margin: 0; */
 	font-size: var(--font-size);
 	text-shadow: var(--text-shadow2);
 }
@@ -195,10 +194,6 @@ ul {
 
 .email:after {
 	content: attr(data-name) '@' attr(data-domain);
-}
-
-.fa-heart {
-	color: var(--heart-color);
 }
 
 p > a:link {
@@ -226,12 +221,8 @@ a:visited {
 nav > a:link {
 	display: inline-block;
 	margin: .2em;
-	/* padding: 1em; */
 	font-size: var(--icon-font-size);
 	font-weight: bolder;
-	/* border: 1px solid var(--text-color);
-	border-radius: .5em;
-	box-shadow: var(--box-shadow2), inset var(--box-shadow2); */
 	text-shadow: var(--box-shadow2);
 	-webkit-transition: text-shadow .1s, box-shadow .1s, -webkit-transform .1s;
 	transition: text-shadow .1s, box-shadow .1s, -webkit-transform .1s;
@@ -243,7 +234,7 @@ nav > a:hover {
 	opacity: 1;
 	-webkit-transform: translateY(var(--wiggle-amount-up));
 					transform: translateY(var(--wiggle-amount-up));
-	/* box-shadow: var(--box-shadow2-hover), inset var(--box-shadow2-hover); */
+	text-shadow: var(--box-shadow2-hover), inset var(--box-shadow2-hover);
 	text-shadow: var(--box-shadow2-hover);
 }
 
@@ -352,10 +343,10 @@ nav > a:active {
 	background: #eee;
 }
 
-.fa-angle-down {
+/* .fa-angle-down {
 	font-weight: bolder;
 	color: var(--bg-color);
-}
+} */
 
 h4 {
 	font-family: 'Open Sans', 'Calibri', 'Trebuchet MS', sans-serif;
@@ -579,19 +570,6 @@ h4, .project-text > p {
 
 
 /* Star background */
-* {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-	background: #080b12;
-	background: linear-gradient(180deg, #040609 0%, #080b12 20%, #291427 75%, #3c1427 100%);
-  width: 100%;
-	/* position: relative; */
-	overflow-x: hidden;
-}
-
 .background {
 	position: absolute;
 	top: 0;

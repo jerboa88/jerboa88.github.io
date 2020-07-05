@@ -36,12 +36,14 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 	<link rel="manifest" href="/site.webmanifest">
-	{% assign color = site.theme_color | default: '#317b71' %}
+	{% assign color = site.theme_color | default: '#040609' %}
 	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="{{ color }}">
 	<meta name="msapplication-navbutton-color" content="{{ color }}">
 	<meta name="msapplication-TileColor" content="{{ color }}">
 	<meta name="theme-color" content="{{ color }}">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
+	{% if page.title == 'Portfolio' %}
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.11.0/rellax.min.js"></script>
+	{% endif %}
 </head>
