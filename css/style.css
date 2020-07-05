@@ -288,7 +288,7 @@ nav > a:active {
 	padding: .7em;
 }
 
-.icon-arrow_back_ios.back-button {
+.icon-arrow-left.back-button {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -485,14 +485,14 @@ h4, .project-text > p {
 /* IcoMoon icon font styles */
 @font-face {
   font-family: 'icomoon';
-  src:  url('/fonts/icomoon.eot?iimd5s');
-  src:  url('/fonts/icomoon.eot?iimd5s#iefix') format('embedded-opentype'),
-    url('/fonts/icomoon.ttf?iimd5s') format('truetype'),
-    url('/fonts/icomoon.woff?iimd5s') format('woff'),
-    url('/fonts/icomoon.svg?iimd5s#icomoon') format('svg');
+  src:  url('/fonts/icomoon.eot?ybig1w');
+  src:  url('/fonts/icomoon.eot?ybig1w#iefix') format('embedded-opentype'),
+    url('/fonts/icomoon.ttf?ybig1w') format('truetype'),
+    url('/fonts/icomoon.woff?ybig1w') format('woff'),
+    url('/fonts/icomoon.svg?ybig1w#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
-	font-display: block;
+  font-display: block;
 }
 
 [class^="icon-"], [class*=" icon-"] {
@@ -511,20 +511,30 @@ h4, .project-text > p {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-arrow_back_ios:before {
-  content: "\e90c";
+.icon-sign-in:before {
+  content: "\e90a";
 }
-.icon-arrow_back:before {
-  content: "\e90d";
+.icon-heart {
+	font-size: inherit;
+	color: var(--heart-color);
 }
-.icon-keyboard_arrow_left:before {
-  content: "\e90e";
+.icon-heart:before {
+  content: "\e908";
 }
-.icon-keyboard_arrow_down:before {
-  content: "\e90f";
+.icon-eye:before {
+  content: "\e910";
 }
-.icon-arrow-down:before {
-  content: "\e90b";
+.icon-close:before {
+  content: "\e911";
+}
+.icon-remove:before {
+  content: "\e911";
+}
+.icon-times:before {
+  content: "\e911";
+}
+.icon-sign-out:before {
+  content: "\e912";
 }
 .icon-globe:before {
   content: "\e900";
@@ -538,9 +548,6 @@ h4, .project-text > p {
 .icon-firefox:before {
   content: "\e903";
 }
-.icon-facebook-square:before {
-  content: "\e904";
-}
 .icon-instagram:before {
   content: "\e905";
 }
@@ -550,15 +557,10 @@ h4, .project-text > p {
 .icon-github-square:before {
   content: "\e907";
 }
-.icon-github:before {
-  content: "\e908";
-}
 .icon-linkedin-square:before {
   content: "\e909";
 }
-.icon-linkedin:before {
-  content: "\e90a";
-}
+
 
 
 

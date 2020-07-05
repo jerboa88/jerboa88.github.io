@@ -6,7 +6,7 @@ layout: scrolling_page
 <div class="background project-image" style="background-image: url('{{ site.image_path }}/{{ page.image | default: 'unknown.png' }}')"></div>
 
 <header class="project-header" data-bg="{{ site.image_path }}/{{ page.image | default: 'unknown.png' }}">
-	<a href="/#projects" class="back-button icon-arrow_back_ios"></a>
+	<a href="/#projects" class="back-button icon-arrow-left"></a>
 	<div class="project-type {{ page.category | default: 'unknown' }}"><p>{{ page.type | default: 'Unknown' }}</p></div>
 	<h1>{{- page.title -}}</h1>
 	<p>{{- page.description -}}</p>
