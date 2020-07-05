@@ -35,7 +35,5 @@
 		}
 
 		new Rellax('.' + starClassName);
-
-		window.scrollTo(0,0);
-	})()
+	})();
 })();
