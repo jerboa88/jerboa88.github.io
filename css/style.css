@@ -461,11 +461,11 @@ h4, .project-text > a {
 /* IcoMoon icon font styles */
 @font-face {
   font-family: 'icomoon';
-  src:  url('/fonts/icomoon.eot?l8enxw');
-  src:  url('/fonts/icomoon.eot?l8enxw#iefix') format('embedded-opentype'),
-    url('/fonts/icomoon.ttf?l8enxw') format('truetype'),
-    url('/fonts/icomoon.woff?l8enxw') format('woff'),
-    url('/fonts/icomoon.svg?l8enxw#icomoon') format('svg');
+  src:  url('/fonts/icomoon.eot?p1634e');
+  src:  url('/fonts/icomoon.eot?p1634e#iefix') format('embedded-opentype'),
+    url('/fonts/icomoon.ttf?p1634e') format('truetype'),
+    url('/fonts/icomoon.woff?p1634e') format('woff'),
+    url('/fonts/icomoon.svg?p1634e#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -487,9 +487,7 @@ h4, .project-text > a {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-sign-in:before {
-  content: "\e90a";
-}
+
 .icon-heart {
 	font-size: inherit;
 	color: var(--heart-color);
@@ -506,21 +504,6 @@ h4, .project-text > a {
 }
 .icon-arrows-alt:before {
   content: "\e904";
-}
-.icon-eye:before {
-  content: "\e910";
-}
-.icon-close:before {
-  content: "\e911";
-}
-.icon-remove:before {
-  content: "\e911";
-}
-.icon-times:before {
-  content: "\e911";
-}
-.icon-sign-out:before {
-  content: "\e912";
 }
 .icon-globe:before {
   content: "\e900";
