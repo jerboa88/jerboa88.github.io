@@ -549,3 +549,42 @@ h4, .project-text > a {
 .icon-linkedin-square:before {
   content: "\e909";
 }
+
+.icon-instagram:after,
+.icon-github-square:after,
+.icon-linkedin-square:after,
+.icon-globe:after,
+.icon-chrome:after,
+.icon-edge:after,
+.icon-firefox:after {
+	display: block;
+	margin-top: 1em;
+	padding: .5em;
+	font-family: 'Open Sans', 'Calibri', 'Trebuchet MS', sans-serif;
+	font-size: .25em;
+	font-weight: lighter;
+	text-shadow: var(--text-shadow);
+	background: rgba(0,0,0,.2);
+	border-radius: 1em;
+}
+.icon-instagram:after {
+	content: "Instagram";
+}
+.icon-github-square:after {
+	content: "Github";
+}
+.icon-linkedin-square:after {
+	content: "LinkedIn";
+}
+.icon-globe:after {
+  content: "Web";
+}
+.icon-chrome:after {
+  content: "Chrome Web Store";
+}
+.icon-edge:after {
+  content: "Edge Add-ons";
+}
+.icon-firefox:after {
+  content: "Firefox Add-ons";
+}
