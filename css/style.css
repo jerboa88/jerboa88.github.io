@@ -429,39 +429,49 @@ h4, .project-text > a {
 }
 
 /* Colors for different project types */
+.web, .web-h:hover, .web-h > div > a,
+.python, .python-h:hover, .python-h > div > a,
+.c, .c-h:hover, .c-h > div > a,
+.node, .node-h:hover, .node-h > div > a,
+.blender, .blender-h:hover, .blender-h > div > a,
+.unknown, .unknown-h:hover, .unknown-h > div > a {
+	color: var(--textColor);
+}
+
+.extension, .extension-h:hover, .extension-h > div > a {
+	color: var(--altTextColor);
+}
+
 .web, .web-h:hover {
 	background: rgba(255, 152, 0, .75);
-	color: var(--textColor);
 }
 
 .extension, .extension-h:hover {
 	background: rgba(255, 235, 59, .75);
-	color: var(--altTextColor);
 }
 
 .python, .python-h:hover {
 	background: rgba(63, 81, 181, .75);
-	color: var(--textColor);
 }
 
 .c, .c-h:hover {
 	background: rgba(244, 67, 54, .75);
-	color: var(--textColor);
+}
+
+.java, .java-h:hover {
+	background: rgba(255, 87, 34, .75);
 }
 
 .node, .node-h:hover {
 	background: rgba(76, 175, 80, .75);
-	color: var(--textColor);
 }
 
 .blender, .blender-h:hover {
 	background: rgba(156, 39, 176, .5);
-	color: var(--textColor);
 }
 
 .unknown, .unknown-h:hover {
 	background: rgba(51, 51, 51, .5);
-	color: var(--textColor);
 }
 
 
