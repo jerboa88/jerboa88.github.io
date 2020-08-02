@@ -1,11 +1,17 @@
 {% if project.hidden != true %}
-<a href="{{ site.baseurl }}{{ project.url | default: '404'}}" class="project" style="background-image: url({{ site.image_path }}/{{ project.image | default: 'unknown.png' }})">
+<div data-href="{{ site.baseurl }}{{ project.url | default: '404'}}" class="project" style="background-image: url({{ site.image_path }}/{{ project.image | default: 'unknown.png' }})">
 	<div class="{{ project.category | default: 'unknown' }}-h">
-		<div class="project-type {{ project.category | default: 'unknown' }}"><p>{{ project.type | default: 'Unknown' }}</p></div>
+		<div class="project-header">
+			<a class="icon-arrows-alt" href="{{ site.baseurl }}{{ project.url | default: '404'}}"></a>
+			<div class="project-type {{ project.category | default: 'unknown' }}"><p>{{ project.type | default: 'Unknown' }}</p></div>
+		</div>
+
 		<div class="project-text">
 			<h4>{{ project.title | default: '?' }}</h4>
-			<p>{{ project.description | default: 'No description' }}</p>
+			<a href="{{ site.baseurl }}{{ project.url | default: '404'}}">
+				<p>{{ project.description | default: 'No description' }}</p>
+			</a>
 		</div>
 	</div>
-</a>
+</div>
 {% endif %}

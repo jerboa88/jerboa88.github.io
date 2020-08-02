@@ -19,6 +19,7 @@
 	--small-font-size: .4em;
 	--wiggle-amount-up: -.2em;
 	--wiggle-amount-down: .1em;
+	--project-type-padding: .6em;
 }
 
 ::-moz-selection {
@@ -90,6 +91,34 @@
 		height: -webkit-fill-available;
 		height: fill-available; */
 		height: 100vh;
+	}
+}
+
+/* For desktop browsers */
+.icon-arrows-alt {
+	visibility: hidden;
+}
+
+/* h4 {
+	margin: calc(var(--project-type-padding) * -2) 0 0 0;
+} */
+
+.project-type {
+	font-size: .7em;
+}
+
+/* For touch browsers */
+@media (hover: none) {
+	.icon-arrows-alt {
+		visibility: visible;
+	}
+
+	/* h4 {
+		margin: 0;
+	} */
+
+	.project-type {
+		font-size: inherit;
 	}
 }
 
@@ -222,6 +251,7 @@ h4 {
 }
 
 p {
+	margin: 0;
 	font-size: var(--font-size);
 	text-shadow: var(--text-shadow2);
 }
@@ -299,6 +329,11 @@ nav > a:active {
 	background-repeat: no-repeat;
 	background-size: cover;
 	text-align: left;
+	cursor: pointer;
+}
+
+.project:hover {
+	opacity: 1;
 }
 
 .project-tile-container {
@@ -306,8 +341,10 @@ nav > a:active {
 	display: grid;
 }
 
-.project:hover {
-	opacity: 1;
+.project-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 header > .project-type {
@@ -322,11 +359,9 @@ header > .project-type {
 	width: -webkit-max-content;
 	width: -moz-max-content;
 	width: max-content;
-	padding: .4em;
-	font-size: .7em;
+	padding: var(--project-type-padding);
 	font-style: italic;
 	border-radius: 0 0 0 .5em;
-  margin-left: auto;
 }
 
 .project > div {
@@ -336,7 +371,7 @@ header > .project-type {
 	background: rgba(0,0,0,.2);
 }
 
-h4, .project-text > p {
+h4, .project-text > a {
 	height: 40vh;
 	display: -webkit-box;
 	display: flex;
@@ -345,20 +380,24 @@ h4, .project-text > p {
 					flex-direction: column;
 	-webkit-box-pack: center;
 					justify-content: center;
-	margin: 0;
 	text-align: center;
 }
 
-.project-text {
-	margin: 0 2em;
+.project-text > h4 {
+	margin: calc(var(--project-type-padding) * -3) 2em 0 2em;
 }
 
-.project-text > p {
+.project-text > a {
 	height: 0;
+	padding: 0 2em;
 	-webkit-box-flex: 1;
 					flex: 1;
 	opacity: 0;
 	overflow-y: hidden;
+}
+
+.project > a > p {
+	padding-top: .6em;
 }
 
 .project:hover > div > .project-text > h4 {
@@ -368,8 +407,14 @@ h4, .project-text > p {
 	transition: opacity .25s 0s ease-out, height 0s .25s step-end;
 }
 
-.project:hover > div > .project-text > p {
+.project:hover > div > .project-text > a {
 	height: 40vh;
+	opacity: 1;
+	-webkit-transition: height 0s .25s step-end, opacity .25s .25s ease-in;
+	transition: height 0s .25s step-end, opacity .25s .25s ease-in;
+}
+
+.project:hover > div > .project-header > .icon-arrows-alt {
 	opacity: 1;
 	-webkit-transition: height 0s .25s step-end, opacity .25s .25s ease-in;
 	transition: height 0s .25s step-end, opacity .25s .25s ease-in;
@@ -416,11 +461,11 @@ h4, .project-text > p {
 /* IcoMoon icon font styles */
 @font-face {
   font-family: 'icomoon';
-  src:  url('/fonts/icomoon.eot?ybig1w');
-  src:  url('/fonts/icomoon.eot?ybig1w#iefix') format('embedded-opentype'),
-    url('/fonts/icomoon.ttf?ybig1w') format('truetype'),
-    url('/fonts/icomoon.woff?ybig1w') format('woff'),
-    url('/fonts/icomoon.svg?ybig1w#icomoon') format('svg');
+  src:  url('/fonts/icomoon.eot?l8enxw');
+  src:  url('/fonts/icomoon.eot?l8enxw#iefix') format('embedded-opentype'),
+    url('/fonts/icomoon.ttf?l8enxw') format('truetype'),
+    url('/fonts/icomoon.woff?l8enxw') format('woff'),
+    url('/fonts/icomoon.svg?l8enxw#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -451,6 +496,16 @@ h4, .project-text > p {
 }
 .icon-heart:before {
   content: "\e908";
+}
+.icon-arrows-alt {
+	left: 0;
+	bottom: 0;
+	font-size: 1.1em;
+	padding-left: var(--project-type-padding);
+	opacity: 0;
+}
+.icon-arrows-alt:before {
+  content: "\e904";
 }
 .icon-eye:before {
   content: "\e910";
