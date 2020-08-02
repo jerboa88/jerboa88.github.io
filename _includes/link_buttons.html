@@ -7,6 +7,10 @@
 	<a href="{{ page.linkedin_link }}" class="icon-linkedin-square" rel="external" target="_blank"></a>
 {% endif %}
 
+{% if page.visit_link %}
+	<a href="{{ page.visit_link }}" class="icon-globe" rel="external" target="_blank"></a>
+{% endif %}
+
 {% if page.github_link %}
 	<a href="{{ page.github_link }}" class="icon-github-square" rel="external" target="_blank"></a>
 {% endif %}
@@ -21,9 +25,5 @@
 
 {% if page.edge_link %}
 	<a href="{{ page.edge_link }}" class="icon-edge" rel="external" target="_blank"></a>
-{% endif %}
-
-{% if page.visit_link %}
-	<a href="{{ page.visit_link }}" class="icon-globe" rel="external" target="_blank"></a>
 {% endif %}
 </nav>
