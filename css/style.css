@@ -17,6 +17,7 @@
 	--icon-font-size: 1.7em;
 	--font-size: .68em;
 	--small-font-size: .4em;
+	--extra-small-font-size: .25em;
 	--wiggle-amount-up: -.2em;
 	--wiggle-amount-down: .1em;
 	--project-type-padding: .6em;
@@ -99,10 +100,6 @@
 	visibility: hidden;
 }
 
-/* h4 {
-	margin: calc(var(--project-type-padding) * -2) 0 0 0;
-} */
-
 .project-type {
 	font-size: .7em;
 }
@@ -112,10 +109,6 @@
 	.icon-arrows-alt {
 		visibility: visible;
 	}
-
-	/* h4 {
-		margin: 0;
-	} */
 
 	.project-type {
 		font-size: inherit;
@@ -561,7 +554,7 @@ h4, .project-text > a {
 	margin-top: 1em;
 	padding: .5em;
 	font-family: 'Open Sans', 'Calibri', 'Trebuchet MS', sans-serif;
-	font-size: .25em;
+	font-size: var(--extra-small-font-size);
 	font-weight: lighter;
 	text-shadow: var(--text-shadow);
 	background: rgba(0,0,0,.2);
