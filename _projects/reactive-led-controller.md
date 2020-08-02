@@ -1,6 +1,6 @@
 ---
 title: Reactive LED Controller
-description: A program that lets you control keyboards and RGB LED strips with music.
+description: A program that lets you control keyboards and RGB LED strips with music
 type: C++
 category: c
 date: December 21, 2019
