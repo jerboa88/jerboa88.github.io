@@ -1,39 +1,59 @@
 :root {
 	/* Colors */
 	--bgColor: #040609;
+	--bgGradient: linear-gradient(180deg, var(--bgColor) 0%, #080b12 20%, #291427 75%, #3c1427 100%);
 	--textColor: #fff;
 	--altTextColor: #000;
 	--projectBgColor: #252525;
-	--selectionColor: rgba(255,34,17,.8);
-	--heartColor: rgba(255,34,17,1);
-	--partialTransparency: rgba(0, 0, 0, .2);
+	--selectionColor: rgba(255, 34, 17, .8);
+	--heartColor: rgba(255, 34, 17, 1);
+	--transparentBlack: rgba(0, 0, 0, .2);
 
 	/* Shadows */
-	--textShadow: .04em .04em .07em rgba(0,0,0,.5);
-	--textShadow2: .02em .02em .05em rgba(0,0,0,.4);
-	--boxShadow: .1em .1em .2em rgba(0,0,0,.3);
-	--boxShadow2: .1em .1em .2em rgba(0,0,0,.1);
-	--boxShadow2Hover: .1em calc(.1em + var(--wiggle-amount-down)) .2em rgba(0,0,0,.1);
+	--textShadow: .04em .04em .07em rgba(0, 0, 0, .5);
+	--textShadowSmall: .02em .02em .05em rgba(0, 0, 0, .4);
+	--boxShadow: .1em .1em .2em rgba(0, 0, 0, .2);
+	--boxShadowDownHover: .1em calc(.1em - var(--wiggleAmount)) .2em rgba(0, 0, 0, .2);
+	--boxShadowRightHover: calc(.1em - var(--wiggleAmount)) .1em .2em rgba(0, 0, 0, .2);
 
 	/* Font Families */
 	--headerFont: 'Montserrat', Impact, Helvetica, sans-serif;
 	--defaultFont: 'Open Sans', 'Calibri', 'Trebuchet MS', sans-serif;
 
-	/* Font Sizes */
+	/* Font Sizes (text) */
 	--fontScaleFactor: 2.75vh; /* For desktop browsers. Scale factor for mobile is set later */
 	--headerFontSize: 2.2em;
-	--iconFontSize: 1.7em;
-	--fontSize: .7em;
-	--smallFontSize: .4em;
-	--extraSmallFontSize: .3em;
+	--projectTileHeaderFontSize: 1.3em;
+	--defaultFontSize: .7em;
+	--yoloFontSize: .4em;
+	--iconLabelFontSize: .3em;
+
+	/* Font Sizes (icons) */
+	--defaultIconFontSize: 2em;
+	--backIconFontSize: 1.4em;
+	--fullScreenIconFontSize: 1.1em;
+
+	/* Blur Radii */
+	--imgBlurRadius: .25em;
+	--projectImageBgBlurRadius: .15em;
+
+	/* Margins & Paddings */
+	--pageMargin: 8vw;
+	--projectTypeTopPadding: .6em;
+	--projectTypeHorizontalMargin: 2em;
+
+	/* Transition Durations */
+	--headerTransitionDuration: .5s;
+	--projectTileTransitionDuration: .2s;
+	--projectTileBgTransitionDuration: .4s;
+	--iconLinkTransitionDuration: .1s;
+	--backButtonTransitionDuration: .1s;
+	--linkTransitionDuration: .1s;
 
 	/* Other */
-	--imgBlurRadius: .25em;
-	--downButtonSize: 6vh;
-	--pageMargin: 8vw;
-	--wiggleAmountUp: -.2em;
-	--wiggleAmountDown: .1em;
-	--projectTypePadding: .6em;
+	--projectTileHeight: 40vh;
+	--wiggleAmount: -.2em;
+	--headerTransitionScale: 1.05;
 }
 
 ::-moz-selection {
@@ -103,7 +123,7 @@
 }
 
 .project-type {
-	font-size: var(--fontSize);
+	font-size: var(--defaultFontSize);
 }
 
 /* For touch browsers */
@@ -129,7 +149,7 @@ body {
 	width: 100%;
 	padding: 0;
 	background: var(--bgColor);
-	background: linear-gradient(180deg, var(--bgColor) 0%, #080b12 20%, #291427 75%, #3c1427 100%);
+	background: var(--bgGradient);
 	color: var(--textColor);
 	text-align: center;
 	font-family: var(--defaultFont);
@@ -144,7 +164,7 @@ body {
 	left: 0;
 	right: 0;
 	margin-top: 1vh;
-	font-size: var(--smallFontSize);
+	font-size: var(--yoloFontSize);
 }
 
 /* Star background */
@@ -164,11 +184,11 @@ body {
 	background-size: cover;
 	-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 	mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
-	filter: blur(3px);
+	filter: blur(var(--projectImageBgBlurRadius));
 }
 
 .star {
-  background-color: #fff;
+  background-color: var(--textColor);
 	position: relative;
 }
 
@@ -192,8 +212,8 @@ footer {
 	-webkit-box-pack: justify;
 					justify-content: space-between;
 	bottom: 0;
-	background: var(--partialTransparency);
-	font-size: var(--fontSize);
+	background: var(--transparentBlack);
+	font-size: var(--defaultFontSize);
 }
 
 .full-height > footer {
@@ -219,13 +239,9 @@ h1, section > h2, section > p {
 	margin: 0 0 3vh 0;
 }
 
-header > h1 {
-	/* margin-top: calc(var(--projectTypePadding) * -1); */
-}
-
 header > h1:hover {
-	-webkit-transform: scale(1.1);
-	transform: scale(1.1);
+	-webkit-transform: scale(var(--headerTransitionScale));
+					transform: scale(var(--headerTransitionScale));
 }
 
 h1, h2 {
@@ -235,10 +251,10 @@ h1, h2 {
 
 h1 {
 	font-size: var(--headerFontSize);
-	-webkit-transition: -webkit-transform .5s;
-	transition: -webkit-transform .5s;
-	transition: transform .5s;
-	transition: transform .5s, -webkit-transform .5s;
+	-webkit-transition: -webkit-transform var(--headerTransitionDuration);
+					transition: -webkit-transform var(--headerTransitionDuration);
+					transition: transform var(--headerTransitionDuration);
+					transition: transform var(--headerTransitionDuration), -webkit-transform var(--headerTransitionDuration);
 	cursor: default;
 }
 
@@ -249,36 +265,39 @@ h2 {
 
 h4 {
 	font-family: var(--defaultFont);
-	font-size: 1.3em;
+	font-size: var(--projectTileHeaderFontSize);
 	font-weight: lighter;
 	text-shadow: var(--textShadow);
 }
 
 p {
 	margin: 0;
-	font-size: var(--fontSize);
-	text-shadow: var(--textShadow2);
+	font-size: var(--defaultFontSize);
+	text-shadow: var(--textShadowSmall);
 }
 
 .email:after {
 	content: attr(data-name) '@' attr(data-domain);
 }
 
+a:link {
+	color: var(--textColor);
+	text-decoration: none;
+}
+
+p > a:link, footer > a:link {
+	transition: opacity var(--linkTransitionDuration);
+}
+
 p > a:link {
 	border-bottom: 1px solid var(--textColor);
 }
 
-a:link {
-	color: var(--textColor);
-	text-decoration: none;
-	transition: opacity .1s;
-}
-
-a:hover {
+p > a:hover, footer > a:hover {
 	opacity: .7;
 }
 
-a:active {
+p > a:active, footer > a:active {
 	opacity: 1;
 }
 
@@ -289,25 +308,23 @@ a:visited {
 nav > a:link {
 	display: inline-block;
 	margin: .2em;
-	font-size: var(--iconFontSize);
-	font-weight: bolder;
-	text-shadow: var(--boxShadow2);
-	-webkit-transition: text-shadow .1s, -webkit-transform .1s;
-	transition: text-shadow .1s, -webkit-transform .1s;
-	transition: transform .1s, text-shadow .1s;
-	transition: transform .1s, text-shadow .1s, -webkit-transform .1s;
+	text-shadow: var(--boxShadow);
+	-webkit-transition: text-shadow var(--iconLinkTransitionDuration), -webkit-transform var(--iconLinkTransitionDuration);
+					transition: text-shadow var(--iconLinkTransitionDuration), -webkit-transform var(--iconLinkTransitionDuration);
+					transition: transform var(--iconLinkTransitionDuration), text-shadow var(--iconLinkTransitionDuration);
+					transition: transform var(--iconLinkTransitionDuration), text-shadow var(--iconLinkTransitionDuration), -webkit-transform var(--iconLinkTransitionDuration);
 }
 
 nav > a:hover {
+	text-shadow: var(--boxShadowDownHover), inset var(--boxShadowDownHover);
+	text-shadow: var(--boxShadowDownHover);
+	-webkit-transform: translateY(var(--wiggleAmount));
+					transform: translateY(var(--wiggleAmount));
 	opacity: 1;
-	-webkit-transform: translateY(var(--wiggleAmountUp));
-					transform: translateY(var(--wiggleAmountUp));
-	text-shadow: var(--boxShadow2Hover), inset var(--boxShadow2Hover);
-	text-shadow: var(--boxShadow2Hover);
 }
 
 nav > a:active {
-	opacity: .9;
+	opacity: .8;
 }
 
 .project-container {
@@ -318,7 +335,7 @@ nav > a:active {
 					flex-direction: column;
 	justify-content: space-around;
 	margin: 0;
-	padding: 0 8vw;
+	padding: 0 var(--pageMargin);
 	position: absolute;
 	text-align: center;
 	top: 0;
@@ -353,34 +370,33 @@ nav > a:active {
 
 header > .project-header {
 	position: absolute;
+	width: 100%;
 	top: 0;
 	justify-content: space-between;
-	width: 100%;
 }
 
 header > .project-header > .project-type {
 	font-size: inherit;
-	padding: calc(var(--projectTypePadding) * 2);
+	padding: calc(var(--projectTypeTopPadding) * 2);
 }
 
 .project-type {
 	width: -webkit-max-content;
 	width: -moz-max-content;
 	width: max-content;
-	padding: var(--projectTypePadding);
+	padding: var(--projectTypeTopPadding);
 	font-style: italic;
-	border-radius: 0 0 0 .5em;
+	border-radius: 0 0 0 var(--projectTypeTopPadding);
 }
 
 .project > div {
 	height: 100%;
-	-webkit-transition: background .5s;
-	transition: background .5s;
-	background: var(--partialTransparency);
+	-webkit-transition: background var(--projectTileBgTransitionDuration);
+					transition: background var(--projectTileBgTransitionDuration);
+	background: var(--transparentBlack);
 }
 
-h4, .project-text > a {
-	height: 40vh;
+.project-text > h4, .project-text > a {
 	display: -webkit-box;
 	display: flex;
 	-webkit-box-orient: vertical;
@@ -392,40 +408,53 @@ h4, .project-text > a {
 }
 
 .project-text > h4 {
-	margin: calc(var(--projectTypePadding) * -3) 2em 0 2em;
+	height: var(--projectTileHeight);
+	margin: calc(var(--projectTypeTopPadding) * -2) var(--projectTypeHorizontalMargin) 0 var(--projectTypeHorizontalMargin);
 }
 
 .project-text > a {
 	height: 0;
-	padding: 0 2em;
+	padding: 0 var(--projectTypeHorizontalMargin);
 	-webkit-box-flex: 1;
-					flex: 1;
+							flex: 1;
 	opacity: 0;
 	overflow-y: hidden;
 }
 
 .project > a > p {
-	padding-top: var(--projectTypePadding);
+	padding-top: var(--projectTypeTopPadding);
 }
 
 .project:hover > div > .project-text > h4 {
 	height: 0;
 	opacity: 0;
-	-webkit-transition: opacity .25s 0s ease-out, height 0s .25s step-end;
-	transition: opacity .25s 0s ease-out, height 0s .25s step-end;
 }
 
 .project:hover > div > .project-text > a {
-	height: 40vh;
+	height: var(--projectTileHeight);
 	opacity: 1;
-	-webkit-transition: height 0s .25s step-end, opacity .25s .25s ease-in;
-	transition: height 0s .25s step-end, opacity .25s .25s ease-in;
 }
 
 .project:hover > div > .project-header > .icon-arrows-alt {
 	opacity: 1;
-	-webkit-transition: height 0s .25s step-end, opacity .25s .25s ease-in;
-	transition: height 0s .25s step-end, opacity .25s .25s ease-in;
+}
+
+.project > div > .project-text > h4,
+.project:hover > div > .project-text > a,
+.project > div > .project-header > .icon-arrows-alt {
+	-webkit-transition: height 0s var(--projectTileTransitionDuration) step-end,
+											opacity var(--projectTileTransitionDuration) var(--projectTileTransitionDuration) ease-in;
+					transition: height 0s var(--projectTileTransitionDuration) step-end,
+											opacity var(--projectTileTransitionDuration) var(--projectTileTransitionDuration) ease-in;
+}
+
+.project:hover > div > .project-text > h4,
+.project > div > .project-text > a,
+.project > div > .project-header > .icon-arrows-alt {
+	-webkit-transition: opacity var(--projectTileTransitionDuration) 0s ease-out,
+											height 0s var(--projectTileTransitionDuration) step-end;
+					transition: opacity var(--projectTileTransitionDuration) 0s ease-out,
+											height 0s var(--projectTileTransitionDuration) step-end;
 }
 
 /* Colors for different project types */
@@ -474,16 +503,14 @@ h4, .project-text > a {
 	background: rgba(51, 51, 51, .5);
 }
 
-
-
 /* IcoMoon icon font styles */
 @font-face {
   font-family: 'icomoon';
   src:  url('/fonts/icomoon.eot?p1634e');
   src:  url('/fonts/icomoon.eot?p1634e#iefix') format('embedded-opentype'),
-    url('/fonts/icomoon.ttf?p1634e') format('truetype'),
-    url('/fonts/icomoon.woff?p1634e') format('woff'),
-    url('/fonts/icomoon.svg?p1634e#icomoon') format('svg');
+				url('/fonts/icomoon.ttf?p1634e') format('truetype'),
+				url('/fonts/icomoon.woff?p1634e') format('woff'),
+				url('/fonts/icomoon.svg?p1634e#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -498,30 +525,24 @@ h4, .project-text > a {
   font-variant: normal;
   text-transform: none;
 	line-height: 1;
-	font-size: 2em;
+	font-size: var(--defaultIconFontSize);
 
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-.icon-heart {
-	font-size: inherit;
-	color: var(--heartColor);
-}
-.icon-heart:before {
-  content: "\e908";
-}
-.icon-arrows-alt {
-	left: 0;
-	bottom: 0;
-	font-size: 1.1em;
-	padding-left: var(--projectTypePadding);
-	opacity: 0;
-}
-.icon-arrows-alt:before {
-  content: "\e904";
+/* Icon Links */
+nav > [class^="icon"]:after, nav > [class*=" icon"]:after {
+	display: block;
+	margin-top: 1em;
+	padding: .5em;
+	font-family: var(--defaultFont);
+	font-size: var(--iconLabelFontSize);
+	font-weight: lighter;
+	text-shadow: var(--textShadow);
+	background: var(--transparentBlack);
+	border-radius: 1em;
 }
 .icon-globe:before {
   content: "\e900";
@@ -538,48 +559,11 @@ h4, .project-text > a {
 .icon-instagram:before {
   content: "\e905";
 }
-.icon-arrow-left.back-button {
-	padding: 0 0 0 .8em;
-	font-size: 1.4em;
-	text-shadow: var(--boxShadow2);
-	-webkit-transition: textShadow .1s, -webkit-transform .1s;
-	transition: textShadow .1s, -webkit-transform .1s;
-	transition: transform .1s, textShadow .1s;
-	transition: transform .1s, textShadow .1s, -webkit-transform .1s;
-}
-.icon-arrow-left.back-button:hover {
-	opacity: 1;
-	-webkit-transform: translateX(var(--wiggleAmountUp));
-					transform: translateX(var(--wiggleAmountUp));
-	text-shadow: var(--boxShadow2Hover), inset var(--boxShadow2Hover);
-	text-shadow: var(--boxShadow2Hover);
-}
-.icon-arrow-left:before {
-  content: "\e906";
-}
 .icon-github-square:before {
   content: "\e907";
 }
 .icon-linkedin-square:before {
   content: "\e909";
-}
-
-.icon-instagram:after,
-.icon-github-square:after,
-.icon-linkedin-square:after,
-.icon-globe:after,
-.icon-chrome:after,
-.icon-edge:after,
-.icon-firefox:after {
-	display: block;
-	margin-top: 1em;
-	padding: .5em;
-	font-family: var(--defaultFont);
-	font-size: var(--extraSmallFontSize);
-	font-weight: lighter;
-	text-shadow: var(--textShadow);
-	background: var(--partialTransparency);
-	border-radius: 1em;
 }
 .icon-instagram:after {
 	content: "Instagram";
@@ -601,4 +585,40 @@ h4, .project-text > a {
 }
 .icon-firefox:after {
   content: "Firefox Add-ons";
+}
+
+/* Other Icons */
+.icon-heart {
+	font-size: inherit;
+	color: var(--heartColor);
+}
+.icon-heart:before {
+  content: "\e908";
+}
+.icon-arrows-alt {
+	left: 0;
+	bottom: 0;
+	font-size: var(--fullScreenIconFontSize);
+	padding-left: var(--projectTypeTopPadding);
+	opacity: 0;
+}
+.icon-arrows-alt:before {
+  content: "\e904";
+}
+.icon-arrow-left {
+	padding: 0 0 0 calc(var(--projectTypeTopPadding) - var(--wiggleAmount));
+	font-size: var(--backIconFontSize);
+	text-shadow: var(--boxShadow);
+	-webkit-transition: text-shadow var(--backButtonTransitionDuration), -webkit-transform var(--backButtonTransitionDuration);
+					transition: text-shadow var(--backButtonTransitionDuration), -webkit-transform var(--backButtonTransitionDuration);
+					transition: transform var(--backButtonTransitionDuration), text-shadow var(--backButtonTransitionDuration);
+					transition: transform var(--backButtonTransitionDuration), text-shadow var(--backButtonTransitionDuration), -webkit-transform var(--backButtonTransitionDuration);
+}
+.icon-arrow-left:hover {
+	text-shadow: var(--boxShadowRightHover);
+	-webkit-transform: translateX(var(--wiggleAmount));
+					transform: translateX(var(--wiggleAmount));
+}
+.icon-arrow-left:before {
+  content: "\e906";
 }
