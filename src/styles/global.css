@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--bgColor: #040609;
+	--bgGradient: linear-gradient(180deg, var(--bgColor) 0%, #080b12 20%, #291427 75%, #3c1427 100%) no-repeat;
+	--primaryColor: #fff;
+}
+
+body {
+	min-height: 100vh;
+	background: var(--bgColor);
+	background: var(--bgGradient);
+	color: var(--primaryColor);
+}
