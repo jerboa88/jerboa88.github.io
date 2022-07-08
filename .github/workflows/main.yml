@@ -25,12 +25,12 @@
 #         run: yarn install --immutable
 
 #       - name: Build with Gatsby
-#         run: npm run build
+#         run: DOTENV_CONFIG_GH_TOKEN=${{ secrets.JOHNGIO_DEPLOY_PAT }} yarn build
 
 #       - name: Deploy to gh-pages branch
 #         uses: peaceiris/actions-gh-pages@v3
 #         if: ${{ github.ref == 'refs/heads/main' }}
 #         with:
-#           personal_token: ${{ secrets.MERGIST_DEPLOY_PAT }}
+#           personal_token: ${{ secrets.JOHNGIO_DEPLOY_PAT }}
 #           publish_dir: ./public
 #           cname: johng.io
