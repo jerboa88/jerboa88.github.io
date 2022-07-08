@@ -17,7 +17,6 @@ module.exports = {
 		'gatsby-plugin-sitemap',
 		'gatsby-plugin-sharp',
 		'gatsby-transformer-sharp',
-		'gatsby-plugin-fontawesome-css',
 		// TODO: Enable this later
 		// {
 		// 	resolve: `gatsby-plugin-realfavicongenerator`,
