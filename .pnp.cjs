@@ -57,7 +57,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:17.0.2"],\
             ["react-helmet", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.1.0"],\
             ["react-html-comment", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:2.0.14"],\
-            ["tailwindcss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.1.4"]\
+            ["tailwindcss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.1.4"],\
+            ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -13956,7 +13957,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:17.0.2"],\
             ["react-helmet", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.1.0"],\
             ["react-html-comment", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:2.0.14"],\
-            ["tailwindcss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.1.4"]\
+            ["tailwindcss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.1.4"],\
+            ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -20136,6 +20138,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["typedarray-to-buffer", "npm:3.1.5"],\
             ["is-typedarray", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["typescript", [\
+        ["patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353", {\
+          "packageLocation": "./.yarn/cache/typescript-patch-e8b9857d0c-9096d8f6c1.zip/node_modules/typescript/",\
+          "packageDependencies": [\
+            ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"]\
           ],\
           "linkType": "HARD"\
         }]\

@@ -2,7 +2,7 @@
   "name": "johng-io",
   "version": "1.0.0",
   "private": true,
-  "description": "Portfolio site for John Goodliff, Software Developer and Student",
+  "description": "Portfolio site for John Goodliff: Software Developer and Student",
   "author": "John Goodliff",
   "keywords": [
     "gatsby",
@@ -18,7 +18,8 @@
     "start": "yarn gatsby develop",
     "build": "yarn gatsby build",
     "serve": "yarn gatsby serve",
-    "clean": "yarn gatsby clean"
+    "clean": "yarn gatsby clean",
+    "typecheck": "yarn tsc --noEmit"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.3.0",
@@ -45,7 +46,8 @@
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-html-comment": "^2.0.12",
-    "tailwindcss": "^3.0.23"
+    "tailwindcss": "^3.0.23",
+    "typescript": "^4.7.4"
   },
   "packageManager": "yarn@3.2.1"
 }
