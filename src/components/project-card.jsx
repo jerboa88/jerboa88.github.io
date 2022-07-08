@@ -2,13 +2,13 @@
 // Use class for this component because it uses state
 import React from 'react';
 import { Link } from 'gatsby';
+import { faExpand } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { H3, P, C } from '../components/text-components';
 import Pill from '../components/pill';
 import TagsWidget from '../components/tags-widget';
 import IconButton from '../components/icon-button';
-import { faExpand } from '@fortawesome/free-solid-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import getProjectImage from '../utilities.js';
+import getProjectImage from '../common/utilities';
 import * as styles from '../styles/project-card.module.css';
 
 

@@ -3,7 +3,7 @@
 import React from 'react';
 import { Layout } from '../components/layout-components';
 import { H2, P } from '../components/text-components';
-import getProjectImage from '../utilities.js';
+import getProjectImage from '../common/utilities';
 
 
 export default function ProjectPage(props) {
