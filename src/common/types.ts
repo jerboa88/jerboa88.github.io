@@ -44,6 +44,29 @@ export type MetadataInterface = {
 }
 
 
+export interface ProjectLanguageInterface {
+	name: string;
+	color: string;
+}
+
+
+export interface ProjectInfoInterface {
+	slug: string;
+	shortDesc: string;
+	homepageUrl: string;
+	url: string;
+	imageUrl: string;
+	stargazers: number;
+	updatedAt: string;
+	license: string;
+	languages: ProjectLanguageInterface[];
+	name: string;
+	longDesc: string;
+	typeName: string;
+	typeColor: string;
+}
+
+
 export type ToggleContextInterface = Context<{
 	isEnabled: boolean;
 	toggle: () => void;

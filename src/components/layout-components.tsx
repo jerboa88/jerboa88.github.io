@@ -1,27 +1,41 @@
-// Various layout components used in multiple pages
-// Use functions for these components because they don't use state
+/*
+	Reusable layout components
+	--------------------------
+*/
+
+
 import React from 'react';
 import { Link } from 'gatsby';
+import { faInstagram, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { H2, P } from '../components/text-components';
 import IconButton from '../components/icon-button';
-import { faInstagram, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 
 // Page section
-export function Section(props) {
+interface SectionPropsInterface {
+	className?: string;
+	title: string;
+	children: React.ReactNode;
+}
+
+export function Section({ className = '', title, children }: SectionPropsInterface) {
 	return (
-		<section className={`flex flex-col min-h-screen p-8 text-white text-center justify-center ${props.className || ''}`}>
-			{props.title && <H2>{props.title}</H2>}
-			{props.children}
+		<section className={`flex flex-col min-h-screen p-8 text-white text-center justify-center ${className}`}>
+			{title && <H2>{title}</H2>}
+			{children}
 		</section>
 	);
 }
 
 
 // Footer shown on every page
-export function Footer(props) {
+interface FooterPropsInterface {
+	className?: string;
+}
+
+export function Footer({ className = '' }: FooterPropsInterface) {
 	return (
-		<footer className={`w-full ${props.className || ''}`}>
+		<footer className={`w-full ${className}`}>
 			<nav className='flex flex-row justify-around text-center'>
 				<Link to='about' className='flex-1 p-2'>About</Link>
 				<P className='flex-1 p-4'>Handcrafted with love</P>
@@ -44,7 +58,7 @@ export function Footer(props) {
 
 
 // Layout component that wraps every page
-export function Layout(props) {
+export function Layout(props: { children: React.ReactNode }) {
 	return (
 		<React.Fragment>
 			<main>
