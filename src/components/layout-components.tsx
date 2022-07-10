@@ -14,7 +14,7 @@ import IconButton from '../components/icon-button';
 // Page section
 interface SectionPropsInterface {
 	className?: string;
-	title: string;
+	title?: string;
 	children: React.ReactNode;
 }
 
