@@ -1,8 +1,9 @@
 'use strict';
 
+
 const path = require('path');
-const indexPageTemplate = path.resolve('./src/templates/index.jsx');
-const projectPageTemplate = path.resolve('./src/templates/project-page.jsx');
+const indexPageTemplate = path.resolve('./src/templates/index.tsx');
+const projectPageTemplate = path.resolve('./src/templates/project-page.tsx');
 
 
 class ResponseParser {
@@ -19,7 +20,7 @@ class ResponseParser {
 			brightgreen: '#4caf50',
 			blue: '#2196f3',
 			purple: '#9c27b0',
-			gray: '#616161'
+			gray: '#333333',
 		};
 		this.#langMap = {
 			JavaScript: 'JS',
@@ -114,7 +115,7 @@ class ResponseParser {
 		result['slug'] = repo.name || this.#defaultText;
 		result['shortDesc'] = repo.description || this.#defaultText;
 		result['homepageUrl'] = repo.homepageUrl || '';
-		result['url'] = repo.url || '';
+		result['githubUrl'] = repo.githubUrl || '';
 		result['imageUrl'] = repo.usesCustomOpenGraphImage ? repo.openGraphImageUrl : '';
 		result['stargazers'] = repo.stargazerCount || 0;
 		result['updatedAt'] = repo.updatedAt || this.#defaultText;

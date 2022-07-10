@@ -54,7 +54,7 @@ export interface ProjectInfoInterface {
 	slug: string;
 	shortDesc: string;
 	homepageUrl: string;
-	url: string;
+	githubUrl: string;
 	imageUrl: string;
 	stargazers: number;
 	updatedAt: string;
