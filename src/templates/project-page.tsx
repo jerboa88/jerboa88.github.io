@@ -5,10 +5,11 @@
 
 
 import React from 'react';
-import { Layout } from '../components/layout-components';
-import { H2, P } from '../components/text-components';
-import getProjectImage from '../common/utilities';
+import ConfigManager from '../common/config-manager';
+import { getProjectImage } from '../common/utilities';
 import { ProjectInfoInterface } from '../common/types';
+import { PageLayout } from '../components/layout-components';
+import { H2, P } from '../components/text-components';
 
 
 interface ProjectPagePropsInterface {
@@ -16,8 +17,13 @@ interface ProjectPagePropsInterface {
 }
 
 export default function ProjectPage({ pageContext }: ProjectPagePropsInterface) {
+	const configManager = new ConfigManager();
+	const metadata = configManager.getMetadata();
+	const lightTheme = configManager.getTheme('light');
+	const darkTheme = configManager.getTheme('dark');
+
 	return (
-		<Layout>
+		<PageLayout metadata={metadata} lightTheme={lightTheme} darkTheme={darkTheme}>
 			<img src={getProjectImage(pageContext.imageUrl)} width='500' alt=''></img>
 			<H2>{pageContext.name}</H2>
 			<P>{pageContext.shortDesc}</P>
@@ -30,6 +36,6 @@ export default function ProjectPage({ pageContext }: ProjectPagePropsInterface) 
 			<P>{pageContext.license}</P>
 			<P>{pageContext.name}</P>
 			<P>{pageContext.longDesc}</P>
-		</Layout>
+		</PageLayout>
 	);
 }

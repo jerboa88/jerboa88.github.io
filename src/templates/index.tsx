@@ -5,10 +5,11 @@
 
 
 import React from 'react';
-import { Section, Layout } from '../components/layout-components';
+import ConfigManager from '../common/config-manager';
+import { ProjectInfoInterface } from '../common/types';
+import { Section, PageLayout } from '../components/layout-components';
 import { H1, P, S } from '../components/text-components';
 import ProjectCardGallery from '../components/project-card-gallery';
-import { ProjectInfoInterface } from '../common/types';
 import * as styles from '../styles/index.module.css';
 
 
@@ -19,11 +20,16 @@ interface HomePropsInterface {
 }
 
 export default function Home({ pageContext }: HomePropsInterface) {
+	const configManager = new ConfigManager();
+	const metadata = configManager.getMetadata();
+	const lightTheme = configManager.getTheme('light');
+	const darkTheme = configManager.getTheme('dark');
+
 	return (
-		<Layout>
+		<PageLayout metadata={metadata} lightTheme={lightTheme} darkTheme={darkTheme}>
 			<Section>
 				<S className="absolute top-0">Space is cool, but cats are cooler (sorry Elon)</S>
-				<H1>John Goodliff</H1>
+				<H1>{metadata.author}</H1>
 				<P>Software Developer & Student</P>
 			</Section>
 			<Section title="About">
@@ -34,6 +40,6 @@ export default function Home({ pageContext }: HomePropsInterface) {
 			</Section>
 			<Section title="Some Other Stuff">
 			</Section>
-		</Layout>
+		</PageLayout>
 	);
 }
