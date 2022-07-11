@@ -8,7 +8,7 @@ import React, { useCallback, useState } from 'react';
 import { Link } from 'gatsby';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import getProjectImage from '../common/utilities';
+import { getProjectImage } from '../common/utilities';
 import { ProjectInfoInterface } from '../common/types';
 import { H3, P, C } from '../components/text-components';
 import Pill from '../components/pill';
