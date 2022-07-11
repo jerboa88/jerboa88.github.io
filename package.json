@@ -1,6 +1,6 @@
 {
   "name": "johng-io",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "private": true,
   "description": "Portfolio site for John Goodliff: Software Developer and Student",
   "author": "John Goodliff",
@@ -39,7 +39,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "daisyui": "^2.18.0",
     "dotenv": "^16.0.1",
-    "framer-motion": "^6.4.1",
+    "framer-motion": "^6.4.3",
     "gatsby": "^4.18.0",
     "gatsby-plugin-google-gtag": "^4.18.0",
     "gatsby-plugin-image": "^2.18.0",
