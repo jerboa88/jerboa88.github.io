@@ -11,14 +11,14 @@ import { P } from '../components/text-components';
 
 interface TagsWidgetPropsInterface {
 	className?: string;
-	data: ProjectLanguageInterface[];
+	tags: ProjectLanguageInterface[];
 }
 
-export default function TagsWidget({ className = '', data }: TagsWidgetPropsInterface) {
+export default function TagsWidget({ className = '', tags }: TagsWidgetPropsInterface) {
 	return (
 		<div className={`flex flex-row px-3 gap-2 ${className}`}>
 			{
-				data.map(({ name, color }) => {
+				tags.map(({ name, color }) => {
 					return (
 						<div key={name} className={'inline-block'}>
 							<span className='m-0 align-middle text-4xl leading-4 drop-shadow' style={{ color: `${color}` }}>•</span>

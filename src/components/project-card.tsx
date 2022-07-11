@@ -91,7 +91,7 @@ export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
 						<C>Project type & language widget</C>
 						<div className='absolute top-0 left-0 flex flex-row w-max m-4 rounded-full bg-black/10 shadow-inner'>
 							<Pill className='self-center' text={repo.typeName} color={repo.typeColor} />
-							<TagsWidget className='self-center' data={repo.languages} />
+							<TagsWidget className='self-center' tags={repo.languages} />
 						</div>
 					</div>
 
