@@ -39,8 +39,23 @@ export type MetadataInterface = {
 	githubUrl: string;
 	homepageDomain: string;
 	trackingId: string;
-	lightTheme: DaisyUiThemeInterface;
-	darkTheme: DaisyUiThemeInterface;
+}
+
+
+export type ThemeInterface = {
+	'primary-header': string;
+	'primary': string;
+	'secondary-header': string;
+	'secondary': string;
+	'accent': string;
+	'neutral': string;
+	'info': string;
+	'success': string;
+	'warning': string;
+	'error': string;
+	'base-100': string;
+	'base-200': string;
+	'base-300': string;
 }
 
 
