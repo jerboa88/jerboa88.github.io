@@ -5,10 +5,9 @@
 
 
 import type { GatsbyConfig } from 'gatsby';
+import dotenv from 'dotenv';
+import ConfigManager from './src/common/config-manager';
 import { MetadataInterface } from './src/common/types';
-
-const dotenv = require('dotenv');
-const ConfigManager = require('./config-manager');
 
 
 const configManager = new ConfigManager();
