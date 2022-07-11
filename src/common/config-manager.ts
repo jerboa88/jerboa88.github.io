@@ -131,14 +131,14 @@ const config = {
 // Exports
 
 // Class for loading and formatting configuration data
-class ConfigManager {
+export default class ConfigManager {
 	// Return metadata for the site
 	getMetadata() {
 		return config.metadata;
 	}
 
 	// Return a a daisyUI theme given its name
-	getTheme(themeName) {
+	getTheme(themeName: 'light' | 'dark') {
 		const theme = config.theme[themeName];
 
 		if (!theme) {
@@ -189,7 +189,7 @@ class ConfigManager {
 	}
 
 	// Returns the mime type for the provided image path
-	getMimeTypeFromPath(path) {
+	getMimeTypeFromPath(path: string) {
 		if (path.endsWith('.svg')) {
 			return 'image/svg+xml';
 		} else {
@@ -203,5 +203,3 @@ class ConfigManager {
 		}
 	}
 };
-
-module.exports = ConfigManager;
