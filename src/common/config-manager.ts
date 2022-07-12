@@ -27,7 +27,7 @@ const config = {
 			'secondary-header': '#1976D2',	// MD Blue 700
 			'secondary': '#1565C0',					// MD Blue 800
 			'accent': '#673AB7',						// MD Purple 500
-			'neutral': 'hsl(220 15% 10%)',
+			'neutral': '#111111',
 			'info': '#0277BD',							// MD Light Blue 800
 			'success': '#558B2F',						// MD Light Green 800
 			'warning': '#FF6F00',						// MD Amber 800
@@ -42,14 +42,14 @@ const config = {
 			'secondary-header': '#E91E63',	// MD Pink 500
 			'secondary': '#F06292',					// MD Pink 300
 			'accent': '#26C6DA',						// MD Cyan 400
-			'neutral': 'hsl(220 15% 10%)',
+			'neutral': '#111111',
 			'info': '#4FC3F7',							// MD Light Blue 300
 			'success': '#AED581',						// MD Light Green 300
 			'warning': '#FFD54F',						// MD Amber 300
 			'error': '#E57373',							// MD Red 300
-			'base-100': 'hsl(220 18% 13%)',
-			'base-200': 'hsl(220 16% 11%)',
-			'base-300': 'hsl(220 15% 10%)'
+			'base-100': '#212121',
+			'base-200': '#111111',
+			'base-300': '#000000'
 		},
 	},
 	// Image generation config to pass to gatsby-plugin-image-generator
