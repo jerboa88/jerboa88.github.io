@@ -8,6 +8,7 @@ import type { GatsbyConfig } from 'gatsby';
 import dotenv from 'dotenv';
 import ConfigManager from './src/common/config-manager';
 import { MetadataInterface } from './src/common/types';
+import * as tailwindConfig from './tailwind.config';
 
 
 const configManager = new ConfigManager();
@@ -33,7 +34,15 @@ const config: GatsbyConfig = {
 		'gatsby-plugin-sharp',
 		'gatsby-transformer-sharp',
 		'gatsby-plugin-react-helmet',
-		'gatsby-plugin-postcss',
+		{
+			resolve: 'gatsby-plugin-postcss',
+			options: {
+				postCssPlugins: [
+					require('tailwindcss')(tailwindConfig),
+					require('autoprefixer')
+				],
+			},
+		},
 		{
 			resolve: 'gatsby-plugin-sitemap',
 			options: {

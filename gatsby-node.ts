@@ -1,6 +1,6 @@
 import { ProjectInfoInterface } from './src/common/types';
+import path from 'path';
 
-const path = require('path');
 const indexPageTemplate = path.resolve('./src/templates/index.tsx');
 const projectPageTemplate = path.resolve('./src/templates/project-page.tsx');
 
