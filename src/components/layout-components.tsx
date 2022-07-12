@@ -6,12 +6,12 @@
 
 import React, { ReactNode } from 'react';
 import { Link } from 'gatsby';
+import { Helmet } from 'react-helmet';
 import { MotionConfig } from 'framer-motion';
 import { faInstagram, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { H2, P } from '../components/text-components';
-import IconButton from '../components/icon-button';
-import { Helmet } from 'react-helmet';
 import { MetadataInterface, ThemeInterface } from '../common/types';
+import { H1, H2, P } from '../components/text-components';
+import IconButton from '../components/icon-button';
 
 
 // Page section
@@ -27,6 +27,25 @@ export function Section({ className = '', title, children }: SectionPropsInterfa
 			{title && <H2>{title}</H2>}
 			{children}
 		</section>
+	);
+}
+
+
+// Header with navbar component
+function Header() {
+	return (
+		<header className="fixed top-0 w-full">
+			<div className="flex-row justify-between p-6 pb-4 items-center">
+				<H1 className="m-0 !text-lg">J</H1>
+				<nav className="tabs flex-row justify-center font-button uppercase">
+					<a href="#about" className="tab tab-active">About</a>
+					<a href="#projects" className="tab">Projects</a>
+					<a href="#experience" className="tab">Experience</a>
+					<a href="#contact" className="tab">Contact</a>
+				</nav>
+			</div>
+			<div className="divider m-0" />
+		</header>
 	);
 }
 
@@ -201,7 +220,8 @@ export function PageLayout({ className = '', metadata, lightTheme, darkTheme, ch
 
 			{/* Page body */}
 			<MotionConfig reducedMotion="user">
-				<div className={`min-h-screen flex-col justify-between items-center mx-auto gap-8 text-base bg-base-200 text-base-content selection:bg-primary selection:text-primary-content ${className}`}>
+				<div className={`min-h-screen flex-col justify-between items-center mx-auto text-base bg-base-200 text-base-content selection:bg-primary selection:text-primary-content ${className}`}>
+					<Header />
 					{children}
 					<Footer />
 				</div>
