@@ -23,7 +23,7 @@ module.exports = {
 		},
 		extend: {
 			fontFamily: {
-				heading: ['Luckiest Guy', 'Impact', 'Franklin Gothic Medium', 'Candara', 'Calibri', 'sans-serif'],
+				heading: ['Montserrat', 'Impact', 'Franklin Gothic Medium', 'Candara', 'Calibri', 'sans-serif'],
 				button: ['Roboto Condensed', 'Arial Narrow', 'Calibri', 'Candara', 'Impact', 'sans-serif'],
 			},
 			colors: {

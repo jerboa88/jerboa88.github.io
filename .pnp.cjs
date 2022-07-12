@@ -33,6 +33,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@fontsource/montserrat", "npm:4.5.11"],\
+            ["@fontsource/roboto-condensed", "npm:4.5.8"],\
+            ["@fontsource/roboto-flex", "npm:4.5.0"],\
             ["@fortawesome/fontawesome-svg-core", "npm:6.1.1"],\
             ["@fortawesome/free-brands-svg-icons", "npm:6.1.1"],\
             ["@fortawesome/free-solid-svg-icons", "npm:6.1.1"],\
@@ -2712,6 +2715,33 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["js-yaml", "npm:3.14.1"],\
             ["minimatch", "npm:3.1.2"],\
             ["strip-json-comments", "npm:3.1.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@fontsource/montserrat", [\
+        ["npm:4.5.11", {\
+          "packageLocation": "./.yarn/cache/@fontsource-montserrat-npm-4.5.11-4cabab3bcc-5bd8ab43ca.zip/node_modules/@fontsource/montserrat/",\
+          "packageDependencies": [\
+            ["@fontsource/montserrat", "npm:4.5.11"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@fontsource/roboto-condensed", [\
+        ["npm:4.5.8", {\
+          "packageLocation": "./.yarn/cache/@fontsource-roboto-condensed-npm-4.5.8-a1988a2797-7022e88fb0.zip/node_modules/@fontsource/roboto-condensed/",\
+          "packageDependencies": [\
+            ["@fontsource/roboto-condensed", "npm:4.5.8"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@fontsource/roboto-flex", [\
+        ["npm:4.5.0", {\
+          "packageLocation": "./.yarn/cache/@fontsource-roboto-flex-npm-4.5.0-83fd8c6875-6461bb84f0.zip/node_modules/@fontsource/roboto-flex/",\
+          "packageDependencies": [\
+            ["@fontsource/roboto-flex", "npm:4.5.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -14601,6 +14631,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["johng-io", "workspace:."],\
+            ["@fontsource/montserrat", "npm:4.5.11"],\
+            ["@fontsource/roboto-condensed", "npm:4.5.8"],\
+            ["@fontsource/roboto-flex", "npm:4.5.0"],\
             ["@fortawesome/fontawesome-svg-core", "npm:6.1.1"],\
             ["@fortawesome/free-brands-svg-icons", "npm:6.1.1"],\
             ["@fortawesome/free-solid-svg-icons", "npm:6.1.1"],\
