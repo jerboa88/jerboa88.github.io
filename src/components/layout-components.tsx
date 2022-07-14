@@ -4,47 +4,61 @@
 */
 
 
-import React, { ReactNode } from 'react';
+import React, { ForwardedRef, forwardRef, ReactNode } from 'react';
 import { Link } from 'gatsby';
 import { Helmet } from 'react-helmet';
-import { MotionConfig } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { faInstagram, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { MetadataInterface, ThemeInterface } from '../common/types';
+import { MetadataInterface, SectionInterface, ThemeInterface } from '../common/types';
+import { getDefaultTransition } from '../common/utilities';
 import { H1, H2, P } from '../components/text-components';
 import IconButton from '../components/icon-button';
+import TabsWidget from '../components/tabs-widget';
 
 
 // Page section
 interface SectionPropsInterface {
 	className?: string;
+	id?: string;
 	title?: string;
 	children: React.ReactNode;
 }
 
-export function Section({ className = '', title, children }: SectionPropsInterface) {
-	return (
-		<section className={`flex flex-col min-h-screen p-8 text-white text-center justify-center ${className}`}>
-			{title && <H2>{title}</H2>}
-			{children}
-		</section>
-	);
-}
+export const Section = forwardRef(({ className = '', id, title, children }: SectionPropsInterface, ref: ForwardedRef<HTMLElement>) => (
+	<section id={id} ref={ref} className={`flex flex-col min-h-screen p-8 text-white text-center justify-center ${className}`}>
+		{title && <H2>{title}</H2>}
+		{children}
+	</section>
+));
 
 
 // Header with navbar component
-function Header() {
+interface HeaderPropsInterface {
+	metadata: MetadataInterface;
+	titleLayoutId?: string;
+	isTitleExpanded?: boolean;
+	sections: SectionInterface[];
+}
+
+function Header({ metadata, titleLayoutId, isTitleExpanded = false, sections }: HeaderPropsInterface) {
+	const monogram = metadata.author[0];
+	const dividerOpacityStyles = isTitleExpanded ? 'opacity-0' : 'opacity-100';
+	const justificationStyles = isTitleExpanded ? 'justify-center' : 'justify-between';
+
 	return (
-		<header className="fixed top-0 w-full">
-			<div className="flex-row justify-between p-6 pb-4 items-center">
-				<H1 className="m-0 !text-lg">J</H1>
-				<nav className="tabs flex-row justify-center font-button uppercase">
-					<a href="#about" className="tab tab-active">About</a>
-					<a href="#projects" className="tab">Projects</a>
-					<a href="#experience" className="tab">Experience</a>
-					<a href="#contact" className="tab">Contact</a>
-				</nav>
+		<header className="fixed top-0 w-full bg-base-300 z-10">
+			<div className={`flex-row p-4 pb-4 items-center ${justificationStyles}`}>
+				{!isTitleExpanded && <motion.a href="/" layoutId={titleLayoutId} {...getDefaultTransition()}>
+					<H1 className="m-0 text-xl">
+						<span className="inline sm:hidden">{monogram}</span>
+						<span className="hidden sm:inline md:hidden">{metadata.siteDomain}</span>
+						<span className="hidden md:inline">{metadata.author}</span>
+					</H1>
+				</motion.a>}
+
+				<TabsWidget sections={sections} />
 			</div>
-			<div className="divider m-0" />
+			<div className={`divider h-auto m-0 transition-opacity ${dividerOpacityStyles}`} />
 		</header>
 	);
 }
@@ -84,15 +98,19 @@ interface PageLayoutPropsInterface {
 	metadata: MetadataInterface;
 	lightTheme: ThemeInterface;
 	darkTheme: ThemeInterface;
-	children: ReactNode
+	titleLayoutId?: string;
+	isTitleExpanded?: boolean;
+	sections: SectionInterface[];
+	children: ReactNode;
 }
 
-// Layout component that provides basic styles and metadata tags for the whole page
-export function PageLayout({ className = '', metadata, lightTheme, darkTheme, children }: PageLayoutPropsInterface) {
+// Layout component that provides basic styles and metadata tags for the whole pageS
+export function PageLayout({ className = '', metadata, lightTheme, darkTheme, titleLayoutId, isTitleExpanded = false, sections, children }: PageLayoutPropsInterface) {
 	// const lsKeyForTheme = 'is-dark-theme';
 	// const lsKeyForMotion = 'is-motion-allowed';
 	// const lsKeyForAnalytics = `ga-disable-${props.metadata.trackingId}`;
-	const ogImageUrl = `${metadata.siteUrl}${metadata.ogImageUrl}`;
+	const siteUrl = `https://${metadata.siteDomain}/`;
+	const ogImageUrl = `${siteUrl}${metadata.ogImageUrl}`;
 	// Whether the component is currently being mounted or not
 	// We can use this to ignore initial state changes of the component
 	// const isMount = useIsMount();
@@ -177,7 +195,7 @@ export function PageLayout({ className = '', metadata, lightTheme, darkTheme, ch
 				<meta property="og:title" content={metadata.title} />
 				<meta property="og:description" content={metadata.description} />
 				<meta property="og:type" content="website" />
-				<meta property="og:url" content={metadata.siteUrl} />
+				<meta property="og:url" content={siteUrl} />
 				<meta property="og:image" content={ogImageUrl} />
 				<meta property="og:image:type" content="image/png" />
 				<meta property="og:image:width" content="1200" />
@@ -195,7 +213,7 @@ export function PageLayout({ className = '', metadata, lightTheme, darkTheme, ch
 				<meta name="google" content="nositelinkssearchbox" />
 				<meta content={getPrimaryThemeColor()} name="theme-color" />
 
-				<link rel="canonical" href={metadata.siteUrl} />
+				<link rel="canonical" href={siteUrl} />
 
 				{/* These icons are were not added to the head with gatsby-plugin-manifest so we need to add them manually here */}
 				<link rel="icon" href="/favicon-32x32.png" type="image/png" />
@@ -208,7 +226,7 @@ export function PageLayout({ className = '', metadata, lightTheme, darkTheme, ch
 							"@type": "WebSite",
 							"name": "${metadata.shortTitle}",
 							"description": "${metadata.description}",
-							"url": "${metadata.siteUrl}",
+							"url": "${siteUrl}",
 							"author": {
 								"@type": "Person",
 								"name": "${metadata.author}",
@@ -219,13 +237,11 @@ export function PageLayout({ className = '', metadata, lightTheme, darkTheme, ch
 			</Helmet>
 
 			{/* Page body */}
-			<MotionConfig reducedMotion="user">
-				<div className={`min-h-screen flex-col justify-between items-center mx-auto text-base bg-base-200 text-base-content selection:bg-primary selection:text-primary-content ${className}`}>
-					<Header />
-					{children}
-					<Footer />
-				</div>
-			</MotionConfig>
+			<div className={`min-h-screen flex-col justify-between items-center mx-auto text-base bg-base-300 text-base-content scroll-smooth selection:bg-primary selection:text-primary-content ${className}`}>
+				<Header metadata={metadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections} />
+				{children}
+				<Footer />
+			</div>
 		</>
 	);
 }
