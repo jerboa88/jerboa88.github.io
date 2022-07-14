@@ -57,6 +57,10 @@
 	}
 
 	/* Styles for custom scrollbar */
+	html {
+		@apply scroll-smooth;
+	}
+
 	body {
 		overflow: overlay;
 	}
