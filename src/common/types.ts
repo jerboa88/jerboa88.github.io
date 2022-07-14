@@ -4,7 +4,7 @@
 */
 
 
-import { Context } from 'react';
+import { Context, RefObject } from 'react';
 
 
 export interface DaisyUiThemeInterface {
@@ -56,6 +56,13 @@ export type ThemeInterface = {
 	'base-100': string;
 	'base-200': string;
 	'base-300': string;
+}
+
+
+export interface SectionInterface {
+	id: string;
+	name: string;
+	ref: RefObject<HTMLElement>;
 }
 
 
