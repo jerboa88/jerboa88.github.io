@@ -15,7 +15,7 @@ const config = {
 		description: 'A portfolio site for John Goodliff, a Software Developer and Student based in Edmonton, Alberta.',
 		ogImageUrl: 'images/og-image.png',
 		ogImageAltText: 'Sample OpenGraph cover image',
-		siteUrl: 'https://johng.io/',
+		siteDomain: 'johng.io',
 		githubUrl: 'https://github.com/jerboa88/jerboa88.github.io/',
 		homepageDomain: 'johng.io',
 		trackingId: 'G-1PTSNX2F57',

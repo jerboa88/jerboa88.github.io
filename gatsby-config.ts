@@ -60,7 +60,7 @@ const config: GatsbyConfig = {
 			resolve: 'gatsby-plugin-robots-txt',
 			options: {
 				// Link to the sitemap index generated above
-				sitemap: `${metadata.siteUrl}/sitemap-index.xml`,
+				sitemap: `https://${metadata.siteDomain}/sitemap-index.xml`,
 				policy: [
 					{
 						userAgent: '*',
