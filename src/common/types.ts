@@ -61,7 +61,7 @@ export type ThemeInterface = {
 
 export interface SectionInterface {
 	id: string;
-	name: string;
+	title: string;
 	ref: RefObject<HTMLElement>;
 }
 

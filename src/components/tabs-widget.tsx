@@ -7,16 +7,13 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useViewportScroll } from 'framer-motion';
 import { doesWindowExist, getDefaultTransition } from '../common/utilities';
+import { SectionInterface } from '../common/types';
 
 
 // Exports
 
 interface TabsWidgetPropsInterface {
-	sections: {
-		name: string;
-		url: string;
-		ref: React.RefObject<HTMLElement>;
-	}[];
+	sections: SectionInterface[];
 }
 
 export default function TabsWidget({ sections }: TabsWidgetPropsInterface) {
@@ -71,11 +68,11 @@ export default function TabsWidget({ sections }: TabsWidgetPropsInterface) {
 	return (
 		<motion.nav layout="position" className="tabs flex-row justify-center font-button uppercase" {...getDefaultTransition()}>
 			{
-				sections.map(({ name, url }, i) => {
+				sections.map(({ id, title }, i) => {
 					const activeClass = currentSectionIndex === i ? 'tab-active' : '';
 
 					return (
-						<a href={url} key={name} className={`tab px-2 sm:px-4 ${activeClass}`}>{name}</a>
+						<a href={`#${id}`} key={title} className={`tab px-2 sm:px-4 ${activeClass}`}>{title}</a>
 					);
 				})
 			}
