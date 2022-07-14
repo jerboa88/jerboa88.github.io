@@ -17,7 +17,7 @@ interface TextComponentPropsInterface {
 // Level 1 heading text
 export function H1({ className = '', children }: TextComponentPropsInterface) {
 	return (
-		<h1 className={`m-4 text-5xl align-middle font-heading font-black uppercase drop-shadow-md transition-transform hover:scale-110 ${className}`}>
+		<h1 className={`align-middle font-heading font-black uppercase drop-shadow-md transition-transform hover:scale-110 ${className}`}>
 			{children}
 		</h1>
 	);
