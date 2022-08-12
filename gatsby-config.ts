@@ -29,6 +29,9 @@ const config: GatsbyConfig = {
 		lightTheme,
 		darkTheme
 	},
+	graphqlTypegen: {
+		typesOutputPath: `src/common/gatsby-types.d.ts`,
+	},
 	plugins: [
 		'gatsby-plugin-image',
 		'gatsby-plugin-sharp',
