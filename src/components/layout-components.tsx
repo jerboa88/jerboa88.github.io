@@ -42,6 +42,7 @@ interface HeaderPropsInterface {
 
 function Header({ metadata, titleLayoutId, isTitleExpanded = false, sections }: HeaderPropsInterface) {
 	const monogram = metadata.author[0];
+	const siteDomain = new URL(metadata.siteUrl).host;
 	const dividerOpacityStyles = isTitleExpanded ? 'opacity-0' : 'opacity-100';
 	const justificationStyles = isTitleExpanded ? 'justify-center' : 'justify-between';
 
@@ -51,7 +52,7 @@ function Header({ metadata, titleLayoutId, isTitleExpanded = false, sections }: 
 				{!isTitleExpanded && <motion.a href="/" layoutId={titleLayoutId} {...getDefaultTransition()}>
 					<H1 className="m-0 text-xl">
 						<span className="inline sm:hidden">{monogram}</span>
-						<span className="hidden sm:inline md:hidden">{metadata.siteDomain}</span>
+						<span className="hidden sm:inline md:hidden">{siteDomain}</span>
 						<span className="hidden md:inline">{metadata.author}</span>
 					</H1>
 				</motion.a>}
@@ -109,8 +110,7 @@ export function PageLayout({ className = '', metadata, lightTheme, darkTheme, ti
 	// const lsKeyForTheme = 'is-dark-theme';
 	// const lsKeyForMotion = 'is-motion-allowed';
 	// const lsKeyForAnalytics = `ga-disable-${props.metadata.trackingId}`;
-	const siteUrl = `https://${metadata.siteDomain}/`;
-	const ogImageUrl = `${siteUrl}${metadata.ogImageUrl}`;
+	const ogImageUrl = new URL(metadata.ogImagePath, metadata.siteUrl).toString();
 	// Whether the component is currently being mounted or not
 	// We can use this to ignore initial state changes of the component
 	// const isMount = useIsMount();
@@ -195,7 +195,7 @@ export function PageLayout({ className = '', metadata, lightTheme, darkTheme, ti
 				<meta property="og:title" content={metadata.title} />
 				<meta property="og:description" content={metadata.description} />
 				<meta property="og:type" content="website" />
-				<meta property="og:url" content={siteUrl} />
+				<meta property="og:url" content={metadata.siteUrl} />
 				<meta property="og:image" content={ogImageUrl} />
 				<meta property="og:image:type" content="image/png" />
 				<meta property="og:image:width" content="1200" />
@@ -213,7 +213,7 @@ export function PageLayout({ className = '', metadata, lightTheme, darkTheme, ti
 				<meta name="google" content="nositelinkssearchbox" />
 				<meta content={getPrimaryThemeColor()} name="theme-color" />
 
-				<link rel="canonical" href={siteUrl} />
+				<link rel="canonical" href={metadata.siteUrl} />
 
 				{/* These icons are were not added to the head with gatsby-plugin-manifest so we need to add them manually here */}
 				<link rel="icon" href="/favicon-32x32.png" type="image/png" />
@@ -226,11 +226,11 @@ export function PageLayout({ className = '', metadata, lightTheme, darkTheme, ti
 							"@type": "WebSite",
 							"name": "${metadata.shortTitle}",
 							"description": "${metadata.description}",
-							"url": "${siteUrl}",
+							"url": "${metadata.siteUrl}",
 							"author": {
 								"@type": "Person",
 								"name": "${metadata.author}",
-								"url": "https://${metadata.homepageDomain}"
+								"url": "${metadata.siteUrl}"
 							}
 						}`}
 				</script>

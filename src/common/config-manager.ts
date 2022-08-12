@@ -13,11 +13,10 @@ const config = {
 		authorUsername: 'jerboa88',
 		shortDescription: 'A portfolio site for John Goodliff, a Software Developer and Student based in Edmonton, Alberta.',
 		description: 'A portfolio site for John Goodliff, a Software Developer and Student based in Edmonton, Alberta.',
-		ogImageUrl: 'images/og-image.png',
+		ogImagePath: 'images/og-image.png',
 		ogImageAltText: 'Sample OpenGraph cover image',
-		siteDomain: 'johng.io',
+		siteUrl: 'https://johng.io/',
 		githubUrl: 'https://github.com/jerboa88/jerboa88.github.io/',
-		homepageDomain: 'johng.io',
 		trackingId: 'G-1PTSNX2F57',
 	},
 	theme: {

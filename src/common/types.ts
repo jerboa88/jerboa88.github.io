@@ -33,11 +33,10 @@ export type MetadataInterface = {
 	authorUsername: string;
 	shortDescription: string;
 	description: string;
-	ogImageUrl: string,
-	ogImageAltText: string,
-	siteDomain: string;
+	ogImagePath: string;
+	ogImageAltText: string;
+	siteUrl: string;
 	githubUrl: string;
-	homepageDomain: string;
 	trackingId: string;
 }
 
