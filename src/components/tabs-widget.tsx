@@ -19,7 +19,7 @@ interface TabsWidgetPropsInterface {
 export default function TabsWidget({ sections }: TabsWidgetPropsInterface) {
 	const scrollThreshold = 250;
 	const windowOffset = doesWindowExist() ? window.innerHeight / 2 : 0;
-	const sectionElems = sections.map(section => section.ref.current);
+	const sectionElems = sections ? sections.map(section => section.ref.current) : [];
 	const { scrollY } = useViewportScroll();
 	const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
 
@@ -68,7 +68,7 @@ export default function TabsWidget({ sections }: TabsWidgetPropsInterface) {
 	return (
 		<motion.nav layout="position" className="tabs flex-row justify-center font-button uppercase" {...getDefaultTransition()}>
 			{
-				sections.map(({ id, title }, i) => {
+				sections && sections.map(({ id, title }, i) => {
 					const activeClass = currentSectionIndex === i ? 'tab-active' : '';
 
 					return (
