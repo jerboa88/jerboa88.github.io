@@ -88,6 +88,39 @@ export interface ProjectInfoInterface {
 }
 
 
+// Queries.PinnedRepoQueryQuery['github']['user']['pinnedItems']
+export type PinnedRepoResponseInterface = {
+	name: string;
+	description: string | null;
+	homepageUrl: any;
+	usesCustomOpenGraphImage: boolean;
+	openGraphImageUrl: any;
+	stargazerCount: number;
+	updatedAt: any;
+	githubUrl: any;
+	languages: {
+		nodes: ({
+			name: string;
+			color: string | null;
+		} | null)[] | null;
+	} | null;
+	licenseInfo: {
+		spdxId: string | null;
+		name: string;
+		url: any;
+	} | null;
+	readmeFromMaster: {} | {
+		text: string | null;
+	} | null;
+	readmeFromMain: {} | {
+		text: string | null;
+	} | null;
+	readmeFromGhPages: {} | {
+		text: string | null;
+	} | null;
+}
+
+
 export type ToggleContextInterface = Context<{
 	isEnabled: boolean;
 	toggle: () => void;
