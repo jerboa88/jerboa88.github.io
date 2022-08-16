@@ -13,7 +13,7 @@ import { ProjectInfoInterface } from '../common/types';
 import { H3, P, C } from '../components/text-components';
 import Pill from '../components/pill';
 import TagsWidget from '../components/tags-widget';
-import IconButton from '../components/icon-button';
+import { IconButton } from '../components/button-components';
 import * as styles from '../styles/project-card.module.css';
 
 

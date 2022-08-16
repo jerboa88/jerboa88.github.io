@@ -12,7 +12,7 @@ import { faInstagram, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-
 import { MetadataInterface, SectionInterface, ThemeInterface } from '../common/types';
 import { getDefaultTransition } from '../common/utilities';
 import { H1, H2, P } from '../components/text-components';
-import IconButton from '../components/icon-button';
+import { IconButton } from '../components/button-components';
 import TabsWidget from '../components/tabs-widget';
 
 
