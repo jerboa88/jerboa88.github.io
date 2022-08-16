@@ -37,8 +37,8 @@ module.exports = {
 	],
 	daisyui: {
 		themes: [
-			{ light: configManager.getTheme('light') },
 			{ dark: configManager.getTheme('dark') },
+			{ light: configManager.getTheme('light') },
 		],
 		darkTheme: 'dark',
 	},

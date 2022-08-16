@@ -33,7 +33,8 @@ const config = {
 			'error': '#C62828',							// MD Red 800
 			'base-100': 'hsl(0 0% 100%)',
 			'base-200': 'hsl(0 0% 98%)',
-			'base-300': 'hsl(0 0% 96%)'
+			'base-300': 'hsl(0 0% 96%)',
+			'base-content': '#000000',
 		},
 		dark: {
 			'primary-header': '#FFC107',		// MD Amber 500
@@ -48,7 +49,8 @@ const config = {
 			'error': '#E57373',							// MD Red 300
 			'base-100': '#212121',
 			'base-200': '#111111',
-			'base-300': '#000000'
+			'base-300': '#000000',
+			'base-content': '#ffffff',
 		},
 	},
 	// Image generation config to pass to gatsby-plugin-image-generator
