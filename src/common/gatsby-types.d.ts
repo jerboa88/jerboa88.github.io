@@ -1250,7 +1250,6 @@ type GITHUB_AcceptTopicSuggestionInput = {
    * **Upcoming Change on 2024-04-01 UTC**
    * **Description:** `name` will be removed.
    * **Reason:** Suggested topics are no longer supported
-   *
    */
   readonly name: InputMaybe<Scalars['String']>;
   /**
@@ -1259,7 +1258,6 @@ type GITHUB_AcceptTopicSuggestionInput = {
    * **Upcoming Change on 2024-04-01 UTC**
    * **Description:** `repositoryId` will be removed.
    * **Reason:** Suggested topics are no longer supported
-   *
    */
   readonly repositoryId: InputMaybe<Scalars['ID']>;
 };
@@ -1538,7 +1536,6 @@ type GITHUB_AddPullRequestReviewCommentInput = {
    * **Upcoming Change on 2023-10-01 UTC**
    * **Description:** `body` will be removed. use addPullRequestReviewThread or addPullRequestReviewThreadReply instead
    * **Reason:** We are deprecating the addPullRequestReviewComment mutation
-   *
    */
   readonly body: InputMaybe<Scalars['String']>;
   /** A unique identifier for the client performing the mutation. */
@@ -1549,7 +1546,6 @@ type GITHUB_AddPullRequestReviewCommentInput = {
    * **Upcoming Change on 2023-10-01 UTC**
    * **Description:** `commitOID` will be removed. use addPullRequestReviewThread or addPullRequestReviewThreadReply instead
    * **Reason:** We are deprecating the addPullRequestReviewComment mutation
-   *
    */
   readonly commitOID: InputMaybe<Scalars['GITHUB_GitObjectID']>;
   /**
@@ -1558,7 +1554,6 @@ type GITHUB_AddPullRequestReviewCommentInput = {
    * **Upcoming Change on 2023-10-01 UTC**
    * **Description:** `inReplyTo` will be removed. use addPullRequestReviewThread or addPullRequestReviewThreadReply instead
    * **Reason:** We are deprecating the addPullRequestReviewComment mutation
-   *
    */
   readonly inReplyTo: InputMaybe<Scalars['ID']>;
   /**
@@ -1567,7 +1562,6 @@ type GITHUB_AddPullRequestReviewCommentInput = {
    * **Upcoming Change on 2023-10-01 UTC**
    * **Description:** `path` will be removed. use addPullRequestReviewThread or addPullRequestReviewThreadReply instead
    * **Reason:** We are deprecating the addPullRequestReviewComment mutation
-   *
    */
   readonly path: InputMaybe<Scalars['String']>;
   /**
@@ -1576,7 +1570,6 @@ type GITHUB_AddPullRequestReviewCommentInput = {
    * **Upcoming Change on 2023-10-01 UTC**
    * **Description:** `position` will be removed. use addPullRequestReviewThread or addPullRequestReviewThreadReply instead
    * **Reason:** We are deprecating the addPullRequestReviewComment mutation
-   *
    */
   readonly position: InputMaybe<Scalars['Int']>;
   /**
@@ -1585,7 +1578,6 @@ type GITHUB_AddPullRequestReviewCommentInput = {
    * **Upcoming Change on 2023-10-01 UTC**
    * **Description:** `pullRequestId` will be removed. use addPullRequestReviewThread or addPullRequestReviewThreadReply instead
    * **Reason:** We are deprecating the addPullRequestReviewComment mutation
-   *
    */
   readonly pullRequestId: InputMaybe<Scalars['ID']>;
   /**
@@ -1594,7 +1586,6 @@ type GITHUB_AddPullRequestReviewCommentInput = {
    * **Upcoming Change on 2023-10-01 UTC**
    * **Description:** `pullRequestReviewId` will be removed. use addPullRequestReviewThread or addPullRequestReviewThreadReply instead
    * **Reason:** We are deprecating the addPullRequestReviewComment mutation
-   *
    */
   readonly pullRequestReviewId: InputMaybe<Scalars['ID']>;
 };
@@ -1621,7 +1612,6 @@ type GITHUB_AddPullRequestReviewInput = {
    * **Upcoming Change on 2023-10-01 UTC**
    * **Description:** `comments` will be removed. use the `threads` argument instead
    * **Reason:** We are deprecating comment fields that use diff-relative positioning
-   *
    */
   readonly comments: InputMaybe<ReadonlyArray<InputMaybe<GITHUB_DraftPullRequestReviewComment>>>;
   /** The commit OID the review pertains to. */
@@ -3380,7 +3370,6 @@ type GITHUB_Commit = GITHUB_GitObject & GITHUB_Node & GITHUB_Subscribable & GITH
   /**
    * The list of authors for this commit based on the git author and the Co-authored-by
    * message trailer. The git author will always be first.
-   *
    */
   readonly authors: GITHUB_GitActorConnection;
   /** Fetches `git blame` information. */
@@ -3851,8 +3840,6 @@ type GITHUB_CommitMessagePatternParametersInput = {
  *       "repositoryNameWithOwner": "github/graphql-client",
  *       "branchName": "main"
  *     }
- *
- *
  */
 type GITHUB_CommittableBranch = {
   /** The unqualified name of the branch to append the commit to. */
@@ -3971,7 +3958,6 @@ type GITHUB_Contribution = {
    * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
-   *
    */
   readonly isRestricted: Scalars['Boolean'];
   /** When this contribution was made. */
@@ -3980,10 +3966,7 @@ type GITHUB_Contribution = {
   readonly resourcePath: Scalars['GITHUB_URI'];
   /** The HTTP URL for this contribution. */
   readonly url: Scalars['GITHUB_URI'];
-  /**
-   * The user who made this contribution.
-   *
-   */
+  /** The user who made this contribution. */
   readonly user: GITHUB_User;
 };
 
@@ -4062,10 +4045,7 @@ type GITHUB_ContributionsCollection = {
   readonly contributionCalendar: GITHUB_ContributionCalendar;
   /** The years the user has been making contributions with the most recent year first. */
   readonly contributionYears: ReadonlyArray<Scalars['Int']>;
-  /**
-   * Determine if this collection's time span ends in the current month.
-   *
-   */
+  /** Determine if this collection's time span ends in the current month. */
   readonly doesEndInCurrentMonth: Scalars['Boolean'];
   /** The date of the first restricted contribution the user made in this time period. Can only be non-null when the user has enabled private contribution counts. */
   readonly earliestRestrictedContributionDate: Maybe<Scalars['GITHUB_Date']>;
@@ -4096,25 +4076,21 @@ type GITHUB_ContributionsCollection = {
   /**
    * When this collection's time range does not include any activity from the user, use this
    * to get a different collection from an earlier time range that does have activity.
-   *
    */
   readonly mostRecentCollectionWithActivity: Maybe<GITHUB_ContributionsCollection>;
   /**
    * Returns a different contributions collection from an earlier time range than this one
    * that does not have any contributions.
-   *
    */
   readonly mostRecentCollectionWithoutActivity: Maybe<GITHUB_ContributionsCollection>;
   /**
    * The issue the user opened on GitHub that received the most comments in the specified
    * time frame.
-   *
    */
   readonly popularIssueContribution: Maybe<GITHUB_CreatedIssueContribution>;
   /**
    * The pull request the user opened on GitHub that received the most comments in the
    * specified time frame.
-   *
    */
   readonly popularPullRequestContribution: Maybe<GITHUB_CreatedPullRequestContribution>;
   /** Pull request contributions made by the user. */
@@ -4124,7 +4100,6 @@ type GITHUB_ContributionsCollection = {
   /**
    * Pull request review contributions made by the user. Returns the most recently
    * submitted review for each PR reviewed by the user.
-   *
    */
   readonly pullRequestReviewContributions: GITHUB_CreatedPullRequestReviewContributionConnection;
   /** Pull request review contributions made by the user, grouped by repository. */
@@ -4778,7 +4753,6 @@ type GITHUB_CreatePullRequestInput = {
    * The name of the branch you want your changes pulled into. This should be an existing branch
    * on the current repository. You cannot update the base branch on a pull request to point
    * to another repository.
-   *
    */
   readonly baseRefName: Scalars['String'];
   /** The contents of the pull request. */
@@ -4790,7 +4764,6 @@ type GITHUB_CreatePullRequestInput = {
   /**
    * The name of the branch where your changes are implemented. For cross-repository pull requests
    * in the same network, namespace `head_ref_name` with a user like this: `username:branch`.
-   *
    */
   readonly headRefName: Scalars['String'];
   /** The Node ID of the head repository. */
@@ -5015,7 +4988,6 @@ type GITHUB_CreateTeamDiscussionCommentInput = {
    * **Upcoming Change on 2024-07-01 UTC**
    * **Description:** `body` will be removed. Follow the guide at https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/ to find a suitable replacement.
    * **Reason:** The Team Discussions feature is deprecated in favor of Organization Discussions.
-   *
    */
   readonly body: InputMaybe<Scalars['String']>;
   /** A unique identifier for the client performing the mutation. */
@@ -5026,7 +4998,6 @@ type GITHUB_CreateTeamDiscussionCommentInput = {
    * **Upcoming Change on 2024-07-01 UTC**
    * **Description:** `discussionId` will be removed. Follow the guide at https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/ to find a suitable replacement.
    * **Reason:** The Team Discussions feature is deprecated in favor of Organization Discussions.
-   *
    */
   readonly discussionId: InputMaybe<Scalars['ID']>;
 };
@@ -5050,7 +5021,6 @@ type GITHUB_CreateTeamDiscussionInput = {
    * **Upcoming Change on 2024-07-01 UTC**
    * **Description:** `body` will be removed. Follow the guide at https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/ to find a suitable replacement.
    * **Reason:** The Team Discussions feature is deprecated in favor of Organization Discussions.
-   *
    */
   readonly body: InputMaybe<Scalars['String']>;
   /** A unique identifier for the client performing the mutation. */
@@ -5061,7 +5031,6 @@ type GITHUB_CreateTeamDiscussionInput = {
    * **Upcoming Change on 2024-07-01 UTC**
    * **Description:** `private` will be removed. Follow the guide at https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/ to find a suitable replacement.
    * **Reason:** The Team Discussions feature is deprecated in favor of Organization Discussions.
-   *
    */
   readonly private: InputMaybe<Scalars['Boolean']>;
   /**
@@ -5070,7 +5039,6 @@ type GITHUB_CreateTeamDiscussionInput = {
    * **Upcoming Change on 2024-07-01 UTC**
    * **Description:** `teamId` will be removed. Follow the guide at https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/ to find a suitable replacement.
    * **Reason:** The Team Discussions feature is deprecated in favor of Organization Discussions.
-   *
    */
   readonly teamId: InputMaybe<Scalars['ID']>;
   /**
@@ -5079,7 +5047,6 @@ type GITHUB_CreateTeamDiscussionInput = {
    * **Upcoming Change on 2024-07-01 UTC**
    * **Description:** `title` will be removed. Follow the guide at https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/ to find a suitable replacement.
    * **Reason:** The Team Discussions feature is deprecated in favor of Organization Discussions.
-   *
    */
   readonly title: InputMaybe<Scalars['String']>;
 };
@@ -5125,7 +5092,6 @@ type GITHUB_CreatedCommitContribution = GITHUB_Contribution & {
    * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
-   *
    */
   readonly isRestricted: Scalars['Boolean'];
   /** When this contribution was made. */
@@ -5136,10 +5102,7 @@ type GITHUB_CreatedCommitContribution = GITHUB_Contribution & {
   readonly resourcePath: Scalars['GITHUB_URI'];
   /** The HTTP URL for this contribution. */
   readonly url: Scalars['GITHUB_URI'];
-  /**
-   * The user who made this contribution.
-   *
-   */
+  /** The user who made this contribution. */
   readonly user: GITHUB_User;
 };
 
@@ -5151,10 +5114,7 @@ type GITHUB_CreatedCommitContributionConnection = {
   readonly nodes: Maybe<ReadonlyArray<Maybe<GITHUB_CreatedCommitContribution>>>;
   /** Information to aid in pagination. */
   readonly pageInfo: GITHUB_PageInfo;
-  /**
-   * Identifies the total count of commits across days and repositories in the connection.
-   *
-   */
+  /** Identifies the total count of commits across days and repositories in the connection. */
   readonly totalCount: Scalars['Int'];
 };
 
@@ -5172,7 +5132,6 @@ type GITHUB_CreatedIssueContribution = GITHUB_Contribution & {
    * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
-   *
    */
   readonly isRestricted: Scalars['Boolean'];
   /** The issue that was opened. */
@@ -5183,10 +5142,7 @@ type GITHUB_CreatedIssueContribution = GITHUB_Contribution & {
   readonly resourcePath: Scalars['GITHUB_URI'];
   /** The HTTP URL for this contribution. */
   readonly url: Scalars['GITHUB_URI'];
-  /**
-   * The user who made this contribution.
-   *
-   */
+  /** The user who made this contribution. */
   readonly user: GITHUB_User;
 };
 
@@ -5219,7 +5175,6 @@ type GITHUB_CreatedPullRequestContribution = GITHUB_Contribution & {
    * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
-   *
    */
   readonly isRestricted: Scalars['Boolean'];
   /** When this contribution was made. */
@@ -5230,10 +5185,7 @@ type GITHUB_CreatedPullRequestContribution = GITHUB_Contribution & {
   readonly resourcePath: Scalars['GITHUB_URI'];
   /** The HTTP URL for this contribution. */
   readonly url: Scalars['GITHUB_URI'];
-  /**
-   * The user who made this contribution.
-   *
-   */
+  /** The user who made this contribution. */
   readonly user: GITHUB_User;
 };
 
@@ -5266,7 +5218,6 @@ type GITHUB_CreatedPullRequestReviewContribution = GITHUB_Contribution & {
    * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
-   *
    */
   readonly isRestricted: Scalars['Boolean'];
   /** When this contribution was made. */
@@ -5281,10 +5232,7 @@ type GITHUB_CreatedPullRequestReviewContribution = GITHUB_Contribution & {
   readonly resourcePath: Scalars['GITHUB_URI'];
   /** The HTTP URL for this contribution. */
   readonly url: Scalars['GITHUB_URI'];
-  /**
-   * The user who made this contribution.
-   *
-   */
+  /** The user who made this contribution. */
   readonly user: GITHUB_User;
 };
 
@@ -5314,7 +5262,6 @@ type GITHUB_CreatedRepositoryContribution = GITHUB_Contribution & {
    * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
-   *
    */
   readonly isRestricted: Scalars['Boolean'];
   /** When this contribution was made. */
@@ -5325,10 +5272,7 @@ type GITHUB_CreatedRepositoryContribution = GITHUB_Contribution & {
   readonly resourcePath: Scalars['GITHUB_URI'];
   /** The HTTP URL for this contribution. */
   readonly url: Scalars['GITHUB_URI'];
-  /**
-   * The user who made this contribution.
-   *
-   */
+  /** The user who made this contribution. */
   readonly user: GITHUB_User;
 };
 
@@ -5389,7 +5333,6 @@ type GITHUB_DeclineTopicSuggestionInput = {
    * **Upcoming Change on 2024-04-01 UTC**
    * **Description:** `name` will be removed.
    * **Reason:** Suggested topics are no longer supported
-   *
    */
   readonly name: InputMaybe<Scalars['String']>;
   /**
@@ -5398,7 +5341,6 @@ type GITHUB_DeclineTopicSuggestionInput = {
    * **Upcoming Change on 2024-04-01 UTC**
    * **Description:** `reason` will be removed.
    * **Reason:** Suggested topics are no longer supported
-   *
    */
   readonly reason: InputMaybe<GITHUB_TopicSuggestionDeclineReason>;
   /**
@@ -5407,7 +5349,6 @@ type GITHUB_DeclineTopicSuggestionInput = {
    * **Upcoming Change on 2024-04-01 UTC**
    * **Description:** `repositoryId` will be removed.
    * **Reason:** Suggested topics are no longer supported
-   *
    */
   readonly repositoryId: InputMaybe<Scalars['ID']>;
 };
@@ -8451,7 +8392,6 @@ type GITHUB_FileAddition = {
  *            }
  *          ]
  *        }
- *
  */
 type GITHUB_FileChanges = {
   /** File to add or change. */
@@ -8598,10 +8538,7 @@ type GITHUB_Gist = GITHUB_Node & GITHUB_Starrable & GITHUB_UniformResourceLocata
   readonly pushedAt: Maybe<Scalars['GITHUB_DateTime']>;
   /** The HTML path to this resource. */
   readonly resourcePath: Scalars['GITHUB_URI'];
-  /**
-   * Returns a count of how many stargazers there are on this object
-   *
-   */
+  /** Returns a count of how many stargazers there are on this object */
   readonly stargazerCount: Scalars['Int'];
   /** A list of users who have starred this starrable. */
   readonly stargazers: GITHUB_StargazerConnection;
@@ -9490,7 +9427,6 @@ type GITHUB_IssueComment = GITHUB_Comment & GITHUB_Deletable & GITHUB_Minimizabl
   /**
    * Returns the pull request associated with the comment, if this comment was made on a
    * pull request.
-   *
    */
   readonly pullRequest: Maybe<GITHUB_PullRequest>;
   /** A list of reactions grouped by content left on the subject. */
@@ -9830,7 +9766,6 @@ type GITHUB_JoinedGitHubContribution = GITHUB_Contribution & {
    * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
-   *
    */
   readonly isRestricted: Scalars['Boolean'];
   /** When this contribution was made. */
@@ -9839,10 +9774,7 @@ type GITHUB_JoinedGitHubContribution = GITHUB_Contribution & {
   readonly resourcePath: Scalars['GITHUB_URI'];
   /** The HTTP URL for this contribution. */
   readonly url: Scalars['GITHUB_URI'];
-  /**
-   * The user who made this contribution.
-   *
-   */
+  /** The user who made this contribution. */
   readonly user: GITHUB_User;
 };
 
@@ -10462,7 +10394,6 @@ type GITHUB_MarketplaceListing = GITHUB_Node & {
   /**
    * Can the current viewer edit the primary and secondary category of this
    * Marketplace listing.
-   *
    */
   readonly viewerCanEditCategories: Scalars['Boolean'];
   /** Can the current viewer edit the plans for this Marketplace listing. */
@@ -10470,36 +10401,26 @@ type GITHUB_MarketplaceListing = GITHUB_Node & {
   /**
    * Can the current viewer return this Marketplace listing to draft state
    * so it becomes editable again.
-   *
    */
   readonly viewerCanRedraft: Scalars['Boolean'];
   /**
    * Can the current viewer reject this Marketplace listing by returning it to
    * an editable draft state or rejecting it entirely.
-   *
    */
   readonly viewerCanReject: Scalars['Boolean'];
   /**
    * Can the current viewer request this listing be reviewed for display in
    * the Marketplace as verified.
-   *
    */
   readonly viewerCanRequestApproval: Scalars['Boolean'];
-  /**
-   * Indicates whether the current user has an active subscription to this Marketplace listing.
-   *
-   */
+  /** Indicates whether the current user has an active subscription to this Marketplace listing. */
   readonly viewerHasPurchased: Scalars['Boolean'];
   /**
    * Indicates if the current user has purchased a subscription to this Marketplace listing
    * for all of the organizations the user owns.
-   *
    */
   readonly viewerHasPurchasedForAllOrganizations: Scalars['Boolean'];
-  /**
-   * Does the current viewer role allow them to administer this Marketplace listing.
-   *
-   */
+  /** Does the current viewer role allow them to administer this Marketplace listing. */
   readonly viewerIsListingAdmin: Scalars['Boolean'];
 };
 
@@ -14339,7 +14260,6 @@ type GITHUB_ProjectCard = GITHUB_Node & {
    * project column at a time. The column field will be null if the card is created
    * in a pending state and has yet to be associated with a column. Once cards are
    * associated with a column, they will not become pending in the future.
-   *
    */
   readonly column: Maybe<GITHUB_ProjectColumn>;
   /** The card content item */
@@ -16001,7 +15921,6 @@ type GITHUB_PullRequest = GITHUB_Assignable & GITHUB_Closable & GITHUB_Comment &
   /**
    * Whether or not the viewer can update the head ref of this PR, by merging or rebasing the base ref.
    * If the head ref is up to date or unable to be updated by this user, this will return false.
-   *
    */
   readonly viewerCanUpdateBranch: Scalars['Boolean'];
   /** Reasons why the current viewer can not update this comment. */
@@ -19280,10 +19199,7 @@ type GITHUB_Repository = GITHUB_Node & GITHUB_PackageOwner & GITHUB_ProjectOwner
   readonly squashPrTitleUsedAsDefault: Scalars['Boolean'];
   /** The SSH URL to clone this repository */
   readonly sshUrl: Scalars['GITHUB_GitSSHRemote'];
-  /**
-   * Returns a count of how many stargazers there are on this object
-   *
-   */
+  /** Returns a count of how many stargazers there are on this object */
   readonly stargazerCount: Scalars['Int'];
   /** A list of users who have starred this starrable. */
   readonly stargazers: GITHUB_StargazerConnection;
@@ -20921,7 +20837,6 @@ type GITHUB_RestrictedContribution = GITHUB_Contribution & {
    * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
-   *
    */
   readonly isRestricted: Scalars['Boolean'];
   /** When this contribution was made. */
@@ -20930,10 +20845,7 @@ type GITHUB_RestrictedContribution = GITHUB_Contribution & {
   readonly resourcePath: Scalars['GITHUB_URI'];
   /** The HTTP URL for this contribution. */
   readonly url: Scalars['GITHUB_URI'];
-  /**
-   * The user who made this contribution.
-   *
-   */
+  /** The user who made this contribution. */
   readonly user: GITHUB_User;
 };
 
@@ -21103,7 +21015,6 @@ type GITHUB_ReviewRequestedEvent = GITHUB_Node & {
 /**
  * A hovercard context with a message describing the current code review state of the pull
  * request.
- *
  */
 type GITHUB_ReviewStatusHovercardContext = GITHUB_HovercardContext & {
   /** A string describing this context */
@@ -21532,7 +21443,6 @@ type GITHUB_SecurityVulnerability = {
    * + `< 0.1.11` denotes a version range up to, but excluding, the specified version
    * + `>= 4.3.0, < 4.3.5` denotes a version range with a known minimum and maximum version.
    * + `>= 0.0.1` denotes a version range with a known minimum, but no known maximum
-   *
    */
   readonly vulnerableVersionRange: Scalars['String'];
 };
@@ -22932,10 +22842,7 @@ type GITHUB_StargazerEdge = {
 type GITHUB_Starrable = {
   /** The Node ID of the Starrable object */
   readonly id: Scalars['ID'];
-  /**
-   * Returns a count of how many stargazers there are on this object
-   *
-   */
+  /** Returns a count of how many stargazers there are on this object */
   readonly stargazerCount: Scalars['Int'];
   /** A list of users who have starred this starrable. */
   readonly stargazers: GITHUB_StargazerConnection;
@@ -24372,15 +24279,11 @@ type GITHUB_Topic = GITHUB_Node & GITHUB_Starrable & {
   /**
    * A list of related topics, including aliases of this topic, sorted with the most relevant
    * first. Returns up to 10 Topics.
-   *
    */
   readonly relatedTopics: ReadonlyArray<GITHUB_Topic>;
   /** A list of repositories. */
   readonly repositories: GITHUB_RepositoryConnection;
-  /**
-   * Returns a count of how many stargazers there are on this object
-   *
-   */
+  /** Returns a count of how many stargazers there are on this object */
   readonly stargazerCount: Scalars['Int'];
   /** A list of users who have starred this starrable. */
   readonly stargazers: GITHUB_StargazerConnection;
@@ -25897,7 +25800,6 @@ type GITHUB_UpdatePullRequestInput = {
   /**
    * The name of the branch you want your changes pulled into. This should be an existing branch
    * on the current repository.
-   *
    */
   readonly baseRefName: InputMaybe<Scalars['String']>;
   /** The contents of the pull request. */
@@ -26402,10 +26304,7 @@ type GITHUB_User = GITHUB_Actor & GITHUB_Node & GITHUB_PackageOwner & GITHUB_Pro
   readonly status: Maybe<GITHUB_UserStatus>;
   /** Suggested names for user lists */
   readonly suggestedListNames: ReadonlyArray<GITHUB_UserListSuggestion>;
-  /**
-   * Repositories the user has contributed to, ordered by contribution rank, plus repositories the user has created
-   *
-   */
+  /** Repositories the user has contributed to, ordered by contribution rank, plus repositories the user has created */
   readonly topRepositories: GITHUB_RepositoryConnection;
   /** The amount in United States cents (e.g., 500 = $5.00 USD) that this entity has spent on GitHub to fund sponsorships. Only returns a value when viewed by the user themselves or by a user who can manage sponsorships for the requested organization. */
   readonly totalSponsorshipAmountAsSponsorInCents: Maybe<Scalars['Int']>;
