@@ -58,7 +58,7 @@ export default function TabsWidget({ sections }: TabsWidgetPropsInterface) {
 			lastYPos = yPos;
 		}
 
-		const unsubscribe = scrollY.onChange(updateCurrentTab);
+		const unsubscribe = scrollY.on('change', updateCurrentTab);
 
 		return () => {
 			unsubscribe();
