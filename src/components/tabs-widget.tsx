@@ -5,7 +5,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { motion, useViewportScroll } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { doesWindowExist, getDefaultTransition } from '../common/utilities';
 import { SectionInterface } from '../common/types';
 
@@ -20,7 +20,7 @@ export default function TabsWidget({ sections }: TabsWidgetPropsInterface) {
 	const scrollThreshold = 250;
 	const windowOffset = doesWindowExist() ? window.innerHeight / 2 : 0;
 	const sectionElems = sections ? sections.map(section => section.ref.current) : [];
-	const { scrollY } = useViewportScroll();
+	const { scrollY } = useScroll();
 	const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
 
 	useEffect(() => {
