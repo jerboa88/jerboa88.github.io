@@ -64,6 +64,16 @@ export function S({ className = '', children }: TextComponentPropsInterface) {
 }
 
 
+// Span
+export function Span({ className = '', children }: TextComponentPropsInterface) {
+	return (
+		<span className={`text-sm ${className}`}>
+			{children}
+		</span>
+	);
+}
+
+
 // HTML comment
 export function C(props: { children: string }) {
 	return (
