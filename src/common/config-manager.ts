@@ -47,9 +47,9 @@ const config = {
 			'success': '#AED581',						// MD Light Green 300
 			'warning': '#FFD54F',						// MD Amber 300
 			'error': '#E57373',							// MD Red 300
-			'base-100': '#212121',
-			'base-200': '#111111',
-			'base-300': '#000000',
+			'base-100': '#121212',
+			'base-200': '#060606',
+			'base-300': '#030303',
 			'base-content': '#ffffff',
 		},
 	},
