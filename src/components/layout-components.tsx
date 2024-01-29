@@ -25,7 +25,7 @@ interface SectionPropsInterface {
 }
 
 export const Section = forwardRef(({ className = '', id, title, children }: SectionPropsInterface, ref: ForwardedRef<HTMLElement>) => (
-	<section id={id} ref={ref} className={`flex flex-col min-h-screen p-8 text-white text-center justify-center ${className}`}>
+	<section id={id} ref={ref} className={`flex flex-col w-full min-h-screen p-8 text-white text-center justify-center ${className}`}>
 		{title && <H2>{title}</H2>}
 		{children}
 	</section>
@@ -47,7 +47,7 @@ function Header({ metadata, titleLayoutId, isTitleExpanded = false, sections }: 
 	const justificationStyles = isTitleExpanded ? 'justify-center' : 'justify-between';
 
 	return (
-		<header className="fixed top-0 w-full bg-base-300 z-10">
+		<header className="fixed top-0 w-full bg-base-300 z-20">
 			<div className={`flex-row p-4 pb-4 items-center ${justificationStyles}`}>
 				{!isTitleExpanded && <motion.a href="/" layoutId={titleLayoutId} {...getDefaultTransition()}>
 					<H1 className="m-0 text-xl">
@@ -59,7 +59,7 @@ function Header({ metadata, titleLayoutId, isTitleExpanded = false, sections }: 
 
 				<TabsWidget sections={sections} />
 			</div>
-			<div className={`divider h-auto m-0 transition-opacity ${dividerOpacityStyles}`} />
+			<div className={`divider bg-base-content/5 h-auto m-0 transition-opacity ${dividerOpacityStyles}`} />
 		</header>
 	);
 }
