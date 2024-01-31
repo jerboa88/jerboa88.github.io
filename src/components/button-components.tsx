@@ -14,7 +14,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 interface IconButtonPropsInterface {
 	className?: string;
 	icon: IconDefinition;
-	disabled?: boolean
+	disabled?: boolean;
 }
 
 export function IconButton({ className = '', icon, disabled = false }: IconButtonPropsInterface) {

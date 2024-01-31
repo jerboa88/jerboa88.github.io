@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import { doesWindowExist, getDefaultTransition } from '../common/utilities';
 import { SectionInterface } from '../common/types';
+import { NavLink } from './nav-link';
 
 
 // Exports
@@ -72,7 +73,7 @@ export default function TabsWidget({ sections }: TabsWidgetPropsInterface) {
 					const activeClass = currentSectionIndex === i ? 'tab-active' : '';
 
 					return (
-						<a href={`#${id}`} key={title} className={`tab px-2 sm:px-4 ${activeClass}`}>{title}</a>
+						<NavLink key={title} title={title} href={`#${id}`} className={activeClass} />
 					);
 				})
 			}
