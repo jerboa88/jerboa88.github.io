@@ -21,7 +21,7 @@ export function IconButton({ className = '', icon, disabled = false }: IconButto
 	const enabledStyles = disabled ? '' : 'hover:bg-white/20 transition-colors duration-200';
 
 	return (
-		<button className={`inline-block m-4 p-4 rounded-full ${enabledStyles} ${className}`}>
+		<button className={`inline-block p-4 rounded-full ${enabledStyles} ${className}`}>
 			<FontAwesomeIcon icon={icon} className='block w-4 fa-lg fa-fw drop-shadow' />
 		</button>
 	);
