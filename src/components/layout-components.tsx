@@ -43,14 +43,22 @@ interface HeaderPropsInterface {
 function Header({ metadata, titleLayoutId, isTitleExpanded = false, sections }: HeaderPropsInterface) {
 	const monogram = metadata.author[0];
 	const siteDomain = new URL(metadata.siteUrl).host;
-	const dividerOpacityStyles = isTitleExpanded ? 'opacity-0' : 'opacity-100';
-	const justificationStyles = isTitleExpanded ? 'justify-center' : 'justify-between';
+
+	let bgColorStyles = 'bg-base-200';
+	let dividerOpacityStyles = 'opacity-100';
+	let justificationStyles = 'justify-between';
+
+	if (isTitleExpanded) {
+		bgColorStyles = 'bg-base-300';
+		dividerOpacityStyles = 'opacity-0';
+		justificationStyles = 'justify-center';
+	}
 
 	return (
-		<header className="fixed top-0 w-full bg-base-300 z-20">
+		<header className={`fixed top-0 w-full z-20 transition-colors ${bgColorStyles}`}>
 			<div className={`flex-row p-4 pb-4 items-center ${justificationStyles}`}>
 				{!isTitleExpanded && <motion.a href="/" layoutId={titleLayoutId} {...getDefaultTransition()}>
-					<H1 className="m-0 text-xl">
+					<H1 className="m-0 px-2 text-xl">
 						<span className="inline sm:hidden">{monogram}</span>
 						<span className="hidden sm:inline md:hidden">{siteDomain}</span>
 						<span className="hidden md:inline">{metadata.author}</span>
@@ -59,7 +67,7 @@ function Header({ metadata, titleLayoutId, isTitleExpanded = false, sections }: 
 
 				<TabsWidget sections={sections} />
 			</div>
-			<div className={`divider bg-base-content/5 h-auto m-0 transition-opacity ${dividerOpacityStyles}`} />
+			<div className={`divider h-auto m-0 transition-opacity ${dividerOpacityStyles}`} />
 		</header>
 	);
 }
