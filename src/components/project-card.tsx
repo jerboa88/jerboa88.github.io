@@ -12,7 +12,7 @@ import { getProjectImage } from '../common/utilities';
 import { ProjectInfoInterface } from '../common/types';
 import { H3, P, Span } from '../components/text-components';
 import Pill from '../components/pill';
-import { IconButton } from '../components/button-components';
+import { IconButton } from '../components/icon-button';
 
 
 interface ProjectCardPropsInterface {
