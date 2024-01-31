@@ -6,7 +6,6 @@
   "author": "John Goodliff",
   "keywords": [
     "portfolio",
-    "mergist",
     "react",
     "website",
     "typescript",
@@ -25,10 +24,10 @@
   },
   "license": "MIT",
   "scripts": {
-    "develop": "yarn gatsby develop",
-    "start": "yarn gatsby develop",
+    "develop": "yarn gatsby develop -H 0.0.0.0",
+    "start": "yarn gatsby develop -H 0.0.0.0",
     "build": "yarn gatsby build",
-    "serve": "yarn gatsby serve",
+    "serve": "yarn gatsby serve -H 0.0.0.0",
     "clean": "yarn gatsby clean",
     "typecheck": "yarn tsc --noEmit"
   },
