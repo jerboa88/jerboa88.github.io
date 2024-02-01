@@ -8,7 +8,7 @@ import React from 'react';
 import ConfigManager from '../common/config-manager';
 import { getProjectImage } from '../common/utilities';
 import { ProjectInfoInterface } from '../common/types';
-import { PageLayout } from '../components/layout-components';
+import PageLayout from '../components/layout/page-layout';
 import { H2, P } from '../components/text-components';
 
 

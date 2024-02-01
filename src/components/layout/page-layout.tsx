@@ -1,105 +1,14 @@
 /*
-	Reusable layout components
-	--------------------------
+	Layout component that provides basic styles and metadata tags for the whole page
+	--------------------------------------------------------------------------------
 */
 
 
-import React, { ForwardedRef, forwardRef, ReactNode } from 'react';
-import { Link } from 'gatsby';
+import React, { ReactNode } from 'react';
 import { Helmet } from 'react-helmet';
-import { motion } from 'framer-motion';
-import { faInstagram, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { MetadataInterface, SectionInterface, ThemeInterface } from '../common/types';
-import { getDefaultTransition } from '../common/utilities';
-import { H1, H2, P } from '../components/text-components';
-import { IconButton } from '../components/icon-button';
-import TabsWidget from '../components/tabs-widget';
-
-
-// Page section
-interface SectionPropsInterface {
-	className?: string;
-	id?: string;
-	title?: string;
-	children: React.ReactNode;
-}
-
-export const Section = forwardRef(({ className = '', id, title, children }: SectionPropsInterface, ref: ForwardedRef<HTMLElement>) => (
-	<section id={id} ref={ref} className={`flex flex-col w-full sm:w-5/6 xl:w-4/6 min-h-screen p-8 text-white text-center justify-center ${className}`}>
-		{title && <H2>{title}</H2>}
-		{children}
-	</section>
-));
-
-
-// Header with navbar component
-interface HeaderPropsInterface {
-	metadata: MetadataInterface;
-	titleLayoutId?: string;
-	isTitleExpanded?: boolean;
-	sections: SectionInterface[];
-}
-
-function Header({ metadata, titleLayoutId, isTitleExpanded = false, sections }: HeaderPropsInterface) {
-	const monogram = metadata.author[0];
-	const siteDomain = new URL(metadata.siteUrl).host;
-
-	let bgColorStyles = 'bg-base-200';
-	let dividerOpacityStyles = 'opacity-100';
-	let justificationStyles = 'justify-between';
-
-	if (isTitleExpanded) {
-		bgColorStyles = 'bg-base-300';
-		dividerOpacityStyles = 'opacity-0';
-		justificationStyles = 'justify-center';
-	}
-
-	return (
-		<header className={`fixed top-0 w-full z-20 transition-colors ${bgColorStyles}`}>
-			<div className={`flex-row p-4 pb-4 items-center ${justificationStyles}`}>
-				{!isTitleExpanded && <motion.a href="/" layoutId={titleLayoutId} {...getDefaultTransition()}>
-					<H1 className="m-0 px-2 text-xl">
-						<span className="inline sm:hidden">{monogram}</span>
-						<span className="hidden sm:inline md:hidden">{siteDomain}</span>
-						<span className="hidden md:inline">{metadata.author}</span>
-					</H1>
-				</motion.a>}
-
-				<TabsWidget sections={sections} />
-			</div>
-			<div className={`divider h-auto m-0 transition-opacity ${dividerOpacityStyles}`} />
-		</header>
-	);
-}
-
-
-// Footer shown on every page
-interface FooterPropsInterface {
-	className?: string;
-}
-
-export function Footer({ className = '' }: FooterPropsInterface) {
-	return (
-		<footer className={`w-full ${className}`}>
-			<nav className='flex flex-row justify-around text-center'>
-				<Link to='about' className='flex-1 p-2'>About</Link>
-				<P className='flex-1 p-4'>Handcrafted with love</P>
-				<Link to='privacy' className='flex-1 p-2'>Privacy Policy</Link>
-			</nav>
-			<nav className='flex flex-row justify-center'>
-				<a href='https://instagram.com/jerboa88' rel='external'>
-					<IconButton icon={faInstagram} className='fa-xl' />
-				</a>
-				<a href='https://linkedin.com' rel='external'>
-					<IconButton icon={faLinkedin} className='fa-xl' />
-				</a>
-				<a href='https://github.com/jerboa88' rel='external'>
-					<IconButton icon={faGithub} className='fa-xl' />
-				</a>
-			</nav>
-		</footer>
-	);
-}
+import { MetadataInterface, SectionInterface, ThemeInterface } from '../../common/types';
+import Header from './header';
+import Footer from './footer';
 
 
 interface PageLayoutPropsInterface {
@@ -113,8 +22,7 @@ interface PageLayoutPropsInterface {
 	children: ReactNode;
 }
 
-// Layout component that provides basic styles and metadata tags for the whole pageS
-export function PageLayout({ className = '', metadata, lightTheme, darkTheme, titleLayoutId, isTitleExpanded = false, sections, children }: PageLayoutPropsInterface) {
+export default function PageLayout({ className = '', metadata, lightTheme, darkTheme, titleLayoutId, isTitleExpanded = false, sections, children }: PageLayoutPropsInterface) {
 	// const lsKeyForTheme = 'is-dark-theme';
 	// const lsKeyForMotion = 'is-motion-allowed';
 	// const lsKeyForAnalytics = `ga-disable-${props.metadata.trackingId}`;
