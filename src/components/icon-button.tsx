@@ -12,7 +12,7 @@ interface IconButtonPropsInterface {
 }
 
 export default function IconButton({ className = '', icon, disabled = false }: IconButtonPropsInterface) {
-	const enabledStyles = disabled ? '' : 'transition-transform hover:scale-110 active:scale-90';
+	const enabledStyles = disabled ? '' : 'j-scale-transitions';
 
 	return (
 		<button className={`inline-block p-4 ${enabledStyles} ${className}`}>

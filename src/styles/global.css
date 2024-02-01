@@ -10,18 +10,24 @@
 
 /* These styles to the base layer so that component styles can override them as necessary */
 @layer base {
+
 	/* Override flex-row and flex-col to also change the display type so we don't have to specify this manually every time */
-  .flex-row, .flex-col {
-    @apply flex;
-  }
+	.flex-row,
+	.flex-col {
+		@apply flex;
+	}
 
 	/* Make sure that this style takes precedence */
-	.flex-row.hidden, .flex-col.hidden {
+	.flex-row.hidden,
+	.flex-col.hidden {
 		display: none;
 	}
 
 	/* Apply btn class automatically to all button variants and change the default font */
-	.btn-primary, .btn-secondary, .btn-accent, .btn-ghost {
+	.btn-primary,
+	.btn-secondary,
+	.btn-accent,
+	.btn-ghost {
 		@apply btn;
 		@apply text-base;
 		@apply font-button;
@@ -30,13 +36,16 @@
 
 
 @layer components {
+
 	/* Override the default font size for footer components */
 	.footer {
 		@apply text-base;
 	}
 
 	/* Override disabled button styles since DaisyUI insists on making disabled buttons gray */
-	.btn-primary[disabled], .btn-secondary[disabled], .btn-accent[disabled] {
+	.btn-primary[disabled],
+	.btn-secondary[disabled],
+	.btn-accent[disabled] {
 		@apply opacity-40;
 		@apply cursor-default;
 	}
@@ -80,8 +89,22 @@
 
 
 @layer utilities {
+
 	/* Disable transitions if an element is flagged as having motion and the the page's `data-motion` attribute is set to `reduce` */
 	html[data-motion="reduce"] .has-motion {
 		transition: none;
+	}
+
+	/* A custom class to enable scale transitions on elements */
+	.j-scale-transitions {
+		@apply transition-transform;
+
+		&:hover {
+			@apply scale-110;
+		}
+
+		&:active {
+			@apply scale-90;
+		}
 	}
 }
