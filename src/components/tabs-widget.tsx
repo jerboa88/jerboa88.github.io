@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import { doesWindowExist, getDefaultTransition } from '../common/utilities';
 import { SectionInterface } from '../common/types';
-import { NavLink } from './nav-link';
+import NavLink from './nav-link';
 
 
 // Exports

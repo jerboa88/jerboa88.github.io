@@ -8,7 +8,7 @@ import React from 'react';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { MetadataInterface } from '../../common/types';
 import IconButton from '../../components/icon-button';
-import { NavLink } from '../../components/nav-link';
+import NavLink from '../../components/nav-link';
 
 
 interface FooterPropsInterface {
