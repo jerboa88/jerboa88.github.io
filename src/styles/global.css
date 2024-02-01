@@ -28,9 +28,7 @@
 	.btn-secondary,
 	.btn-accent,
 	.btn-ghost {
-		@apply btn;
-		@apply text-base;
-		@apply font-button;
+		@apply btn text-base font-button;
 	}
 }
 
@@ -46,23 +44,19 @@
 	.btn-primary[disabled],
 	.btn-secondary[disabled],
 	.btn-accent[disabled] {
-		@apply opacity-40;
-		@apply cursor-default;
+		@apply opacity-40 cursor-default;
 	}
 
 	.btn-primary[disabled] {
-		@apply bg-primary;
-		@apply text-primary-content;
+		@apply bg-primary text-primary-content;
 	}
 
 	.btn-secondary[disabled] {
-		@apply bg-secondary;
-		@apply text-secondary-content;
+		@apply bg-secondary text-secondary-content;
 	}
 
 	.btn-accent[disabled] {
-		@apply bg-accent;
-		@apply text-accent-content;
+		@apply bg-accent text-accent-content;
 	}
 
 	/* Styles for custom scrollbar */
