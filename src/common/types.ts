@@ -36,6 +36,8 @@ export type MetadataInterface = {
 	ogImagePath: string;
 	ogImageAltText: string;
 	siteUrl: string;
+	sourceUrl: string;
+	linkedinUrl: string;
 	githubUrl: string;
 	trackingId: string;
 }

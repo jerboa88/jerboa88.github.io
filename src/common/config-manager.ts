@@ -16,7 +16,9 @@ const config = {
 		ogImagePath: 'images/og-image.png',
 		ogImageAltText: 'Sample OpenGraph cover image',
 		siteUrl: 'https://johng.io/',
-		githubUrl: 'https://github.com/jerboa88/jerboa88.github.io/',
+		sourceUrl: 'https://github.com/jerboa88/jerboa88.github.io/',
+		linkedinUrl: 'https://www.linkedin.com/in/johngoodliff/',
+		githubUrl: 'https://github.com/jerboa88',
 		trackingId: 'G-1PTSNX2F57',
 	},
 	theme: {

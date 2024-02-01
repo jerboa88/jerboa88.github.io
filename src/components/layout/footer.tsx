@@ -5,35 +5,35 @@
 
 
 import React from 'react';
-import { Link } from 'gatsby';
-import { faInstagram, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { P } from '../../components/text-components';
+import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
+import { MetadataInterface } from '../../common/types';
 import { IconButton } from '../../components/icon-button';
+import { NavLink } from '../../components/nav-link';
 
 
 interface FooterPropsInterface {
-	className?: string;
+	metadata: MetadataInterface;
 }
 
-export default function Footer({ className = '' }: FooterPropsInterface) {
+export default function Footer({ metadata }: FooterPropsInterface) {
 	return (
-		<footer className={`w-full ${className}`}>
-			<nav className='flex flex-row justify-around text-center'>
-				<Link to='about' className='flex-1 p-2'>About</Link>
-				<P className='flex-1 p-4'>Handcrafted with love</P>
-				<Link to='privacy' className='flex-1 p-2'>Privacy Policy</Link>
-			</nav>
-			<nav className='flex flex-row justify-center'>
-				<a href='https://instagram.com/jerboa88' rel='external'>
-					<IconButton icon={faInstagram} className='fa-xl' />
-				</a>
-				<a href='https://linkedin.com' rel='external'>
-					<IconButton icon={faLinkedin} className='fa-xl' />
-				</a>
-				<a href='https://github.com/jerboa88' rel='external'>
-					<IconButton icon={faGithub} className='fa-xl' />
-				</a>
-			</nav>
+		<footer className="w-full bg-base-200 z-20">
+			<div className='divider h-auto m-0 transition-opacity opacity-100' />
+			<div className='flex-row p-4 pb-4 items-center justify-between'>
+				<nav layout="position" className="tabs flex-row justify-center font-button uppercase">
+					<NavLink title='Source' href={metadata.sourceUrl} />
+					{/* TODO: Add privacy policy */}
+					{/* <NavLink title='Privacy' href='#' /> */}
+				</nav>
+				<nav className='flex flex-row justify-center'>
+					<a href={metadata.linkedinUrl} rel='external'>
+						<IconButton icon={faLinkedin} />
+					</a>
+					<a href={metadata.githubUrl} rel='external'>
+						<IconButton icon={faGithub} />
+					</a>
+				</nav>
+			</div>
 		</footer>
 	);
 }

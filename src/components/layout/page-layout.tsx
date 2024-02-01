@@ -156,7 +156,7 @@ export default function PageLayout({ className = '', metadata, lightTheme, darkT
 			<div className={`min-h-screen flex-col justify-between items-center mx-auto text-base bg-base-300 text-base-content scroll-smooth selection:bg-primary selection:text-primary-content ${className}`}>
 				<Header metadata={metadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections} />
 				{children}
-				<Footer />
+				<Footer metadata={metadata} />
 			</div>
 		</>
 	);
