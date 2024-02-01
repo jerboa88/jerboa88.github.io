@@ -6744,6 +6744,8 @@ type GITHUB_Enterprise = GITHUB_AnnouncementBanner & GITHUB_Node & {
   readonly announcementUserDismissible: Maybe<Scalars['Boolean']>;
   /** A URL pointing to the enterprise's public avatar. */
   readonly avatarUrl: Scalars['GITHUB_URI'];
+  /** The enterprise's billing email. */
+  readonly billingEmail: Maybe<Scalars['String']>;
   /** Enterprise billing information visible to enterprise billing managers. */
   readonly billingInfo: Maybe<GITHUB_EnterpriseBillingInfo>;
   /** Identifies the date and time when the object was created. */
@@ -12559,6 +12561,8 @@ type GITHUB_Organization = GITHUB_Actor & GITHUB_AnnouncementBanner & GITHUB_Mem
   readonly isVerified: Scalars['Boolean'];
   /** Showcases a selection of repositories and gists that the profile owner has either curated or that have been selected automatically based on popularity. */
   readonly itemShowcase: GITHUB_ProfileItemShowcase;
+  /** Calculate how much each sponsor has ever paid total to this maintainer via GitHub Sponsors. Does not include sponsorships paid via Patreon. */
+  readonly lifetimeReceivedSponsorshipValues: GITHUB_SponsorAndLifetimeValueConnection;
   /** The organization's public profile location. */
   readonly location: Maybe<Scalars['String']>;
   /** The organization's login name. */
@@ -12746,6 +12750,16 @@ type GITHUB_Organization_ipAllowListEntriesArgs = {
 /** An account on GitHub, with one or more owners, that has repositories, members and teams. */
 type GITHUB_Organization_isSponsoredByArgs = {
   accountLogin: Scalars['String'];
+};
+
+
+/** An account on GitHub, with one or more owners, that has repositories, members and teams. */
+type GITHUB_Organization_lifetimeReceivedSponsorshipValuesArgs = {
+  after: InputMaybe<Scalars['String']>;
+  before: InputMaybe<Scalars['String']>;
+  first: InputMaybe<Scalars['Int']>;
+  last: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<GITHUB_SponsorAndLifetimeValueOrder>;
 };
 
 
@@ -15532,6 +15546,22 @@ type GITHUB_ProjectV2WorkflowsOrderField =
   /** The date and time of the workflow update */
   | 'UPDATED_AT';
 
+/** A property that must match */
+type GITHUB_PropertyTargetDefinition = {
+  /** The name of the property */
+  readonly name: Scalars['String'];
+  /** The values to match for */
+  readonly propertyValues: ReadonlyArray<Scalars['String']>;
+};
+
+/** A property that must match */
+type GITHUB_PropertyTargetDefinitionInput = {
+  /** The name of the property */
+  readonly name: Scalars['String'];
+  /** The values to match for */
+  readonly propertyValues: ReadonlyArray<Scalars['String']>;
+};
+
 /** A user's public key. */
 type GITHUB_PublicKey = GITHUB_Node & {
   /** The last time this authorization was used to perform an action. Values will be null for keys not owned by the user. */
@@ -15662,6 +15692,10 @@ type GITHUB_PullRequest = GITHUB_Assignable & GITHUB_Closable & GITHUB_Comment &
   readonly isCrossRepository: Scalars['Boolean'];
   /** Identifies if the pull request is a draft. */
   readonly isDraft: Scalars['Boolean'];
+  /** Indicates whether the pull request is in a merge queue */
+  readonly isInMergeQueue: Scalars['Boolean'];
+  /** Indicates whether the pull request's base ref has a merge queue enabled. */
+  readonly isMergeQueueEnabled: Scalars['Boolean'];
   /** Is this pull request read by the viewer */
   readonly isReadByViewer: Maybe<Scalars['Boolean']>;
   /** A list of labels associated with the object. */
@@ -15678,6 +15712,8 @@ type GITHUB_PullRequest = GITHUB_Assignable & GITHUB_Closable & GITHUB_Comment &
   readonly maintainerCanModify: Scalars['Boolean'];
   /** The commit that was created when this pull request was merged. */
   readonly mergeCommit: Maybe<GITHUB_Commit>;
+  /** The merge queue for the pull request's base branch */
+  readonly mergeQueue: Maybe<GITHUB_MergeQueue>;
   /** The merge queue entry of the pull request in the base branch's merge queue */
   readonly mergeQueueEntry: Maybe<GITHUB_MergeQueueEntry>;
   /** Whether or not the pull request can be merged based on the existence of merge conflicts. */
@@ -20063,6 +20099,22 @@ type GITHUB_RepositoryPrivacy =
   /** Public */
   | 'PUBLIC';
 
+/** Parameters to be used for the repository_property condition */
+type GITHUB_RepositoryPropertyConditionTarget = {
+  /** Array of repository properties that must not match. */
+  readonly exclude: ReadonlyArray<GITHUB_PropertyTargetDefinition>;
+  /** Array of repository properties that must match */
+  readonly include: ReadonlyArray<GITHUB_PropertyTargetDefinition>;
+};
+
+/** Parameters to be used for the repository_property condition */
+type GITHUB_RepositoryPropertyConditionTargetInput = {
+  /** Array of repository properties that must not match. */
+  readonly exclude: ReadonlyArray<GITHUB_PropertyTargetDefinitionInput>;
+  /** Array of repository properties that must match */
+  readonly include: ReadonlyArray<GITHUB_PropertyTargetDefinitionInput>;
+};
+
 /** A repository rule. */
 type GITHUB_RepositoryRule = GITHUB_Node & {
   /** The Node ID of the RepositoryRule object */
@@ -20083,6 +20135,8 @@ type GITHUB_RepositoryRuleConditions = {
   readonly repositoryId: Maybe<GITHUB_RepositoryIdConditionTarget>;
   /** Configuration for the repository_name condition */
   readonly repositoryName: Maybe<GITHUB_RepositoryNameConditionTarget>;
+  /** Configuration for the repository_property condition */
+  readonly repositoryProperty: Maybe<GITHUB_RepositoryPropertyConditionTarget>;
 };
 
 /** Specifies the conditions required for a ruleset to evaluate */
@@ -20093,6 +20147,8 @@ type GITHUB_RepositoryRuleConditionsInput = {
   readonly repositoryId: InputMaybe<GITHUB_RepositoryIdConditionTargetInput>;
   /** Configuration for the repository_name condition */
   readonly repositoryName: InputMaybe<GITHUB_RepositoryNameConditionTargetInput>;
+  /** Configuration for the repository_property condition */
+  readonly repositoryProperty: InputMaybe<GITHUB_RepositoryPropertyConditionTargetInput>;
 };
 
 /** The connection type for RepositoryRule. */
@@ -21507,6 +21563,55 @@ type GITHUB_SocialAccountProvider =
 /** Entities that can sponsor others via GitHub Sponsors */
 type GITHUB_Sponsor = GITHUB_Organization | GITHUB_User;
 
+/** A GitHub account and the total amount in USD they've paid for sponsorships to a particular maintainer. Does not include payments made via Patreon. */
+type GITHUB_SponsorAndLifetimeValue = {
+  /** The amount in cents. */
+  readonly amountInCents: Scalars['Int'];
+  /** The amount in USD, formatted as a string. */
+  readonly formattedAmount: Scalars['String'];
+  /** The sponsor's GitHub account. */
+  readonly sponsor: GITHUB_Sponsorable;
+  /** The maintainer's GitHub account. */
+  readonly sponsorable: GITHUB_Sponsorable;
+};
+
+/** The connection type for SponsorAndLifetimeValue. */
+type GITHUB_SponsorAndLifetimeValueConnection = {
+  /** A list of edges. */
+  readonly edges: Maybe<ReadonlyArray<Maybe<GITHUB_SponsorAndLifetimeValueEdge>>>;
+  /** A list of nodes. */
+  readonly nodes: Maybe<ReadonlyArray<Maybe<GITHUB_SponsorAndLifetimeValue>>>;
+  /** Information to aid in pagination. */
+  readonly pageInfo: GITHUB_PageInfo;
+  /** Identifies the total count of items in the connection. */
+  readonly totalCount: Scalars['Int'];
+};
+
+/** An edge in a connection. */
+type GITHUB_SponsorAndLifetimeValueEdge = {
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  readonly node: Maybe<GITHUB_SponsorAndLifetimeValue>;
+};
+
+/** Ordering options for connections to get sponsor entities and associated USD amounts for GitHub Sponsors. */
+type GITHUB_SponsorAndLifetimeValueOrder = {
+  /** The ordering direction. */
+  readonly direction: GITHUB_OrderDirection;
+  /** The field to order results by. */
+  readonly field: GITHUB_SponsorAndLifetimeValueOrderField;
+};
+
+/** Properties by which sponsor and lifetime value connections can be ordered. */
+type GITHUB_SponsorAndLifetimeValueOrderField =
+  /** Order results by how much money the sponsor has paid in total. */
+  | 'LIFETIME_VALUE'
+  /** Order results by the sponsor's login (username). */
+  | 'SPONSOR_LOGIN'
+  /** Order results by the sponsor's relevance to the viewer. */
+  | 'SPONSOR_RELEVANCE';
+
 /** The connection type for Sponsor. */
 type GITHUB_SponsorConnection = {
   /** A list of edges. */
@@ -21552,6 +21657,8 @@ type GITHUB_Sponsorable = {
   readonly isSponsoredBy: Scalars['Boolean'];
   /** True if the viewer is sponsored by this user/organization. */
   readonly isSponsoringViewer: Scalars['Boolean'];
+  /** Calculate how much each sponsor has ever paid total to this maintainer via GitHub Sponsors. Does not include sponsorships paid via Patreon. */
+  readonly lifetimeReceivedSponsorshipValues: GITHUB_SponsorAndLifetimeValueConnection;
   /** The estimated monthly GitHub Sponsors income for this user/organization in cents (USD). */
   readonly monthlyEstimatedSponsorsIncomeInCents: Scalars['Int'];
   /** List of users and organizations this entity is sponsoring. */
@@ -21584,6 +21691,16 @@ type GITHUB_Sponsorable = {
 /** Entities that can sponsor or be sponsored through GitHub Sponsors. */
 type GITHUB_Sponsorable_isSponsoredByArgs = {
   accountLogin: Scalars['String'];
+};
+
+
+/** Entities that can sponsor or be sponsored through GitHub Sponsors. */
+type GITHUB_Sponsorable_lifetimeReceivedSponsorshipValuesArgs = {
+  after: InputMaybe<Scalars['String']>;
+  before: InputMaybe<Scalars['String']>;
+  first: InputMaybe<Scalars['Int']>;
+  last: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<GITHUB_SponsorAndLifetimeValueOrder>;
 };
 
 
@@ -24649,6 +24766,8 @@ type GITHUB_UnpinIssueInput = {
 type GITHUB_UnpinIssuePayload = {
   /** A unique identifier for the client performing the mutation. */
   readonly clientMutationId: Maybe<Scalars['String']>;
+  /** The id of the pinned issue that was unpinned */
+  readonly id: Maybe<Scalars['ID']>;
   /** The issue that was unpinned */
   readonly issue: Maybe<GITHUB_Issue>;
 };
@@ -26093,6 +26212,8 @@ type GITHUB_User = GITHUB_Actor & GITHUB_Node & GITHUB_PackageOwner & GITHUB_Pro
   readonly issues: GITHUB_IssueConnection;
   /** Showcases a selection of repositories and gists that the profile owner has either curated or that have been selected automatically based on popularity. */
   readonly itemShowcase: GITHUB_ProfileItemShowcase;
+  /** Calculate how much each sponsor has ever paid total to this maintainer via GitHub Sponsors. Does not include sponsorships paid via Patreon. */
+  readonly lifetimeReceivedSponsorshipValues: GITHUB_SponsorAndLifetimeValueConnection;
   /** A user-curated list of repositories */
   readonly lists: GITHUB_UserListConnection;
   /** The user's public profile location. */
@@ -26331,6 +26452,16 @@ type GITHUB_User_issuesArgs = {
   last: InputMaybe<Scalars['Int']>;
   orderBy: InputMaybe<GITHUB_IssueOrder>;
   states: InputMaybe<ReadonlyArray<GITHUB_IssueState>>;
+};
+
+
+/** A user is an individual's account on GitHub that owns repositories and can make new content. */
+type GITHUB_User_lifetimeReceivedSponsorshipValuesArgs = {
+  after: InputMaybe<Scalars['String']>;
+  before: InputMaybe<Scalars['String']>;
+  first: InputMaybe<Scalars['Int']>;
+  last: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<GITHUB_SponsorAndLifetimeValueOrder>;
 };
 
 
@@ -28943,11 +29074,13 @@ type SiteSiteMetadata = {
   readonly description: Maybe<Scalars['String']>;
   readonly githubUrl: Maybe<Scalars['String']>;
   readonly lightTheme: Maybe<SiteSiteMetadataLightTheme>;
+  readonly linkedinUrl: Maybe<Scalars['String']>;
   readonly ogImageAltText: Maybe<Scalars['String']>;
   readonly ogImagePath: Maybe<Scalars['String']>;
   readonly shortDescription: Maybe<Scalars['String']>;
   readonly shortTitle: Maybe<Scalars['String']>;
   readonly siteUrl: Maybe<Scalars['String']>;
+  readonly sourceUrl: Maybe<Scalars['String']>;
   readonly title: Maybe<Scalars['String']>;
   readonly trackingId: Maybe<Scalars['String']>;
 };
@@ -29063,11 +29196,13 @@ type SiteSiteMetadataFieldSelector = {
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly githubUrl: InputMaybe<FieldSelectorEnum>;
   readonly lightTheme: InputMaybe<SiteSiteMetadataLightThemeFieldSelector>;
+  readonly linkedinUrl: InputMaybe<FieldSelectorEnum>;
   readonly ogImageAltText: InputMaybe<FieldSelectorEnum>;
   readonly ogImagePath: InputMaybe<FieldSelectorEnum>;
   readonly shortDescription: InputMaybe<FieldSelectorEnum>;
   readonly shortTitle: InputMaybe<FieldSelectorEnum>;
   readonly siteUrl: InputMaybe<FieldSelectorEnum>;
+  readonly sourceUrl: InputMaybe<FieldSelectorEnum>;
   readonly title: InputMaybe<FieldSelectorEnum>;
   readonly trackingId: InputMaybe<FieldSelectorEnum>;
 };
@@ -29079,11 +29214,13 @@ type SiteSiteMetadataFilterInput = {
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly githubUrl: InputMaybe<StringQueryOperatorInput>;
   readonly lightTheme: InputMaybe<SiteSiteMetadataLightThemeFilterInput>;
+  readonly linkedinUrl: InputMaybe<StringQueryOperatorInput>;
   readonly ogImageAltText: InputMaybe<StringQueryOperatorInput>;
   readonly ogImagePath: InputMaybe<StringQueryOperatorInput>;
   readonly shortDescription: InputMaybe<StringQueryOperatorInput>;
   readonly shortTitle: InputMaybe<StringQueryOperatorInput>;
   readonly siteUrl: InputMaybe<StringQueryOperatorInput>;
+  readonly sourceUrl: InputMaybe<StringQueryOperatorInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
   readonly trackingId: InputMaybe<StringQueryOperatorInput>;
 };
@@ -29199,11 +29336,13 @@ type SiteSiteMetadataSortInput = {
   readonly description: InputMaybe<SortOrderEnum>;
   readonly githubUrl: InputMaybe<SortOrderEnum>;
   readonly lightTheme: InputMaybe<SiteSiteMetadataLightThemeSortInput>;
+  readonly linkedinUrl: InputMaybe<SortOrderEnum>;
   readonly ogImageAltText: InputMaybe<SortOrderEnum>;
   readonly ogImagePath: InputMaybe<SortOrderEnum>;
   readonly shortDescription: InputMaybe<SortOrderEnum>;
   readonly shortTitle: InputMaybe<SortOrderEnum>;
   readonly siteUrl: InputMaybe<SortOrderEnum>;
+  readonly sourceUrl: InputMaybe<SortOrderEnum>;
   readonly title: InputMaybe<SortOrderEnum>;
   readonly trackingId: InputMaybe<SortOrderEnum>;
 };
