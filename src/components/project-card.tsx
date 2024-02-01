@@ -12,7 +12,7 @@ import { getProjectImage } from '../common/utilities';
 import { ProjectInfoInterface } from '../common/types';
 import { H3, P, Span } from '../components/text-components';
 import Pill from '../components/pill';
-import { IconButton } from '../components/icon-button';
+import IconButton from '../components/icon-button';
 
 
 interface ProjectCardPropsInterface {
@@ -20,7 +20,7 @@ interface ProjectCardPropsInterface {
 }
 
 export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
-	const showOnCardHoverStyles = 'opacity-0 group-hover:opacity-100 transition-opacity';
+	const showOnCardHoverStyles = 'opacity-0 group-hover:opacity-100 transition-opacity transition-200';
 
 	return (
 		<a href={repo.githubUrl} role='presentation' className='flex flex-col items-start w-full h-full p-4 text-ellipsis text-left relative z-10 justify-between align-middle bg-base-200 border border-2 border-base-content/10 rounded-2xl overflow-hidden group transition duration-500 hover:bg-[--card-bg] hover:scale-105' style={{ '--card-bg': `${repo.typeColor}aa` }}>

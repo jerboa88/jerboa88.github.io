@@ -8,11 +8,14 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 interface IconButtonPropsInterface {
 	className?: string;
 	icon: IconDefinition;
+	disabled?: boolean;
 }
 
-export function IconButton({ className = '', icon }: IconButtonPropsInterface) {
+export default function IconButton({ className = '', icon, disabled = false }: IconButtonPropsInterface) {
+	const enabledStyles = disabled ? '' : 'transition-transform hover:scale-110 active:scale-90';
+
 	return (
-		<button className={`inline-block p-4 transition-transform hover:scale-110 active:scale-90 ${className}`}>
+		<button className={`inline-block p-4 ${enabledStyles} ${className}`}>
 			<FontAwesomeIcon icon={icon} className='block w-4 fa-lg fa-fw drop-shadow' />
 		</button>
 	);
