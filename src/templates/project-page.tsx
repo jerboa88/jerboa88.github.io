@@ -5,10 +5,12 @@
 
 
 import React from 'react';
+import type { HeadProps } from 'gatsby';
 import ConfigManager from '../common/config-manager';
 import { getProjectImage } from '../common/utilities';
 import { ProjectInfoInterface } from '../common/types';
 import PageLayout from '../components/layout/page-layout';
+import SEO from '../components/layout/seo';
 import { H2, P } from '../components/text-components';
 
 
@@ -37,5 +39,20 @@ export default function ProjectPage({ pageContext }: ProjectPagePropsInterface) 
 			<P>{pageContext.name}</P>
 			<P>{pageContext.longDesc}</P>
 		</PageLayout>
+	);
+}
+
+export const Head = ({ location, pageContext }: HeadProps) => {
+	const pageMetadata = {
+		title: pageContext.name,
+		description: pageContext.longDesc,
+		shortDescription: pageContext.shortDesc,
+		path: location.pathname,
+		ogImageUrl: pageContext.imageUrl,
+		ogImageAltText: `Cover image for ${pageContext.name}`,
+	};
+
+	return (
+		<SEO pageMetadata={pageMetadata} />
 	);
 }

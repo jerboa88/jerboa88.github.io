@@ -8338,6 +8338,8 @@ type GITHUB_FundingPlatform =
   | 'OTECHIE'
   /** Patreon funding platform. */
   | 'PATREON'
+  /** Polar funding platform. */
+  | 'POLAR'
   /** Tidelift funding platform. */
   | 'TIDELIFT';
 
@@ -15664,7 +15666,10 @@ type GITHUB_PullRequest = GITHUB_Assignable & GITHUB_Closable & GITHUB_Comment &
   readonly createdAt: Scalars['GITHUB_DateTime'];
   /** Check if this comment was created via an email reply. */
   readonly createdViaEmail: Scalars['Boolean'];
-  /** Identifies the primary key from the database. */
+  /**
+   * Identifies the primary key from the database.
+   * @deprecated `databaseId` will be removed because it does not support 64-bit signed integer identifiers. Use `fullDatabaseId` instead. Removal on 2024-07-01 UTC.
+   */
   readonly databaseId: Maybe<Scalars['Int']>;
   /** The number of deletions in this pull request. */
   readonly deletions: Scalars['Int'];
@@ -15672,6 +15677,8 @@ type GITHUB_PullRequest = GITHUB_Assignable & GITHUB_Closable & GITHUB_Comment &
   readonly editor: Maybe<GITHUB_Actor>;
   /** Lists the files changed within this pull request. */
   readonly files: Maybe<GITHUB_PullRequestChangedFileConnection>;
+  /** Identifies the primary key from the database as a BigInt. */
+  readonly fullDatabaseId: Maybe<Scalars['GITHUB_BigInt']>;
   /** Identifies the head Ref associated with the pull request. */
   readonly headRef: Maybe<GITHUB_Ref>;
   /** Identifies the name of the head Ref associated with the pull request, even if the ref has been deleted. */
@@ -16257,10 +16264,15 @@ type GITHUB_PullRequestReview = GITHUB_Comment & GITHUB_Deletable & GITHUB_Minim
   readonly createdAt: Scalars['GITHUB_DateTime'];
   /** Check if this comment was created via an email reply. */
   readonly createdViaEmail: Scalars['Boolean'];
-  /** Identifies the primary key from the database. */
+  /**
+   * Identifies the primary key from the database.
+   * @deprecated `databaseId` will be removed because it does not support 64-bit signed integer identifiers. Use `fullDatabaseId` instead. Removal on 2024-07-01 UTC.
+   */
   readonly databaseId: Maybe<Scalars['Int']>;
   /** The actor who edited the comment. */
   readonly editor: Maybe<GITHUB_Actor>;
+  /** Identifies the primary key from the database as a BigInt. */
+  readonly fullDatabaseId: Maybe<Scalars['GITHUB_BigInt']>;
   /** The Node ID of the PullRequestReview object */
   readonly id: Scalars['ID'];
   /** Check if this comment was edited and includes an edit with the creation data */
@@ -16365,7 +16377,10 @@ type GITHUB_PullRequestReviewComment = GITHUB_Comment & GITHUB_Deletable & GITHU
   readonly createdAt: Scalars['GITHUB_DateTime'];
   /** Check if this comment was created via an email reply. */
   readonly createdViaEmail: Scalars['Boolean'];
-  /** Identifies the primary key from the database. */
+  /**
+   * Identifies the primary key from the database.
+   * @deprecated `databaseId` will be removed because it does not support 64-bit signed integer identifiers. Use `fullDatabaseId` instead. Removal on 2024-07-01 UTC.
+   */
   readonly databaseId: Maybe<Scalars['Int']>;
   /** The diff hunk to which the comment applies. */
   readonly diffHunk: Scalars['String'];
@@ -16373,6 +16388,8 @@ type GITHUB_PullRequestReviewComment = GITHUB_Comment & GITHUB_Deletable & GITHU
   readonly draftedAt: Scalars['GITHUB_DateTime'];
   /** The actor who edited the comment. */
   readonly editor: Maybe<GITHUB_Actor>;
+  /** Identifies the primary key from the database as a BigInt. */
+  readonly fullDatabaseId: Maybe<Scalars['GITHUB_BigInt']>;
   /** The Node ID of the PullRequestReviewComment object */
   readonly id: Scalars['ID'];
   /** Check if this comment was edited and includes an edit with the creation data */
@@ -18944,6 +18961,8 @@ type GITHUB_Repository = GITHUB_Node & GITHUB_PackageOwner & GITHUB_ProjectOwner
   readonly hasIssuesEnabled: Scalars['Boolean'];
   /** Indicates if the repository has the Projects feature enabled. */
   readonly hasProjectsEnabled: Scalars['Boolean'];
+  /** Indicates if the repository displays a Sponsor button for financial contributions. */
+  readonly hasSponsorshipsEnabled: Scalars['Boolean'];
   /** Whether vulnerability alerts are enabled for the repository. */
   readonly hasVulnerabilityAlertsEnabled: Scalars['Boolean'];
   /** Indicates if the repository has wiki feature enabled. */
@@ -19754,6 +19773,8 @@ type GITHUB_RepositoryInfo = {
   readonly hasIssuesEnabled: Scalars['Boolean'];
   /** Indicates if the repository has the Projects feature enabled. */
   readonly hasProjectsEnabled: Scalars['Boolean'];
+  /** Indicates if the repository displays a Sponsor button for financial contributions. */
+  readonly hasSponsorshipsEnabled: Scalars['Boolean'];
   /** Indicates if the repository has wiki feature enabled. */
   readonly hasWikiEnabled: Scalars['Boolean'];
   /** The repository's URL. */
@@ -25892,6 +25913,8 @@ type GITHUB_UpdateRepositoryInput = {
   readonly hasIssuesEnabled: InputMaybe<Scalars['Boolean']>;
   /** Indicates if the repository should have the project boards feature enabled. */
   readonly hasProjectsEnabled: InputMaybe<Scalars['Boolean']>;
+  /** Indicates if the repository displays a Sponsor button for financial contributions. */
+  readonly hasSponsorshipsEnabled: InputMaybe<Scalars['Boolean']>;
   /** Indicates if the repository should have the wiki feature enabled. */
   readonly hasWikiEnabled: InputMaybe<Scalars['Boolean']>;
   /** The URL for a web page about this repository. Pass an empty string to erase the existing URL. */
@@ -29069,7 +29092,6 @@ type SitePluginSortInput = {
 
 type SiteSiteMetadata = {
   readonly author: Maybe<Scalars['String']>;
-  readonly authorUsername: Maybe<Scalars['String']>;
   readonly darkTheme: Maybe<SiteSiteMetadataDarkTheme>;
   readonly description: Maybe<Scalars['String']>;
   readonly githubUrl: Maybe<Scalars['String']>;
@@ -29083,6 +29105,7 @@ type SiteSiteMetadata = {
   readonly sourceUrl: Maybe<Scalars['String']>;
   readonly title: Maybe<Scalars['String']>;
   readonly trackingId: Maybe<Scalars['String']>;
+  readonly twitterUsername: Maybe<Scalars['String']>;
 };
 
 type SiteSiteMetadataDarkTheme = {
@@ -29191,7 +29214,6 @@ type SiteSiteMetadataDarkThemeSortInput = {
 
 type SiteSiteMetadataFieldSelector = {
   readonly author: InputMaybe<FieldSelectorEnum>;
-  readonly authorUsername: InputMaybe<FieldSelectorEnum>;
   readonly darkTheme: InputMaybe<SiteSiteMetadataDarkThemeFieldSelector>;
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly githubUrl: InputMaybe<FieldSelectorEnum>;
@@ -29205,11 +29227,11 @@ type SiteSiteMetadataFieldSelector = {
   readonly sourceUrl: InputMaybe<FieldSelectorEnum>;
   readonly title: InputMaybe<FieldSelectorEnum>;
   readonly trackingId: InputMaybe<FieldSelectorEnum>;
+  readonly twitterUsername: InputMaybe<FieldSelectorEnum>;
 };
 
 type SiteSiteMetadataFilterInput = {
   readonly author: InputMaybe<StringQueryOperatorInput>;
-  readonly authorUsername: InputMaybe<StringQueryOperatorInput>;
   readonly darkTheme: InputMaybe<SiteSiteMetadataDarkThemeFilterInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly githubUrl: InputMaybe<StringQueryOperatorInput>;
@@ -29223,6 +29245,7 @@ type SiteSiteMetadataFilterInput = {
   readonly sourceUrl: InputMaybe<StringQueryOperatorInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
   readonly trackingId: InputMaybe<StringQueryOperatorInput>;
+  readonly twitterUsername: InputMaybe<StringQueryOperatorInput>;
 };
 
 type SiteSiteMetadataLightTheme = {
@@ -29331,7 +29354,6 @@ type SiteSiteMetadataLightThemeSortInput = {
 
 type SiteSiteMetadataSortInput = {
   readonly author: InputMaybe<SortOrderEnum>;
-  readonly authorUsername: InputMaybe<SortOrderEnum>;
   readonly darkTheme: InputMaybe<SiteSiteMetadataDarkThemeSortInput>;
   readonly description: InputMaybe<SortOrderEnum>;
   readonly githubUrl: InputMaybe<SortOrderEnum>;
@@ -29345,6 +29367,7 @@ type SiteSiteMetadataSortInput = {
   readonly sourceUrl: InputMaybe<SortOrderEnum>;
   readonly title: InputMaybe<SortOrderEnum>;
   readonly trackingId: InputMaybe<SortOrderEnum>;
+  readonly twitterUsername: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSortInput = {
@@ -29414,6 +29437,11 @@ type GatsbyImageSharpFluid_withWebp_noBase64Fragment = { readonly aspectRatio: n
 type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = { readonly tracedSVG: string | null, readonly aspectRatio: number, readonly src: string, readonly srcSet: string, readonly srcWebp: string | null, readonly srcSetWebp: string | null, readonly sizes: string };
 
 type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: number, readonly maxWidth: number };
+
+type HeaderQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type HeaderQueryQuery = { readonly site: { readonly siteMetadata: { readonly title: string | null, readonly shortTitle: string | null, readonly author: string | null, readonly description: string | null, readonly shortDescription: string | null, readonly siteUrl: string | null, readonly twitterUsername: string | null, readonly ogImagePath: string | null, readonly ogImageAltText: string | null, readonly lightTheme: { readonly primary: string | null } | null, readonly darkTheme: { readonly primary: string | null } | null } | null } | null };
 
 type PinnedRepoQueryQueryVariables = Exact<{ [key: string]: never; }>;
 

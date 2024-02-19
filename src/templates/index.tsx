@@ -11,6 +11,7 @@ import { ProjectInfoInterface, SectionInterface } from '../common/types';
 import { getDefaultTransition } from '../common/utilities';
 import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
+import SEO from '../components/layout/seo';
 import { H1, P } from '../components/text-components';
 import ProjectCardGallery from '../components/project-card-gallery';
 import * as styles from '../styles/index.module.css';
@@ -80,3 +81,5 @@ export default function Home({ pageContext }: HomePropsInterface) {
 		</PageLayout>
 	);
 }
+
+export const Head = SEO
