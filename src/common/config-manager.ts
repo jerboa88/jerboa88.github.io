@@ -7,12 +7,12 @@
 // Constants
 const config = {
 	metadata: {
-		shortTitle: 'John\'s Portfolio',
-		title: 'John Goodliff - Software Developer & Cat Whisperer',
+		shortTitle: 'John Goodliff',
+		title: 'John Goodliff | Software Developer',
 		author: 'John Goodliff',
-		authorUsername: 'jerboa88',
 		shortDescription: 'A portfolio site for John Goodliff, a Software Developer based in Edmonton, Alberta.',
 		description: 'A portfolio site for John Goodliff, a Software Developer based in Edmonton, Alberta.',
+		twitterUsername: 'jerboa88',
 		ogImagePath: 'images/og-image.png',
 		ogImageAltText: 'Sample OpenGraph cover image',
 		siteUrl: 'https://johng.io/',

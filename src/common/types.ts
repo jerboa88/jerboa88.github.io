@@ -26,13 +26,13 @@ export interface DaisyUiThemeInterface {
 
 // This needs to be a type rather than an interface due to existing TS 'functionality'
 // See https://github.com/microsoft/TypeScript/issues/15300 for more details
-export type MetadataInterface = {
+export type SiteMetadataInterface = {
 	shortTitle: string;
 	title: string;
 	author: string;
-	authorUsername: string;
 	shortDescription: string;
 	description: string;
+	twitterUsername: string;
 	ogImagePath: string;
 	ogImageAltText: string;
 	siteUrl: string;
