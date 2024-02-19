@@ -39,7 +39,6 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:20.11.14"],\
           ["@types/react", "npm:18.2.48"],\
           ["@types/react-dom", "npm:18.2.18"],\
-          ["@types/react-helmet", "npm:6.1.11"],\
           ["autoprefixer", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:10.4.17"],\
           ["daisyui", "npm:4.6.1"],\
           ["dompurify", "npm:3.0.8"],\
@@ -52,7 +51,6 @@ const RAW_RUNTIME_STATE =
           ["gatsby-plugin-manifest", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-plugin-offline", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
           ["gatsby-plugin-postcss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
-          ["gatsby-plugin-react-helmet", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
           ["gatsby-plugin-react-svg", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.3.0"],\
           ["gatsby-plugin-realfavicongenerator", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:0.1.2"],\
           ["gatsby-plugin-robots-txt", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.8.0"],\
@@ -66,7 +64,6 @@ const RAW_RUNTIME_STATE =
           ["postcss", "npm:8.4.33"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:18.2.0"],\
-          ["react-helmet", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.1.0"],\
           ["react-html-comment", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:2.0.16"],\
           ["sharp", "npm:0.33.2"],\
           ["svg-react-loader", "npm:0.4.6"],\
@@ -5871,16 +5868,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@types-react-dom-npm-18.2.18-b316a8af22-4ef7725b4c.zip/node_modules/@types/react-dom/",\
         "packageDependencies": [\
           ["@types/react-dom", "npm:18.2.18"],\
-          ["@types/react", "npm:18.2.48"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/react-helmet", [\
-      ["npm:6.1.11", {\
-        "packageLocation": "./.yarn/cache/@types-react-helmet-npm-6.1.11-6d6a281744-e329d8ad82.zip/node_modules/@types/react-helmet/",\
-        "packageDependencies": [\
-          ["@types/react-helmet", "npm:6.1.11"],\
           ["@types/react", "npm:18.2.48"]\
         ],\
         "linkType": "HARD"\
@@ -11922,33 +11909,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["gatsby-plugin-react-helmet", [\
-      ["npm:6.13.1", {\
-        "packageLocation": "./.yarn/cache/gatsby-plugin-react-helmet-npm-6.13.1-23bfc1113e-8ad2911259.zip/node_modules/gatsby-plugin-react-helmet/",\
-        "packageDependencies": [\
-          ["gatsby-plugin-react-helmet", "npm:6.13.1"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1", {\
-        "packageLocation": "./.yarn/__virtual__/gatsby-plugin-react-helmet-virtual-3b2d89b779/0/cache/gatsby-plugin-react-helmet-npm-6.13.1-23bfc1113e-8ad2911259.zip/node_modules/gatsby-plugin-react-helmet/",\
-        "packageDependencies": [\
-          ["gatsby-plugin-react-helmet", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
-          ["@babel/runtime", "npm:7.23.8"],\
-          ["@types/gatsby", null],\
-          ["@types/react-helmet", "npm:6.1.11"],\
-          ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.3"],\
-          ["react-helmet", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.1.0"]\
-        ],\
-        "packagePeers": [\
-          "@types/gatsby",\
-          "@types/react-helmet",\
-          "gatsby",\
-          "react-helmet"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["gatsby-plugin-react-svg", [\
       ["npm:3.3.0", {\
         "packageLocation": "./.yarn/cache/gatsby-plugin-react-svg-npm-3.3.0-cc0a473d54-c9376a7d86.zip/node_modules/gatsby-plugin-react-svg/",\
@@ -14124,7 +14084,6 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:20.11.14"],\
           ["@types/react", "npm:18.2.48"],\
           ["@types/react-dom", "npm:18.2.18"],\
-          ["@types/react-helmet", "npm:6.1.11"],\
           ["autoprefixer", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:10.4.17"],\
           ["daisyui", "npm:4.6.1"],\
           ["dompurify", "npm:3.0.8"],\
@@ -14137,7 +14096,6 @@ const RAW_RUNTIME_STATE =
           ["gatsby-plugin-manifest", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-plugin-offline", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
           ["gatsby-plugin-postcss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
-          ["gatsby-plugin-react-helmet", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
           ["gatsby-plugin-react-svg", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.3.0"],\
           ["gatsby-plugin-realfavicongenerator", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:0.1.2"],\
           ["gatsby-plugin-robots-txt", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.8.0"],\
@@ -14151,7 +14109,6 @@ const RAW_RUNTIME_STATE =
           ["postcss", "npm:8.4.33"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:18.2.0"],\
-          ["react-helmet", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.1.0"],\
           ["react-html-comment", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:2.0.16"],\
           ["sharp", "npm:0.33.2"],\
           ["svg-react-loader", "npm:0.4.6"],\
@@ -18023,41 +17980,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["react-fast-compare", [\
-      ["npm:3.2.2", {\
-        "packageLocation": "./.yarn/cache/react-fast-compare-npm-3.2.2-45b585a872-a6826180ba.zip/node_modules/react-fast-compare/",\
-        "packageDependencies": [\
-          ["react-fast-compare", "npm:3.2.2"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["react-helmet", [\
-      ["npm:6.1.0", {\
-        "packageLocation": "./.yarn/cache/react-helmet-npm-6.1.0-20fd5447ff-eff2523138.zip/node_modules/react-helmet/",\
-        "packageDependencies": [\
-          ["react-helmet", "npm:6.1.0"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.1.0", {\
-        "packageLocation": "./.yarn/__virtual__/react-helmet-virtual-428f038e26/0/cache/react-helmet-npm-6.1.0-20fd5447ff-eff2523138.zip/node_modules/react-helmet/",\
-        "packageDependencies": [\
-          ["react-helmet", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.1.0"],\
-          ["@types/react", "npm:18.2.48"],\
-          ["object-assign", "npm:4.1.1"],\
-          ["prop-types", "npm:15.8.1"],\
-          ["react", "npm:18.2.0"],\
-          ["react-fast-compare", "npm:3.2.2"],\
-          ["react-side-effect", "virtual:428f038e2685bbf815465c19a8ac75645e1c7de06c126f87e6bf116d549f2c65b4d4bd16514c02890ec8ef2967be2d059e6bc51c4aefc8945a7d33557d2b1c35#npm:2.1.2"]\
-        ],\
-        "packagePeers": [\
-          "@types/react",\
-          "react"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["react-html-comment", [\
       ["npm:2.0.16", {\
         "packageLocation": "./.yarn/cache/react-html-comment-npm-2.0.16-0ad0bfb0fc-e2a5d69680.zip/node_modules/react-html-comment/",\
@@ -18137,28 +18059,6 @@ const RAW_RUNTIME_STATE =
           "@types/webpack",\
           "react",\
           "webpack"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["react-side-effect", [\
-      ["npm:2.1.2", {\
-        "packageLocation": "./.yarn/cache/react-side-effect-npm-2.1.2-c18e5fd8bd-8c31aaec5b.zip/node_modules/react-side-effect/",\
-        "packageDependencies": [\
-          ["react-side-effect", "npm:2.1.2"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:428f038e2685bbf815465c19a8ac75645e1c7de06c126f87e6bf116d549f2c65b4d4bd16514c02890ec8ef2967be2d059e6bc51c4aefc8945a7d33557d2b1c35#npm:2.1.2", {\
-        "packageLocation": "./.yarn/__virtual__/react-side-effect-virtual-9b98ad77de/0/cache/react-side-effect-npm-2.1.2-c18e5fd8bd-8c31aaec5b.zip/node_modules/react-side-effect/",\
-        "packageDependencies": [\
-          ["react-side-effect", "virtual:428f038e2685bbf815465c19a8ac75645e1c7de06c126f87e6bf116d549f2c65b4d4bd16514c02890ec8ef2967be2d059e6bc51c4aefc8945a7d33557d2b1c35#npm:2.1.2"],\
-          ["@types/react", "npm:18.2.48"],\
-          ["react", "npm:18.2.0"]\
-        ],\
-        "packagePeers": [\
-          "@types/react",\
-          "react"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -22190,10 +22090,9 @@ async function copyImpl(prelayout, postlayout, destinationFs, destination, sourc
         updated = await copySymlink(prelayout, postlayout, destinationFs, destination, destinationStat, sourceFs, source, sourceStat, opts);
       }
       break;
-    default:
-      {
-        throw new Error(`Unsupported file type (${sourceStat.mode})`);
-      }
+    default: {
+      throw new Error(`Unsupported file type (${sourceStat.mode})`);
+    }
   }
   if (opts.linkStrategy?.type !== `HardlinkFromIndex` || !sourceStat.isFile()) {
     if (updated || destinationStat?.mtime?.getTime() !== mtime.getTime() || destinationStat?.atime?.getTime() !== atime.getTime()) {
@@ -22256,7 +22155,10 @@ async function copyFolder(prelayout, postlayout, destinationFs, destination, des
 }
 async function copyFileViaIndex(prelayout, postlayout, destinationFs, destination, destinationStat, sourceFs, source, sourceStat, opts, linkStrategy) {
   const sourceHash = await sourceFs.checksumFilePromise(source, { algorithm: `sha1` });
-  const indexPath = destinationFs.pathUtils.join(linkStrategy.indexPath, sourceHash.slice(0, 2), `${sourceHash}.dat`);
+  const defaultMode = 420;
+  const sourceMode = sourceStat.mode & 511;
+  const indexFileName = `${sourceHash}${sourceMode !== defaultMode ? sourceMode.toString(8) : ``}`;
+  const indexPath = destinationFs.pathUtils.join(linkStrategy.indexPath, sourceHash.slice(0, 2), `${indexFileName}.dat`);
   let AtomicBehavior;
   ((AtomicBehavior2) => {
     AtomicBehavior2[AtomicBehavior2["Lock"] = 0] = "Lock";
@@ -22312,8 +22214,12 @@ async function copyFileViaIndex(prelayout, postlayout, destinationFs, destinatio
     }
   });
   postlayout.push(async () => {
-    if (!indexStat)
+    if (!indexStat) {
       await destinationFs.lutimesPromise(indexPath, defaultTime, defaultTime);
+      if (sourceMode !== defaultMode) {
+        await destinationFs.chmodPromise(indexPath, sourceMode);
+      }
+    }
     if (tempPath && !tempPathCleaned) {
       await destinationFs.unlinkPromise(tempPath);
     }
@@ -24517,6 +24423,8 @@ class VirtualFS extends ProxiedFS {
   }
 }
 
+const URL = Number(process.versions.node.split('.', 1)[0]) < 20 ? url.URL : globalThis.URL;
+
 class NodePathFS extends ProxiedFS {
   constructor(baseFs) {
     super(npath);
@@ -24528,7 +24436,7 @@ class NodePathFS extends ProxiedFS {
   mapToBase(path) {
     if (typeof path === `string`)
       return path;
-    if (path instanceof url.URL)
+    if (path instanceof URL)
       return url.fileURLToPath(path);
     if (Buffer.isBuffer(path)) {
       const str = path.toString();
@@ -26094,8 +26002,10 @@ class ZipFS extends BasePortableFakeFS {
           throw new Error(`Incomplete read`);
         else if (rc > size)
           throw new Error(`Overread`);
-        const memory = this.libzip.HEAPU8.subarray(buffer, buffer + size);
-        return Buffer.from(memory);
+        let result = Buffer.from(this.libzip.HEAPU8.subarray(buffer, buffer + size));
+        if (process.env.YARN_IS_TEST_ENV && process.env.YARN_ZIP_DATA_EPILOGUE)
+          result = Buffer.concat([result, Buffer.from(process.env.YARN_ZIP_DATA_EPILOGUE)]);
+        return result;
       } finally {
         this.libzip.free(buffer);
       }
@@ -27153,7 +27063,7 @@ function applyPatch(pnpapi, opts) {
   process.versions.pnp = String(pnpapi.VERSIONS.std);
   const moduleExports = require$$0__default.default;
   moduleExports.findPnpApi = (lookupSource) => {
-    const lookupPath = lookupSource instanceof url.URL ? url.fileURLToPath(lookupSource) : lookupSource;
+    const lookupPath = lookupSource instanceof URL ? url.fileURLToPath(lookupSource) : lookupSource;
     const apiPath = opts.manager.findApiPathFor(lookupPath);
     if (apiPath === null)
       return null;
@@ -27575,28 +27485,6 @@ function getPackageScopeConfig(resolved, readFileSyncFn) {
   return packageConfig;
 }
 
-/**
-  @license
-  Copyright Node.js contributors. All rights reserved.
-
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files (the "Software"), to
-  deal in the Software without restriction, including without limitation the
-  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
-  sell copies of the Software, and to permit persons to whom the Software is
-  furnished to do so, subject to the following conditions:
-
-  The above copyright notice and this permission notice shall be included in
-  all copies or substantial portions of the Software.
-
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-  IN THE SOFTWARE.
-*/
 function throwImportNotDefined(specifier, packageJSONUrl, base) {
   throw new ERR_PACKAGE_IMPORT_NOT_DEFINED(
     specifier,
