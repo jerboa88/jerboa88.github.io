@@ -5,15 +5,14 @@
 
 
 import React, { ReactNode } from 'react';
-import { Helmet } from 'react-helmet';
-import { MetadataInterface, SectionInterface, ThemeInterface } from '../../common/types';
+import { SiteMetadataInterface, SectionInterface, ThemeInterface } from '../../common/types';
 import Header from './header';
 import Footer from './footer';
 
 
 interface PageLayoutPropsInterface {
 	className?: string;
-	metadata: MetadataInterface;
+	siteMetadata: SiteMetadataInterface;
 	lightTheme: ThemeInterface;
 	darkTheme: ThemeInterface;
 	titleLayoutId?: string;
@@ -22,11 +21,11 @@ interface PageLayoutPropsInterface {
 	children: ReactNode;
 }
 
-export default function PageLayout({ className = '', metadata, lightTheme, darkTheme, titleLayoutId, isTitleExpanded = false, sections, children }: PageLayoutPropsInterface) {
+export default function PageLayout({ className = '', siteMetadata, lightTheme, darkTheme, titleLayoutId, isTitleExpanded = false, sections, children }: PageLayoutPropsInterface) {
 	// const lsKeyForTheme = 'is-dark-theme';
 	// const lsKeyForMotion = 'is-motion-allowed';
-	// const lsKeyForAnalytics = `ga-disable-${props.metadata.trackingId}`;
-	const ogImageUrl = new URL(metadata.ogImagePath, metadata.siteUrl).toString();
+	// const lsKeyForAnalytics = `ga-disable-${props.siteMetadata.trackingId}`;
+	const ogImageUrl = new URL(siteMetadata.ogImagePath, siteMetadata.siteUrl).toString();
 	// Whether the component is currently being mounted or not
 	// We can use this to ignore initial state changes of the component
 	// const isMount = useIsMount();
@@ -65,7 +64,7 @@ export default function PageLayout({ className = '', metadata, lightTheme, darkT
 	function getPrimaryThemeColor(): string {
 		// TODO: Replace hardcoded value
 		return true ? darkTheme.primary : lightTheme.primary;
-		// return metadata[true ? 'darkTheme' : 'lightTheme'].primary;
+		// return siteMetadata[true ? 'darkTheme' : 'lightTheme'].primary;
 	}
 
 	// Define toggle functions and memoize before passing to the relevant context provider
@@ -154,9 +153,9 @@ export default function PageLayout({ className = '', metadata, lightTheme, darkT
 
 			{/* Page body */}
 			<div className={`min-h-screen flex-col justify-between items-center mx-auto text-base bg-base-300 text-base-content scroll-smooth selection:bg-primary selection:text-primary-content ${className}`}>
-				<Header metadata={metadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections} />
+				<Header siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections} />
 				{children}
-				<Footer metadata={metadata} />
+				<Footer siteMetadata={siteMetadata} />
 			</div>
 		</>
 	);

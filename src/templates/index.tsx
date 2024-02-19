@@ -25,7 +25,7 @@ interface HomePropsInterface {
 export default function Home({ pageContext }: HomePropsInterface) {
 	const titleLayoutId = 'title-layout';
 	const configManager = new ConfigManager();
-	const metadata = configManager.getMetadata();
+	const siteMetadata = configManager.getMetadata();
 	const lightTheme = configManager.getTheme('light');
 	const darkTheme = configManager.getTheme('dark');
 	const inViewTriggerRef = useRef(null);
@@ -57,10 +57,10 @@ export default function Home({ pageContext }: HomePropsInterface) {
 	] as SectionInterface[];
 
 	return (
-		<PageLayout metadata={metadata} lightTheme={lightTheme} darkTheme={darkTheme} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
+		<PageLayout siteMetadata={siteMetadata} lightTheme={lightTheme} darkTheme={darkTheme} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
 			<Section>
 				{isTitleExpanded && <motion.a href="/" className="z-20" layoutId={titleLayoutId} {...getDefaultTransition()}>
-					<H1 className="m-4 text-6xl">{metadata.author}</H1>
+					<H1 className="m-4 text-6xl">{siteMetadata.author}</H1>
 				</motion.a>}
 				<span ref={inViewTriggerRef} />
 				<P>Software Developer & Student</P>
