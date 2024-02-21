@@ -29091,7 +29091,7 @@ type SitePluginSortInput = {
 };
 
 type SiteSiteMetadata = {
-  readonly author: Maybe<Scalars['String']>;
+  readonly author: Maybe<SiteSiteMetadataAuthor>;
   readonly darkTheme: Maybe<SiteSiteMetadataDarkTheme>;
   readonly description: Maybe<Scalars['String']>;
   readonly githubUrl: Maybe<Scalars['String']>;
@@ -29106,6 +29106,30 @@ type SiteSiteMetadata = {
   readonly title: Maybe<Scalars['String']>;
   readonly trackingId: Maybe<Scalars['String']>;
   readonly twitterUsername: Maybe<Scalars['String']>;
+};
+
+type SiteSiteMetadataAuthor = {
+  readonly firstName: Maybe<Scalars['String']>;
+  readonly fullName: Maybe<Scalars['String']>;
+  readonly lastName: Maybe<Scalars['String']>;
+};
+
+type SiteSiteMetadataAuthorFieldSelector = {
+  readonly firstName: InputMaybe<FieldSelectorEnum>;
+  readonly fullName: InputMaybe<FieldSelectorEnum>;
+  readonly lastName: InputMaybe<FieldSelectorEnum>;
+};
+
+type SiteSiteMetadataAuthorFilterInput = {
+  readonly firstName: InputMaybe<StringQueryOperatorInput>;
+  readonly fullName: InputMaybe<StringQueryOperatorInput>;
+  readonly lastName: InputMaybe<StringQueryOperatorInput>;
+};
+
+type SiteSiteMetadataAuthorSortInput = {
+  readonly firstName: InputMaybe<SortOrderEnum>;
+  readonly fullName: InputMaybe<SortOrderEnum>;
+  readonly lastName: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSiteMetadataDarkTheme = {
@@ -29213,7 +29237,7 @@ type SiteSiteMetadataDarkThemeSortInput = {
 };
 
 type SiteSiteMetadataFieldSelector = {
-  readonly author: InputMaybe<FieldSelectorEnum>;
+  readonly author: InputMaybe<SiteSiteMetadataAuthorFieldSelector>;
   readonly darkTheme: InputMaybe<SiteSiteMetadataDarkThemeFieldSelector>;
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly githubUrl: InputMaybe<FieldSelectorEnum>;
@@ -29231,7 +29255,7 @@ type SiteSiteMetadataFieldSelector = {
 };
 
 type SiteSiteMetadataFilterInput = {
-  readonly author: InputMaybe<StringQueryOperatorInput>;
+  readonly author: InputMaybe<SiteSiteMetadataAuthorFilterInput>;
   readonly darkTheme: InputMaybe<SiteSiteMetadataDarkThemeFilterInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly githubUrl: InputMaybe<StringQueryOperatorInput>;
@@ -29353,7 +29377,7 @@ type SiteSiteMetadataLightThemeSortInput = {
 };
 
 type SiteSiteMetadataSortInput = {
-  readonly author: InputMaybe<SortOrderEnum>;
+  readonly author: InputMaybe<SiteSiteMetadataAuthorSortInput>;
   readonly darkTheme: InputMaybe<SiteSiteMetadataDarkThemeSortInput>;
   readonly description: InputMaybe<SortOrderEnum>;
   readonly githubUrl: InputMaybe<SortOrderEnum>;
@@ -29437,11 +29461,6 @@ type GatsbyImageSharpFluid_withWebp_noBase64Fragment = { readonly aspectRatio: n
 type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = { readonly tracedSVG: string | null, readonly aspectRatio: number, readonly src: string, readonly srcSet: string, readonly srcWebp: string | null, readonly srcSetWebp: string | null, readonly sizes: string };
 
 type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: number, readonly maxWidth: number };
-
-type HeaderQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type HeaderQueryQuery = { readonly site: { readonly siteMetadata: { readonly title: string | null, readonly shortTitle: string | null, readonly author: string | null, readonly description: string | null, readonly shortDescription: string | null, readonly siteUrl: string | null, readonly twitterUsername: string | null, readonly ogImagePath: string | null, readonly ogImageAltText: string | null, readonly lightTheme: { readonly primary: string | null } | null, readonly darkTheme: { readonly primary: string | null } | null } | null } | null };
 
 type PinnedRepoQueryQueryVariables = Exact<{ [key: string]: never; }>;
 

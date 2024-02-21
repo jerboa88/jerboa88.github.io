@@ -11,7 +11,6 @@ import { Context, RefObject } from 'react';
 export interface SiteMetadataConfigInterface {
 	shortTitle: string;
 	title: string;
-	author: string;
 	shortDescription: string;
 	description: string;
 	twitterUsername: string;
@@ -22,12 +21,20 @@ export interface SiteMetadataConfigInterface {
 	linkedinUrl: string;
 	githubUrl: string;
 	trackingId: string;
+	author: {
+		firstName: string;
+		lastName: string;
+	}
 }
 
 
 // Site metadata object used to populate the site's metadata
 export interface SiteMetadataInterface extends SiteMetadataConfigInterface {
-
+	author: {
+		firstName: string;
+		lastName: string;
+		fullName: string;
+	}
 }
 
 

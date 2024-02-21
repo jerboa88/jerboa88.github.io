@@ -59,7 +59,7 @@ export default function Home({ pageContext }: HomePropsInterface) {
 		<PageLayout siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
 			<Section>
 				{isTitleExpanded && <motion.a href="/" className="z-20" layoutId={titleLayoutId} {...getDefaultTransition()}>
-					<H1 className="m-4 text-6xl">{siteMetadata.author}</H1>
+					<H1 className="m-4 text-6xl">{siteMetadata.author.fullName}</H1>
 				</motion.a>}
 				<span ref={inViewTriggerRef} />
 				<P>Software Developer & Student</P>

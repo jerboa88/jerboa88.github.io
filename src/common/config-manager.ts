@@ -15,9 +15,14 @@ import iconGenerationConfig from '../config/icon-generation';
 // Class for loading and formatting configuration data
 export default class ConfigManager {
 	// TODO: Rename this method to getSiteMetadata
-	// TODO: Build additional fields from the ones in the `siteMetadataConfig` object
 	getMetadata(): SiteMetadataInterface {
-		return siteMetadataConfig;
+		return {
+			...siteMetadataConfig,
+			author: {
+				...siteMetadataConfig.author,
+				fullName: `${siteMetadataConfig.author.firstName} ${siteMetadataConfig.author.lastName}`,
+			}
+		}
 	}
 
 	// Return a a daisyUI theme given its name
