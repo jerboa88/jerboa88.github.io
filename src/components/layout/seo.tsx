@@ -5,7 +5,7 @@
 
 
 import React from 'react';
-import useSiteMetadata from '../../hooks/use-site-metadata';
+import ConfigManager from '../../common/config-manager';
 
 
 // Return a formatted title and short title for the page
@@ -39,10 +39,15 @@ interface SEOPropsInterface {
 
 export default function SEO({ pageMetadata }: SEOPropsInterface) {
 	// Grab site metadata from Gatsby config
-	const siteMetadata = useSiteMetadata();
+	const configManager = new ConfigManager();
+	const siteMetadata = configManager.getMetadata();
+
+	// TODO: Replace hardcoded value
+	const theme = configManager.getTheme('dark');
+	const primaryThemeColor = theme.primary;
 
 	// Page constants
-	const { author, twitterUsername, siteUrl } = siteMetadata;
+	const { author, twitterUsername, siteUrl, linkedinUrl, githubUrl } = siteMetadata;
 
 	// Use site metadata if no page-specific metadata is provided
 	const pageUrl = new URL(pageMetadata?.path || '', siteUrl).toString();
@@ -59,12 +64,6 @@ export default function SEO({ pageMetadata }: SEOPropsInterface) {
 	);
 	const ogImageUrl = pageMetadata?.ogImageUrl || new URL(siteMetadata.ogImagePath, siteMetadata.siteUrl).toString();
 	const ogImageAltText = pageMetadata?.ogImageAltText || siteMetadata.ogImageAltText;
-
-	// Get the primary theme color from DaisyUI config
-	function getPrimaryThemeColor(): string {
-		// TODO: Replace hardcoded value
-		return true ? siteMetadata.darkTheme.primary : siteMetadata.lightTheme.primary;
-	}
 
 	return (
 		<>
@@ -94,7 +93,7 @@ export default function SEO({ pageMetadata }: SEOPropsInterface) {
 			<meta name="twitter:image:alt" content={ogImageAltText} />
 
 			<meta name="google" content="nositelinkssearchbox" />
-			<meta content={getPrimaryThemeColor()} name="theme-color" />
+			<meta content={primaryThemeColor} name="theme-color" />
 
 			<link rel="canonical" href={pageUrl} />
 
