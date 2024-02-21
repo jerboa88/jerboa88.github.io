@@ -5,7 +5,7 @@
 
 
 import React, { ReactNode } from 'react';
-import { SiteMetadataInterface, SectionInterface, ThemeInterface } from '../../common/types';
+import { SiteMetadataInterface, SectionInterface } from '../../common/types';
 import Header from './header';
 import Footer from './footer';
 
@@ -13,15 +13,13 @@ import Footer from './footer';
 interface PageLayoutPropsInterface {
 	className?: string;
 	siteMetadata: SiteMetadataInterface;
-	lightTheme: ThemeInterface;
-	darkTheme: ThemeInterface;
 	titleLayoutId?: string;
 	isTitleExpanded?: boolean;
 	sections: SectionInterface[];
 	children: ReactNode;
 }
 
-export default function PageLayout({ className = '', siteMetadata, lightTheme, darkTheme, titleLayoutId, isTitleExpanded = false, sections, children }: PageLayoutPropsInterface) {
+export default function PageLayout({ className = '', siteMetadata, titleLayoutId, isTitleExpanded = false, sections, children }: PageLayoutPropsInterface) {
 	// const lsKeyForTheme = 'is-dark-theme';
 	// const lsKeyForMotion = 'is-motion-allowed';
 	// const lsKeyForAnalytics = `ga-disable-${props.siteMetadata.trackingId}`;

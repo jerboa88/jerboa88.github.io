@@ -7,23 +7,6 @@
 import { Context, RefObject } from 'react';
 
 
-export interface DaisyUiThemeInterface {
-	'accent': string;
-	'accent-content': string;
-	'base-100': string;
-	'base-200': string;
-	'base-300': string;
-	'base-content': string;
-	'neutral': string;
-	'neutral-content': string;
-	'neutral-focus': string;
-	'primary': string;
-	'primary-content': string;
-	'secondary': string;
-	'secondary-content': string;
-}
-
-
 // This needs to be a type rather than an interface due to existing TS 'functionality'
 // See https://github.com/microsoft/TypeScript/issues/15300 for more details
 export type SiteMetadataInterface = {
@@ -43,20 +26,42 @@ export type SiteMetadataInterface = {
 }
 
 
-export type ThemeInterface = {
+// Raw theme config for a single theme
+interface ThemeConfigInterface {
+	'accent': string;
+	'base-100': string;
+	'base-200': string;
+	'base-300': string;
+	'error': string;
+	'info': string;
+	'neutral': string;
 	'primary-header': string;
 	'primary': string;
 	'secondary-header': string;
 	'secondary': string;
-	'accent': string;
-	'neutral': string;
-	'info': string;
 	'success': string;
 	'warning': string;
-	'error': string;
-	'base-100': string;
-	'base-200': string;
-	'base-300': string;
+}
+
+
+// Raw themes config used to generate theme objects
+export interface ThemesConfigInterface {
+	light: ThemeConfigInterface;
+	dark: ThemeConfigInterface;
+}
+
+
+// Theme object used to style the site
+export interface ThemeInterface extends ThemeConfigInterface {
+	'--ph': string;
+	'--sh': string;
+	'accent-content': string;
+	'error-content': string;
+	'info-content': string;
+	'primary-content': string;
+	'secondary-content': string;
+	'success-content': string;
+	'warning-content': string;
 }
 
 

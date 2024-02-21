@@ -4,6 +4,9 @@
 */
 
 
+import type { ThemesConfigInterface } from '../common/types';
+
+
 export default {
 	light: {
 		'primary-header': '#F4511E',		// MD Deep Orange 600
@@ -37,4 +40,4 @@ export default {
 		'base-300': '#030303',
 		'base-content': '#ffffff',
 	},
-};
+} as ThemesConfigInterface;

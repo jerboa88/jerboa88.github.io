@@ -4,6 +4,7 @@
 */
 
 
+import type { ThemeInterface } from '../common/types';
 import siteMetadataConfig from '../config/site-metadata';
 import themesConfig from '../config/themes';
 import iconGenerationConfig from '../config/icon-generation';
@@ -20,7 +21,7 @@ export default class ConfigManager {
 	}
 
 	// Return a a daisyUI theme given its name
-	getTheme(themeName: 'light' | 'dark') {
+	getTheme(themeName: 'light' | 'dark'): ThemeInterface {
 		const theme = themesConfig[themeName];
 
 		if (!theme) {

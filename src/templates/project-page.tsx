@@ -21,11 +21,9 @@ interface ProjectPagePropsInterface {
 export default function ProjectPage({ pageContext }: ProjectPagePropsInterface) {
 	const configManager = new ConfigManager();
 	const siteMetadata = configManager.getMetadata();
-	const lightTheme = configManager.getTheme('light');
-	const darkTheme = configManager.getTheme('dark');
 
 	return (
-		<PageLayout siteMetadata={siteMetadata} lightTheme={lightTheme} darkTheme={darkTheme}>
+		<PageLayout siteMetadata={siteMetadata}>
 			<img src={getProjectImage(pageContext.imageUrl)} width='500' alt=''></img>
 			<H2>{pageContext.name}</H2>
 			<P>{pageContext.shortDesc}</P>

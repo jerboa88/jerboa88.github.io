@@ -27,8 +27,6 @@ export default function Home({ pageContext }: HomePropsInterface) {
 	const titleLayoutId = 'title-layout';
 	const configManager = new ConfigManager();
 	const siteMetadata = configManager.getMetadata();
-	const lightTheme = configManager.getTheme('light');
-	const darkTheme = configManager.getTheme('dark');
 	const inViewTriggerRef = useRef(null);
 	const isTitleExpanded = useInView(inViewTriggerRef, {
 		amount: 0,
@@ -58,7 +56,7 @@ export default function Home({ pageContext }: HomePropsInterface) {
 	] as SectionInterface[];
 
 	return (
-		<PageLayout siteMetadata={siteMetadata} lightTheme={lightTheme} darkTheme={darkTheme} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
+		<PageLayout siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
 			<Section>
 				{isTitleExpanded && <motion.a href="/" className="z-20" layoutId={titleLayoutId} {...getDefaultTransition()}>
 					<H1 className="m-4 text-6xl">{siteMetadata.author}</H1>
