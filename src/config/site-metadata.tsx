@@ -4,6 +4,9 @@
 */
 
 
+import type { SiteMetadataConfigInterface } from '../common/types';
+
+
 export default {
 	shortTitle: 'John Goodliff',
 	title: 'John Goodliff | Software Developer',
@@ -18,4 +21,4 @@ export default {
 	linkedinUrl: 'https://www.linkedin.com/in/johngoodliff/',
 	githubUrl: 'https://github.com/jerboa88',
 	trackingId: 'G-1PTSNX2F57',
-};
+} as SiteMetadataConfigInterface;

@@ -7,9 +7,8 @@
 import { Context, RefObject } from 'react';
 
 
-// This needs to be a type rather than an interface due to existing TS 'functionality'
-// See https://github.com/microsoft/TypeScript/issues/15300 for more details
-export type SiteMetadataInterface = {
+// Raw site metadata config
+export interface SiteMetadataConfigInterface {
 	shortTitle: string;
 	title: string;
 	author: string;
@@ -23,6 +22,12 @@ export type SiteMetadataInterface = {
 	linkedinUrl: string;
 	githubUrl: string;
 	trackingId: string;
+}
+
+
+// Site metadata object used to populate the site's metadata
+export interface SiteMetadataInterface extends SiteMetadataConfigInterface {
+
 }
 
 

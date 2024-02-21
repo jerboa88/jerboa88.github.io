@@ -7,7 +7,6 @@
 import type { GatsbyConfig } from 'gatsby';
 import dotenv from 'dotenv';
 import ConfigManager from './src/common/config-manager';
-import { SiteMetadataInterface } from './src/common/types';
 import * as tailwindConfig from './tailwind.config';
 
 
@@ -25,7 +24,7 @@ dotenv.config({
 
 const config: GatsbyConfig = {
 	siteMetadata: {
-		...metadata as SiteMetadataInterface,
+		...metadata,
 		lightTheme,
 		darkTheme
 	},

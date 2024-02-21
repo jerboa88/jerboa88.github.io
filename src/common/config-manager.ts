@@ -4,7 +4,7 @@
 */
 
 
-import type { ThemeInterface } from '../common/types';
+import type { SiteMetadataInterface, ThemeInterface } from '../common/types';
 import siteMetadataConfig from '../config/site-metadata';
 import themesConfig from '../config/themes';
 import iconGenerationConfig from '../config/icon-generation';
@@ -16,7 +16,7 @@ import iconGenerationConfig from '../config/icon-generation';
 export default class ConfigManager {
 	// TODO: Rename this method to getSiteMetadata
 	// TODO: Build additional fields from the ones in the `siteMetadataConfig` object
-	getMetadata() {
+	getMetadata(): SiteMetadataInterface {
 		return siteMetadataConfig;
 	}
 
