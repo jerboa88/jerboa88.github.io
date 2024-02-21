@@ -19,8 +19,17 @@ export default class ConfigManager {
 		return {
 			...siteMetadataConfig,
 			author: {
-				...siteMetadataConfig.author,
+				firstName: siteMetadataConfig.author.firstName,
+				lastName: siteMetadataConfig.author.lastName,
 				fullName: `${siteMetadataConfig.author.firstName} ${siteMetadataConfig.author.lastName}`,
+				link: {
+					linkedin: `https://www.linkedin.com/in/${siteMetadataConfig.author.username.linkedin}`,
+					github: `https://github.com/${siteMetadataConfig.author.username.github}`,
+					twitter: `https://twitter.com/${siteMetadataConfig.author.username.twitter}`,
+				},
+				username: {
+					twitter: siteMetadataConfig.author.username.twitter,
+				}
 			}
 		}
 	}

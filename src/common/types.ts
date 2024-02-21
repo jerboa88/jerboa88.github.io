@@ -13,17 +13,19 @@ export interface SiteMetadataConfigInterface {
 	title: string;
 	shortDescription: string;
 	description: string;
-	twitterUsername: string;
 	ogImagePath: string;
 	ogImageAltText: string;
 	siteUrl: string;
 	sourceUrl: string;
-	linkedinUrl: string;
-	githubUrl: string;
 	trackingId: string;
 	author: {
 		firstName: string;
 		lastName: string;
+		username: {
+			linkedin: string;
+			github: string;
+			twitter: string;
+		},
 	}
 }
 
@@ -34,6 +36,14 @@ export interface SiteMetadataInterface extends SiteMetadataConfigInterface {
 		firstName: string;
 		lastName: string;
 		fullName: string;
+		link: {
+			linkedin: string;
+			github: string;
+			twitter: string;
+		},
+		username: {
+			twitter: string;
+		}
 	}
 }
 

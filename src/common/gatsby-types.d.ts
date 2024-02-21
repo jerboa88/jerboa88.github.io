@@ -29094,9 +29094,7 @@ type SiteSiteMetadata = {
   readonly author: Maybe<SiteSiteMetadataAuthor>;
   readonly darkTheme: Maybe<SiteSiteMetadataDarkTheme>;
   readonly description: Maybe<Scalars['String']>;
-  readonly githubUrl: Maybe<Scalars['String']>;
   readonly lightTheme: Maybe<SiteSiteMetadataLightTheme>;
-  readonly linkedinUrl: Maybe<Scalars['String']>;
   readonly ogImageAltText: Maybe<Scalars['String']>;
   readonly ogImagePath: Maybe<Scalars['String']>;
   readonly shortDescription: Maybe<Scalars['String']>;
@@ -29105,31 +29103,78 @@ type SiteSiteMetadata = {
   readonly sourceUrl: Maybe<Scalars['String']>;
   readonly title: Maybe<Scalars['String']>;
   readonly trackingId: Maybe<Scalars['String']>;
-  readonly twitterUsername: Maybe<Scalars['String']>;
 };
 
 type SiteSiteMetadataAuthor = {
   readonly firstName: Maybe<Scalars['String']>;
   readonly fullName: Maybe<Scalars['String']>;
   readonly lastName: Maybe<Scalars['String']>;
+  readonly link: Maybe<SiteSiteMetadataAuthorLink>;
+  readonly username: Maybe<SiteSiteMetadataAuthorUsername>;
 };
 
 type SiteSiteMetadataAuthorFieldSelector = {
   readonly firstName: InputMaybe<FieldSelectorEnum>;
   readonly fullName: InputMaybe<FieldSelectorEnum>;
   readonly lastName: InputMaybe<FieldSelectorEnum>;
+  readonly link: InputMaybe<SiteSiteMetadataAuthorLinkFieldSelector>;
+  readonly username: InputMaybe<SiteSiteMetadataAuthorUsernameFieldSelector>;
 };
 
 type SiteSiteMetadataAuthorFilterInput = {
   readonly firstName: InputMaybe<StringQueryOperatorInput>;
   readonly fullName: InputMaybe<StringQueryOperatorInput>;
   readonly lastName: InputMaybe<StringQueryOperatorInput>;
+  readonly link: InputMaybe<SiteSiteMetadataAuthorLinkFilterInput>;
+  readonly username: InputMaybe<SiteSiteMetadataAuthorUsernameFilterInput>;
+};
+
+type SiteSiteMetadataAuthorLink = {
+  readonly github: Maybe<Scalars['String']>;
+  readonly linkedin: Maybe<Scalars['String']>;
+  readonly twitter: Maybe<Scalars['String']>;
+};
+
+type SiteSiteMetadataAuthorLinkFieldSelector = {
+  readonly github: InputMaybe<FieldSelectorEnum>;
+  readonly linkedin: InputMaybe<FieldSelectorEnum>;
+  readonly twitter: InputMaybe<FieldSelectorEnum>;
+};
+
+type SiteSiteMetadataAuthorLinkFilterInput = {
+  readonly github: InputMaybe<StringQueryOperatorInput>;
+  readonly linkedin: InputMaybe<StringQueryOperatorInput>;
+  readonly twitter: InputMaybe<StringQueryOperatorInput>;
+};
+
+type SiteSiteMetadataAuthorLinkSortInput = {
+  readonly github: InputMaybe<SortOrderEnum>;
+  readonly linkedin: InputMaybe<SortOrderEnum>;
+  readonly twitter: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSiteMetadataAuthorSortInput = {
   readonly firstName: InputMaybe<SortOrderEnum>;
   readonly fullName: InputMaybe<SortOrderEnum>;
   readonly lastName: InputMaybe<SortOrderEnum>;
+  readonly link: InputMaybe<SiteSiteMetadataAuthorLinkSortInput>;
+  readonly username: InputMaybe<SiteSiteMetadataAuthorUsernameSortInput>;
+};
+
+type SiteSiteMetadataAuthorUsername = {
+  readonly twitter: Maybe<Scalars['String']>;
+};
+
+type SiteSiteMetadataAuthorUsernameFieldSelector = {
+  readonly twitter: InputMaybe<FieldSelectorEnum>;
+};
+
+type SiteSiteMetadataAuthorUsernameFilterInput = {
+  readonly twitter: InputMaybe<StringQueryOperatorInput>;
+};
+
+type SiteSiteMetadataAuthorUsernameSortInput = {
+  readonly twitter: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSiteMetadataDarkTheme = {
@@ -29240,9 +29285,7 @@ type SiteSiteMetadataFieldSelector = {
   readonly author: InputMaybe<SiteSiteMetadataAuthorFieldSelector>;
   readonly darkTheme: InputMaybe<SiteSiteMetadataDarkThemeFieldSelector>;
   readonly description: InputMaybe<FieldSelectorEnum>;
-  readonly githubUrl: InputMaybe<FieldSelectorEnum>;
   readonly lightTheme: InputMaybe<SiteSiteMetadataLightThemeFieldSelector>;
-  readonly linkedinUrl: InputMaybe<FieldSelectorEnum>;
   readonly ogImageAltText: InputMaybe<FieldSelectorEnum>;
   readonly ogImagePath: InputMaybe<FieldSelectorEnum>;
   readonly shortDescription: InputMaybe<FieldSelectorEnum>;
@@ -29251,16 +29294,13 @@ type SiteSiteMetadataFieldSelector = {
   readonly sourceUrl: InputMaybe<FieldSelectorEnum>;
   readonly title: InputMaybe<FieldSelectorEnum>;
   readonly trackingId: InputMaybe<FieldSelectorEnum>;
-  readonly twitterUsername: InputMaybe<FieldSelectorEnum>;
 };
 
 type SiteSiteMetadataFilterInput = {
   readonly author: InputMaybe<SiteSiteMetadataAuthorFilterInput>;
   readonly darkTheme: InputMaybe<SiteSiteMetadataDarkThemeFilterInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
-  readonly githubUrl: InputMaybe<StringQueryOperatorInput>;
   readonly lightTheme: InputMaybe<SiteSiteMetadataLightThemeFilterInput>;
-  readonly linkedinUrl: InputMaybe<StringQueryOperatorInput>;
   readonly ogImageAltText: InputMaybe<StringQueryOperatorInput>;
   readonly ogImagePath: InputMaybe<StringQueryOperatorInput>;
   readonly shortDescription: InputMaybe<StringQueryOperatorInput>;
@@ -29269,7 +29309,6 @@ type SiteSiteMetadataFilterInput = {
   readonly sourceUrl: InputMaybe<StringQueryOperatorInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
   readonly trackingId: InputMaybe<StringQueryOperatorInput>;
-  readonly twitterUsername: InputMaybe<StringQueryOperatorInput>;
 };
 
 type SiteSiteMetadataLightTheme = {
@@ -29380,9 +29419,7 @@ type SiteSiteMetadataSortInput = {
   readonly author: InputMaybe<SiteSiteMetadataAuthorSortInput>;
   readonly darkTheme: InputMaybe<SiteSiteMetadataDarkThemeSortInput>;
   readonly description: InputMaybe<SortOrderEnum>;
-  readonly githubUrl: InputMaybe<SortOrderEnum>;
   readonly lightTheme: InputMaybe<SiteSiteMetadataLightThemeSortInput>;
-  readonly linkedinUrl: InputMaybe<SortOrderEnum>;
   readonly ogImageAltText: InputMaybe<SortOrderEnum>;
   readonly ogImagePath: InputMaybe<SortOrderEnum>;
   readonly shortDescription: InputMaybe<SortOrderEnum>;
@@ -29391,7 +29428,6 @@ type SiteSiteMetadataSortInput = {
   readonly sourceUrl: InputMaybe<SortOrderEnum>;
   readonly title: InputMaybe<SortOrderEnum>;
   readonly trackingId: InputMaybe<SortOrderEnum>;
-  readonly twitterUsername: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSortInput = {

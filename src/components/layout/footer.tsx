@@ -26,10 +26,10 @@ export default function Footer({ siteMetadata }: FooterPropsInterface) {
 					{/* <NavLink title='Privacy' href='#' /> */}
 				</nav>
 				<nav className='flex flex-row justify-center'>
-					<a href={siteMetadata.linkedinUrl} rel='external'>
+					<a href={siteMetadata.author.link.linkedin} rel='external'>
 						<IconButton icon={faLinkedin} />
 					</a>
-					<a href={siteMetadata.githubUrl} rel='external'>
+					<a href={siteMetadata.author.link.github} rel='external'>
 						<IconButton icon={faGithub} />
 					</a>
 				</nav>

@@ -47,7 +47,7 @@ export default function SEO({ pageMetadata }: SEOPropsInterface) {
 	const primaryThemeColor = theme.primary;
 
 	// Page constants
-	const { author, twitterUsername, siteUrl, linkedinUrl, githubUrl } = siteMetadata;
+	const { author, siteUrl } = siteMetadata;
 
 	// Use site metadata if no page-specific metadata is provided
 	const pageUrl = new URL(pageMetadata?.path || '', siteUrl).toString();
@@ -69,7 +69,7 @@ export default function SEO({ pageMetadata }: SEOPropsInterface) {
 		<>
 			<html lang="en-US" />
 			<title>{title}</title>
-			<meta name="author" content={author} />
+			<meta name="author" content={author.fullName} />
 			<meta name="description" content={description} />
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -87,7 +87,7 @@ export default function SEO({ pageMetadata }: SEOPropsInterface) {
 			{/* Twitter meta tags */}
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:title" content={title} />
-			<meta name="twitter:creator" content={twitterUsername} />
+			<meta name="twitter:creator" content={author.username.twitter} />
 			<meta name="twitter:description" content={description} />
 			<meta name="twitter:image" content={ogImageUrl} />
 			<meta name="twitter:image:alt" content={ogImageAltText} />
