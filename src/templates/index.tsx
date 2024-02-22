@@ -32,28 +32,13 @@ export default function Home({ pageContext }: HomePropsInterface) {
 		amount: 0,
 		margin: '-16%',
 	});
-	const sections = [
-		{
-			id: 'about',
-			title: 'About',
+	const sections = ['About', 'Projects', 'Experience', 'Contact'].map(title => {
+		return {
+			id: title.toLowerCase(),
+			title,
 			ref: useRef(null),
-		},
-		{
-			id: 'projects',
-			title: 'Projects',
-			ref: useRef(null),
-		},
-		{
-			id: 'experience',
-			title: 'Experience',
-			ref: useRef(null),
-		},
-		{
-			id: 'contact',
-			title: 'Contact',
-			ref: useRef(null),
-		}
-	] as SectionInterface[];
+		} as SectionInterface;
+	});
 
 	return (
 		<PageLayout siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
