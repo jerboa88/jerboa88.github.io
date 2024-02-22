@@ -7,30 +7,11 @@
 import React from 'react';
 import ConfigManager from '../../common/config-manager';
 
-
-// Return a formatted title and short title for the page
-function getTitles(pageTitle: string | undefined, siteTitle: string, siteShortTitle: string): { title: string, shortTitle: string } {
-	return {
-		title: pageTitle ? `${pageTitle} | ${siteShortTitle}` : siteTitle,
-		shortTitle: pageTitle || siteShortTitle,
-	}
-}
-
-
-// Returns formatted descriptions for the page
-function getDescriptions(pageDescription: string | undefined, pageShortDescription: string | undefined, siteDescription: string, siteShortDescription: string): { description: string, shortDescription: string } {
-	return {
-		description: pageDescription || pageShortDescription || siteDescription || siteShortDescription,
-		shortDescription: pageShortDescription || pageDescription || siteShortDescription || siteDescription,
-	}
-}
-
-
 interface SEOPropsInterface {
-	pageMetadata?: {
+	pageMetadata: {
 		title: string;
 		description: string;
-		shortDescription?: string;
+		shortDescription: string;
 		path: string;
 		ogImageUrl: string;
 		ogImageAltText: string;
@@ -46,52 +27,35 @@ export default function SEO({ pageMetadata }: SEOPropsInterface) {
 	// TODO: Replace hardcoded value
 	const theme = configManager.getTheme('dark');
 	const primaryThemeColor = theme.primary;
+	const pageUrl = new URL(pageMetadata.path, siteMetadata.siteUrl).toString();
 
-	// Page constants
-	const { author, siteUrl } = siteMetadata;
-
-	// Use site metadata if no page-specific metadata is provided
-	const pageUrl = new URL(pageMetadata?.path || '', siteUrl).toString();
-	const { title, shortTitle } = getTitles(
-		pageMetadata?.title,
-		siteMetadata.title,
-		siteMetadata.shortTitle
-	);
-	const { description, shortDescription } = getDescriptions(
-		pageMetadata?.description,
-		pageMetadata?.shortDescription,
-		siteMetadata.description,
-		siteMetadata.shortDescription
-	);
-	const ogImageUrl = pageMetadata?.ogImageUrl || new URL(siteMetadata.ogImagePath, siteMetadata.siteUrl).toString();
-	const ogImageAltText = pageMetadata?.ogImageAltText || siteMetadata.ogImageAltText;
 
 	return (
 		<>
 			<html lang="en-US" />
-			<title>{title}</title>
-			<meta name="author" content={author.name} />
-			<meta name="description" content={description} />
+			<title>{pageMetadata.title}</title>
+			<meta name="author" content={siteMetadata.author.name} />
+			<meta name="description" content={pageMetadata.description} />
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 			{/* OpenGraph meta tags */}
-			<meta property="og:title" content={title} />
-			<meta property="og:description" content={description} />
+			<meta property="og:title" content={pageMetadata.title} />
+			<meta property="og:description" content={pageMetadata.description} />
 			<meta property="og:type" content="website" />
 			<meta property="og:url" content={pageUrl} />
-			<meta property="og:image" content={ogImageUrl} />
+			<meta property="og:image" content={pageMetadata.ogImageUrl} />
 			<meta property="og:image:type" content="image/png" />
 			<meta property="og:image:width" content="1200" />
 			<meta property="og:image:height" content="630" />
-			<meta property="og:image:alt" content={ogImageAltText} />
+			<meta property="og:image:alt" content={pageMetadata.ogImageAltText} />
 
 			{/* Twitter meta tags */}
 			<meta name="twitter:card" content="summary_large_image" />
-			<meta name="twitter:title" content={title} />
-			<meta name="twitter:creator" content={author.username.twitter} />
-			<meta name="twitter:description" content={description} />
-			<meta name="twitter:image" content={ogImageUrl} />
-			<meta name="twitter:image:alt" content={ogImageAltText} />
+			<meta name="twitter:title" content={pageMetadata.title} />
+			<meta name="twitter:creator" content={siteMetadata.author.username.twitter} />
+			<meta name="twitter:description" content={pageMetadata.description} />
+			<meta name="twitter:image" content={pageMetadata.ogImageUrl} />
+			<meta name="twitter:image:alt" content={pageMetadata.ogImageAltText} />
 
 			<meta name="google" content="nositelinkssearchbox" />
 			<meta content={primaryThemeColor} name="theme-color" />
@@ -103,28 +67,27 @@ export default function SEO({ pageMetadata }: SEOPropsInterface) {
 			<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
 			{/* Structured data */}
-			{/* TODO: This should be customized per page */}
 			<script type="application/ld+json">
 				{JSON.stringify({
 					'@context': 'http://schema.org',
-					...pageMetadata?.structuredData,
+					...pageMetadata.structuredData,
 					author: {
 						'@type': 'Person',
-						name: author.name,
-						url: siteUrl,
-						image: author.image,
-						alumniOf: author.alumniOf,
-						jobTitle: author.jobTitle,
+						name: siteMetadata.author.name,
+						url: siteMetadata.siteUrl,
+						image: siteMetadata.author.image,
+						alumniOf: siteMetadata.author.alumniOf,
+						jobTitle: siteMetadata.author.jobTitle,
 						sameAs: [
-							author.link.linkedin,
-							author.link.github,
-							author.link.twitter,
+							siteMetadata.author.link.linkedin,
+							siteMetadata.author.link.github,
+							siteMetadata.author.link.twitter,
 						],
 						address: {
 							'@type': 'PostalAddress',
-							addressLocality: author.location.city,
-							addressRegion: author.location.state,
-							addressCountry: author.location.country,
+							addressLocality: siteMetadata.author.location.city,
+							addressRegion: siteMetadata.author.location.state,
+							addressCountry: siteMetadata.author.location.country,
 						},
 					}
 				})}

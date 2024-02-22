@@ -41,13 +41,25 @@ export default function ProjectPage({ pageContext }: ProjectPagePropsInterface) 
 }
 
 export const Head = ({ location, pageContext }: HeadProps) => {
+	const configManager = new ConfigManager();
+	const siteMetadata = configManager.getMetadata();
 	const pageMetadata = {
-		title: pageContext.name,
+		title: `${pageContext.name} | ${siteMetadata.shortTitle}`,
+		// TODO: Strip newlines and HTML tags from the long description
 		description: pageContext.longDesc,
 		shortDescription: pageContext.shortDesc,
 		path: location.pathname,
 		ogImageUrl: pageContext.imageUrl,
 		ogImageAltText: `Cover image for ${pageContext.name}`,
+		structuredData: {
+			'@context': 'https://schema.org',
+			'@type': 'SoftwareApplication',
+			name: pageContext.name,
+			description: pageContext.longDesc,
+			url: new URL(location.pathname, siteMetadata.siteUrl).toString(),
+			image: pageContext.imageUrl,
+			license: pageContext.license,
+		}
 	};
 
 	return (

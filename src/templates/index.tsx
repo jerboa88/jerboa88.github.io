@@ -5,6 +5,7 @@
 
 
 import React, { useRef } from 'react';
+import type { HeadProps } from 'gatsby';
 import { motion, useInView } from 'framer-motion';
 import ConfigManager from '../common/config-manager';
 import { ProjectInfoInterface, SectionInterface } from '../common/types';
@@ -65,4 +66,25 @@ export default function Home({ pageContext }: HomePropsInterface) {
 	);
 }
 
-export const Head = SEO
+export const Head = ({ location }: HeadProps) => {
+	const configManager = new ConfigManager();
+	const siteMetadata = configManager.getMetadata();
+	const pageMetadata = {
+		title: siteMetadata.title,
+		description: siteMetadata.description,
+		shortDescription: siteMetadata.shortDescription,
+		path: location.pathname,
+		ogImageUrl: new URL(siteMetadata.ogImagePath, siteMetadata.siteUrl).toString(),
+		ogImageAltText: siteMetadata.ogImageAltText,
+		structuredData: {
+			'@type': 'WebSite',
+			name: siteMetadata.title,
+			description: siteMetadata.description,
+			url: siteMetadata.siteUrl,
+		}
+	};
+
+	return (
+		<SEO pageMetadata={pageMetadata} />
+	);
+}
