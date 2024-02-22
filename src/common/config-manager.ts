@@ -17,19 +17,36 @@ export default class ConfigManager {
 	// TODO: Rename this method to getSiteMetadata
 	getMetadata(): SiteMetadataInterface {
 		return {
-			...siteMetadataConfig,
+			shortTitle: siteMetadataConfig.shortTitle,
+			title: siteMetadataConfig.title,
+			tagline: `${siteMetadataConfig.author.jobTitle} & Cat Whisperer`,
+			shortDescription: siteMetadataConfig.shortDescription,
+			description: siteMetadataConfig.description,
+			ogImagePath: siteMetadataConfig.ogImagePath,
+			ogImageAltText: siteMetadataConfig.ogImageAltText,
+			siteUrl: siteMetadataConfig.siteUrl,
+			sourceUrl: siteMetadataConfig.sourceUrl,
+			trackingId: siteMetadataConfig.trackingId,
 			author: {
 				firstName: siteMetadataConfig.author.firstName,
 				lastName: siteMetadataConfig.author.lastName,
 				fullName: `${siteMetadataConfig.author.firstName} ${siteMetadataConfig.author.lastName}`,
+				jobTitle: siteMetadataConfig.author.jobTitle,
+				alumniOf: siteMetadataConfig.author.alumniOf,
+				image: siteMetadataConfig.author.image,
+				username: {
+					twitter: siteMetadataConfig.author.username.twitter,
+				},
 				link: {
 					linkedin: `https://www.linkedin.com/in/${siteMetadataConfig.author.username.linkedin}`,
 					github: `https://github.com/${siteMetadataConfig.author.username.github}`,
 					twitter: `https://twitter.com/${siteMetadataConfig.author.username.twitter}`,
 				},
-				username: {
-					twitter: siteMetadataConfig.author.username.twitter,
-				}
+				location: {
+					city: siteMetadataConfig.author.location.city,
+					state: siteMetadataConfig.author.location.state,
+					country: siteMetadataConfig.author.location.country,
+				},
 			}
 		}
 	}

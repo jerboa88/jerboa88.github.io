@@ -42,6 +42,7 @@ export interface SiteMetadataConfigInterface {
 export interface SiteMetadataInterface {
 	shortTitle: string;
 	title: string;
+	tagline: string;
 	shortDescription: string;
 	description: string;
 	ogImagePath: string;

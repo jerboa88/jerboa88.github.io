@@ -62,7 +62,7 @@ export default function Home({ pageContext }: HomePropsInterface) {
 					<H1 className="m-4 text-6xl">{siteMetadata.author.fullName}</H1>
 				</motion.a>}
 				<span ref={inViewTriggerRef} />
-				<P>Software Developer & Student</P>
+				<P>{siteMetadata.tagline}</P>
 			</Section>
 			<Section {...sections[0]}>
 				I am a passionate Computing Science student working towards my Bachelors Specialization at the University of Alberta. I have recently completed my internship at Haemonetics Corporation in Edmonton, where I put my expertise to use on their NexLynk Donor Management System. Some of my interests include cats, cars, music, and of course, anything technology-related :)
