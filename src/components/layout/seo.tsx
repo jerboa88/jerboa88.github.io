@@ -34,6 +34,7 @@ interface SEOPropsInterface {
 		path: string;
 		ogImageUrl: string;
 		ogImageAltText: string;
+		structuredData: object;
 	}
 }
 
@@ -103,22 +104,31 @@ export default function SEO({ pageMetadata }: SEOPropsInterface) {
 
 			{/* Structured data */}
 			{/* TODO: This should be customized per page */}
-			{/* <script type="application/ld+json">
-				{
-					`{
-						"@context": "http://schema.org",
-						"@type": "WebSite",
-						"name": "${title}",
-						"description": "${description}",
-						// "url": "${pageUrl}",
-						"author": {
-							"@type": "Person",
-							"name": "${author}",
-							"url": "${siteUrl}"
-						}
-					}`
-				}
-			</script> */}
+			<script type="application/ld+json">
+				{JSON.stringify({
+					'@context': 'http://schema.org',
+					...pageMetadata?.structuredData,
+					author: {
+						'@type': 'Person',
+						name: author.name,
+						url: siteUrl,
+						image: author.image,
+						alumniOf: author.alumniOf,
+						jobTitle: author.jobTitle,
+						sameAs: [
+							author.link.linkedin,
+							author.link.github,
+							author.link.twitter,
+						],
+						address: {
+							'@type': 'PostalAddress',
+							addressLocality: author.location.city,
+							addressRegion: author.location.state,
+							addressCountry: author.location.country,
+						},
+					}
+				})}
+			</script>
 		</>
 	)
 }
