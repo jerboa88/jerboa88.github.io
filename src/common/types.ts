@@ -9,8 +9,6 @@ import { Context, RefObject } from 'react';
 
 // Raw site metadata config
 export interface SiteMetadataConfigInterface {
-	shortTitle: string;
-	title: string;
 	shortDescription: string;
 	description: string;
 	ogImagePath: string;

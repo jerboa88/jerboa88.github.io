@@ -17,8 +17,8 @@ export default class ConfigManager {
 	// TODO: Rename this method to getSiteMetadata
 	getMetadata(): SiteMetadataInterface {
 		return {
-			shortTitle: siteMetadataConfig.shortTitle,
-			title: siteMetadataConfig.title,
+			shortTitle: siteMetadataConfig.author.name,
+			title: `${siteMetadataConfig.author.name} | ${siteMetadataConfig.author.jobTitle}`,
 			tagline: `${siteMetadataConfig.author.jobTitle} & Cat Whisperer`,
 			shortDescription: siteMetadataConfig.shortDescription,
 			description: siteMetadataConfig.description,

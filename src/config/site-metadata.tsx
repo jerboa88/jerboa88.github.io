@@ -8,9 +8,7 @@ import type { SiteMetadataConfigInterface } from '../common/types';
 
 
 export default {
-	shortTitle: 'John Goodliff',
-	title: 'John Goodliff | Software Developer',
-	shortDescription: 'A portfolio site for John Goodliff, a Software Developer based in Edmonton, Alberta.',
+	shortDescription: 'A portfolio site for John Goodliff',
 	description: 'A portfolio site for John Goodliff, a Software Developer based in Edmonton, Alberta.',
 	ogImagePath: 'images/og-image.png',
 	ogImageAltText: 'Cover image for johng.io',
