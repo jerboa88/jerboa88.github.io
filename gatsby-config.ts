@@ -7,7 +7,6 @@
 import type { GatsbyConfig } from 'gatsby';
 import dotenv from 'dotenv';
 import ConfigManager from './src/common/config-manager';
-import { MetadataInterface } from './src/common/types';
 import * as tailwindConfig from './tailwind.config';
 
 
@@ -25,7 +24,7 @@ dotenv.config({
 
 const config: GatsbyConfig = {
 	siteMetadata: {
-		...metadata as MetadataInterface,
+		...metadata,
 		lightTheme,
 		darkTheme
 	},
@@ -36,7 +35,6 @@ const config: GatsbyConfig = {
 		'gatsby-plugin-image',
 		'gatsby-plugin-sharp',
 		'gatsby-transformer-sharp',
-		'gatsby-plugin-react-helmet',
 		{
 			resolve: 'gatsby-plugin-postcss',
 			options: {
@@ -108,12 +106,12 @@ const config: GatsbyConfig = {
 				theme_color: darkTheme['primary'],
 				display: 'standalone',
 				icons: configManager.getIconManifestEntries(),
-				// Favicon declarations and theme color meta tags are added to the document head manually using React Helmet
+				// Favicon declarations and theme color meta tags are added to the document head manually using the SEO component (via Gatsby Head API)
 				include_favicon: false,
 				theme_color_in_head: false
 			}
 		},
-		// This plugin need to be listed after gatsby-plugin-manifest
+		// This plugin needs to be listed after gatsby-plugin-manifest
 		'gatsby-plugin-offline',
 		{
 			resolve: 'gatsby-plugin-react-svg',
