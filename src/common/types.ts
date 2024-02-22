@@ -21,29 +21,54 @@ export interface SiteMetadataConfigInterface {
 	author: {
 		firstName: string;
 		lastName: string;
+		jobTitle: string;
+		alumniOf: string;
+		image: string;
 		username: {
 			linkedin: string;
 			github: string;
 			twitter: string;
+		},
+		location: {
+			city: string;
+			state: string;
+			country: string;
 		},
 	}
 }
 
 
 // Site metadata object used to populate the site's metadata
-export interface SiteMetadataInterface extends SiteMetadataConfigInterface {
+export interface SiteMetadataInterface {
+	shortTitle: string;
+	title: string;
+	shortDescription: string;
+	description: string;
+	ogImagePath: string;
+	ogImageAltText: string;
+	siteUrl: string;
+	sourceUrl: string;
+	trackingId: string;
 	author: {
 		firstName: string;
 		lastName: string;
 		fullName: string;
+		jobTitle: string;
+		alumniOf: string;
+		image: string;
+		username: {
+			twitter: string;
+		},
 		link: {
 			linkedin: string;
 			github: string;
 			twitter: string;
 		},
-		username: {
-			twitter: string;
-		}
+		location: {
+			city: string;
+			state: string;
+			country: string;
+		},
 	}
 }
 
