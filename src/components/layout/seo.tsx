@@ -20,7 +20,7 @@ function getTitles(pageTitle: string | undefined, siteTitle: string, siteShortTi
 // Returns formatted descriptions for the page
 function getDescriptions(pageDescription: string | undefined, pageShortDescription: string | undefined, siteDescription: string, siteShortDescription: string): { description: string, shortDescription: string } {
 	return {
-		description: pageDescription || pageShortDescription || siteShortDescription || siteDescription,
+		description: pageDescription || pageShortDescription || siteDescription || siteShortDescription,
 		shortDescription: pageShortDescription || pageDescription || siteShortDescription || siteDescription,
 	}
 }

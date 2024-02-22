@@ -21,7 +21,7 @@ export default class ConfigManager {
 			title: `${siteMetadataConfig.author.name} | ${siteMetadataConfig.author.jobTitle}`,
 			tagline: `${siteMetadataConfig.author.jobTitle} & Cat Whisperer`,
 			shortDescription: `Portfolio site for ${siteMetadataConfig.author.name}`,
-			description: `A portfolio site for ${siteMetadataConfig.author.name}, a ${siteMetadataConfig.author.jobTitle} based in ${siteMetadataConfig.author.location.city}, ${siteMetadataConfig.author.location.state}.`,
+			description: `Portfolio site for ${siteMetadataConfig.author.name}, a ${siteMetadataConfig.author.jobTitle} based in ${siteMetadataConfig.author.location.city}, ${siteMetadataConfig.author.location.state}.`,
 			ogImagePath: siteMetadataConfig.ogImagePath,
 			ogImageAltText: siteMetadataConfig.ogImageAltText,
 			siteUrl: siteMetadataConfig.siteUrl,
