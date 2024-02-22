@@ -29101,31 +29101,38 @@ type SiteSiteMetadata = {
   readonly shortTitle: Maybe<Scalars['String']>;
   readonly siteUrl: Maybe<Scalars['String']>;
   readonly sourceUrl: Maybe<Scalars['String']>;
+  readonly tagline: Maybe<Scalars['String']>;
   readonly title: Maybe<Scalars['String']>;
   readonly trackingId: Maybe<Scalars['String']>;
 };
 
 type SiteSiteMetadataAuthor = {
-  readonly firstName: Maybe<Scalars['String']>;
-  readonly fullName: Maybe<Scalars['String']>;
-  readonly lastName: Maybe<Scalars['String']>;
+  readonly alumniOf: Maybe<Scalars['String']>;
+  readonly image: Maybe<Scalars['String']>;
+  readonly jobTitle: Maybe<Scalars['String']>;
   readonly link: Maybe<SiteSiteMetadataAuthorLink>;
+  readonly location: Maybe<SiteSiteMetadataAuthorLocation>;
+  readonly name: Maybe<Scalars['String']>;
   readonly username: Maybe<SiteSiteMetadataAuthorUsername>;
 };
 
 type SiteSiteMetadataAuthorFieldSelector = {
-  readonly firstName: InputMaybe<FieldSelectorEnum>;
-  readonly fullName: InputMaybe<FieldSelectorEnum>;
-  readonly lastName: InputMaybe<FieldSelectorEnum>;
+  readonly alumniOf: InputMaybe<FieldSelectorEnum>;
+  readonly image: InputMaybe<FieldSelectorEnum>;
+  readonly jobTitle: InputMaybe<FieldSelectorEnum>;
   readonly link: InputMaybe<SiteSiteMetadataAuthorLinkFieldSelector>;
+  readonly location: InputMaybe<SiteSiteMetadataAuthorLocationFieldSelector>;
+  readonly name: InputMaybe<FieldSelectorEnum>;
   readonly username: InputMaybe<SiteSiteMetadataAuthorUsernameFieldSelector>;
 };
 
 type SiteSiteMetadataAuthorFilterInput = {
-  readonly firstName: InputMaybe<StringQueryOperatorInput>;
-  readonly fullName: InputMaybe<StringQueryOperatorInput>;
-  readonly lastName: InputMaybe<StringQueryOperatorInput>;
+  readonly alumniOf: InputMaybe<StringQueryOperatorInput>;
+  readonly image: InputMaybe<StringQueryOperatorInput>;
+  readonly jobTitle: InputMaybe<StringQueryOperatorInput>;
   readonly link: InputMaybe<SiteSiteMetadataAuthorLinkFilterInput>;
+  readonly location: InputMaybe<SiteSiteMetadataAuthorLocationFilterInput>;
+  readonly name: InputMaybe<StringQueryOperatorInput>;
   readonly username: InputMaybe<SiteSiteMetadataAuthorUsernameFilterInput>;
 };
 
@@ -29153,11 +29160,37 @@ type SiteSiteMetadataAuthorLinkSortInput = {
   readonly twitter: InputMaybe<SortOrderEnum>;
 };
 
+type SiteSiteMetadataAuthorLocation = {
+  readonly city: Maybe<Scalars['String']>;
+  readonly country: Maybe<Scalars['String']>;
+  readonly state: Maybe<Scalars['String']>;
+};
+
+type SiteSiteMetadataAuthorLocationFieldSelector = {
+  readonly city: InputMaybe<FieldSelectorEnum>;
+  readonly country: InputMaybe<FieldSelectorEnum>;
+  readonly state: InputMaybe<FieldSelectorEnum>;
+};
+
+type SiteSiteMetadataAuthorLocationFilterInput = {
+  readonly city: InputMaybe<StringQueryOperatorInput>;
+  readonly country: InputMaybe<StringQueryOperatorInput>;
+  readonly state: InputMaybe<StringQueryOperatorInput>;
+};
+
+type SiteSiteMetadataAuthorLocationSortInput = {
+  readonly city: InputMaybe<SortOrderEnum>;
+  readonly country: InputMaybe<SortOrderEnum>;
+  readonly state: InputMaybe<SortOrderEnum>;
+};
+
 type SiteSiteMetadataAuthorSortInput = {
-  readonly firstName: InputMaybe<SortOrderEnum>;
-  readonly fullName: InputMaybe<SortOrderEnum>;
-  readonly lastName: InputMaybe<SortOrderEnum>;
+  readonly alumniOf: InputMaybe<SortOrderEnum>;
+  readonly image: InputMaybe<SortOrderEnum>;
+  readonly jobTitle: InputMaybe<SortOrderEnum>;
   readonly link: InputMaybe<SiteSiteMetadataAuthorLinkSortInput>;
+  readonly location: InputMaybe<SiteSiteMetadataAuthorLocationSortInput>;
+  readonly name: InputMaybe<SortOrderEnum>;
   readonly username: InputMaybe<SiteSiteMetadataAuthorUsernameSortInput>;
 };
 
@@ -29292,6 +29325,7 @@ type SiteSiteMetadataFieldSelector = {
   readonly shortTitle: InputMaybe<FieldSelectorEnum>;
   readonly siteUrl: InputMaybe<FieldSelectorEnum>;
   readonly sourceUrl: InputMaybe<FieldSelectorEnum>;
+  readonly tagline: InputMaybe<FieldSelectorEnum>;
   readonly title: InputMaybe<FieldSelectorEnum>;
   readonly trackingId: InputMaybe<FieldSelectorEnum>;
 };
@@ -29307,6 +29341,7 @@ type SiteSiteMetadataFilterInput = {
   readonly shortTitle: InputMaybe<StringQueryOperatorInput>;
   readonly siteUrl: InputMaybe<StringQueryOperatorInput>;
   readonly sourceUrl: InputMaybe<StringQueryOperatorInput>;
+  readonly tagline: InputMaybe<StringQueryOperatorInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
   readonly trackingId: InputMaybe<StringQueryOperatorInput>;
 };
@@ -29426,6 +29461,7 @@ type SiteSiteMetadataSortInput = {
   readonly shortTitle: InputMaybe<SortOrderEnum>;
   readonly siteUrl: InputMaybe<SortOrderEnum>;
   readonly sourceUrl: InputMaybe<SortOrderEnum>;
+  readonly tagline: InputMaybe<SortOrderEnum>;
   readonly title: InputMaybe<SortOrderEnum>;
   readonly trackingId: InputMaybe<SortOrderEnum>;
 };

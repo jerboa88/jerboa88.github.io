@@ -20,7 +20,7 @@ interface HeaderPropsInterface {
 }
 
 export default function Header({ siteMetadata, titleLayoutId, isTitleExpanded = false, sections }: HeaderPropsInterface) {
-	const monogram = siteMetadata.author.firstName[0];
+	const monogram = siteMetadata.author.name[0];
 	const siteDomain = new URL(siteMetadata.siteUrl).host;
 
 	let bgColorStyles = 'bg-base-200';
@@ -40,7 +40,7 @@ export default function Header({ siteMetadata, titleLayoutId, isTitleExpanded = 
 					<H1 className="m-0 px-2 text-xl">
 						<span className="inline sm:hidden">{monogram}</span>
 						<span className="hidden sm:inline md:hidden">{siteDomain}</span>
-						<span className="hidden md:inline">{siteMetadata.author.fullName}</span>
+						<span className="hidden md:inline">{siteMetadata.author.name}</span>
 					</H1>
 				</motion.a>}
 

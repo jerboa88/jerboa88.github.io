@@ -69,7 +69,7 @@ export default function SEO({ pageMetadata }: SEOPropsInterface) {
 		<>
 			<html lang="en-US" />
 			<title>{title}</title>
-			<meta name="author" content={author.fullName} />
+			<meta name="author" content={author.name} />
 			<meta name="description" content={description} />
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 

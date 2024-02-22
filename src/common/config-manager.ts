@@ -28,9 +28,7 @@ export default class ConfigManager {
 			sourceUrl: siteMetadataConfig.sourceUrl,
 			trackingId: siteMetadataConfig.trackingId,
 			author: {
-				firstName: siteMetadataConfig.author.firstName,
-				lastName: siteMetadataConfig.author.lastName,
-				fullName: `${siteMetadataConfig.author.firstName} ${siteMetadataConfig.author.lastName}`,
+				name: siteMetadataConfig.author.name,
 				jobTitle: siteMetadataConfig.author.jobTitle,
 				alumniOf: siteMetadataConfig.author.alumniOf,
 				image: siteMetadataConfig.author.image,
