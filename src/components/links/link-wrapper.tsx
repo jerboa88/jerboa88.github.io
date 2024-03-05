@@ -4,16 +4,15 @@
 */
 
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, PropsWithChildren } from 'react';
 import { Link } from 'gatsby';
 
 
-interface LinkWrapperProps {
+interface LinkWrapperProps extends PropsWithChildren {
 	className?: string;
 	to?: string;
 	isInternal?: boolean;
 	rel?: string;
-	children: ReactNode;
 }
 
 export default function LinkWrapper({ className = '', to, isInternal = false, rel = '', children }: LinkWrapperProps) {
