@@ -71,11 +71,3 @@ export function Span({ className = '', children }: TextComponentPropsInterface) 
 		</span>
 	);
 }
-
-
-// HTML comment
-export function C(props: { children: string }) {
-	return (
-		<HTMLComment text={props.children.toString()} />
-	);
-}
