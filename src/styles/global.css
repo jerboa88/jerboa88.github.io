@@ -90,15 +90,40 @@
 	}
 
 	/* A custom class to enable scale transitions on elements */
-	.j-scale-transitions {
-		@apply transition-transform;
+	.interactive-scale {
+		@apply transition;
 
 		&:hover {
 			@apply scale-110;
+			@apply border-base-content/15
 		}
 
 		&:active {
 			@apply scale-90;
+		}
+	}
+
+	.interactive-scale-sm {
+		@apply transition;
+
+		&:hover {
+			@apply scale-105;
+		}
+
+		&:active {
+			@apply scale-90;
+		}
+	}
+
+	.interactive-border {
+		@apply transition;
+
+		&:hover {
+			@apply border-base-content/15
+		}
+
+		&:active {
+			@apply border-base-content/10
 		}
 	}
 }

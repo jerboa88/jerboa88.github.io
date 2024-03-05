@@ -4,20 +4,19 @@
 */
 
 
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import HTMLComment from 'react-html-comment';
 
 
-interface TextComponentPropsInterface {
+interface TextComponentPropsInterface extends PropsWithChildren {
 	className?: string;
-	children: React.ReactNode;
 }
 
 
 // Level 1 heading text
 export function H1({ className = '', children }: TextComponentPropsInterface) {
 	return (
-		<h1 className={`align-middle font-heading font-black uppercase drop-shadow-md j-scale-transitions ${className}`}>
+		<h1 className={`align-middle font-heading font-black uppercase drop-shadow-md interactive-scale-sm ${className}`}>
 			{children}
 		</h1>
 	);
@@ -70,13 +69,5 @@ export function Span({ className = '', children }: TextComponentPropsInterface) 
 		<span className={`text-sm ${className}`}>
 			{children}
 		</span>
-	);
-}
-
-
-// HTML comment
-export function C(props: { children: string }) {
-	return (
-		<HTMLComment text={props.children.toString()} />
 	);
 }

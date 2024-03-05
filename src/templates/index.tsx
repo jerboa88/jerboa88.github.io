@@ -15,8 +15,6 @@ import PageLayout from '../components/layout/page-layout';
 import SEO from '../components/layout/seo';
 import { H1, P } from '../components/text-components';
 import ProjectCardGallery from '../components/project-card-gallery';
-import * as styles from '../styles/index.module.css';
-
 
 interface HomePropsInterface {
 	pageContext: {
@@ -43,23 +41,23 @@ export default function Home({ pageContext }: HomePropsInterface) {
 
 	return (
 		<PageLayout siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
-			<Section>
+			<Section className="min-h-screen">
 				{isTitleExpanded && <motion.a href="/" className="z-20" layoutId={titleLayoutId} {...getDefaultTransition()}>
 					<H1 className="m-4 text-6xl">{siteMetadata.author.name}</H1>
 				</motion.a>}
 				<span ref={inViewTriggerRef} />
 				<P>{siteMetadata.tagline}</P>
 			</Section>
-			<Section {...sections[0]}>
+			<Section className="min-h-screen" {...sections[0]}>
 				I am a passionate Computing Science student working towards my Bachelors Specialization at the University of Alberta. I have recently completed my internship at Haemonetics Corporation in Edmonton, where I put my expertise to use on their NexLynk Donor Management System. Some of my interests include cats, cars, music, and of course, anything technology-related :)
 			</Section>
-			<Section {...sections[1]} className={styles.projectsSection}>
+			<Section className="min-h-screen" {...sections[1]}>
 				<ProjectCardGallery projects={pageContext.pinnedRepos} />
 			</Section>
-			<Section {...sections[2]}>
+			<Section className="min-h-screen" {...sections[2]}>
 				TODO
 			</Section>
-			<Section {...sections[3]}>
+			<Section className="min-h-screen" {...sections[3]}>
 				TODO
 			</Section>
 		</PageLayout>

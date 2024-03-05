@@ -1,54 +1,78 @@
-import * as React from "react"
-import { Link } from "gatsby"
+/*
+	Custom 404 page
+	---------------
+*/
 
-// styles
-const pageStyles = {
-	color: "#232129",
-	padding: "96px",
-	fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
-const headingStyles = {
-	marginTop: 0,
-	marginBottom: 64,
-	maxWidth: 320,
-}
 
-const paragraphStyles = {
-	marginBottom: 48,
-}
-const codeStyles = {
-	color: "#8A6534",
-	padding: 4,
-	backgroundColor: "#FFF4DB",
-	fontSize: "1.25rem",
-	borderRadius: 4,
-}
+import React, { useRef } from 'react';
+import type { HeadProps } from 'gatsby';
+import ConfigManager from '../common/config-manager';
+import { SectionInterface } from '../common/types';
+import Section from '../components/layout/section';
+import PageLayout from '../components/layout/page-layout';
+import SEO from '../components/layout/seo';
+import BorderedTextButtonLink from '../components/links/bordered-text-button-link';
 
-// markup
-const NotFoundPage = () => {
+
+export default function NotFoundPage() {
+	const titleLayoutId = 'title-layout';
+	const configManager = new ConfigManager();
+	const siteMetadata = configManager.getMetadata();
+	const section = {
+		id: '404',
+		title: '404',
+		ref: useRef(null),
+	} as SectionInterface;
+	// Cat ASCII art from https://emojicombos.com/cat
+	const sadCat = [
+		'         \uFF0F\uFF1E\u3000\u0020\u30D5',
+		'         \u007C\u0020\u3000\u005F\u3000\u005F\u007C',
+		'       \uFF0F\u0060\u0020\u30DF\uFF3F\u0078\u30CE',
+		'      \u002F\u3000\u3000\u3000\u3000\u0020\u007C',
+		'     \u002F\u3000\u0020\u30FD\u3000\u3000\u0020\uFF89',
+		'    \u2502\u3000\u3000\u007C\u3000\u007C\u3000\u007C',
+		'\uFF0F\uFFE3\u007C\u3000\u3000\u0020\u007C\u3000\u007C\u3000\u007C',
+		'\u0028\uFFE3\u30FD\uFF3F\u005F\u30FD\u005F\u0029\u005F\u005F\u0029',
+		'\uFF3C\u4E8C\u0029',
+	].join('\n');
+
 	return (
-		<main style={pageStyles}>
-			<title>Not found</title>
-			<h1 style={headingStyles}>Page not found</h1>
-			<p style={paragraphStyles}>
-				Sorry{" "}
-				<span role="img" aria-label="Pensive emoji">
-					😔
-				</span>{" "}
-				we couldn’t find what you were looking for.
-				<br />
-				{process.env.NODE_ENV === "development" ? (
-					<>
-						<br />
-						Try creating a page in <code style={codeStyles}>src/pages/</code>.
-						<br />
-					</>
-				) : null}
-				<br />
-				<Link to="/">Go home</Link>.
-			</p>
-		</main>
-	)
+		<PageLayout siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={false} sections={[]}>
+			{/* Dummy element to force center alignment of section */}
+			<div></div>
+			<Section className="items-center" {...section}>
+				Oof, there's nothing here
+				<figure className="flex flex-column justify-center m-8">
+					<pre className="text-left leading-normal" role="img" aria-label="ASCII Sad Cat" aria-description="ASCII art of a sad cat, sitting down">
+						{sadCat}
+					</pre>
+				</figure>
+				<BorderedTextButtonLink text="Home" to="/" isInternal />
+			</Section>
+		</PageLayout>
+	);
 }
 
-export default NotFoundPage
+export const Head = ({ location }: HeadProps) => {
+	const configManager = new ConfigManager();
+	const siteMetadata = configManager.getMetadata();
+	const pageTitle = '404 - Page Not Found';
+	const pageMetadata = {
+		title: `${pageTitle} | ${siteMetadata.shortTitle}`,
+		description: siteMetadata.description,
+		shortDescription: siteMetadata.shortDescription,
+		path: location.pathname,
+		ogImageUrl: new URL(siteMetadata.ogImagePath, siteMetadata.siteUrl).toString(),
+		ogImageAltText: siteMetadata.ogImageAltText,
+		structuredData: {
+			'@type': 'WebSite',
+			name: pageTitle,
+			description: siteMetadata.description,
+			url: siteMetadata.siteUrl,
+		}
+	};
+
+	return (
+		<SEO pageMetadata={pageMetadata} />
+	);
+}
