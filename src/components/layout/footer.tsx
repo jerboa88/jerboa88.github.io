@@ -7,8 +7,8 @@
 import React from 'react';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { SiteMetadataInterface } from '../../common/types';
-import IconButton from '../../components/icon-button';
-import NavLink from '../../components/nav-link';
+import IconButtonLink from '../links/icon-button-link';
+import TextButtonLink from '../links/text-button-link';
 
 
 interface FooterPropsInterface {
@@ -21,17 +21,13 @@ export default function Footer({ siteMetadata }: FooterPropsInterface) {
 			<div className='divider h-auto m-0 transition-opacity opacity-100' />
 			<div className='flex-row p-4 pb-4 items-center justify-between'>
 				<nav layout="position" className="tabs flex-row justify-center font-button uppercase">
-					<NavLink title='Source' href={siteMetadata.sourceUrl} />
+					<TextButtonLink text='Source' to={siteMetadata.sourceUrl} />
 					{/* TODO: Add privacy policy */}
-					{/* <NavLink title='Privacy' href='#' /> */}
+					{/* <TextButtonLink title='Privacy' href='#' /> */}
 				</nav>
 				<nav className='flex flex-row justify-center'>
-					<a href={siteMetadata.author.link.linkedin} rel='external'>
-						<IconButton icon={faLinkedin} />
-					</a>
-					<a href={siteMetadata.author.link.github} rel='external'>
-						<IconButton icon={faGithub} />
-					</a>
+					<IconButtonLink to={siteMetadata.author.link.linkedin} icon={faLinkedin} />
+					<IconButtonLink to={siteMetadata.author.link.github} icon={faGithub} />
 				</nav>
 			</div>
 		</footer>

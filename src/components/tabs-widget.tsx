@@ -1,6 +1,6 @@
 /*
-	Widget to show tags with colored bullets
-	----------------------------------------
+	Widget to show tabs for each section of the page
+	------------------------------------------------
 */
 
 
@@ -8,10 +8,8 @@ import React, { useEffect, useState } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import { doesWindowExist, getDefaultTransition } from '../common/utilities';
 import { SectionInterface } from '../common/types';
-import NavLink from './nav-link';
+import TextButtonLink from './links/text-button-link';
 
-
-// Exports
 
 interface TabsWidgetPropsInterface {
 	sections: SectionInterface[];
@@ -67,13 +65,13 @@ export default function TabsWidget({ sections }: TabsWidgetPropsInterface) {
 	}, [currentSectionIndex]);
 
 	return (
-		<motion.nav layout="position" className="tabs flex-row justify-center font-button uppercase" {...getDefaultTransition()}>
+		<motion.nav layout="position" className="tabs flex-row justify-center" {...getDefaultTransition()}>
 			{
 				sections && sections.map(({ id, title }, i) => {
 					const activeClass = currentSectionIndex === i ? 'tab-active' : '';
 
 					return (
-						<NavLink key={title} title={title} href={`#${id}`} className={activeClass} />
+						<TextButtonLink className={`tab ${activeClass}`} key={title} text={title} to={`#${id}`} isInternal />
 					);
 				})
 			}
