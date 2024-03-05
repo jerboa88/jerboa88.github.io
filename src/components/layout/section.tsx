@@ -4,15 +4,14 @@
 */
 
 
-import React, { ForwardedRef, forwardRef } from 'react';
+import React, { ForwardedRef, PropsWithChildren, forwardRef } from 'react';
 import { H2 } from '../../components/text-components';
 
 
-interface SectionPropsInterface {
+interface SectionPropsInterface extends PropsWithChildren {
 	className?: string;
 	id?: string;
 	title?: string;
-	children: React.ReactNode;
 }
 
 const Section = forwardRef(({ className = '', id, title, children }: SectionPropsInterface, ref: ForwardedRef<HTMLElement>) => (

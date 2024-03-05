@@ -4,13 +4,12 @@
 */
 
 
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import HTMLComment from 'react-html-comment';
 
 
-interface TextComponentPropsInterface {
+interface TextComponentPropsInterface extends PropsWithChildren {
 	className?: string;
-	children: React.ReactNode;
 }
 
 

@@ -4,19 +4,18 @@
 */
 
 
-import React, { ReactNode } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { SiteMetadataInterface, SectionInterface } from '../../common/types';
 import Header from './header';
 import Footer from './footer';
 
 
-interface PageLayoutPropsInterface {
+interface PageLayoutPropsInterface extends PropsWithChildren {
 	className?: string;
 	siteMetadata: SiteMetadataInterface;
 	titleLayoutId?: string;
 	isTitleExpanded?: boolean;
 	sections: SectionInterface[];
-	children: ReactNode;
 }
 
 export default function PageLayout({ className = '', siteMetadata, titleLayoutId, isTitleExpanded = false, sections, children }: PageLayoutPropsInterface) {
