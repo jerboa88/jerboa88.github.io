@@ -3,7 +3,7 @@
   <img class="projectLogo" src="src/images/icon.png" alt="Project logo" title="Project logo" width="256">
 
   <h1 class="projectName">
-    <a href="https://johng.io">johng.io</a>
+    <a href="https://johng.io" title="Project URL">johng.io</a>
   </h1>
 
   <p class="projectBadges">
@@ -13,6 +13,9 @@
     <a href="LICENSE">
       <img src="https://img.shields.io/github/license/jerboa88/jerboa88.github.io.svg" alt="Project license" title="Project license"/>
     </a>
+    <a href="https://johng.io" title="Project URL">
+			<img src="https://img.shields.io/website?url=https%3A%2F%2Fjohng.io&up_message=johng.io%20%E2%86%97" alt="Project URL" title="Project URL">
+		</a>
   </p>
 
   <p class="projectDesc">
