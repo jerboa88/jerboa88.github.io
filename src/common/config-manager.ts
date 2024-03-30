@@ -4,8 +4,9 @@
 */
 
 
-import type { BgColor, ProjectTypeColorMappingsInterface, RoleTypeColorMappingsInterface, SiteMetadataInterface, ThemeInterface } from '../common/types';
+import type { BgColor, ProjectTypeColorMappingsInterface, RoleInterface, RoleTypeColorMappingsInterface, SiteMetadataInterface, ThemeInterface } from '../common/types';
 import siteMetadataConfig from '../config/site-metadata';
+import jobsConfig from '../config/jobs';
 import themesConfig from '../config/themes';
 import colorMappingsConfig from '../config/color-mappings';
 import iconGenerationConfig from '../config/icon-generation';
@@ -50,7 +51,18 @@ export default class ConfigManager {
 		}
 	}
 
-	// Return a a daisyUI theme given its name
+	// Returns a list of jobs with formatted date objects
+	getJobs(): RoleInterface[] {
+		return jobsConfig.map(job => {
+			return {
+				...job,
+				startDate: new Date(job.startDate),
+				endDate: new Date(job.endDate),
+			};
+		});
+	}
+
+	// Returns a daisyUI theme given its name
 	getTheme(themeName: 'light' | 'dark'): ThemeInterface {
 		const theme = themesConfig[themeName];
 
