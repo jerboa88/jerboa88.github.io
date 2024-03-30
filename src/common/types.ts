@@ -106,6 +106,36 @@ export interface ThemeInterface extends ThemeConfigInterface {
 }
 
 
+// Tailwind CSS background color
+export type BgColor = `bg-${string}`;
+
+
+// Color mappings for project types
+export interface ProjectTypeColorMappingsInterface {
+	'android app': BgColor;
+	'extension': BgColor;
+	'cli app': BgColor;
+	'js library': BgColor;
+	'node.js module': BgColor;
+	'markdown': BgColor;
+	'website': BgColor;
+	'web app': BgColor;
+	'gimp plugin': BgColor;
+	'other': BgColor;
+}
+
+export interface RoleTypeColorMappingsInterface {
+	'internship': BgColor;
+	'summer job': BgColor;
+}
+
+
+export interface ColorMappingsConfigInterface {
+	projectType: ProjectTypeColorMappingsInterface;
+	roleType: RoleTypeColorMappingsInterface;
+}
+
+
 export interface SectionInterface {
 	id: string;
 	title: string;
@@ -133,6 +163,16 @@ export interface ProjectInfoInterface {
 	longDesc: string;
 	typeName: string;
 	typeColor: string;
+}
+
+export interface RoleInterface {
+	type: 'internship' | 'summer job';
+	title: string;
+	company: string;
+	startDate: Date;
+	endDate: Date;
+	location: string;
+	tasks: string[];
 }
 
 
