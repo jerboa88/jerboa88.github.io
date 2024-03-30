@@ -124,12 +124,15 @@ export interface ProjectTypeColorMappingsInterface {
 	'other': BgColor;
 }
 
+
+// Color mappings for role types
 export interface RoleTypeColorMappingsInterface {
 	'internship': BgColor;
 	'summer job': BgColor;
 }
 
 
+// Raw color mappings config used to generate color mappings
 export interface ColorMappingsConfigInterface {
 	projectType: ProjectTypeColorMappingsInterface;
 	roleType: RoleTypeColorMappingsInterface;
@@ -165,6 +168,20 @@ export interface ProjectInfoInterface {
 	typeColor: string;
 }
 
+
+// Raw role config
+export interface RoleConfigInterface {
+	type: 'internship' | 'summer job';
+	title: string;
+	company: string;
+	startDate: string;
+	endDate: string;
+	location: string;
+	tasks: string[];
+}
+
+
+// Role object used to represent jobs and volunteer positions
 export interface RoleInterface {
 	type: 'internship' | 'summer job';
 	title: string;

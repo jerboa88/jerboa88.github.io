@@ -4768,6 +4768,8 @@ type GITHUB_CreateSponsorshipsInput = {
   readonly privacyLevel: InputMaybe<GITHUB_SponsorshipPrivacy>;
   /** Whether the sponsor should receive email updates from the sponsorables. */
   readonly receiveEmails: InputMaybe<Scalars['Boolean']>;
+  /** Whether the sponsorships created should continue each billing cycle for the sponsor (monthly or annually), versus lasting only a single month. Defaults to one-time sponsorships. */
+  readonly recurring: InputMaybe<Scalars['Boolean']>;
   /** The username of the user or organization who is acting as the sponsor, paying for the sponsorships. */
   readonly sponsorLogin: Scalars['String'];
   /** The list of maintainers to sponsor and for how much apiece. */
@@ -8318,6 +8320,8 @@ type GITHUB_FundingLink = {
 
 /** The possible funding platforms for repository funding links. */
 type GITHUB_FundingPlatform =
+  /** Buy Me a Coffee funding platform. */
+  | 'BUY_ME_A_COFFEE'
   /** Community Bridge funding platform. */
   | 'COMMUNITY_BRIDGE'
   /** Custom funding platform. */
@@ -8334,8 +8338,6 @@ type GITHUB_FundingPlatform =
   | 'LIBERAPAY'
   /** Open Collective funding platform. */
   | 'OPEN_COLLECTIVE'
-  /** Otechie funding platform. */
-  | 'OTECHIE'
   /** Patreon funding platform. */
   | 'PATREON'
   /** Polar funding platform. */
@@ -19295,6 +19297,7 @@ type GITHUB_Repository_environmentsArgs = {
   before: InputMaybe<Scalars['String']>;
   first: InputMaybe<Scalars['Int']>;
   last: InputMaybe<Scalars['Int']>;
+  names?: InputMaybe<ReadonlyArray<Scalars['String']>>;
   orderBy?: InputMaybe<GITHUB_Environments>;
 };
 
