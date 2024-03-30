@@ -15,6 +15,8 @@ import PageLayout from '../components/layout/page-layout';
 import SEO from '../components/layout/seo';
 import { H1, P } from '../components/text-components';
 import ProjectCardGallery from '../components/project-card-gallery';
+import Timeline from '../components/timeline';
+
 
 interface HomePropsInterface {
 	pageContext: {
@@ -26,6 +28,7 @@ export default function Home({ pageContext }: HomePropsInterface) {
 	const titleLayoutId = 'title-layout';
 	const configManager = new ConfigManager();
 	const siteMetadata = configManager.getMetadata();
+	const jobs = configManager.getJobs();
 	const inViewTriggerRef = useRef(null);
 	const isTitleExpanded = useInView(inViewTriggerRef, {
 		amount: 0,
@@ -55,7 +58,7 @@ export default function Home({ pageContext }: HomePropsInterface) {
 				<ProjectCardGallery projects={pageContext.pinnedRepos} />
 			</Section>
 			<Section className="min-h-screen" {...sections[2]}>
-				TODO
+				<Timeline roles={jobs} />
 			</Section>
 			<Section className="min-h-screen" {...sections[3]}>
 				TODO
