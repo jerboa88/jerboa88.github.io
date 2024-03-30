@@ -4,9 +4,10 @@
 */
 
 
-import type { SiteMetadataInterface, ThemeInterface } from '../common/types';
+import type { BgColor, ProjectTypeColorMappingsInterface, RoleTypeColorMappingsInterface, SiteMetadataInterface, ThemeInterface } from '../common/types';
 import siteMetadataConfig from '../config/site-metadata';
 import themesConfig from '../config/themes';
+import colorMappingsConfig from '../config/color-mappings';
 import iconGenerationConfig from '../config/icon-generation';
 
 
@@ -73,6 +74,25 @@ export default class ConfigManager {
 			'error-content': bgColor,
 		};
 	}
+
+	// Returns the color for a given project type
+	getProjectTypeColor(projectType: string): BgColor | false {
+		const colorMap = colorMappingsConfig.projectType;
+
+		projectType = projectType.toLowerCase();
+
+		return projectType in colorMap && colorMap[projectType as keyof ProjectTypeColorMappingsInterface];
+	}
+
+	// Returns the color for a given role type
+	getRoleTypeColor(roleType: string): BgColor | false {
+		const colorMap = colorMappingsConfig.roleType;
+
+		roleType = roleType.toLowerCase();
+
+		return roleType in colorMap && colorMap[roleType as keyof RoleTypeColorMappingsInterface];
+	}
+
 
 	// Returns the OpenGraph image generation config
 	getOgImage() {
