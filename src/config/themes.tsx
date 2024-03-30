@@ -35,8 +35,8 @@ export default {
 		'success': '#AED581',						// MD Light Green 300
 		'warning': '#FFD54F',						// MD Amber 300
 		'error': '#E57373',							// MD Red 300
-		'base-100': '#121212',
-		'base-200': '#060606',
+		'base-100': '#151515',
+		'base-200': '#090909',
 		'base-300': '#030303',
 		'base-content': '#ffffff',
 	},
