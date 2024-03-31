@@ -88,21 +88,21 @@ export default class ConfigManager {
 	}
 
 	// Returns the color for a given project type
-	getProjectTypeColor(projectType: string): BgColor | false {
+	getProjectTypeColor(projectType: string): BgColor | '' {
 		const colorMap = colorMappingsConfig.projectType;
 
 		projectType = projectType.toLowerCase();
 
-		return projectType in colorMap && colorMap[projectType as keyof ProjectTypeColorMappingsInterface];
+		return projectType in colorMap ? colorMap[projectType as keyof ProjectTypeColorMappingsInterface] : '';
 	}
 
 	// Returns the color for a given role type
-	getRoleTypeColor(roleType: string): BgColor | false {
+	getRoleTypeColor(roleType: string): BgColor | '' {
 		const colorMap = colorMappingsConfig.roleType;
 
 		roleType = roleType.toLowerCase();
 
-		return roleType in colorMap && colorMap[roleType as keyof RoleTypeColorMappingsInterface];
+		return roleType in colorMap ? colorMap[roleType as keyof RoleTypeColorMappingsInterface] : '';
 	}
 
 
