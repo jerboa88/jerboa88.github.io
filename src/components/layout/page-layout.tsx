@@ -89,7 +89,7 @@ export default function PageLayout({ className = '', siteMetadata, titleLayoutId
 	return (
 		<>
 			{/* Page body */}
-			<div className={`min-h-screen flex-col justify-between items-center mx-auto text-base bg-base-300 text-base-content scroll-smooth selection:bg-primary selection:text-primary-content ${className}`}>
+			<div className={`min-h-screen flex-col justify-between items-center gap-32 mx-auto text-base bg-base-300 text-base-content scroll-smooth selection:bg-primary selection:text-primary-content ${className}`}>
 				<Header siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections} />
 				{children}
 				<Footer siteMetadata={siteMetadata} />
