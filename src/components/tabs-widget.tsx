@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import { doesWindowExist, getDefaultTransition } from '../common/utilities';
 import { SectionInterface } from '../common/types';
-import TextButtonLink from './links/text-button-link';
+import ButtonLink from './links/button-link';
 
 
 interface TabsWidgetPropsInterface {
@@ -71,7 +71,7 @@ export default function TabsWidget({ sections }: TabsWidgetPropsInterface) {
 					const activeClass = currentSectionIndex === i ? 'tab-active' : '';
 
 					return (
-						<TextButtonLink className={`tab ${activeClass}`} key={title} text={title} to={`#${id}`} isInternal />
+						<ButtonLink className={`tab !py-0 ${activeClass}`} key={title} text={title} to={`#${id}`} isInternal />
 					);
 				})
 			}
