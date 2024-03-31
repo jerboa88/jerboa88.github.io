@@ -7,6 +7,7 @@
 import React, { useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import { motion, useInView } from 'framer-motion';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import ConfigManager from '../common/config-manager';
 import { ProjectInfoInterface, SectionInterface } from '../common/types';
 import { getDefaultTransition } from '../common/utilities';
@@ -34,17 +35,42 @@ export default function Home({ pageContext }: HomePropsInterface) {
 		amount: 0,
 		margin: '-16%',
 	});
-	const sections = ['About', 'Projects', 'Experience', 'Contact'].map(title => {
-		return {
-			id: title.toLowerCase(),
-			title,
+	const sections = [
+		{
+			id: 'about',
+			title: 'About',
 			ref: useRef(null),
-		} as SectionInterface;
-	});
+		},
+		{
+			id: 'projects',
+			title: 'Projects',
+			button: {
+				text: 'View more on GitHub',
+				icon: faArrowUpRightFromSquare,
+				to: siteMetadata.author.link.github,
+			},
+			ref: useRef(null),
+		},
+		{
+			id: 'experience',
+			title: 'Experience',
+			button: {
+				text: 'View more on LinkedIn',
+				icon: faArrowUpRightFromSquare,
+				to: siteMetadata.author.link.linkedin,
+			},
+			ref: useRef(null),
+		},
+		{
+			id: 'contact',
+			title: 'Contact',
+			ref: useRef(null),
+		}
+	];
 
 	return (
 		<PageLayout siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
-			<Section className="min-h-screen">
+			<Section className="min-h-screen text-center">
 				{isTitleExpanded && <motion.a href="/" className="z-20" layoutId={titleLayoutId} {...getDefaultTransition()}>
 					<H1 className="m-4 text-6xl">{siteMetadata.author.name}</H1>
 				</motion.a>}
