@@ -11,6 +11,7 @@ import { RoleInterface } from '../common/types';
 import { H3, Span } from '../components/text-components';
 import DateRange from '../components/text/date-range';
 import Pill from '../components/pill';
+import ConfigManager from '../common/config-manager';
 
 
 interface TimelineEntryPropsInterface {
@@ -18,6 +19,9 @@ interface TimelineEntryPropsInterface {
 }
 
 export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
+	const configManager = new ConfigManager();
+	const roleTypeColor = configManager.getRoleTypeColor(role.type);
+
 	return (
 		<>
 			<div className="timeline-start !m-0 px-8 pb-8 !row-start-2 !self-start flex flex-col max-lg:flex-row w-fit max-lg:w-full justify-between gap-4 items-start max-lg:items-center text-left">
@@ -25,7 +29,7 @@ export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
 					<DateRange startDate={role.startDate} endDate={role.endDate} />
 					<Span>{role.location}</Span>
 				</div>
-				<Pill text={role.type} className="w-fit capitalize" />
+				<Pill text={role.type} className={`capitalize ${roleTypeColor}`} />
 			</div>
 			<div className="timeline-middle">
 				<FontAwesomeIcon icon={faCircleCheck} />
