@@ -25,9 +25,9 @@ export default function SectionHeader({ className = '', title, button }: Section
 		<>
 			<div className="w-full flex justify-between items-baseline pt-8">
 				<H2 className="mx-0 p-0">{title}</H2>
-				{button && <ButtonLink {...button} flip />}
+				{button && <ButtonLink {...button} flip className="self-baseline" />}
 			</div>
-			<div className='divider h-auto m-0 pb-8 opacity-100' />
+			<div className="divider h-auto m-0 pb-8 opacity-100" />
 		</>
 	);
 }
