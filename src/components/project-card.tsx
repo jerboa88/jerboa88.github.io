@@ -10,9 +10,9 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import ConfigManager from '../common/config-manager';
 import { getProjectImage } from '../common/utilities';
 import { ProjectInfoInterface } from '../common/types';
-import { H3, P, Span } from '../components/text-components';
-import Pill from '../components/pill';
 import LinkWrapper from './links/link-wrapper';
+import { H3, P } from './text-components';
+import Pill from './pill';
 import Button from './button';
 
 
