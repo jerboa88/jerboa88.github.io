@@ -7,8 +7,7 @@
 import React from 'react';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { SiteMetadataInterface } from '../../common/types';
-import IconButtonLink from '../links/icon-button-link';
-import TextButtonLink from '../links/text-button-link';
+import ButtonLink from '../links/button-link';
 
 
 interface FooterPropsInterface {
@@ -21,13 +20,13 @@ export default function Footer({ siteMetadata }: FooterPropsInterface) {
 			<div className='divider h-auto m-0 transition-opacity opacity-100' />
 			<div className='flex-row p-4 pb-4 items-center justify-between'>
 				<nav layout="position" className="tabs flex-row justify-center font-button uppercase">
-					<TextButtonLink text='Source' to={siteMetadata.sourceUrl} />
+					<ButtonLink text='Source' to={siteMetadata.sourceUrl} />
 					{/* TODO: Add privacy policy */}
-					{/* <TextButtonLink title='Privacy' href='#' /> */}
+					{/* <ButtonLink text='Privacy' to='#' /> */}
 				</nav>
 				<nav className='flex flex-row justify-center'>
-					<IconButtonLink to={siteMetadata.author.link.linkedin} icon={faLinkedin} />
-					<IconButtonLink to={siteMetadata.author.link.github} icon={faGithub} />
+					<ButtonLink to={siteMetadata.author.link.linkedin} icon={faLinkedin} />
+					<ButtonLink to={siteMetadata.author.link.github} icon={faGithub} />
 				</nav>
 			</div>
 		</footer>
