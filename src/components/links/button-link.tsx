@@ -17,6 +17,7 @@ interface ButtonLinkPropsInterface {
 	disabled?: boolean;
 	icon?: IconDefinition;
 	text?: string;
+	responsive?: boolean;
 	flip?: boolean;
 	key?: string;
 	to: string;
@@ -24,10 +25,10 @@ interface ButtonLinkPropsInterface {
 	rel?: string;
 }
 
-export default function ButtonLink({ className, iconClassName, textClassName, disabled, flip, icon, text, to, isInternal, rel }: ButtonLinkPropsInterface) {
+export default function ButtonLink({ className, iconClassName, textClassName, disabled, responsive, flip, icon, text, to, isInternal, rel }: ButtonLinkPropsInterface) {
 	return (
 		<LinkWrapper to={to} isInternal={isInternal} rel={rel} className="contents">
-			<Button {...{ className, iconClassName, textClassName, disabled, flip, icon, text }} />
+			<Button {...{ className, iconClassName, textClassName, disabled, responsive, flip, icon, text }} />
 		</LinkWrapper>
 	);
 }
