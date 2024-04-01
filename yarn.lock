@@ -1708,17 +1708,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/montserrat@npm:^5.0.16":
-  version: 5.0.16
-  resolution: "@fontsource/montserrat@npm:5.0.16"
-  checksum: 10/20da488985d21df8ba8905585f83cf72f1e3aa0b1a09f99075c5f16739e5dde7c62054da95421545101ac7dc5c9d61a53d5390b5399271fde9fcc414b67c227e
-  languageName: node
-  linkType: hard
-
-"@fontsource/roboto-condensed@npm:^5.0.14":
-  version: 5.0.14
-  resolution: "@fontsource/roboto-condensed@npm:5.0.14"
-  checksum: 10/5d7a9de1c7ea3ad1025c14b3ea88695873f89d2ae059abfada1881c853b7f3635db9e9393ea02d964a161b0f77429d3c3f6a11ad5e5682f348a86bdcd9528b4b
+"@fontsource/poppins@npm:^5.0.13":
+  version: 5.0.13
+  resolution: "@fontsource/poppins@npm:5.0.13"
+  checksum: 10/0b64b5a24deeb19899847e331df3a83400c64a2c97d1099be6333058a195543fd41920e80c232830c4165f7ed898a471a9dfee0e78f7456382eefcfde1386dc8
   languageName: node
   linkType: hard
 
@@ -8611,16 +8604,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-web-font-loader@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "gatsby-plugin-web-font-loader@npm:1.0.4"
-  dependencies:
-    babel-runtime: "npm:^6.26.0"
-    webfontloader: "npm:^1.6.28"
-  checksum: 10/7cb4df8ed58d56656150ef7d5277f9acec91a7153afeccdfc1cac75482a25a8d926957a7892ccfbaf3ab743b02b3c9ca5a95e06f3c69370b53426616ed0d4359
-  languageName: node
-  linkType: hard
-
 "gatsby-react-router-scroll@npm:^6.13.1":
   version: 6.13.1
   resolution: "gatsby-react-router-scroll@npm:6.13.1"
@@ -10366,8 +10349,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "johng-io@workspace:."
   dependencies:
-    "@fontsource/montserrat": "npm:^5.0.16"
-    "@fontsource/roboto-condensed": "npm:^5.0.14"
+    "@fontsource/poppins": "npm:^5.0.13"
     "@fontsource/roboto-flex": "npm:^5.0.8"
     "@fortawesome/fontawesome-svg-core": "npm:^6.5.1"
     "@fortawesome/free-brands-svg-icons": "npm:^6.5.1"
@@ -10396,7 +10378,6 @@ __metadata:
     gatsby-plugin-robots-txt: "npm:^1.8.0"
     gatsby-plugin-sharp: "npm:^5.13.1"
     gatsby-plugin-sitemap: "npm:^6.13.1"
-    gatsby-plugin-web-font-loader: "npm:^1.0.4"
     gatsby-source-filesystem: "npm:^5.13.1"
     gatsby-source-graphql: "npm:^5.13.1"
     gatsby-transformer-sharp: "npm:^5.13.1"
@@ -16095,13 +16076,6 @@ __metadata:
   version: 1.2.2
   resolution: "weak-lru-cache@npm:1.2.2"
   checksum: 10/441f86236d34b9750ccf2bae1658cc62b49e805b740b3f3bf4b1d78e8cac50b6c05d31791f3f5bbf00f3b544834ae20c0f5a374efc833b7ba2a11dd8af37a790
-  languageName: node
-  linkType: hard
-
-"webfontloader@npm:^1.6.28":
-  version: 1.6.28
-  resolution: "webfontloader@npm:1.6.28"
-  checksum: 10/fba6a6a41222d893401aa43199ba3937679a6d71a7e1aeed1fc57d2f034c96fefa267b57cf9aff6af5877fed78c11a5327d7f3c8d3d6f2bfb7543fce8640e5f0
   languageName: node
   linkType: hard
 

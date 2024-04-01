@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@import '@fontsource/montserrat';
+@import '@fontsource/poppins/400.css';
+@import '@fontsource/poppins/500.css';
+@import '@fontsource/poppins/700.css';
 @import '@fontsource/roboto-flex';
-@import '@fontsource/roboto-condensed';
 @import '@fortawesome/fontawesome-svg-core/styles';
 
 

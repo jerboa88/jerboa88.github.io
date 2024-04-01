@@ -23,8 +23,8 @@ module.exports = {
 		},
 		extend: {
 			fontFamily: {
-				heading: ['Montserrat', 'Impact', 'Franklin Gothic Medium', 'Candara', 'Calibri', 'sans-serif'],
-				button: ['Roboto Condensed', 'Arial Narrow', 'Calibri', 'Candara', 'Impact', 'sans-serif'],
+				heading: ['Poppins', 'Montserrat', 'Impact', 'Franklin Gothic Medium', 'Candara', 'Calibri', 'sans-serif'],
+				button: ['Poppins', 'Inter Tight', 'Roboto Condensed', 'Arial Narrow', 'Calibri', 'Candara', 'Impact', 'sans-serif'],
 			},
 			colors: {
 				'primary-header': 'var(--ph)',

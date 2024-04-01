@@ -26,8 +26,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["@fontsource/montserrat", "npm:5.0.16"],\
-          ["@fontsource/roboto-condensed", "npm:5.0.14"],\
+          ["@fontsource/poppins", "npm:5.0.13"],\
           ["@fontsource/roboto-flex", "npm:5.0.8"],\
           ["@fortawesome/fontawesome-svg-core", "npm:6.5.1"],\
           ["@fortawesome/free-brands-svg-icons", "npm:6.5.1"],\
@@ -56,7 +55,6 @@ const RAW_RUNTIME_STATE =
           ["gatsby-plugin-robots-txt", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.8.0"],\
           ["gatsby-plugin-sharp", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-plugin-sitemap", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
-          ["gatsby-plugin-web-font-loader", "npm:1.0.4"],\
           ["gatsby-source-filesystem", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-source-graphql", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-transformer-sharp", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
@@ -3031,20 +3029,11 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@fontsource/montserrat", [\
-      ["npm:5.0.16", {\
-        "packageLocation": "./.yarn/cache/@fontsource-montserrat-npm-5.0.16-703bfccec4-20da488985.zip/node_modules/@fontsource/montserrat/",\
+    ["@fontsource/poppins", [\
+      ["npm:5.0.13", {\
+        "packageLocation": "./.yarn/cache/@fontsource-poppins-npm-5.0.13-09fcbadd84-0b64b5a24d.zip/node_modules/@fontsource/poppins/",\
         "packageDependencies": [\
-          ["@fontsource/montserrat", "npm:5.0.16"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@fontsource/roboto-condensed", [\
-      ["npm:5.0.14", {\
-        "packageLocation": "./.yarn/cache/@fontsource-roboto-condensed-npm-5.0.14-a0995238f2-5d7a9de1c7.zip/node_modules/@fontsource/roboto-condensed/",\
-        "packageDependencies": [\
-          ["@fontsource/roboto-condensed", "npm:5.0.14"]\
+          ["@fontsource/poppins", "npm:5.0.13"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -12151,17 +12140,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["gatsby-plugin-web-font-loader", [\
-      ["npm:1.0.4", {\
-        "packageLocation": "./.yarn/cache/gatsby-plugin-web-font-loader-npm-1.0.4-e6329b179e-7cb4df8ed5.zip/node_modules/gatsby-plugin-web-font-loader/",\
-        "packageDependencies": [\
-          ["gatsby-plugin-web-font-loader", "npm:1.0.4"],\
-          ["babel-runtime", "npm:6.26.0"],\
-          ["webfontloader", "npm:1.6.28"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["gatsby-react-router-scroll", [\
       ["npm:6.13.1", {\
         "packageLocation": "./.yarn/cache/gatsby-react-router-scroll-npm-6.13.1-ecadbd1a70-595407ceb2.zip/node_modules/gatsby-react-router-scroll/",\
@@ -14081,8 +14059,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["johng-io", "workspace:."],\
-          ["@fontsource/montserrat", "npm:5.0.16"],\
-          ["@fontsource/roboto-condensed", "npm:5.0.14"],\
+          ["@fontsource/poppins", "npm:5.0.13"],\
           ["@fontsource/roboto-flex", "npm:5.0.8"],\
           ["@fortawesome/fontawesome-svg-core", "npm:6.5.1"],\
           ["@fortawesome/free-brands-svg-icons", "npm:6.5.1"],\
@@ -14111,7 +14088,6 @@ const RAW_RUNTIME_STATE =
           ["gatsby-plugin-robots-txt", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.8.0"],\
           ["gatsby-plugin-sharp", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-plugin-sitemap", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
-          ["gatsby-plugin-web-font-loader", "npm:1.0.4"],\
           ["gatsby-source-filesystem", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-source-graphql", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-transformer-sharp", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
@@ -20896,15 +20872,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/weak-lru-cache-npm-1.2.2-0dc8dfa322-441f86236d.zip/node_modules/weak-lru-cache/",\
         "packageDependencies": [\
           ["weak-lru-cache", "npm:1.2.2"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["webfontloader", [\
-      ["npm:1.6.28", {\
-        "packageLocation": "./.yarn/cache/webfontloader-npm-1.6.28-5e6803960c-fba6a6a412.zip/node_modules/webfontloader/",\
-        "packageDependencies": [\
-          ["webfontloader", "npm:1.6.28"]\
         ],\
         "linkType": "HARD"\
       }]\

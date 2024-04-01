@@ -32,8 +32,7 @@
     "typecheck": "yarn tsc --noEmit"
   },
   "dependencies": {
-    "@fontsource/montserrat": "^5.0.16",
-    "@fontsource/roboto-condensed": "^5.0.14",
+    "@fontsource/poppins": "^5.0.13",
     "@fontsource/roboto-flex": "^5.0.8",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-brands-svg-icons": "^6.5.1",
@@ -58,7 +57,6 @@
     "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sharp": "^5.13.1",
     "gatsby-plugin-sitemap": "^6.13.1",
-    "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-source-filesystem": "^5.13.1",
     "gatsby-source-graphql": "^5.13.1",
     "gatsby-transformer-sharp": "^5.13.1",
