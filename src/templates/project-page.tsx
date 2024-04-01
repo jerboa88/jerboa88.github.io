@@ -12,6 +12,7 @@ import { ProjectInfoInterface } from '../common/types';
 import PageLayout from '../components/layout/page-layout';
 import SEO from '../components/layout/seo';
 import { H2, P } from '../components/text-components';
+import LinkWrapper from '../components/links/link-wrapper';
 
 
 interface ProjectPagePropsInterface {
@@ -29,8 +30,12 @@ export default function ProjectPage({ pageContext }: ProjectPagePropsInterface) 
 			<P>{pageContext.shortDesc}</P>
 			<P>{pageContext.typeName}</P>
 			<P>{pageContext.typeColor}</P>
-			<a href={pageContext.homepageUrl}>{pageContext.homepageUrl}</a><br />
-			<a href={pageContext.githubUrl}>{pageContext.githubUrl}</a>
+			<LinkWrapper to={pageContext.homepageUrl}>
+				{pageContext.homepageUrl}}
+			</LinkWrapper>
+			<LinkWrapper to={pageContext.githubUrl}>
+				{pageContext.githubUrl}}
+			</LinkWrapper>
 			<P>{pageContext.stargazers}</P>
 			<P>{pageContext.updatedAt}</P>
 			<P>{pageContext.license}</P>
