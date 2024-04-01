@@ -46,7 +46,7 @@ export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
 				</div>
 				<ul className="list-[circle] m-4">
 					{
-						role.tasks.map((task, index) => <li key={index}>{task}</li>)
+						role.tasks.map((task, index) => <li key={index} className="my-2">{task}</li>)
 					}
 				</ul>
 			</div >
