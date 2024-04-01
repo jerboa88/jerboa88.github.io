@@ -62,7 +62,6 @@ const RAW_RUNTIME_STATE =
           ["postcss", "npm:8.4.33"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:18.2.0"],\
-          ["react-html-comment", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:2.0.16"],\
           ["sharp", "npm:0.33.2"],\
           ["svg-react-loader", "npm:0.4.6"],\
           ["svgo", "npm:3.2.0"],\
@@ -14095,7 +14094,6 @@ const RAW_RUNTIME_STATE =
           ["postcss", "npm:8.4.33"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:18.2.0"],\
-          ["react-html-comment", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:2.0.16"],\
           ["sharp", "npm:0.33.2"],\
           ["svg-react-loader", "npm:0.4.6"],\
           ["svgo", "npm:3.2.0"],\
@@ -17962,33 +17960,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/react-error-overlay-npm-6.0.11-021cdeaa92-b4ac746fc4.zip/node_modules/react-error-overlay/",\
         "packageDependencies": [\
           ["react-error-overlay", "npm:6.0.11"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["react-html-comment", [\
-      ["npm:2.0.16", {\
-        "packageLocation": "./.yarn/cache/react-html-comment-npm-2.0.16-0ad0bfb0fc-e2a5d69680.zip/node_modules/react-html-comment/",\
-        "packageDependencies": [\
-          ["react-html-comment", "npm:2.0.16"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:2.0.16", {\
-        "packageLocation": "./.yarn/__virtual__/react-html-comment-virtual-b37bf92880/0/cache/react-html-comment-npm-2.0.16-0ad0bfb0fc-e2a5d69680.zip/node_modules/react-html-comment/",\
-        "packageDependencies": [\
-          ["react-html-comment", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:2.0.16"],\
-          ["@types/react", "npm:18.2.62"],\
-          ["@types/react-dom", "npm:18.2.19"],\
-          ["prop-types", "npm:15.8.1"],\
-          ["react", "npm:18.2.0"],\
-          ["react-dom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:18.2.0"]\
-        ],\
-        "packagePeers": [\
-          "@types/react-dom",\
-          "@types/react",\
-          "react-dom",\
-          "react"\
         ],\
         "linkType": "HARD"\
       }]\

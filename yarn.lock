@@ -10385,7 +10385,6 @@ __metadata:
     postcss: "npm:^8.4.33"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
-    react-html-comment: "npm:^2.0.16"
     sharp: "npm:^0.33.2"
     svg-react-loader: "npm:^0.4.6"
     svgo: "npm:^3.2.0"
@@ -13456,18 +13455,6 @@ __metadata:
   version: 6.0.11
   resolution: "react-error-overlay@npm:6.0.11"
   checksum: 10/b4ac746fc4fb50da733768aadbc638d34dd56d4e46ed4b2f2d1ac54dced0c5fa5fe47ebbbf90810ada44056ed0713bba5b9b930b69f4e45466e7f59fc806c44e
-  languageName: node
-  linkType: hard
-
-"react-html-comment@npm:^2.0.16":
-  version: 2.0.16
-  resolution: "react-html-comment@npm:2.0.16"
-  dependencies:
-    prop-types: "npm:^15.7.2"
-  peerDependencies:
-    react: ">17.x"
-    react-dom: ">17.x"
-  checksum: 10/e2a5d69680abda6ccded94126502e27112b85b81ae82e5734aace38d8d5d13a59f6d821e2e902548a8fdae9fe508f90577b2d398904692f7a99e5ea45cad4244
   languageName: node
   linkType: hard
 
