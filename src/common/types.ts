@@ -4,6 +4,7 @@
 */
 
 
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Context, RefObject } from 'react';
 
 
@@ -143,6 +144,11 @@ export interface SectionInterface {
 	id: string;
 	title: string;
 	ref: RefObject<HTMLElement>;
+	button?: {
+		text?: string;
+		icon?: IconDefinition;
+		to: string;
+	}
 }
 
 

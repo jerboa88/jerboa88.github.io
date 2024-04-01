@@ -66,7 +66,7 @@ export default function Home({ pageContext }: HomePropsInterface) {
 			title: 'Contact',
 			ref: useRef(null),
 		}
-	];
+	] as SectionInterface[];
 
 	return (
 		<PageLayout siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
@@ -78,7 +78,9 @@ export default function Home({ pageContext }: HomePropsInterface) {
 				<P>{siteMetadata.tagline}</P>
 			</Section>
 			<Section className="min-h-screen" {...sections[0]}>
-				I am a passionate Computing Science student working towards my Bachelors Specialization at the University of Alberta. I have recently completed my internship at Haemonetics Corporation in Edmonton, where I put my expertise to use on their NexLynk Donor Management System. Some of my interests include cats, cars, music, and of course, anything technology-related :)
+				<p>
+					I am a passionate Computing Science student working towards my Bachelors Specialization at the University of Alberta. I have recently completed my internship at Haemonetics Corporation in Edmonton, where I put my expertise to use on their NexLynk Donor Management System. Some of my interests include cats, cars, music, and of course, anything technology-related :)
+				</p>
 			</Section>
 			<Section className="min-h-screen" {...sections[1]}>
 				<ProjectCardGallery projects={pageContext.pinnedRepos} />
