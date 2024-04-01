@@ -14,8 +14,8 @@ interface SectionHeaderPropsInterface extends PropsWithChildren {
 	className?: string;
 	title: string;
 	button?: {
-		text: string;
-		icon: IconDefinition;
+		text?: string;
+		icon?: IconDefinition;
 		to: string;
 	};
 }
