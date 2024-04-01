@@ -5,7 +5,6 @@
 
 
 import React, { PropsWithChildren } from 'react';
-import HTMLComment from 'react-html-comment';
 
 
 interface TextComponentPropsInterface extends PropsWithChildren {
@@ -16,7 +15,7 @@ interface TextComponentPropsInterface extends PropsWithChildren {
 // Level 1 heading text
 export function H1({ className = '', children }: TextComponentPropsInterface) {
 	return (
-		<h1 className={`align-middle font-heading font-black uppercase drop-shadow-md interactive-scale-sm ${className}`}>
+		<h1 className={`align-middle font-heading font-bold uppercase drop-shadow-md interactive-scale-sm ${className}`}>
 			{children}
 		</h1>
 	);
@@ -26,7 +25,7 @@ export function H1({ className = '', children }: TextComponentPropsInterface) {
 // Level 2 heading text
 export function H2({ className = '', children }: TextComponentPropsInterface) {
 	return (
-		<h2 className={`m-4 p-8 text-3xl align-middle font-heading font-black drop-shadow-md ${className}`}>
+		<h2 className={`py-4 text-3xl align-middle font-heading font-medium drop-shadow-md ${className}`}>
 			{children}
 		</h2>
 	);
@@ -36,7 +35,7 @@ export function H2({ className = '', children }: TextComponentPropsInterface) {
 // Level 3 heading text
 export function H3({ className = '', children }: TextComponentPropsInterface) {
 	return (
-		<h3 className={`my-4 text-l font-heading font-black drop-shadow ${className}`}>
+		<h3 className={`my-4 text-l font-heading font-bold drop-shadow ${className}`}>
 			{children}
 		</h3>
 	);
