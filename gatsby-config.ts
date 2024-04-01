@@ -122,14 +122,6 @@ const config: GatsbyConfig = {
 			}
 		},
 		{
-			resolve: 'gatsby-plugin-web-font-loader',
-			options: {
-				google: {
-					families: ['Montserrat:900', 'Open Sans:400']
-				}
-			}
-		},
-		{
 			resolve: 'gatsby-source-filesystem',
 			options: {
 				'name': 'images',
