@@ -79,7 +79,15 @@ export default function Home({ pageContext }: HomePropsInterface) {
 			</Section>
 			<Section className="min-h-screen" {...sections[0]}>
 				<p>
-					I am a passionate Computing Science student working towards my Bachelors Specialization at the University of Alberta. I have recently completed my internship at Haemonetics Corporation in Edmonton, where I put my expertise to use on their NexLynk Donor Management System. Some of my interests include cats, cars, music, and of course, anything technology-related :)
+					I am a recent graduate with a Bachelors Specialization in Computing Science from the University of Alberta. During my time at the U of A, I had the opportunity to share my expertise with Haemonetics Corporation in Edmonton, where I was involved in end-to-end development of their NexLynk Donor Management System.
+				</p>
+				<br />
+				<p>
+					Having a natural interest in science has allowed me to become familiar with a wide variety of tech related subjects including programming, design, and audio production. I have experience with frontend web technologies, backend development, cloud computing, as well as low-level programming like Arduino and MIPS assembly.
+				</p>
+				<br />
+				<p>
+					Some of my extracurricular interests include cats, cars, and music!
 				</p>
 			</Section>
 			<Section className="min-h-screen" {...sections[1]}>
