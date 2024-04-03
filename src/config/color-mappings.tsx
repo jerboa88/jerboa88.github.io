@@ -22,7 +22,7 @@ export default {
 		'gimp plugin': 'bg-blue-500',	// hover:bg-blue-500/75
 	},
 	roleType: {
-		'internship': 'bg-primary',	// hover:bg-primary/75
+		'internship': 'bg-secondary',	// hover:bg-secondary/75
 		'summer job': 'bg-secondary',	// hover:bg-secondary/75
 	},
 } as ColorMappingsConfigInterface;
