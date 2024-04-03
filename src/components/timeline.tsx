@@ -14,14 +14,16 @@ interface TimelinePropsInterface {
 }
 
 export default function Timeline({ roles }: TimelinePropsInterface) {
+	const lastIndex = roles.length - 1;
+
 	return (
 		<ul className="timeline timeline-vertical timeline-snap-icon max-lg:timeline-compact">
 			{
 				roles.map((entry, index) => (
 					<li key={index}>
-						<hr className="bg-primary" />
+						<hr className={`bg-primary rounded-b-full ${index === 0 ? 'rounded-t-full' : ''}`} />
 						<TimelineEntry role={entry} />
-						<hr className="bg-primary" />
+						<hr className={`bg-primary rounded-t-full ${index === lastIndex ? 'rounded-b-full' : ''}`} />
 					</li>
 				))
 			}
