@@ -5,6 +5,7 @@ import ResponseMapper from './src/node/response-mapper';
 import { PinnedRepoResponseInterface } from './src/common/types';
 
 
+const projectsPagePath = 'projects';
 const indexPageTemplate = path.resolve('./src/templates/index.tsx');
 const projectPageTemplate = path.resolve('./src/templates/project-page.tsx');
 
@@ -81,7 +82,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql 
 
 		// Create project pages
 		actions.createPage({
-			path: projectInfo.slug,
+			path: `/${projectsPagePath}/${projectInfo.slug}`,
 			component: projectPageTemplate,
 			context: projectInfo
 		});
