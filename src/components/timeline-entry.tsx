@@ -12,6 +12,7 @@ import { H3, Span } from '../components/text-components';
 import DateRange from '../components/text/date-range';
 import Pill from '../components/pill';
 import ConfigManager from '../common/config-manager';
+import Card from './card';
 
 
 interface TimelineEntryPropsInterface {
@@ -34,7 +35,7 @@ export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
 			<div className="timeline-middle">
 				<FontAwesomeIcon icon={faCircleCheck} />
 			</div>
-			<div className="!m-0 !ml-8 !mb-8 p-8 bg-base-200 border-2 border-base-content/10 rounded-2xl overflow-hidden timeline-box timeline-end text-left">
+			<Card className="mt-0 mr-0 ml-8 mb-8 p-8 timeline-box timeline-end" disabled >
 				<div className="flex flex-row mb-8 justify-between items-center">
 					<div className="flex flex-col">
 						<H3 className="mt-0 mr-2">{role.title}</H3>
@@ -49,7 +50,7 @@ export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
 						role.tasks.map((task, index) => <li key={index} className="my-2">{task}</li>)
 					}
 				</ul>
-			</div >
+			</Card>
 		</>
 	);
 }
