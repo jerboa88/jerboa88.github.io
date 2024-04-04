@@ -42,6 +42,7 @@ const RAW_RUNTIME_STATE =
           ["daisyui", "npm:4.6.1"],\
           ["dompurify", "npm:3.0.8"],\
           ["dotenv", "npm:16.4.1"],\
+          ["eslint-plugin-react-hooks", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:4.6.0"],\
           ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.0.3"],\
           ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.3"],\
           ["gatsby-plugin-google-gtag", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
@@ -10353,6 +10354,19 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
+      ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:4.6.0", {\
+        "packageLocation": "./.yarn/__virtual__/eslint-plugin-react-hooks-virtual-878d2eb234/0/cache/eslint-plugin-react-hooks-npm-4.6.0-b429fac07f-3c63134e05.zip/node_modules/eslint-plugin-react-hooks/",\
+        "packageDependencies": [\
+          ["eslint-plugin-react-hooks", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:4.6.0"],\
+          ["@types/eslint", null],\
+          ["eslint", null]\
+        ],\
+        "packagePeers": [\
+          "@types/eslint",\
+          "eslint"\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["virtual:a617369617faf93e910864128c0f8464497f442fdcec6cecbb08a6c1df9e525f0812e1ba0325d168cb2bec4a1fec9dd31e161bcc655b25939644e043c22eb923#npm:4.6.0", {\
         "packageLocation": "./.yarn/__virtual__/eslint-plugin-react-hooks-virtual-85d0afb496/0/cache/eslint-plugin-react-hooks-npm-4.6.0-b429fac07f-3c63134e05.zip/node_modules/eslint-plugin-react-hooks/",\
         "packageDependencies": [\
@@ -14074,6 +14088,7 @@ const RAW_RUNTIME_STATE =
           ["daisyui", "npm:4.6.1"],\
           ["dompurify", "npm:3.0.8"],\
           ["dotenv", "npm:16.4.1"],\
+          ["eslint-plugin-react-hooks", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:4.6.0"],\
           ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.0.3"],\
           ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.3"],\
           ["gatsby-plugin-google-gtag", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
