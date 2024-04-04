@@ -26,7 +26,7 @@ export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
 	const projectTypeColor = configManager.getProjectTypeColor(repo.typeName);
 
 	return (
-		<LinkWrapper to={repo.githubUrl} className={`flex flex-col items-start w-full h-full p-4 text-ellipsis text-left relative z-10 justify-between align-middle bg-base-200 border-2 border-base-content/10 rounded-2xl overflow-hidden group duration-500 interactive-scale hover:${projectTypeColor}/75`}>
+		<LinkWrapper to={repo.githubUrl} className={`flex flex-col items-start w-full h-full p-4 text-ellipsis z-10 justify-between align-middle bg-base-200 border-2 border-base-content/10 rounded-2xl overflow-hidden group duration-500 interactive-scale-sm hover:${projectTypeColor}/75`}>
 			<div className='flex flex-row justify-between items-center w-full'>
 				<Pill text={repo.typeName} className={projectTypeColor} />
 				<Button icon={faGithub} className={`m-0 ${showOnCardHoverStyles}`} disabled />
