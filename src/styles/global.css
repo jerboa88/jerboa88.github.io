@@ -85,20 +85,17 @@
 
 @layer utilities {
 
-	/* Disable transitions if an element is flagged as having motion and the the page's `data-motion` attribute is set to `reduce` */
-	html[data-motion="reduce"] .has-motion {
-		transition: none;
-	}
-
 	/* A custom class to make cards interact on hover and click */
 	.interactive-card {
 		@apply transition;
 
-		&:hover {
-			@apply bg-base-100;
-			@apply border-base-content/15;
-			@apply motion-safe:scale-105;
-			@apply motion-safe:shadow-lg;
+		@media (pointer: fine) {
+			&:hover {
+				@apply bg-base-100;
+				@apply border-base-content/15;
+				@apply motion-safe:scale-105;
+				@apply motion-safe:shadow-lg;
+			}
 		}
 
 		&:active {
@@ -110,8 +107,10 @@
 
 	/* Increase scale effect for small elements */
 	button.interactive-card {
-		&:hover {
-			@apply motion-safe:scale-110;
+		@media (pointer: fine) {
+			&:hover {
+				@apply motion-safe:scale-110;
+			}
 		}
 
 		&:active {
@@ -123,9 +122,11 @@
 	.interactive-text {
 		@apply motion-safe:transition;
 
-		&:hover {
-			@apply motion-safe:scale-110;
-			@apply motion-safe:drop-shadow-md;
+		@media (pointer: fine) {
+			&:hover {
+				@apply motion-safe:scale-110;
+				@apply motion-safe:drop-shadow-md;
+			}
 		}
 
 		&:active {
@@ -136,8 +137,10 @@
 
 	/* Decrease scale effect for large text */
 	h1.interactive-text {
-		&:hover {
-			@apply motion-safe:scale-105;
+		@media (pointer: fine) {
+			&:hover {
+				@apply motion-safe:scale-105;
+			}
 		}
 
 		&:active {
