@@ -52,16 +52,6 @@ export function P({ className = '', children }: TextComponentPropsInterface) {
 }
 
 
-// Small text
-export function S({ className = '', children }: TextComponentPropsInterface) {
-	return (
-		<small className={`m-2 inset-x-0 text-xs drop-shadow-sm ${className}`}>
-			{children}
-		</small>
-	);
-}
-
-
 // Span
 export function Span({ className = '', children }: TextComponentPropsInterface) {
 	return (
