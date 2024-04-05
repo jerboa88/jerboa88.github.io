@@ -13,10 +13,10 @@ interface CardPropsInterface extends PropsWithChildren {
 }
 
 export default function Card({ className = '', disabled = false, children }: CardPropsInterface) {
-	const interactiveStyles = disabled ? '' : 'interactive-scale-sm';
+	const interactiveStyles = disabled ? '' : 'interactive-card';
 
 	return (
-		<div className={`bg-base-200 border-2 border-base-content/10 rounded-2xl overflow-hidden duration-500 ${interactiveStyles} ${className}`}>
+		<div className={`bg-base-200 border-2 border-base-content/10 rounded-2xl shadow-md overflow-hidden duration-500 ${interactiveStyles} ${className}`}>
 			{children}
 		</div>
 	);
