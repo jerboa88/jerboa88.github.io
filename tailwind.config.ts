@@ -4,6 +4,7 @@
 */
 
 
+import plugin from 'tailwindcss/plugin';
 import ConfigManager from './src/common/config-manager';
 
 
@@ -35,6 +36,9 @@ module.exports = {
 	plugins: [
 		require('@tailwindcss/typography'),
 		require('daisyui'),
+		plugin(({ addVariant }) => {
+			addVariant('mouse-only', '@media (pointer: fine)');
+		}),
 	],
 	daisyui: {
 		themes: [

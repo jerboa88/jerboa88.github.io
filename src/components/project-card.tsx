@@ -22,13 +22,13 @@ interface ProjectCardPropsInterface {
 }
 
 export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
-	const showOnCardHoverStyles = 'opacity-0 group-hover:opacity-100 transition-opacity transition-200';
+	const showOnCardHoverStyles = 'opacity-0 mouse-only:group-hover:opacity-100 transition-opacity transition-200';
 	const configManager = new ConfigManager();
 	const projectTypeColor = configManager.getProjectTypeColor(repo.typeName);
 
 	return (
 		<LinkWrapper to={repo.githubUrl}>
-			<Card className={`w-full h-full p-4 flex flex-col justify-between items-start align-middle text-ellipsis z-10 group hover:${projectTypeColor}/75`}>
+			<Card className={`w-full h-full p-4 flex flex-col justify-between items-start align-middle text-ellipsis z-10 group mouse-only:hover:${projectTypeColor}/75`}>
 				<div className='flex flex-row justify-between items-center w-full'>
 					<Pill text={repo.typeName} className={projectTypeColor} />
 					<Button icon={faGithub} className={`m-0 ${showOnCardHoverStyles}`} disabled />
