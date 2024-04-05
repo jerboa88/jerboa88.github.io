@@ -15,7 +15,7 @@ interface TextComponentPropsInterface extends PropsWithChildren {
 // Level 1 heading text
 export function H1({ className = '', children }: TextComponentPropsInterface) {
 	return (
-		<h1 className={`align-middle font-heading font-bold uppercase drop-shadow-md interactive-scale-sm ${className}`}>
+		<h1 className={`align-middle font-heading font-bold uppercase drop-shadow interactive-text ${className}`}>
 			{children}
 		</h1>
 	);
@@ -45,7 +45,7 @@ export function H3({ className = '', children }: TextComponentPropsInterface) {
 // Paragraph text
 export function P({ className = '', children }: TextComponentPropsInterface) {
 	return (
-		<p className={`m-4 text-sm ${className}`}>
+		<p className={`m-4 text-sm drop-shadow-sm ${className}`}>
 			{children}
 		</p>
 	);
