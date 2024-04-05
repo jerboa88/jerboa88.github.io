@@ -18,7 +18,7 @@ interface BorderedTextButtonLinkPropsInterface {
 }
 
 export default function BorderedTextButtonLink({ className = '', disabled = false, text, to, isInternal, rel }: BorderedTextButtonLinkPropsInterface) {
-	const enabledStyles = disabled ? '' : 'interactive-scale-sm interactive-border';
+	const enabledStyles = disabled ? '' : 'interactive-card';
 
 	return (
 		<LinkWrapper to={to} isInternal={isInternal} rel={rel}>

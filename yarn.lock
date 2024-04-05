@@ -10365,6 +10365,7 @@ __metadata:
     daisyui: "npm:^4.6.1"
     dompurify: "npm:^3.0.8"
     dotenv: "npm:^16.4.1"
+    eslint-plugin-react-hooks: "npm:^4.6.0"
     framer-motion: "npm:^11.0.3"
     gatsby: "npm:^5.13.3"
     gatsby-plugin-google-gtag: "npm:^5.13.1"

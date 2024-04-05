@@ -90,41 +90,57 @@
 		transition: none;
 	}
 
-	/* A custom class to enable scale transitions on elements */
-	.interactive-scale {
+	/* A custom class to make cards interact on hover and click */
+	.interactive-card {
 		@apply transition;
 
 		&:hover {
-			@apply scale-110;
-			@apply border-base-content/15
+			@apply bg-base-100;
+			@apply border-base-content/15;
+			@apply motion-safe:scale-105;
+			@apply motion-safe:shadow-lg;
 		}
 
 		&:active {
-			@apply scale-90;
+			@apply border-base-content/10;
+			@apply motion-safe:scale-95;
+			@apply motion-safe:shadow;
 		}
 	}
 
-	.interactive-scale-sm {
-		@apply transition;
+	/* Increase scale effect for small elements */
+	button.interactive-card {
+		&:hover {
+			@apply motion-safe:scale-110;
+		}
+
+		&:active {
+			@apply motion-safe:scale-90;
+		}
+	}
+
+	/* A custom class to make text interact on hover and click */
+	.interactive-text {
+		@apply motion-safe:transition;
 
 		&:hover {
-			@apply scale-105;
+			@apply motion-safe:scale-110;
+			@apply motion-safe:drop-shadow-md;
 		}
 
 		&:active {
-			@apply scale-90;
+			@apply motion-safe:drop-shadow-sm;
+			@apply motion-safe:scale-90;
 		}
 	}
 
-	.interactive-border {
-		@apply transition;
-
+	/* Decrease scale effect for large text */
+	h1.interactive-text {
 		&:hover {
-			@apply border-base-content/15
+			@apply motion-safe:scale-105;
 		}
 
 		&:active {
-			@apply border-base-content/10
+			@apply motion-safe:scale-95;
 		}
-	}
-}
+	}}

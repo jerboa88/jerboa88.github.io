@@ -23,7 +23,7 @@ interface ButtonPropsInterface {
 }
 
 export default function Button({ className = '', iconClassName = '', textClassName = '', disabled = false, responsive = false, flip = false, icon, text }: ButtonPropsInterface) {
-	const enabledStyles = disabled ? '' : 'interactive-scale';
+	const enabledStyles = disabled ? '' : 'interactive-text';
 	const flipStyles = flip ? 'flex-row-reverse' : '';
 	const iconOnlyStyles = text ? '' : 'text-xl';
 	const responsiveTextStyles = (responsive && icon) ? 'max-lg:hidden' : '';
