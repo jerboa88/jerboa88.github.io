@@ -44,7 +44,7 @@ export default function Header({ siteMetadata, titleLayoutId, isTitleExpanded = 
 					</H1>
 				</motion.a>}
 
-				<TabsWidget sections={sections} />
+				<TabsWidget sections={sections} hideIndicator={isTitleExpanded} />
 			</div>
 			<div className={`divider h-auto m-0 transition-opacity ${dividerOpacityStyles}`} />
 		</header>

@@ -13,14 +13,16 @@ import ButtonLink from './links/button-link';
 
 interface TabsWidgetPropsInterface {
 	sections: SectionInterface[];
+	hideIndicator?: boolean;
 }
 
-export default function TabsWidget({ sections }: TabsWidgetPropsInterface) {
+export default function TabsWidget({ sections, hideIndicator = false }: TabsWidgetPropsInterface) {
 	// Map is used here because we need to call the same number of hook every time. Otherwise, React will complain
-	const currentSectionIndex = sections.map(section => useInView(section.ref, {
+	const sectionInViewHooks = sections.map(section => useInView(section.ref, {
 		amount: 0,
-		margin: '-16%',
-	})).findIndex(inView => inView);
+		margin: '-70px',
+	}));
+	const currentSectionIndex = hideIndicator ? -1 : sectionInViewHooks.findIndex(inView => inView);
 
 	return (
 		<motion.nav layout="position" className="tabs flex flex-row justify-center" {...getDefaultTransition()}>
