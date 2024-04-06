@@ -67,16 +67,22 @@ export default function Home({ pageContext }: HomePropsInterface) {
 			ref: useRef(null),
 		}
 	] as SectionInterface[];
-	let titleElement = (
+	const titleElement = (
+		<H1 className="m-4 text-6xl">
+			<span className="inline md:hidden">{siteMetadata.author.name.short}</span>
+			<span className="hidden md:inline">{siteMetadata.author.name.full}</span>
+		</H1>
+	);
+	let titleWrapperElement = (
 		<a href="/" className="z-20 opacity-0">
-			<H1 className="m-4 text-6xl">{siteMetadata.author.name}</H1>
+			{titleElement}
 		</a>
 	);
 
 	if (isTitleExpanded) {
-		titleElement = (
+		titleWrapperElement = (
 			<motion.a href="/" className="z-20" layoutId={titleLayoutId} {...getDefaultTransition()}>
-				<H1 className="m-4 text-6xl">{siteMetadata.author.name}</H1>
+				{titleElement}
 			</motion.a>
 		);
 	}
@@ -85,7 +91,7 @@ export default function Home({ pageContext }: HomePropsInterface) {
 		<PageLayout siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
 			<Section className="min-h-svh text-center">
 				<span ref={inViewTriggerRef} />
-				{titleElement}
+				{titleWrapperElement}
 				<P>{siteMetadata.tagline}</P>
 			</Section>
 			<Section className="min-h-screen" {...sections[0]}>
