@@ -29,12 +29,11 @@ export default function SEO({ pageMetadata }: SEOPropsInterface) {
 	const primaryThemeColor = theme.primary;
 	const pageUrl = new URL(pageMetadata.path, siteMetadata.siteUrl).toString();
 
-
 	return (
 		<>
 			<html lang="en-US" />
 			<title>{pageMetadata.title}</title>
-			<meta name="author" content={siteMetadata.author.name} />
+			<meta name="author" content={siteMetadata.author.name.full} />
 			<meta name="description" content={pageMetadata.description} />
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -73,7 +72,7 @@ export default function SEO({ pageMetadata }: SEOPropsInterface) {
 					...pageMetadata.structuredData,
 					author: {
 						'@type': 'Person',
-						name: siteMetadata.author.name,
+						name: siteMetadata.author.name.full,
 						url: siteMetadata.siteUrl,
 						image: siteMetadata.author.image,
 						alumniOf: siteMetadata.author.alumniOf,
