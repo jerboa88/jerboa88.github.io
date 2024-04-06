@@ -16,7 +16,10 @@ export interface SiteMetadataConfigInterface {
 	sourceUrl: string;
 	trackingId: string;
 	author: {
-		name: string;
+		name: {
+			first: string;
+			last: string;
+		};
 		jobTitle: string;
 		alumniOf: string;
 		image: string;
@@ -47,7 +50,13 @@ export interface SiteMetadataInterface {
 	sourceUrl: string;
 	trackingId: string;
 	author: {
-		name: string;
+		name: {
+			first: string;
+			last: string;
+			initial: string;
+			short: string;
+			full: string;
+		}
 		jobTitle: string;
 		alumniOf: string;
 		image: string;

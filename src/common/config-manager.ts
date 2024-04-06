@@ -18,37 +18,46 @@ import iconGenerationConfig from '../config/icon-generation';
 export default class ConfigManager {
 	// TODO: Rename this method to getSiteMetadata
 	getMetadata(): SiteMetadataInterface {
+		const smc = siteMetadataConfig;
+		const authorFullName = `${smc.author.name.first} ${smc.author.name.last}`;
+
 		return {
-			shortTitle: siteMetadataConfig.author.name,
-			title: `${siteMetadataConfig.author.name} | ${siteMetadataConfig.author.jobTitle}`,
-			tagline: `${siteMetadataConfig.author.jobTitle} & Cat Whisperer`,
-			shortDescription: `Portfolio site for ${siteMetadataConfig.author.name}`,
-			description: `Portfolio site for ${siteMetadataConfig.author.name}, a ${siteMetadataConfig.author.jobTitle} based in ${siteMetadataConfig.author.location.city}, ${siteMetadataConfig.author.location.state}.`,
-			ogImagePath: siteMetadataConfig.ogImagePath,
-			ogImageAltText: siteMetadataConfig.ogImageAltText,
-			siteUrl: siteMetadataConfig.siteUrl,
-			sourceUrl: siteMetadataConfig.sourceUrl,
-			trackingId: siteMetadataConfig.trackingId,
+			shortTitle: authorFullName,
+			title: `${authorFullName} | ${smc.author.jobTitle}`,
+			tagline: `${smc.author.jobTitle} & Cat Whisperer`,
+			shortDescription: `Portfolio site for ${authorFullName}`,
+			description: `Portfolio site for ${authorFullName}, a ${smc.author.jobTitle} based in ${smc.author.location.city}, ${smc.author.location.state}.`,
+			ogImagePath: smc.ogImagePath,
+			ogImageAltText: smc.ogImageAltText,
+			siteUrl: smc.siteUrl,
+			sourceUrl: smc.sourceUrl,
+			trackingId: smc.trackingId,
 			author: {
-				name: siteMetadataConfig.author.name,
-				jobTitle: siteMetadataConfig.author.jobTitle,
-				alumniOf: siteMetadataConfig.author.alumniOf,
-				image: siteMetadataConfig.author.image,
+				name: {
+					first: smc.author.name.first,
+					last: smc.author.name.last,
+					initial: smc.author.name.first[0],
+					short: `${smc.author.name.first} ${smc.author.name.last[0]}`,
+					full: authorFullName,
+				},
+				jobTitle: smc.author.jobTitle,
+				alumniOf: smc.author.alumniOf,
+				image: smc.author.image,
 				username: {
-					twitter: siteMetadataConfig.author.username.twitter,
+					twitter: smc.author.username.twitter,
 				},
 				link: {
-					linkedin: `https://www.linkedin.com/in/${siteMetadataConfig.author.username.linkedin}`,
-					github: `https://github.com/${siteMetadataConfig.author.username.github}`,
-					twitter: `https://twitter.com/${siteMetadataConfig.author.username.twitter}`,
+					linkedin: `https://www.linkedin.com/in/${smc.author.username.linkedin}`,
+					github: `https://github.com/${smc.author.username.github}`,
+					twitter: `https://twitter.com/${smc.author.username.twitter}`,
 				},
 				location: {
-					city: siteMetadataConfig.author.location.city,
-					state: siteMetadataConfig.author.location.state,
-					country: siteMetadataConfig.author.location.country,
+					city: smc.author.location.city,
+					state: smc.author.location.state,
+					country: smc.author.location.country,
 				},
 			}
-		}
+		};
 	}
 
 	// Returns a list of jobs with formatted date objects
