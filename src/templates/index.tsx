@@ -33,7 +33,7 @@ export default function Home({ pageContext }: HomePropsInterface) {
 	const inViewTriggerRef = useRef(null);
 	const isTitleExpanded = useInView(inViewTriggerRef, {
 		amount: 0,
-		margin: '-16%',
+		margin: '-70px',
 	});
 	const sections = [
 		{
@@ -67,14 +67,25 @@ export default function Home({ pageContext }: HomePropsInterface) {
 			ref: useRef(null),
 		}
 	] as SectionInterface[];
+	let titleElement = (
+		<a href="/" className="z-20 opacity-0">
+			<H1 className="m-4 text-6xl">{siteMetadata.author.name}</H1>
+		</a>
+	);
+
+	if (isTitleExpanded) {
+		titleElement = (
+			<motion.a href="/" className="z-20" layoutId={titleLayoutId} {...getDefaultTransition()}>
+				<H1 className="m-4 text-6xl">{siteMetadata.author.name}</H1>
+			</motion.a>
+		);
+	}
 
 	return (
 		<PageLayout siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
 			<Section className="min-h-screen text-center">
-				{isTitleExpanded && <motion.a href="/" className="z-20" layoutId={titleLayoutId} {...getDefaultTransition()}>
-					<H1 className="m-4 text-6xl">{siteMetadata.author.name}</H1>
-				</motion.a>}
 				<span ref={inViewTriggerRef} />
+				{titleElement}
 				<P>{siteMetadata.tagline}</P>
 			</Section>
 			<Section className="min-h-screen" {...sections[0]}>
