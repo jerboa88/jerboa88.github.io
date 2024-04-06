@@ -29,7 +29,7 @@ export default function Button({ className = '', iconClassName = '', textClassNa
 	const responsiveTextStyles = (responsive && icon) ? 'max-lg:hidden' : '';
 
 	return (
-		<button className={`flex gap-2 p-2 sm:p-4 items-center self-center text-sm font-button uppercase drop-shadow group ${enabledStyles} ${flipStyles} ${className}`}>
+		<button className={`flex flex-row items-center self-center gap-2 p-2 sm:p-4 text-sm font-button uppercase drop-shadow group ${enabledStyles} ${flipStyles} ${className}`}>
 			{icon && <FontAwesomeIcon icon={icon} className={`fa-fw ${iconOnlyStyles} ${iconClassName}`} />}
 			{text && <Span className={`${textClassName} ${responsiveTextStyles}`}>{text}</Span>}
 		</button>

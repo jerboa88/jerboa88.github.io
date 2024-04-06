@@ -7,7 +7,7 @@
 import React, { useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import { motion, useInView } from 'framer-motion';
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpRightFromSquare, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import ConfigManager from '../common/config-manager';
 import { ProjectInfoInterface, SectionInterface } from '../common/types';
 import { getDefaultTransition } from '../common/utilities';
@@ -17,6 +17,7 @@ import SEO from '../components/layout/seo';
 import { H1, P } from '../components/text-components';
 import ProjectCardGallery from '../components/project-card-gallery';
 import Timeline from '../components/timeline';
+import ButtonLink from '../components/links/button-link';
 
 
 interface HomePropsInterface {
@@ -93,6 +94,7 @@ export default function Home({ pageContext }: HomePropsInterface) {
 				<span ref={inViewTriggerRef} />
 				{titleWrapperElement}
 				<P>{siteMetadata.tagline}</P>
+				<ButtonLink to={`#${sections[0].id}`} className={`absolute bottom-0 mb-4 transition ${isTitleExpanded ? '' : 'opacity-0'}`} icon={faChevronDown} isInternal />
 			</Section>
 			<Section className="min-h-screen" {...sections[0]}>
 				<p>
