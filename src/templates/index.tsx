@@ -83,7 +83,7 @@ export default function Home({ pageContext }: HomePropsInterface) {
 
 	return (
 		<PageLayout siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
-			<Section className="min-h-screen text-center">
+			<Section className="min-h-svh text-center">
 				<span ref={inViewTriggerRef} />
 				{titleElement}
 				<P>{siteMetadata.tagline}</P>
