@@ -27,7 +27,7 @@ export default function SectionHeader({ className = '', title, button }: Section
 			<div className={`w-full flex justify-between items-baseline pt-8 ${className}`}>
 				<H2>{title}</H2>
 				{button && (
-					<Tooltip text={button.text} className="tooltip-left">
+					<Tooltip text={button.text} className="!tooltip-left">
 						<ButtonLink {...button} responsive flip className="self-baseline" />
 					</Tooltip>
 				)}

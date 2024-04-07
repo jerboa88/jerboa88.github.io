@@ -97,9 +97,11 @@ export default function Home({ pageContext }: HomePropsInterface) {
 				<P>
 					{siteMetadata.tagline}
 				</P>
-				<Tooltip text={`Go to ${sections[0].title} section`} className="fixed inset-x-0 bottom-0 mb-4 flex flex-row justify-center">
-					<ButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={`transition ${isTitleExpanded ? '' : 'opacity-0'}`} isInternal />
-				</Tooltip>
+				<div className="fixed inset-x-0 bottom-0 mb-4 flex flex-row justify-center">
+					<Tooltip text={`Go to ${sections[0].title} section`}>
+						<ButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={`transition ${isTitleExpanded ? '' : 'opacity-0'}`} isInternal />
+					</Tooltip>
+				</div>
 			</Section>
 			<Section className="min-h-screen" {...sections[0]}>
 				<p>
