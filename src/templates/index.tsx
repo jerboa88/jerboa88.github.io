@@ -18,6 +18,7 @@ import { H1, P } from '../components/text-components';
 import ProjectCardGallery from '../components/project-card-gallery';
 import Timeline from '../components/timeline';
 import ButtonLink from '../components/links/button-link';
+import Tooltip from '../components/tooltip';
 
 
 interface HomePropsInterface {
@@ -93,8 +94,12 @@ export default function Home({ pageContext }: HomePropsInterface) {
 			<Section className="min-h-svh text-center">
 				<span ref={inViewTriggerRef} />
 				{titleWrapperElement}
-				<P>{siteMetadata.tagline}</P>
-				<ButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={`fixed bottom-0 mb-4 transition ${isTitleExpanded ? '' : 'opacity-0'}`} isInternal />
+				<P>
+					{siteMetadata.tagline}
+				</P>
+				<Tooltip text={`Go to ${sections[0].title} section`} className="fixed inset-x-0 bottom-0 mb-4 flex flex-row justify-center">
+					<ButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={`transition ${isTitleExpanded ? '' : 'opacity-0'}`} isInternal />
+				</Tooltip>
 			</Section>
 			<Section className="min-h-screen" {...sections[0]}>
 				<p>
