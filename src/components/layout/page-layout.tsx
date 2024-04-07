@@ -15,10 +15,10 @@ interface PageLayoutPropsInterface extends PropsWithChildren {
 	siteMetadata: SiteMetadataInterface;
 	titleLayoutId?: string;
 	isTitleExpanded?: boolean;
-	sections: SectionInterface[];
+	sections?: SectionInterface[];
 }
 
-export default function PageLayout({ className = '', siteMetadata, titleLayoutId, isTitleExpanded = false, sections, children }: PageLayoutPropsInterface) {
+export default function PageLayout({ className = '', siteMetadata, titleLayoutId, isTitleExpanded = false, sections = [], children }: PageLayoutPropsInterface) {
 	// const lsKeyForTheme = 'is-dark-theme';
 	// const lsKeyForMotion = 'is-motion-allowed';
 	// const lsKeyForAnalytics = `ga-disable-${props.siteMetadata.trackingId}`;
