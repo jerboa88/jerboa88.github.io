@@ -15,7 +15,7 @@ interface PillPropsInterface {
 
 export default function Pill({ className = '', text }: PillPropsInterface) {
 	return (
-		<div key={text} className={`inline-block w-fit h-fit px-3 py-2 rounded-lg drop-shadow-sm ${className}`}>
+		<div key={text} className={`inline-block size-fit px-3 py-2 rounded-lg drop-shadow-sm ${className}`}>
 			<Span>{text}</Span>
 		</div>
 	);
