@@ -7,7 +7,7 @@
 import React, { useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import { motion, useInView } from 'framer-motion';
-import { faArrowUpRightFromSquare, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import ConfigManager from '../common/config-manager';
 import { ProjectInfoInterface, SectionInterface } from '../common/types';
 import { getDefaultTransition } from '../common/utilities';
@@ -94,7 +94,7 @@ export default function Home({ pageContext }: HomePropsInterface) {
 				<span ref={inViewTriggerRef} />
 				{titleWrapperElement}
 				<P>{siteMetadata.tagline}</P>
-				<ButtonLink to={`#${sections[0].id}`} className={`absolute bottom-0 mb-4 transition ${isTitleExpanded ? '' : 'opacity-0'}`} icon={faChevronDown} isInternal />
+				<ButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={`fixed bottom-0 mb-4 transition ${isTitleExpanded ? '' : 'opacity-0'}`} isInternal />
 			</Section>
 			<Section className="min-h-screen" {...sections[0]}>
 				<p>
