@@ -11,9 +11,9 @@ import ConfigManager from '../common/config-manager';
 import { getProjectImage } from '../common/utilities';
 import { ProjectInfoInterface } from '../common/types';
 import LinkWrapper from './links/link-wrapper';
+import GhostButton from './input/ghost-button';
 import { H3, P } from './text-components';
 import Pill from './pill';
-import Button from './button';
 import Card from './card';
 
 
@@ -31,7 +31,7 @@ export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
 			<Card className={`size-full p-4 flex flex-col justify-between items-start align-middle text-ellipsis z-10 group mouse-only:hover:${projectTypeColor}/75`}>
 				<div className="flex flex-row justify-between items-center w-full">
 					<Pill text={repo.typeName} className={projectTypeColor} />
-					<Button icon={faGithub} className={`m-0 ${showOnCardHoverStyles}`} disabled />
+					<GhostButton icon={faGithub} className={`m-0 ${showOnCardHoverStyles}`} disabled />
 				</div>
 				<div className="flex flex-row justify-center w-full">
 					{/* TODO: Put project icon here? */}
@@ -52,7 +52,7 @@ export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
 						}
 					</div>
 					<div className="flex flex-row items-center">
-						<Button icon={faStar} text={repo.stargazers.toString()} className="font-bold text-xl" iconClassName="mb-1" disabled />
+						<GhostButton icon={faStar} text={repo.stargazers.toString()} className="font-bold text-xl" iconClassName="mb-1" disabled />
 					</div>
 				</div>
 			</Card>

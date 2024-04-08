@@ -7,7 +7,7 @@
 import React from 'react';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import LinkWrapper from './link-wrapper';
-import Button from '../button';
+import GhostButton from '../input/ghost-button';
 
 
 interface ButtonLinkPropsInterface {
@@ -28,7 +28,7 @@ interface ButtonLinkPropsInterface {
 export default function ButtonLink({ className, iconClassName, textClassName, disabled, responsive, flip, icon, text, to, isInternal, rel }: ButtonLinkPropsInterface) {
 	return (
 		<LinkWrapper to={to} isInternal={isInternal} rel={rel} className="contents">
-			<Button {...{ className, iconClassName, textClassName, disabled, responsive, flip, icon, text }} />
+			<GhostButton {...{ className, iconClassName, textClassName, disabled, responsive, flip, icon, text }} />
 		</LinkWrapper>
 	);
 }

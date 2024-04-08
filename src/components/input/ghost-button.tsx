@@ -1,16 +1,16 @@
 /*
-	A button with optional text/icon
-	--------------------------------
+	A borderless button with optional text/icon
+	-------------------------------------------
 */
 
 
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { Span } from './text-components';
+import { Span } from '../text-components';
 
 
-interface ButtonPropsInterface {
+interface GhostButtonPropsInterface {
 	className?: string;
 	iconClassName?: string;
 	textClassName?: string;
@@ -22,7 +22,7 @@ interface ButtonPropsInterface {
 	key?: string;
 }
 
-export default function Button({ className = '', iconClassName = '', textClassName = '', disabled = false, responsive = false, flip = false, icon, text }: ButtonPropsInterface) {
+export default function GhostButton({ className = '', iconClassName = '', textClassName = '', disabled = false, responsive = false, flip = false, icon, text }: GhostButtonPropsInterface) {
 	const enabledStyles = disabled ? '' : 'interactive-text';
 	const flipStyles = flip ? 'flex-row-reverse' : '';
 	const iconOnlyStyles = text ? '' : 'text-xl';
