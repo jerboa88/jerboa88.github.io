@@ -8,7 +8,7 @@ import React from 'react';
 import LinkWrapper from './link-wrapper';
 
 
-interface BorderedTextButtonLinkPropsInterface {
+interface SolidButtonLinkPropsInterface {
 	className?: string;
 	disabled?: boolean;
 	text: string;
@@ -17,7 +17,7 @@ interface BorderedTextButtonLinkPropsInterface {
 	rel?: string;
 }
 
-export default function BorderedTextButtonLink({ className = '', disabled = false, text, to, isInternal, rel }: BorderedTextButtonLinkPropsInterface) {
+export default function SolidButtonLink({ className = '', disabled = false, text, to, isInternal, rel }: SolidButtonLinkPropsInterface) {
 	const enabledStyles = disabled ? '' : 'interactive-card';
 
 	return (

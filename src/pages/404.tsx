@@ -11,7 +11,7 @@ import { SectionInterface } from '../common/types';
 import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
 import SEO from '../components/layout/seo';
-import BorderedTextButtonLink from '../components/links/bordered-text-button-link';
+import SolidButtonLink from '../components/links/solid-button-link';
 
 
 export default function NotFoundPage() {
@@ -47,7 +47,7 @@ export default function NotFoundPage() {
 						{sadCat}
 					</pre>
 				</figure>
-				<BorderedTextButtonLink text="Home" to="/" isInternal />
+				<SolidButtonLink text="Home" to="/" isInternal />
 			</Section>
 		</PageLayout>
 	);
