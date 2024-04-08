@@ -154,8 +154,8 @@ export interface SectionInterface {
 	title: string;
 	ref: RefObject<HTMLElement>;
 	button?: {
-		text?: string;
-		icon?: IconDefinition;
+		text: string;
+		icon: IconDefinition;
 		to: string;
 	}
 }
