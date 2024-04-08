@@ -16,12 +16,13 @@
 	.flex-row,
 	.flex-col {
 		@apply flex;
-	}
 
-	/* Make sure that this style takes precedence */
-	.flex-row.hidden,
-	.flex-col.hidden {
-		display: none;
+		/* Make sure that this style takes precedence */
+		&.hidden,
+		&.hidden {
+			/* We can't write this as `@apply hidden` because it creates a circular dependency */
+			display: none;
+		}
 	}
 
 	/* Apply btn class automatically to all button variants and change the default font */
