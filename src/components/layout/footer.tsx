@@ -30,10 +30,10 @@ export default function Footer({ siteMetadata }: FooterPropsInterface) {
 					</Tooltip> */}
 				</nav>
 				<nav className="flex flex-row justify-center">
-					<Tooltip text="View my profile on LinkedIn" className="tooltip-left">
+					<Tooltip text="View my profile on LinkedIn" className="!tooltip-left">
 						<ButtonLink to={siteMetadata.author.link.linkedin} icon={faLinkedin} />
 					</Tooltip>
-					<Tooltip text="View my profile on GitHub" className="tooltip-left">
+					<Tooltip text="View my profile on GitHub" className="!tooltip-left">
 						<ButtonLink to={siteMetadata.author.link.github} icon={faGithub} />
 					</Tooltip>
 				</nav>
