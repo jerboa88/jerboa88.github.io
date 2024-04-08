@@ -21,8 +21,8 @@ export default function TagsWidget({ className = '', tags }: TagsWidgetPropsInte
 				tags.map(({ name, color }) => {
 					return (
 						<div key={name} className={'inline-block'}>
-							<span className='m-0 align-middle text-4xl leading-4 drop-shadow' style={{ color: `${color}` }}>•</span>
-							<P className='inline mx-1 my-0 drop-shadow'>{name}</P>
+							<span className="m-0 align-middle text-4xl leading-4 drop-shadow" style={{ color: `${color}` }}>•</span>
+							<P className="inline mx-1 my-0 drop-shadow">{name}</P>
 						</div>
 					);
 				})

@@ -25,7 +25,7 @@ export default function ProjectPage({ pageContext }: ProjectPagePropsInterface) 
 
 	return (
 		<PageLayout siteMetadata={siteMetadata}>
-			<img src={getProjectImage(pageContext.imageUrl)} width='500' alt=''></img>
+			<img src={getProjectImage(pageContext.imageUrl)} width="500" alt="TODO"></img>
 			<H2>{pageContext.name}</H2>
 			<P>{pageContext.shortDesc}</P>
 			<P>{pageContext.typeName}</P>
