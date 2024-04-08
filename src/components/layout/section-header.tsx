@@ -7,7 +7,7 @@
 import React, { PropsWithChildren } from 'react';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { H2 } from '../text-components';
-import ButtonLink from '../links/button-link';
+import GhostButtonLink from '../links/ghost-button-link';
 import Tooltip from '../tooltip';
 
 
@@ -28,7 +28,7 @@ export default function SectionHeader({ className = '', title, button }: Section
 				<H2>{title}</H2>
 				{button && (
 					<Tooltip text={button.text} className="!tooltip-left">
-						<ButtonLink {...button} responsive flip className="self-baseline" />
+						<GhostButtonLink {...button} responsive flip className="self-baseline" />
 					</Tooltip>
 				)}
 			</div>

@@ -17,7 +17,7 @@ import SEO from '../components/layout/seo';
 import { H1, P } from '../components/text-components';
 import ProjectCardGallery from '../components/project-card-gallery';
 import Timeline from '../components/timeline';
-import ButtonLink from '../components/links/button-link';
+import GhostButtonLink from '../components/links/ghost-button-link';
 import Tooltip from '../components/tooltip';
 
 
@@ -99,7 +99,7 @@ export default function Home({ pageContext }: HomePropsInterface) {
 				</P>
 				<div className="fixed inset-x-0 bottom-0 mb-4 flex flex-row justify-center">
 					<Tooltip text={`Go to ${sections[0].title} section`}>
-						<ButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={`transition ${isTitleExpanded ? '' : 'opacity-0'}`} isInternal />
+						<GhostButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={`transition ${isTitleExpanded ? '' : 'opacity-0'}`} isInternal />
 					</Tooltip>
 				</div>
 			</Section>

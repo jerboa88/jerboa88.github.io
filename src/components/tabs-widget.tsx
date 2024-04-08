@@ -8,7 +8,7 @@ import React from 'react';
 import { motion, useInView } from 'framer-motion';
 import { getDefaultTransition } from '../common/utilities';
 import { SectionInterface } from '../common/types';
-import ButtonLink from './links/button-link';
+import GhostButtonLink from './links/ghost-button-link';
 
 
 interface TabsWidgetPropsInterface {
@@ -39,7 +39,7 @@ export default function TabsWidget({ sections, hideIndicator = false }: TabsWidg
 					return (
 						<div key={title} className="flex flex-col items-center">
 							<motion.div layout="position" {...getDefaultTransition()}>
-								<ButtonLink className={`tab !py-0 ${buttonActiveClass}`} text={title} to={`#${id}`} isInternal />
+								<GhostButtonLink className={`tab !py-0 ${buttonActiveClass}`} text={title} to={`#${id}`} isInternal />
 							</motion.div>
 							{indicatorElement}
 						</div>
