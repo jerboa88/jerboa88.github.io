@@ -22,11 +22,11 @@ export default function Footer({ siteMetadata }: FooterPropsInterface) {
 			<div className="flex-row p-4 pb-4 items-center justify-between">
 				<nav className="tabs flex-row justify-center font-button">
 					<Tooltip text="View the source code on GitHub" className="!tooltip-right">
-						<GhostButtonLink text="Source" to={siteMetadata.sourceUrl} className="uppercase" />
+						<GhostButtonLink text="Source" to={siteMetadata.sourceUrl} />
 					</Tooltip>
 					{/* TODO: Add privacy policy */}
 					{/* <Tooltip text="View the privacy policy" className="!tooltip-right">
-						<GhostButtonLink text="Privacy" to="#" className="uppercase"/>
+						<GhostButtonLink text="Privacy" to="#"/>
 					</Tooltip> */}
 				</nav>
 				<nav className="flex flex-row justify-center">
