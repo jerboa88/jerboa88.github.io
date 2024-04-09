@@ -5,33 +5,15 @@
 
 
 import React from 'react';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Span } from '../text-components';
+import ButtonBase from './button-base';
+import { ButtonInterface } from '../../common/types';
 
 
-interface GhostButtonPropsInterface {
-	className?: string;
-	iconClassName?: string;
-	textClassName?: string;
-	disabled?: boolean;
-	responsive?: boolean;
-	icon?: IconDefinition;
-	text?: string;
-	flip?: boolean;
-	key?: string;
-}
-
-export default function GhostButton({ className = '', iconClassName = '', textClassName = '', disabled = false, responsive = false, flip = false, icon, text }: GhostButtonPropsInterface) {
-	const enabledStyles = disabled ? '' : 'interactive-text';
-	const flipStyles = flip ? 'flex-row-reverse' : '';
-	const iconOnlyStyles = text ? '' : 'text-xl';
-	const responsiveTextStyles = (responsive && icon) ? 'max-lg:hidden' : '';
+export default function GhostButton({ className = '', iconClassName, textClassName, icon, text, disabled, responsive, flip }: ButtonInterface) {
+	const buttonEnabledStyles = disabled ? '' : 'interactive-text';
+	const buttonStyles = `p-2 sm:p-4 drop-shadow ${buttonEnabledStyles} ${className}`;
 
 	return (
-		<button className={`flex flex-row justify-center items-center self-center gap-2 p-2 sm:p-4 text-sm font-button uppercase drop-shadow group ${enabledStyles} ${flipStyles} ${className}`}>
-			{icon && <FontAwesomeIcon icon={icon} className={`fa-fw ${iconOnlyStyles} ${iconClassName}`} />}
-			{text && <Span className={`${textClassName} ${responsiveTextStyles}`}>{text}</Span>}
-		</button>
+		<ButtonBase className={buttonStyles} {...{ iconClassName, textClassName, disabled, responsive, flip, icon, text }} />
 	);
 }
