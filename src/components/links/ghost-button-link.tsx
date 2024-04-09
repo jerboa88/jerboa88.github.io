@@ -1,5 +1,5 @@
 /*
-	A button link with optional text/icon
+	A borderless button link with optional text/icon
 	-------------------------------------
 */
 
