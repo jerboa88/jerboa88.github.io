@@ -171,6 +171,7 @@ export interface ButtonInterface {
 	className?: string;
 	iconClassName?: string;
 	textClassName?: string;
+	type?: 'button' | 'submit' | 'reset';
 	icon?: IconDefinition;
 	text?: string | number;
 	disabled?: boolean;

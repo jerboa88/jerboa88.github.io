@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ButtonInterface } from '../../common/types';
 
 
-export default function ButtonBase({ className = '', iconClassName = '', textClassName = '', disabled = false, responsive = false, flip = false, icon, text }: ButtonInterface) {
+export default function ButtonBase({ className = '', type = 'button', iconClassName = '', textClassName = '', disabled = false, responsive = false, flip = false, icon, text }: ButtonInterface) {
 	const buttonFlipStyles = flip ? 'flex-row-reverse' : '';
 	const buttonStyles = `flex flex-row justify-center items-center self-center gap-2 text-sm font-button uppercase ${buttonFlipStyles} ${className}`;
 
@@ -21,7 +21,7 @@ export default function ButtonBase({ className = '', iconClassName = '', textCla
 	const textStyles = `${textResponsiveStyles} ${textClassName} `;
 
 	return (
-		<button className={buttonStyles} disabled={disabled}>
+		<button type={type} disabled={disabled} className={buttonStyles} >
 			{icon && <FontAwesomeIcon icon={icon} className={iconStyles} />}
 			{text && <span className={textStyles}>{text}</span>}
 		</button>
