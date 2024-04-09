@@ -52,7 +52,7 @@ export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
 						}
 					</div>
 					<div className="flex flex-row items-center">
-						<GhostButton icon={faStar} text={repo.stargazers.toString()} className="font-bold text-xl" iconClassName="mb-1" disabled />
+						<GhostButton icon={faStar} text={repo.stargazers} iconClassName="mb-1 font-bold text-xl" disabled />
 					</div>
 				</div>
 			</Card>

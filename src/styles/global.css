@@ -106,45 +106,20 @@
 		}
 	}
 
-	/* Increase scale effect for small elements */
-	button.interactive-card {
-		@media (pointer: fine) {
-			&:hover {
-				@apply motion-safe:scale-110;
-			}
-		}
-
-		&:active {
-			@apply motion-safe:scale-90;
-		}
-	}
-
 	/* A custom class to make text interact on hover and click */
 	.interactive-text {
 		@apply motion-safe:transition;
 
 		@media (pointer: fine) {
 			&:hover {
-				@apply motion-safe:scale-110;
+				@apply motion-safe:scale-105;
 				@apply motion-safe:drop-shadow-md;
 			}
 		}
 
 		&:active {
 			@apply motion-safe:drop-shadow-sm;
-			@apply motion-safe:scale-90;
-		}
-	}
-
-	/* Decrease scale effect for large text */
-	h1.interactive-text {
-		@media (pointer: fine) {
-			&:hover {
-				@apply motion-safe:scale-105;
-			}
-		}
-
-		&:active {
 			@apply motion-safe:scale-95;
 		}
-	}}
+	}
+}
