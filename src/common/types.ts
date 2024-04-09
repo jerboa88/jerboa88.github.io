@@ -160,6 +160,24 @@ export interface SectionInterface {
 	}
 }
 
+export interface LinkInterface {
+	to: string;
+	isInternal?: boolean;
+	rel?: string;
+}
+
+
+export interface ButtonInterface {
+	className?: string;
+	iconClassName?: string;
+	textClassName?: string;
+	icon?: IconDefinition;
+	text?: string | number;
+	disabled?: boolean;
+	responsive?: boolean;
+	flip?: boolean;
+}
+
 
 export interface ProjectLanguageInterface {
 	name: string;
