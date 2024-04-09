@@ -5,30 +5,17 @@
 
 
 import React from 'react';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { ButtonInterface, LinkInterface } from '../../common/types';
 import LinkWrapper from './link-wrapper';
 import SolidButton from '../input/solid-button';
 
 
-interface SolidButtonLinkPropsInterface {
-	className?: string;
-	iconClassName?: string;
-	textClassName?: string;
-	disabled?: boolean;
-	icon?: IconDefinition;
-	text?: string;
-	responsive?: boolean;
-	flip?: boolean;
-	key?: string;
-	to: string;
-	isInternal?: boolean;
-	rel?: string;
-}
+interface SolidButtonLinkPropsInterface extends ButtonInterface, LinkInterface { }
 
-export default function SolidButtonLink({ className, iconClassName, textClassName, disabled, responsive, flip, icon, text, to, isInternal, rel }: SolidButtonLinkPropsInterface) {
+export default function SolidButtonLink({ className, iconClassName, textClassName, icon, text, disabled, responsive, flip, to, isInternal, rel }: SolidButtonLinkPropsInterface) {
 	return (
 		<LinkWrapper to={to} isInternal={isInternal} rel={rel}>
-			<SolidButton {...{ className, iconClassName, textClassName, disabled, responsive, flip, icon, text }} />
+			<SolidButton {...{ className, iconClassName, textClassName, icon, text, disabled, responsive, flip }} />
 		</LinkWrapper>
 	);
 }

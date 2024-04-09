@@ -5,8 +5,8 @@
 
 
 import React from 'react';
-import ButtonBase from './button-base';
 import { ButtonInterface } from '../../common/types';
+import ButtonBase from './button-base';
 
 
 export default function SolidButton({ className = '', iconClassName, textClassName, icon, text, disabled, responsive, flip }: ButtonInterface) {
