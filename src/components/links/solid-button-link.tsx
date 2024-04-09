@@ -1,30 +1,34 @@
 /*
-	A text-only button link with a border
-	-------------------------------------
+	A bordered button link with optional text/icon
+	----------------------------------------------
 */
 
 
 import React from 'react';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import LinkWrapper from './link-wrapper';
+import SolidButton from '../input/solid-button';
 
 
 interface SolidButtonLinkPropsInterface {
 	className?: string;
+	iconClassName?: string;
+	textClassName?: string;
 	disabled?: boolean;
-	text: string;
+	icon?: IconDefinition;
+	text?: string;
+	responsive?: boolean;
+	flip?: boolean;
+	key?: string;
 	to: string;
 	isInternal?: boolean;
 	rel?: string;
 }
 
-export default function SolidButtonLink({ className = '', disabled = false, text, to, isInternal, rel }: SolidButtonLinkPropsInterface) {
-	const enabledStyles = disabled ? '' : 'interactive-card';
-
+export default function SolidButtonLink({ className, iconClassName, textClassName, disabled, responsive, flip, icon, text, to, isInternal, rel }: SolidButtonLinkPropsInterface) {
 	return (
 		<LinkWrapper to={to} isInternal={isInternal} rel={rel}>
-			<button className={`px-4 sm:px-8 py-2 text-center text-sm font-button uppercase bg-base-200 border-2 border-base-content/10 rounded-lg drop-shadow-sm ${enabledStyles} ${className}`}>
-				{text}
-			</button>
+			<SolidButton {...{ className, iconClassName, textClassName, disabled, responsive, flip, icon, text }} />
 		</LinkWrapper>
 	);
 }
