@@ -15,11 +15,11 @@ import { H2, P } from '../components/text-components';
 import LinkWrapper from '../components/links/link-wrapper';
 
 
-interface ProjectPagePropsInterface {
+interface ProjectPageTemplatePropsInterface {
 	pageContext: ProjectInfoInterface;
 }
 
-export default function ProjectPage({ pageContext }: ProjectPagePropsInterface) {
+export default function ProjectPageTemplate({ pageContext }: ProjectPageTemplatePropsInterface) {
 	const configManager = new ConfigManager();
 	const siteMetadata = configManager.getMetadata();
 
