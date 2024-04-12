@@ -24,13 +24,13 @@ import MultilineTextInput from '../components/input/multiline-text-input';
 import SolidButton from '../components/input/solid-button';
 
 
-interface HomePropsInterface {
+interface IndexPageTemplatePropsInterface {
 	pageContext: {
 		pinnedRepos: ProjectInfoInterface[];
 	};
 }
 
-export default function Home({ pageContext }: HomePropsInterface) {
+export default function IndexPageTemplate({ pageContext }: IndexPageTemplatePropsInterface) {
 	const titleLayoutId = 'title-layout';
 	const configManager = new ConfigManager();
 	const siteMetadata = configManager.getMetadata();
