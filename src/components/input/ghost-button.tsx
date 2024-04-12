@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { ButtonInterface } from '../../common/types';
-import ButtonBase from './button-base';
+import BaseButton from './base-button';
 
 
 export default function GhostButton({ className = '', disabled, ...remainingProps }: ButtonInterface) {
@@ -14,6 +14,6 @@ export default function GhostButton({ className = '', disabled, ...remainingProp
 	const buttonStyles = `p-2 sm:p-4 drop-shadow ${buttonEnabledStyles} ${className}`;
 
 	return (
-		<ButtonBase className={buttonStyles} disabled={disabled} {...remainingProps} />
+		<BaseButton className={buttonStyles} disabled={disabled} {...remainingProps} />
 	);
 }
