@@ -35,8 +35,8 @@ export default {
 		'success': '#86EFAC',						// TW Green 300
 		'warning': '#FDE047',						// TW Yellow 300
 		'error': '#FCA5A5',							// TW Red 300
-		'base-100': '#151515',
-		'base-200': '#090909',
+		'base-100': '#131313',
+		'base-200': '#080808',
 		'base-300': '#030303',
 		'base-content': '#FFFFFF',
 	},
