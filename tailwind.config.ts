@@ -20,7 +20,7 @@ module.exports = {
 			sans: ['Roboto Flex', 'Roboto', 'Tahoma', 'Arial', 'Helvetica', 'sans-serif'],
 		},
 		transitionDuration: {
-			DEFAULT: '200ms',
+			DEFAULT: '150ms',
 		},
 		extend: {
 			fontFamily: {
