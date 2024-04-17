@@ -19,15 +19,14 @@ export default function Footer({ siteMetadata }: FooterPropsInterface) {
 	return (
 		<footer className="w-full bg-base-200 z-20">
 			<div className="divider h-auto m-0 opacity-100" />
-			<div className="flex-row p-4 pb-4 items-center justify-between">
-				<nav className="tabs flex-row justify-center font-button">
+			<div className="flex flex-row p-4 pb-4 items-center justify-between">
+				<nav className="tabs flex flex-row justify-center font-button">
 					<Tooltip text="View the source code on GitHub" className="!tooltip-right">
 						<GhostButtonLink text="Source" to={siteMetadata.sourceUrl} />
 					</Tooltip>
-					{/* TODO: Add privacy policy */}
-					{/* <Tooltip text="View the privacy policy" className="!tooltip-right">
-						<GhostButtonLink text="Privacy" to="#"/>
-					</Tooltip> */}
+					<Tooltip text="View the Privacy Policy" className="!tooltip-right">
+						<GhostButtonLink text="Privacy" to="/privacy-policy" isInternal />
+					</Tooltip>
 				</nav>
 				<nav className="flex flex-row justify-center">
 					<Tooltip text="View my profile on LinkedIn" className="!tooltip-left">
