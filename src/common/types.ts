@@ -149,6 +149,12 @@ export interface ColorMappingsConfigInterface {
 }
 
 
+// Props for components that accept an optional classname
+export interface PropsWithClassname {
+	className?: string;
+}
+
+
 export interface SectionInterface {
 	id: string;
 	title: string;
