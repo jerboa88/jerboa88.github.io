@@ -128,7 +128,7 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 			<Section className="min-h-screen" {...sections[3]}>
 				<div className="w-full flex flex-row justify-center">
 					{/* TODO: Hook up this with a backend form provider */}
-					<form action="TODO" method="post" className="w-full max-w-lg p-8 flex flex-col gap-4">
+					<form action="TODO" method="post" className="w-full max-w-lg p-0 sm:p-8 flex flex-col gap-4">
 						<TextInput name="name" label="Name" className="w-full" required />
 						<TextInput name="email" label="Email" type="email" className="w-full" required />
 						<MultilineTextInput name="message" label="Message" className="w-full" required />
