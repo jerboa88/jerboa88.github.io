@@ -12,7 +12,7 @@ import { LinkInterface, PropsWithClassName } from '../../common/types';
 interface LinkWrapperProps extends LinkInterface, PropsWithClassName, PropsWithChildren { }
 
 export default function LinkWrapper({ className = '', to, isInternal = false, rel = '', children }: LinkWrapperProps) {
-	const styles = `link no-underline whitespace-nowrap ${className}`;
+	const styles = `whitespace-nowrap ${className}`;
 
 	if (isInternal) {
 		return (
