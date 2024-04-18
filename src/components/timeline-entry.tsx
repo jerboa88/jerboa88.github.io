@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { RoleInterface } from '../common/types';
 import ConfigManager from '../common/config-manager';
-import { Span } from './text-components';
 import SubsectionHeading from './text/subsection-heading';
 import DateRange from './text/date-range';
 import Pill from './pill';
@@ -30,9 +29,9 @@ export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
 			<div className="timeline-start !m-0 px-8 pb-8 !row-start-2 !self-start flex flex-col max-lg:flex-row w-fit max-lg:w-full justify-between gap-4 items-start max-lg:items-center text-left">
 				<div>
 					<DateRange startDate={role.startDate} endDate={role.endDate} />
-					<Span>
+					<span className="text-sm">
 						{role.location}
-					</Span>
+					</span>
 				</div>
 				<Pill text={role.type} className={`capitalize ${roleTypeColor}`} />
 			</div>
@@ -47,9 +46,9 @@ export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
 						</SubsectionHeading>
 						<div className="flex items-center">
 							<FontAwesomeIcon className="pr-2" icon={faBuilding} />
-							<Span className="italic">
+							<span className="text-sm italic">
 								{role.company}
-							</Span>
+							</span>
 						</div>
 					</div>
 				</div>
