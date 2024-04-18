@@ -5,18 +5,11 @@
 
 
 import React from 'react';
+import { InputInterface } from '../../common/types';
 
 
-interface MultilineTextInputPropsInterface {
-	className?: string;
-	labelClassName?: string;
-	inputClassName?: string;
-	name: string;
-	label: string;
-	placeholder?: string;
+interface MultilineTextInputPropsInterface extends InputInterface {
 	rows?: number;
-	required?: boolean;
-	disabled?: boolean;
 }
 
 export default function MultilineTextInput({ className = '', labelClassName = '', inputClassName = '', name, label, placeholder = '', rows = 4, required = false, disabled = false }: MultilineTextInputPropsInterface) {

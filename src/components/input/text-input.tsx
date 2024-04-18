@@ -5,21 +5,10 @@
 
 
 import React from 'react';
+import { InputInterface } from '../../common/types';
 
 
-interface TextInputPropsInterface {
-	className?: string;
-	labelClassName?: string;
-	inputClassName?: string;
-	name: string;
-	label: string;
-	type?: string;
-	placeholder?: string;
-	required?: boolean;
-	disabled?: boolean;
-}
-
-export default function TextInput({ className = '', labelClassName = '', inputClassName = '', name, label, type = 'text', placeholder = '', required = false, disabled = false }: TextInputPropsInterface) {
+export default function TextInput({ className = '', labelClassName = '', inputClassName = '', name, label, type = 'text', placeholder = '', required = false, disabled = false }: InputInterface) {
 	return (
 		<label className={`form-control ${className}`}>
 			<span className={`label label-text ${labelClassName}`}>{label}</span>
