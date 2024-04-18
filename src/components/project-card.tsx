@@ -10,9 +10,10 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import ConfigManager from '../common/config-manager';
 import { getProjectImage } from '../common/utilities';
 import { ProjectInfoInterface } from '../common/types';
+import SubsectionHeading from './text/subsection-heading';
 import LinkWrapper from './links/link-wrapper';
 import GhostButton from './input/ghost-button';
-import { H3, P } from './text-components';
+import { P } from './text-components';
 import Pill from './pill';
 import Card from './card';
 
@@ -37,9 +38,9 @@ export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
 					{/* TODO: Put project icon here? */}
 					{/* <img src={getProjectImage(repo.imageUrl)}/> */}
 					<div className={`flex flex-col z-16 h-full p-8 justify-center text-wrap rounded-2xl px-10`}>
-						<H3 className="font-semibold">
+						<SubsectionHeading className="font-semibold">
 							{repo.name}
-						</H3>
+						</SubsectionHeading>
 						<P className={`origin-center mx-0 my-0`}>
 							{repo.shortDesc}
 						</P>
