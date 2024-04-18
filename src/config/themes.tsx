@@ -15,10 +15,10 @@ export default {
 		'secondary': '#E11D48',					// TW Rose 600
 		'accent': '#D97706',						// TW Amber 600
 		'neutral': '#111111',
-		'info': '#0369A1',							// TW Sky 700
-		'success': '#15803D',						// TW Green 700
-		'warning': '#A16207',						// TW Yellow 700
-		'error': '#B91C1C',							// TW Red 700
+		'info': '#0284C7',							// TW Sky 600
+		'success': '#16A34A',						// TW Green 600
+		'warning': '#D97706',						// TW Amber 600
+		'error': '#DC2626',							// TW Red 600
 		'base-100': 'hsl(0 0% 100%)',
 		'base-200': 'hsl(0 0% 98%)',
 		'base-300': 'hsl(0 0% 96%)',
@@ -31,10 +31,10 @@ export default {
 		'secondary': '#FB7185',					// TW Rose 400
 		'accent': '#FBBF24',						// TW Amber 400
 		'neutral': '#111111',
-		'info': '#7DD3FC',							// TW Sky 300
-		'success': '#86EFAC',						// TW Green 300
-		'warning': '#FDE047',						// TW Yellow 300
-		'error': '#FCA5A5',							// TW Red 300
+		'info': '#38BDF8',							// TW Sky 400
+		'success': '#4ADE80',						// TW Green 400
+		'warning': '#FBBF24',						// TW Amber 400
+		'error': '#F87171',							// TW Red 400
 		'base-100': '#131313',
 		'base-200': '#080808',
 		'base-300': '#030303',
