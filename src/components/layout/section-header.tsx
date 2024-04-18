@@ -6,7 +6,7 @@
 
 import React, { PropsWithChildren } from 'react';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { H2 } from '../text-components';
+import { SectionHeading } from '../text/section-heading';
 import GhostButtonLink from '../links/ghost-button-link';
 import Tooltip from '../tooltip';
 
@@ -25,7 +25,9 @@ export default function SectionHeader({ className = '', title, button }: Section
 	return (
 		<>
 			<div className={`w-full flex justify-between items-baseline pt-8 ${className}`}>
-				<H2>{title}</H2>
+				<SectionHeading>
+					{title}
+				</SectionHeading>
 				{button && (
 					<Tooltip text={button.text} className="!tooltip-left">
 						<GhostButtonLink {...button} responsive flip className="self-baseline" />
