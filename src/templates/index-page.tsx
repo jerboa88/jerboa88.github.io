@@ -15,6 +15,7 @@ import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
 import SEO from '../components/layout/seo';
 import { P } from '../components/text-components';
+import Heading from '../components/text/heading';
 import ProjectCardGallery from '../components/project-card-gallery';
 import Timeline from '../components/timeline';
 import GhostButtonLink from '../components/links/ghost-button-link';
@@ -22,7 +23,6 @@ import Tooltip from '../components/tooltip';
 import TextInput from '../components/input/text-input';
 import MultilineTextInput from '../components/input/multiline-text-input';
 import SolidButton from '../components/input/solid-button';
-import { Heading } from '../components/text/heading';
 
 
 interface IndexPageTemplatePropsInterface {

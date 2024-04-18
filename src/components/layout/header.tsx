@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 import { SiteMetadataInterface, SectionInterface } from '../../common/types';
 import { getDefaultTransition } from '../../common/utilities';
 import TabsWidget from '../tabs-widget';
-import { Heading } from '../text/heading';
+import Heading from '../text/heading';
 
 
 interface HeaderPropsInterface {
@@ -19,7 +19,7 @@ interface HeaderPropsInterface {
 	sections: SectionInterface[];
 }
 
-export default function Header({ siteMetadata, titleLayoutId, isTitleExpanded = false, sections }: HeaderPropsInterface) {
+export default function Header({ siteMetadata, titleLayoutId = 'title-layout', isTitleExpanded = false, sections }: HeaderPropsInterface) {
 	let bgColorStyles = 'bg-base-200';
 	let dividerOpacityStyles = 'opacity-100';
 	let justificationStyles = 'justify-between';
