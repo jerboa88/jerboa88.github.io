@@ -23,13 +23,13 @@ module.exports = {
 			DEFAULT: '150ms',
 		},
 		extend: {
-			fontFamily: {
-				heading: ['Poppins', 'Montserrat', 'Impact', 'Franklin Gothic Medium', 'Candara', 'Calibri', 'sans-serif'],
-				button: ['Poppins', 'Inter Tight', 'Roboto Condensed', 'Arial Narrow', 'Calibri', 'Candara', 'Impact', 'sans-serif'],
-			},
 			colors: {
 				'primary-header': 'var(--ph)',
 				'secondary-header': 'var(--sh)',
+			},
+			fontFamily: {
+				heading: ['Poppins', 'Montserrat', 'Impact', 'Franklin Gothic Medium', 'Candara', 'Calibri', 'sans-serif'],
+				button: ['Poppins', 'Inter Tight', 'Roboto Condensed', 'Arial Narrow', 'Calibri', 'Candara', 'Impact', 'sans-serif'],
 			},
 		}
 	},

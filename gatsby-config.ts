@@ -143,7 +143,6 @@ const config: GatsbyConfig = {
 					{
 						resolve: 'gatsby-remark-autolink-headers',
 						options: {
-							offsetY: '200',
 							isIconAfterHeader: true,
 						},
 					},
