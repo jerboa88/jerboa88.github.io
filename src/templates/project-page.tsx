@@ -12,8 +12,8 @@ import { getProjectImage } from '../common/utilities';
 import PageLayout from '../components/layout/page-layout';
 import SEO from '../components/layout/seo';
 import Section from '../components/layout/section';
-import LinkWrapper from '../components/links/link-wrapper';
 import { Article } from '../components/text/article';
+import InlineLink from '../components/links/inline-link';
 
 
 interface ProjectPageTemplatePropsInterface {
@@ -45,12 +45,9 @@ export default function ProjectPageTemplate({ pageContext }: ProjectPageTemplate
 					<p>
 						{pageContext.typeColor}
 					</p>
-					<LinkWrapper to={pageContext.homepageUrl}>
-						{pageContext.homepageUrl}}
-					</LinkWrapper>
-					<LinkWrapper to={pageContext.githubUrl}>
-						{pageContext.githubUrl}}
-					</LinkWrapper>
+					<InlineLink to={pageContext.homepageUrl} text={pageContext.homepageUrl} />
+					<br />
+					<InlineLink to={pageContext.githubUrl} text={pageContext.githubUrl} />
 					<p>
 						{pageContext.stargazers}
 					</p>
