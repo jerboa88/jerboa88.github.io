@@ -1,6 +1,6 @@
 /*
-	Widget to show tabs for each section of the page
-	------------------------------------------------
+	Widget to show tabs for each section of a page
+	----------------------------------------------
 */
 
 
@@ -11,12 +11,12 @@ import { SectionInterface } from '../common/types';
 import GhostButtonLink from './links/ghost-button-link';
 
 
-interface TabsWidgetPropsInterface {
+interface TabsPropsInterface {
 	sections: SectionInterface[];
 	hideIndicator?: boolean;
 }
 
-export default function TabsWidget({ sections, hideIndicator = false }: TabsWidgetPropsInterface) {
+export default function Tabs({ sections, hideIndicator = false }: TabsPropsInterface) {
 	// Map is used here because we need to call the same number of hook every time. Otherwise, React will complain
 	const sectionInViewHooks = sections.map(section => useInView(section.ref, {
 		amount: 0,
