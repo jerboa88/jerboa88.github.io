@@ -31,7 +31,6 @@ interface PrivacyPolicyPageProps {
 
 
 export default function PrivacyPolicyPage({ data }: PrivacyPolicyPageProps) {
-	const titleLayoutId = 'title-layout';
 	const configManager = new ConfigManager();
 	const siteMetadata = configManager.getMetadata();
 	const section = {
@@ -42,7 +41,7 @@ export default function PrivacyPolicyPage({ data }: PrivacyPolicyPageProps) {
 	const articleHtml = data.file.childMarkdownRemark.html;
 
 	return (
-		<PageLayout siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={false}>
+		<PageLayout siteMetadata={siteMetadata}>
 			{/* Dummy element to force center alignment of section */}
 			<div></div>
 			<Section className="items-center" {...section}>

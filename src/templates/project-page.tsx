@@ -33,7 +33,7 @@ export default function ProjectPageTemplate({ pageContext }: ProjectPageTemplate
 		<PageLayout siteMetadata={siteMetadata}>
 			{/* Dummy element to force center alignment of section */}
 			<div></div>
-			<Section className="items-center" {...section}>
+			<Section {...section}>
 				<img src={getProjectImage(pageContext.imageUrl)} width="500" alt="TODO"></img>
 				<P>{pageContext.shortDesc}</P>
 				<P>{pageContext.typeName}</P>
