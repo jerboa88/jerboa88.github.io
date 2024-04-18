@@ -8,7 +8,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { SiteMetadataInterface, SectionInterface } from '../../common/types';
 import { getDefaultTransition } from '../../common/utilities';
-import TabsWidget from '../tabs-widget';
+import Tabs from '../tabs';
 import Heading from '../text/heading';
 
 
@@ -41,7 +41,7 @@ export default function Header({ siteMetadata, titleLayoutId = 'title-layout', i
 					</Heading>
 				</motion.a>}
 
-				<TabsWidget sections={sections} hideIndicator={isTitleExpanded} />
+				<Tabs sections={sections} hideIndicator={isTitleExpanded} />
 			</div>
 			<div className={`divider h-auto m-0 transition-opacity ${dividerOpacityStyles}`} />
 		</header>
