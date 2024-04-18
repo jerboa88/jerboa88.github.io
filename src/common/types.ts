@@ -8,6 +8,12 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Context, RefObject } from 'react';
 
 
+// Props for components that accept an optional class name
+export interface PropsWithClassName {
+	className?: string;
+}
+
+
 // Raw site metadata config
 export interface SiteMetadataConfigInterface {
 	ogImagePath: string;
@@ -149,12 +155,6 @@ export interface ColorMappingsConfigInterface {
 }
 
 
-// Props for components that accept an optional classname
-export interface PropsWithClassname {
-	className?: string;
-}
-
-
 export interface SectionInterface {
 	id: string;
 	title: string;
@@ -173,8 +173,7 @@ export interface LinkInterface {
 }
 
 
-export interface ButtonInterface {
-	className?: string;
+export interface ButtonInterface extends PropsWithClassName {
 	iconClassName?: string;
 	textClassName?: string;
 	type?: 'button' | 'submit' | 'reset';
@@ -183,6 +182,18 @@ export interface ButtonInterface {
 	disabled?: boolean;
 	responsive?: boolean;
 	flip?: boolean;
+}
+
+
+export interface InputInterface extends PropsWithClassName {
+	labelClassName?: string;
+	inputClassName?: string;
+	type?: string;
+	name: string;
+	label: string;
+	placeholder?: string;
+	required?: boolean;
+	disabled?: boolean;
 }
 
 
