@@ -5,10 +5,10 @@
 
 
 import React from 'react';
+import { PropsWithClassName } from '../../common/types';
 
 
-interface DateRangePropsInterface {
-	className?: string;
+interface DateRangePropsInterface extends PropsWithClassName {
 	startDate: Date;
 	endDate: Date;
 }
@@ -22,7 +22,7 @@ export default function DateRange({ className = '', startDate, endDate }: DateRa
 	const endDateString = `${endMonth} ${endYear}`;
 
 	return (
-		<div className="font-bold">
+		<div className={`font-bold ${className}`}>
 			<time dateTime={startDate.toISOString()}>
 				{startDateString}
 			</time>

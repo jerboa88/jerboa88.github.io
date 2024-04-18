@@ -6,13 +6,13 @@
 
 import React, { PropsWithChildren } from 'react';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { PropsWithClassName } from '../../common/types';
 import SectionHeading from '../text/section-heading';
 import GhostButtonLink from '../links/ghost-button-link';
 import Tooltip from '../tooltip';
 
 
-interface SectionHeaderPropsInterface extends PropsWithChildren {
-	className?: string;
+interface SectionHeaderPropsInterface extends PropsWithClassName, PropsWithChildren {
 	title: string;
 	button?: {
 		text: string;

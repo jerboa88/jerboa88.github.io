@@ -5,10 +5,10 @@
 
 
 import React, { PropsWithChildren } from 'react';
+import { PropsWithClassName } from '../common/types';
 
 
-interface TooltipPropsInterface extends PropsWithChildren {
-	className?: string;
+interface TooltipPropsInterface extends PropsWithClassName, PropsWithChildren {
 	text: string;
 }
 

@@ -5,10 +5,10 @@
 
 
 import React, { PropsWithChildren } from 'react';
-import { PropsWithClassname } from '../../common/types';
+import { PropsWithClassName } from '../../common/types';
 
 
-interface TextComponentPropsInterface extends PropsWithClassname, PropsWithChildren { }
+interface TextComponentPropsInterface extends PropsWithClassName, PropsWithChildren { }
 
 export default function SubsectionHeading({ className = '', children }: TextComponentPropsInterface) {
 	return (

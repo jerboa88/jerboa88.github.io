@@ -5,13 +5,12 @@
 
 
 import React, { PropsWithChildren, StrictMode } from 'react';
-import { SiteMetadataInterface, SectionInterface } from '../../common/types';
+import { SiteMetadataInterface, SectionInterface, PropsWithClassName } from '../../common/types';
 import Header from './header';
 import Footer from './footer';
 
 
-interface PageLayoutPropsInterface extends PropsWithChildren {
-	className?: string;
+interface PageLayoutPropsInterface extends PropsWithClassName, PropsWithChildren {
 	siteMetadata: SiteMetadataInterface;
 	titleLayoutId?: string;
 	isTitleExpanded?: boolean;

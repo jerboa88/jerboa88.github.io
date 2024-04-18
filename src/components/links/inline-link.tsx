@@ -5,11 +5,11 @@
 
 
 import React from 'react';
-import { LinkInterface, PropsWithClassname } from '../../common/types';
+import { LinkInterface, PropsWithClassName } from '../../common/types';
 import LinkWrapper from './link-wrapper';
 
 
-interface InlineLinkPropsInterface extends PropsWithClassname, LinkInterface {
+interface InlineLinkPropsInterface extends PropsWithClassName, LinkInterface {
 	text: string;
 }
 

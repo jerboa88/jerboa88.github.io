@@ -6,11 +6,11 @@
 
 import React, { ForwardedRef, PropsWithChildren, forwardRef } from 'react';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { PropsWithClassName } from '../../common/types';
 import SectionHeader from './section-header';
 
 
-interface SectionPropsInterface extends PropsWithChildren {
-	className?: string;
+interface SectionPropsInterface extends PropsWithClassName, PropsWithChildren {
 	id?: string;
 	title?: string;
 	button?: {

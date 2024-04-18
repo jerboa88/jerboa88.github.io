@@ -5,10 +5,10 @@
 
 
 import React from 'react';
+import { PropsWithClassName } from '../common/types';
 
 
-interface PillPropsInterface {
-	className?: string;
+interface PillPropsInterface extends PropsWithClassName {
 	text: string;
 }
 
