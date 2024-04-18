@@ -13,7 +13,6 @@ import { ProjectInfoInterface } from '../common/types';
 import SubsectionHeading from './text/subsection-heading';
 import LinkWrapper from './links/link-wrapper';
 import GhostButton from './input/ghost-button';
-import { P } from './text-components';
 import Pill from './pill';
 import Card from './card';
 
@@ -41,9 +40,9 @@ export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
 						<SubsectionHeading className="font-semibold">
 							{repo.name}
 						</SubsectionHeading>
-						<P className={`origin-center mx-0 my-0`}>
+						<span className="text-wrap">
 							{repo.shortDesc}
-						</P>
+						</span>
 					</div>
 				</div>
 				<div className="flex flex-row justify-between items-center w-full">

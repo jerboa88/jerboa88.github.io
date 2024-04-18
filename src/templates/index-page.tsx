@@ -14,7 +14,6 @@ import { getDefaultTransition } from '../common/utilities';
 import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
 import SEO from '../components/layout/seo';
-import { P } from '../components/text-components';
 import Heading from '../components/text/heading';
 import ProjectCardGallery from '../components/project-card-gallery';
 import Timeline from '../components/timeline';
@@ -23,6 +22,7 @@ import Tooltip from '../components/tooltip';
 import TextInput from '../components/input/text-input';
 import MultilineTextInput from '../components/input/multiline-text-input';
 import SolidButton from '../components/input/solid-button';
+import { Article } from '../components/text/article';
 
 
 interface IndexPageTemplatePropsInterface {
@@ -98,9 +98,9 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 			<Section className="min-h-svh text-center">
 				<span ref={inViewTriggerRef} />
 				{titleWrapperElement}
-				<P>
+				<span className="m-4">
 					{siteMetadata.tagline}
-				</P>
+				</span>
 				<div className="fixed inset-x-0 bottom-0 mb-4 flex flex-row justify-center">
 					<Tooltip text={`Go to ${sections[0].title} section`}>
 						<GhostButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={`transition ${isTitleExpanded ? '' : 'opacity-0'}`} isInternal />
@@ -108,17 +108,17 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 				</div>
 			</Section>
 			<Section className="min-h-screen" {...sections[0]}>
-				<p>
-					I am a recent graduate with a Bachelors Specialization in Computing Science from the University of Alberta. During my time at the U of A, I had the opportunity to share my expertise with Haemonetics Corporation in Edmonton, where I was involved in end-to-end development of their NexLynk Donor Management System.
-				</p>
-				<br />
-				<p>
-					Having a natural interest in science has allowed me to become familiar with a wide variety of tech related subjects including programming, design, and audio production. I have experience with frontend web technologies, backend development, cloud computing, as well as low-level programming like Arduino and MIPS assembly.
-				</p>
-				<br />
-				<p>
-					Some of my extracurricular interests include cats, cars, and music!
-				</p>
+				<Article>
+					<p>
+						I am a recent graduate with a Bachelors Specialization in Computing Science from the University of Alberta. During my time at the U of A, I had the opportunity to share my expertise with Haemonetics Corporation in Edmonton, where I was involved in end-to-end development of their NexLynk Donor Management System.
+					</p>
+					<p>
+						Having a natural interest in science has allowed me to become familiar with a wide variety of tech related subjects including programming, design, and audio production. I have experience with frontend web technologies, backend development, cloud computing, as well as low-level programming like Arduino and MIPS assembly.
+					</p>
+					<p>
+						Some of my extracurricular interests include cats, cars, and music!
+					</p>
+				</Article>
 			</Section>
 			<Section className="min-h-screen" {...sections[1]}>
 				<ProjectCardGallery projects={pageContext.pinnedRepos} />

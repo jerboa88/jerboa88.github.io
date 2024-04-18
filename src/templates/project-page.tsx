@@ -12,8 +12,8 @@ import { getProjectImage } from '../common/utilities';
 import PageLayout from '../components/layout/page-layout';
 import SEO from '../components/layout/seo';
 import Section from '../components/layout/section';
-import { P } from '../components/text-components';
 import LinkWrapper from '../components/links/link-wrapper';
+import { Article } from '../components/text/article';
 
 
 interface ProjectPageTemplatePropsInterface {
@@ -34,21 +34,39 @@ export default function ProjectPageTemplate({ pageContext }: ProjectPageTemplate
 			{/* Dummy element to force center alignment of section */}
 			<div></div>
 			<Section {...section}>
-				<img src={getProjectImage(pageContext.imageUrl)} width="500" alt="TODO"></img>
-				<P>{pageContext.shortDesc}</P>
-				<P>{pageContext.typeName}</P>
-				<P>{pageContext.typeColor}</P>
-				<LinkWrapper to={pageContext.homepageUrl}>
-					{pageContext.homepageUrl}}
-				</LinkWrapper>
-				<LinkWrapper to={pageContext.githubUrl}>
-					{pageContext.githubUrl}}
-				</LinkWrapper>
-				<P>{pageContext.stargazers}</P>
-				<P>{pageContext.updatedAt}</P>
-				<P>{pageContext.license}</P>
-				<P>{pageContext.name}</P>
-				<P>{pageContext.longDesc}</P>
+				<Article>
+					<img src={getProjectImage(pageContext.imageUrl)} width="500" alt="TODO"></img>
+					<p>
+						{pageContext.shortDesc}
+					</p>
+					<p>
+						{pageContext.typeName}
+					</p>
+					<p>
+						{pageContext.typeColor}
+					</p>
+					<LinkWrapper to={pageContext.homepageUrl}>
+						{pageContext.homepageUrl}}
+					</LinkWrapper>
+					<LinkWrapper to={pageContext.githubUrl}>
+						{pageContext.githubUrl}}
+					</LinkWrapper>
+					<p>
+						{pageContext.stargazers}
+					</p>
+					<p>
+						{pageContext.updatedAt}
+					</p>
+					<p>
+						{pageContext.license}
+					</p>
+					<p>
+						{pageContext.name}
+					</p>
+					<p>
+						{pageContext.longDesc}
+					</p>
+				</Article>
 			</Section>
 		</PageLayout>
 	);
