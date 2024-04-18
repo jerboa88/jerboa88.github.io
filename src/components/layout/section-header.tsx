@@ -6,7 +6,7 @@
 
 import React, { PropsWithChildren } from 'react';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { SectionHeading } from '../text/section-heading';
+import SectionHeading from '../text/section-heading';
 import GhostButtonLink from '../links/ghost-button-link';
 import Tooltip from '../tooltip';
 
