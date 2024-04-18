@@ -1,6 +1,6 @@
 **Last updated on Apr 17, 2024.**
 
-This privacy notice describes how and why [JOHNG.IO](/) ("**we**", "**us**", "**our**") might collect, store, use, and/or share your information when you use our services ("**Services**") by:
+This privacy notice describes how and why [johng.io](/) ("**we**", "**us**", "**our**") might collect, store, use, and/or share your information when you use our services ("**Services**") by:
 
 - Visiting our website at [johng.io](/) or related URLS
 - Visiting any website of ours that links to this privacy notice
