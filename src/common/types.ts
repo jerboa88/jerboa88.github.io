@@ -6,6 +6,7 @@
 
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Context, RefObject } from 'react';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 
 // Props for components that accept an optional class name
@@ -192,6 +193,11 @@ export interface InputInterface extends PropsWithClassName {
 	name: string;
 	label: string;
 	placeholder?: string;
+	register: UseFormRegister<any>;
+	errors: FieldErrors<any>;
+	minLength?: number;
+	maxLength?: number;
+	pattern?: RegExp;
 	required?: boolean;
 	disabled?: boolean;
 }
