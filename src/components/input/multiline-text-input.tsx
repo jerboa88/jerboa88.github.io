@@ -6,19 +6,17 @@
 
 import React from 'react';
 import { InputInterface } from '../../common/types';
+import BaseInput from './base-input';
 
 
 interface MultilineTextInputPropsInterface extends InputInterface {
 	rows?: number;
 }
 
-export default function MultilineTextInput({ className = '', labelClassName = '', inputClassName = '', name, label, placeholder = '', rows = 4, required = false, disabled = false }: MultilineTextInputPropsInterface) {
+export default function TextInput({ inputClassName = '', name, errors, ...remainingProps }: MultilineTextInputPropsInterface) {
+	const errorStyles = errors[name] ? 'textarea-error' : '';
+
 	return (
-		<label className={`form-control ${className}`}>
-			<span className={`label label-text ${labelClassName}`}>
-				{label}
-			</span>
-			<textarea name={name} placeholder={placeholder} rows={rows} required={required} disabled={disabled} className={`textarea textarea-bordered w-full bg-base-200 text-base ${inputClassName}`} />
-		</label>
+		<BaseInput type="textarea" inputClassName={`textarea textarea-bordered w-full bg-base-200 text-base ${errorStyles} ${inputClassName}`} {...{ name, errors, ...remainingProps }} />
 	);
 }
