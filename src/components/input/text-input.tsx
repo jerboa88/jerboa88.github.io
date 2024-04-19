@@ -6,13 +6,13 @@
 
 import React from 'react';
 import { InputInterface } from '../../common/types';
+import BaseInput from './base-input';
 
 
-export default function TextInput({ className = '', labelClassName = '', inputClassName = '', name, label, type = 'text', placeholder = '', required = false, disabled = false }: InputInterface) {
+export default function TextInput({ inputClassName = '', name, errors, ...remainingProps }: InputInterface) {
+	const errorStyles = errors[name] ? 'input-error' : '';
+
 	return (
-		<label className={`form-control ${className}`}>
-			<span className={`label label-text ${labelClassName}`}>{label}</span>
-			<input name={name} type={type} placeholder={placeholder} required={required} disabled={disabled} className={`input input-bordered w-full bg-base-200 ${inputClassName}`} />
-		</label>
+		<BaseInput inputClassName={`input input-bordered w-full bg-base-200 ${errorStyles} ${inputClassName}`} {...{ name, errors, ...remainingProps }} />
 	);
 }
