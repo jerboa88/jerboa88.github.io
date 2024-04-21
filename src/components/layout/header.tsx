@@ -7,7 +7,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { SiteMetadataInterface, SectionInterface } from '../../common/types';
-import { getDefaultTransition } from '../../common/utilities';
 import Tabs from '../tabs';
 import Heading from '../text/heading';
 
@@ -33,7 +32,7 @@ export default function Header({ siteMetadata, titleLayoutId = 'title-layout', i
 	return (
 		<header className={`fixed top-0 w-full z-20 transition-colors ${bgColorStyles}`}>
 			<div className={`flex-row p-4 pb-4 items-center ${justificationStyles}`}>
-				{!isTitleExpanded && <motion.a href="/" layoutId={titleLayoutId} {...getDefaultTransition()}>
+				{!isTitleExpanded && <motion.a href="/" layoutId={titleLayoutId}>
 					<Heading className="m-0 px-2 text-xl">
 						<span className="inline sm:hidden">{siteMetadata.author.name.initial}</span>
 						<span className="hidden sm:inline md:hidden">{siteMetadata.author.name.short}</span>

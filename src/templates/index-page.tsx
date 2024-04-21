@@ -10,7 +10,6 @@ import { motion, useInView } from 'framer-motion';
 import { faAngleDown, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import ConfigManager from '../common/config-manager';
 import { ProjectInfoInterface, SectionInterface } from '../common/types';
-import { getDefaultTransition } from '../common/utilities';
 import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
 import SEO from '../components/layout/seo';
@@ -85,7 +84,7 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 
 	if (isTitleExpanded) {
 		titleWrapperElement = (
-			<motion.a href="/" className="z-20" layoutId={titleLayoutId} {...getDefaultTransition()}>
+			<motion.a href="/" className="z-20" layoutId={titleLayoutId}>
 				{titleElement}
 			</motion.a>
 		);

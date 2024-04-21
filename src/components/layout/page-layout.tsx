@@ -5,6 +5,7 @@
 
 
 import React, { PropsWithChildren, StrictMode } from 'react';
+import { MotionConfig } from 'framer-motion';
 import { SiteMetadataInterface, SectionInterface, PropsWithClassName } from '../../common/types';
 import Header from './header';
 import Footer from './footer';
@@ -87,12 +88,14 @@ export default function PageLayout({ className = '', siteMetadata, titleLayoutId
 
 	return (
 		<StrictMode>
-			{/* Page body */}
-			<div className={`min-h-screen flex-col justify-between items-center gap-32 mx-auto text-base bg-base-300 text-base-content scroll-smooth selection:bg-primary selection:text-primary-content ${className}`}>
-				<Header {...{ siteMetadata, titleLayoutId, isTitleExpanded, sections }} />
-				{children}
-				<Footer siteMetadata={siteMetadata} />
-			</div>
+			<MotionConfig transition={{ type: 'spring', stiffness: 350, damping: 25 }} reducedMotion="user">
+				{/* Page body */}
+				<div className={`min-h-screen flex-col justify-between items-center gap-32 mx-auto text-base bg-base-300 text-base-content scroll-smooth selection:bg-primary selection:text-primary-content ${className}`}>
+					<Header {...{ siteMetadata, titleLayoutId, isTitleExpanded, sections }} />
+					{children}
+					<Footer siteMetadata={siteMetadata} />
+				</div>
+			</MotionConfig>
 		</StrictMode>
 	);
 }
