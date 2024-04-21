@@ -7,7 +7,7 @@
 import React, { useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import { motion, useInView } from 'framer-motion';
-import { faAngleDown, faArrowUpRightFromSquare, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import ConfigManager from '../common/config-manager';
 import { ProjectInfoInterface, SectionInterface } from '../common/types';
 import { getDefaultTransition } from '../common/utilities';
@@ -15,14 +15,12 @@ import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
 import SEO from '../components/layout/seo';
 import Heading from '../components/text/heading';
+import { Article } from '../components/text/article';
+import GhostButtonLink from '../components/links/ghost-button-link';
+import ContactForm from '../components/input/contact-form';
 import ProjectCardGallery from '../components/project-card-gallery';
 import Timeline from '../components/timeline';
-import GhostButtonLink from '../components/links/ghost-button-link';
 import Tooltip from '../components/tooltip';
-import TextInput from '../components/input/text-input';
-import MultilineTextInput from '../components/input/multiline-text-input';
-import SolidButton from '../components/input/solid-button';
-import { Article } from '../components/text/article';
 
 
 interface IndexPageTemplatePropsInterface {
@@ -127,15 +125,12 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 				<Timeline roles={jobs} />
 			</Section>
 			<Section className="min-h-screen" {...sections[3]}>
-				<div className="w-full flex flex-row justify-center">
-					{/* TODO: Hook up this with a backend form provider */}
-					<form action="TODO" method="post" className="w-full max-w-lg p-0 sm:p-8 flex flex-col gap-4">
-						<TextInput name="name" label="Name" className="w-full" required />
-						<TextInput name="email" label="Email" type="email" className="w-full" required />
-						<MultilineTextInput name="message" label="Message" className="w-full" required />
-						<SolidButton type="submit" icon={faPaperPlane} text="Send" className="w-full mt-2" />
-					</form>
-				</div>
+				<Article className="w-full flex flex-col justify-center">
+					<p>
+						Got something on your mind? Whether it's a query, a collaboration proposal, or just a friendly hello, feel free to reach out using the form below.
+					</p>
+					<ContactForm className="self-center" />
+				</Article>
 			</Section>
 		</PageLayout>
 	);
