@@ -6,34 +6,37 @@
 
 
 import React from 'react';
-import { InputInterface } from '../../common/types';
+import { PropsWithClassName, InputElementRenderFunction, InputValidationOptions } from '../../common/types';
 import Alert from '../ghost-alert';
+import { FieldErrors, UseFormRegister, } from 'react-hook-form';
 
 
-export default function BaseInput({ className = '', labelClassName = '', inputClassName = '', name, label, type = 'text', placeholder = '', register, errors, minLength, maxLength, pattern, required = false, disabled = false, ...remainingProps }: InputInterface) {
+interface BaseInputInterface extends PropsWithClassName {
+	labelClassName?: string;
+	name: string;
+	label: string;
+	renderInput: InputElementRenderFunction;
+	register: UseFormRegister<any>;
+	errors: FieldErrors<any>;
+	validationOptions: InputValidationOptions;
+}
+
+export default function BaseInput({ className = '', labelClassName = '', name, label, renderInput, register, errors, validationOptions }: BaseInputInterface) {
 	const errorMsg = (() => {
 		switch (errors[name]?.type) {
 			case 'required':
 				return 'This field is required';
 			case 'minLength':
-				return `This field must be at least ${minLength} characters long`;
+				return `This field must be at least ${validationOptions.minLength} characters long`;
 			case 'maxLength':
-				return `This field must be at most ${maxLength} characters long`;
+				return `This field must be at most ${validationOptions.maxLength} characters long`;
 			case 'pattern':
 				return 'This field doesn\'t match the expected pattern';
 			default:
 				return 'This field is invalid';
 		}
 	})();
-	let inputElement = (
-		<input {...register(name, { minLength, maxLength, pattern, required, disabled })} className={inputClassName} {...{ type, placeholder, ...remainingProps }} />
-	);
-
-	if (type === 'textarea') {
-		inputElement = (
-			<textarea {...register(name, { minLength, maxLength, pattern, required, disabled })} className={inputClassName} {...{ placeholder, ...remainingProps }} />
-		);
-	}
+	const inputElement = renderInput(register(name, validationOptions));
 
 	return (
 		<label className={`form-control ${className}`}>

@@ -4,15 +4,34 @@
 */
 
 
-import React from 'react';
-import { InputInterface } from '../../common/types';
+import React, { useCallback } from 'react';
+import { InputElementRenderFunction, InputInterface } from '../../common/types';
 import BaseInput from './base-input';
 
 
-export default function TextInput({ inputClassName = '', name, errors, ...remainingProps }: InputInterface) {
-	const errorStyles = errors[name] ? 'input-error' : '';
+export interface TextInputPropsInterface extends InputInterface {
+	inputOptions?: {
+		type?: string;
+		placeholder?: string;
+	};
+}
+
+const defaultInputOptions = {
+	type: 'text'
+};
+
+export default function TextInput({ inputClassName = '', name, inputOptions = defaultInputOptions, errors, ...remainingProps }: TextInputPropsInterface) {
+	const inputErrorStyles = errors[name] ? 'input-error' : '';
+	const inputStyles = `input input-bordered w-full bg-base-200 ${inputErrorStyles} ${inputClassName}`;
+	// A function for rendering the input element
+	// This will be passed to the base input component and called from there
+	const renderInput = useCallback((registerObj => {
+		return (
+			<input className={inputStyles} {...registerObj} {...inputOptions} />
+		);
+	}) as InputElementRenderFunction, [inputStyles, inputOptions]);
 
 	return (
-		<BaseInput inputClassName={`input input-bordered w-full bg-base-200 ${errorStyles} ${inputClassName}`} {...{ name, errors, ...remainingProps }} />
+		<BaseInput {...{ renderInput, name, errors, ...remainingProps }} />
 	);
 }

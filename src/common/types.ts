@@ -6,7 +6,7 @@
 
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Context, RefObject } from 'react';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { FieldErrors, UseFormRegister, UseFormRegisterReturn } from 'react-hook-form';
 
 
 // Props for components that accept an optional class name
@@ -186,20 +186,28 @@ export interface ButtonInterface extends PropsWithClassName {
 }
 
 
-export interface InputInterface extends PropsWithClassName {
-	labelClassName?: string;
-	inputClassName?: string;
-	type?: string;
-	name: string;
-	label: string;
-	placeholder?: string;
-	register: UseFormRegister<any>;
-	errors: FieldErrors<any>;
+export interface InputValidationOptions {
 	minLength?: number;
 	maxLength?: number;
 	pattern?: RegExp;
 	required?: boolean;
 	disabled?: boolean;
+}
+
+
+export interface InputElementRenderFunction {
+	(props: UseFormRegisterReturn<string>): JSX.Element;
+}
+
+
+export interface InputInterface extends PropsWithClassName {
+	labelClassName?: string;
+	inputClassName?: string;
+	name: string;
+	label: string;
+	register: UseFormRegister<any>;
+	errors: FieldErrors<any>;
+	validationOptions: InputValidationOptions;
 }
 
 
