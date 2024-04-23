@@ -5,6 +5,7 @@
 
 
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { LayoutProps } from 'framer-motion';
 import { Context, RefObject } from 'react';
 import { FieldErrors, UseFormRegister, UseFormRegisterReturn } from 'react-hook-form';
 
@@ -177,21 +178,31 @@ export interface LinkInterface {
 export interface ButtonInterface extends PropsWithClassName {
 	iconClassName?: string;
 	textClassName?: string;
-	type?: 'button' | 'submit' | 'reset';
+	type?: React.ButtonHTMLAttributes<any>['type'];
 	icon?: IconDefinition;
 	text?: string | number;
 	disabled?: boolean;
 	responsive?: boolean;
 	flip?: boolean;
+	layout?: LayoutProps['layout'];
+	layoutRoot?: LayoutProps['layoutRoot'];
 }
 
 
+// Possible options for input validation using react-hook-form
 export interface InputValidationOptions {
 	minLength?: number;
 	maxLength?: number;
 	pattern?: RegExp;
 	required?: boolean;
 	disabled?: boolean;
+}
+
+// Common options for different input elements
+export interface InputOptions {
+	tabIndex?: React.HTMLAttributes<HTMLInputElement>['tabIndex'];
+	// autocomplete is not supposed to have any effect on checkbox and radio inputs, but Firefox uses it anyway
+	autoComplete?: React.InputHTMLAttributes<HTMLInputElement>['autoComplete'];
 }
 
 
@@ -204,10 +215,18 @@ export interface InputInterface extends PropsWithClassName {
 	labelClassName?: string;
 	inputClassName?: string;
 	name: string;
-	label: string;
+	label?: string;
 	register: UseFormRegister<any>;
 	errors: FieldErrors<any>;
-	validationOptions: InputValidationOptions;
+	validationOptions?: InputValidationOptions;
+}
+
+
+export enum AlertType {
+	Info,
+	Success,
+	Warning,
+	Error,
 }
 
 
