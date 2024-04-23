@@ -32,6 +32,7 @@
     "typecheck": "yarn tsc --noEmit"
   },
   "dependencies": {
+    "@botpoison/browser": "^0.1.30",
     "@fontsource/poppins": "^5.0.14",
     "@fontsource/roboto-flex": "^5.0.15",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
@@ -62,6 +63,7 @@
     "gatsby-source-graphql": "^5.13.1",
     "gatsby-transformer-remark": "^6.13.1",
     "gatsby-transformer-sharp": "^5.13.1",
+    "http-status-codes": "^2.3.0",
     "jsdom": "^24.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

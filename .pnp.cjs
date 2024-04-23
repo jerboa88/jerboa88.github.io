@@ -26,6 +26,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@botpoison/browser", "npm:0.1.30"],\
           ["@fontsource/poppins", "npm:5.0.14"],\
           ["@fontsource/roboto-flex", "npm:5.0.15"],\
           ["@fortawesome/fontawesome-svg-core", "npm:6.5.2"],\
@@ -61,6 +62,7 @@ const RAW_RUNTIME_STATE =
           ["gatsby-source-graphql", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-transformer-remark", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
           ["gatsby-transformer-sharp", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
+          ["http-status-codes", "npm:2.3.0"],\
           ["jsdom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:24.0.0"],\
           ["postcss", "npm:8.4.38"],\
           ["react", "npm:18.2.0"],\
@@ -2940,6 +2942,16 @@ const RAW_RUNTIME_STATE =
           ["@babel/helper-string-parser", "npm:7.23.4"],\
           ["@babel/helper-validator-identifier", "npm:7.22.20"],\
           ["to-fast-properties", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@botpoison/browser", [\
+      ["npm:0.1.30", {\
+        "packageLocation": "./.yarn/cache/@botpoison-browser-npm-0.1.30-8cd9385c92-34d2098c19.zip/node_modules/@botpoison/browser/",\
+        "packageDependencies": [\
+          ["@botpoison/browser", "npm:0.1.30"],\
+          ["js-sha512", "npm:0.8.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -13509,6 +13521,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["http-status-codes", [\
+      ["npm:2.3.0", {\
+        "packageLocation": "./.yarn/cache/http-status-codes-npm-2.3.0-2ae4a17e36-1b8a01940b.zip/node_modules/http-status-codes/",\
+        "packageDependencies": [\
+          ["http-status-codes", "npm:2.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["http2-wrapper", [\
       ["npm:1.0.3", {\
         "packageLocation": "./.yarn/cache/http2-wrapper-npm-1.0.3-5b58ade1df-8097ee2699.zip/node_modules/http2-wrapper/",\
@@ -14559,6 +14580,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["johng-io", "workspace:."],\
+          ["@botpoison/browser", "npm:0.1.30"],\
           ["@fontsource/poppins", "npm:5.0.14"],\
           ["@fontsource/roboto-flex", "npm:5.0.15"],\
           ["@fortawesome/fontawesome-svg-core", "npm:6.5.2"],\
@@ -14594,6 +14616,7 @@ const RAW_RUNTIME_STATE =
           ["gatsby-source-graphql", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-transformer-remark", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
           ["gatsby-transformer-sharp", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
+          ["http-status-codes", "npm:2.3.0"],\
           ["jsdom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:24.0.0"],\
           ["postcss", "npm:8.4.38"],\
           ["react", "npm:18.2.0"],\
@@ -14618,6 +14641,15 @@ const RAW_RUNTIME_STATE =
           ["@sideway/address", "npm:4.1.4"],\
           ["@sideway/formula", "npm:3.0.1"],\
           ["@sideway/pinpoint", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["js-sha512", [\
+      ["npm:0.8.0", {\
+        "packageLocation": "./.yarn/cache/js-sha512-npm-0.8.0-48a1a122ac-2e8f98a6c0.zip/node_modules/js-sha512/",\
+        "packageDependencies": [\
+          ["js-sha512", "npm:0.8.0"]\
         ],\
         "linkType": "HARD"\
       }]\

@@ -1639,6 +1639,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@botpoison/browser@npm:^0.1.30":
+  version: 0.1.30
+  resolution: "@botpoison/browser@npm:0.1.30"
+  dependencies:
+    js-sha512: "npm:^0.8.0"
+  checksum: 10/34d2098c19a80aa24d527e7033472554da7a4602737c810c9efcb2477cff96cc160b726d27fa9b4ee8600c05a0e7dde2e0097d2c6e534cbeb0343e3409907840
+  languageName: node
+  linkType: hard
+
 "@builder.io/partytown@npm:^0.7.5":
   version: 0.7.6
   resolution: "@builder.io/partytown@npm:0.7.6"
@@ -9825,6 +9834,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"http-status-codes@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "http-status-codes@npm:2.3.0"
+  checksum: 10/1b8a01940b5e14d3c5b2f842313f4531469b41ce4fa40ca3aae5c82a3101828db2cc9406bfb2d50a46e6d521d106577b6656c2b065c76125b99ee54b2cbbac09
+  languageName: node
+  linkType: hard
+
 "http2-wrapper@npm:^1.0.0-beta.5.2":
   version: 1.0.3
   resolution: "http2-wrapper@npm:1.0.3"
@@ -10742,6 +10758,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "johng-io@workspace:."
   dependencies:
+    "@botpoison/browser": "npm:^0.1.30"
     "@fontsource/poppins": "npm:^5.0.14"
     "@fontsource/roboto-flex": "npm:^5.0.15"
     "@fortawesome/fontawesome-svg-core": "npm:^6.5.2"
@@ -10777,6 +10794,7 @@ __metadata:
     gatsby-source-graphql: "npm:^5.13.1"
     gatsby-transformer-remark: "npm:^6.13.1"
     gatsby-transformer-sharp: "npm:^5.13.1"
+    http-status-codes: "npm:^2.3.0"
     jsdom: "npm:^24.0.0"
     postcss: "npm:^8.4.38"
     react: "npm:^18.2.0"
@@ -10800,6 +10818,13 @@ __metadata:
     "@sideway/formula": "npm:^3.0.1"
     "@sideway/pinpoint": "npm:^2.0.0"
   checksum: 10/bedb7bcadd7c6d9d4852f5f37e5951f2453830420bcf77ec62f4a2d61af335254aa327888fd08f572cb2675ad3598cf87d57927334b7c7dcd48b9e60839524ae
+  languageName: node
+  linkType: hard
+
+"js-sha512@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "js-sha512@npm:0.8.0"
+  checksum: 10/2e8f98a6c0c35ff039dc74d4ea7a00f7cd3f4712d1cb74007713e0338bffc44c53a44729c60e97afbd7430eeefb1f435eca30b355f17fc11ec0c35351e3e9bdd
   languageName: node
   linkType: hard
 
