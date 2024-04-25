@@ -6,30 +6,31 @@
 
 
 import React from 'react';
-import { PropsWithClassName, InputElementRenderFunction, InputValidationOptions } from '../../common/types';
-import Alert from '../ghost-alert';
 import { FieldErrors, UseFormRegister, } from 'react-hook-form';
+import { motion } from 'framer-motion';
+import { PropsWithClassName, PropsWithLayoutAnimations, InputElementRenderFunction, InputValidationOptions, AlertType } from '../../common/types';
+import GhostAlert from '../ghost-alert';
 
 
-interface BaseInputInterface extends PropsWithClassName {
+interface BaseInputInterface extends PropsWithClassName, PropsWithLayoutAnimations {
 	labelClassName?: string;
 	name: string;
-	label: string;
+	label?: string;
 	renderInput: InputElementRenderFunction;
 	register: UseFormRegister<any>;
 	errors: FieldErrors<any>;
-	validationOptions: InputValidationOptions;
+	validationOptions?: InputValidationOptions;
 }
 
-export default function BaseInput({ className = '', labelClassName = '', name, label, renderInput, register, errors, validationOptions }: BaseInputInterface) {
+export default function BaseInput({ className = '', labelClassName = '', name, label = '', renderInput, register, errors, validationOptions, layout, layoutRoot }: BaseInputInterface) {
 	const errorMsg = (() => {
 		switch (errors[name]?.type) {
 			case 'required':
 				return 'This field is required';
 			case 'minLength':
-				return `This field must be at least ${validationOptions.minLength} characters long`;
+				return `This field must be at least ${validationOptions?.minLength} characters long`;
 			case 'maxLength':
-				return `This field must be at most ${validationOptions.maxLength} characters long`;
+				return `This field must be at most ${validationOptions?.maxLength} characters long`;
 			case 'pattern':
 				return 'This field doesn\'t match the expected pattern';
 			default:
@@ -39,14 +40,12 @@ export default function BaseInput({ className = '', labelClassName = '', name, l
 	const inputElement = renderInput(register(name, validationOptions));
 
 	return (
-		<label className={`form-control ${className}`}>
+		<motion.label layout={layout} layoutRoot={layoutRoot} className={`form-control ${className}`}>
 			<span className={`label label-text justify-start ${labelClassName}`}>
 				{label}
 			</span>
 			{inputElement}
-			{errors[name] && (
-				<Alert type="error" text={errorMsg} className="mt-4" />
-			)}
-		</label>
+			<GhostAlert type={AlertType.Error} text={errorMsg} className="mt-4" show={!!errors[name]} />
+		</motion.label>
 	);
 }

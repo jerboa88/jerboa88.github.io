@@ -216,7 +216,7 @@ export interface InputElementRenderFunction {
 }
 
 
-export interface InputInterface extends PropsWithClassName {
+export interface InputInterface extends PropsWithClassName, PropsWithLayoutAnimations {
 	labelClassName?: string;
 	inputClassName?: string;
 	name: string;
