@@ -42,8 +42,8 @@ export interface ExternalServicesConfigInterface {
 export interface SiteMetadataConfigInterface {
 	ogImagePath: string;
 	ogImageAltText: string;
-	siteUrl: string;
-	sourceUrl: string;
+	siteUrl: Url;
+	sourceUrl: Url;
 	author: {
 		name: {
 			first: string;
@@ -75,8 +75,8 @@ export interface SiteMetadataInterface {
 	description: string;
 	ogImagePath: string;
 	ogImageAltText: string;
-	siteUrl: string;
-	sourceUrl: string;
+	siteUrl: Url;
+	sourceUrl: Url;
 	author: {
 		name: {
 			first: string;
@@ -253,9 +253,9 @@ export interface ProjectLanguageInterface {
 export interface ProjectInfoInterface {
 	slug: string;
 	shortDesc: string;
-	homepageUrl: string;
-	githubUrl: string;
-	imageUrl: string;
+	homepageUrl: Url;
+	githubUrl: Url;
+	imageUrl: Url;
 	stargazers: number;
 	updatedAt: string;
 	license: string;
@@ -295,12 +295,12 @@ export interface RoleInterface {
 export type PinnedRepoResponseInterface = {
 	name: string;
 	description: string | null;
-	homepageUrl: any;
+	homepageUrl: Url;
 	usesCustomOpenGraphImage: boolean;
 	openGraphImageUrl: any;
 	stargazerCount: number;
 	updatedAt: any;
-	githubUrl: any;
+	githubUrl: Url;
 	languages: {
 		nodes: ({
 			name: string;
