@@ -109,6 +109,14 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 		}
 	})();
 
+	// Function that sets form state to error and prints an error message to the console
+	// This function is called when form submission fails
+	const handleSubmissionError = (errorMsg: string) => {
+		setFormState(FormState.Error);
+
+		console.error(`Something went wrong during form submission. ${errorMsg}`);
+	}
+
 	const onSubmit: SubmitHandler<ContactFormFieldsInterface> = async formData => {
 		setFormState(FormState.Busy);
 
