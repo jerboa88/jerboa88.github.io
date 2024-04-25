@@ -16,6 +16,13 @@ export interface PropsWithClassName {
 }
 
 
+// Props for components that accept optional layout animations
+export interface PropsWithLayoutAnimations {
+	layout?: LayoutProps['layout'];
+	layoutRoot?: LayoutProps['layoutRoot'];
+}
+
+
 // Raw site metadata config
 export interface SiteMetadataConfigInterface {
 	ogImagePath: string;
@@ -175,7 +182,7 @@ export interface LinkInterface {
 }
 
 
-export interface ButtonInterface extends PropsWithClassName {
+export interface ButtonInterface extends PropsWithClassName, PropsWithLayoutAnimations {
 	iconClassName?: string;
 	textClassName?: string;
 	type?: React.ButtonHTMLAttributes<any>['type'];
@@ -184,8 +191,6 @@ export interface ButtonInterface extends PropsWithClassName {
 	disabled?: boolean;
 	responsive?: boolean;
 	flip?: boolean;
-	layout?: LayoutProps['layout'];
-	layoutRoot?: LayoutProps['layoutRoot'];
 }
 
 
