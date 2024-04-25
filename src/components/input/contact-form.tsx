@@ -11,6 +11,23 @@ import { PropsWithClassName, InputValidationOptions } from '../../common/types';
 import TextInput from './text-input';
 import MultilineTextInput from './multiline-text-input';
 import SolidButton from './solid-button';
+import Checkbox from './checkbox';
+
+
+// Options passed to the input components themselves
+const inputOptions = {
+	name: {
+		autoComplete: 'name',
+	},
+	email: {
+		type: 'email',
+		autoComplete: 'email',
+	},
+	_gotcha: {
+		tabIndex: -1,
+		autoComplete: 'off',
+	}
+};
 
 
 // Allowed fields for the contact form
@@ -18,15 +35,10 @@ interface ContactFormFieldsInterface {
 	name: string;
 	email: string;
 	message: string;
+	_gotcha?: 'on';
 }
 
 export default function ContactForm({ className = '' }: PropsWithClassName) {
-	// Options passed to the input components themselves
-	const inputOptions = {
-		email: {
-			type: 'email',
-		}
-	}
 	// Options passed to React Hook Form for input validation
 	const validationOptions = {
 		name: {
@@ -63,6 +75,7 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 				<TextInput name="email" label="Email" register={register} errors={errors} inputOptions={inputOptions.email} validationOptions={validationOptions.email} className="w-full" layout="position" />
 				<MultilineTextInput name="message" label="Message" register={register} errors={errors} validationOptions={validationOptions.message} className="w-full" layout="position" />
 				<SolidButton type="submit" className="w-full mt-2" layout="position" layoutRoot />
+				<Checkbox name="_gotcha" register={register} errors={errors} className="hidden" />
 			</LayoutGroup>
 		</motion.form>
 	);
