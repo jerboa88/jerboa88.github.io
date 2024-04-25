@@ -8,9 +8,9 @@ import React, { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { LayoutGroup, motion } from 'framer-motion';
 import Botpoison from '@botpoison/browser';
-import { getReasonPhrase } from 'http-status-codes';
 import { faCircleNotch, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { PropsWithClassName, InputValidationOptions, AlertType } from '../../common/types';
+import { getStatusCodeDescription } from '../../common/utilities';
 import TextInput from './text-input';
 import MultilineTextInput from './multiline-text-input';
 import SolidButton from './solid-button';
@@ -152,7 +152,7 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 		})
 			.then(response => {
 				if (!response.ok) {
-					const statusText = response.statusText || getReasonPhrase(response.status);
+					const statusText = response.statusText || getStatusCodeDescription(response.status);
 
 					handleSubmissionError(`The server returned status code ${response.status} (${statusText})`);
 
