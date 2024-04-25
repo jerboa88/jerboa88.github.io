@@ -5,7 +5,7 @@
 
 
 import React, { useCallback } from 'react';
-import { InputElementRenderFunction, InputInterface } from '../../common/types';
+import { InputElementRenderFunction, InputInterface, InputOptions } from '../../common/types';
 import BaseInput from './base-input';
 
 
@@ -13,7 +13,7 @@ export interface TextInputPropsInterface extends InputInterface {
 	inputOptions?: {
 		type?: string;
 		placeholder?: string;
-	};
+	} & InputOptions;
 }
 
 const defaultInputOptions = {
