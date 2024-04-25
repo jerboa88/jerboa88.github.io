@@ -21,9 +21,9 @@ export default function Timeline({ roles }: TimelinePropsInterface) {
 			{
 				roles.map((entry, index) => (
 					<li key={index}>
-						<hr className={`bg-primary rounded-b-full ${index === 0 ? 'rounded-t-full' : ''}`} />
+						<hr className={`mx-10 bg-primary rounded-b-full ${index === 0 ? 'rounded-t-full' : ''}`} />
 						<TimelineEntry role={entry} />
-						<hr className={`bg-primary rounded-t-full ${index === lastIndex ? 'rounded-b-full' : ''}`} />
+						<hr className={`mx-10 bg-primary rounded-t-full ${index === lastIndex ? 'rounded-b-full' : ''}`} />
 					</li>
 				))
 			}

@@ -26,8 +26,8 @@ export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
 
 	return (
 		<>
-			<div className="timeline-start !m-0 px-8 pb-8 !row-start-2 !self-start flex flex-col max-lg:flex-row w-fit max-lg:w-full justify-between gap-4 items-start max-lg:items-center text-left">
-				<div>
+			<div className="timeline-start !m-0 pb-8 !row-start-2 !self-start w-fit flex flex-col justify-between items-start gap-4 max-lg:flex-row max-lg:w-full max-lg:items-center text-left">
+				<div className="max-lg:pl-1">
 					<DateRange startDate={role.startDate} endDate={role.endDate} />
 					<span className="text-sm">
 						{role.location}
@@ -38,13 +38,13 @@ export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
 			<div className="timeline-middle">
 				<FontAwesomeIcon icon={faCircleCheck} />
 			</div>
-			<Card className="mt-0 mr-0 ml-8 mb-8 p-8 timeline-box timeline-end" disabled >
+			<Card className="timeline-box timeline-end m-0 mb-16 p-8 !row-start-2" disabled>
 				<div className="flex flex-row mb-8 justify-between items-center">
 					<div className="flex flex-col">
 						<SubsectionHeading className="mt-0 mr-2">
 							{role.title}
 						</SubsectionHeading>
-						<div className="flex items-center">
+						<div className="flex flex-row items-center">
 							<FontAwesomeIcon className="pr-2" icon={faBuilding} />
 							<span className="text-sm italic">
 								{role.company}
