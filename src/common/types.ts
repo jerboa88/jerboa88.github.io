@@ -23,6 +23,17 @@ export interface PropsWithLayoutAnimations {
 }
 
 
+// HTTPS URL
+type Url = `https://${string}`;
+
+
+// Raw external services config
+export interface ExternalServicesConfigInterface {
+	botpoisonPublicKey: `pk_${string}`;
+	contactFormPostUrl: Url;
+}
+
+
 // Raw site metadata config
 export interface SiteMetadataConfigInterface {
 	ogImagePath: string;
