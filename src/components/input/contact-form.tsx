@@ -7,6 +7,8 @@
 import React, { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { LayoutGroup, motion } from 'framer-motion';
+import Botpoison from '@botpoison/browser';
+import { getReasonPhrase } from 'http-status-codes';
 import { faCircleNotch, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { PropsWithClassName, InputValidationOptions, AlertType } from '../../common/types';
 import TextInput from './text-input';
@@ -14,6 +16,7 @@ import MultilineTextInput from './multiline-text-input';
 import SolidButton from './solid-button';
 import GhostAlert from '../ghost-alert';
 import Checkbox from './checkbox';
+import ConfigManager from '../../common/config-manager';
 
 
 // Options passed to the input components themselves
@@ -48,6 +51,16 @@ interface ContactFormFieldsInterface {
 
 export default function ContactForm({ className = '' }: PropsWithClassName) {
 	const alertDuration = 5000;
+	const configManager = new ConfigManager();
+	const {
+		botpoisonPublicKey,
+		contactFormPostUrl,
+	} = configManager.getExternalServices();
+
+	const botpoison = new Botpoison({
+		publicKey: botpoisonPublicKey,
+	});
+
 	const [formState, setFormState] = React.useState<FormState>(FormState.Idle);
 
 	// Options passed to React Hook Form for input validation
@@ -120,9 +133,37 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 	const onSubmit: SubmitHandler<ContactFormFieldsInterface> = async formData => {
 		setFormState(FormState.Busy);
 
-		// TODO: Implement form submission here
+		// Compute hash for the Botpoison challenge
+		const { solution } = await botpoison.challenge();
+		const requestBody = JSON.stringify({
+			_botpoison: solution,
+			...formData,
+		});
 
-		setFormState(FormState.Submitted);
+		console.debug('Submitting form with data:', requestBody);
+
+		fetch(contactFormPostUrl, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+			body: requestBody,
+		})
+			.then(response => {
+				if (!response.ok) {
+					const statusText = response.statusText || getReasonPhrase(response.status);
+
+					handleSubmissionError(`The server returned status code ${response.status} (${statusText})`);
+
+					return;
+				}
+
+				setFormState(FormState.Submitted);
+			})
+			.catch(error => {
+				handleSubmissionError(`The following error was caught: ${error}`);
+			});
 	}
 
 	// After submission, reset the form state after a few seconds
