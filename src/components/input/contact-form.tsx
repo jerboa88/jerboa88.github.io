@@ -4,7 +4,7 @@
 */
 
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { LayoutGroup, motion } from 'framer-motion';
 import { faCircleNotch, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
@@ -47,6 +47,7 @@ interface ContactFormFieldsInterface {
 }
 
 export default function ContactForm({ className = '' }: PropsWithClassName) {
+	const alertDuration = 5000;
 	const [formState, setFormState] = React.useState<FormState>(FormState.Idle);
 
 	// Options passed to React Hook Form for input validation
@@ -115,6 +116,19 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 
 		setFormState(FormState.Submitted);
 	}
+
+	// After submission, reset the form state after a few seconds
+	useEffect(() => {
+		if (formState === FormState.Submitted || formState === FormState.Error) {
+			const timeout = setTimeout(() => {
+				setFormState(FormState.Idle);
+
+				// TODO: Clear form fields here
+			}, alertDuration);
+
+			return () => clearTimeout(timeout);
+		}
+	}, [formState]);
 
 	return (
 		<motion.form layout method="post" onSubmit={handleSubmit(onSubmit)} className={`w-full max-w-xl p-0 sm:p-8 flex flex-col gap-4 ${className}`}>
