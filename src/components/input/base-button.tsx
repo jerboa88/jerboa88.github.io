@@ -6,11 +6,13 @@
 
 
 import React from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ButtonInterface } from '../../common/types';
+import { asInteractiveCard, withFadeInAnimation } from '../../common/utilities';
 
 
-export default function BaseButton({ className = '', type = 'button', iconClassName = '', textClassName = '', disabled = false, responsive = false, flip = false, icon, text }: ButtonInterface) {
+export default function BaseButton({ className = '', type = 'button', iconClassName = '', textClassName = '', disabled = false, responsive = false, flip = false, icon, text, layout, layoutRoot }: ButtonInterface) {
 	const buttonFlipStyles = flip ? 'flex-row-reverse' : '';
 	const buttonStyles = `flex flex-row justify-center items-center self-center gap-2 text-sm font-button uppercase ${buttonFlipStyles} ${className}`;
 
@@ -21,9 +23,19 @@ export default function BaseButton({ className = '', type = 'button', iconClassN
 	const textStyles = `${textResponsiveStyles} ${textClassName} `;
 
 	return (
-		<button type={type} disabled={disabled} className={buttonStyles} >
-			{icon && <FontAwesomeIcon icon={icon} className={iconStyles} />}
-			{text && <span className={textStyles}>{text}</span>}
-		</button>
+		<motion.button {...{ type, disabled, layout, layoutRoot }} {...asInteractiveCard} className={buttonStyles}>
+			<AnimatePresence mode="popLayout">
+				{icon && (
+					<motion.span key="icon" layout="position" {...withFadeInAnimation}>
+						<FontAwesomeIcon icon={icon} className={iconStyles} />
+					</motion.span>
+				)}
+				{text && (
+					<motion.span key="text" layout="position" {...withFadeInAnimation} className={textStyles}>
+						{text}
+					</motion.span>
+				)}
+			</AnimatePresence>
+		</motion.button>
 	);
 }
