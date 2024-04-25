@@ -8523,20 +8523,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-google-gtag@npm:^5.13.1":
-  version: 5.13.1
-  resolution: "gatsby-plugin-google-gtag@npm:5.13.1"
-  dependencies:
-    "@babel/runtime": "npm:^7.20.13"
-    minimatch: "npm:^3.1.2"
-  peerDependencies:
-    gatsby: ^5.0.0-next
-    react: ^18.0.0 || ^0.0.0
-    react-dom: ^18.0.0 || ^0.0.0
-  checksum: 10/70a88d4abdf6a5294037fbb4d75438121513eb7ba875cd10ad53fc84e3f721d365e53ae307e6cdda6cc96cef2509c4a73316c6535250b7963de6eb1c3ee1c78d
-  languageName: node
-  linkType: hard
-
 "gatsby-plugin-image-generator@link:./plugins/gatsby-plugin-image-generator::locator=johng-io%40workspace%3A.":
   version: 0.0.0-use.local
   resolution: "gatsby-plugin-image-generator@link:./plugins/gatsby-plugin-image-generator::locator=johng-io%40workspace%3A."
@@ -10778,7 +10764,6 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^4.6.0"
     framer-motion: "npm:^11.1.7"
     gatsby: "npm:^5.13.4"
-    gatsby-plugin-google-gtag: "npm:^5.13.1"
     gatsby-plugin-image: "npm:^3.13.1"
     gatsby-plugin-image-generator: "link:./plugins/gatsby-plugin-image-generator"
     gatsby-plugin-manifest: "npm:^5.13.1"

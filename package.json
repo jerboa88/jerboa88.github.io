@@ -47,7 +47,6 @@
     "dotenv": "^16.4.5",
     "framer-motion": "^11.1.7",
     "gatsby": "^5.13.4",
-    "gatsby-plugin-google-gtag": "^5.13.1",
     "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-image-generator": "link:./plugins/gatsby-plugin-image-generator",
     "gatsby-plugin-manifest": "^5.13.1",

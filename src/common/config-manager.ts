@@ -32,7 +32,6 @@ export default class ConfigManager {
 			ogImageAltText: smc.ogImageAltText,
 			siteUrl: smc.siteUrl,
 			sourceUrl: smc.sourceUrl,
-			trackingId: smc.trackingId,
 			author: {
 				name: {
 					first: smc.author.name.first,

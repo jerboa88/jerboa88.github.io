@@ -23,6 +23,10 @@ export interface PropsWithLayoutAnimations {
 }
 
 
+// Tailwind CSS background color
+export type BgColor = `bg-${string}`;
+
+
 // HTTPS URL
 type Url = `https://${string}`;
 
@@ -40,7 +44,6 @@ export interface SiteMetadataConfigInterface {
 	ogImageAltText: string;
 	siteUrl: string;
 	sourceUrl: string;
-	trackingId: string;
 	author: {
 		name: {
 			first: string;
@@ -74,7 +77,6 @@ export interface SiteMetadataInterface {
 	ogImageAltText: string;
 	siteUrl: string;
 	sourceUrl: string;
-	trackingId: string;
 	author: {
 		name: {
 			first: string;
@@ -140,10 +142,6 @@ export interface ThemeInterface extends ThemeConfigInterface {
 	'success-content': string;
 	'warning-content': string;
 }
-
-
-// Tailwind CSS background color
-export type BgColor = `bg-${string}`;
 
 
 // Color mappings for project types

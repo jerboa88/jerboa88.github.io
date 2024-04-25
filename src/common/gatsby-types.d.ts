@@ -8471,6 +8471,30 @@ type GITHUB_FileDeletion = {
   readonly path: Scalars['String'];
 };
 
+/** Prevent commits that include files with specified file extensions from being pushed to the commit graph. NOTE: This rule is in beta and subject to change */
+type GITHUB_FileExtensionRestrictionParameters = {
+  /** The file extensions that are restricted from being pushed to the commit graph. */
+  readonly restrictedFileExtensions: ReadonlyArray<Scalars['String']>;
+};
+
+/** Prevent commits that include files with specified file extensions from being pushed to the commit graph. NOTE: This rule is in beta and subject to change */
+type GITHUB_FileExtensionRestrictionParametersInput = {
+  /** The file extensions that are restricted from being pushed to the commit graph. */
+  readonly restrictedFileExtensions: ReadonlyArray<Scalars['String']>;
+};
+
+/** Prevent commits that include changes in specified file paths from being pushed to the commit graph. NOTE: This rule is in beta and subject to change */
+type GITHUB_FilePathRestrictionParameters = {
+  /** The file paths that are restricted from being pushed to the commit graph. */
+  readonly restrictedFilePaths: ReadonlyArray<Scalars['String']>;
+};
+
+/** Prevent commits that include changes in specified file paths from being pushed to the commit graph. NOTE: This rule is in beta and subject to change */
+type GITHUB_FilePathRestrictionParametersInput = {
+  /** The file paths that are restricted from being pushed to the commit graph. */
+  readonly restrictedFilePaths: ReadonlyArray<Scalars['String']>;
+};
+
 /** The possible viewed states of a file . */
 type GITHUB_FileViewedState =
   /** The file has new changes since last viewed. */
@@ -10576,6 +10600,30 @@ type GITHUB_MarketplaceListingEdge = {
   readonly cursor: Scalars['String'];
   /** The item at the end of the edge. */
   readonly node: Maybe<GITHUB_MarketplaceListing>;
+};
+
+/** Prevent commits that include file paths that exceed a specified character limit from being pushed to the commit graph. NOTE: This rule is in beta and subject to change */
+type GITHUB_MaxFilePathLengthParameters = {
+  /** The maximum amount of characters allowed in file paths */
+  readonly maxFilePathLength: Scalars['Int'];
+};
+
+/** Prevent commits that include file paths that exceed a specified character limit from being pushed to the commit graph. NOTE: This rule is in beta and subject to change */
+type GITHUB_MaxFilePathLengthParametersInput = {
+  /** The maximum amount of characters allowed in file paths */
+  readonly maxFilePathLength: Scalars['Int'];
+};
+
+/** Prevent commits that exceed a specified file size limit from being pushed to the commit. NOTE: This rule is in beta and subject to change */
+type GITHUB_MaxFileSizeParameters = {
+  /** The maximum file size allowed in megabytes. This limit does not apply to Git Large File Storage (Git LFS). */
+  readonly maxFileSize: Scalars['Int'];
+};
+
+/** Prevent commits that exceed a specified file size limit from being pushed to the commit. NOTE: This rule is in beta and subject to change */
+type GITHUB_MaxFileSizeParametersInput = {
+  /** The maximum file size allowed in megabytes. This limit does not apply to Git Large File Storage (Git LFS). */
+  readonly maxFileSize: Scalars['Int'];
 };
 
 /** Represents a member feature request notification */
@@ -20605,8 +20653,16 @@ type GITHUB_RepositoryRuleType =
   | 'CREATION'
   /** Only allow users with bypass permissions to delete matching refs. */
   | 'DELETION'
+  /** Prevent commits that include files with specified file extensions from being pushed to the commit graph. NOTE: Thie rule is in beta and subject to change */
+  | 'FILE_EXTENSION_RESTRICTION'
+  /** Prevent commits that include changes in specified file paths from being pushed to the commit graph. NOTE: Thie rule is in beta and subject to change */
+  | 'FILE_PATH_RESTRICTION'
   /** Branch is read-only. Users cannot push to the branch. */
   | 'LOCK_BRANCH'
+  /** Prevent commits that include file paths that exceed a specified character limit from being pushed to the commit graph. NOTE: Thie rule is in beta and subject to change */
+  | 'MAX_FILE_PATH_LENGTH'
+  /** Prevent commits that exceed a specified file size limit from being pushed to the commit. NOTE: Thie rule is in beta and subject to change */
+  | 'MAX_FILE_SIZE'
   /** Max ref updates */
   | 'MAX_REF_UPDATES'
   /** Merges must be performed via a merge queue. */
@@ -20764,10 +20820,12 @@ type GITHUB_RepositoryRulesetEdge = {
   readonly node: Maybe<GITHUB_RepositoryRuleset>;
 };
 
-/** The targets supported for rulesets */
+/** The targets supported for rulesets. NOTE: The push target is in beta and subject to change. */
 type GITHUB_RepositoryRulesetTarget =
   /** Branch */
   | 'BRANCH'
+  /** Push */
+  | 'PUSH'
   /** Tag */
   | 'TAG';
 
@@ -21400,7 +21458,7 @@ type GITHUB_RuleEnforcement =
   | 'EVALUATE';
 
 /** Types which can be parameters for `RepositoryRule` objects. */
-type GITHUB_RuleParameters = GITHUB_BranchNamePatternParameters | GITHUB_CommitAuthorEmailPatternParameters | GITHUB_CommitMessagePatternParameters | GITHUB_CommitterEmailPatternParameters | GITHUB_PullRequestParameters | GITHUB_RequiredDeploymentsParameters | GITHUB_RequiredStatusChecksParameters | GITHUB_TagNamePatternParameters | GITHUB_UpdateParameters | GITHUB_WorkflowsParameters;
+type GITHUB_RuleParameters = GITHUB_BranchNamePatternParameters | GITHUB_CommitAuthorEmailPatternParameters | GITHUB_CommitMessagePatternParameters | GITHUB_CommitterEmailPatternParameters | GITHUB_FileExtensionRestrictionParameters | GITHUB_FilePathRestrictionParameters | GITHUB_MaxFilePathLengthParameters | GITHUB_MaxFileSizeParameters | GITHUB_PullRequestParameters | GITHUB_RequiredDeploymentsParameters | GITHUB_RequiredStatusChecksParameters | GITHUB_TagNamePatternParameters | GITHUB_UpdateParameters | GITHUB_WorkflowsParameters;
 
 /** Specifies the parameters for a `RepositoryRule` object. Only one of the fields should be specified. */
 type GITHUB_RuleParametersInput = {
@@ -21412,6 +21470,14 @@ type GITHUB_RuleParametersInput = {
   readonly commitMessagePattern: InputMaybe<GITHUB_CommitMessagePatternParametersInput>;
   /** Parameters used for the `committer_email_pattern` rule type */
   readonly committerEmailPattern: InputMaybe<GITHUB_CommitterEmailPatternParametersInput>;
+  /** Parameters used for the `file_extension_restriction` rule type */
+  readonly fileExtensionRestriction: InputMaybe<GITHUB_FileExtensionRestrictionParametersInput>;
+  /** Parameters used for the `file_path_restriction` rule type */
+  readonly filePathRestriction: InputMaybe<GITHUB_FilePathRestrictionParametersInput>;
+  /** Parameters used for the `max_file_path_length` rule type */
+  readonly maxFilePathLength: InputMaybe<GITHUB_MaxFilePathLengthParametersInput>;
+  /** Parameters used for the `max_file_size` rule type */
+  readonly maxFileSize: InputMaybe<GITHUB_MaxFileSizeParametersInput>;
   /** Parameters used for the `pull_request` rule type */
   readonly pullRequest: InputMaybe<GITHUB_PullRequestParametersInput>;
   /** Parameters used for the `required_deployments` rule type */
@@ -29856,7 +29922,6 @@ type SiteSiteMetadata = {
   readonly sourceUrl: Maybe<Scalars['String']>;
   readonly tagline: Maybe<Scalars['String']>;
   readonly title: Maybe<Scalars['String']>;
-  readonly trackingId: Maybe<Scalars['String']>;
 };
 
 type SiteSiteMetadataAuthor = {
@@ -30112,7 +30177,6 @@ type SiteSiteMetadataFieldSelector = {
   readonly sourceUrl: InputMaybe<FieldSelectorEnum>;
   readonly tagline: InputMaybe<FieldSelectorEnum>;
   readonly title: InputMaybe<FieldSelectorEnum>;
-  readonly trackingId: InputMaybe<FieldSelectorEnum>;
 };
 
 type SiteSiteMetadataFilterInput = {
@@ -30128,7 +30192,6 @@ type SiteSiteMetadataFilterInput = {
   readonly sourceUrl: InputMaybe<StringQueryOperatorInput>;
   readonly tagline: InputMaybe<StringQueryOperatorInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
-  readonly trackingId: InputMaybe<StringQueryOperatorInput>;
 };
 
 type SiteSiteMetadataLightTheme = {
@@ -30248,7 +30311,6 @@ type SiteSiteMetadataSortInput = {
   readonly sourceUrl: InputMaybe<SortOrderEnum>;
   readonly tagline: InputMaybe<SortOrderEnum>;
   readonly title: InputMaybe<SortOrderEnum>;
-  readonly trackingId: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSortInput = {

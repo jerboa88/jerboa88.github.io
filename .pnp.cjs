@@ -46,7 +46,6 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-hooks", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:4.6.0"],\
           ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.1.7"],\
           ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.4"],\
-          ["gatsby-plugin-google-gtag", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-plugin-image", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.13.1"],\
           ["gatsby-plugin-image-generator", "link:./plugins/gatsby-plugin-image-generator::locator=johng-io%40workspace%3A."],\
           ["gatsby-plugin-manifest", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
@@ -11891,38 +11890,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["gatsby-plugin-google-gtag", [\
-      ["npm:5.13.1", {\
-        "packageLocation": "./.yarn/cache/gatsby-plugin-google-gtag-npm-5.13.1-993d935611-70a88d4abd.zip/node_modules/gatsby-plugin-google-gtag/",\
-        "packageDependencies": [\
-          ["gatsby-plugin-google-gtag", "npm:5.13.1"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1", {\
-        "packageLocation": "./.yarn/__virtual__/gatsby-plugin-google-gtag-virtual-1684198783/0/cache/gatsby-plugin-google-gtag-npm-5.13.1-993d935611-70a88d4abd.zip/node_modules/gatsby-plugin-google-gtag/",\
-        "packageDependencies": [\
-          ["gatsby-plugin-google-gtag", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
-          ["@babel/runtime", "npm:7.23.8"],\
-          ["@types/gatsby", null],\
-          ["@types/react", "npm:18.2.79"],\
-          ["@types/react-dom", "npm:18.2.25"],\
-          ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.4"],\
-          ["minimatch", "npm:3.1.2"],\
-          ["react", "npm:18.2.0"],\
-          ["react-dom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:18.2.0"]\
-        ],\
-        "packagePeers": [\
-          "@types/gatsby",\
-          "@types/react-dom",\
-          "@types/react",\
-          "gatsby",\
-          "react-dom",\
-          "react"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["gatsby-plugin-image", [\
       ["npm:3.13.1", {\
         "packageLocation": "./.yarn/cache/gatsby-plugin-image-npm-3.13.1-b98f59f6b2-e354c98c6f.zip/node_modules/gatsby-plugin-image/",\
@@ -14600,7 +14567,6 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-hooks", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:4.6.0"],\
           ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.1.7"],\
           ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.4"],\
-          ["gatsby-plugin-google-gtag", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-plugin-image", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.13.1"],\
           ["gatsby-plugin-image-generator", "link:./plugins/gatsby-plugin-image-generator::locator=johng-io%40workspace%3A."],\
           ["gatsby-plugin-manifest", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
