@@ -8,10 +8,11 @@ import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { LayoutGroup, motion } from 'framer-motion';
 import { faCircleNotch, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { PropsWithClassName, InputValidationOptions } from '../../common/types';
+import { PropsWithClassName, InputValidationOptions, AlertType } from '../../common/types';
 import TextInput from './text-input';
 import MultilineTextInput from './multiline-text-input';
 import SolidButton from './solid-button';
+import GhostAlert from '../ghost-alert';
 import Checkbox from './checkbox';
 
 
@@ -85,10 +86,34 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 		text: 'Send',
 	};
 
+	const alertProps = (() => {
+		switch (formState) {
+			case FormState.Submitted:
+				return {
+					type: AlertType.Success,
+					text: 'Message sent successfully!',
+					show: true,
+				};
+			case FormState.Error:
+				return {
+					type: AlertType.Error,
+					text: 'Oof, something went wrong during form submission. Please try again later.',
+					show: true,
+				};
+			default:
+				return {
+					text: '',
+					show: false,
+				};
+		}
+	})();
+
 	const onSubmit: SubmitHandler<ContactFormFieldsInterface> = async formData => {
 		setFormState(FormState.Busy);
 
 		// TODO: Implement form submission here
+
+		setFormState(FormState.Submitted);
 	}
 
 	return (
@@ -99,6 +124,7 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 				<MultilineTextInput name="message" label="Message" register={register} errors={errors} validationOptions={validationOptions.message} className="w-full" layout="position" />
 				<SolidButton type="submit" className="w-full mt-2" {...submitButtonProps} layout="position" layoutRoot />
 				<Checkbox name="_gotcha" register={register} errors={errors} className="hidden" />
+				<GhostAlert {...alertProps} />
 			</LayoutGroup>
 		</motion.form>
 	);
