@@ -83,6 +83,7 @@ const statusCodeMessages = {
 
 // Functions
 
+// Get a value from an object or return a default value if the key does not exist
 export function getOrDefault<T, K extends keyof T, D extends any>(object: T, key: K | number | string, defaultValue: D): T[K] | D {
 	return object[key as K] ?? defaultValue as D;
 }
