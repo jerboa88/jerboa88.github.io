@@ -249,7 +249,7 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 				<TextInput {...{ register, errors, ...INPUT_PROPS.email }} validationOptions={validationOptions.email} />
 				<MultilineTextInput {...{ register, errors, ...INPUT_PROPS.message }} validationOptions={validationOptions.message} />
 				<Checkbox {...{ register, errors, ...INPUT_PROPS._gotcha }} />
-				<SolidButton type="submit" className="w-full mt-2" {...submitButtonProps} layout="position" layoutRoot />
+				<SolidButton type="submit" className="mt-2 w-full" {...submitButtonProps} layout="position" layoutRoot />
 				<GhostAlert {...alertProps} />
 			</LayoutGroup>
 		</motion.form>

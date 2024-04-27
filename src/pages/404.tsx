@@ -40,10 +40,10 @@ export default function NotFoundPage() {
 			{/* Dummy element to force center alignment of section */}
 			<div></div>
 			<Section className="items-center" {...section}>
-				<div className="flex flex-col items-center gap-8">
+				<div className="flex flex-col gap-8 items-center">
 					Oof, there's nothing here
-					<figure className="flex flex-column justify-center">
-						<pre className="text-left leading-normal" role="img" aria-label="ASCII Sad Cat" aria-description="ASCII art of a sad cat, sitting down">
+					<figure className="flex justify-center flex-column">
+						<pre className="leading-normal text-left" role="img" aria-label="ASCII Sad Cat" aria-description="ASCII art of a sad cat, sitting down">
 							{sadCat}
 						</pre>
 					</figure>

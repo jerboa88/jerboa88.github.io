@@ -46,7 +46,7 @@ export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
 					</div>
 				</div>
 				<div className="flex flex-row justify-between items-center w-full">
-					<div className="flex flex-row justify-start items-center gap-2">
+					<div className="flex flex-row gap-2 justify-start items-center">
 						{
 							repo.languages.map(language => <Pill key={language.name} className={`border ${showOnCardHoverStyles}`} text={language.name} />)
 						}

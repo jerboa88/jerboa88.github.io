@@ -17,10 +17,10 @@ interface FooterPropsInterface {
 
 export default function Footer({ siteMetadata }: FooterPropsInterface) {
 	return (
-		<footer className="w-full bg-base-200 z-20">
-			<div className="divider h-auto m-0 opacity-100" />
-			<div className="flex flex-row p-4 pb-4 items-center justify-between">
-				<nav className="tabs flex flex-row justify-center font-button">
+		<footer className="z-20 w-full bg-base-200">
+			<div className="m-0 h-auto opacity-100 divider" />
+			<div className="flex flex-row justify-between items-center p-4 pb-4">
+				<nav className="flex flex-row justify-center tabs font-button">
 					<Tooltip text="View the source code on GitHub" className="!tooltip-right">
 						<GhostButtonLink text="Source" to={siteMetadata.sourceUrl} />
 					</Tooltip>

@@ -34,7 +34,7 @@ export default function SectionHeader({ className = '', title, button }: Section
 					</Tooltip>
 				)}
 			</div>
-			<div className="divider h-auto m-0 pb-8 opacity-100" />
+			<div className="pb-8 m-0 h-auto opacity-100 divider" />
 		</>
 	);
 }
