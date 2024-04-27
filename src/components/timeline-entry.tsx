@@ -8,11 +8,12 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { RoleInterface } from '../common/types';
-import { H3, Span } from '../components/text-components';
-import DateRange from '../components/text/date-range';
-import Pill from '../components/pill';
 import ConfigManager from '../common/config-manager';
+import SubsectionHeading from './text/subsection-heading';
+import DateRange from './text/date-range';
+import Pill from './pill';
 import Card from './card';
+
 
 
 interface TimelineEntryPropsInterface {
@@ -25,23 +26,29 @@ export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
 
 	return (
 		<>
-			<div className="timeline-start !m-0 px-8 pb-8 !row-start-2 !self-start flex flex-col max-lg:flex-row w-fit max-lg:w-full justify-between gap-4 items-start max-lg:items-center text-left">
-				<div>
+			<div className="timeline-start !m-0 pb-8 !row-start-2 !self-start w-fit flex flex-col justify-between items-start gap-4 max-lg:flex-row max-lg:w-full max-lg:items-center text-left">
+				<div className="max-lg:pl-1">
 					<DateRange startDate={role.startDate} endDate={role.endDate} />
-					<Span>{role.location}</Span>
+					<span className="text-sm">
+						{role.location}
+					</span>
 				</div>
 				<Pill text={role.type} className={`capitalize ${roleTypeColor}`} />
 			</div>
 			<div className="timeline-middle">
 				<FontAwesomeIcon icon={faCircleCheck} />
 			</div>
-			<Card className="mt-0 mr-0 ml-8 mb-8 p-8 timeline-box timeline-end" disabled >
+			<Card className="timeline-box timeline-end m-0 mb-16 p-8 !row-start-2" disabled>
 				<div className="flex flex-row mb-8 justify-between items-center">
 					<div className="flex flex-col">
-						<H3 className="mt-0 mr-2">{role.title}</H3>
-						<div className="flex items-center">
+						<SubsectionHeading className="mt-0 mr-2">
+							{role.title}
+						</SubsectionHeading>
+						<div className="flex flex-row items-center">
 							<FontAwesomeIcon className="pr-2" icon={faBuilding} />
-							<Span className="italic">{role.company}</Span>
+							<span className="text-sm italic">
+								{role.company}
+							</span>
 						</div>
 					</div>
 				</div>

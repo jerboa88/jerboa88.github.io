@@ -7,26 +7,28 @@
 import React, { useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import { motion, useInView } from 'framer-motion';
-import { faArrowUpRightFromSquare, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import ConfigManager from '../common/config-manager';
 import { ProjectInfoInterface, SectionInterface } from '../common/types';
-import { getDefaultTransition } from '../common/utilities';
 import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
 import SEO from '../components/layout/seo';
-import { H1, P } from '../components/text-components';
+import Heading from '../components/text/heading';
+import { Article } from '../components/text/article';
+import GhostButtonLink from '../components/links/ghost-button-link';
+import ContactForm from '../components/input/contact-form';
 import ProjectCardGallery from '../components/project-card-gallery';
 import Timeline from '../components/timeline';
-import ButtonLink from '../components/links/button-link';
+import Tooltip from '../components/tooltip';
 
 
-interface HomePropsInterface {
+interface IndexPageTemplatePropsInterface {
 	pageContext: {
 		pinnedRepos: ProjectInfoInterface[];
 	};
 }
 
-export default function Home({ pageContext }: HomePropsInterface) {
+export default function IndexPageTemplate({ pageContext }: IndexPageTemplatePropsInterface) {
 	const titleLayoutId = 'title-layout';
 	const configManager = new ConfigManager();
 	const siteMetadata = configManager.getMetadata();
@@ -69,10 +71,10 @@ export default function Home({ pageContext }: HomePropsInterface) {
 		}
 	] as SectionInterface[];
 	const titleElement = (
-		<H1 className="m-4 text-6xl">
+		<Heading className="m-4 text-6xl">
 			<span className="inline md:hidden">{siteMetadata.author.name.short}</span>
 			<span className="hidden md:inline">{siteMetadata.author.name.full}</span>
-		</H1>
+		</Heading>
 	);
 	let titleWrapperElement = (
 		<a href="/" className="z-20 opacity-0">
@@ -82,7 +84,7 @@ export default function Home({ pageContext }: HomePropsInterface) {
 
 	if (isTitleExpanded) {
 		titleWrapperElement = (
-			<motion.a href="/" className="z-20" layoutId={titleLayoutId} {...getDefaultTransition()}>
+			<motion.a href="/" className="z-20" layoutId={titleLayoutId}>
 				{titleElement}
 			</motion.a>
 		);
@@ -93,21 +95,27 @@ export default function Home({ pageContext }: HomePropsInterface) {
 			<Section className="min-h-svh text-center">
 				<span ref={inViewTriggerRef} />
 				{titleWrapperElement}
-				<P>{siteMetadata.tagline}</P>
-				<ButtonLink to={`#${sections[0].id}`} className={`absolute bottom-0 mb-4 transition ${isTitleExpanded ? '' : 'opacity-0'}`} icon={faChevronDown} isInternal />
+				<span className="m-4">
+					{siteMetadata.tagline}
+				</span>
+				<div className="fixed inset-x-0 bottom-0 mb-4 flex flex-row justify-center">
+					<Tooltip text={`Go to ${sections[0].title} section`}>
+						<GhostButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={`transition ${isTitleExpanded ? '' : 'opacity-0'}`} isInternal />
+					</Tooltip>
+				</div>
 			</Section>
 			<Section className="min-h-screen" {...sections[0]}>
-				<p>
-					I am a recent graduate with a Bachelors Specialization in Computing Science from the University of Alberta. During my time at the U of A, I had the opportunity to share my expertise with Haemonetics Corporation in Edmonton, where I was involved in end-to-end development of their NexLynk Donor Management System.
-				</p>
-				<br />
-				<p>
-					Having a natural interest in science has allowed me to become familiar with a wide variety of tech related subjects including programming, design, and audio production. I have experience with frontend web technologies, backend development, cloud computing, as well as low-level programming like Arduino and MIPS assembly.
-				</p>
-				<br />
-				<p>
-					Some of my extracurricular interests include cats, cars, and music!
-				</p>
+				<Article>
+					<p>
+						I am a recent graduate with a Bachelors Specialization in Computing Science from the University of Alberta. During my time at the U of A, I had the opportunity to share my expertise with Haemonetics Corporation in Edmonton, where I was involved in end-to-end development of their NexLynk Donor Management System.
+					</p>
+					<p>
+						Having a natural interest in science has allowed me to become familiar with a wide variety of tech related subjects including programming, design, and audio production. I have experience with frontend web technologies, backend development, cloud computing, as well as low-level programming like Arduino and MIPS assembly.
+					</p>
+					<p>
+						Some of my extracurricular interests include cats, cars, and music!
+					</p>
+				</Article>
 			</Section>
 			<Section className="min-h-screen" {...sections[1]}>
 				<ProjectCardGallery projects={pageContext.pinnedRepos} />
@@ -116,7 +124,12 @@ export default function Home({ pageContext }: HomePropsInterface) {
 				<Timeline roles={jobs} />
 			</Section>
 			<Section className="min-h-screen" {...sections[3]}>
-				TODO
+				<Article className="w-full flex flex-col justify-center">
+					<p>
+						Got something on your mind? Whether it's a query, a collaboration proposal, or just a friendly hello, feel free to reach out using the form below.
+					</p>
+					<ContactForm className="self-center" />
+				</Article>
 			</Section>
 		</PageLayout>
 	);

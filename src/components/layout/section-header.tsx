@@ -5,17 +5,18 @@
 
 
 import React, { PropsWithChildren } from 'react';
-import { H2 } from '../../components/text-components';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import ButtonLink from '../links/button-link';
+import { PropsWithClassName } from '../../common/types';
+import SectionHeading from '../text/section-heading';
+import GhostButtonLink from '../links/ghost-button-link';
+import Tooltip from '../tooltip';
 
 
-interface SectionHeaderPropsInterface extends PropsWithChildren {
-	className?: string;
+interface SectionHeaderPropsInterface extends PropsWithClassName, PropsWithChildren {
 	title: string;
 	button?: {
-		text?: string;
-		icon?: IconDefinition;
+		text: string;
+		icon: IconDefinition;
 		to: string;
 	};
 }
@@ -23,9 +24,15 @@ interface SectionHeaderPropsInterface extends PropsWithChildren {
 export default function SectionHeader({ className = '', title, button }: SectionHeaderPropsInterface) {
 	return (
 		<>
-			<div className="w-full flex justify-between items-baseline pt-8">
-				<H2>{title}</H2>
-				{button && <ButtonLink {...button} responsive flip className="self-baseline" />}
+			<div className={`w-full flex justify-between items-baseline pt-8 ${className}`}>
+				<SectionHeading>
+					{title}
+				</SectionHeading>
+				{button && (
+					<Tooltip text={button.text} className="!tooltip-left">
+						<GhostButtonLink {...button} responsive flip className="self-baseline" />
+					</Tooltip>
+				)}
 			</div>
 			<div className="divider h-auto m-0 pb-8 opacity-100" />
 		</>

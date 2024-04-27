@@ -4,43 +4,67 @@
 */
 
 
-import React from 'react';
+import React, { useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import ConfigManager from '../common/config-manager';
+import { ProjectInfoInterface, SectionInterface } from '../common/types';
 import { getProjectImage } from '../common/utilities';
-import { ProjectInfoInterface } from '../common/types';
 import PageLayout from '../components/layout/page-layout';
 import SEO from '../components/layout/seo';
-import { H2, P } from '../components/text-components';
-import LinkWrapper from '../components/links/link-wrapper';
+import Section from '../components/layout/section';
+import { Article } from '../components/text/article';
+import InlineLink from '../components/links/inline-link';
 
 
-interface ProjectPagePropsInterface {
+interface ProjectPageTemplatePropsInterface {
 	pageContext: ProjectInfoInterface;
 }
 
-export default function ProjectPage({ pageContext }: ProjectPagePropsInterface) {
+export default function ProjectPageTemplate({ pageContext }: ProjectPageTemplatePropsInterface) {
 	const configManager = new ConfigManager();
 	const siteMetadata = configManager.getMetadata();
+	const section = {
+		id: 'project',
+		title: pageContext.name,
+		ref: useRef(null),
+	} as SectionInterface;
 
 	return (
 		<PageLayout siteMetadata={siteMetadata}>
-			<img src={getProjectImage(pageContext.imageUrl)} width='500' alt=''></img>
-			<H2>{pageContext.name}</H2>
-			<P>{pageContext.shortDesc}</P>
-			<P>{pageContext.typeName}</P>
-			<P>{pageContext.typeColor}</P>
-			<LinkWrapper to={pageContext.homepageUrl}>
-				{pageContext.homepageUrl}}
-			</LinkWrapper>
-			<LinkWrapper to={pageContext.githubUrl}>
-				{pageContext.githubUrl}}
-			</LinkWrapper>
-			<P>{pageContext.stargazers}</P>
-			<P>{pageContext.updatedAt}</P>
-			<P>{pageContext.license}</P>
-			<P>{pageContext.name}</P>
-			<P>{pageContext.longDesc}</P>
+			{/* Dummy element to force center alignment of section */}
+			<div></div>
+			<Section {...section}>
+				<Article>
+					<img src={getProjectImage(pageContext.imageUrl)} width="500" alt="TODO"></img>
+					<p>
+						{pageContext.shortDesc}
+					</p>
+					<p>
+						{pageContext.typeName}
+					</p>
+					<p>
+						{pageContext.typeColor}
+					</p>
+					<InlineLink to={pageContext.homepageUrl} text={pageContext.homepageUrl} />
+					<br />
+					<InlineLink to={pageContext.githubUrl} text={pageContext.githubUrl} />
+					<p>
+						{pageContext.stargazers}
+					</p>
+					<p>
+						{pageContext.updatedAt}
+					</p>
+					<p>
+						{pageContext.license}
+					</p>
+					<p>
+						{pageContext.name}
+					</p>
+					<p>
+						{pageContext.longDesc}
+					</p>
+				</Article>
+			</Section>
 		</PageLayout>
 	);
 }

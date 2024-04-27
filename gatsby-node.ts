@@ -6,7 +6,7 @@ import { PinnedRepoResponseInterface } from './src/common/types';
 
 
 const projectsPagePath = 'projects';
-const indexPageTemplate = path.resolve('./src/templates/index.tsx');
+const indexPageTemplate = path.resolve('./src/templates/index-page.tsx');
 const projectPageTemplate = path.resolve('./src/templates/project-page.tsx');
 
 

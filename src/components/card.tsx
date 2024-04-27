@@ -5,10 +5,10 @@
 
 
 import React, { PropsWithChildren } from 'react';
+import { PropsWithClassName } from '../common/types';
 
 
-interface CardPropsInterface extends PropsWithChildren {
-	className?: string;
+interface CardPropsInterface extends PropsWithClassName, PropsWithChildren {
 	disabled?: boolean;
 }
 

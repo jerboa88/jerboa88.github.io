@@ -1,39 +1,44 @@
 /*
-	Custom 404 page
-	---------------
+	Privacy Policy page
+	-------------------
 */
 
 
 import React, { useRef } from 'react';
 import type { HeadProps } from 'gatsby';
+import { graphql } from 'gatsby';
 import ConfigManager from '../common/config-manager';
 import { SectionInterface } from '../common/types';
 import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
 import SEO from '../components/layout/seo';
 import SolidButtonLink from '../components/links/solid-button-link';
+import { Article } from '../components/text/article';
 
 
-export default function NotFoundPage() {
+const pageTitle = 'Privacy Policy';
+
+
+interface PrivacyPolicyPageProps {
+	data: {
+		file: {
+			childMarkdownRemark: {
+				html: string;
+			};
+		};
+	};
+}
+
+
+export default function PrivacyPolicyPage({ data }: PrivacyPolicyPageProps) {
 	const configManager = new ConfigManager();
 	const siteMetadata = configManager.getMetadata();
 	const section = {
-		id: '404',
-		title: '404',
+		id: 'privacy-policy',
+		title: pageTitle,
 		ref: useRef(null),
 	} as SectionInterface;
-	// Cat ASCII art from https://emojicombos.com/cat
-	const sadCat = [
-		'         \uFF0F\uFF1E\u3000\u0020\u30D5',
-		'         \u007C\u0020\u3000\u005F\u3000\u005F\u007C',
-		'       \uFF0F\u0060\u0020\u30DF\uFF3F\u0078\u30CE',
-		'      \u002F\u3000\u3000\u3000\u3000\u0020\u007C',
-		'     \u002F\u3000\u0020\u30FD\u3000\u3000\u0020\uFF89',
-		'    \u2502\u3000\u3000\u007C\u3000\u007C\u3000\u007C',
-		'\uFF0F\uFFE3\u007C\u3000\u3000\u0020\u007C\u3000\u007C\u3000\u007C',
-		'\u0028\uFFE3\u30FD\uFF3F\u005F\u30FD\u005F\u0029\u005F\u005F\u0029',
-		'\uFF3C\u4E8C\u0029',
-	].join('\n');
+	const articleHtml = data.file.childMarkdownRemark.html;
 
 	return (
 		<PageLayout siteMetadata={siteMetadata}>
@@ -41,12 +46,7 @@ export default function NotFoundPage() {
 			<div></div>
 			<Section className="items-center" {...section}>
 				<div className="flex flex-col items-center gap-8">
-					Oof, there's nothing here
-					<figure className="flex flex-column justify-center">
-						<pre className="text-left leading-normal" role="img" aria-label="ASCII Sad Cat" aria-description="ASCII art of a sad cat, sitting down">
-							{sadCat}
-						</pre>
-					</figure>
+					<Article html={articleHtml} />
 					<SolidButtonLink text="Home" to="/" isInternal />
 				</div>
 			</Section>
@@ -57,7 +57,6 @@ export default function NotFoundPage() {
 export const Head = ({ location }: HeadProps) => {
 	const configManager = new ConfigManager();
 	const siteMetadata = configManager.getMetadata();
-	const pageTitle = '404 - Page Not Found';
 	const pageMetadata = {
 		title: `${pageTitle} | ${siteMetadata.shortTitle}`,
 		description: siteMetadata.description,
@@ -77,3 +76,14 @@ export const Head = ({ location }: HeadProps) => {
 		<SEO pageMetadata={pageMetadata} />
 	);
 }
+
+
+export const pageQuery = graphql`
+  query {
+		file(name: {eq: "privacy-policy"}) {
+			childMarkdownRemark {
+				html
+			}
+		}
+  }
+`

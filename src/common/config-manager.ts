@@ -6,6 +6,7 @@
 
 import type { BgColor, ProjectTypeColorMappingsInterface, RoleInterface, RoleTypeColorMappingsInterface, SiteMetadataInterface, ThemeInterface } from '../common/types';
 import siteMetadataConfig from '../config/site-metadata';
+import externalServicesConfig from '../config/external-services';
 import jobsConfig from '../config/jobs';
 import themesConfig from '../config/themes';
 import colorMappingsConfig from '../config/color-mappings';
@@ -31,7 +32,6 @@ export default class ConfigManager {
 			ogImageAltText: smc.ogImageAltText,
 			siteUrl: smc.siteUrl,
 			sourceUrl: smc.sourceUrl,
-			trackingId: smc.trackingId,
 			author: {
 				name: {
 					first: smc.author.name.first,
@@ -58,6 +58,10 @@ export default class ConfigManager {
 				},
 			}
 		};
+	}
+
+	getExternalServices() {
+		return externalServicesConfig;
 	}
 
 	// Returns a list of jobs with formatted date objects

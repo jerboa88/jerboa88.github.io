@@ -1,22 +1,21 @@
 /*
-	Widget to show tabs for each section of the page
-	------------------------------------------------
+	Widget to show tabs for each section of a page
+	----------------------------------------------
 */
 
 
 import React from 'react';
 import { motion, useInView } from 'framer-motion';
-import { getDefaultTransition } from '../common/utilities';
 import { SectionInterface } from '../common/types';
-import ButtonLink from './links/button-link';
+import GhostButtonLink from './links/ghost-button-link';
 
 
-interface TabsWidgetPropsInterface {
+interface TabsPropsInterface {
 	sections: SectionInterface[];
 	hideIndicator?: boolean;
 }
 
-export default function TabsWidget({ sections, hideIndicator = false }: TabsWidgetPropsInterface) {
+export default function Tabs({ sections, hideIndicator = false }: TabsPropsInterface) {
 	// Map is used here because we need to call the same number of hook every time. Otherwise, React will complain
 	const sectionInViewHooks = sections.map(section => useInView(section.ref, {
 		amount: 0,
@@ -25,7 +24,7 @@ export default function TabsWidget({ sections, hideIndicator = false }: TabsWidg
 	const currentSectionIndex = hideIndicator ? -1 : sectionInViewHooks.findIndex(inView => inView);
 
 	return (
-		<motion.nav layout="position" className="tabs flex flex-row justify-center" {...getDefaultTransition()}>
+		<motion.nav layout="position" className="tabs flex flex-row justify-center">
 			{
 				sections && sections.map(({ id, title }, i) => {
 					let buttonActiveClass = '';
@@ -33,13 +32,13 @@ export default function TabsWidget({ sections, hideIndicator = false }: TabsWidg
 
 					if (currentSectionIndex === i) {
 						buttonActiveClass = 'tab-active';
-						indicatorElement = <motion.div className="w-4 h-1 bg-primary rounded-full" layoutId="active-tab-indicator" {...getDefaultTransition()} />;
+						indicatorElement = <motion.div className="w-4 h-1 bg-primary rounded-full" layoutId="active-tab-indicator" />;
 					}
 
 					return (
 						<div key={title} className="flex flex-col items-center">
-							<motion.div layout="position" {...getDefaultTransition()}>
-								<ButtonLink className={`tab !py-0 ${buttonActiveClass}`} text={title} to={`#${id}`} isInternal />
+							<motion.div layout="position">
+								<GhostButtonLink className={`tab !py-0 ${buttonActiveClass}`} text={title} to={`#${id}`} isInternal />
 							</motion.div>
 							{indicatorElement}
 						</div>

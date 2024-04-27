@@ -5,20 +5,21 @@
 
 
 import React, { PropsWithChildren, StrictMode } from 'react';
-import { SiteMetadataInterface, SectionInterface } from '../../common/types';
+import { MotionConfig } from 'framer-motion';
+import { SiteMetadataInterface, SectionInterface, PropsWithClassName } from '../../common/types';
 import Header from './header';
 import Footer from './footer';
+import { withSpringTransition } from '../../common/utilities';
 
 
-interface PageLayoutPropsInterface extends PropsWithChildren {
-	className?: string;
+interface PageLayoutPropsInterface extends PropsWithClassName, PropsWithChildren {
 	siteMetadata: SiteMetadataInterface;
 	titleLayoutId?: string;
 	isTitleExpanded?: boolean;
-	sections: SectionInterface[];
+	sections?: SectionInterface[];
 }
 
-export default function PageLayout({ className = '', siteMetadata, titleLayoutId, isTitleExpanded = false, sections, children }: PageLayoutPropsInterface) {
+export default function PageLayout({ className = '', siteMetadata, titleLayoutId, isTitleExpanded = false, sections = [], children }: PageLayoutPropsInterface) {
 	// const lsKeyForTheme = 'is-dark-theme';
 	// const lsKeyForMotion = 'is-motion-allowed';
 	// const lsKeyForAnalytics = `ga-disable-${props.siteMetadata.trackingId}`;
@@ -88,12 +89,14 @@ export default function PageLayout({ className = '', siteMetadata, titleLayoutId
 
 	return (
 		<StrictMode>
-			{/* Page body */}
-			<div className={`min-h-screen flex-col justify-between items-center gap-32 mx-auto text-base bg-base-300 text-base-content scroll-smooth selection:bg-primary selection:text-primary-content ${className}`}>
-				<Header siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections} />
-				{children}
-				<Footer siteMetadata={siteMetadata} />
-			</div>
+			<MotionConfig {...withSpringTransition} reducedMotion="user">
+				{/* Page body */}
+				<div className={`min-h-screen flex-col justify-between items-center gap-32 mx-auto text-base bg-base-300 text-base-content scroll-smooth selection:bg-primary selection:text-primary-content ${className}`}>
+					<Header {...{ siteMetadata, titleLayoutId, isTitleExpanded, sections }} />
+					{children}
+					<Footer siteMetadata={siteMetadata} />
+				</div>
+			</MotionConfig>
 		</StrictMode>
 	);
 }

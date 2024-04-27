@@ -5,12 +5,11 @@
 
 
 import React from 'react';
-import { ProjectInfoInterface } from '../common/types';
+import { ProjectInfoInterface, PropsWithClassName } from '../common/types';
 import ProjectCard from '../components/project-card';
 
 
-interface ProjectCardGalleryPropsInterface {
-	className?: string;
+interface ProjectCardGalleryPropsInterface extends PropsWithClassName {
 	projects: ProjectInfoInterface[];
 }
 

@@ -5,16 +5,45 @@
 
 
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { LayoutProps } from 'framer-motion';
 import { Context, RefObject } from 'react';
+import { FieldErrors, UseFormRegister, UseFormRegisterReturn } from 'react-hook-form';
+
+
+// Props for components that accept an optional class name
+export interface PropsWithClassName {
+	className?: string;
+}
+
+
+// Props for components that accept optional layout animations
+export interface PropsWithLayoutAnimations {
+	layout?: LayoutProps['layout'];
+	layoutRoot?: LayoutProps['layoutRoot'];
+}
+
+
+// Tailwind CSS background color
+export type BgColor = `bg-${string}`;
+
+
+// HTTPS URL
+type Url = `https://${string}`;
+
+
+// Raw external services config
+export interface ExternalServicesConfigInterface {
+	botpoisonPublicKey: `pk_${string}`;
+	contactFormPostUrl: Url;
+}
 
 
 // Raw site metadata config
 export interface SiteMetadataConfigInterface {
 	ogImagePath: string;
 	ogImageAltText: string;
-	siteUrl: string;
-	sourceUrl: string;
-	trackingId: string;
+	siteUrl: Url;
+	sourceUrl: Url;
 	author: {
 		name: {
 			first: string;
@@ -46,9 +75,8 @@ export interface SiteMetadataInterface {
 	description: string;
 	ogImagePath: string;
 	ogImageAltText: string;
-	siteUrl: string;
-	sourceUrl: string;
-	trackingId: string;
+	siteUrl: Url;
+	sourceUrl: Url;
 	author: {
 		name: {
 			first: string;
@@ -116,10 +144,6 @@ export interface ThemeInterface extends ThemeConfigInterface {
 }
 
 
-// Tailwind CSS background color
-export type BgColor = `bg-${string}`;
-
-
 // Color mappings for project types
 export interface ProjectTypeColorMappingsInterface {
 	'android app': BgColor;
@@ -154,10 +178,69 @@ export interface SectionInterface {
 	title: string;
 	ref: RefObject<HTMLElement>;
 	button?: {
-		text?: string;
-		icon?: IconDefinition;
+		text: string;
+		icon: IconDefinition;
 		to: string;
 	}
+}
+
+export interface LinkInterface {
+	to: string;
+	isInternal?: boolean;
+	rel?: string;
+}
+
+
+export interface ButtonInterface extends PropsWithClassName, PropsWithLayoutAnimations {
+	iconClassName?: string;
+	textClassName?: string;
+	type?: React.ButtonHTMLAttributes<any>['type'];
+	icon?: IconDefinition;
+	text?: string | number;
+	disabled?: boolean;
+	responsive?: boolean;
+	flip?: boolean;
+}
+
+
+// Possible options for input validation using react-hook-form
+export interface InputValidationOptions {
+	minLength?: number;
+	maxLength?: number;
+	pattern?: RegExp;
+	required?: boolean;
+	disabled?: boolean;
+}
+
+// Common options for different input elements
+export interface InputOptions {
+	tabIndex?: React.HTMLAttributes<HTMLInputElement>['tabIndex'];
+	// autocomplete is not supposed to have any effect on checkbox and radio inputs, but Firefox uses it anyway
+	autoComplete?: React.InputHTMLAttributes<HTMLInputElement>['autoComplete'];
+}
+
+
+export interface InputElementRenderFunction {
+	(props: UseFormRegisterReturn<string>): JSX.Element;
+}
+
+
+export interface InputInterface extends PropsWithClassName, PropsWithLayoutAnimations {
+	labelClassName?: string;
+	inputClassName?: string;
+	name: string;
+	label?: string;
+	register: UseFormRegister<any>;
+	errors: FieldErrors<any>;
+	validationOptions?: InputValidationOptions;
+}
+
+
+export enum AlertType {
+	Info,
+	Success,
+	Warning,
+	Error,
 }
 
 
@@ -170,9 +253,9 @@ export interface ProjectLanguageInterface {
 export interface ProjectInfoInterface {
 	slug: string;
 	shortDesc: string;
-	homepageUrl: string;
-	githubUrl: string;
-	imageUrl: string;
+	homepageUrl: Url;
+	githubUrl: Url;
+	imageUrl: Url;
 	stargazers: number;
 	updatedAt: string;
 	license: string;
@@ -212,12 +295,12 @@ export interface RoleInterface {
 export type PinnedRepoResponseInterface = {
 	name: string;
 	description: string | null;
-	homepageUrl: any;
+	homepageUrl: Url;
 	usesCustomOpenGraphImage: boolean;
 	openGraphImageUrl: any;
 	stargazerCount: number;
 	updatedAt: any;
-	githubUrl: any;
+	githubUrl: Url;
 	languages: {
 		nodes: ({
 			name: string;
