@@ -20749,6 +20749,8 @@ type GITHUB_RepositoryRulesetBypassActor = GITHUB_Node & {
   readonly actor: Maybe<GITHUB_BypassActor>;
   /** The mode for the bypass actor */
   readonly bypassMode: Maybe<GITHUB_RepositoryRulesetBypassActorBypassMode>;
+  /** This actor represents the ability for a deploy key to bypass */
+  readonly deployKey: Scalars['Boolean'];
   /** The Node ID of the RepositoryRulesetBypassActor object */
   readonly id: Scalars['ID'];
   /** This actor represents the ability for an organization owner to bypass */
@@ -20788,12 +20790,14 @@ type GITHUB_RepositoryRulesetBypassActorEdge = {
   readonly node: Maybe<GITHUB_RepositoryRulesetBypassActor>;
 };
 
-/** Specifies the attributes for a new or updated ruleset bypass actor. Only one of `actor_id`, `repository_role_database_id`, or `organization_admin` should be specified. */
+/** Specifies the attributes for a new or updated ruleset bypass actor. Only one of `actor_id`, `repository_role_database_id`, `organization_admin`, or `deploy_key` should be specified. */
 type GITHUB_RepositoryRulesetBypassActorInput = {
   /** For Team and Integration bypasses, the Team or Integration ID */
   readonly actorId: InputMaybe<Scalars['ID']>;
   /** The bypass mode for this actor. */
   readonly bypassMode: GITHUB_RepositoryRulesetBypassActorBypassMode;
+  /** For deploy key bypasses, true. Can only use ALWAYS as the bypass mode */
+  readonly deployKey: InputMaybe<Scalars['Boolean']>;
   /** For organization owner bypasses, true */
   readonly organizationAdmin: InputMaybe<Scalars['Boolean']>;
   /** For role bypasses, the role database ID */

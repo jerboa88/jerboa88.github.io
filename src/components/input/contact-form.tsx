@@ -84,10 +84,11 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 		} as InputValidationOptions
 	};
 	const {
-		register,
 		formState: {
 			errors
 		},
+		register,
+		reset,
 		handleSubmit,
 	} = useForm<ContactFormFieldsInterface>();
 
@@ -160,6 +161,7 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 				}
 
 				setFormState(FormState.Submitted);
+				reset();
 			})
 			.catch(error => {
 				handleSubmissionError(`The following error was caught: ${error}`);
