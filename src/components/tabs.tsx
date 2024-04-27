@@ -24,7 +24,7 @@ export default function Tabs({ sections, hideIndicator = false }: TabsPropsInter
 	const currentSectionIndex = hideIndicator ? -1 : sectionInViewHooks.findIndex(inView => inView);
 
 	return (
-		<motion.nav layout="position" className="tabs flex flex-row justify-center">
+		<motion.nav layout="position" className="flex flex-row justify-center tabs">
 			{
 				sections && sections.map(({ id, title }, i) => {
 					let buttonActiveClass = '';
@@ -32,7 +32,7 @@ export default function Tabs({ sections, hideIndicator = false }: TabsPropsInter
 
 					if (currentSectionIndex === i) {
 						buttonActiveClass = 'tab-active';
-						indicatorElement = <motion.div className="w-4 h-1 bg-primary rounded-full" layoutId="active-tab-indicator" />;
+						indicatorElement = <motion.div className="w-4 h-1 rounded-full bg-primary" layoutId="active-tab-indicator" />;
 					}
 
 					return (

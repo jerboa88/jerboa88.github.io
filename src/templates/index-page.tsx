@@ -92,13 +92,13 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 
 	return (
 		<PageLayout siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
-			<Section className="min-h-svh text-center">
+			<Section className="text-center min-h-svh">
 				<span ref={inViewTriggerRef} />
 				{titleWrapperElement}
 				<span className="m-4">
 					{siteMetadata.tagline}
 				</span>
-				<div className="fixed inset-x-0 bottom-0 mb-4 flex flex-row justify-center">
+				<div className="flex fixed inset-x-0 bottom-0 flex-row justify-center mb-4">
 					<Tooltip text={`Go to ${sections[0].title} section`}>
 						<GhostButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={`transition ${isTitleExpanded ? '' : 'opacity-0'}`} isInternal />
 					</Tooltip>
@@ -124,7 +124,7 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 				<Timeline roles={jobs} />
 			</Section>
 			<Section className="min-h-screen" {...sections[3]}>
-				<Article className="w-full flex flex-col justify-center">
+				<Article className="flex flex-col justify-center w-full">
 					<p>
 						Got something on your mind? Whether it's a query, a collaboration proposal, or just a friendly hello, feel free to reach out using the form below.
 					</p>

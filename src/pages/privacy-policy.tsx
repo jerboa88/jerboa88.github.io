@@ -45,7 +45,7 @@ export default function PrivacyPolicyPage({ data }: PrivacyPolicyPageProps) {
 			{/* Dummy element to force center alignment of section */}
 			<div></div>
 			<Section className="items-center" {...section}>
-				<div className="flex flex-col items-center gap-8">
+				<div className="flex flex-col gap-8 items-center">
 					<Article html={articleHtml} />
 					<SolidButtonLink text="Home" to="/" isInternal />
 				</div>

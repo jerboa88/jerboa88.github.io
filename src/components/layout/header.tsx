@@ -33,7 +33,7 @@ export default function Header({ siteMetadata, titleLayoutId = 'title-layout', i
 		<header className={`fixed top-0 w-full z-20 transition-colors ${bgColorStyles}`}>
 			<div className={`flex-row p-4 pb-4 items-center ${justificationStyles}`}>
 				{!isTitleExpanded && <motion.a href="/" layoutId={titleLayoutId}>
-					<Heading className="m-0 px-2 text-xl">
+					<Heading className="px-2 m-0 text-xl">
 						<span className="inline sm:hidden">{siteMetadata.author.name.initial}</span>
 						<span className="hidden sm:inline md:hidden">{siteMetadata.author.name.short}</span>
 						<span className="hidden md:inline">{siteMetadata.author.name.full}</span>
