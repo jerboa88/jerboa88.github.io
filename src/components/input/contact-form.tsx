@@ -5,12 +5,12 @@
 
 
 import React, { useEffect } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, useFormState, SubmitHandler } from 'react-hook-form';
 import { LayoutGroup, motion } from 'framer-motion';
 import Botpoison from '@botpoison/browser';
 import { faCircleNotch, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { PropsWithClassName, InputValidationOptions, AlertType } from '../../common/types';
-import { getStatusCodeDescription } from '../../common/utilities';
+import { getOrDefault, getStatusCodeDescription } from '../../common/utilities';
 import TextInput from './text-input';
 import MultilineTextInput from './multiline-text-input';
 import SolidButton from './solid-button';
@@ -19,20 +19,7 @@ import Checkbox from './checkbox';
 import ConfigManager from '../../common/config-manager';
 
 
-// Options passed to the input components themselves
-const inputOptions = {
-	name: {
-		autoComplete: 'name',
-	},
-	email: {
-		type: 'email',
-		autoComplete: 'email',
-	},
-	_gotcha: {
-		tabIndex: -1,
-		autoComplete: 'off',
-	}
-};
+// Types
 
 enum FormState {
 	Idle,
@@ -49,22 +36,66 @@ interface ContactFormFieldsInterface {
 	_gotcha?: 'on';
 }
 
-export default function ContactForm({ className = '' }: PropsWithClassName) {
-	const alertDuration = 5000;
-	const configManager = new ConfigManager();
-	const {
-		botpoisonPublicKey,
-		contactFormPostUrl,
-	} = configManager.getExternalServices();
 
-	const botpoison = new Botpoison({
-		publicKey: botpoisonPublicKey,
-	});
+// Constants
 
-	const [formState, setFormState] = React.useState<FormState>(FormState.Idle);
+const ALERT_DURATION_MS = 5000;
 
-	// Options passed to React Hook Form for input validation
-	const validationOptions = {
+const ALERT_PROPS = {
+	[FormState.Submitted]: {
+		type: AlertType.Success,
+		text: 'Message sent successfully!',
+		show: true,
+	},
+	[FormState.Error]: {
+		type: AlertType.Error,
+		text: 'Oof, something went wrong during form submission. Please try again later.',
+		show: true,
+	},
+};
+
+const ALERT_PROPS_DEFAULT = {
+	text: '',
+	show: false,
+};
+
+const SUBMIT_BUTTON_PROPS_BUSY = {
+	iconClassName: 'animate-spin',
+	icon: faCircleNotch,
+	disabled: true,
+};
+
+const SUBMIT_BUTTON_PROPS_DEFAULT = {
+	icon: faPaperPlane,
+	text: 'Send',
+};
+
+// Options passed to the input components themselves
+const INPUT_OPTIONS = {
+	name: {
+		autoComplete: 'name',
+	},
+	email: {
+		type: 'email',
+		autoComplete: 'email',
+	},
+	_gotcha: {
+		tabIndex: -1,
+		autoComplete: 'off',
+	}
+};
+
+const {
+	botpoisonPublicKey: BOTPOISON_PUBLIC_KEY,
+	contactFormPostUrl: CONTACT_FORM_POST_URL,
+} = new ConfigManager().getExternalServices();
+
+const botpoison = new Botpoison({
+	publicKey: BOTPOISON_PUBLIC_KEY,
+});
+
+function getValidationOptions(formState: FormState) {
+	return {
 		name: {
 			maxLength: 50,
 			required: true,
@@ -83,67 +114,66 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 			disabled: formState === FormState.Busy,
 		} as InputValidationOptions
 	};
+}
+
+// Compute the Botpoison solution. Returns a promise that resolves with the solution string
+async function computeBotPoisonSolution() {
+	console.debug('Computing Botpoison solution...');
+
+	return new Promise<string>((resolve, reject) => {
+		botpoison.challenge()
+			.then(({ solution }) => {
+				console.debug('Botpoison solution found');
+
+				resolve(solution)
+			})
+			.catch(reject);
+	});
+}
+
+
+export default function ContactForm({ className = '' }: PropsWithClassName) {
+	const [formState, setFormState] = React.useState<FormState>(FormState.Idle);
+	const [botpoisonSolution, setBotpoisonSolution] = React.useState<Promise<string>>();
+
+	// Options passed to React Hook Form for input validation
+	const validationOptions = getValidationOptions(formState);
+	const submitButtonProps = (formState === FormState.Busy) ? SUBMIT_BUTTON_PROPS_BUSY : SUBMIT_BUTTON_PROPS_DEFAULT;
+	const alertProps = getOrDefault(ALERT_PROPS, formState, ALERT_PROPS_DEFAULT);
+
 	const {
 		formState: {
 			errors
 		},
+		control,
 		register,
 		reset,
 		handleSubmit,
-	} = useForm<ContactFormFieldsInterface>();
+	} = useForm<ContactFormFieldsInterface>({ mode: 'onBlur' });
+	const { isValid } = useFormState({ control });
 
-	const submitButtonProps = (formState === FormState.Busy) ? {
-		iconClassName: 'animate-spin',
-		icon: faCircleNotch,
-		disabled: true,
-	} : {
-		icon: faPaperPlane,
-		text: 'Send',
-	};
 
-	const alertProps = (() => {
-		switch (formState) {
-			case FormState.Submitted:
-				return {
-					type: AlertType.Success,
-					text: 'Message sent successfully!',
-					show: true,
-				};
-			case FormState.Error:
-				return {
-					type: AlertType.Error,
-					text: 'Oof, something went wrong during form submission. Please try again later.',
-					show: true,
-				};
-			default:
-				return {
-					text: '',
-					show: false,
-				};
-		}
-	})();
-
-	// Function that sets form state to error and prints an error message to the console
-	// This function is called when form submission fails
+	// Handle form submission errors
 	const handleSubmissionError = (errorMsg: string) => {
 		setFormState(FormState.Error);
 
 		console.error(`Something went wrong during form submission. ${errorMsg}`);
 	}
 
+
 	const onSubmit: SubmitHandler<ContactFormFieldsInterface> = async formData => {
 		setFormState(FormState.Busy);
 
-		// Compute hash for the Botpoison challenge
-		const { solution } = await botpoison.challenge();
+		console.debug('Waiting for Botpoison solution...');
+
 		const requestBody = JSON.stringify({
-			_botpoison: solution,
+			_botpoison: await botpoisonSolution,
 			...formData,
 		});
 
 		console.debug('Submitting form with data:', requestBody);
 
-		fetch(contactFormPostUrl, {
+		fetch(CONTACT_FORM_POST_URL, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -168,27 +198,35 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 			});
 	}
 
-	// After submission, reset the form state after a few seconds
+
+	// Compute Botpoison solution as soon as the form is valid
+	useEffect(() => {
+		if (isValid && !botpoisonSolution) {
+			setBotpoisonSolution(computeBotPoisonSolution());
+		}
+	}, [isValid, botpoisonSolution]);
+
+
+	// Reset the form state a few seconds after submission
 	useEffect(() => {
 		if (formState === FormState.Submitted || formState === FormState.Error) {
 			const timeout = setTimeout(() => {
 				setFormState(FormState.Idle);
-
-				// TODO: Clear form fields here
-			}, alertDuration);
+			}, ALERT_DURATION_MS);
 
 			return () => clearTimeout(timeout);
 		}
 	}, [formState]);
 
+
 	return (
 		<motion.form layout method="post" onSubmit={handleSubmit(onSubmit)} className={`w-full max-w-xl p-0 sm:p-8 flex flex-col gap-4 ${className}`}>
 			<LayoutGroup>
-				<TextInput name="name" label="Name" register={register} errors={errors} validationOptions={validationOptions.name} className="w-full" layout="position" />
-				<TextInput name="email" label="Email" register={register} errors={errors} inputOptions={inputOptions.email} validationOptions={validationOptions.email} className="w-full" layout="position" />
+				<TextInput name="name" label="Name" register={register} errors={errors} inputOptions={INPUT_OPTIONS.name} validationOptions={validationOptions.name} className="w-full" layout="position" />
+				<TextInput name="email" label="Email" register={register} errors={errors} inputOptions={INPUT_OPTIONS.email} validationOptions={validationOptions.email} className="w-full" layout="position" />
 				<MultilineTextInput name="message" label="Message" register={register} errors={errors} validationOptions={validationOptions.message} className="w-full" layout="position" />
 				<SolidButton type="submit" className="w-full mt-2" {...submitButtonProps} layout="position" layoutRoot />
-				<Checkbox name="_gotcha" register={register} errors={errors} className="hidden" />
+				<Checkbox name="_gotcha" register={register} errors={errors} inputOptions={INPUT_OPTIONS._gotcha} className="hidden" />
 				<GhostAlert {...alertProps} />
 			</LayoutGroup>
 		</motion.form>
