@@ -52,38 +52,61 @@ const ALERT_PROPS = {
 		text: 'Oof, something went wrong during form submission. Please try again later.',
 		show: true,
 	},
-};
+} as const;
 
 const ALERT_PROPS_DEFAULT = {
 	text: '',
 	show: false,
-};
+} as const;
 
 const SUBMIT_BUTTON_PROPS_BUSY = {
 	iconClassName: 'animate-spin',
 	icon: faCircleNotch,
 	disabled: true,
-};
+} as const;
 
 const SUBMIT_BUTTON_PROPS_DEFAULT = {
 	icon: faPaperPlane,
 	text: 'Send',
-};
+} as const;
 
-// Options passed to the input components themselves
-const INPUT_OPTIONS = {
+const COMMON_TEXT_INPUT_PROPS = {
+	className: 'w-full',
+	layout: 'position',
+} as const;
+
+const INPUT_PROPS = {
 	name: {
-		autoComplete: 'name',
+		name: 'name',
+		label: 'Name',
+		inputOptions: {
+			autoComplete: 'name',
+		},
+		...COMMON_TEXT_INPUT_PROPS,
 	},
 	email: {
-		type: 'email',
-		autoComplete: 'email',
+		name: 'email',
+		label: 'Email',
+		inputOptions: {
+			type: 'email',
+			autoComplete: 'email',
+		},
+		...COMMON_TEXT_INPUT_PROPS,
+	},
+	message: {
+		name: 'message',
+		label: 'Message',
+		...COMMON_TEXT_INPUT_PROPS,
 	},
 	_gotcha: {
-		tabIndex: -1,
-		autoComplete: 'off',
-	}
-};
+		name: '_gotcha',
+		inputOptions: {
+			tabIndex: -1,
+			autoComplete: 'off',
+		},
+		className: 'hidden',
+	},
+} as const;
 
 const {
 	botpoisonPublicKey: BOTPOISON_PUBLIC_KEY,
@@ -112,7 +135,7 @@ function getValidationOptions(formState: FormState) {
 			maxLength: 3000,
 			required: true,
 			disabled: formState === FormState.Busy,
-		} as InputValidationOptions
+		} as InputValidationOptions,
 	};
 }
 
@@ -222,11 +245,11 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 	return (
 		<motion.form layout method="post" onSubmit={handleSubmit(onSubmit)} className={`w-full max-w-xl p-0 sm:p-8 flex flex-col gap-4 ${className}`}>
 			<LayoutGroup>
-				<TextInput name="name" label="Name" register={register} errors={errors} inputOptions={INPUT_OPTIONS.name} validationOptions={validationOptions.name} className="w-full" layout="position" />
-				<TextInput name="email" label="Email" register={register} errors={errors} inputOptions={INPUT_OPTIONS.email} validationOptions={validationOptions.email} className="w-full" layout="position" />
-				<MultilineTextInput name="message" label="Message" register={register} errors={errors} validationOptions={validationOptions.message} className="w-full" layout="position" />
+				<TextInput {...{ register, errors, ...INPUT_PROPS.name }} validationOptions={validationOptions.name} />
+				<TextInput {...{ register, errors, ...INPUT_PROPS.email }} validationOptions={validationOptions.email} />
+				<MultilineTextInput {...{ register, errors, ...INPUT_PROPS.message }} validationOptions={validationOptions.message} />
+				<Checkbox {...{ register, errors, ...INPUT_PROPS._gotcha }} />
 				<SolidButton type="submit" className="w-full mt-2" {...submitButtonProps} layout="position" layoutRoot />
-				<Checkbox name="_gotcha" register={register} errors={errors} inputOptions={INPUT_OPTIONS._gotcha} className="hidden" />
 				<GhostAlert {...alertProps} />
 			</LayoutGroup>
 		</motion.form>
