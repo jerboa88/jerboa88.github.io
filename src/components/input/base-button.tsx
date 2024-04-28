@@ -22,8 +22,10 @@ export default function BaseButton({ className = '', type = 'button', iconClassN
 	const textResponsiveStyles = (responsive && icon) ? 'max-lg:hidden' : '';
 	const textStyles = `${textResponsiveStyles} ${textClassName} `;
 
+	const interactiveCardProps = disabled ? {} : asInteractiveCard;
+
 	return (
-		<motion.button {...{ type, disabled, layout, layoutRoot }} {...asInteractiveCard} className={buttonStyles}>
+		<motion.button {...{ type, disabled, layout, layoutRoot }} {...interactiveCardProps} className={buttonStyles}>
 			<AnimatePresence mode="popLayout">
 				{icon && (
 					<motion.span key="icon" layout="position" {...withFadeInAnimation}>
