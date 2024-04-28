@@ -29917,6 +29917,7 @@ type SiteSiteMetadata = {
   readonly author: Maybe<SiteSiteMetadataAuthor>;
   readonly darkTheme: Maybe<SiteSiteMetadataDarkTheme>;
   readonly description: Maybe<Scalars['String']>;
+  readonly iconPath: Maybe<Scalars['String']>;
   readonly lightTheme: Maybe<SiteSiteMetadataLightTheme>;
   readonly ogImageAltText: Maybe<Scalars['String']>;
   readonly ogImagePath: Maybe<Scalars['String']>;
@@ -30172,6 +30173,7 @@ type SiteSiteMetadataFieldSelector = {
   readonly author: InputMaybe<SiteSiteMetadataAuthorFieldSelector>;
   readonly darkTheme: InputMaybe<SiteSiteMetadataDarkThemeFieldSelector>;
   readonly description: InputMaybe<FieldSelectorEnum>;
+  readonly iconPath: InputMaybe<FieldSelectorEnum>;
   readonly lightTheme: InputMaybe<SiteSiteMetadataLightThemeFieldSelector>;
   readonly ogImageAltText: InputMaybe<FieldSelectorEnum>;
   readonly ogImagePath: InputMaybe<FieldSelectorEnum>;
@@ -30187,6 +30189,7 @@ type SiteSiteMetadataFilterInput = {
   readonly author: InputMaybe<SiteSiteMetadataAuthorFilterInput>;
   readonly darkTheme: InputMaybe<SiteSiteMetadataDarkThemeFilterInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
+  readonly iconPath: InputMaybe<StringQueryOperatorInput>;
   readonly lightTheme: InputMaybe<SiteSiteMetadataLightThemeFilterInput>;
   readonly ogImageAltText: InputMaybe<StringQueryOperatorInput>;
   readonly ogImagePath: InputMaybe<StringQueryOperatorInput>;
@@ -30306,6 +30309,7 @@ type SiteSiteMetadataSortInput = {
   readonly author: InputMaybe<SiteSiteMetadataAuthorSortInput>;
   readonly darkTheme: InputMaybe<SiteSiteMetadataDarkThemeSortInput>;
   readonly description: InputMaybe<SortOrderEnum>;
+  readonly iconPath: InputMaybe<SortOrderEnum>;
   readonly lightTheme: InputMaybe<SiteSiteMetadataLightThemeSortInput>;
   readonly ogImageAltText: InputMaybe<SortOrderEnum>;
   readonly ogImagePath: InputMaybe<SortOrderEnum>;

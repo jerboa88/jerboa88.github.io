@@ -8,6 +8,7 @@ import type { SiteMetadataConfigInterface } from '../common/types';
 
 
 export default {
+	iconPath: 'images/icon.svg',
 	ogImagePath: 'images/og-image.png',
 	ogImageAltText: 'Cover image for johng.io',
 	siteUrl: 'https://johng.io/',

@@ -10,10 +10,7 @@ import externalServicesConfig from '../config/external-services';
 import jobsConfig from '../config/jobs';
 import themesConfig from '../config/themes';
 import colorMappingsConfig from '../config/color-mappings';
-import iconGenerationConfig from '../config/icon-generation';
 
-
-// Exports
 
 // Class for loading and formatting configuration data
 export default class ConfigManager {
@@ -28,6 +25,7 @@ export default class ConfigManager {
 			tagline: `${smc.author.jobTitle} & Cat Whisperer`,
 			shortDescription: `Portfolio site for ${authorFullName}`,
 			description: `Portfolio site for ${authorFullName}, a ${smc.author.jobTitle} based in ${smc.author.location.city}, ${smc.author.location.state}.`,
+			iconPath: smc.iconPath,
 			ogImagePath: smc.ogImagePath,
 			ogImageAltText: smc.ogImageAltText,
 			siteUrl: smc.siteUrl,
@@ -116,47 +114,5 @@ export default class ConfigManager {
 		roleType = roleType.toLowerCase();
 
 		return roleType in colorMap ? colorMap[roleType as keyof RoleTypeColorMappingsInterface] : '';
-	}
-
-
-	// Returns the OpenGraph image generation config
-	getOgImage() {
-		return iconGenerationConfig.ogImage;
-	}
-
-	// Returns the icon generation config
-	getIcons() {
-		return iconGenerationConfig.icons;
-	}
-
-	// Generate icon entries for the site's webmanifest using the provided icon generation config
-	getIconManifestEntries() {
-		// Flatten after mapping as we do not need to keep any info about how the icons are generated
-		return iconGenerationConfig.icons.flatMap(inputRule => {
-			return inputRule.to.map(outputRule => {
-				return {
-					src: outputRule.path,
-					sizes: `${outputRule.size}x${outputRule.size}`,
-					type: this.getMimeTypeFromPath(outputRule.path),
-					// If the icon name contains `maskable`, set the purpose property to `maskable`
-					purpose: outputRule.path.match(/maskable/) ? 'maskable' : 'any'
-				};
-			});
-		});
-	}
-
-	// Returns the mime type for the provided image path
-	getMimeTypeFromPath(path: string) {
-		if (path.endsWith('.svg')) {
-			return 'image/svg+xml';
-		} else {
-			const match = path.match(/\.(jpg|jpeg|png|webp|gif|avif|tif|tiff)$/i);
-
-			if (!match || match.length < 2) {
-				throw new Error(`Could not determine mime type for image path ${path}`);
-			}
-
-			return `image/${match[1]}`;
-		}
 	}
 };
