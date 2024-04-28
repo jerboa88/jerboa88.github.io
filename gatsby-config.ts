@@ -33,7 +33,9 @@ const config: GatsbyConfig = {
 	},
 	plugins: [
 		'gatsby-plugin-image',
+		// Required by gatsby-plugin-image
 		'gatsby-plugin-sharp',
+		// Required by gatsby-plugin-image for dynamic images
 		'gatsby-transformer-sharp',
 		{
 			resolve: 'gatsby-plugin-postcss',
@@ -85,14 +87,6 @@ const config: GatsbyConfig = {
 		},
 		// This plugin needs to be listed after gatsby-plugin-manifest so that it can cache the generated manifest.webmanifest
 		'gatsby-plugin-offline',
-		{
-			resolve: 'gatsby-plugin-react-svg',
-			options: {
-				rule: {
-					include: /\.svg$/
-				}
-			}
-		},
 		{
 			resolve: 'gatsby-source-filesystem',
 			options: {
