@@ -28,7 +28,7 @@ export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
 
 	return (
 		<LinkWrapper to={repo.githubUrl}>
-			<Card className={`size-full p-4 flex flex-col justify-between items-start align-middle text-ellipsis z-10 group mouse-only:hover:${projectTypeColor}/75`}>
+			<Card className={`flex z-10 flex-col justify-between items-start p-4 align-middle size-full text-ellipsis group mouse-only:hover:${projectTypeColor}/75`}>
 				<div className="flex flex-row justify-between items-center w-full">
 					<Pill text={repo.typeName} className={projectTypeColor} />
 					<GhostButton icon={faGithub} className={`m-0 ${showOnCardHoverStyles}`} disabled />
@@ -36,7 +36,7 @@ export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
 				<div className="flex flex-row justify-center w-full">
 					{/* TODO: Put project icon here? */}
 					{/* <img src={getProjectImage(repo.imageUrl)}/> */}
-					<div className={`flex flex-col z-16 h-full p-8 justify-center text-wrap rounded-2xl px-10`}>
+					<div className={`flex flex-col justify-center p-8 px-10 h-full rounded-2xl z-16 text-wrap`}>
 						<SubsectionHeading className="font-semibold">
 							{repo.name}
 						</SubsectionHeading>
@@ -51,9 +51,7 @@ export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
 							repo.languages.map(language => <Pill key={language.name} className={`border ${showOnCardHoverStyles}`} text={language.name} />)
 						}
 					</div>
-					<div className="flex flex-row items-center">
-						<GhostButton icon={faStar} text={repo.stargazers} iconClassName="mb-1 text-xl" textClassName="font-bold" disabled />
-					</div>
+					<GhostButton icon={faStar} text={repo.stargazers} iconClassName="text-xl" textClassName="font-bold" disabled />
 				</div>
 			</Card>
 		</LinkWrapper>
