@@ -38,7 +38,7 @@ export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
 			<div className="timeline-middle">
 				<FontAwesomeIcon icon={faCircleCheck} />
 			</div>
-			<Card className="timeline-box timeline-end m-0 mb-16 p-8 !row-start-2" disabled>
+			<Card className="p-8 m-0 mb-16 timeline-box timeline-end" disabled>
 				<div className="flex flex-row justify-between items-center mb-8">
 					<div className="flex flex-col">
 						<SubsectionHeading className="mt-0 mr-2">
