@@ -8523,12 +8523,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-image-generator@link:./plugins/gatsby-plugin-image-generator::locator=johng-io%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "gatsby-plugin-image-generator@link:./plugins/gatsby-plugin-image-generator::locator=johng-io%40workspace%3A."
-  languageName: node
-  linkType: soft
-
 "gatsby-plugin-image@npm:^3.13.1":
   version: 3.13.1
   resolution: "gatsby-plugin-image@npm:3.13.1"
@@ -10758,7 +10752,6 @@ __metadata:
     framer-motion: "npm:^11.1.7"
     gatsby: "npm:^5.13.4"
     gatsby-plugin-image: "npm:^3.13.1"
-    gatsby-plugin-image-generator: "link:./plugins/gatsby-plugin-image-generator"
     gatsby-plugin-manifest: "npm:^5.13.1"
     gatsby-plugin-offline: "npm:^6.13.2"
     gatsby-plugin-postcss: "npm:^6.13.1"

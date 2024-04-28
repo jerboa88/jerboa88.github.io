@@ -47,7 +47,6 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.1.7"],\
           ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.4"],\
           ["gatsby-plugin-image", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.13.1"],\
-          ["gatsby-plugin-image-generator", "link:./plugins/gatsby-plugin-image-generator::locator=johng-io%40workspace%3A."],\
           ["gatsby-plugin-manifest", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-plugin-offline", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.2"],\
           ["gatsby-plugin-postcss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
@@ -11945,16 +11944,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["gatsby-plugin-image-generator", [\
-      ["link:./plugins/gatsby-plugin-image-generator::locator=johng-io%40workspace%3A.", {\
-        "packageLocation": "./plugins/gatsby-plugin-image-generator/",\
-        "packageDependencies": [\
-          ["gatsby-plugin-image-generator", "link:./plugins/gatsby-plugin-image-generator::locator=johng-io%40workspace%3A."]\
-        ],\
-        "linkType": "SOFT",\
-        "discardFromLookup": true\
-      }]\
-    ]],\
     ["gatsby-plugin-manifest", [\
       ["npm:5.13.1", {\
         "packageLocation": "./.yarn/cache/gatsby-plugin-manifest-npm-5.13.1-2036e9f84e-45d59a4aa5.zip/node_modules/gatsby-plugin-manifest/",\
@@ -14558,7 +14547,6 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.1.7"],\
           ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.4"],\
           ["gatsby-plugin-image", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.13.1"],\
-          ["gatsby-plugin-image-generator", "link:./plugins/gatsby-plugin-image-generator::locator=johng-io%40workspace%3A."],\
           ["gatsby-plugin-manifest", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-plugin-offline", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.2"],\
           ["gatsby-plugin-postcss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
