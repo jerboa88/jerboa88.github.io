@@ -1,6 +1,6 @@
 <!-- Project Header -->
 <div align="center">
-  <img class="projectLogo" src="src/images/icon.png" alt="Project logo" title="Project logo" width="256">
+  <img class="projectLogo" src="src/images/icon.svg" alt="Project logo" title="Project logo" width="256">
 
   <h1 class="projectName">
     <a href="https://johng.io" title="Project URL">johng.io</a>
