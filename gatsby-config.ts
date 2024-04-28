@@ -70,15 +70,6 @@ const config: GatsbyConfig = {
 				]
 			}
 		},
-		// {
-		// 	resolve: 'gatsby-plugin-image-generator',
-		// 	options: {
-		// 		generate: [
-		// 			configManager.getOgImage(),
-		// 			...configManager.getIcons()
-		// 		]
-		// 	}
-		// },
 		{
 			resolve: 'gatsby-plugin-manifest',
 			options: {
@@ -88,13 +79,11 @@ const config: GatsbyConfig = {
 				background_color: darkTheme['base-100'],
 				theme_color: darkTheme['primary'],
 				display: 'standalone',
-				icons: configManager.getIconManifestEntries(),
-				// Favicon declarations and theme color meta tags are added to the document head manually using the SEO component (via Gatsby Head API)
-				include_favicon: false,
-				theme_color_in_head: false
+				icon: `${__dirname}/src/${metadata.iconPath}`,
+				crossOrigin: 'use-credentials',
 			}
 		},
-		// This plugin needs to be listed after gatsby-plugin-manifest
+		// This plugin needs to be listed after gatsby-plugin-manifest so that it can cache the generated manifest.webmanifest
 		'gatsby-plugin-offline',
 		{
 			resolve: 'gatsby-plugin-react-svg',
