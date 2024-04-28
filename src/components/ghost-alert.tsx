@@ -36,7 +36,7 @@ export default function GhostAlert({ className = '', type, text, show = true }: 
 	return (
 		<AnimatePresence>
 			{show && (
-				<motion.div key={type} {...withFadeInAnimation} role="alert" className={`alert w-fit p-0 pl-1 bg-transparent border-none ${typeStyles} ${className}`}>
+				<motion.div key={type} {...withFadeInAnimation} role="alert" className={`flex flex-row p-0 pl-1 bg-transparent border-none alert w-fit ${typeStyles} ${className}`}>
 					<FontAwesomeIcon icon={icon} />
 					<span>
 						{text}
