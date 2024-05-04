@@ -100,7 +100,7 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 				</span>
 				<div className="flex fixed inset-x-0 bottom-0 flex-row justify-center mb-4">
 					<Tooltip text={`Go to ${sections[0].title} section`}>
-						<GhostButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={`transition ${isTitleExpanded ? '' : 'opacity-0'}`} isInternal />
+						<GhostButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={isTitleExpanded ? '' : 'opacity-0'} isInternal />
 					</Tooltip>
 				</div>
 			</Section>
