@@ -11,12 +11,6 @@
 
 /* These styles to the base layer so that component styles can override them as necessary */
 @layer base {
-	/* Fallback colors to use before Tailwind vars are set */
-	:root {
-		--pc-fallback: var(--pc, #2DD4BF);
-		--b2-fallback: var(--b2, #080808);
-	}
-
 	/* Override flex-row and flex-col to also change the display type so we don't have to specify this manually every time */
 	.flex-row,
 	.flex-col {
@@ -82,7 +76,8 @@
 	body {
 		overflow: overlay;
 		scrollbar-width: thin;
-		scrollbar-color: var(--pc-fallback) var(--b2-fallback);
+		scrollbar-color: var(--fallback-p,oklch(var(--p))) var(--fallback-b2,oklch(var(--b2)));
+
 	}
 
 	*::-webkit-scrollbar {
@@ -95,8 +90,7 @@
 		/* Use transparent border as margin/padding is not supported for scrollbar components */
 		border: 6px transparent solid;
 		/* Set background color using box-shadow because background doesn't work with above hack */
-		/* var(--pc-fallback) is not defined here for some reason, so the color is hardcoded  */
-		box-shadow: inset 0 -1px 1px #000a, inset 0 0 99px #2DD4BF;
+		box-shadow: inset 0 -1px 1px #000a, inset 0 0 99px var(--fallback-p,oklch(var(--p)));
 	}
 }
 
