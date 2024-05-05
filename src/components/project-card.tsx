@@ -28,30 +28,32 @@ export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
 
 	return (
 		<LinkWrapper to={repo.githubUrl}>
-			<Card className={`flex z-10 flex-col justify-between items-start p-6 align-middle size-full text-ellipsis group mouse-only:hover:${projectTypeColor}/75`}>
-				<div className="flex flex-row justify-between items-center pr-2 w-full">
-					<Pill text={repo.typeName} className={projectTypeColor} />
-					<GhostButton icon={faGithub} className={`!p-0 m-0 ${showOnCardHoverStyles}`} disabled />
-				</div>
-				<div className="flex flex-row justify-center w-full">
-					{/* TODO: Put project icon here? */}
-					{/* <img src={getProjectImage(repo.imageUrl)}/> */}
-					<div className={`flex flex-col justify-center p-8 px-10 h-full rounded-2xl z-16 text-wrap`}>
-						<SubsectionHeading className="font-semibold">
-							{repo.name}
-						</SubsectionHeading>
-						<span className="text-wrap">
-							{repo.shortDesc}
-						</span>
+			<Card>
+				<div className={`flex z-10 flex-col justify-between items-start p-6 align-middle size-full text-ellipsis group`}>
+					<div className="flex flex-row justify-between items-center pr-2 w-full">
+						<Pill text={repo.typeName} className={projectTypeColor} />
+						<GhostButton icon={faGithub} className={`!p-0 m-0 ${showOnCardHoverStyles}`} disabled />
 					</div>
-				</div>
-				<div className="flex flex-row justify-between items-center pr-2 w-full">
-					<div className="flex flex-row gap-2 justify-start items-center">
-						{
-							repo.languages.map(language => <Pill key={language.name} className={`border ${showOnCardHoverStyles}`} text={language.name} />)
-						}
+					<div className="flex flex-row justify-center w-full">
+						{/* TODO: Put project icon here? */}
+						{/* <img src={getProjectImage(repo.imageUrl)}/> */}
+						<div className={`flex flex-col justify-center p-8 px-10 h-full rounded-2xl z-16 text-wrap`}>
+							<SubsectionHeading className="font-semibold">
+								{repo.name}
+							</SubsectionHeading>
+							<span className="text-wrap">
+								{repo.shortDesc}
+							</span>
+						</div>
 					</div>
-					<GhostButton icon={faStar} text={repo.stargazers} className="!p-0" iconClassName="text-xl" textClassName="font-bold" disabled />
+					<div className="flex flex-row justify-between items-center pr-2 w-full">
+						<div className="flex flex-row gap-2 justify-start items-center">
+							{
+								repo.languages.map(language => <Pill key={language.name} className={`border ${showOnCardHoverStyles}`} text={language.name} />)
+							}
+						</div>
+						<GhostButton icon={faStar} text={repo.stargazers} className="!p-0" iconClassName="text-xl" textClassName="font-bold" disabled />
+					</div>
 				</div>
 			</Card>
 		</LinkWrapper>
