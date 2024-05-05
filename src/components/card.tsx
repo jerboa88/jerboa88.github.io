@@ -19,8 +19,9 @@ interface CardPropsInterface extends PropsWithClassName, PropsWithChildren {
 
 // Constants
 
-const MOUSE_X_COORDS_DEFAULT = 0;
-const MOUSE_Y_COORDS_DEFAULT = 0;
+const MOUSE_XY_COORDS_DEFAULT = 0;
+const MOUSE_XY_COORDS_MIN = -1;
+const MOUSE_XY_COORDS_MAX = 1;
 const MOUSE_Z_COORDS_DEFAULT = 1;
 const MOUSE_Z_COORDS_MIN = .98;
 const MOUSE_Z_COORDS_MAX = 1.02;
@@ -52,8 +53,8 @@ function getMouseCoords(event: React.MouseEvent<HTMLDivElement>) {
 	const cardBoundingBox = event.currentTarget.getBoundingClientRect();
 
 	return {
-		x: 2 * (event.clientX - cardBoundingBox.left) / cardBoundingBox.width - 1,
-		y: 2 * (event.clientY - cardBoundingBox.top) / cardBoundingBox.height - 1,
+		x: 2 * MOUSE_XY_COORDS_MAX * (event.clientX - cardBoundingBox.left) / cardBoundingBox.width - MOUSE_XY_COORDS_MAX,
+		y: 2 * MOUSE_XY_COORDS_MAX * (event.clientY - cardBoundingBox.top) / cardBoundingBox.height - MOUSE_XY_COORDS_MAX,
 	}
 };
 
@@ -71,13 +72,13 @@ export default function Card({ className = '', disabled = false, children }: Car
 
 	// Motion values that track the mouse position within the card
 	// The values are normalized to be between -1 and 1, with (0, 0) being the center of the card
-	const mouseXCoords = useSpring(MOUSE_X_COORDS_DEFAULT, MOTION_VALUE_TRANSITION);
-	const mouseYCoords = useSpring(MOUSE_Y_COORDS_DEFAULT, MOTION_VALUE_TRANSITION);
+	const mouseXCoords = useSpring(MOUSE_XY_COORDS_DEFAULT, MOTION_VALUE_TRANSITION);
+	const mouseYCoords = useSpring(MOUSE_XY_COORDS_DEFAULT, MOTION_VALUE_TRANSITION);
 	const mouseZCoords = useSpring(MOUSE_Z_COORDS_DEFAULT, MOTION_VALUE_TRANSITION);
 
 	// Calculate the background gradient origin based on the mouse position
-	const bgOriginXPercentage = useTransform(mouseXCoords, [-1, 1], [0, 100]);
-	const bgOriginYPercentage = useTransform(mouseYCoords, [-1, 1], [-25, 75]);
+	const bgOriginXPercentage = useTransform(mouseXCoords, [MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX], [0, 100]);
+	const bgOriginYPercentage = useTransform(mouseYCoords, [MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX], [-25, 75]);
 
 	// Calculate the background gradient scale based on the mouse position
 	const bgXScale = useTransform(mouseXCoords, value => getBackgroundScale(value, mouseZCoords.get()));
@@ -86,8 +87,8 @@ export default function Card({ className = '', disabled = false, children }: Car
 
 	// Calculate the card rotation based on the mouse position
 	// The mouse position is first clamped to prevent extreme rotation values, then we calculate the tangent
-	const cardXRotationDegrees = useTransform(mouseYCoords, value => Math.tan(clamp(value, -1, 1)));
-	const cardYRotationDegrees = useTransform(mouseXCoords, value => Math.tan(-clamp(value, -1, 1)));
+	const cardXRotationDegrees = useTransform(mouseYCoords, value => Math.tan(clamp(value, MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX)));
+	const cardYRotationDegrees = useTransform(mouseXCoords, value => Math.tan(-clamp(value, MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX)));
 
 	// Generate the background gradient string based on the mouse position
 	const backgroundGradientString = useMotionTemplate`radial-gradient(${bgXScale}% ${bgYScale}% at ${bgOriginXPercentage}% ${bgOriginYPercentage}%,rgba(255,255,255,.5) 0%,transparent 100%),oklch(var(--b2))`; 500
@@ -110,8 +111,8 @@ export default function Card({ className = '', disabled = false, children }: Car
 
 	// Reset the card position when the mouse leaves the card
 	function handleMouseLeave() {
-		mouseXCoords.set(MOUSE_X_COORDS_DEFAULT);
-		mouseYCoords.set(MOUSE_Y_COORDS_DEFAULT);
+		mouseXCoords.set(MOUSE_XY_COORDS_DEFAULT);
+		mouseYCoords.set(MOUSE_XY_COORDS_DEFAULT);
 	};
 
 
