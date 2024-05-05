@@ -7,7 +7,7 @@
 import React, { PropsWithChildren } from 'react';
 import { PropsWithClassName } from '../common/types';
 import { AnimationProps, motion, useMotionTemplate, useReducedMotion, useSpring, useTransform } from 'framer-motion';
-import { withSpringTransition } from '../common/utilities';
+import { clamp, doesDeviceSupportHover, withSpringTransition } from '../common/utilities';
 
 
 // Types
@@ -43,10 +43,6 @@ function getTransitionWithoutRestProps(transition: AnimationProps['transition'])
 	return transitionWithoutRestProps;
 };
 
-// Clamp a value between a minimum and maximum value
-function clamp(value: number, min: number, max: number) {
-	return Math.min(Math.max(value, min), max);
-};
 
 // Given a mouse event, return the normalized coordinates of the mouse within the card
 function getMouseCoords(event: React.MouseEvent<HTMLDivElement>) {
@@ -91,34 +87,35 @@ export default function Card({ className = '', disabled = false, children }: Car
 	const cardYRotationDegrees = useTransform(mouseXCoords, value => Math.tan(-clamp(value, MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX)));
 
 	// Generate the background gradient string based on the mouse position
-	const backgroundGradientString = useMotionTemplate`radial-gradient(${bgXScale}% ${bgYScale}% at ${bgOriginXPercentage}% ${bgOriginYPercentage}%,rgba(255,255,255,.5) 0%,transparent 100%),oklch(var(--b2))`; 500
+	const backgroundGradientString = useMotionTemplate`radial-gradient(${bgXScale}% ${bgYScale}% at ${bgOriginXPercentage}% ${bgOriginYPercentage}%,rgba(255,255,255,.5) 0%,transparent 100%),oklch(var(--b2))`;
 
-
-	// Update the mouse position when the mouse moves within the card
-	const handleMouseMove = disabled || shouldReduceMotion ? undefined : (event: React.MouseEvent<HTMLDivElement>) => {
-		const { x, y } = getMouseCoords(event);
-
-		mouseXCoords.set(x);
-		mouseYCoords.set(y);
-	};
-
-
-	// Set the mouse Z position to the max value when the mouse enters the card
-	function handleMouseEnter() {
-		mouseZCoords.set(MOUSE_Z_COORDS_MAX);
-	}
-
-
-	// Reset the card position when the mouse leaves the card
-	function handleMouseLeave() {
-		mouseXCoords.set(MOUSE_XY_COORDS_DEFAULT);
-		mouseYCoords.set(MOUSE_XY_COORDS_DEFAULT);
-	};
-
+	// Event handlers
+	let handleMouseMove: ((event: React.MouseEvent<HTMLDivElement>) => void) | undefined = undefined;
+	let handleMouseEnter: ((event: React.MouseEvent<HTMLDivElement>) => void) | undefined = undefined;
+	let handleMouseLeave: ((event: React.MouseEvent<HTMLDivElement>) => void) | undefined = undefined;
 
 	// Set the mouse Z position to the min value when the mouse is pressed down
-	function handleMouseDown() {
+	const handleMouseDown = () => {
 		mouseZCoords.set(MOUSE_Z_COORDS_MIN);
+	}
+
+	if (!disabled && !shouldReduceMotion && doesDeviceSupportHover()) {
+		// Update the mouse position when the mouse moves within the card
+		handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+			const { x, y } = getMouseCoords(event);
+
+			mouseXCoords.set(x);
+			mouseYCoords.set(y);
+		};
+
+		// Set the mouse Z position to the max value when the mouse enters the card
+		handleMouseEnter = () => mouseZCoords.set(MOUSE_Z_COORDS_MAX);
+
+		// Reset the card position when the mouse leaves the card
+		handleMouseLeave = () => {
+			mouseXCoords.set(MOUSE_XY_COORDS_DEFAULT);
+			mouseYCoords.set(MOUSE_XY_COORDS_DEFAULT);
+		};
 	}
 
 
