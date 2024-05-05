@@ -96,6 +96,12 @@ export function doesWindowExist(): boolean {
 }
 
 
+// CHeck if the device supports hover interactions or if it is a touch-only device
+export function doesDeviceSupportHover() {
+	return doesWindowExist() && window.matchMedia('(pointer: fine)').matches;
+}
+
+
 export function getProjectImage(imageUrl: string) {
 	return imageUrl ? imageUrl : defaultProjectImage
 }
@@ -136,3 +142,9 @@ export const asInteractiveCard = {
 export function getStatusCodeDescription(statusCode: number): string {
 	return getOrDefault(statusCodeMessages, statusCode, 'Unknown Status Code');
 }
+
+
+// Clamp a value between a minimum and maximum value
+export function clamp(value: number, min: number, max: number) {
+	return Math.min(Math.max(value, min), max);
+};
