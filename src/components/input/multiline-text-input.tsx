@@ -22,7 +22,7 @@ const defaultInputOptions = {
 
 export default function MultilineTextInput({ inputClassName = '', name, inputOptions = defaultInputOptions, errors, ...remainingProps }: MultilineTextInputPropsInterface) {
 	const inputErrorStyles = errors[name] ? 'textarea-error' : '';
-	const inputStyles = `textarea textarea-bordered w-full bg-base-200 text-base ${inputErrorStyles} ${inputClassName}`;
+	const inputStyles = `textarea border-2 border-base-content/5 w-full bg-base-200 text-base ${inputErrorStyles} ${inputClassName}`;
 	// A function for rendering the input element
 	// This will be passed to the base input component and called from there
 	const renderInput = useCallback((registerObj => {

@@ -22,7 +22,7 @@ const defaultInputOptions = {
 
 export default function TextInput({ inputClassName = '', name, inputOptions = defaultInputOptions, errors, ...remainingProps }: TextInputPropsInterface) {
 	const inputErrorStyles = errors[name] ? 'input-error' : '';
-	const inputStyles = `input input-bordered w-full bg-base-200 ${inputErrorStyles} ${inputClassName}`;
+	const inputStyles = `input border-2 border-base-content/5 w-full bg-base-200 ${inputErrorStyles} ${inputClassName}`;
 	// A function for rendering the input element
 	// This will be passed to the base input component and called from there
 	const renderInput = useCallback((registerObj => {
