@@ -59,7 +59,7 @@ function getBackgroundScale(xCoords: number, zCoords: number) {
 	const scaleModifier = Math.abs(zCoords);
 	const skewModifier = 1 + Math.abs(xCoords) / 4;
 
-	return 250 * scaleModifier * skewModifier;
+	return 300 * scaleModifier * skewModifier;
 }
 
 
