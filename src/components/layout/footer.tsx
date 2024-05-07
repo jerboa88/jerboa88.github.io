@@ -17,7 +17,7 @@ interface FooterPropsInterface {
 
 export default function Footer({ siteMetadata }: FooterPropsInterface) {
 	return (
-		<footer className="z-30 w-full backdrop-blur-sm bg-glass">
+		<footer className="z-30 w-full backdrop-blur bg-glass">
 			<div className="mix-blend-overlay">
 				<div className="m-0 h-auto opacity-100 divider" />
 				<div className="flex flex-row justify-between items-center p-4 pb-4">
