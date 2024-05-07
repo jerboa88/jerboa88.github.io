@@ -125,7 +125,7 @@ export default function Card({ className = '', disabled = false, children }: Car
 			<motion.div
 				style={{ transformOrigin: 'center', background: backgroundGradientString, rotateX: cardXRotationDegrees, rotateY: cardYRotationDegrees }}
 				{...(disabled || shouldReduceMotion ? {} : HOVER_PROPS)}
-				className="overflow-hidden w-full h-full shadow-md !bg-clip-content rounded-[1.1rem] backdrop-blur-sm">
+				className="overflow-hidden w-full h-full shadow-md !bg-clip-content rounded-[1.1rem] backdrop-blur-md">
 				<div className="w-full h-full rounded-2xl border-2 mix-blend-overlay border-base-content/5">
 					{children}
 				</div>
