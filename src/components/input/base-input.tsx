@@ -40,11 +40,13 @@ export default function BaseInput({ className = '', labelClassName = '', name, l
 	const inputElement = renderInput(register(name, validationOptions));
 
 	return (
-		<motion.label layout={layout} layoutRoot={layoutRoot} className={`form-control ${className}`}>
-			<span className={`label label-text justify-start ${labelClassName}`}>
+		<motion.label layout={layout} layoutRoot={layoutRoot} className={`z-20 form-control ${className}`}>
+			<span className={`justify-start label label-text ${labelClassName}`}>
 				{label}
 			</span>
-			{inputElement}
+			<div className="backdrop-blur bg-glass">
+				{inputElement}
+			</div>
 			<GhostAlert type={AlertType.Error} text={errorMsg} className="mt-4" show={!!errors[name]} />
 		</motion.label>
 	);

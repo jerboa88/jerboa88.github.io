@@ -20,12 +20,11 @@ module.exports = {
 			sans: ['Roboto Flex', 'Roboto', 'Tahoma', 'Arial', 'Helvetica', 'sans-serif'],
 		},
 		transitionDuration: {
-			DEFAULT: '150ms',
+			DEFAULT: '200ms',
 		},
 		extend: {
-			colors: {
-				'primary-header': 'var(--ph)',
-				'secondary-header': 'var(--sh)',
+			backgroundImage: {
+				glass: 'radial-gradient(100% 100% at 50% 25%, oklch(var(--n)/.03), oklch(var(--b3)/.03))',
 			},
 			fontFamily: {
 				heading: ['Poppins', 'Montserrat', 'Impact', 'Franklin Gothic Medium', 'Candara', 'Calibri', 'sans-serif'],

@@ -19,30 +19,33 @@ interface HeaderPropsInterface {
 }
 
 export default function Header({ siteMetadata, titleLayoutId = 'title-layout', isTitleExpanded = false, sections }: HeaderPropsInterface) {
-	let bgColorStyles = 'bg-base-200';
+	let bgStyles = 'bg-glass backdrop-blur-md shadow-lg';
 	let dividerOpacityStyles = 'opacity-100';
 	let justificationStyles = 'justify-between';
 
 	if (isTitleExpanded) {
-		bgColorStyles = 'bg-base-300';
+		bgStyles = '';
 		dividerOpacityStyles = 'opacity-0';
 		justificationStyles = 'justify-center';
 	}
 
 	return (
-		<header className={`fixed top-0 w-full z-20 transition-colors ${bgColorStyles}`}>
-			<div className={`flex-row p-4 pb-4 items-center ${justificationStyles}`}>
-				{!isTitleExpanded && <motion.a href="/" layoutId={titleLayoutId}>
-					<Heading className="px-2 m-0 text-xl">
-						<span className="inline sm:hidden">{siteMetadata.author.name.initial}</span>
-						<span className="hidden sm:inline md:hidden">{siteMetadata.author.name.short}</span>
-						<span className="hidden md:inline">{siteMetadata.author.name.full}</span>
-					</Heading>
-				</motion.a>}
-
-				<Tabs sections={sections} hideIndicator={isTitleExpanded} />
+		<header className={`fixed top-0 z-30 w-full transition ${bgStyles}`}>
+			<div className="mix-blend-overlay">
+				<div className={`flex-row items-center p-4 ${justificationStyles}`}>
+					{!isTitleExpanded && (
+						<motion.a href="/" layoutId={titleLayoutId}>
+							<Heading className="px-2 m-0 text-xl">
+								<span className="inline sm:hidden">{siteMetadata.author.name.initial}</span>
+								<span className="hidden sm:inline md:hidden">{siteMetadata.author.name.short}</span>
+								<span className="hidden md:inline">{siteMetadata.author.name.full}</span>
+							</Heading>
+						</motion.a>
+					)}
+					<Tabs sections={sections} hideIndicator={isTitleExpanded} />
+				</div>
+				<div className={`m-0 h-auto transition-opacity divider ${dividerOpacityStyles}`} />
 			</div>
-			<div className={`divider h-auto m-0 transition-opacity ${dividerOpacityStyles}`} />
 		</header>
 	);
 }

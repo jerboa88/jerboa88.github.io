@@ -1,24 +1,11 @@
 /*
-	Helper functions and constants that are used throughout the application
-	-----------------------------------------------------------------------
+	Helper functions that are used throughout the application
+	---------------------------------------------------------
 */
 
 
 import defaultProjectImage from '../images/default-tile-bg.png'
 
-
-// Constants
-
-const fadeTransitionVariants = {
-	hidden: {
-		opacity: 0,
-		scale: .8,
-	},
-	show: {
-		opacity: 1,
-		scale: 1,
-	}
-} as const;
 
 // Status code information is adapted from https://github.com/prettymuchbryce/http-status-codes/blob/master/codes.json as is licensed under the MIT License
 const statusCodeMessages = {
@@ -81,8 +68,6 @@ const statusCodeMessages = {
 } as const;
 
 
-// Functions
-
 // Get a value from an object or return a default value if the key does not exist
 export function getOrDefault<T, K extends keyof T, D extends any>(object: T, key: K | number | string, defaultValue: D): T[K] | D {
 	return object[key as K] ?? defaultValue as D;
@@ -96,43 +81,24 @@ export function doesWindowExist(): boolean {
 }
 
 
-export function getProjectImage(imageUrl: string) {
-	return imageUrl ? imageUrl : defaultProjectImage
+// CHeck if the device supports hover interactions or if it is a touch-only device
+export function doesDeviceSupportHover() {
+	return doesWindowExist() && window.matchMedia('(pointer: fine)').matches;
 }
 
 
-// Props for enabling a fade-in animation for a Framer Motion component
-export const withFadeInAnimation = {
-	initial: fadeTransitionVariants.hidden,
-	animate: fadeTransitionVariants.show,
-	exit: fadeTransitionVariants.hidden,
-} as const;
-
-
-// Props for setting a spring transition on a Framer Motion component
-export const withSpringTransition = {
-	transition: {
-		type: 'spring',
-		stiffness: 220,
-		damping: 20,
-		restSpeed: .2,
-		restDelta: .08,
-	}
-} as const;
-
-
-// Props for setting an interactive card animation on a Framer Motion component
-export const asInteractiveCard = {
-	whileHover: {
-		scale: 1.05,
-	},
-	whileTap: {
-		scale: .95,
-	},
-} as const;
+export function getProjectImage(imageUrl: string) {
+	return imageUrl ? imageUrl : defaultProjectImage
+}
 
 
 // Get the description associated with a given status code
 export function getStatusCodeDescription(statusCode: number): string {
 	return getOrDefault(statusCodeMessages, statusCode, 'Unknown Status Code');
 }
+
+
+// Clamp a value between a minimum and maximum value
+export function clamp(value: number, min: number, max: number) {
+	return Math.min(Math.max(value, min), max);
+};

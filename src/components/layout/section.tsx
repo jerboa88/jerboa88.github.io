@@ -21,7 +21,7 @@ interface SectionPropsInterface extends PropsWithClassName, PropsWithChildren {
 }
 
 const Section = forwardRef(({ className = '', id, title, button, children }: SectionPropsInterface, ref: ForwardedRef<HTMLElement>) => (
-	<section id={id} ref={ref} className={`flex flex-col w-full sm:w-10/12 lg:w-9/12 xl:w-8/12 max-w-5xl p-8 text-white justify-center ${className}`}>
+	<section id={id} ref={ref} className={`flex z-10 flex-col justify-center p-8 w-full max-w-5xl sm:w-10/12 lg:w-9/12 xl:w-8/12 ${className}`}>
 		{title && <SectionHeader title={title} button={button} />}
 		{children}
 	</section>

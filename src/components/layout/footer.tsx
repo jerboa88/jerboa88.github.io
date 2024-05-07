@@ -17,25 +17,27 @@ interface FooterPropsInterface {
 
 export default function Footer({ siteMetadata }: FooterPropsInterface) {
 	return (
-		<footer className="z-20 w-full bg-base-200">
-			<div className="m-0 h-auto opacity-100 divider" />
-			<div className="flex flex-row justify-between items-center p-4 pb-4">
-				<nav className="flex flex-row justify-center tabs font-button">
-					<Tooltip text="View the source code on GitHub" className="!tooltip-right">
-						<GhostButtonLink text="Source" to={siteMetadata.sourceUrl} />
-					</Tooltip>
-					<Tooltip text="View the Privacy Policy" className="!tooltip-right">
-						<GhostButtonLink text="Privacy" to="/privacy-policy" isInternal />
-					</Tooltip>
-				</nav>
-				<nav className="flex flex-row justify-center">
-					<Tooltip text="View my profile on LinkedIn" className="!tooltip-left">
-						<GhostButtonLink to={siteMetadata.author.link.linkedin} icon={faLinkedin} />
-					</Tooltip>
-					<Tooltip text="View my profile on GitHub" className="!tooltip-left">
-						<GhostButtonLink to={siteMetadata.author.link.github} icon={faGithub} />
-					</Tooltip>
-				</nav>
+		<footer className="z-30 w-full shadow-lg backdrop-blur-md bg-glass">
+			<div className="mix-blend-overlay">
+				<div className="m-0 h-auto opacity-100 divider" />
+				<div className="flex flex-row justify-between items-center p-4 pb-4">
+					<nav className="flex flex-row justify-center tabs font-button">
+						<Tooltip text="View the source code on GitHub" className="!tooltip-right">
+							<GhostButtonLink text="Source" to={siteMetadata.sourceUrl} />
+						</Tooltip>
+						<Tooltip text="View the Privacy Policy" className="!tooltip-right">
+							<GhostButtonLink text="Privacy" to="/privacy-policy" isInternal />
+						</Tooltip>
+					</nav>
+					<nav className="flex flex-row justify-center">
+						<Tooltip text="View my profile on LinkedIn" className="!tooltip-left">
+							<GhostButtonLink to={siteMetadata.author.link.linkedin} icon={faLinkedin} />
+						</Tooltip>
+						<Tooltip text="View my profile on GitHub" className="!tooltip-left">
+							<GhostButtonLink to={siteMetadata.author.link.github} icon={faGithub} />
+						</Tooltip>
+					</nav>
+				</div>
 			</div>
 		</footer>
 	);

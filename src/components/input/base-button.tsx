@@ -9,12 +9,12 @@ import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ButtonInterface } from '../../common/types';
-import { asInteractiveCard, withFadeInAnimation } from '../../common/utilities';
+import { FADE_IN_ANIMATION_PROPS } from '../../common/constants';
 
 
 export default function BaseButton({ className = '', type = 'button', iconClassName = '', textClassName = '', disabled = false, responsive = false, flip = false, icon, text, layout, layoutRoot }: ButtonInterface) {
 	const buttonFlipStyles = flip ? 'flex-row-reverse' : '';
-	const buttonStyles = `flex flex-row justify-center items-center self-center gap-2 text-sm font-button uppercase ${buttonFlipStyles} ${className}`;
+	const buttonStyles = `flex flex-row justify-center items-center self-center gap-2 z-20 text-sm font-button uppercase ${buttonFlipStyles} ${className}`;
 
 	const iconOnlyStyles = text ? '' : 'text-xl';
 	const iconStyles = `fa-fw ${iconOnlyStyles} ${iconClassName}`;
@@ -22,18 +22,16 @@ export default function BaseButton({ className = '', type = 'button', iconClassN
 	const textResponsiveStyles = (responsive && icon) ? 'max-lg:hidden' : '';
 	const textStyles = `${textResponsiveStyles} ${textClassName} `;
 
-	const interactiveCardProps = disabled ? {} : asInteractiveCard;
-
 	return (
-		<motion.button {...{ type, disabled, layout, layoutRoot }} {...interactiveCardProps} className={buttonStyles}>
+		<motion.button {...{ type, disabled, layout, layoutRoot }} className={buttonStyles}>
 			<AnimatePresence mode="popLayout">
 				{icon && (
-					<motion.span key="icon" layout="position" {...withFadeInAnimation}>
+					<motion.span key="icon" layout="position" {...FADE_IN_ANIMATION_PROPS}>
 						<FontAwesomeIcon icon={icon} className={iconStyles} />
 					</motion.span>
 				)}
 				{text && (
-					<motion.span key="text" layout="position" {...withFadeInAnimation} className={textStyles}>
+					<motion.span key="text" layout="position" {...FADE_IN_ANIMATION_PROPS} className={textStyles}>
 						{text}
 					</motion.span>
 				)}

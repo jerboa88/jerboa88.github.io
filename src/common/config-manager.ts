@@ -81,21 +81,7 @@ export default class ConfigManager {
 			throw new Error(`Theme ${themeName} not found`);
 		}
 
-		const bgColor = theme['base-100'];
-
-		return {
-			...theme,
-			// Custom vars for header colors
-			'--ph': theme['primary-header'],
-			'--sh': theme['secondary-header'],
-			'primary-content': bgColor,
-			'secondary-content': bgColor,
-			'accent-content': bgColor,
-			'info-content': bgColor,
-			'success-content': bgColor,
-			'warning-content': bgColor,
-			'error-content': bgColor,
-		};
+		return theme;
 	}
 
 	// Returns the color for a given project type

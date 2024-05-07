@@ -100,11 +100,11 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 				</span>
 				<div className="flex fixed inset-x-0 bottom-0 flex-row justify-center mb-4">
 					<Tooltip text={`Go to ${sections[0].title} section`}>
-						<GhostButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={`transition ${isTitleExpanded ? '' : 'opacity-0'}`} isInternal />
+						<GhostButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={isTitleExpanded ? '':'opacity-0'} isInternal />
 					</Tooltip>
 				</div>
 			</Section>
-			<Section className="min-h-screen" {...sections[0]}>
+			<Section className="min-h-lvh" {...sections[0]}>
 				<Article>
 					<p>
 						I am a recent graduate with a Bachelors Specialization in Computing Science from the University of Alberta. During my time at the U of A, I had the opportunity to share my expertise with Haemonetics Corporation in Edmonton, where I was involved in end-to-end development of their NexLynk Donor Management System.
@@ -117,13 +117,13 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 					</p>
 				</Article>
 			</Section>
-			<Section className="min-h-screen" {...sections[1]}>
+			<Section className="min-h-lvh" {...sections[1]}>
 				<ProjectCardGallery projects={pageContext.pinnedRepos} />
 			</Section>
-			<Section className="min-h-screen" {...sections[2]}>
+			<Section className="min-h-lvh" {...sections[2]}>
 				<Timeline roles={jobs} />
 			</Section>
-			<Section className="min-h-screen" {...sections[3]}>
+			<Section className="min-h-lvh" {...sections[3]}>
 				<Article className="flex flex-col justify-center w-full">
 					<p>
 						Got something on your mind? Whether it's a query, a collaboration proposal, or just a friendly hello, feel free to reach out using the form below.

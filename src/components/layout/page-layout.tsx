@@ -7,10 +7,13 @@
 import React, { PropsWithChildren, StrictMode } from 'react';
 import { MotionConfig } from 'framer-motion';
 import { SiteMetadataInterface, SectionInterface, PropsWithClassName } from '../../common/types';
+import { SPRING_TRANSITION_PROPS } from '../../common/constants';
 import Header from './header';
 import Footer from './footer';
-import { withSpringTransition } from '../../common/utilities';
+import ParticlesBackground from './particles-background';
 
+
+// Types
 
 interface PageLayoutPropsInterface extends PropsWithClassName, PropsWithChildren {
 	siteMetadata: SiteMetadataInterface;
@@ -18,6 +21,16 @@ interface PageLayoutPropsInterface extends PropsWithClassName, PropsWithChildren
 	isTitleExpanded?: boolean;
 	sections?: SectionInterface[];
 }
+
+
+// Constants
+
+const BG_GRADIENT_PROPS = {
+	style: {
+		background: `radial-gradient(100% 100% at 0% 0%,oklch(var(--a)),oklch(var(--b2)),transparent),radial-gradient(100% 100% at 100% 100%,oklch(var(--a)),oklch(var(--b2)),transparent)`
+	}
+}
+
 
 export default function PageLayout({ className = '', siteMetadata, titleLayoutId, isTitleExpanded = false, sections = [], children }: PageLayoutPropsInterface) {
 	// const lsKeyForTheme = 'is-dark-theme';
@@ -89,9 +102,10 @@ export default function PageLayout({ className = '', siteMetadata, titleLayoutId
 
 	return (
 		<StrictMode>
-			<MotionConfig {...withSpringTransition} reducedMotion="user">
+			<MotionConfig {...SPRING_TRANSITION_PROPS} reducedMotion="user">
 				{/* Page body */}
-				<div className={`min-h-screen flex-col justify-between items-center gap-32 mx-auto text-base bg-base-300 text-base-content scroll-smooth selection:bg-primary selection:text-primary-content ${className}`}>
+				<div className={`flex-col gap-32 justify-between items-center mx-auto text-base min-h-svh scroll-smooth selection:bg-primary selection:text-primary-content ${className}`} {...BG_GRADIENT_PROPS}>
+					<ParticlesBackground />
 					<Header {...{ siteMetadata, titleLayoutId, isTitleExpanded, sections }} />
 					{children}
 					<Footer siteMetadata={siteMetadata} />

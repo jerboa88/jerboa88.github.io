@@ -38,25 +38,27 @@ export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
 			<div className="timeline-middle">
 				<FontAwesomeIcon icon={faCircleCheck} />
 			</div>
-			<Card className="p-8 m-0 mb-16 timeline-box timeline-end" disabled>
-				<div className="flex flex-row justify-between items-center mb-8">
-					<div className="flex flex-col">
-						<SubsectionHeading className="mt-0 mr-2">
-							{role.title}
-						</SubsectionHeading>
-						<div className="flex flex-row items-center">
-							<FontAwesomeIcon className="pr-2" icon={faBuilding} />
-							<span className="text-sm italic">
-								{role.company}
-							</span>
+			<Card outerClassName="timeline-end mb-16" disabled>
+				<div className="p-10">
+					<div className="flex flex-row justify-between items-center mb-8">
+						<div className="flex flex-col">
+							<SubsectionHeading className="mt-0 mr-2">
+								{role.title}
+							</SubsectionHeading>
+							<div className="flex flex-row items-center">
+								<FontAwesomeIcon className="pr-2" icon={faBuilding} />
+								<span className="text-sm italic">
+									{role.company}
+								</span>
+							</div>
 						</div>
 					</div>
+					<ul className="list-[circle] m-4">
+						{
+							role.tasks.map((task, index) => <li key={index} className="my-2">{task}</li>)
+						}
+					</ul>
 				</div>
-				<ul className="list-[circle] m-4">
-					{
-						role.tasks.map((task, index) => <li key={index} className="my-2">{task}</li>)
-					}
-				</ul>
 			</Card>
 		</>
 	);
