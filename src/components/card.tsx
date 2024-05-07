@@ -59,7 +59,7 @@ function getBackgroundScale(xCoords: number, zCoords: number) {
 	const scaleModifier = Math.abs(zCoords);
 	const skewModifier = 1 + Math.abs(xCoords) / 4;
 
-	return 300 * scaleModifier * skewModifier;
+	return 100 * scaleModifier * skewModifier;
 }
 
 
@@ -87,7 +87,8 @@ export default function Card({ className = '', disabled = false, children }: Car
 	const cardYRotationDegrees = useTransform(mouseXCoords, value => Math.tan(-clamp(value, MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX)));
 
 	// Generate the background gradient string based on the mouse position
-	const backgroundGradientString = useMotionTemplate`radial-gradient(${bgXScale}% ${bgYScale}% at ${bgOriginXPercentage}% ${bgOriginYPercentage}%,rgba(255,255,255,.5) 0%,transparent 100%),oklch(var(--b2))`;
+	const backgroundGradientString = useMotionTemplate`radial-gradient(${bgXScale}% ${bgYScale}% at ${bgOriginXPercentage}% ${bgOriginYPercentage}%,oklch(var(--a)/.025) 0%,oklch(var(--b3)/.025) 100%)`;
+
 
 	// Event handlers
 	let handleMouseMove: ((event: React.MouseEvent<HTMLDivElement>) => void) | undefined = undefined;
@@ -124,8 +125,8 @@ export default function Card({ className = '', disabled = false, children }: Car
 			<motion.div
 				style={{ transformOrigin: 'center', background: backgroundGradientString, rotateX: cardXRotationDegrees, rotateY: cardYRotationDegrees }}
 				{...(disabled || shouldReduceMotion ? {} : HOVER_PROPS)}
-				className="overflow-hidden w-full h-full shadow-md bg-base-200 !bg-clip-content rounded-[1.1rem]">
-				<div className="w-full h-full rounded-2xl border-2 mix-blend-overlay bg-base-200 border-base-content/5">
+				className="overflow-hidden w-full h-full shadow-md !bg-clip-content rounded-[1.1rem] backdrop-blur-sm">
+				<div className="w-full h-full rounded-2xl border-2 mix-blend-overlay border-base-content/5">
 					{children}
 				</div>
 			</motion.div>
