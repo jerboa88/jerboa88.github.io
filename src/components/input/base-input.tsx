@@ -44,7 +44,9 @@ export default function BaseInput({ className = '', labelClassName = '', name, l
 			<span className={`justify-start label label-text ${labelClassName}`}>
 				{label}
 			</span>
-			{inputElement}
+			<div className="backdrop bg-glass">
+				{inputElement}
+			</div>
 			<GhostAlert type={AlertType.Error} text={errorMsg} className="mt-4" show={!!errors[name]} />
 		</motion.label>
 	);
