@@ -127,17 +127,6 @@ export const withSpringTransition = {
 } as const;
 
 
-// Props for setting an interactive card animation on a Framer Motion component
-export const asInteractiveCard = {
-	whileHover: {
-		scale: 1.05,
-	},
-	whileTap: {
-		scale: .95,
-	},
-} as const;
-
-
 // Get the description associated with a given status code
 export function getStatusCodeDescription(statusCode: number): string {
 	return getOrDefault(statusCodeMessages, statusCode, 'Unknown Status Code');

@@ -99,40 +99,20 @@
 
 @layer utilities {
 	
-	/* A custom class to make cards interact on hover and click */
-	.interactive-card {
-		@apply transition;
-
-		@media (pointer: fine) {
-			&:hover {
-				@apply bg-base-100;
-				@apply border-base-content/10;
-				@apply motion-safe:scale-105;
-				@apply motion-safe:shadow-lg;
-			}
-		}
-
-		&:active {
-			@apply border-base-content/5;
-			@apply motion-safe:scale-95;
-			@apply motion-safe:shadow;
-		}
-	}
-
 	/* A custom class to make text interact on hover and click */
 	.interactive-text {
 		@apply motion-safe:transition;
 
 		@media (pointer: fine) {
 			&:hover {
-				@apply motion-safe:scale-105;
+				@apply motion-safe:scale-[1.02];
 				@apply motion-safe:drop-shadow-md;
 			}
 		}
 
 		&:active {
 			@apply motion-safe:drop-shadow-sm;
-			@apply motion-safe:scale-95;
+			@apply motion-safe:scale-[.98];
 		}
 	}
 }
