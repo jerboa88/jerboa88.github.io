@@ -11,6 +11,9 @@
 
 /* These styles to the base layer so that component styles can override them as necessary */
 @layer base {
+	html, body {
+		@apply bg-base-300;
+	}
 	/* Override flex-row and flex-col to also change the display type so we don't have to specify this manually every time */
 	.flex-row,
 	.flex-col {
@@ -95,6 +98,10 @@
 
 
 @layer utilities {
+	/* Sets the background to a transparent gradient for a glass-like effect */
+	.bg-glass {
+		background: radial-gradient(100% 100% at 50% 25%, oklch(var(--a)/.025) 0%, oklch(var(--b3)/.025) 100%);
+	}
 
 	/* A custom class to make cards interact on hover and click */
 	.interactive-card {
