@@ -5,14 +5,16 @@
 
 
 import React, { PropsWithChildren } from 'react';
-import { PropsWithClassName } from '../common/types';
 import { AnimationProps, motion, useMotionTemplate, useReducedMotion, useSpring, useTransform } from 'framer-motion';
 import { clamp, doesDeviceSupportHover, withSpringTransition } from '../common/utilities';
 
 
 // Types
 
-interface CardPropsInterface extends PropsWithClassName, PropsWithChildren {
+interface CardPropsInterface extends PropsWithChildren {
+	outerClassName?: string;
+	middleClassName?: string;
+	innerClassName?: string;
 	disabled?: boolean;
 }
 
@@ -63,7 +65,7 @@ function getBackgroundScale(xCoords: number, zCoords: number) {
 }
 
 
-export default function Card({ className = '', disabled = false, children }: CardPropsInterface) {
+export default function Card({ outerClassName = '', middleClassName = '', innerClassName = '', disabled = false, children }: CardPropsInterface) {
 	const shouldReduceMotion = useReducedMotion();
 
 	// Motion values that track the mouse position within the card
@@ -121,12 +123,12 @@ export default function Card({ className = '', disabled = false, children }: Car
 
 
 	return (
-		<div onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseDown={handleMouseDown} style={{ perspective: 500 }} className={className}>
+		<div onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseDown={handleMouseDown} style={{ perspective: 500 }} className={outerClassName}>
 			<motion.div
 				style={{ transformOrigin: 'center', background: backgroundGradientString, rotateX: cardXRotationDegrees, rotateY: cardYRotationDegrees }}
 				{...(disabled || shouldReduceMotion ? {} : HOVER_PROPS)}
-				className="overflow-hidden w-full h-full shadow-md !bg-clip-content rounded-[1.1rem] backdrop-blur-md">
-				<div className="w-full h-full rounded-2xl border-2 mix-blend-overlay border-base-content/5">
+				className={`overflow-hidden size-full shadow-md !bg-clip-content rounded-2xl backdrop-blur-md ${middleClassName}`}>
+				<div className={`rounded-2xl border-2 mix-blend-overlay size-full border-base-content/5 ${innerClassName}`}>
 					{children}
 				</div>
 			</motion.div>

@@ -85,7 +85,7 @@ function ParticlesBackground() {
 
 
 	return (
-		<Particles options={tsParticlesConfig} className={`fixed top-0 left-0 w-full h-full mix-blend-overlay transition-opacity ease-out duration-[2s] ${init ? 'opacity-100' : 'opacity-0'}`} />
+		<Particles options={tsParticlesConfig} className={`fixed top-0 left-0 size-full mix-blend-overlay transition-opacity ease-out duration-[2s] ${init ? 'opacity-100' : 'opacity-0'}`} />
 	);
 }
 
