@@ -24,7 +24,7 @@ module.exports = {
 		},
 		extend: {
 			backgroundImage: {
-				glass: 'radial-gradient(100% 100% at 50% 25%, oklch(var(--a)/.025) 0%, oklch(var(--b3)/.025) 100%)',
+				glass: 'radial-gradient(100% 100% at 50% 25%, oklch(var(--a)/.03) 0%, oklch(var(--b3)/.03) 100%)',
 			},
 			colors: {
 				'primary-header': 'var(--ph)',

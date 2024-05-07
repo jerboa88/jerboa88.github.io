@@ -87,7 +87,7 @@ export default function Card({ className = '', disabled = false, children }: Car
 	const cardYRotationDegrees = useTransform(mouseXCoords, value => Math.tan(-clamp(value, MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX)));
 
 	// Generate the background gradient string based on the mouse position
-	const backgroundGradientString = useMotionTemplate`radial-gradient(${bgXScale}% ${bgYScale}% at ${bgOriginXPercentage}% ${bgOriginYPercentage}%,oklch(var(--a)/.025) 0%,oklch(var(--b3)/.025) 100%)`;
+	const backgroundGradientString = useMotionTemplate`radial-gradient(${bgXScale}% ${bgYScale}% at ${bgOriginXPercentage}% ${bgOriginYPercentage}%,oklch(var(--a)/.03) 0%,oklch(var(--b3)/.03) 100%)`;
 
 
 	// Event handlers
