@@ -107,8 +107,8 @@ export interface SiteMetadataInterface {
 }
 
 
-// Raw theme config for a single theme
-interface ThemeConfigInterface {
+// Theme object used to style the site
+export interface ThemeInterface {
 	'accent': string;
 	'base-100': string;
 	'base-200': string;
@@ -116,9 +116,7 @@ interface ThemeConfigInterface {
 	'error': string;
 	'info': string;
 	'neutral': string;
-	'primary-header': string;
 	'primary': string;
-	'secondary-header': string;
 	'secondary': string;
 	'success': string;
 	'warning': string;
@@ -127,22 +125,8 @@ interface ThemeConfigInterface {
 
 // Raw themes config used to generate theme objects
 export interface ThemesConfigInterface {
-	light: ThemeConfigInterface;
-	dark: ThemeConfigInterface;
-}
-
-
-// Theme object used to style the site
-export interface ThemeInterface extends ThemeConfigInterface {
-	'--ph': string;
-	'--sh': string;
-	'accent-content': string;
-	'error-content': string;
-	'info-content': string;
-	'primary-content': string;
-	'secondary-content': string;
-	'success-content': string;
-	'warning-content': string;
+	light: ThemeInterface;
+	dark: ThemeInterface;
 }
 
 

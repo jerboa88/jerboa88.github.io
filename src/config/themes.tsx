@@ -9,12 +9,10 @@ import type { ThemesConfigInterface } from '../common/types';
 
 export default {
 	light: {
-		'primary-header': '#0D9488',		// TW Teal 600
 		'primary': '#0F766E',						// TW Teal 700
-		'secondary-header': '#BE123C',	// TW Rose 700
 		'secondary': '#E11D48',					// TW Rose 600
-		'accent': '#000',								// Pure black
-		'neutral': '#111',
+		'accent': '#E11D48',						// TW Rose 600
+		'neutral': '#FFF',							// Pure white
 		'info': '#0284C7',							// TW Sky 600
 		'success': '#16A34A',						// TW Green 600
 		'warning': '#D97706',						// TW Amber 600
@@ -25,12 +23,10 @@ export default {
 		'base-content': '#000',
 	},
 	dark: {
-		'primary-header': '#14B8A6',		// TW Teal 500
 		'primary': '#2DD4BF',						// TW Teal 400
-		'secondary-header': '#F43F5E',	// TW Rose 500
 		'secondary': '#FB7185',					// TW Rose 400
-		'accent': '#FFF',								// Pure white
-		'neutral': '#111',
+		'accent': '#E11D48',						// TW Rose 600
+		'neutral': '#FFF',							// Pure white
 		'info': '#38BDF8',							// TW Sky 400
 		'success': '#4ADE80',						// TW Green 400
 		'warning': '#FBBF24',						// TW Amber 400

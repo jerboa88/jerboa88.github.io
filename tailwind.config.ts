@@ -24,11 +24,7 @@ module.exports = {
 		},
 		extend: {
 			backgroundImage: {
-				glass: 'radial-gradient(100% 100% at 50% 25%, oklch(var(--a)/.03) 0%, oklch(var(--b3)/.03) 100%)',
-			},
-			colors: {
-				'primary-header': 'var(--ph)',
-				'secondary-header': 'var(--sh)',
+				glass: 'radial-gradient(100% 100% at 50% 25%, oklch(var(--n)/.03), oklch(var(--b3)/.03))',
 			},
 			fontFamily: {
 				heading: ['Poppins', 'Montserrat', 'Impact', 'Franklin Gothic Medium', 'Candara', 'Calibri', 'sans-serif'],
