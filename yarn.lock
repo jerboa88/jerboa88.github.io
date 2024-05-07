@@ -3786,12 +3786,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.12.7":
-  version: 20.12.7
-  resolution: "@types/node@npm:20.12.7"
+"@types/node@npm:^20.12.10":
+  version: 20.12.10
+  resolution: "@types/node@npm:20.12.10"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 10/b4a28a3b593a9bdca5650880b6a9acef46911d58cf7cfa57268f048e9a7157a7c3196421b96cea576850ddb732e3b54bc982c8eb5e1e5ef0635d4424c2fce801
+  checksum: 10/b3ab044969880084e4da22a0173fc234239de81c22fb9418bd992de98369a3065c0c6119216476711af69ff520331cf06711acdeb1959554de6bbf0912a0494e
   languageName: node
   linkType: hard
 
@@ -6418,15 +6418,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"daisyui@npm:^4.10.2":
-  version: 4.10.2
-  resolution: "daisyui@npm:4.10.2"
+"daisyui@npm:^4.10.5":
+  version: 4.10.5
+  resolution: "daisyui@npm:4.10.5"
   dependencies:
     css-selector-tokenizer: "npm:^0.8"
     culori: "npm:^3"
     picocolors: "npm:^1"
     postcss-js: "npm:^4"
-  checksum: 10/5ca518806341895cdb14e30c0c6cb76b654c245dfe5997de48d02e9c8044aa6590bd6aee63eab6328494a60130895033b28f2bed1b830f0ded5bf687d755b426
+  checksum: 10/05e53023e04e16040f69c603d4a28fca9b4553fd45596fd7846816c95db1ddb4bdb14f7c696027cca7f368765896d05468cc021fc43deddaa6309da7788fb62e
   languageName: node
   linkType: hard
 
@@ -6809,10 +6809,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dompurify@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "dompurify@npm:3.1.1"
-  checksum: 10/32102d99af058c84a2e6dba4ff4bb0bb544db50c519d756594d443537db14ce5457785160ab3461b6dfa556fa963cf7b5e1a6e766ed3e1cc0ed3fdb2c77cc432
+"dompurify@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "dompurify@npm:3.1.2"
+  checksum: 10/9d5f4464d6b52aa540ac362a8e4354adc7dc33ef05a2b0a109cfcc1ba63c011b5ff38bbbf4f6b5a893166d976cbbd665c7aa4f5571cd010c812dc63a1f701f8b
   languageName: node
   linkType: hard
 
@@ -8127,9 +8127,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^11.1.7":
-  version: 11.1.7
-  resolution: "framer-motion@npm:11.1.7"
+"framer-motion@npm:^11.1.8":
+  version: 11.1.8
+  resolution: "framer-motion@npm:11.1.8"
   dependencies:
     tslib: "npm:^2.4.0"
   peerDependencies:
@@ -8143,7 +8143,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10/b3bc5ac1c41fa3646b86f1855317cd7c9ebbc576667e1b29c283ab95dca7bcda6c3b0ad392645d12779b5bc340e816cef405574fbb757ba44a0517b2527fe30f
+  checksum: 10/aa2632363cc35c790f0328d3e159e292eedd40718cb366be2f0c9228806f867a9bbe8d98d72ec416558fbc6af7826f7bf0784386d70bd22fee5c3d55395b4540
   languageName: node
   linkType: hard
 
@@ -10581,15 +10581,15 @@ __metadata:
     "@tsparticles/shape-square": "npm:^3.3.0"
     "@types/dompurify": "npm:^3.0.5"
     "@types/jsdom": "npm:^21.1.6"
-    "@types/node": "npm:^20.12.7"
+    "@types/node": "npm:^20.12.10"
     "@types/react": "npm:^18.3.1"
     "@types/react-dom": "npm:^18.3.0"
     autoprefixer: "npm:^10.4.19"
-    daisyui: "npm:^4.10.2"
-    dompurify: "npm:^3.1.1"
+    daisyui: "npm:^4.10.5"
+    dompurify: "npm:^3.1.2"
     dotenv: "npm:^16.4.5"
     eslint-plugin-react-hooks: "npm:^4.6.2"
-    framer-motion: "npm:^11.1.7"
+    framer-motion: "npm:^11.1.8"
     gatsby: "npm:^5.13.4"
     gatsby-plugin-image: "npm:^3.13.1"
     gatsby-plugin-manifest: "npm:^5.13.1"
@@ -10607,7 +10607,7 @@ __metadata:
     postcss: "npm:^8.4.38"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
-    react-hook-form: "npm:^7.51.3"
+    react-hook-form: "npm:^7.51.4"
     sharp: "npm:^0.33.3"
     svgo: "npm:^3.2.0"
     tailwindcss: "npm:^3.4.3"
@@ -13867,12 +13867,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.51.3":
-  version: 7.51.3
-  resolution: "react-hook-form@npm:7.51.3"
+"react-hook-form@npm:^7.51.4":
+  version: 7.51.4
+  resolution: "react-hook-form@npm:7.51.4"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18
-  checksum: 10/37f5d681b0f9d6a64b56e38c6ea98941c78d2634e175e7722e66a6bd72b4b22a73a5b912ada8cc010b5ec9e1019b8e2d4a6b0f38e87280600f8e921dee96aaca
+  checksum: 10/1edb032284c127756ad4b99be5da55407dac311afa05f534ad882971088efef6c1debd339f2d9783a572fe17f97d206dbeb9b5b0cdd4e7599cd86a3485e45ad0
   languageName: node
   linkType: hard
 
