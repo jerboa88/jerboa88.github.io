@@ -30102,107 +30102,63 @@ type SiteSiteMetadataAuthorUsernameSortInput = {
 };
 
 type SiteSiteMetadataDarkTheme = {
-  readonly _xph: Maybe<Scalars['String']>;
-  readonly _xsh: Maybe<Scalars['String']>;
   readonly accent: Maybe<Scalars['String']>;
-  readonly accent_content: Maybe<Scalars['String']>;
   readonly base_100: Maybe<Scalars['String']>;
   readonly base_200: Maybe<Scalars['String']>;
   readonly base_300: Maybe<Scalars['String']>;
   readonly base_content: Maybe<Scalars['String']>;
   readonly error: Maybe<Scalars['String']>;
-  readonly error_content: Maybe<Scalars['String']>;
   readonly info: Maybe<Scalars['String']>;
-  readonly info_content: Maybe<Scalars['String']>;
   readonly neutral: Maybe<Scalars['String']>;
   readonly primary: Maybe<Scalars['String']>;
-  readonly primary_content: Maybe<Scalars['String']>;
-  readonly primary_header: Maybe<Scalars['String']>;
   readonly secondary: Maybe<Scalars['String']>;
-  readonly secondary_content: Maybe<Scalars['String']>;
-  readonly secondary_header: Maybe<Scalars['String']>;
   readonly success: Maybe<Scalars['String']>;
-  readonly success_content: Maybe<Scalars['String']>;
   readonly warning: Maybe<Scalars['String']>;
-  readonly warning_content: Maybe<Scalars['String']>;
 };
 
 type SiteSiteMetadataDarkThemeFieldSelector = {
-  readonly _xph: InputMaybe<FieldSelectorEnum>;
-  readonly _xsh: InputMaybe<FieldSelectorEnum>;
   readonly accent: InputMaybe<FieldSelectorEnum>;
-  readonly accent_content: InputMaybe<FieldSelectorEnum>;
   readonly base_100: InputMaybe<FieldSelectorEnum>;
   readonly base_200: InputMaybe<FieldSelectorEnum>;
   readonly base_300: InputMaybe<FieldSelectorEnum>;
   readonly base_content: InputMaybe<FieldSelectorEnum>;
   readonly error: InputMaybe<FieldSelectorEnum>;
-  readonly error_content: InputMaybe<FieldSelectorEnum>;
   readonly info: InputMaybe<FieldSelectorEnum>;
-  readonly info_content: InputMaybe<FieldSelectorEnum>;
   readonly neutral: InputMaybe<FieldSelectorEnum>;
   readonly primary: InputMaybe<FieldSelectorEnum>;
-  readonly primary_content: InputMaybe<FieldSelectorEnum>;
-  readonly primary_header: InputMaybe<FieldSelectorEnum>;
   readonly secondary: InputMaybe<FieldSelectorEnum>;
-  readonly secondary_content: InputMaybe<FieldSelectorEnum>;
-  readonly secondary_header: InputMaybe<FieldSelectorEnum>;
   readonly success: InputMaybe<FieldSelectorEnum>;
-  readonly success_content: InputMaybe<FieldSelectorEnum>;
   readonly warning: InputMaybe<FieldSelectorEnum>;
-  readonly warning_content: InputMaybe<FieldSelectorEnum>;
 };
 
 type SiteSiteMetadataDarkThemeFilterInput = {
-  readonly _xph: InputMaybe<StringQueryOperatorInput>;
-  readonly _xsh: InputMaybe<StringQueryOperatorInput>;
   readonly accent: InputMaybe<StringQueryOperatorInput>;
-  readonly accent_content: InputMaybe<StringQueryOperatorInput>;
   readonly base_100: InputMaybe<StringQueryOperatorInput>;
   readonly base_200: InputMaybe<StringQueryOperatorInput>;
   readonly base_300: InputMaybe<StringQueryOperatorInput>;
   readonly base_content: InputMaybe<StringQueryOperatorInput>;
   readonly error: InputMaybe<StringQueryOperatorInput>;
-  readonly error_content: InputMaybe<StringQueryOperatorInput>;
   readonly info: InputMaybe<StringQueryOperatorInput>;
-  readonly info_content: InputMaybe<StringQueryOperatorInput>;
   readonly neutral: InputMaybe<StringQueryOperatorInput>;
   readonly primary: InputMaybe<StringQueryOperatorInput>;
-  readonly primary_content: InputMaybe<StringQueryOperatorInput>;
-  readonly primary_header: InputMaybe<StringQueryOperatorInput>;
   readonly secondary: InputMaybe<StringQueryOperatorInput>;
-  readonly secondary_content: InputMaybe<StringQueryOperatorInput>;
-  readonly secondary_header: InputMaybe<StringQueryOperatorInput>;
   readonly success: InputMaybe<StringQueryOperatorInput>;
-  readonly success_content: InputMaybe<StringQueryOperatorInput>;
   readonly warning: InputMaybe<StringQueryOperatorInput>;
-  readonly warning_content: InputMaybe<StringQueryOperatorInput>;
 };
 
 type SiteSiteMetadataDarkThemeSortInput = {
-  readonly _xph: InputMaybe<SortOrderEnum>;
-  readonly _xsh: InputMaybe<SortOrderEnum>;
   readonly accent: InputMaybe<SortOrderEnum>;
-  readonly accent_content: InputMaybe<SortOrderEnum>;
   readonly base_100: InputMaybe<SortOrderEnum>;
   readonly base_200: InputMaybe<SortOrderEnum>;
   readonly base_300: InputMaybe<SortOrderEnum>;
   readonly base_content: InputMaybe<SortOrderEnum>;
   readonly error: InputMaybe<SortOrderEnum>;
-  readonly error_content: InputMaybe<SortOrderEnum>;
   readonly info: InputMaybe<SortOrderEnum>;
-  readonly info_content: InputMaybe<SortOrderEnum>;
   readonly neutral: InputMaybe<SortOrderEnum>;
   readonly primary: InputMaybe<SortOrderEnum>;
-  readonly primary_content: InputMaybe<SortOrderEnum>;
-  readonly primary_header: InputMaybe<SortOrderEnum>;
   readonly secondary: InputMaybe<SortOrderEnum>;
-  readonly secondary_content: InputMaybe<SortOrderEnum>;
-  readonly secondary_header: InputMaybe<SortOrderEnum>;
   readonly success: InputMaybe<SortOrderEnum>;
-  readonly success_content: InputMaybe<SortOrderEnum>;
   readonly warning: InputMaybe<SortOrderEnum>;
-  readonly warning_content: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSiteMetadataFieldSelector = {
@@ -30238,107 +30194,63 @@ type SiteSiteMetadataFilterInput = {
 };
 
 type SiteSiteMetadataLightTheme = {
-  readonly _xph: Maybe<Scalars['String']>;
-  readonly _xsh: Maybe<Scalars['String']>;
   readonly accent: Maybe<Scalars['String']>;
-  readonly accent_content: Maybe<Scalars['String']>;
   readonly base_100: Maybe<Scalars['String']>;
   readonly base_200: Maybe<Scalars['String']>;
   readonly base_300: Maybe<Scalars['String']>;
   readonly base_content: Maybe<Scalars['String']>;
   readonly error: Maybe<Scalars['String']>;
-  readonly error_content: Maybe<Scalars['String']>;
   readonly info: Maybe<Scalars['String']>;
-  readonly info_content: Maybe<Scalars['String']>;
   readonly neutral: Maybe<Scalars['String']>;
   readonly primary: Maybe<Scalars['String']>;
-  readonly primary_content: Maybe<Scalars['String']>;
-  readonly primary_header: Maybe<Scalars['String']>;
   readonly secondary: Maybe<Scalars['String']>;
-  readonly secondary_content: Maybe<Scalars['String']>;
-  readonly secondary_header: Maybe<Scalars['String']>;
   readonly success: Maybe<Scalars['String']>;
-  readonly success_content: Maybe<Scalars['String']>;
   readonly warning: Maybe<Scalars['String']>;
-  readonly warning_content: Maybe<Scalars['String']>;
 };
 
 type SiteSiteMetadataLightThemeFieldSelector = {
-  readonly _xph: InputMaybe<FieldSelectorEnum>;
-  readonly _xsh: InputMaybe<FieldSelectorEnum>;
   readonly accent: InputMaybe<FieldSelectorEnum>;
-  readonly accent_content: InputMaybe<FieldSelectorEnum>;
   readonly base_100: InputMaybe<FieldSelectorEnum>;
   readonly base_200: InputMaybe<FieldSelectorEnum>;
   readonly base_300: InputMaybe<FieldSelectorEnum>;
   readonly base_content: InputMaybe<FieldSelectorEnum>;
   readonly error: InputMaybe<FieldSelectorEnum>;
-  readonly error_content: InputMaybe<FieldSelectorEnum>;
   readonly info: InputMaybe<FieldSelectorEnum>;
-  readonly info_content: InputMaybe<FieldSelectorEnum>;
   readonly neutral: InputMaybe<FieldSelectorEnum>;
   readonly primary: InputMaybe<FieldSelectorEnum>;
-  readonly primary_content: InputMaybe<FieldSelectorEnum>;
-  readonly primary_header: InputMaybe<FieldSelectorEnum>;
   readonly secondary: InputMaybe<FieldSelectorEnum>;
-  readonly secondary_content: InputMaybe<FieldSelectorEnum>;
-  readonly secondary_header: InputMaybe<FieldSelectorEnum>;
   readonly success: InputMaybe<FieldSelectorEnum>;
-  readonly success_content: InputMaybe<FieldSelectorEnum>;
   readonly warning: InputMaybe<FieldSelectorEnum>;
-  readonly warning_content: InputMaybe<FieldSelectorEnum>;
 };
 
 type SiteSiteMetadataLightThemeFilterInput = {
-  readonly _xph: InputMaybe<StringQueryOperatorInput>;
-  readonly _xsh: InputMaybe<StringQueryOperatorInput>;
   readonly accent: InputMaybe<StringQueryOperatorInput>;
-  readonly accent_content: InputMaybe<StringQueryOperatorInput>;
   readonly base_100: InputMaybe<StringQueryOperatorInput>;
   readonly base_200: InputMaybe<StringQueryOperatorInput>;
   readonly base_300: InputMaybe<StringQueryOperatorInput>;
   readonly base_content: InputMaybe<StringQueryOperatorInput>;
   readonly error: InputMaybe<StringQueryOperatorInput>;
-  readonly error_content: InputMaybe<StringQueryOperatorInput>;
   readonly info: InputMaybe<StringQueryOperatorInput>;
-  readonly info_content: InputMaybe<StringQueryOperatorInput>;
   readonly neutral: InputMaybe<StringQueryOperatorInput>;
   readonly primary: InputMaybe<StringQueryOperatorInput>;
-  readonly primary_content: InputMaybe<StringQueryOperatorInput>;
-  readonly primary_header: InputMaybe<StringQueryOperatorInput>;
   readonly secondary: InputMaybe<StringQueryOperatorInput>;
-  readonly secondary_content: InputMaybe<StringQueryOperatorInput>;
-  readonly secondary_header: InputMaybe<StringQueryOperatorInput>;
   readonly success: InputMaybe<StringQueryOperatorInput>;
-  readonly success_content: InputMaybe<StringQueryOperatorInput>;
   readonly warning: InputMaybe<StringQueryOperatorInput>;
-  readonly warning_content: InputMaybe<StringQueryOperatorInput>;
 };
 
 type SiteSiteMetadataLightThemeSortInput = {
-  readonly _xph: InputMaybe<SortOrderEnum>;
-  readonly _xsh: InputMaybe<SortOrderEnum>;
   readonly accent: InputMaybe<SortOrderEnum>;
-  readonly accent_content: InputMaybe<SortOrderEnum>;
   readonly base_100: InputMaybe<SortOrderEnum>;
   readonly base_200: InputMaybe<SortOrderEnum>;
   readonly base_300: InputMaybe<SortOrderEnum>;
   readonly base_content: InputMaybe<SortOrderEnum>;
   readonly error: InputMaybe<SortOrderEnum>;
-  readonly error_content: InputMaybe<SortOrderEnum>;
   readonly info: InputMaybe<SortOrderEnum>;
-  readonly info_content: InputMaybe<SortOrderEnum>;
   readonly neutral: InputMaybe<SortOrderEnum>;
   readonly primary: InputMaybe<SortOrderEnum>;
-  readonly primary_content: InputMaybe<SortOrderEnum>;
-  readonly primary_header: InputMaybe<SortOrderEnum>;
   readonly secondary: InputMaybe<SortOrderEnum>;
-  readonly secondary_content: InputMaybe<SortOrderEnum>;
-  readonly secondary_header: InputMaybe<SortOrderEnum>;
   readonly success: InputMaybe<SortOrderEnum>;
-  readonly success_content: InputMaybe<SortOrderEnum>;
   readonly warning: InputMaybe<SortOrderEnum>;
-  readonly warning_content: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSiteMetadataSortInput = {
