@@ -20,7 +20,7 @@ module.exports = {
 			sans: ['Roboto Flex', 'Roboto', 'Tahoma', 'Arial', 'Helvetica', 'sans-serif'],
 		},
 		transitionDuration: {
-			DEFAULT: '150ms',
+			DEFAULT: '200ms',
 		},
 		extend: {
 			backgroundImage: {
