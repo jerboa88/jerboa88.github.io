@@ -34,6 +34,10 @@ const RAW_RUNTIME_STATE =
           ["@fortawesome/free-solid-svg-icons", "npm:6.5.2"],\
           ["@fortawesome/react-fontawesome", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:0.2.0"],\
           ["@tailwindcss/typography", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:0.5.13"],\
+          ["@tsparticles/basic", "npm:3.3.0"],\
+          ["@tsparticles/engine", "npm:3.3.0"],\
+          ["@tsparticles/react", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.0.0"],\
+          ["@tsparticles/shape-square", "npm:3.3.0"],\
           ["@types/dompurify", "npm:3.0.5"],\
           ["@types/jsdom", "npm:21.1.6"],\
           ["@types/node", "npm:20.12.7"],\
@@ -5473,6 +5477,131 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@trysound-sax-npm-0.2.0-9f763d0295-7379713eca.zip/node_modules/@trysound/sax/",\
         "packageDependencies": [\
           ["@trysound/sax", "npm:0.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tsparticles/basic", [\
+      ["npm:3.3.0", {\
+        "packageLocation": "./.yarn/cache/@tsparticles-basic-npm-3.3.0-aec7fb5f5f-23cb2ac6e9.zip/node_modules/@tsparticles/basic/",\
+        "packageDependencies": [\
+          ["@tsparticles/basic", "npm:3.3.0"],\
+          ["@tsparticles/engine", "npm:3.3.0"],\
+          ["@tsparticles/move-base", "npm:3.3.0"],\
+          ["@tsparticles/shape-circle", "npm:3.3.0"],\
+          ["@tsparticles/updater-color", "npm:3.3.0"],\
+          ["@tsparticles/updater-opacity", "npm:3.3.0"],\
+          ["@tsparticles/updater-out-modes", "npm:3.3.0"],\
+          ["@tsparticles/updater-size", "npm:3.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tsparticles/engine", [\
+      ["npm:3.3.0", {\
+        "packageLocation": "./.yarn/unplugged/@tsparticles-engine-npm-3.3.0-de96f12403/node_modules/@tsparticles/engine/",\
+        "packageDependencies": [\
+          ["@tsparticles/engine", "npm:3.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tsparticles/move-base", [\
+      ["npm:3.3.0", {\
+        "packageLocation": "./.yarn/cache/@tsparticles-move-base-npm-3.3.0-6eb6318a58-056c12ba32.zip/node_modules/@tsparticles/move-base/",\
+        "packageDependencies": [\
+          ["@tsparticles/move-base", "npm:3.3.0"],\
+          ["@tsparticles/engine", "npm:3.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tsparticles/react", [\
+      ["npm:3.0.0", {\
+        "packageLocation": "./.yarn/cache/@tsparticles-react-npm-3.0.0-6c68d4d856-c3764d472e.zip/node_modules/@tsparticles/react/",\
+        "packageDependencies": [\
+          ["@tsparticles/react", "npm:3.0.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.0.0", {\
+        "packageLocation": "./.yarn/__virtual__/@tsparticles-react-virtual-3e699e5c1c/0/cache/@tsparticles-react-npm-3.0.0-6c68d4d856-c3764d472e.zip/node_modules/@tsparticles/react/",\
+        "packageDependencies": [\
+          ["@tsparticles/react", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.0.0"],\
+          ["@tsparticles/engine", "npm:3.3.0"],\
+          ["@types/react", "npm:18.3.1"],\
+          ["@types/react-dom", "npm:18.3.0"],\
+          ["@types/tsparticles__engine", null],\
+          ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:18.3.1"]\
+        ],\
+        "packagePeers": [\
+          "@tsparticles/engine",\
+          "@types/react-dom",\
+          "@types/react",\
+          "@types/tsparticles__engine",\
+          "react-dom",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tsparticles/shape-circle", [\
+      ["npm:3.3.0", {\
+        "packageLocation": "./.yarn/cache/@tsparticles-shape-circle-npm-3.3.0-5cc5851ff0-7120f12cd6.zip/node_modules/@tsparticles/shape-circle/",\
+        "packageDependencies": [\
+          ["@tsparticles/shape-circle", "npm:3.3.0"],\
+          ["@tsparticles/engine", "npm:3.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tsparticles/shape-square", [\
+      ["npm:3.3.0", {\
+        "packageLocation": "./.yarn/cache/@tsparticles-shape-square-npm-3.3.0-bd65ef0ab1-9b773e2f7a.zip/node_modules/@tsparticles/shape-square/",\
+        "packageDependencies": [\
+          ["@tsparticles/shape-square", "npm:3.3.0"],\
+          ["@tsparticles/engine", "npm:3.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tsparticles/updater-color", [\
+      ["npm:3.3.0", {\
+        "packageLocation": "./.yarn/cache/@tsparticles-updater-color-npm-3.3.0-e8a2e304ca-a97e7ef4f4.zip/node_modules/@tsparticles/updater-color/",\
+        "packageDependencies": [\
+          ["@tsparticles/updater-color", "npm:3.3.0"],\
+          ["@tsparticles/engine", "npm:3.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tsparticles/updater-opacity", [\
+      ["npm:3.3.0", {\
+        "packageLocation": "./.yarn/cache/@tsparticles-updater-opacity-npm-3.3.0-047e55afd2-33db88511a.zip/node_modules/@tsparticles/updater-opacity/",\
+        "packageDependencies": [\
+          ["@tsparticles/updater-opacity", "npm:3.3.0"],\
+          ["@tsparticles/engine", "npm:3.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tsparticles/updater-out-modes", [\
+      ["npm:3.3.0", {\
+        "packageLocation": "./.yarn/cache/@tsparticles-updater-out-modes-npm-3.3.0-24c1eb00db-d44c0d653d.zip/node_modules/@tsparticles/updater-out-modes/",\
+        "packageDependencies": [\
+          ["@tsparticles/updater-out-modes", "npm:3.3.0"],\
+          ["@tsparticles/engine", "npm:3.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tsparticles/updater-size", [\
+      ["npm:3.3.0", {\
+        "packageLocation": "./.yarn/cache/@tsparticles-updater-size-npm-3.3.0-7184fd300a-4ae14c6221.zip/node_modules/@tsparticles/updater-size/",\
+        "packageDependencies": [\
+          ["@tsparticles/updater-size", "npm:3.3.0"],\
+          ["@tsparticles/engine", "npm:3.3.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -14233,6 +14362,10 @@ const RAW_RUNTIME_STATE =
           ["@fortawesome/free-solid-svg-icons", "npm:6.5.2"],\
           ["@fortawesome/react-fontawesome", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:0.2.0"],\
           ["@tailwindcss/typography", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:0.5.13"],\
+          ["@tsparticles/basic", "npm:3.3.0"],\
+          ["@tsparticles/engine", "npm:3.3.0"],\
+          ["@tsparticles/react", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.0.0"],\
+          ["@tsparticles/shape-square", "npm:3.3.0"],\
           ["@types/dompurify", "npm:3.0.5"],\
           ["@types/jsdom", "npm:21.1.6"],\
           ["@types/node", "npm:20.12.7"],\

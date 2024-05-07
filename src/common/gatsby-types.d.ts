@@ -3054,6 +3054,38 @@ type GITHUB_CodeOfConduct = GITHUB_Node & {
   readonly url: Maybe<Scalars['GITHUB_URI']>;
 };
 
+/** Choose which tools must provide code scanning results before the reference is updated. When configured, code scanning must be enabled and have results for both the commit and the reference being updated. */
+type GITHUB_CodeScanningParameters = {
+  /** Tools that must provide code scanning results for this rule to pass. */
+  readonly codeScanningTools: ReadonlyArray<GITHUB_CodeScanningTool>;
+};
+
+/** Choose which tools must provide code scanning results before the reference is updated. When configured, code scanning must be enabled and have results for both the commit and the reference being updated. */
+type GITHUB_CodeScanningParametersInput = {
+  /** Tools that must provide code scanning results for this rule to pass. */
+  readonly codeScanningTools: ReadonlyArray<GITHUB_CodeScanningToolInput>;
+};
+
+/** A tool that must provide code scanning results for this rule to pass. */
+type GITHUB_CodeScanningTool = {
+  /** The severity level at which code scanning results that raise alerts block a reference update. For more information on alert severity levels, see "[About code scanning alerts](${externalDocsUrl}/code-security/code-scanning/managing-code-scanning-alerts/about-code-scanning-alerts#about-alert-severity-and-security-severity-levels)." */
+  readonly alertsThreshold: Scalars['String'];
+  /** The severity level at which code scanning results that raise security alerts block a reference update. For more information on security severity levels, see "[About code scanning alerts](${externalDocsUrl}/code-security/code-scanning/managing-code-scanning-alerts/about-code-scanning-alerts#about-alert-severity-and-security-severity-levels)." */
+  readonly securityAlertsThreshold: Scalars['String'];
+  /** The name of a code scanning tool */
+  readonly tool: Scalars['String'];
+};
+
+/** A tool that must provide code scanning results for this rule to pass. */
+type GITHUB_CodeScanningToolInput = {
+  /** The severity level at which code scanning results that raise alerts block a reference update. For more information on alert severity levels, see "[About code scanning alerts](${externalDocsUrl}/code-security/code-scanning/managing-code-scanning-alerts/about-code-scanning-alerts#about-alert-severity-and-security-severity-levels)." */
+  readonly alertsThreshold: Scalars['String'];
+  /** The severity level at which code scanning results that raise security alerts block a reference update. For more information on security severity levels, see "[About code scanning alerts](${externalDocsUrl}/code-security/code-scanning/managing-code-scanning-alerts/about-code-scanning-alerts#about-alert-severity-and-security-severity-levels)." */
+  readonly securityAlertsThreshold: Scalars['String'];
+  /** The name of a code scanning tool */
+  readonly tool: Scalars['String'];
+};
+
 /** Collaborators affiliation level with a subject. */
 type GITHUB_CollaboratorAffiliation =
   /** All collaborators the authenticated user can see. */
@@ -20643,6 +20675,8 @@ type GITHUB_RepositoryRuleType =
   | 'AUTHORIZATION'
   /** Branch name pattern */
   | 'BRANCH_NAME_PATTERN'
+  /** Choose which tools must provide code scanning results before the reference is updated. When configured, code scanning must be enabled and have results for both the commit and the reference being updated. */
+  | 'CODE_SCANNING'
   /** Committer email pattern */
   | 'COMMITTER_EMAIL_PATTERN'
   /** Commit author email pattern */
@@ -21462,12 +21496,14 @@ type GITHUB_RuleEnforcement =
   | 'EVALUATE';
 
 /** Types which can be parameters for `RepositoryRule` objects. */
-type GITHUB_RuleParameters = GITHUB_BranchNamePatternParameters | GITHUB_CommitAuthorEmailPatternParameters | GITHUB_CommitMessagePatternParameters | GITHUB_CommitterEmailPatternParameters | GITHUB_FileExtensionRestrictionParameters | GITHUB_FilePathRestrictionParameters | GITHUB_MaxFilePathLengthParameters | GITHUB_MaxFileSizeParameters | GITHUB_PullRequestParameters | GITHUB_RequiredDeploymentsParameters | GITHUB_RequiredStatusChecksParameters | GITHUB_TagNamePatternParameters | GITHUB_UpdateParameters | GITHUB_WorkflowsParameters;
+type GITHUB_RuleParameters = GITHUB_BranchNamePatternParameters | GITHUB_CodeScanningParameters | GITHUB_CommitAuthorEmailPatternParameters | GITHUB_CommitMessagePatternParameters | GITHUB_CommitterEmailPatternParameters | GITHUB_FileExtensionRestrictionParameters | GITHUB_FilePathRestrictionParameters | GITHUB_MaxFilePathLengthParameters | GITHUB_MaxFileSizeParameters | GITHUB_PullRequestParameters | GITHUB_RequiredDeploymentsParameters | GITHUB_RequiredStatusChecksParameters | GITHUB_TagNamePatternParameters | GITHUB_UpdateParameters | GITHUB_WorkflowsParameters;
 
 /** Specifies the parameters for a `RepositoryRule` object. Only one of the fields should be specified. */
 type GITHUB_RuleParametersInput = {
   /** Parameters used for the `branch_name_pattern` rule type */
   readonly branchNamePattern: InputMaybe<GITHUB_BranchNamePatternParametersInput>;
+  /** Parameters used for the `code_scanning` rule type */
+  readonly codeScanning: InputMaybe<GITHUB_CodeScanningParametersInput>;
   /** Parameters used for the `commit_author_email_pattern` rule type */
   readonly commitAuthorEmailPattern: InputMaybe<GITHUB_CommitAuthorEmailPatternParametersInput>;
   /** Parameters used for the `commit_message_pattern` rule type */

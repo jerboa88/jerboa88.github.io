@@ -3426,6 +3426,102 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tsparticles/basic@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@tsparticles/basic@npm:3.3.0"
+  dependencies:
+    "@tsparticles/engine": "npm:^3.3.0"
+    "@tsparticles/move-base": "npm:^3.3.0"
+    "@tsparticles/shape-circle": "npm:^3.3.0"
+    "@tsparticles/updater-color": "npm:^3.3.0"
+    "@tsparticles/updater-opacity": "npm:^3.3.0"
+    "@tsparticles/updater-out-modes": "npm:^3.3.0"
+    "@tsparticles/updater-size": "npm:^3.3.0"
+  checksum: 10/23cb2ac6e99e7aa7dce775410350c81cd180c9bd56620617980cfc4b6af11daa0f49af2cb2ede3cf6d5da3187597ffd48738f8bab3fffa1d94d432600510ac5c
+  languageName: node
+  linkType: hard
+
+"@tsparticles/engine@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@tsparticles/engine@npm:3.3.0"
+  checksum: 10/36a60fbc6da7c563d546c80cc58f0e6e07e55ba960211bb60723d8b97c7df79f5226b1e3053df6ee7da1f963e57fd597ed670cd8a523491323488580db31cca2
+  languageName: node
+  linkType: hard
+
+"@tsparticles/move-base@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@tsparticles/move-base@npm:3.3.0"
+  dependencies:
+    "@tsparticles/engine": "npm:^3.3.0"
+  checksum: 10/056c12ba322eefa92fbb916096d1b755a59b831a66794b2517672686f80ba1bf550581853d015a9392d887f34aff37705faa9972d42adb501b7b8782f6db70a7
+  languageName: node
+  linkType: hard
+
+"@tsparticles/react@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@tsparticles/react@npm:3.0.0"
+  peerDependencies:
+    "@tsparticles/engine": ^3.0.2
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 10/c3764d472e8f2798dceda16ed7ebffbc8bbadeb8096dcba6729be476b84076079e9aed258f19bc5cb2c3aa8f648396e8658f5f7722b3e2be4e477f16ab994df3
+  languageName: node
+  linkType: hard
+
+"@tsparticles/shape-circle@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@tsparticles/shape-circle@npm:3.3.0"
+  dependencies:
+    "@tsparticles/engine": "npm:^3.3.0"
+  checksum: 10/7120f12cd66f9005e4e36d8319af30d52894f04e94f12de295285df3cb1f964405813f4c8f0b7f8560e414f3b307eda9904f49795dbe8cbaf15e7e025c6c110e
+  languageName: node
+  linkType: hard
+
+"@tsparticles/shape-square@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@tsparticles/shape-square@npm:3.3.0"
+  dependencies:
+    "@tsparticles/engine": "npm:^3.3.0"
+  checksum: 10/9b773e2f7a0c60d14abe14a5ed94d5e3cc1b3247fb6e8cfb8529f3f5928d231cf13ce2cfcf40bd374c3dcf8760d018951b9b14e93d107a6f8e6b6d2cfeef1ca7
+  languageName: node
+  linkType: hard
+
+"@tsparticles/updater-color@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@tsparticles/updater-color@npm:3.3.0"
+  dependencies:
+    "@tsparticles/engine": "npm:^3.3.0"
+  checksum: 10/a97e7ef4f45f350c6827c9267c249fdc64e62594e63abb38efd750e5a61f62aa1d5e7415885042e787d5544982eab98bb59138b807020314faf1c3dc019ed31b
+  languageName: node
+  linkType: hard
+
+"@tsparticles/updater-opacity@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@tsparticles/updater-opacity@npm:3.3.0"
+  dependencies:
+    "@tsparticles/engine": "npm:^3.3.0"
+  checksum: 10/33db88511ae3bb34294dd28aa8ed43c5e9eada22ee8b66e1b3ca9082f023dc976b3573f7ebab13b3ad729d02f35bc83b14c3ce53f2e92e82d145b7a38b43ef07
+  languageName: node
+  linkType: hard
+
+"@tsparticles/updater-out-modes@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@tsparticles/updater-out-modes@npm:3.3.0"
+  dependencies:
+    "@tsparticles/engine": "npm:^3.3.0"
+  checksum: 10/d44c0d653d7b75c570759477b941f532051e4a356396453fce63f886380d7d7c08ae4a55b7a2592af894d8f82d345f6143e8d86f0faff9cae05086ab0a41818b
+  languageName: node
+  linkType: hard
+
+"@tsparticles/updater-size@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@tsparticles/updater-size@npm:3.3.0"
+  dependencies:
+    "@tsparticles/engine": "npm:^3.3.0"
+  checksum: 10/4ae14c62210adf5be10cbe37c9495fdeba72101948d1cfe1a4f69427c9a231b5d9a119ec3b0390a0f9e036eb51dea4e27707186a6f81f3a80a1482e8b834df25
+  languageName: node
+  linkType: hard
+
 "@turist/fetch@npm:^7.2.0":
   version: 7.2.0
   resolution: "@turist/fetch@npm:7.2.0"
@@ -10479,6 +10575,10 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^6.5.2"
     "@fortawesome/react-fontawesome": "npm:^0.2.0"
     "@tailwindcss/typography": "npm:^0.5.13"
+    "@tsparticles/basic": "npm:^3.3.0"
+    "@tsparticles/engine": "npm:^3.3.0"
+    "@tsparticles/react": "npm:^3.0.0"
+    "@tsparticles/shape-square": "npm:^3.3.0"
     "@types/dompurify": "npm:^3.0.5"
     "@types/jsdom": "npm:^21.1.6"
     "@types/node": "npm:^20.12.7"
