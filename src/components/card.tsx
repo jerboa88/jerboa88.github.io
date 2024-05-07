@@ -6,7 +6,8 @@
 
 import React, { PropsWithChildren } from 'react';
 import { AnimationProps, motion, useMotionTemplate, useReducedMotion, useSpring, useTransform } from 'framer-motion';
-import { clamp, doesDeviceSupportHover, withSpringTransition } from '../common/utilities';
+import { SPRING_TRANSITION_PROPS } from '../common/constants';
+import { clamp, doesDeviceSupportHover } from '../common/utilities';
 
 
 // Types
@@ -28,14 +29,14 @@ const MOUSE_Z_COORDS_DEFAULT = 1;
 const MOUSE_Z_COORDS_MIN = .98;
 const MOUSE_Z_COORDS_MAX = 1.02;
 const MOTION_VALUE_TRANSITION = {
-	...withSpringTransition.transition,
+	...SPRING_TRANSITION_PROPS.transition,
 	damping: 120,
 };
 const HOVER_PROPS = {
 	initial: { scale: MOUSE_Z_COORDS_DEFAULT },
 	whileHover: { scale: MOUSE_Z_COORDS_MAX },
 	whileTap: { scale: MOUSE_Z_COORDS_MIN },
-	transition: getTransitionWithoutRestProps(withSpringTransition.transition),
+	transition: getTransitionWithoutRestProps(SPRING_TRANSITION_PROPS.transition),
 };
 
 // Remove the restDelta and restSpeed properties from a Framer Motion transition object

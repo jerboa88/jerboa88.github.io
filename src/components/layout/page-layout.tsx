@@ -7,9 +7,9 @@
 import React, { PropsWithChildren, StrictMode } from 'react';
 import { MotionConfig } from 'framer-motion';
 import { SiteMetadataInterface, SectionInterface, PropsWithClassName } from '../../common/types';
+import { SPRING_TRANSITION_PROPS } from '../../common/constants';
 import Header from './header';
 import Footer from './footer';
-import { withSpringTransition } from '../../common/utilities';
 import ParticlesBackground from './particles-background';
 
 
@@ -102,7 +102,7 @@ export default function PageLayout({ className = '', siteMetadata, titleLayoutId
 
 	return (
 		<StrictMode>
-			<MotionConfig {...withSpringTransition} reducedMotion="user">
+			<MotionConfig {...SPRING_TRANSITION_PROPS} reducedMotion="user">
 				{/* Page body */}
 				<div className={`flex-col gap-32 justify-between items-center mx-auto text-base min-h-svh scroll-smooth selection:bg-primary selection:text-primary-content ${className}`} {...BG_GRADIENT_PROPS}>
 					<ParticlesBackground />
