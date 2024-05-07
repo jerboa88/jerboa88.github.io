@@ -14,7 +14,7 @@ import { asInteractiveCard, withFadeInAnimation } from '../../common/utilities';
 
 export default function BaseButton({ className = '', type = 'button', iconClassName = '', textClassName = '', disabled = false, responsive = false, flip = false, icon, text, layout, layoutRoot }: ButtonInterface) {
 	const buttonFlipStyles = flip ? 'flex-row-reverse' : '';
-	const buttonStyles = `flex flex-row justify-center items-center self-center gap-2 text-sm font-button uppercase ${buttonFlipStyles} ${className}`;
+	const buttonStyles = `flex flex-row justify-center items-center self-center gap-2 z-20 text-sm font-button uppercase ${buttonFlipStyles} ${className}`;
 
 	const iconOnlyStyles = text ? '' : 'text-xl';
 	const iconStyles = `fa-fw ${iconOnlyStyles} ${iconClassName}`;
