@@ -9,7 +9,7 @@ import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ButtonInterface } from '../../common/types';
-import { asInteractiveCard, withFadeInAnimation } from '../../common/utilities';
+import { withFadeInAnimation } from '../../common/utilities';
 
 
 export default function BaseButton({ className = '', type = 'button', iconClassName = '', textClassName = '', disabled = false, responsive = false, flip = false, icon, text, layout, layoutRoot }: ButtonInterface) {
@@ -22,10 +22,8 @@ export default function BaseButton({ className = '', type = 'button', iconClassN
 	const textResponsiveStyles = (responsive && icon) ? 'max-lg:hidden' : '';
 	const textStyles = `${textResponsiveStyles} ${textClassName} `;
 
-	const interactiveCardProps = disabled ? {} : asInteractiveCard;
-
 	return (
-		<motion.button {...{ type, disabled, layout, layoutRoot }} {...interactiveCardProps} className={buttonStyles}>
+		<motion.button {...{ type, disabled, layout, layoutRoot }} className={buttonStyles}>
 			<AnimatePresence mode="popLayout">
 				{icon && (
 					<motion.span key="icon" layout="position" {...withFadeInAnimation}>

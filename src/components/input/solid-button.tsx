@@ -7,13 +7,17 @@
 import React from 'react';
 import { ButtonInterface } from '../../common/types';
 import BaseButton from './base-button';
+import Card from '../card';
 
 
-export default function SolidButton({ className = '', disabled, ...remainingProps }: ButtonInterface) {
-	const buttonEnabledStyles = disabled ? '' : 'interactive-card';
-	const buttonStyles = `px-4 sm:px-8 py-2 bg-base-200 border-2 border-base-content/5 rounded-lg shadow-md ${buttonEnabledStyles} ${className}`;
+interface SolidButtonInterface extends ButtonInterface {
+	cardClassName?: string;
+}
 
+export default function SolidButton({ className = '', cardClassName = '', disabled, ...remainingProps }: SolidButtonInterface) {
 	return (
-		<BaseButton className={buttonStyles} disabled={disabled} {...remainingProps} />
+		<Card outerClassName={cardClassName} middleClassName="rounded-lg" innerClassName="rounded-lg" disabled={disabled}>
+			<BaseButton className={`px-4 py-3 sm:px-8 ${className}`} disabled={disabled} {...remainingProps} />
+		</Card>
 	);
 }

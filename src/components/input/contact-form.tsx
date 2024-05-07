@@ -243,13 +243,13 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 
 
 	return (
-		<motion.form layout method="post" onSubmit={handleSubmit(onSubmit)} className={`w-full max-w-xl p-0 sm:p-8 flex flex-col gap-4 ${className}`}>
+		<motion.form layout method="post" onSubmit={handleSubmit(onSubmit)} className={`flex flex-col gap-4 p-0 w-full max-w-xl sm:p-8 ${className}`}>
 			<LayoutGroup>
 				<TextInput {...{ register, errors, ...INPUT_PROPS.name }} validationOptions={validationOptions.name} />
 				<TextInput {...{ register, errors, ...INPUT_PROPS.email }} validationOptions={validationOptions.email} />
 				<MultilineTextInput {...{ register, errors, ...INPUT_PROPS.message }} validationOptions={validationOptions.message} />
 				<Checkbox {...{ register, errors, ...INPUT_PROPS._gotcha }} />
-				<SolidButton type="submit" className="mt-2 w-full" {...submitButtonProps} layout="position" layoutRoot />
+				<SolidButton type="submit" cardClassName="mt-2" className="w-full" {...submitButtonProps} layout="position" layoutRoot />
 				<GhostAlert {...alertProps} />
 			</LayoutGroup>
 		</motion.form>
