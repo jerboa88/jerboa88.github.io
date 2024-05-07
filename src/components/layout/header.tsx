@@ -19,7 +19,7 @@ interface HeaderPropsInterface {
 }
 
 export default function Header({ siteMetadata, titleLayoutId = 'title-layout', isTitleExpanded = false, sections }: HeaderPropsInterface) {
-	let bgStyles = 'bg-glass backdrop-blur-md';
+	let bgStyles = 'bg-glass backdrop-blur-md shadow-lg';
 	let dividerOpacityStyles = 'opacity-100';
 	let justificationStyles = 'justify-between';
 
