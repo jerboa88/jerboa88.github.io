@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { PropsWithClassName } from '../../common/types';
+import { getClassNameProps } from '../../common/utilities';
 
 
 interface DateRangePropsInterface extends PropsWithClassName {
@@ -14,6 +15,8 @@ interface DateRangePropsInterface extends PropsWithClassName {
 }
 
 export default function DateRange({ className = '', startDate, endDate }: DateRangePropsInterface) {
+	const classNameProps = getClassNameProps('font-bold', className);
+
 	const startMonth = startDate.toLocaleString('default', { month: 'long' });
 	const endMonth = endDate.toLocaleString('default', { month: 'long' });
 	const startYear = startDate.getFullYear();
@@ -22,7 +25,7 @@ export default function DateRange({ className = '', startDate, endDate }: DateRa
 	const endDateString = `${endMonth} ${endYear}`;
 
 	return (
-		<div className={`font-bold ${className}`}>
+		<div {...classNameProps}>
 			<time dateTime={startDate.toISOString()}>
 				{startDateString}
 			</time>
