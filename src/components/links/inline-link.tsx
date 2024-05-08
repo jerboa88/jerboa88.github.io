@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { LinkInterface, PropsWithClassName } from '../../common/types';
+import { getClassNameProps } from '../../common/utilities';
 import LinkWrapper from './link-wrapper';
 
 
@@ -14,8 +15,13 @@ interface InlineLinkPropsInterface extends PropsWithClassName, LinkInterface {
 }
 
 export default function InlineLink({ className, text, to, isInternal, rel }: InlineLinkPropsInterface) {
+	const classNameProps = getClassNameProps(
+		'pb-0.5 font-semibold transition-colors border-b-[1px] border-primary hover:border-secondary',
+		className,
+	);
+
 	return (
-		<LinkWrapper {...{ text, to, isInternal, rel }} className={`pb-0.5 font-semibold transition-colors border-b-[1px] border-primary hover:border-secondary ${className}`}>
+		<LinkWrapper {...{ text, to, isInternal, rel, ...classNameProps }}>
 			{text}
 		</LinkWrapper>
 	);
