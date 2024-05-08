@@ -6,13 +6,19 @@
 
 import React, { PropsWithChildren } from 'react';
 import { PropsWithClassName } from '../../common/types';
+import { getClassNameProps } from '../../common/utilities';
 
 
 interface TextComponentPropsInterface extends PropsWithClassName, PropsWithChildren { }
 
 export default function SubsectionHeading({ className = '', children }: TextComponentPropsInterface) {
+	const classNameProps = getClassNameProps(
+		'my-4 text-lg font-heading font-semibold drop-shadow',
+		className,
+	);
+
 	return (
-		<h3 className={`my-4 text-lg font-heading font-semibold drop-shadow ${className}`}>
+		<h3 {...classNameProps}>
 			{children}
 		</h3>
 	);
