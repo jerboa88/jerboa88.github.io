@@ -7,6 +7,7 @@
 import React, { PropsWithChildren } from 'react';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { PropsWithClassName } from '../../common/types';
+import { getClassNameProps } from '../../common/utilities';
 import SectionHeading from '../text/section-heading';
 import GhostButtonLink from '../links/ghost-button-link';
 import Tooltip from '../tooltip';
@@ -22,15 +23,20 @@ interface SectionHeaderPropsInterface extends PropsWithClassName, PropsWithChild
 }
 
 export default function SectionHeader({ className = '', title, button }: SectionHeaderPropsInterface) {
+	const classNameProps = getClassNameProps(
+		'w-full flex flex-row justify-between items-baseline pt-8',
+		className,
+	);
+
 	return (
 		<>
-			<div className={`w-full flex justify-between items-baseline pt-8 ${className}`}>
+			<div {...classNameProps}>
 				<SectionHeading>
 					{title}
 				</SectionHeading>
 				{button && (
 					<Tooltip text={button.text} className="!tooltip-left">
-						<GhostButtonLink {...button} responsive flip className="self-baseline" />
+						<GhostButtonLink {...button} className="self-baseline" responsive flip />
 					</Tooltip>
 				)}
 			</div>
