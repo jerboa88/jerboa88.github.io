@@ -89,9 +89,12 @@ export default class ResponseParser {
 			throw new Error('Pinned repo has no slug');
 		}
 
-		const languages = getProp(getProp(responseData, 'languages'), 'nodes')?.filter(language => {
-			return language && 'name' in language && 'color' in language;
-		}) as ProjectLanguageInterface[];
+		const languages = getProp(
+			getProp(responseData, 'languages'),
+			'nodes',
+		)?.filter(language => (
+			language && 'name' in language && 'color' in language
+		)) as ProjectLanguageInterface[];
 		const {
 			name,
 			longDesc,
