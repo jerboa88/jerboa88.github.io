@@ -30,11 +30,9 @@ export default function TextInput({ inputClassName = '', name, inputOptions = de
 
 	// A function for rendering the input element
 	// This will be passed to the base input component and called from there
-	const renderInput = useCallback((registerObj => {
-		return (
-			<input {...{ ...classNameProps, ...registerObj, ...inputOptions }} />
-		);
-	}) as InputElementRenderFunction, [classNameProps, inputOptions]);
+	const renderInput = useCallback((registerObj => (
+		<input {...{ ...classNameProps, ...registerObj, ...inputOptions }} />
+	)) as InputElementRenderFunction, [classNameProps, inputOptions]);
 
 	return (
 		<BaseInput {...{ renderInput, name, errors, ...remainingProps }} />
