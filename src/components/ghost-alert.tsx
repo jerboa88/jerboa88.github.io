@@ -10,7 +10,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck, faCircleExclamation, faCircleInfo, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { AlertType, PropsWithClassName } from '../common/types';
 import { FADE_IN_ANIMATION_PROPS } from '../common/constants';
+import { getClassNameProps, getOrDefault } from '../common/utilities';
 
+
+// Types
 
 interface GhostAlertPropsInterface extends PropsWithClassName {
 	type?: AlertType;
@@ -18,25 +21,35 @@ interface GhostAlertPropsInterface extends PropsWithClassName {
 	show?: boolean;
 }
 
-export default function GhostAlert({ className = '', type, text, show = true }: GhostAlertPropsInterface) {
-	let typeStyles = 'alert-info text-info';
-	let icon = faCircleInfo;
 
-	if (type === AlertType.Success) {
-		typeStyles = 'alert-success text-success';
-		icon = faCircleCheck;
-	} else if (type === AlertType.Warning) {
-		typeStyles = 'alert-warning text-warning';
-		icon = faTriangleExclamation;
-	} else if (type === AlertType.Error) {
-		typeStyles = 'alert-error text-error';
-		icon = faCircleExclamation;
-	}
+// Constants
+
+const ALERT_TYPE_STYLES = {
+	[AlertType.Info]: 'alert-info text-info',
+	[AlertType.Success]: 'alert-success text-success',
+	[AlertType.Warning]: 'alert-warning text-warning',
+	[AlertType.Error]: 'alert-error text-error',
+}
+const ALERT_TYPE_ICONS = {
+	[AlertType.Info]: faCircleInfo,
+	[AlertType.Success]: faCircleCheck,
+	[AlertType.Warning]: faTriangleExclamation,
+	[AlertType.Error]: faCircleExclamation,
+}
+
+
+export default function GhostAlert({ className = '', type, text, show = true }: GhostAlertPropsInterface) {
+	const classNameProps = getClassNameProps(
+		'flex flex-row p-0 pl-1 bg-transparent border-none alert w-fit',
+		getOrDefault(ALERT_TYPE_STYLES, type, ALERT_TYPE_STYLES[AlertType.Info]),	// Styles per alert type
+		className,
+	);
+	const icon = getOrDefault(ALERT_TYPE_ICONS, type, ALERT_TYPE_ICONS[AlertType.Info]);
 
 	return (
 		<AnimatePresence>
 			{show && (
-				<motion.div key={type} {...FADE_IN_ANIMATION_PROPS} role="alert" className={`flex flex-row p-0 pl-1 bg-transparent border-none alert w-fit ${typeStyles} ${className}`}>
+				<motion.div key={type} role="alert" {...FADE_IN_ANIMATION_PROPS} {...classNameProps}>
 					<FontAwesomeIcon icon={icon} />
 					<span>
 						{text}
