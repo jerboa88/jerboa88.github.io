@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { ProjectInfoInterface, PropsWithClassName } from '../common/types';
+import { getClassNameProps } from '../common/utilities';
 import ProjectCard from '../components/project-card';
 
 
@@ -14,10 +15,17 @@ interface ProjectCardGalleryPropsInterface extends PropsWithClassName {
 }
 
 export default function ProjectCardGallery({ className = '', projects }: ProjectCardGalleryPropsInterface) {
+	const classNameProps = getClassNameProps(
+		'grid grid-flow-row-dense flex-1 w-full gap-10 grid-cols-1 xl:grid-cols-2',
+		className,
+	);
+
 	return (
-		<div className={`grid grid-flow-row-dense flex-1 w-full gap-10 grid-cols-1 xl:grid-cols-2 ${className}`}>
+		<div {...classNameProps}>
 			{
-				projects.map(repo => <ProjectCard key={repo.slug} repo={repo}></ProjectCard>)
+				projects.map(repo => (
+					<ProjectCard key={repo.slug} repo={repo} />
+				))
 			}
 		</div>
 	);
