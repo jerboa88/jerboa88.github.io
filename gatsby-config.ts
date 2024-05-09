@@ -42,7 +42,7 @@ const config: GatsbyConfig = {
 			options: {
 				postCssPlugins: [
 					require('tailwindcss')(tailwindConfig),
-					require('autoprefixer')
+					require('autoprefixer'),
 				],
 			},
 		},
@@ -51,12 +51,12 @@ const config: GatsbyConfig = {
 			options: {
 				// Generate sitemaps at the root of the site
 				output: '/',
-				serialize: ({ path }: { path: string }) => {
-					return {
+				serialize: ({ path }: { path: string }) => (
+					{
 						url: path,
-						changefreq: 'monthly'
+						changefreq: 'monthly',
 					}
-				},
+				)
 			}
 		},
 		{
@@ -67,7 +67,7 @@ const config: GatsbyConfig = {
 				policy: [
 					{
 						userAgent: '*',
-						allow: '/'
+						allow: '/',
 					}
 				]
 			}

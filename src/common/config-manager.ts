@@ -64,13 +64,11 @@ export default class ConfigManager {
 
 	// Returns a list of jobs with formatted date objects
 	getJobs(): RoleInterface[] {
-		return jobsConfig.map(job => {
-			return {
-				...job,
-				startDate: new Date(job.startDate),
-				endDate: new Date(job.endDate),
-			};
-		});
+		return jobsConfig.map(job => ({
+			...job,
+			startDate: new Date(job.startDate),
+			endDate: new Date(job.endDate),
+		}));
 	}
 
 	// Returns a daisyUI theme given its name

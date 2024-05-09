@@ -7,23 +7,20 @@
 import React, { PropsWithChildren } from 'react';
 import { Link } from 'gatsby';
 import { LinkInterface, PropsWithClassName } from '../../common/types';
+import { getClassNameProps } from '../../common/utilities';
 
 
 interface LinkWrapperProps extends LinkInterface, PropsWithClassName, PropsWithChildren { }
 
 export default function LinkWrapper({ className = '', to, isInternal = false, rel = '', children }: LinkWrapperProps) {
-	const styles = `contents whitespace-nowrap ${className}`;
+	const classNameProps = getClassNameProps('whitespace-nowrap', className);
 
-	if (isInternal) {
-		return (
-			<Link to={to} className={styles}>
-				{children}
-			</Link>
-		);
-	}
-
-	return (
-		<a className={styles} href={to} target="_blank" rel={`noopener external ${rel}`}>
+	return isInternal ? (
+		<Link to={to} {...classNameProps}>
+			{children}
+		</Link>
+	) : (
+		<a href={to} target="_blank" rel={`noopener external ${rel}`} {...classNameProps}>
 			{children}
 		</a>
 	);

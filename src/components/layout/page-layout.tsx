@@ -8,6 +8,7 @@ import React, { PropsWithChildren, StrictMode } from 'react';
 import { MotionConfig } from 'framer-motion';
 import { SiteMetadataInterface, SectionInterface, PropsWithClassName } from '../../common/types';
 import { SPRING_TRANSITION_PROPS } from '../../common/constants';
+import { getClassNameProps } from '../../common/utilities';
 import Header from './header';
 import Footer from './footer';
 import ParticlesBackground from './particles-background';
@@ -33,6 +34,11 @@ const BG_GRADIENT_PROPS = {
 
 
 export default function PageLayout({ className = '', siteMetadata, titleLayoutId, isTitleExpanded = false, sections = [], children }: PageLayoutPropsInterface) {
+	const classNameProps = getClassNameProps(
+		'flex-col gap-32 justify-between items-center mx-auto text-base min-h-svh scroll-smooth selection:bg-primary selection:text-primary-content',
+		className,
+	);
+
 	// const lsKeyForTheme = 'is-dark-theme';
 	// const lsKeyForMotion = 'is-motion-allowed';
 	// const lsKeyForAnalytics = `ga-disable-${props.siteMetadata.trackingId}`;
@@ -104,7 +110,7 @@ export default function PageLayout({ className = '', siteMetadata, titleLayoutId
 		<StrictMode>
 			<MotionConfig {...SPRING_TRANSITION_PROPS} reducedMotion="user">
 				{/* Page body */}
-				<div className={`flex-col gap-32 justify-between items-center mx-auto text-base min-h-svh scroll-smooth selection:bg-primary selection:text-primary-content ${className}`} {...BG_GRADIENT_PROPS}>
+				<div {...BG_GRADIENT_PROPS} {...classNameProps}>
 					<ParticlesBackground />
 					<Header {...{ siteMetadata, titleLayoutId, isTitleExpanded, sections }} />
 					{children}

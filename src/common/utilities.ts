@@ -5,6 +5,7 @@
 
 
 import defaultProjectImage from '../images/default-tile-bg.png'
+import { PropsWithClassName } from './types';
 
 
 // Status code information is adapted from https://github.com/prettymuchbryce/http-status-codes/blob/master/codes.json as is licensed under the MIT License
@@ -68,12 +69,6 @@ const statusCodeMessages = {
 } as const;
 
 
-// Get a value from an object or return a default value if the key does not exist
-export function getOrDefault<T, K extends keyof T, D extends any>(object: T, key: K | number | string, defaultValue: D): T[K] | D {
-	return object[key as K] ?? defaultValue as D;
-}
-
-
 // Check if the window object exists
 // This will return false if the method is called from a server-side environment
 export function doesWindowExist(): boolean {
@@ -87,6 +82,12 @@ export function doesDeviceSupportHover() {
 }
 
 
+// Get a value from an object or return a default value if the key does not exist
+export function getOrDefault<T, K extends keyof T, D extends any>(object: T, key: K | number | string | undefined, defaultValue: D): T[K] | D {
+	return object[key as K] ?? defaultValue as D;
+}
+
+
 export function getProjectImage(imageUrl: string) {
 	return imageUrl ? imageUrl : defaultProjectImage
 }
@@ -95,6 +96,14 @@ export function getProjectImage(imageUrl: string) {
 // Get the description associated with a given status code
 export function getStatusCodeDescription(statusCode: number): string {
 	return getOrDefault(statusCodeMessages, statusCode, 'Unknown Status Code');
+}
+
+
+// Combine multiple class names into a single string
+export function getClassNameProps(...classNames: (string | false | undefined)[]): PropsWithClassName {
+	return {
+		className: classNames.filter(className => className).join(' '),
+	};
 }
 
 

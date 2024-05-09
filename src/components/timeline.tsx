@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { RoleInterface } from '../common/types';
+import { getClassNameProps } from '../common/utilities';
 import TimelineEntry from './timeline-entry';
 
 
@@ -19,13 +20,21 @@ export default function Timeline({ roles }: TimelinePropsInterface) {
 	return (
 		<ul className="timeline timeline-vertical timeline-snap-icon max-lg:timeline-compact">
 			{
-				roles.map((entry, index) => (
-					<li key={index}>
-						<hr className={`mx-10 bg-primary rounded-b-full ${index === 0 ? 'rounded-t-full' : ''}`} />
-						<TimelineEntry role={entry} />
-						<hr className={`mx-10 bg-primary rounded-t-full ${index === lastIndex ? 'rounded-b-full' : ''}`} />
-					</li>
-				))
+				roles.map((entry, index) => {
+					const hrStyles = getClassNameProps(
+						'mx-10 bg-primary rounded-b-full',
+						index === 0 && 'rounded-t-full',	// hr styles for the first list item
+						index === lastIndex && 'rounded-b-full',	// hr styles for the last list item
+					);
+
+					return (
+						<li key={index}>
+							<hr {...hrStyles} />
+							<TimelineEntry role={entry} />
+							<hr {...hrStyles} />
+						</li>
+					)
+				})
 			}
 		</ul>
 	);

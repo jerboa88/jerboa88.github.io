@@ -11,6 +11,7 @@ import { IOptions, RecursivePartial } from '@tsparticles/engine';
 import { loadBasic } from '@tsparticles/basic';
 import { loadSquareShape } from '@tsparticles/shape-square';
 import ConfigManager from '../../common/config-manager';
+import { getClassNameProps } from '../../common/utilities';
 
 
 // Constants
@@ -21,6 +22,12 @@ const { neutral } = new ConfigManager().getTheme('dark');
 
 function ParticlesBackground() {
 	const shouldReduceMotion = useReducedMotion();
+	const [init, setInit] = useState(false);
+
+	const classNameProps = getClassNameProps(
+		'fixed top-0 left-0 size-full mix-blend-overlay transition-opacity ease-out duration-[2s]',
+		init ? 'opacity-100' : 'opacity-0'	// Hide until loaded
+	);
 	const tsParticlesConfig = {
 		fpsLimit: 30,
 		detectRetina: true,
@@ -69,8 +76,6 @@ function ParticlesBackground() {
 		},
 	} as RecursivePartial<IOptions>;
 
-	const [init, setInit] = useState(false);
-
 
 	useEffect(() => {
 		initParticlesEngine(async engine => {
@@ -85,7 +90,7 @@ function ParticlesBackground() {
 
 
 	return (
-		<Particles options={tsParticlesConfig} className={`fixed top-0 left-0 size-full mix-blend-overlay transition-opacity ease-out duration-[2s] ${init ? 'opacity-100' : 'opacity-0'}`} />
+		<Particles options={tsParticlesConfig} {...classNameProps} />
 	);
 }
 
