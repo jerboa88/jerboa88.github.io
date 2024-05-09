@@ -36,7 +36,7 @@ export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
 
 	return (
 		<LinkWrapper to={repo.githubUrl}>
-			<Card>
+			<Card outerClassName="size-full">
 				<div className="flex flex-col justify-between items-start p-6 align-middle size-full text-ellipsis group">
 					<div className="flex flex-row justify-between items-center pr-2 w-full">
 						<Pill text={repo.typeName} className={projectTypeColor} />
