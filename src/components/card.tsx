@@ -7,7 +7,7 @@
 import React, { PropsWithChildren } from 'react';
 import { AnimationProps, motion, useMotionTemplate, useReducedMotion, useSpring, useTransform } from 'framer-motion';
 import { SPRING_TRANSITION_PROPS } from '../common/constants';
-import { clamp, doesDeviceSupportHover } from '../common/utilities';
+import { clamp, doesDeviceSupportHover, getClassNameProps } from '../common/utilities';
 
 
 // Types
@@ -67,6 +67,8 @@ function getBackgroundScale(xCoords: number, zCoords: number) {
 
 
 export default function Card({ outerClassName = '', middleClassName = '', innerClassName = '', disabled = false, children }: CardPropsInterface) {
+	// Hooks
+
 	const shouldReduceMotion = useReducedMotion();
 
 	// Motion values that track the mouse position within the card
@@ -76,24 +78,32 @@ export default function Card({ outerClassName = '', middleClassName = '', innerC
 	const mouseZCoords = useSpring(MOUSE_Z_COORDS_DEFAULT, MOTION_VALUE_TRANSITION);
 
 	// Calculate the background gradient origin based on the mouse position
-	const bgOriginXPercentage = useTransform(mouseXCoords, [MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX], [0, 100]);
-	const bgOriginYPercentage = useTransform(mouseYCoords, [MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX], [-25, 75]);
+	const bgOriginXPercent = useTransform(mouseXCoords, [MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX], [0, 100]);
+	const bgOriginYPercent = useTransform(mouseYCoords, [MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX], [-25, 75]);
 
 	// Calculate the background gradient scale based on the mouse position
-	const bgXScale = useTransform(mouseXCoords, value => getBackgroundScale(value, mouseZCoords.get()));
-	const bgYScale = useTransform(mouseYCoords, value => getBackgroundScale(value, mouseZCoords.get()));
-
+	const bgXScale = useTransform(mouseXCoords, value => (
+		getBackgroundScale(value, mouseZCoords.get())
+	));
+	const bgYScale = useTransform(mouseYCoords, value => (
+		getBackgroundScale(value, mouseZCoords.get())
+	));
 
 	// Calculate the card rotation based on the mouse position
 	// The mouse position is first clamped to prevent extreme rotation values, then we calculate the tangent
-	const cardXRotationDegrees = useTransform(mouseYCoords, value => Math.tan(clamp(value, MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX)));
-	const cardYRotationDegrees = useTransform(mouseXCoords, value => Math.tan(-clamp(value, MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX)));
+	const xRotationDegs = useTransform(mouseYCoords, value => (
+		Math.tan(clamp(value, MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX))
+	));
+	const yRotationDegs = useTransform(mouseXCoords, value => (
+		Math.tan(-clamp(value, MOUSE_XY_COORDS_MIN, MOUSE_XY_COORDS_MAX))
+	));
 
 	// Generate the background gradient string based on the mouse position
-	const backgroundGradientString = useMotionTemplate`radial-gradient(${bgXScale}% ${bgYScale}% at ${bgOriginXPercentage}% ${bgOriginYPercentage}%,oklch(var(--n)/.03),oklch(var(--b3)/.03))`;
+	const bgGradientString = useMotionTemplate`radial-gradient(${bgXScale}% ${bgYScale}% at ${bgOriginXPercent}% ${bgOriginYPercent}%,oklch(var(--n)/.03),oklch(var(--b3)/.03))`;
 
 
 	// Event handlers
+
 	let handleMouseMove: ((event: React.MouseEvent<HTMLDivElement>) => void) | undefined = undefined;
 	let handleMouseEnter: ((event: React.MouseEvent<HTMLDivElement>) => void) | undefined = undefined;
 	let handleMouseLeave: ((event: React.MouseEvent<HTMLDivElement>) => void) | undefined = undefined;
@@ -123,13 +133,37 @@ export default function Card({ outerClassName = '', middleClassName = '', innerC
 	}
 
 
+	// Vars
+
+	const outerEventHandlerProps = {
+		onMouseMove: handleMouseMove,
+		onMouseEnter: handleMouseEnter,
+		onMouseLeave: handleMouseLeave,
+		onMouseDown: handleMouseDown,
+	}
+	const middleClassNameProps = getClassNameProps(
+		'overflow-hidden size-full shadow-md !bg-clip-content rounded-2xl backdrop-blur-md',
+		middleClassName,
+	);
+	const middleStyleProps = {
+		style: {
+			transformOrigin: 'center',
+			background: bgGradientString,
+			rotateX: xRotationDegs,
+			rotateY: yRotationDegs,
+		},
+	};
+	const middleHoverProps = disabled || shouldReduceMotion ? {} : HOVER_PROPS;
+	const innerClassNameProps = getClassNameProps(
+		'rounded-2xl border-2 mix-blend-overlay size-full border-base-content/5',
+		innerClassName,
+	);
+
+
 	return (
-		<div onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseDown={handleMouseDown} style={{ perspective: 500 }} className={outerClassName}>
-			<motion.div
-				style={{ transformOrigin: 'center', background: backgroundGradientString, rotateX: cardXRotationDegrees, rotateY: cardYRotationDegrees }}
-				{...(disabled || shouldReduceMotion ? {} : HOVER_PROPS)}
-				className={`overflow-hidden size-full shadow-md !bg-clip-content rounded-2xl backdrop-blur-md ${middleClassName}`}>
-				<div className={`rounded-2xl border-2 mix-blend-overlay size-full border-base-content/5 ${innerClassName}`}>
+		<div style={{ perspective: 500 }} className={outerClassName} {...outerEventHandlerProps}>
+			<motion.div {...{ ...middleStyleProps, ...middleHoverProps, ...middleClassNameProps }}>
+				<div {...innerClassNameProps}>
 					{children}
 				</div>
 			</motion.div>
