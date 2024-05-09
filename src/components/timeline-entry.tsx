@@ -8,6 +8,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { RoleInterface } from '../common/types';
+import { getClassNameProps } from '../common/utilities';
 import ConfigManager from '../common/config-manager';
 import SubsectionHeading from './text/subsection-heading';
 import DateRange from './text/date-range';
@@ -15,14 +16,13 @@ import Pill from './pill';
 import Card from './card';
 
 
-
 interface TimelineEntryPropsInterface {
 	role: RoleInterface;
 }
 
 export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
-	const configManager = new ConfigManager();
-	const roleTypeColor = configManager.getRoleTypeColor(role.type);
+	const roleTypeColor = new ConfigManager().getRoleTypeColor(role.type);
+	const pillClassNameProps = getClassNameProps('capitalize', roleTypeColor);
 
 	return (
 		<>
@@ -33,7 +33,7 @@ export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
 						{role.location}
 					</span>
 				</div>
-				<Pill text={role.type} className={`capitalize ${roleTypeColor}`} />
+				<Pill text={role.type} {...pillClassNameProps} />
 			</div>
 			<div className="timeline-middle">
 				<FontAwesomeIcon icon={faCircleCheck} />
@@ -55,7 +55,11 @@ export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
 					</div>
 					<ul className="list-[circle] m-4">
 						{
-							role.tasks.map((task, index) => <li key={index} className="my-2">{task}</li>)
+							role.tasks.map((task, index) => (
+								<li key={index} className="my-2">
+									{task}
+								</li>
+							))
 						}
 					</ul>
 				</div>
