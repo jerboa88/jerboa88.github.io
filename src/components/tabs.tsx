@@ -7,6 +7,7 @@
 import React from 'react';
 import { motion, useInView } from 'framer-motion';
 import { SectionInterface } from '../common/types';
+import { getClassNameProps } from '../common/utilities';
 import GhostButtonLink from './links/ghost-button-link';
 
 
@@ -27,18 +28,20 @@ export default function Tabs({ sections, hideIndicator = false }: TabsPropsInter
 		<motion.nav layout="position" className="flex flex-row justify-center tabs">
 			{
 				sections && sections.map(({ id, title }, i) => {
-					let buttonActiveClass = '';
-					let indicatorElement = <div className="w-4 h-1 bg-transparent rounded-full" />;
-
-					if (currentSectionIndex === i) {
-						buttonActiveClass = 'tab-active';
-						indicatorElement = <motion.div className="w-4 h-1 rounded-full bg-primary" layoutId="active-tab-indicator" />;
-					}
+					const ghostButtonLinkClassNameProps = getClassNameProps(
+						'tab !py-0',
+						currentSectionIndex === i && 'tab-active',
+					);
+					const indicatorElement = (currentSectionIndex === i) ? (
+						<motion.div className="w-4 h-1 rounded-full bg-primary" layoutId="active-tab-indicator" />
+					) : (
+						<div className="w-4 h-1 bg-transparent rounded-full" />
+					);
 
 					return (
 						<div key={title} className="flex flex-col items-center">
 							<motion.div layout="position">
-								<GhostButtonLink className={`tab !py-0 ${buttonActiveClass}`} text={title} to={`#${id}`} isInternal />
+								<GhostButtonLink text={title} to={`#${id}`} {...ghostButtonLinkClassNameProps} isInternal />
 							</motion.div>
 							{indicatorElement}
 						</div>
