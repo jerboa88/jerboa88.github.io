@@ -10,13 +10,13 @@ import { LayoutGroup, motion } from 'framer-motion';
 import Botpoison from '@botpoison/browser';
 import { faCircleNotch, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { PropsWithClassName, InputValidationOptions, AlertType } from '../../common/types';
-import { getOrDefault, getStatusCodeDescription } from '../../common/utilities';
+import { getClassNameProps, getOrDefault, getStatusCodeDescription } from '../../common/utilities';
+import ConfigManager from '../../common/config-manager';
 import TextInput from './text-input';
 import MultilineTextInput from './multiline-text-input';
 import SolidButton from './solid-button';
 import GhostAlert from '../ghost-alert';
 import Checkbox from './checkbox';
-import ConfigManager from '../../common/config-manager';
 
 
 // Types
@@ -156,6 +156,11 @@ async function computeBotPoisonSolution() {
 
 
 export default function ContactForm({ className = '' }: PropsWithClassName) {
+	const formClassNameProps = getClassNameProps(
+		'flex flex-col gap-4 p-0 w-full max-w-xl sm:p-8',
+		className,
+	);
+
 	const [formState, setFormState] = React.useState<FormState>(FormState.Idle);
 	const [botpoisonSolution, setBotpoisonSolution] = React.useState<Promise<string>>();
 
@@ -243,13 +248,13 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 
 
 	return (
-		<motion.form layout method="post" onSubmit={handleSubmit(onSubmit)} className={`flex flex-col gap-4 p-0 w-full max-w-xl sm:p-8 ${className}`}>
+		<motion.form method="post" onSubmit={handleSubmit(onSubmit)} {...formClassNameProps} layout>
 			<LayoutGroup>
 				<TextInput {...{ register, errors, ...INPUT_PROPS.name }} validationOptions={validationOptions.name} />
 				<TextInput {...{ register, errors, ...INPUT_PROPS.email }} validationOptions={validationOptions.email} />
 				<MultilineTextInput {...{ register, errors, ...INPUT_PROPS.message }} validationOptions={validationOptions.message} />
 				<Checkbox {...{ register, errors, ...INPUT_PROPS._gotcha }} />
-				<SolidButton type="submit" cardClassName="mt-2" className="w-full" {...submitButtonProps} layout="position" layoutRoot />
+				<SolidButton type="submit" layout="position" cardClassName="mt-2" className="w-full" {...submitButtonProps} layoutRoot />
 				<GhostAlert {...alertProps} />
 			</LayoutGroup>
 		</motion.form>
