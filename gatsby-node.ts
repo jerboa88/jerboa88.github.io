@@ -1,5 +1,5 @@
 import path from 'path';
-import type { GatsbyNode } from 'gatsby';
+import type { CreatePagesArgs, GatsbyNode } from 'gatsby';
 import { createOpenGraphImage } from 'gatsby-plugin-dynamic-open-graph-images';
 import { PinnedRepoResponseInterface } from './src/common/types';
 import { PROJECTS_DIR, OG_IMAGE_DIR } from './src/common/constants';
@@ -28,22 +28,8 @@ interface GenerateOpenGraphImageOptions {
 
 // Functions
 
-// Generate an Open Graph image for a page
-function generateOpenGraphImage(createPage, { id, component, context }: GenerateOpenGraphImageOptions) {
-	console.debug(`Generating Open Graph image for ${id}`);
-
-	createOpenGraphImage(createPage, {
-		outputDir: OG_IMAGE_DIR,
-		component: component,
-		context: {
-			id: id,
-			...context,
-		},
-	});
-}
-
-
-export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
+// Fetch pinned repos from a GitHub profile
+async function fetchPinnedRepos(graphql: CreatePagesArgs['graphql']) {
 	const response = await graphql(`
 		query PinnedRepoQuery {
 			github {
@@ -100,16 +86,44 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 	}
 
 	const data = response.data as Queries.PinnedRepoQueryQuery;
-	const pinnedItems = data.github.user?.pinnedItems.nodes;
+	const pinnedRepos = data.github.user?.pinnedItems.nodes;
 
-	if (!pinnedItems) {
+	if (!pinnedRepos) {
 		throw new Error('No pinned repos found');
 	}
 
-	const pinnedRepos = pinnedItems.map(responseData => {
-		if (!responseData || Object.keys(responseData).length === 0) {
-			throw new Error('Pinned repo does not contain any data');
-		}
+	return pinnedRepos;
+}
+
+
+// Assert that the response data is non-empty before we start processing it
+function assertResponseDataIsNonEmpty(responseData) {
+	if (!responseData || Object.keys(responseData).length === 0) {
+		throw new Error('Pinned repo does not contain any data');
+	}
+}
+
+
+// Generate an Open Graph image for a page
+function generateOpenGraphImage(createPage: CreatePagesArgs['actions']['createPage'], { id, component, context }: GenerateOpenGraphImageOptions) {
+	console.debug(`Generating Open Graph image for ${id}`);
+
+	createOpenGraphImage(createPage, {
+		outputDir: OG_IMAGE_DIR,
+		component: component,
+		context: {
+			id: id,
+			...context,
+		},
+	});
+}
+
+
+// Entry point
+export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
+	const pinnedReposResponseData = await fetchPinnedRepos(graphql);
+	const pinnedRepos = pinnedReposResponseData.map(responseData => {
+		assertResponseDataIsNonEmpty(responseData);
 
 		const projectInfo = ResponseMapper.map(ResponseParser.parse(responseData as PinnedRepoResponseInterface));
 
@@ -138,6 +152,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 		}
 	});
 
+	// Create Open Graph images
 	generateOpenGraphImage(createPage, {
 		id: 'index',
 		component: INDEX_OG_IMAGE_TEMPLATE,
