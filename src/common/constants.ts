@@ -18,6 +18,10 @@ const FADE_TRANSITION_VARIANTS = {
 } as const;
 
 
+export const PROJECTS_DIR = 'projects';
+export const OG_IMAGE_DIR = 'og-image';
+
+
 // Props for enabling a fade-in animation for a Framer Motion component
 export const FADE_IN_ANIMATION_PROPS = {
 	initial: FADE_TRANSITION_VARIANTS.hidden,
