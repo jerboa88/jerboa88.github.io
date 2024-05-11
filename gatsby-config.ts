@@ -6,8 +6,9 @@
 
 import type { GatsbyConfig } from 'gatsby';
 import dotenv from 'dotenv';
-import ConfigManager from './src/common/config-manager';
 import * as tailwindConfig from './tailwind.config';
+import ConfigManager from './src/common/config-manager';
+import { OG_IMAGE_DIR } from './src/common/constants';
 
 
 const configManager = new ConfigManager();
@@ -37,6 +38,7 @@ const config: GatsbyConfig = {
 		'gatsby-plugin-sharp',
 		// Required by gatsby-plugin-image for dynamic images
 		'gatsby-transformer-sharp',
+		'gatsby-plugin-dynamic-open-graph-images',
 		{
 			resolve: 'gatsby-plugin-postcss',
 			options: {
@@ -49,14 +51,14 @@ const config: GatsbyConfig = {
 		{
 			resolve: 'gatsby-plugin-sitemap',
 			options: {
-				// Generate sitemaps at the root of the site
+				// The sitemap index will be generated at /sitemap-index.xml
 				output: '/',
-				serialize: ({ path }: { path: string }) => (
-					{
-						url: path,
-						changefreq: 'monthly',
-					}
-				)
+				serialize: ({ path }: { path: string }) => ({
+					url: path,
+					changefreq: 'monthly',
+				}),
+				// Prevent temporary components rendered by gatsby-plugin-open-graph-images from being included in the sitemap
+				excludes: [`/${OG_IMAGE_DIR}/*`],
 			}
 		},
 		{
@@ -99,7 +101,7 @@ const config: GatsbyConfig = {
 			resolve: 'gatsby-source-filesystem',
 			options: {
 				name: 'content',
-				path: `${__dirname}/src/content`,
+				path: `${__dirname}/src/content/`,
 			},
 		},
 		{
@@ -125,7 +127,7 @@ const config: GatsbyConfig = {
 					Authorization: `Bearer ${process.env.GH_TOKEN}`,
 				},
 			},
-		}
+		},
 	]
 };
 
