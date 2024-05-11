@@ -1,18 +1,39 @@
 import path from 'path';
 import type { GatsbyNode } from 'gatsby';
+import { createOpenGraphImage } from 'gatsby-plugin-dynamic-open-graph-images';
+import { PinnedRepoResponseInterface } from './src/common/types';
+import { PROJECTS_DIR, OG_IMAGE_DIR } from './src/common/constants';
 import ResponseParser from './src/node/response-parser';
 import ResponseMapper from './src/node/response-mapper';
-import { PinnedRepoResponseInterface } from './src/common/types';
 
 
-const projectsPagePath = 'projects';
-const indexPageTemplate = path.resolve('./src/templates/index-page.tsx');
-const projectPageTemplate = path.resolve('./src/templates/project-page.tsx');
+// Constants
+
+const INDEX_PAGE_TEMPLATE = path.resolve('./src/templates/page/index.tsx');
+const PROJECT_PAGE_TEMPLATE = path.resolve('./src/templates/page/project.tsx');
+
+const INDEX_OG_IMAGE_TEMPLATE = path.resolve('./src/templates/og-image/index.tsx');
+const PROJECT_OG_IMAGE_TEMPLATE = path.resolve('./src/templates/og-image/project.tsx');
+const OTHER_OG_IMAGE_TEMPLATE = path.resolve('./src/templates/og-image/other.tsx');
 
 
-// Exports
+// Functions
 
-export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql }) => {
+// Generate an Open Graph image for a page
+function generateOpenGraphImage(createPage, id: string, component: string) {
+	console.debug(`Generating Open Graph image for ${id}`);
+
+	createOpenGraphImage(createPage, {
+		outputDir: OG_IMAGE_DIR,
+		component: component,
+		context: {
+			id: id,
+		},
+	});
+}
+
+
+export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
 	const response = await graphql(`
 		query PinnedRepoQuery {
 			github {
@@ -63,7 +84,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql 
 	`);
 
 	if (!response || 'errors' in response) {
-		throw new Error('The response from GitHub contains errors');
+		console.warn('response', response);
+
+		throw new Error('The response from GitHub contains errors', response?.errors);
 	}
 
 	const data = response.data as Queries.PinnedRepoQueryQuery;
@@ -81,21 +104,27 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions, graphql 
 		const projectInfo = ResponseMapper.map(ResponseParser.parse(responseData as PinnedRepoResponseInterface));
 
 		// Create project pages
-		actions.createPage({
-			path: `/${projectsPagePath}/${projectInfo.slug}`,
-			component: projectPageTemplate,
-			context: projectInfo
+		createPage({
+			path: path.join('/', PROJECTS_DIR, projectInfo.slug),
+			component: PROJECT_PAGE_TEMPLATE,
+			context: projectInfo,
 		});
+
+		generateOpenGraphImage(createPage, projectInfo.slug, PROJECT_OG_IMAGE_TEMPLATE);
 
 		return projectInfo;
 	});
 
 	// Create landing page
-	actions.createPage({
+	createPage({
 		path: '/',
-		component: indexPageTemplate,
+		component: INDEX_PAGE_TEMPLATE,
 		context: {
-			pinnedRepos: pinnedRepos
+			pinnedRepos: pinnedRepos,
 		}
 	});
-};
+
+	generateOpenGraphImage(createPage, 'index', INDEX_OG_IMAGE_TEMPLATE);
+	generateOpenGraphImage(createPage, 'privacy-policy', OTHER_OG_IMAGE_TEMPLATE);
+	generateOpenGraphImage(createPage, '404', OTHER_OG_IMAGE_TEMPLATE);
+}
