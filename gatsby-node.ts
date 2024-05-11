@@ -17,10 +17,19 @@ const PROJECT_OG_IMAGE_TEMPLATE = path.resolve('./src/templates/og-image/project
 const OTHER_OG_IMAGE_TEMPLATE = path.resolve('./src/templates/og-image/other.tsx');
 
 
+// Types
+
+interface GenerateOpenGraphImageOptions {
+	id: string;
+	component: string;
+	context?: Object;
+}
+
+
 // Functions
 
 // Generate an Open Graph image for a page
-function generateOpenGraphImage(createPage, id: string, component: string) {
+function generateOpenGraphImage(createPage, { id, component, context }: GenerateOpenGraphImageOptions) {
 	console.debug(`Generating Open Graph image for ${id}`);
 
 	createOpenGraphImage(createPage, {
@@ -28,6 +37,7 @@ function generateOpenGraphImage(createPage, id: string, component: string) {
 		component: component,
 		context: {
 			id: id,
+			...context,
 		},
 	});
 }
@@ -110,7 +120,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 			context: projectInfo,
 		});
 
-		generateOpenGraphImage(createPage, projectInfo.slug, PROJECT_OG_IMAGE_TEMPLATE);
+		generateOpenGraphImage(createPage, {
+			id: projectInfo.slug,
+			component: PROJECT_OG_IMAGE_TEMPLATE,
+			context: projectInfo,
+		});
 
 		return projectInfo;
 	});
@@ -124,7 +138,22 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 		}
 	});
 
-	generateOpenGraphImage(createPage, 'index', INDEX_OG_IMAGE_TEMPLATE);
-	generateOpenGraphImage(createPage, 'privacy-policy', OTHER_OG_IMAGE_TEMPLATE);
-	generateOpenGraphImage(createPage, '404', OTHER_OG_IMAGE_TEMPLATE);
+	generateOpenGraphImage(createPage, {
+		id: 'index',
+		component: INDEX_OG_IMAGE_TEMPLATE,
+	});
+	generateOpenGraphImage(createPage, {
+		id: 'privacy-policy',
+		component: OTHER_OG_IMAGE_TEMPLATE,
+		context: {
+			pageName: 'Privacy Policy',
+		}
+	});
+	generateOpenGraphImage(createPage, {
+		id: '404',
+		component: OTHER_OG_IMAGE_TEMPLATE,
+		context: {
+			pageName: '404',
+		}
+	});
 }
