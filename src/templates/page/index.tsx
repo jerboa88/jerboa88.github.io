@@ -8,18 +8,18 @@ import React, { useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import { motion, useInView } from 'framer-motion';
 import { faAngleDown, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import ConfigManager from '../common/config-manager';
-import { ProjectInfoInterface, SectionInterface } from '../common/types';
-import Section from '../components/layout/section';
-import PageLayout from '../components/layout/page-layout';
-import SEO from '../components/layout/seo';
-import Heading from '../components/text/heading';
-import { Article } from '../components/text/article';
-import GhostButtonLink from '../components/links/ghost-button-link';
-import ContactForm from '../components/input/contact-form';
-import ProjectCardGallery from '../components/project-card-gallery';
-import Timeline from '../components/timeline';
-import Tooltip from '../components/tooltip';
+import ConfigManager from '../../common/config-manager';
+import { ProjectInfoInterface, SectionInterface } from '../../common/types';
+import Section from '../../components/layout/section';
+import PageLayout from '../../components/layout/page-layout';
+import SEO from '../../components/layout/seo';
+import Heading from '../../components/text/heading';
+import { Article } from '../../components/text/article';
+import GhostButtonLink from '../../components/links/ghost-button-link';
+import ContactForm from '../../components/input/contact-form';
+import ProjectCardGallery from '../../components/project-card-gallery';
+import Timeline from '../../components/timeline';
+import Tooltip from '../../components/tooltip';
 
 
 interface IndexPageTemplatePropsInterface {
@@ -100,7 +100,7 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 				</span>
 				<div className="flex fixed inset-x-0 bottom-0 flex-row justify-center mb-4">
 					<Tooltip text={`Go to ${sections[0].title} section`}>
-						<GhostButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={isTitleExpanded ? '':'opacity-0'} isInternal />
+						<GhostButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={isTitleExpanded ? '' : 'opacity-0'} isInternal />
 					</Tooltip>
 				</div>
 			</Section>
