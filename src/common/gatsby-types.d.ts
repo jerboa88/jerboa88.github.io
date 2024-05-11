@@ -10660,7 +10660,7 @@ type GITHUB_MaxFileSizeParametersInput = {
 
 /** Represents a member feature request notification */
 type GITHUB_MemberFeatureRequestNotification = GITHUB_Node & {
-  /** Represents member feature request body containing organization name and the number of feature requests */
+  /** Represents member feature request body containing entity name and the number of feature requests */
   readonly body: Scalars['String'];
   /** The Node ID of the MemberFeatureRequestNotification object */
   readonly id: Scalars['ID'];
