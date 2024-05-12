@@ -131,13 +131,17 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 		createPage({
 			path: path.join('/', PROJECTS_DIR, projectInfo.slug),
 			component: PROJECT_PAGE_TEMPLATE,
-			context: projectInfo,
+			context: {
+				repo: projectInfo,
+			}
 		});
 
 		generateOpenGraphImage(createPage, {
 			id: projectInfo.slug,
 			component: PROJECT_OG_IMAGE_TEMPLATE,
-			context: projectInfo,
+			context: {
+				repo: projectInfo,
+			}
 		});
 
 		return projectInfo;

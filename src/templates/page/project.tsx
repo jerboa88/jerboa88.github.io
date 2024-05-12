@@ -17,15 +17,17 @@ import InlineLink from '../../components/links/inline-link';
 
 
 interface ProjectPageTemplatePropsInterface {
-	pageContext: ProjectInfoInterface;
+	pageContext: {
+		repo: ProjectInfoInterface;
+	};
 }
 
-export default function ProjectPageTemplate({ pageContext }: ProjectPageTemplatePropsInterface) {
+export default function ProjectPageTemplate({ pageContext: { repo } }: ProjectPageTemplatePropsInterface) {
 	const configManager = new ConfigManager();
 	const siteMetadata = configManager.getMetadata();
 	const section = {
 		id: 'project',
-		title: pageContext.name,
+		title: repo.name,
 		ref: useRef(null),
 	} as SectionInterface;
 
@@ -35,33 +37,33 @@ export default function ProjectPageTemplate({ pageContext }: ProjectPageTemplate
 			<div></div>
 			<Section {...section}>
 				<Article>
-					<img src={getProjectImage(pageContext.imageUrl)} width="500" alt="TODO"></img>
+					<img src={getProjectImage(repo.imageUrl)} width="500" alt="TODO"></img>
 					<p>
-						{pageContext.shortDesc}
+						{repo.shortDesc}
 					</p>
 					<p>
-						{pageContext.typeName}
+						{repo.typeName}
 					</p>
 					<p>
-						{pageContext.typeColor}
+						{repo.typeColor}
 					</p>
-					<InlineLink to={pageContext.homepageUrl} text={pageContext.homepageUrl} />
+					<InlineLink to={repo.homepageUrl} text={repo.homepageUrl} />
 					<br />
-					<InlineLink to={pageContext.githubUrl} text={pageContext.githubUrl} />
+					<InlineLink to={repo.githubUrl} text={repo.githubUrl} />
 					<p>
-						{pageContext.stargazers}
+						{repo.stargazers}
 					</p>
 					<p>
-						{pageContext.updatedAt}
+						{repo.updatedAt}
 					</p>
 					<p>
-						{pageContext.license}
+						{repo.license}
 					</p>
 					<p>
-						{pageContext.name}
+						{repo.name}
 					</p>
 					<p>
-						{pageContext.longDesc}
+						{repo.longDesc}
 					</p>
 				</Article>
 			</Section>
@@ -92,6 +94,6 @@ export const Head = ({ location, pageContext }: HeadProps) => {
 	};
 
 	return (
-		<SEO pageMetadata={pageMetadata} />
+		<PageHead pageMetadata={pageMetadata} />
 	);
 }
