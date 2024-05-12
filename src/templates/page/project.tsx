@@ -10,7 +10,7 @@ import ConfigManager from '../../common/config-manager';
 import { ProjectInfoInterface, SectionInterface } from '../../common/types';
 import { getProjectImage } from '../../common/utilities';
 import PageLayout from '../../components/layout/page-layout';
-import SEO from '../../components/layout/seo';
+import PageHead from '../../components/seo/page-head';
 import Section from '../../components/layout/section';
 import { Article } from '../../components/text/article';
 import InlineLink from '../../components/links/inline-link';

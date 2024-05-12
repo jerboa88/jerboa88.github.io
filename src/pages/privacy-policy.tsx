@@ -11,7 +11,7 @@ import ConfigManager from '../common/config-manager';
 import { SectionInterface } from '../common/types';
 import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
-import SEO from '../components/layout/seo';
+import PageHead from '../components/seo/page-head';
 import SolidButtonLink from '../components/links/solid-button-link';
 import { Article } from '../components/text/article';
 
@@ -55,8 +55,7 @@ export default function PrivacyPolicyPage({ data }: PrivacyPolicyPageProps) {
 }
 
 export const Head = ({ location }: HeadProps) => {
-	const configManager = new ConfigManager();
-	const siteMetadata = configManager.getMetadata();
+	const siteMetadata = new ConfigManager().getMetadata();
 	const pageMetadata = {
 		title: `${pageTitle} | ${siteMetadata.shortTitle}`,
 		description: siteMetadata.description,
@@ -73,7 +72,7 @@ export const Head = ({ location }: HeadProps) => {
 	};
 
 	return (
-		<SEO pageMetadata={pageMetadata} />
+		<PageHead pageMetadata={pageMetadata} />
 	);
 }
 

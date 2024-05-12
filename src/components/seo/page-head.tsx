@@ -1,13 +1,14 @@
 /*
-	Custom head section for meta tags
-	---------------------------------
+	Custom head section for including meta tags on pages
+	----------------------------------------------------
 */
 
 
 import React from 'react';
 import ConfigManager from '../../common/config-manager';
 
-interface SEOPropsInterface {
+
+interface PageHeadPropsInterface {
 	pageMetadata: {
 		title: string;
 		description: string;
@@ -16,10 +17,10 @@ interface SEOPropsInterface {
 		ogImageUrl: string;
 		ogImageAltText: string;
 		structuredData: object;
-	}
+	};
 }
 
-export default function SEO({ pageMetadata }: SEOPropsInterface) {
+export default function PageHead({ pageMetadata }: PageHeadPropsInterface) {
 	// Grab site metadata from Gatsby config
 	const configManager = new ConfigManager();
 	const siteMetadata = configManager.getMetadata();

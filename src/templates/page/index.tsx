@@ -12,7 +12,7 @@ import ConfigManager from '../../common/config-manager';
 import { ProjectInfoInterface, SectionInterface } from '../../common/types';
 import Section from '../../components/layout/section';
 import PageLayout from '../../components/layout/page-layout';
-import SEO from '../../components/layout/seo';
+import PageHead from '../../components/seo/page-head';
 import Heading from '../../components/text/heading';
 import { Article } from '../../components/text/article';
 import GhostButtonLink from '../../components/links/ghost-button-link';
@@ -154,6 +154,6 @@ export const Head = ({ location }: HeadProps) => {
 	};
 
 	return (
-		<SEO pageMetadata={pageMetadata} />
+		<PageHead pageMetadata={pageMetadata} />
 	);
 }
