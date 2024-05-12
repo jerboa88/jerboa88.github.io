@@ -31,7 +31,7 @@ export default function BaseButton({ className = '', type = 'button', iconClassN
 
 	return (
 		<motion.button {...{ type, disabled, layout, layoutRoot, ...buttonClassNameProps }}>
-			<AnimatePresence mode="popLayout">
+			<AnimatePresence mode="popLayout" initial={false}>
 				{icon && (
 					<motion.span key="icon" layout="position" {...FADE_IN_ANIMATION_PROPS}>
 						<FontAwesomeIcon icon={icon} {...iconClassNameProps} />
