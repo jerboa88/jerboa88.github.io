@@ -34,7 +34,7 @@ export default function ProjectPageTemplate({ pageContext: { repo } }: ProjectPa
 	return (
 		<PageLayout siteMetadata={siteMetadata}>
 			{/* Dummy element to force center alignment of section */}
-			<div></div>
+			<div />
 			<Section {...section}>
 				<Article>
 					<img src={getProjectImage(repo.imageUrl)} width="500" alt="TODO"></img>
