@@ -19,6 +19,7 @@ interface SectionHeaderPropsInterface extends PropsWithClassName, PropsWithChild
 		text: string;
 		icon: IconDefinition;
 		to: string;
+		flip?: boolean;
 	};
 }
 
@@ -36,7 +37,7 @@ export default function SectionHeader({ className = '', title, button }: Section
 				</SectionHeading>
 				{button && (
 					<Tooltip text={button.text} className="!tooltip-left">
-						<GhostButtonLink {...button} className="self-baseline" responsive flip />
+						<GhostButtonLink flip={button.flip ?? true} className="self-baseline" {...button} responsive />
 					</Tooltip>
 				)}
 			</div>
