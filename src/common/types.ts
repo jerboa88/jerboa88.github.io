@@ -177,6 +177,14 @@ export interface LinkInterface {
 }
 
 
+export enum TooltipPosition {
+	Left,
+	Right,
+	Top,
+	Bottom,
+}
+
+
 export interface ButtonInterface extends PropsWithClassName, PropsWithLayoutAnimations {
 	iconClassName?: string;
 	textClassName?: string;
