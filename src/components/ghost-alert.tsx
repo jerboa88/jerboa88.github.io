@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck, faCircleExclamation, faCircleInfo, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { AlertType, PropsWithClassName } from '../common/types';
 import { FADE_IN_ANIMATION_PROPS } from '../common/constants';
-import { getClassNameProps, getOrDefault } from '../common/utilities';
+import { getClassNameProps } from '../common/utilities';
 
 
 // Types
@@ -24,13 +24,13 @@ interface GhostAlertPropsInterface extends PropsWithClassName {
 
 // Constants
 
-const ALERT_TYPE_STYLES = {
+const ALERT_TYPE_STYLES_MAP = {
 	[AlertType.Info]: 'alert-info text-info',
 	[AlertType.Success]: 'alert-success text-success',
 	[AlertType.Warning]: 'alert-warning text-warning',
 	[AlertType.Error]: 'alert-error text-error',
 }
-const ALERT_TYPE_ICONS = {
+const ALERT_TYPE_ICON_MAP = {
 	[AlertType.Info]: faCircleInfo,
 	[AlertType.Success]: faCircleCheck,
 	[AlertType.Warning]: faTriangleExclamation,
@@ -38,13 +38,13 @@ const ALERT_TYPE_ICONS = {
 }
 
 
-export default function GhostAlert({ className = '', type, text, show = true }: GhostAlertPropsInterface) {
+export default function GhostAlert({ className = '', type = AlertType.Info, text, show = true }: GhostAlertPropsInterface) {
 	const classNameProps = getClassNameProps(
 		'flex flex-row p-0 pl-1 bg-transparent border-none alert w-fit',
-		getOrDefault(ALERT_TYPE_STYLES, type, ALERT_TYPE_STYLES[AlertType.Info]),	// Styles per alert type
+		ALERT_TYPE_STYLES_MAP[type],	// Styles per alert type
 		className,
 	);
-	const icon = getOrDefault(ALERT_TYPE_ICONS, type, ALERT_TYPE_ICONS[AlertType.Info]);
+	const icon = ALERT_TYPE_ICON_MAP[type];
 
 	return (
 		<AnimatePresence>
