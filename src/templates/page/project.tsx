@@ -37,7 +37,7 @@ export default function ProjectPageTemplate({ pageContext: { repo } }: ProjectPa
 			<div />
 			<Section {...section}>
 				<Article>
-					<img src={getProjectImage(repo.imageUrl)} width="500" alt="TODO"></img>
+					<img src={getProjectImage(repo.imageUrl)} width="500" alt="TODO" />
 					<p>
 						{repo.shortDesc}
 					</p>
@@ -71,25 +71,24 @@ export default function ProjectPageTemplate({ pageContext: { repo } }: ProjectPa
 	);
 }
 
-export const Head = ({ location, pageContext }: HeadProps) => {
-	const configManager = new ConfigManager();
-	const siteMetadata = configManager.getMetadata();
+export const Head = ({ location, pageContext: { repo } }: HeadProps & ProjectPageTemplatePropsInterface) => {
+	const siteMetadata = new ConfigManager().getMetadata();
 	const pageMetadata = {
-		title: `${pageContext.name} | ${siteMetadata.shortTitle}`,
+		title: `${repo.name} | ${siteMetadata.shortTitle}`,
 		// TODO: Strip newlines and HTML tags from the long description
-		description: pageContext.longDesc,
-		shortDescription: pageContext.shortDesc,
+		description: repo.longDesc,
+		shortDescription: repo.shortDesc,
 		path: location.pathname,
-		ogImageUrl: pageContext.imageUrl,
-		ogImageAltText: `Cover image for ${pageContext.name}`,
+		ogImageUrl: repo.imageUrl,
+		ogImageAltText: `Cover image for ${repo.name}`,
 		structuredData: {
 			'@context': 'https://schema.org',
 			'@type': 'SoftwareApplication',
-			name: pageContext.name,
-			description: pageContext.longDesc,
+			name: repo.name,
+			description: repo.longDesc,
 			url: new URL(location.pathname, siteMetadata.siteUrl).toString(),
-			image: pageContext.imageUrl,
-			license: pageContext.license,
+			image: repo.imageUrl,
+			license: repo.license,
 		}
 	};
 
