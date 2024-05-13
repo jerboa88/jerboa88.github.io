@@ -9,7 +9,7 @@ import { PropsWithClassName } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
 
 
-export default function SectionHeader({ className }: PropsWithClassName) {
+export default function Divider({ className }: PropsWithClassName) {
 	const classNameProps = getClassNameProps(
 		'm-0 h-auto divider',
 		className,
