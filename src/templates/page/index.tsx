@@ -4,12 +4,12 @@
 */
 
 
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import { motion, useInView } from 'framer-motion';
 import { faAngleDown, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import ConfigManager from '../../common/config-manager';
-import { ProjectInfoInterface, SectionInterface } from '../../common/types';
+import { ButtonElementRenderFunction, ProjectInfoInterface, SectionInterface } from '../../common/types';
 import Section from '../../components/layout/section';
 import PageLayout from '../../components/layout/page-layout';
 import PageHead from '../../components/seo/page-head';
@@ -19,7 +19,6 @@ import GhostButtonLink from '../../components/links/ghost-button-link';
 import ContactForm from '../../components/input/contact-form';
 import ProjectCardGallery from '../../components/project-card-gallery';
 import Timeline from '../../components/timeline';
-import Tooltip from '../../components/tooltip';
 
 
 interface IndexPageTemplatePropsInterface {
@@ -47,21 +46,29 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 		{
 			id: 'projects',
 			title: 'Projects',
-			button: {
-				text: 'View more on GitHub',
-				icon: faArrowUpRightFromSquare,
-				to: siteMetadata.author.link.github,
-			},
+			renderButton: useCallback((remainingProps => (
+				<GhostButtonLink
+					text="View more on GitHub"
+					icon={faArrowUpRightFromSquare}
+					to={siteMetadata.author.link.github}
+					tooltipText="View more on GitHub"
+					responsive flip
+					{...remainingProps} />
+			)) as ButtonElementRenderFunction, []),
 			ref: useRef(null),
 		},
 		{
 			id: 'experience',
 			title: 'Experience',
-			button: {
-				text: 'View more on LinkedIn',
-				icon: faArrowUpRightFromSquare,
-				to: siteMetadata.author.link.linkedin,
-			},
+			renderButton: useCallback((remainingProps => (
+				<GhostButtonLink
+					text="View more on LinkedIn"
+					icon={faArrowUpRightFromSquare}
+					to={siteMetadata.author.link.linkedin}
+					tooltipText="View more on LinkedIn"
+					responsive flip
+					{...remainingProps} />
+			)) as ButtonElementRenderFunction, []),
 			ref: useRef(null),
 		},
 		{
@@ -99,9 +106,12 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 					{siteMetadata.tagline}
 				</span>
 				<div className="flex fixed inset-x-0 bottom-0 flex-row justify-center mb-4">
-					<Tooltip text={`Go to ${sections[0].title} section`}>
-						<GhostButtonLink to={`#${sections[0].id}`} icon={faAngleDown} className={isTitleExpanded ? '' : 'opacity-0'} isInternal />
-					</Tooltip>
+					<GhostButtonLink
+						to={`#${sections[0].id}`}
+						icon={faAngleDown}
+						tooltipText={`Go to ${sections[0].title} section`}
+						className={isTitleExpanded ? '' : 'opacity-0'}
+						isInternal />
 				</div>
 			</Section>
 			<Section className="min-h-lvh" {...sections[0]}>
