@@ -6,9 +6,8 @@
 
 import React from 'react';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { SiteMetadataInterface } from '../../common/types';
+import { SiteMetadataInterface, TooltipPosition } from '../../common/types';
 import GhostButtonLink from '../links/ghost-button-link';
-import Tooltip from '../tooltip';
 import Divider from '../divider';
 
 
@@ -23,20 +22,29 @@ export default function Footer({ siteMetadata }: FooterPropsInterface) {
 				<Divider />
 				<div className="flex flex-row justify-between items-center p-4 pb-4">
 					<nav className="flex flex-row justify-center tabs font-button">
-						<Tooltip text="View the source code on GitHub" className="!tooltip-right">
-							<GhostButtonLink text="Source" to={siteMetadata.sourceUrl} />
-						</Tooltip>
-						<Tooltip text="View the Privacy Policy" className="!tooltip-right">
-							<GhostButtonLink text="Privacy" to="/privacy-policy" isInternal />
-						</Tooltip>
+						<GhostButtonLink
+							text="Source"
+							to={siteMetadata.sourceUrl}
+							tooltipText="View the source code on GitHub"
+							tooltipPosition={TooltipPosition.Right} />
+						<GhostButtonLink
+							text="Privacy"
+							to="/privacy-policy"
+							tooltipText="View the Privacy Policy"
+							tooltipPosition={TooltipPosition.Right}
+							isInternal />
 					</nav>
 					<nav className="flex flex-row justify-center">
-						<Tooltip text="View my profile on LinkedIn" className="!tooltip-left">
-							<GhostButtonLink to={siteMetadata.author.link.linkedin} icon={faLinkedin} />
-						</Tooltip>
-						<Tooltip text="View my profile on GitHub" className="!tooltip-left">
-							<GhostButtonLink to={siteMetadata.author.link.github} icon={faGithub} />
-						</Tooltip>
+						<GhostButtonLink
+							to={siteMetadata.author.link.linkedin}
+							icon={faLinkedin}
+							tooltipText="View my profile on LinkedIn"
+							tooltipPosition={TooltipPosition.Left} />
+						<GhostButtonLink
+							to={siteMetadata.author.link.github}
+							icon={faGithub}
+							tooltipText="View my profile on GitHub"
+							tooltipPosition={TooltipPosition.Left} />
 					</nav>
 				</div>
 			</div>

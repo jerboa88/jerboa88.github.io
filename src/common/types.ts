@@ -191,9 +191,16 @@ export interface ButtonInterface extends PropsWithClassName, PropsWithLayoutAnim
 	type?: React.ButtonHTMLAttributes<any>['type'];
 	icon?: IconDefinition;
 	text?: string | number;
+	tooltipText?: string;
+	tooltipPosition?: TooltipPosition;
 	disabled?: boolean;
 	responsive?: boolean;
 	flip?: boolean;
+}
+
+
+export interface ButtonElementRenderFunction {
+	({ className, tooltipPosition }: { className: string, tooltipPosition: TooltipPosition }): JSX.Element;
 }
 
 
