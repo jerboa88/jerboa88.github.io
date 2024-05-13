@@ -43,7 +43,7 @@ export default function PrivacyPolicyPage({ data }: PrivacyPolicyPageProps) {
 	return (
 		<PageLayout siteMetadata={siteMetadata}>
 			{/* Dummy element to force center alignment of section */}
-			<div></div>
+			<div />
 			<Section className="items-center" {...section}>
 				<div className="flex flex-col gap-8 items-center">
 					<Article html={articleHtml} />
