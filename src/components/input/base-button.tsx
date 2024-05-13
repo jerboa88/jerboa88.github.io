@@ -14,7 +14,7 @@ import { getClassNameProps } from '../../common/utilities';
 import Tooltip from '../tooltip';
 
 
-export default function BaseButton({ className, iconClassName, textClassName, type = 'button', tooltipText = '', tooltipPosition, disabled = false, responsive = false, flip = false, icon, text, layout, layoutRoot }: ButtonInterface) {
+export default function BaseButton({ className, iconClassName, textClassName, type = 'button', icon, text, tooltipText, tooltipPosition, disabled = false, responsive = false, flip = false, layout, layoutRoot }: ButtonInterface) {
 	const buttonClassNameProps = getClassNameProps(
 		'flex flex-row justify-center items-center self-center gap-2 z-20 text-sm font-button uppercase',
 		flip && 'flex-row-reverse',	// Button flip styles
@@ -47,8 +47,10 @@ export default function BaseButton({ className, iconClassName, textClassName, ty
 		</motion.button>
 	);
 
-	return tooltipText ? (
-		<Tooltip text={tooltipText} position={tooltipPosition}>
+	const computedTooltipText = tooltipText ?? text;
+
+	return computedTooltipText ? (
+		<Tooltip text={computedTooltipText} position={tooltipPosition}>
 			{buttonElement}
 		</Tooltip>
 	) : (

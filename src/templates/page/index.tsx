@@ -51,7 +51,6 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 					text="View more on GitHub"
 					icon={faArrowUpRightFromSquare}
 					to={siteMetadata.author.link.github}
-					tooltipText="View more on GitHub"
 					responsive flip
 					{...remainingProps} />
 			)) as ButtonElementRenderFunction, []),
@@ -65,7 +64,6 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 					text="View more on LinkedIn"
 					icon={faArrowUpRightFromSquare}
 					to={siteMetadata.author.link.linkedin}
-					tooltipText="View more on LinkedIn"
 					responsive flip
 					{...remainingProps} />
 			)) as ButtonElementRenderFunction, []),

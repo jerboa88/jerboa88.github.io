@@ -23,13 +23,13 @@ export default function Footer({ siteMetadata }: FooterPropsInterface) {
 				<div className="flex flex-row justify-between items-center p-4 pb-4">
 					<nav className="flex flex-row justify-center tabs font-button">
 						<GhostButtonLink
-							text="Source"
 							to={siteMetadata.sourceUrl}
+							text="Source"
 							tooltipText="View the source code on GitHub"
 							tooltipPosition={TooltipPosition.Right} />
 						<GhostButtonLink
-							text="Privacy"
 							to="/privacy-policy"
+							text="Privacy"
 							tooltipText="View the Privacy Policy"
 							tooltipPosition={TooltipPosition.Right}
 							isInternal />
