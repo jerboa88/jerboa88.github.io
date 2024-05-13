@@ -9,6 +9,7 @@ import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { SiteMetadataInterface } from '../../common/types';
 import GhostButtonLink from '../links/ghost-button-link';
 import Tooltip from '../tooltip';
+import Divider from '../divider';
 
 
 interface FooterPropsInterface {
@@ -19,7 +20,7 @@ export default function Footer({ siteMetadata }: FooterPropsInterface) {
 	return (
 		<footer className="z-30 w-full shadow-lg backdrop-blur-md bg-glass">
 			<div className="mix-blend-overlay">
-				<div className="m-0 h-auto opacity-100 divider" />
+				<Divider />
 				<div className="flex flex-row justify-between items-center p-4 pb-4">
 					<nav className="flex flex-row justify-center tabs font-button">
 						<Tooltip text="View the source code on GitHub" className="!tooltip-right">

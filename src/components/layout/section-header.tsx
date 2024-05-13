@@ -11,6 +11,7 @@ import { getClassNameProps } from '../../common/utilities';
 import SectionHeading from '../text/section-heading';
 import GhostButtonLink from '../links/ghost-button-link';
 import Tooltip from '../tooltip';
+import Divider from '../divider';
 
 
 interface SectionHeaderPropsInterface extends PropsWithClassName, PropsWithChildren {
@@ -41,7 +42,7 @@ export default function SectionHeader({ className = '', title, button }: Section
 					</Tooltip>
 				)}
 			</div>
-			<div className="pb-8 m-0 h-auto opacity-100 divider" />
+			<Divider className="pb-8" />
 		</>
 	);
 }

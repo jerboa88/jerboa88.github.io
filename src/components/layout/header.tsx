@@ -10,6 +10,7 @@ import { SiteMetadataInterface, SectionInterface } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import Tabs from '../tabs';
 import Heading from '../text/heading';
+import Divider from '../divider';
 
 
 interface HeaderPropsInterface {
@@ -30,7 +31,7 @@ export default function Header({ siteMetadata, titleLayoutId = 'title-layout', i
 		isTitleExpanded ? 'justify-center' : 'justify-between',	// Center title when expanded
 	);
 	const dividerClassNameProps = getClassNameProps(
-		'm-0 h-auto transition-opacity divider',
+		'transition-opacity',
 		isTitleExpanded ? 'opacity-0' : 'opacity-100',	// Hide divider when title is expanded
 	);
 
@@ -55,7 +56,7 @@ export default function Header({ siteMetadata, titleLayoutId = 'title-layout', i
 					)}
 					<Tabs sections={sections} hideIndicator={isTitleExpanded} />
 				</div>
-				<div {...dividerClassNameProps} />
+				<Divider {...dividerClassNameProps} />
 			</div>
 		</header>
 	);
