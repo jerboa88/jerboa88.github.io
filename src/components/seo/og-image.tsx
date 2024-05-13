@@ -19,7 +19,7 @@ interface OgImagePropsInterface extends PropsWithClassName, PropsWithChildren {
 
 export default function OgImage({ className, size, children }: OgImagePropsInterface) {
 	const classNameProps = getClassNameProps(
-		'flex flex-col items-center size-full p-8 bg-glass overflow-hidden',
+		'flex flex-col items-center size-full p-6 bg-glass overflow-hidden',
 		className,
 	);
 
