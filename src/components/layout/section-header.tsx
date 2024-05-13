@@ -26,7 +26,7 @@ interface SectionHeaderPropsInterface extends PropsWithClassName, PropsWithChild
 
 export default function SectionHeader({ className = '', title, button }: SectionHeaderPropsInterface) {
 	const classNameProps = getClassNameProps(
-		'w-full flex flex-row justify-between items-baseline pt-8',
+		'w-full flex flex-row justify-between items-baseline',
 		className,
 	);
 
