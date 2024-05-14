@@ -9,7 +9,7 @@ import { useForm, useFormState, SubmitHandler } from 'react-hook-form';
 import { LayoutGroup, motion } from 'framer-motion';
 import Botpoison from '@botpoison/browser';
 import { faCircleNotch, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { PropsWithClassName, InputValidationOptions, AlertType } from '../../common/types';
+import { PropsWithClassName, InputValidationOptions, AlertType, TooltipPosition } from '../../common/types';
 import { getClassNameProps, getOrDefault, getStatusCodeDescription } from '../../common/utilities';
 import ConfigManager from '../../common/config-manager';
 import TextInput from './text-input';
@@ -254,7 +254,16 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 				<TextInput {...{ register, errors, ...INPUT_PROPS.email }} validationOptions={validationOptions.email} />
 				<MultilineTextInput {...{ register, errors, ...INPUT_PROPS.message }} validationOptions={validationOptions.message} />
 				<Checkbox {...{ register, errors, ...INPUT_PROPS._gotcha }} />
-				<SolidButton type="submit" layout="position" cardClassName="mt-2" className="w-full" {...submitButtonProps} layoutRoot />
+				<SolidButton
+					type="submit"
+					layout="position"
+					tooltipText="Send message"
+					tooltipPosition={TooltipPosition.Bottom}
+					cardClassName="mt-2 z-20"
+					tooltipClassName="w-full"
+					className="w-full"
+					layoutRoot
+					{...submitButtonProps} />
 				<GhostAlert {...alertProps} />
 			</LayoutGroup>
 		</motion.form>

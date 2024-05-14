@@ -12,7 +12,7 @@ import { getClassNameProps } from '../common/utilities';
 // Types
 
 export interface TooltipPropsInterface extends PropsWithClassName, PropsWithChildren {
-	text: string;
+	text: string | number;
 	position?: TooltipPosition;
 }
 

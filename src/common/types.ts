@@ -188,6 +188,7 @@ export enum TooltipPosition {
 export interface ButtonInterface extends PropsWithClassName, PropsWithLayoutAnimations {
 	iconClassName?: string;
 	textClassName?: string;
+	tooltipClassName?: string;
 	type?: React.ButtonHTMLAttributes<any>['type'];
 	icon?: IconDefinition;
 	text?: string | number;
