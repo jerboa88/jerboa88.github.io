@@ -8,8 +8,9 @@ import React, { useCallback, useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import { motion, useInView } from 'framer-motion';
 import { faAngleDown, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import ConfigManager from '../../common/config-manager';
 import { ButtonElementRenderFunction, ProjectInfoInterface, SectionInterface } from '../../common/types';
+import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
+import ConfigManager from '../../common/config-manager';
 import Section from '../../components/layout/section';
 import PageLayout from '../../components/layout/page-layout';
 import PageHead from '../../components/seo/page-head';
@@ -32,10 +33,7 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 	const siteMetadata = configManager.getMetadata();
 	const jobs = configManager.getJobs();
 	const inViewTriggerRef = useRef(null);
-	const expandTitle = useInView(inViewTriggerRef, {
-		amount: 0,
-		margin: '-70px',
-	});
+	const expandTitle = useInView(inViewTriggerRef, USE_IN_VIEW_OPTIONS);
 	const sections = [
 		{
 			id: 'about',

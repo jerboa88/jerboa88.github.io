@@ -18,11 +18,17 @@ const FADE_TRANSITION_VARIANTS = {
 } as const;
 
 // Directories
-export const PROJECTS_DIR = 'projects';
-export const OG_IMAGE_DIR = 'og-image';
+export const PROJECTS_DIR = 'projects' as const;
+export const OG_IMAGE_DIR = 'og-image' as const;
 
 // ID used to group together elements for the title animation
-export const TITLE_LAYOUT_ID = 'title-layout';
+export const TITLE_LAYOUT_ID = 'title-layout' as const;
+
+// Options for the useInView hook. Margin is used to offset the height of the navbar
+export const USE_IN_VIEW_OPTIONS = {
+	amount: 0,
+	margin: '-68px',
+} as const;
 
 // Props for enabling a fade-in animation for a Framer Motion component
 export const FADE_IN_ANIMATION_PROPS = {

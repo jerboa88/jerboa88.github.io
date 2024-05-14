@@ -7,6 +7,7 @@
 import React from 'react';
 import { motion, useInView } from 'framer-motion';
 import { SectionInterface, TooltipPosition } from '../common/types';
+import { USE_IN_VIEW_OPTIONS } from '../common/constants';
 import { getClassNameProps } from '../common/utilities';
 import GhostButtonLink from './links/ghost-button-link';
 
@@ -18,10 +19,7 @@ interface TabsPropsInterface {
 
 export default function Tabs({ sections, hideIndicator = false }: TabsPropsInterface) {
 	// Map is used here because we need to call the same number of hook every time. Otherwise, React will complain
-	const sectionInViewHooks = sections.map(section => useInView(section.ref, {
-		amount: 0,
-		margin: '-70px',
-	}));
+	const sectionInViewHooks = sections.map(section => useInView(section.ref, USE_IN_VIEW_OPTIONS));
 	const currentSectionIndex = hideIndicator ? -1 : sectionInViewHooks.findIndex(inView => inView);
 
 	return (
