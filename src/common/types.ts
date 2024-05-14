@@ -160,15 +160,10 @@ export interface ColorMappingsConfigInterface {
 
 
 export interface SectionInterface {
-	id: string;
 	title: string;
 	ref: RefObject<HTMLElement>;
-	button?: {
-		text: string;
-		icon: IconDefinition;
-		to: string;
-	}
 }
+
 
 export interface LinkInterface {
 	to: string;

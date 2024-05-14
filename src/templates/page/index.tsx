@@ -20,7 +20,10 @@ import GhostButtonLink from '../../components/links/ghost-button-link';
 import ContactForm from '../../components/input/contact-form';
 import ProjectCardGallery from '../../components/project-card-gallery';
 import Timeline from '../../components/timeline';
+import { toKebabCase } from '../../common/utilities';
 
+
+// Types
 
 interface IndexPageTemplatePropsInterface {
 	pageContext: {
@@ -28,59 +31,62 @@ interface IndexPageTemplatePropsInterface {
 	};
 }
 
+
+// Constants
+
+const configManager = new ConfigManager();
+const SITE_METADATA = configManager.getMetadata();
+const JOBS = configManager.getJobs();
+
+
 export default function IndexPageTemplate({ pageContext }: IndexPageTemplatePropsInterface) {
-	const configManager = new ConfigManager();
-	const siteMetadata = configManager.getMetadata();
-	const jobs = configManager.getJobs();
 	const inViewTriggerRef = useRef(null);
 	const expandTitle = useInView(inViewTriggerRef, USE_IN_VIEW_OPTIONS);
 	const sections = [
 		{
-			id: 'about',
 			title: 'About',
 			ref: useRef(null),
 		},
 		{
-			id: 'projects',
 			title: 'Projects',
-			renderButton: useCallback((remainingProps => (
-				<GhostButtonLink
-					text="View more on GitHub"
-					icon={faArrowUpRightFromSquare}
-					to={siteMetadata.author.link.github}
-					responsive flip
-					{...remainingProps} />
-			)) as ButtonElementRenderFunction, []),
 			ref: useRef(null),
 		},
 		{
-			id: 'experience',
 			title: 'Experience',
-			renderButton: useCallback((remainingProps => (
-				<GhostButtonLink
-					text="View more on LinkedIn"
-					icon={faArrowUpRightFromSquare}
-					to={siteMetadata.author.link.linkedin}
-					responsive flip
-					{...remainingProps} />
-			)) as ButtonElementRenderFunction, []),
 			ref: useRef(null),
 		},
 		{
-			id: 'contact',
 			title: 'Contact',
 			ref: useRef(null),
 		}
 	] as SectionInterface[];
 
+	const projectsSectionButton = useCallback((remainingProps => (
+		<GhostButtonLink
+			text="View more on GitHub"
+			icon={faArrowUpRightFromSquare}
+			to={SITE_METADATA.author.link.github}
+			responsive flip
+			{...remainingProps} />
+	)) as ButtonElementRenderFunction, []);
+
+	const experienceSectionButton = useCallback((remainingProps => (
+		<GhostButtonLink
+			text="View more on LinkedIn"
+			icon={faArrowUpRightFromSquare}
+			to={SITE_METADATA.author.link.linkedin}
+			responsive flip
+			{...remainingProps} />
+	)) as ButtonElementRenderFunction, []);
+
 	return (
-		<PageLayout siteMetadata={siteMetadata} expandTitle={expandTitle} sections={sections}>
+		<PageLayout siteMetadata={SITE_METADATA} expandTitle={expandTitle} sections={sections}>
 			<Section className="text-center min-h-svh">
 				<span ref={inViewTriggerRef} />
 				<HeroHeader expandTitle={expandTitle} />
 				<div className="flex fixed inset-x-0 bottom-0 flex-row justify-center mb-4">
 					<GhostButtonLink
-						to={`#${sections[0].id}`}
+						to={`#${toKebabCase(sections[0].title)}`}
 						icon={faAngleDown}
 						tooltipText={`Go to ${sections[0].title} section`}
 						className={expandTitle ? '' : 'opacity-0'}
@@ -100,11 +106,11 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 					</p>
 				</Article>
 			</Section>
-			<Section className="min-h-lvh" {...sections[1]}>
+			<Section renderButton={projectsSectionButton} className="min-h-lvh" {...sections[1]}>
 				<ProjectCardGallery projects={pageContext.pinnedRepos} />
 			</Section>
-			<Section className="min-h-lvh" {...sections[2]}>
-				<Timeline roles={jobs} />
+			<Section renderButton={experienceSectionButton} className="min-h-lvh" {...sections[2]}>
+				<Timeline roles={JOBS} />
 			</Section>
 			<Section className="min-h-lvh" {...sections[3]}>
 				<Article className="flex flex-col justify-center w-full">
@@ -119,20 +125,18 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 }
 
 export const Head = ({ location }: HeadProps) => {
-	const configManager = new ConfigManager();
-	const siteMetadata = configManager.getMetadata();
 	const pageMetadata = {
-		title: siteMetadata.title,
-		description: siteMetadata.description,
-		shortDescription: siteMetadata.shortDescription,
+		title: SITE_METADATA.title,
+		description: SITE_METADATA.description,
+		shortDescription: SITE_METADATA.shortDescription,
 		path: location.pathname,
-		ogImageUrl: new URL(siteMetadata.ogImagePath, siteMetadata.siteUrl).toString(),
-		ogImageAltText: siteMetadata.ogImageAltText,
+		ogImageUrl: new URL(SITE_METADATA.ogImagePath, SITE_METADATA.siteUrl).toString(),
+		ogImageAltText: SITE_METADATA.ogImageAltText,
 		structuredData: {
 			'@type': 'WebSite',
-			name: siteMetadata.title,
-			description: siteMetadata.description,
-			url: siteMetadata.siteUrl,
+			name: SITE_METADATA.title,
+			description: SITE_METADATA.description,
+			url: SITE_METADATA.siteUrl,
 		}
 	};
 

@@ -111,3 +111,12 @@ export function getClassNameProps(...classNames: (string | false | undefined)[])
 export function clamp(value: number, min: number, max: number) {
 	return Math.min(Math.max(value, min), max);
 };
+
+
+// Convert a string to kebab case
+export function toKebabCase(string: string) {
+	return string
+		.replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+		.replace(/[\s_]+/g, '-')
+		.toLowerCase();
+}

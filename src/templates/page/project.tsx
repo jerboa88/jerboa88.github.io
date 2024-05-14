@@ -7,7 +7,7 @@
 import React, { useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import ConfigManager from '../../common/config-manager';
-import { ProjectInfoInterface, SectionInterface } from '../../common/types';
+import { ProjectInfoInterface } from '../../common/types';
 import { getProjectImage } from '../../common/utilities';
 import PageLayout from '../../components/layout/page-layout';
 import PageHead from '../../components/seo/page-head';
@@ -16,26 +16,25 @@ import { Article } from '../../components/text/article';
 import InlineLink from '../../components/links/inline-link';
 
 
+// Types
+
 interface ProjectPageTemplatePropsInterface {
 	pageContext: {
 		repo: ProjectInfoInterface;
 	};
 }
 
-export default function ProjectPageTemplate({ pageContext: { repo } }: ProjectPageTemplatePropsInterface) {
-	const configManager = new ConfigManager();
-	const siteMetadata = configManager.getMetadata();
-	const section = {
-		id: 'project',
-		title: repo.name,
-		ref: useRef(null),
-	} as SectionInterface;
 
+// Constants
+const SITE_METADATA = new ConfigManager().getMetadata();
+
+
+export default function ProjectPageTemplate({ pageContext: { repo } }: ProjectPageTemplatePropsInterface) {
 	return (
-		<PageLayout siteMetadata={siteMetadata}>
+		<PageLayout siteMetadata={SITE_METADATA}>
 			{/* Dummy element to force center alignment of section */}
 			<div />
-			<Section {...section}>
+			<Section title={repo.name} ref={useRef(null)}>
 				<Article>
 					<img src={getProjectImage(repo.imageUrl)} width="500" alt="TODO" />
 					<p>
@@ -72,9 +71,8 @@ export default function ProjectPageTemplate({ pageContext: { repo } }: ProjectPa
 }
 
 export const Head = ({ location, pageContext: { repo } }: HeadProps & ProjectPageTemplatePropsInterface) => {
-	const siteMetadata = new ConfigManager().getMetadata();
 	const pageMetadata = {
-		title: `${repo.name} | ${siteMetadata.shortTitle}`,
+		title: `${repo.name} | ${SITE_METADATA.shortTitle}`,
 		// TODO: Strip newlines and HTML tags from the long description
 		description: repo.longDesc,
 		shortDescription: repo.shortDesc,
@@ -86,7 +84,7 @@ export const Head = ({ location, pageContext: { repo } }: HeadProps & ProjectPag
 			'@type': 'SoftwareApplication',
 			name: repo.name,
 			description: repo.longDesc,
-			url: new URL(location.pathname, siteMetadata.siteUrl).toString(),
+			url: new URL(location.pathname, SITE_METADATA.siteUrl).toString(),
 			image: repo.imageUrl,
 			license: repo.license,
 		}

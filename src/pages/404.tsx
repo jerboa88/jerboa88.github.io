@@ -7,21 +7,19 @@
 import React, { useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import ConfigManager from '../common/config-manager';
-import { SectionInterface } from '../common/types';
 import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
 import PageHead from '../components/seo/page-head';
 import SolidButtonLink from '../components/links/solid-button-link';
 
 
+// Constants
+
+const PAGE_TITLE = '404 - Page Not Found';
+const SITE_METADATA = new ConfigManager().getMetadata();
+
+
 export default function NotFoundPage() {
-	const configManager = new ConfigManager();
-	const siteMetadata = configManager.getMetadata();
-	const section = {
-		id: '404',
-		title: '404',
-		ref: useRef(null),
-	} as SectionInterface;
 	// Cat ASCII art from https://emojicombos.com/cat
 	const sadCat = [
 		'         \uFF0F\uFF1E\u3000\u0020\u30D5',
@@ -36,14 +34,14 @@ export default function NotFoundPage() {
 	].join('\n');
 
 	return (
-		<PageLayout siteMetadata={siteMetadata}>
+		<PageLayout siteMetadata={SITE_METADATA}>
 			{/* Dummy element to force center alignment of section */}
 			<div />
-			<Section className="items-center" {...section}>
+			<Section title="404" ref={useRef(null)} className="items-center">
 				<div className="flex flex-col gap-8 items-center">
 					Oof, there's nothing here
 					<figure className="flex justify-center flex-column">
-						<pre className="leading-normal text-left" role="img" aria-label="ASCII Sad Cat" aria-description="ASCII art of a sad cat, sitting down">
+						<pre role="img" aria-label="ASCII Sad Cat" aria-description="ASCII art of a sad cat, sitting down" className="leading-normal text-left" >
 							{sadCat}
 						</pre>
 					</figure>
@@ -55,21 +53,18 @@ export default function NotFoundPage() {
 }
 
 export const Head = ({ location }: HeadProps) => {
-	const configManager = new ConfigManager();
-	const siteMetadata = configManager.getMetadata();
-	const pageTitle = '404 - Page Not Found';
 	const pageMetadata = {
-		title: `${pageTitle} | ${siteMetadata.shortTitle}`,
-		description: siteMetadata.description,
-		shortDescription: siteMetadata.shortDescription,
+		title: `${PAGE_TITLE} | ${SITE_METADATA.shortTitle}`,
+		description: SITE_METADATA.description,
+		shortDescription: SITE_METADATA.shortDescription,
 		path: location.pathname,
-		ogImageUrl: new URL(siteMetadata.ogImagePath, siteMetadata.siteUrl).toString(),
-		ogImageAltText: siteMetadata.ogImageAltText,
+		ogImageUrl: new URL(SITE_METADATA.ogImagePath, SITE_METADATA.siteUrl).toString(),
+		ogImageAltText: SITE_METADATA.ogImageAltText,
 		structuredData: {
 			'@type': 'WebSite',
-			name: pageTitle,
-			description: siteMetadata.description,
-			url: siteMetadata.siteUrl,
+			name: PAGE_TITLE,
+			description: SITE_METADATA.description,
+			url: SITE_METADATA.siteUrl,
 		}
 	};
 
