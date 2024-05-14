@@ -142,7 +142,7 @@ export default function Card({ outerClassName = '', middleClassName = '', innerC
 		onMouseDown: handleMouseDown,
 	}
 	const middleClassNameProps = getClassNameProps(
-		'overflow-hidden size-full shadow-md !bg-clip-content rounded-2xl backdrop-blur-md',
+		'size-full shadow-md !bg-clip-content rounded-2xl backdrop-blur-md',
 		middleClassName,
 	);
 	const middleStyleProps = {
