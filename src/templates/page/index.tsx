@@ -13,7 +13,7 @@ import { ButtonElementRenderFunction, ProjectInfoInterface, SectionInterface } f
 import Section from '../../components/layout/section';
 import PageLayout from '../../components/layout/page-layout';
 import PageHead from '../../components/seo/page-head';
-import Heading from '../../components/text/heading';
+import HeroHeader from '../../components/layout/hero-header';
 import { Article } from '../../components/text/article';
 import GhostButtonLink from '../../components/links/ghost-button-link';
 import ContactForm from '../../components/input/contact-form';
@@ -75,34 +75,12 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 			ref: useRef(null),
 		}
 	] as SectionInterface[];
-	const titleElement = (
-		<Heading className="m-4 text-6xl">
-			<span className="inline md:hidden">{siteMetadata.author.name.short}</span>
-			<span className="hidden md:inline">{siteMetadata.author.name.full}</span>
-		</Heading>
-	);
-	let titleWrapperElement = (
-		<a href="/" className="z-20 opacity-0">
-			{titleElement}
-		</a>
-	);
-
-	if (isTitleExpanded) {
-		titleWrapperElement = (
-			<motion.a href="/" className="z-20" layoutId={titleLayoutId}>
-				{titleElement}
-			</motion.a>
-		);
-	}
 
 	return (
 		<PageLayout siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
 			<Section className="text-center min-h-svh">
 				<span ref={inViewTriggerRef} />
-				{titleWrapperElement}
-				<span className="m-4">
-					{siteMetadata.tagline}
-				</span>
+				<HeroHeader titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} />
 				<div className="flex fixed inset-x-0 bottom-0 flex-row justify-center mb-4">
 					<GhostButtonLink
 						to={`#${sections[0].id}`}
