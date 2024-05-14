@@ -32,7 +32,7 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 	const siteMetadata = configManager.getMetadata();
 	const jobs = configManager.getJobs();
 	const inViewTriggerRef = useRef(null);
-	const isTitleExpanded = useInView(inViewTriggerRef, {
+	const expandTitle = useInView(inViewTriggerRef, {
 		amount: 0,
 		margin: '-70px',
 	});
@@ -76,16 +76,16 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 	] as SectionInterface[];
 
 	return (
-		<PageLayout siteMetadata={siteMetadata} isTitleExpanded={isTitleExpanded} sections={sections}>
+		<PageLayout siteMetadata={siteMetadata} expandTitle={expandTitle} sections={sections}>
 			<Section className="text-center min-h-svh">
 				<span ref={inViewTriggerRef} />
-				<HeroHeader isTitleExpanded={isTitleExpanded} />
+				<HeroHeader expandTitle={expandTitle} />
 				<div className="flex fixed inset-x-0 bottom-0 flex-row justify-center mb-4">
 					<GhostButtonLink
 						to={`#${sections[0].id}`}
 						icon={faAngleDown}
 						tooltipText={`Go to ${sections[0].title} section`}
-						className={isTitleExpanded ? '' : 'opacity-0'}
+						className={expandTitle ? '' : 'opacity-0'}
 						isInternal />
 				</div>
 			</Section>

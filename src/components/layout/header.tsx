@@ -16,30 +16,30 @@ import Divider from '../divider';
 
 interface HeaderPropsInterface {
 	siteMetadata: SiteMetadataInterface;
-	isTitleExpanded?: boolean;
+	expandTitle?: boolean;
 	sections: SectionInterface[];
 }
 
 
-export default function Header({ siteMetadata, isTitleExpanded = false, sections }: HeaderPropsInterface) {
+export default function Header({ siteMetadata, expandTitle = false, sections }: HeaderPropsInterface) {
 	const headerClassNameProps = getClassNameProps(
 		'fixed top-0 z-30 w-full transition',
-		!isTitleExpanded && 'bg-glass backdrop-blur-md shadow-lg',	// Transparent bg when title is expanded
+		!expandTitle && 'bg-glass backdrop-blur-md shadow-lg',	// Transparent bg when title is expanded
 	);
 	const containerClassNameProps = getClassNameProps(
 		'flex-row items-center p-4',
-		isTitleExpanded ? 'justify-center' : 'justify-between',	// Center title when expanded
+		expandTitle ? 'justify-center' : 'justify-between',	// Center title when expanded
 	);
 	const dividerClassNameProps = getClassNameProps(
 		'transition-opacity',
-		isTitleExpanded ? 'opacity-0' : 'opacity-100',	// Hide divider when title is expanded
+		expandTitle ? 'opacity-0' : 'opacity-100',	// Hide divider when title is expanded
 	);
 
 	return (
 		<header {...headerClassNameProps}>
 			<div className="mix-blend-overlay">
 				<div {...containerClassNameProps}>
-					{!isTitleExpanded && (
+					{!expandTitle && (
 						<motion.a href="/" layoutId={TITLE_LAYOUT_ID}>
 							<Heading className="px-2 m-0 text-xl">
 								<span className="inline sm:hidden">
@@ -54,7 +54,7 @@ export default function Header({ siteMetadata, isTitleExpanded = false, sections
 							</Heading>
 						</motion.a>
 					)}
-					<Tabs sections={sections} hideIndicator={isTitleExpanded} />
+					<Tabs sections={sections} hideIndicator={expandTitle} />
 				</div>
 				<Divider {...dividerClassNameProps} />
 			</div>

@@ -12,10 +12,10 @@ import Heading from '../../components/text/heading';
 
 
 interface HeroHeaderProps {
-	isTitleExpanded?: boolean;
+	expandTitle?: boolean;
 }
 
-export default function HeroHeader({ isTitleExpanded = false }: HeroHeaderProps) {
+export default function HeroHeader({ expandTitle = false }: HeroHeaderProps) {
 	const siteMetadata = new ConfigManager().getMetadata();
 
 	const titleElement = (
@@ -29,7 +29,7 @@ export default function HeroHeader({ isTitleExpanded = false }: HeroHeaderProps)
 		</Heading>
 	);
 
-	const titleWrapperElement = isTitleExpanded ? (
+	const titleWrapperElement = expandTitle ? (
 		<motion.a href="/" className="z-20" layoutId={TITLE_LAYOUT_ID}>
 			{titleElement}
 		</motion.a>
