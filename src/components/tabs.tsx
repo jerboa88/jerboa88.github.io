@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { motion, useInView } from 'framer-motion';
-import { SectionInterface } from '../common/types';
+import { SectionInterface, TooltipPosition } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
 import GhostButtonLink from './links/ghost-button-link';
 
@@ -41,7 +41,13 @@ export default function Tabs({ sections, hideIndicator = false }: TabsPropsInter
 					return (
 						<div key={title} className="flex flex-col items-center">
 							<motion.div layout="position">
-								<GhostButtonLink text={title} to={`#${id}`} {...ghostButtonLinkClassNameProps} isInternal />
+								<GhostButtonLink
+									text={title}
+									to={`#${id}`}
+									tooltipText={`Go to ${title} section`}
+									tooltipPosition={TooltipPosition.Bottom}
+									isInternal
+									{...ghostButtonLinkClassNameProps} />
 							</motion.div>
 							{indicatorElement}
 						</div>
