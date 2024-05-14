@@ -6,16 +6,16 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { TITLE_LAYOUT_ID } from '../../common/constants';
 import ConfigManager from '../../common/config-manager';
 import Heading from '../../components/text/heading';
 
 
 interface HeroHeaderProps {
-	titleLayoutId?: string;
 	isTitleExpanded?: boolean;
 }
 
-export default function HeroHeader({ titleLayoutId = 'title-layout', isTitleExpanded = false }: HeroHeaderProps) {
+export default function HeroHeader({ isTitleExpanded = false }: HeroHeaderProps) {
 	const siteMetadata = new ConfigManager().getMetadata();
 
 	const titleElement = (
@@ -30,7 +30,7 @@ export default function HeroHeader({ titleLayoutId = 'title-layout', isTitleExpa
 	);
 
 	const titleWrapperElement = isTitleExpanded ? (
-		<motion.a href="/" className="z-20" layoutId={titleLayoutId}>
+		<motion.a href="/" className="z-20" layoutId={TITLE_LAYOUT_ID}>
 			{titleElement}
 		</motion.a>
 	) : (

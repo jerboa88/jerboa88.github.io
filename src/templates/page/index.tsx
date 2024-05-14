@@ -28,7 +28,6 @@ interface IndexPageTemplatePropsInterface {
 }
 
 export default function IndexPageTemplate({ pageContext }: IndexPageTemplatePropsInterface) {
-	const titleLayoutId = 'title-layout';
 	const configManager = new ConfigManager();
 	const siteMetadata = configManager.getMetadata();
 	const jobs = configManager.getJobs();
@@ -77,10 +76,10 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 	] as SectionInterface[];
 
 	return (
-		<PageLayout siteMetadata={siteMetadata} titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} sections={sections}>
+		<PageLayout siteMetadata={siteMetadata} isTitleExpanded={isTitleExpanded} sections={sections}>
 			<Section className="text-center min-h-svh">
 				<span ref={inViewTriggerRef} />
-				<HeroHeader titleLayoutId={titleLayoutId} isTitleExpanded={isTitleExpanded} />
+				<HeroHeader isTitleExpanded={isTitleExpanded} />
 				<div className="flex fixed inset-x-0 bottom-0 flex-row justify-center mb-4">
 					<GhostButtonLink
 						to={`#${sections[0].id}`}

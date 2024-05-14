@@ -17,10 +17,12 @@ const FADE_TRANSITION_VARIANTS = {
 	}
 } as const;
 
-
+// Directories
 export const PROJECTS_DIR = 'projects';
 export const OG_IMAGE_DIR = 'og-image';
 
+// ID used to group together elements for the title animation
+export const TITLE_LAYOUT_ID = 'title-layout';
 
 // Props for enabling a fade-in animation for a Framer Motion component
 export const FADE_IN_ANIMATION_PROPS = {
@@ -28,7 +30,6 @@ export const FADE_IN_ANIMATION_PROPS = {
 	animate: FADE_TRANSITION_VARIANTS.show,
 	exit: FADE_TRANSITION_VARIANTS.hidden,
 } as const;
-
 
 // Props for setting a spring transition on a Framer Motion component
 export const SPRING_TRANSITION_PROPS = {

@@ -7,6 +7,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { SiteMetadataInterface, SectionInterface } from '../../common/types';
+import { TITLE_LAYOUT_ID } from '../../common/constants';
 import { getClassNameProps } from '../../common/utilities';
 import Tabs from '../tabs';
 import Heading from '../text/heading';
@@ -15,13 +16,12 @@ import Divider from '../divider';
 
 interface HeaderPropsInterface {
 	siteMetadata: SiteMetadataInterface;
-	titleLayoutId?: string;
 	isTitleExpanded?: boolean;
 	sections: SectionInterface[];
 }
 
 
-export default function Header({ siteMetadata, titleLayoutId = 'title-layout', isTitleExpanded = false, sections }: HeaderPropsInterface) {
+export default function Header({ siteMetadata, isTitleExpanded = false, sections }: HeaderPropsInterface) {
 	const headerClassNameProps = getClassNameProps(
 		'fixed top-0 z-30 w-full transition',
 		!isTitleExpanded && 'bg-glass backdrop-blur-md shadow-lg',	// Transparent bg when title is expanded
@@ -40,7 +40,7 @@ export default function Header({ siteMetadata, titleLayoutId = 'title-layout', i
 			<div className="mix-blend-overlay">
 				<div {...containerClassNameProps}>
 					{!isTitleExpanded && (
-						<motion.a href="/" layoutId={titleLayoutId}>
+						<motion.a href="/" layoutId={TITLE_LAYOUT_ID}>
 							<Heading className="px-2 m-0 text-xl">
 								<span className="inline sm:hidden">
 									{siteMetadata.author.name.initial}
