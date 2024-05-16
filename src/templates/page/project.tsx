@@ -8,7 +8,6 @@ import React, { useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import ConfigManager from '../../common/config-manager';
 import { ProjectInfoInterface } from '../../common/types';
-import { getProjectImage } from '../../common/utilities';
 import PageLayout from '../../components/layout/page-layout';
 import PageHead from '../../components/seo/page-head';
 import Section from '../../components/layout/section';
@@ -36,7 +35,7 @@ export default function ProjectPageTemplate({ pageContext: { repo } }: ProjectPa
 			<div />
 			<Section title={repo.name} ref={useRef(null)}>
 				<Article>
-					<img src={getProjectImage(repo.imageUrl)} width="500" alt="TODO" />
+					<img src={repo.imageUrl} width="500" alt="TODO" />
 					<p>
 						{repo.shortDesc}
 					</p>

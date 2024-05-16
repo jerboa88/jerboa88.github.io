@@ -9,7 +9,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { ProjectInfoInterface } from '../common/types';
 import ConfigManager from '../common/config-manager';
-import { getClassNameProps, getProjectImage } from '../common/utilities';
+import { getClassNameProps } from '../common/utilities';
 import SubsectionHeading from './text/subsection-heading';
 import LinkWrapper from './links/link-wrapper';
 import GhostButton from './input/ghost-button';
@@ -44,7 +44,6 @@ export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
 					</div>
 					<div className="flex flex-row justify-center w-full">
 						{/* TODO: Put project icon here? */}
-						{/* <img src={getProjectImage(repo.imageUrl)}/> */}
 						<div className="flex flex-col justify-center p-8 px-10 h-full rounded-2xl z-16 text-wrap">
 							<SubsectionHeading className="font-semibold">
 								{repo.name}

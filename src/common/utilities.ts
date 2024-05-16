@@ -4,7 +4,6 @@
 */
 
 
-import defaultProjectImage from '../images/default-tile-bg.png'
 import { PropsWithClassName } from './types';
 
 
@@ -85,11 +84,6 @@ export function doesDeviceSupportHover() {
 // Get a value from an object or return a default value if the key does not exist
 export function getOrDefault<T, K extends keyof T, D extends any>(object: T, key: K | number | string | undefined, defaultValue: D): T[K] | D {
 	return object[key as K] ?? defaultValue as D;
-}
-
-
-export function getProjectImage(imageUrl: string) {
-	return imageUrl ? imageUrl : defaultProjectImage
 }
 
 
