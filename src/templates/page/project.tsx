@@ -77,7 +77,6 @@ export const Head = ({ location, pageContext: { repo } }: HeadProps & ProjectPag
 		shortDescription: repo.shortDesc,
 		path: location.pathname,
 		ogImageUrl: repo.imageUrl,
-		ogImageAltText: `Cover image for ${repo.name}`,
 		structuredData: {
 			'@context': 'https://schema.org',
 			'@type': 'SoftwareApplication',

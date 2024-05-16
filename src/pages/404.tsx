@@ -59,7 +59,6 @@ export const Head = ({ location }: HeadProps) => {
 		shortDescription: SITE_METADATA.shortDescription,
 		path: location.pathname,
 		ogImageUrl: new URL(SITE_METADATA.ogImagePath, SITE_METADATA.siteUrl).toString(),
-		ogImageAltText: SITE_METADATA.ogImageAltText,
 		structuredData: {
 			'@type': 'WebSite',
 			name: PAGE_TITLE,

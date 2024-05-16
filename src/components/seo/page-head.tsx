@@ -15,7 +15,6 @@ interface PageHeadPropsInterface {
 		shortDescription: string;
 		path: string;
 		ogImageUrl: string;
-		ogImageAltText: string;
 		structuredData: object;
 	};
 }
@@ -47,7 +46,6 @@ export default function PageHead({ pageMetadata }: PageHeadPropsInterface) {
 			<meta property="og:image:type" content="image/png" />
 			<meta property="og:image:width" content="1200" />
 			<meta property="og:image:height" content="630" />
-			<meta property="og:image:alt" content={pageMetadata.ogImageAltText} />
 
 			{/* Twitter meta tags */}
 			<meta name="twitter:card" content="summary_large_image" />
@@ -55,7 +53,6 @@ export default function PageHead({ pageMetadata }: PageHeadPropsInterface) {
 			<meta name="twitter:creator" content={siteMetadata.author.username.twitter} />
 			<meta name="twitter:description" content={pageMetadata.description} />
 			<meta name="twitter:image" content={pageMetadata.ogImageUrl} />
-			<meta name="twitter:image:alt" content={pageMetadata.ogImageAltText} />
 
 			<meta name="google" content="nositelinkssearchbox" />
 			<meta content={primaryThemeColor} name="theme-color" />
