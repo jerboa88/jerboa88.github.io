@@ -27,6 +27,10 @@ export interface PropsWithLayoutAnimations {
 export type BgColor = `bg-${string}`;
 
 
+// Absolute path
+export type Path = `/${string}`;
+
+
 // HTTPS URL
 type Url = `https://${string}`;
 
@@ -99,6 +103,43 @@ export interface SiteMetadataInterface {
 			state: string;
 			country: string;
 		},
+	}
+}
+
+
+// Page metadata fields
+export interface PageMetadata {
+	title: string;
+	shortTitle: string;
+	description: string;
+}
+
+
+// Page metadata added to pageContext when pages are created
+export interface PageMetadataProp {
+	pageMetadata: {
+		title: string;
+		shortTitle: string;
+		description: string;
+	}
+}
+
+
+// Raw pages metadata config
+export interface PagesMetadataConfigInterface {
+	[key: Path]: PageMetadata;
+}
+
+
+// Open Graph image metadata added to pageContext when pages are created
+export interface OgImageProp {
+	ogImage: {
+		componentPath: string;
+		imagePath: string;
+		size: {
+			height: number,
+			width: number,
+		};
 	}
 }
 

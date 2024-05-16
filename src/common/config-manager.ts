@@ -4,8 +4,9 @@
 */
 
 
-import type { BgColor, ProjectTypeColorMappingsInterface, RoleInterface, RoleTypeColorMappingsInterface, SiteMetadataInterface, ThemeInterface } from '../common/types';
+import type { BgColor, PageMetadata, ProjectTypeColorMappingsInterface, RoleInterface, RoleTypeColorMappingsInterface, SiteMetadataInterface, ThemeInterface } from '../common/types';
 import siteMetadataConfig from '../config/site-metadata';
+import pageMetadataConfig from '../config/pages-metadata';
 import externalServicesConfig from '../config/external-services';
 import jobsConfig from '../config/jobs';
 import themesConfig from '../config/themes';
@@ -53,6 +54,17 @@ export default class ConfigManager {
 				},
 			}
 		};
+	}
+
+	// Returns the metadata for a given page
+	getPageMetadata(pagePath: string): PageMetadata {
+		const pmc = pageMetadataConfig[pagePath as keyof typeof pageMetadataConfig];
+
+		if (!pmc) {
+			console.warn(`Page metadata for ${pagePath} not found`);
+		}
+
+		return pmc;
 	}
 
 	getExternalServices() {
