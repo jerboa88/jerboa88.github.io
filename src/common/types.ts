@@ -41,8 +41,6 @@ export interface ExternalServicesConfigInterface {
 // Raw site metadata config
 export interface SiteMetadataConfigInterface {
 	iconPath: string;
-	ogImagePath: string;
-	ogImageAltText: string;
 	siteUrl: Url;
 	sourceUrl: Url;
 	author: {
@@ -75,8 +73,6 @@ export interface SiteMetadataInterface {
 	shortDescription: string;
 	description: string;
 	iconPath: string;
-	ogImagePath: string;
-	ogImageAltText: string;
 	siteUrl: Url;
 	sourceUrl: Url;
 	author: {

@@ -25,8 +25,6 @@ export default class ConfigManager {
 			shortDescription: `Portfolio site for ${authorFullName}`,
 			description: `Portfolio site for ${authorFullName}, a ${smc.author.jobTitle} based in ${smc.author.location.city}, ${smc.author.location.state}.`,
 			iconPath: smc.iconPath,
-			ogImagePath: smc.ogImagePath,
-			ogImageAltText: smc.ogImageAltText,
 			siteUrl: smc.siteUrl,
 			sourceUrl: smc.sourceUrl,
 			author: {
@@ -75,7 +73,7 @@ export default class ConfigManager {
 		const theme = themesConfig[themeName];
 
 		if (!theme) {
-			throw new Error(`Theme ${themeName} not found`);
+			throw new Error(`Theme '${themeName}' not found`);
 		}
 
 		return theme;

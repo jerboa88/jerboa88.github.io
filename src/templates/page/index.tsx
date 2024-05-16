@@ -6,11 +6,12 @@
 
 import React, { useCallback, useRef } from 'react';
 import type { HeadProps } from 'gatsby';
-import { motion, useInView } from 'framer-motion';
+import { useInView } from 'framer-motion';
 import { faAngleDown, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { ButtonElementRenderFunction, ProjectInfoInterface, SectionInterface } from '../../common/types';
 import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
 import ConfigManager from '../../common/config-manager';
+import { toKebabCase } from '../../common/utilities';
 import Section from '../../components/layout/section';
 import PageLayout from '../../components/layout/page-layout';
 import PageHead from '../../components/seo/page-head';
@@ -20,7 +21,6 @@ import GhostButtonLink from '../../components/links/ghost-button-link';
 import ContactForm from '../../components/input/contact-form';
 import ProjectCardGallery from '../../components/project-card-gallery';
 import Timeline from '../../components/timeline';
-import { toKebabCase } from '../../common/utilities';
 
 
 // Types
@@ -130,7 +130,7 @@ export const Head = ({ location }: HeadProps) => {
 		description: SITE_METADATA.description,
 		shortDescription: SITE_METADATA.shortDescription,
 		path: location.pathname,
-		ogImageUrl: new URL(SITE_METADATA.ogImagePath, SITE_METADATA.siteUrl).toString(),
+		ogImageUrl: new URL("TODO", SITE_METADATA.siteUrl).toString(),
 		structuredData: {
 			'@type': 'WebSite',
 			name: SITE_METADATA.title,
