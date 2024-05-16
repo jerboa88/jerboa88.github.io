@@ -12,7 +12,7 @@ import { OG_IMAGE_DIR } from './src/common/constants';
 
 
 const configManager = new ConfigManager();
-const metadata = configManager.getMetadata();
+const metadata = configManager.getSiteMetadata();
 const lightTheme = configManager.getTheme('light');
 const darkTheme = configManager.getTheme('dark');
 

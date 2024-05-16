@@ -31,7 +31,7 @@ interface PrivacyPolicyPageProps {
 // Constants
 
 const PAGE_TITLE = 'Privacy Policy';
-const SITE_METADATA = new ConfigManager().getMetadata();
+const SITE_METADATA = new ConfigManager().getSiteMetadata();
 
 
 export default function PrivacyPolicyPage({ data }: PrivacyPolicyPageProps) {

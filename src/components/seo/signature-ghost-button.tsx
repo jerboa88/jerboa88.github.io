@@ -11,7 +11,7 @@ import ConfigManager from '../../common/config-manager';
 import GhostButton from '../input/ghost-button';
 
 
-const { siteUrl } = new ConfigManager().getMetadata();
+const { siteUrl } = new ConfigManager().getSiteMetadata();
 const BUTTON_PROPS = {
 	text: new URL(siteUrl).hostname,
 	icon: faSignature,

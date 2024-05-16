@@ -16,7 +16,7 @@ interface HeroHeaderProps {
 }
 
 export default function HeroHeader({ expandTitle = false }: HeroHeaderProps) {
-	const siteMetadata = new ConfigManager().getMetadata();
+	const siteMetadata = new ConfigManager().getSiteMetadata();
 
 	const titleElement = (
 		<Heading className="m-4 text-6xl">

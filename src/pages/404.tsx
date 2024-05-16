@@ -16,7 +16,7 @@ import SolidButtonLink from '../components/links/solid-button-link';
 // Constants
 
 const PAGE_TITLE = '404 - Page Not Found';
-const SITE_METADATA = new ConfigManager().getMetadata();
+const SITE_METADATA = new ConfigManager().getSiteMetadata();
 
 
 export default function NotFoundPage() {

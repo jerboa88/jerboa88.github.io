@@ -14,8 +14,7 @@ import colorMappingsConfig from '../config/color-mappings';
 
 // Class for loading and formatting configuration data
 export default class ConfigManager {
-	// TODO: Rename this method to getSiteMetadata
-	getMetadata(): SiteMetadataInterface {
+	getSiteMetadata(): SiteMetadataInterface {
 		const smc = siteMetadataConfig;
 		const authorFullName = `${smc.author.name.first} ${smc.author.name.last}`;
 

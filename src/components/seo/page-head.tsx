@@ -23,7 +23,7 @@ interface PageHeadPropsInterface {
 export default function PageHead({ pageMetadata }: PageHeadPropsInterface) {
 	// Grab site metadata from Gatsby config
 	const configManager = new ConfigManager();
-	const siteMetadata = configManager.getMetadata();
+	const siteMetadata = configManager.getSiteMetadata();
 
 	// TODO: Replace hardcoded value
 	const theme = configManager.getTheme('dark');

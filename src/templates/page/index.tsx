@@ -35,7 +35,7 @@ interface IndexPageTemplatePropsInterface {
 // Constants
 
 const configManager = new ConfigManager();
-const SITE_METADATA = configManager.getMetadata();
+const SITE_METADATA = configManager.getSiteMetadata();
 const JOBS = configManager.getJobs();
 
 

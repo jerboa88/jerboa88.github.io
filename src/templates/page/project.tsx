@@ -26,7 +26,7 @@ interface ProjectPageTemplatePropsInterface {
 
 
 // Constants
-const SITE_METADATA = new ConfigManager().getMetadata();
+const SITE_METADATA = new ConfigManager().getSiteMetadata();
 
 
 export default function ProjectPageTemplate({ pageContext: { repo } }: ProjectPageTemplatePropsInterface) {
