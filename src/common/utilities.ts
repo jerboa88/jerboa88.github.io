@@ -10,6 +10,16 @@ import ConfigManager from './config-manager';
 
 const SITE_METADATA = new ConfigManager().getSiteMetadata();
 
+const MIME_TYPE_MAP = {
+	apng: 'image/apng',
+	avif: 'image/avif',
+	gif: 'image/gif',
+	jpeg: 'image/jpeg',
+	jpg: 'image/jpeg',
+	png: 'image/png',
+	svg: 'image/svg+xml',
+	webp: 'image/webp',
+} as const;
 
 // Status code information is adapted from https://github.com/prettymuchbryce/http-status-codes/blob/master/codes.json as is licensed under the MIT License
 const STATUS_CODE_MESSAGE_MAP = {
@@ -132,4 +142,16 @@ export function toKebabCase(string: string) {
 // Given a path, return the absolute URL
 export function getAbsoluteUrl(path: string) {
 	return new URL(path, SITE_METADATA.siteUrl);
+}
+
+
+// Get the MIME type of a file URL based on its extension
+export function getMimeType(fileUrl: URL) {
+	const extension = fileUrl.pathname.split('.').pop();
+
+	if (extension === undefined) {
+		throw new Error('File extension not found in URL');
+	}
+
+	return getOrDefault(MIME_TYPE_MAP, extension) as string;
 }
