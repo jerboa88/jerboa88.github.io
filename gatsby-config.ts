@@ -8,7 +8,8 @@ import type { GatsbyConfig } from 'gatsby';
 import dotenv from 'dotenv';
 import * as tailwindConfig from './tailwind.config';
 import ConfigManager from './src/common/config-manager';
-import { OG_IMAGE_DIR } from './src/common/constants';
+import { getAbsoluteUrl } from './src/common/utilities';
+import { SOCIAL_IMAGES_DIR } from './src/common/constants';
 
 
 const configManager = new ConfigManager();
@@ -38,7 +39,10 @@ const config: GatsbyConfig = {
 		'gatsby-plugin-sharp',
 		// Required by gatsby-plugin-image for dynamic images
 		'gatsby-transformer-sharp',
-		'gatsby-plugin-dynamic-open-graph-images',
+		{
+			resolve: 'gatsby-plugin-component-to-image',
+			options: configManager.getSocialImageGenerationConfigDefaults()
+		},
 		{
 			resolve: 'gatsby-plugin-postcss',
 			options: {
@@ -58,14 +62,16 @@ const config: GatsbyConfig = {
 					changefreq: 'monthly',
 				}),
 				// Prevent temporary components rendered by gatsby-plugin-open-graph-images from being included in the sitemap
-				excludes: [`/${OG_IMAGE_DIR}/*`],
+				excludes: [
+					`/${SOCIAL_IMAGES_DIR}/**/*`,
+				],
 			}
 		},
 		{
 			resolve: 'gatsby-plugin-robots-txt',
 			options: {
 				// Link to the sitemap index generated above
-				sitemap: new URL('sitemap-index.xml', metadata.siteUrl).toString(),
+				sitemap: getAbsoluteUrl('sitemap-index.xml').toString(),
 				policy: [
 					{
 						userAgent: '*',
