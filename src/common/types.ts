@@ -6,6 +6,7 @@
 
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { LayoutProps } from 'framer-motion';
+import { DefaultOptions, JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import { Context, RefObject } from 'react';
 import { FieldErrors, UseFormRegister, UseFormRegisterReturn } from 'react-hook-form';
 
@@ -131,16 +132,33 @@ export interface PagesMetadataConfigInterface {
 }
 
 
-// Open Graph image metadata added to pageContext when pages are created
-export interface OgImageProp {
-	ogImage: {
-		componentPath: string;
-		imagePath: string;
-		size: {
-			height: number,
-			width: number,
-		};
+// TODO: Use this type in interfaces below
+// TODO: Change this to an enum
+export type SocialImageTypes = 'og' | 'twitter';
+
+
+// Raw social image metadata config
+export interface SocialImagesGenerationConfig {
+	defaults: DefaultOptions
+	types: {
+		og: JobOptions;
+		twitter: JobOptions;
 	}
+}
+
+
+// Social image metadata added to the pageContext of pages when they are created
+export interface SocialImagesMetadataProp {
+	socialImagesMetadata: {
+		og: JobOptions;
+		twitter: JobOptions;
+	};
+}
+
+
+// Open Graph image metadata added to the pageContext of gatsby-plugin-component-to-image components when they are created
+export interface ImageMetadataProp {
+	imageMetadata: JobOptions;
 }
 
 
