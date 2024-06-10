@@ -59,9 +59,6 @@ export default function PageHead({ pageMetadata }: PageHeadPropsInterface) {
 
 			<link rel="canonical" href={pageUrl} />
 
-			{/* These icons are were not added to the head with gatsby-plugin-manifest so we need to add them manually here */}
-			<link rel="icon" href="/favicon-32x32.png" type="image/png" />
-			<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
 			{/* Structured data */}
 			<script type="application/ld+json">
