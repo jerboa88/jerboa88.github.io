@@ -8,63 +8,63 @@ import { PropsWithClassName } from './types';
 
 
 // Status code information is adapted from https://github.com/prettymuchbryce/http-status-codes/blob/master/codes.json as is licensed under the MIT License
-const statusCodeMessages = {
-	202: 'Accepted',
-	502: 'Bad Gateway',
-	400: 'Bad Request',
-	409: 'Conflict',
+const STATUS_CODE_MESSAGE_MAP = {
 	100: 'Continue',
-	201: 'Created',
-	417: 'Expectation Failed',
-	424: 'Failed Dependency',
-	403: 'Forbidden',
-	504: 'Gateway Timeout',
-	410: 'Gone',
-	505: 'HTTP Version Not Supported',
-	418: 'I\'m a teapot',
-	419: 'Insufficient Space on Resource',
-	507: 'Insufficient Storage',
-	500: 'Internal Server Error',
-	411: 'Length Required',
-	423: 'Locked',
-	405: 'Method Not Allowed',
-	301: 'Moved Permanently',
-	302: 'Moved Temporarily',
-	207: 'Multi-Status',
-	300: 'Multiple Choices',
-	511: 'Network Authentication Required',
-	204: 'No Content',
-	203: 'Non Authoritative Information',
-	406: 'Not Acceptable',
-	404: 'Not Found',
-	501: 'Not Implemented',
-	304: 'Not Modified',
-	200: 'OK',
-	206: 'Partial Content',
-	402: 'Payment Required',
-	308: 'Permanent Redirect',
-	412: 'Precondition Failed',
-	428: 'Precondition Required',
+	101: 'Switching Protocols',
 	102: 'Processing',
 	103: 'Early Hints',
-	426: 'Upgrade Required',
+	200: 'OK',
+	201: 'Created',
+	202: 'Accepted',
+	203: 'Non Authoritative Information',
+	204: 'No Content',
+	205: 'Reset Content',
+	206: 'Partial Content',
+	207: 'Multi-Status',
+	300: 'Multiple Choices',
+	301: 'Moved Permanently',
+	302: 'Moved Temporarily',
+	303: 'See Other',
+	304: 'Not Modified',
+	307: 'Temporary Redirect',
+	308: 'Permanent Redirect',
+	400: 'Bad Request',
+	401: 'Unauthorized',
+	402: 'Payment Required',
+	403: 'Forbidden',
+	404: 'Not Found',
+	405: 'Method Not Allowed',
+	406: 'Not Acceptable',
 	407: 'Proxy Authentication Required',
-	431: 'Request Header Fields Too Large',
 	408: 'Request Timeout',
+	409: 'Conflict',
+	410: 'Gone',
+	411: 'Length Required',
+	412: 'Precondition Failed',
 	413: 'Request Entity Too Large',
 	414: 'Request-URI Too Long',
-	416: 'Requested Range Not Satisfiable',
-	205: 'Reset Content',
-	303: 'See Other',
-	503: 'Service Unavailable',
-	101: 'Switching Protocols',
-	307: 'Temporary Redirect',
-	429: 'Too Many Requests',
-	401: 'Unauthorized',
-	451: 'Unavailable For Legal Reasons',
-	422: 'Unprocessable Entity',
 	415: 'Unsupported Media Type',
-	421: 'Misdirected Request'
+	416: 'Requested Range Not Satisfiable',
+	417: 'Expectation Failed',
+	418: 'I\'m a teapot',
+	419: 'Insufficient Space on Resource',
+	421: 'Misdirected Request',
+	422: 'Unprocessable Entity',
+	423: 'Locked',
+	424: 'Failed Dependency',
+	426: 'Upgrade Required',
+	428: 'Precondition Required',
+	429: 'Too Many Requests',
+	431: 'Request Header Fields Too Large',
+	451: 'Unavailable For Legal Reasons',
+	500: 'Internal Server Error',
+	501: 'Not Implemented',
+	502: 'Bad Gateway',
+	503: 'Service Unavailable',
+	504: 'Gateway Timeout',
+	505: 'HTTP Version Not Supported',
+	507: 'Insufficient Storage',
+	511: 'Network Authentication Required',
 } as const;
 
 
@@ -89,7 +89,7 @@ export function getOrDefault<T, K extends keyof T, D extends any>(object: T, key
 
 // Get the description associated with a given status code
 export function getStatusCodeDescription(statusCode: number): string {
-	return getOrDefault(statusCodeMessages, statusCode, 'Unknown Status Code');
+	return getOrDefault(STATUS_CODE_MESSAGE_MAP, statusCode, 'Unknown Status Code');
 }
 
 
@@ -110,7 +110,7 @@ export function clamp(value: number, min: number, max: number) {
 // Convert a string to kebab case
 export function toKebabCase(string: string) {
 	return string
-		.replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+		.replace(/([a-z0-9])([A-Z])/g, '$1-$2')
 		.replace(/[\s_]+/g, '-')
 		.toLowerCase();
 }
