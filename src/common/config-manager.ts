@@ -4,13 +4,15 @@
 */
 
 
-import type { BgColor, PageMetadata, ProjectTypeColorMappingsInterface, RoleInterface, RoleTypeColorMappingsInterface, SiteMetadataInterface, ThemeInterface } from '../common/types';
+import type { BgColor, PageMetadata, ProjectTypeColorMappingsInterface, RoleInterface, RoleTypeColorMappingsInterface, SiteMetadataInterface, SocialImageTypes, SocialImagesGenerationConfig, ThemeInterface } from '../common/types';
 import siteMetadataConfig from '../config/site-metadata';
 import pageMetadataConfig from '../config/pages-metadata';
+import socialImagesGenerationConfig from '../config/social-images-generation';
 import externalServicesConfig from '../config/external-services';
 import jobsConfig from '../config/jobs';
 import themesConfig from '../config/themes';
 import colorMappingsConfig from '../config/color-mappings';
+import { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 
 
 // Class for loading and formatting configuration data
@@ -65,6 +67,22 @@ export default class ConfigManager {
 		}
 
 		return pmc;
+	}
+
+	// Returns the social image generation config for a given type
+	getSocialImageGenerationConfigDefaults(): SocialImagesGenerationConfig['defaults'] {
+		return socialImagesGenerationConfig.defaults;
+	}
+
+	// Returns the social image generation config for a given type
+	getSocialImageGenerationConfigForType(type: SocialImageTypes): JobOptions {
+		const sigc = socialImagesGenerationConfig.types[type as keyof typeof socialImagesGenerationConfig['types']];
+
+		if (!sigc) {
+			console.warn(`Social image generation config for '${type}' not found`);
+		}
+
+		return sigc;
 	}
 
 	getExternalServices() {
