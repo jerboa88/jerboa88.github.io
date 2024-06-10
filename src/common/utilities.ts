@@ -5,6 +5,10 @@
 
 
 import { PropsWithClassName } from './types';
+import ConfigManager from './config-manager';
+
+
+const SITE_METADATA = new ConfigManager().getSiteMetadata();
 
 
 // Status code information is adapted from https://github.com/prettymuchbryce/http-status-codes/blob/master/codes.json as is licensed under the MIT License
@@ -122,4 +126,10 @@ export function toKebabCase(string: string) {
 		.replace(/([a-z0-9])([A-Z])/g, '$1-$2')
 		.replace(/[\s_]+/g, '-')
 		.toLowerCase();
+}
+
+
+// Given a path, return the absolute URL
+export function getAbsoluteUrl(path: string) {
+	return new URL(path, SITE_METADATA.siteUrl);
 }
