@@ -155,3 +155,9 @@ export function getMimeType(fileUrl: URL) {
 
 	return getOrDefault(MIME_TYPE_MAP, extension) as string;
 }
+
+
+// Remove a trailing slash from a path if it exists
+export function removeTrailingSlash(path: string) {
+	return path.endsWith('/') ? path.slice(0, -1) : path;
+}
