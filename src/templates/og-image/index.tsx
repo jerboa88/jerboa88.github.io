@@ -3,21 +3,31 @@
 	------------------------------------------------------------------
 */
 
-// TODO: Implement this template
 
 import React from 'react'
-import { Node } from 'gatsby'
+import { PageProps } from 'gatsby';
+import { ImageMetadataProp } from '../../common/types';
+import HeroHeader from '../../components/layout/hero-header';
+import OgImage from '../../components/seo/og-image';
+import GhostButton from '../../components/input/ghost-button';
+import SignatureGhostButtonLink from '../../components/seo/signature-ghost-button';
 
 
-export default function (props: Node) {
-	console.log('props', props)
+interface PageContext {
+	pageContext: ImageMetadataProp;
+}
 
+export default function IndexOgImageTemplate({ pageContext: { imageMetadata } }: PageContext & PageProps) {
 	return (
-		<div className="flex flex-row size-full bg-error">
-			<h1>Open Graph image for the landing page</h1>
-			<output>
-				{JSON.stringify(props, null, 2)}
-			</output>
-		</div>
+		<OgImage size={imageMetadata.size} className="justify-between text-center">
+			<SignatureGhostButtonLink />
+			<div className="flex flex-col">
+				<HeroHeader expandTitle />
+			</div>
+			{/* Dummy element to force center alignment of section */}
+			<GhostButton text="" />
+		</OgImage>
 	)
 }
+
+export { default as Head } from '../../components/seo/og-image-head'
