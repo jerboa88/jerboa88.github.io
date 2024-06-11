@@ -6,7 +6,7 @@
 
 import React, { useRef } from 'react';
 import type { HeadProps, PageProps } from 'gatsby';
-import { PageMetadataProp, SocialImagesMetadataProp } from '../common/types';
+import { PageMetadataProp } from '../common/types';
 import ConfigManager from '../common/config-manager';
 import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
