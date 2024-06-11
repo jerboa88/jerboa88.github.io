@@ -1,28 +1,39 @@
-import path from 'path';
-import type { CreatePagesArgs, GatsbyNode } from 'gatsby';
-import { createOpenGraphImage } from 'gatsby-plugin-dynamic-open-graph-images';
-import { PinnedRepoResponseInterface } from './src/common/types';
-import { PROJECTS_DIR, OG_IMAGE_DIR } from './src/common/constants';
+import { resolve, join } from 'path';
+import type { Actions, CreatePagesArgs, GatsbyNode } from 'gatsby';
+import { createImage } from 'gatsby-plugin-component-to-image';
+import { Path, PinnedRepoResponseInterface, SocialImageTypes } from './src/common/types';
+import { PROJECTS_DIR, SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR } from './src/common/constants';
+import ConfigManager from './src/common/config-manager';
 import ResponseParser from './src/node/response-parser';
 import ResponseMapper from './src/node/response-mapper';
+import { removeTrailingSlash } from './src/common/utilities';
 
 
 // Constants
 
-const INDEX_PAGE_TEMPLATE = path.resolve('./src/templates/page/index.tsx');
-const PROJECT_PAGE_TEMPLATE = path.resolve('./src/templates/page/project.tsx');
+const INDEX_PAGE_TEMPLATE = resolve('./src/templates/page/index.tsx');
+const PROJECT_PAGE_TEMPLATE = resolve('./src/templates/page/project.tsx');
 
-const INDEX_OG_IMAGE_TEMPLATE = path.resolve('./src/templates/og-image/index.tsx');
-const PROJECT_OG_IMAGE_TEMPLATE = path.resolve('./src/templates/og-image/project.tsx');
-const OTHER_OG_IMAGE_TEMPLATE = path.resolve('./src/templates/og-image/other.tsx');
+const INDEX_OG_IMAGE_TEMPLATE = resolve('./src/templates/og-image/index.tsx');
+const PROJECT_OG_IMAGE_TEMPLATE = resolve('./src/templates/og-image/project.tsx');
+const OTHER_OG_IMAGE_TEMPLATE = resolve('./src/templates/og-image/other.tsx');
+
+const configManager = new ConfigManager();
 
 
 // Types
 
-interface GenerateOpenGraphImageOptions {
-	id: string;
+interface CreatePageOptions {
+	path: Path;
 	component: string;
-	context?: Object;
+	socialImageComponent: string;
+	context: object;
+}
+
+interface CreateSocialImagesOptions {
+	path: string;
+	component: string;
+	context?: object;
 }
 
 
@@ -80,8 +91,6 @@ async function fetchPinnedRepos(graphql: CreatePagesArgs['graphql']) {
 	`);
 
 	if (!response || 'errors' in response) {
-		console.warn('response', response);
-
 		throw new Error('The response from GitHub contains errors', response?.errors);
 	}
 
@@ -104,75 +113,119 @@ function assertResponseDataIsNonEmpty(responseData) {
 }
 
 
-// Generate an Open Graph image for a page
-function generateOpenGraphImage(createPage: CreatePagesArgs['actions']['createPage'], { id, component, context }: GenerateOpenGraphImageOptions) {
-	console.debug(`Generating Open Graph image for ${id}`);
+// Generate a single social image for a page
+function createSocialImage(type: SocialImageTypes, { path, component, context }: CreateSocialImagesOptions) {
+	const pagePath = join(SOCIAL_IMAGE_PAGES_DIR, type, path);
+	const imageFileName = path === '/' ? 'index' : removeTrailingSlash(path);
+	const imagePath = join('/', 'images', type, `${imageFileName}.webp`);
+	const { size } = configManager.getSocialImageGenerationConfigForType(type);
+	const socialImageMetadata = createImage({
+		pagePath,
+		imagePath,
+		component,
+		size,
+		context,
+	});
 
-	createOpenGraphImage(createPage, {
-		outputDir: OG_IMAGE_DIR,
+	return socialImageMetadata;
+}
+
+// Generate a set of social images for a page
+function createSocialImages(options: CreateSocialImagesOptions) {
+	return {
+		og: createSocialImage('og', options),
+		twitter: createSocialImage('twitter', options),
+	};
+}
+
+// Create a page and generate the associated social images for it
+function createPage(gatsbyCreatePage: Actions['createPage'], { path, component, socialImageComponent, context }: CreatePageOptions) {
+	console.debug(`Creating page at ${path}`);
+
+	const socialImagesMetadata = createSocialImages({
+		path: path,
+		component: socialImageComponent,
+		context: context,
+	});
+
+	gatsbyCreatePage({
+		path: path,
 		component: component,
 		context: {
-			id: id,
 			...context,
-		},
+			socialImagesMetadata: socialImagesMetadata,
+		}
 	});
 }
 
 
-// Entry point
-export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
+// Add metadata to automatically generated pages and generate the associated Open Graph images
+export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page, actions }) => {
+	const {
+		createPage: gatsbyCreatePage,
+		deletePage: gatsbyDeletePage
+	} = actions;
+	if (!page.path) {
+		return;
+	}
+
+	// Skip social images
+	if (page.path.startsWith(SOCIAL_IMAGE_PAGES_DIR)) {
+		return;
+	}
+
+	const pageMetadata = configManager.getPageMetadata(page.path);
+
+	if (!pageMetadata) {
+		console.warn(`Skipped adding metadata to ${page.path}`);
+
+		return;
+	}
+
+	gatsbyDeletePage(page);
+
+	createPage(gatsbyCreatePage, {
+		...page,
+		path: page.path as Path,
+		socialImageComponent: OTHER_OG_IMAGE_TEMPLATE,
+		context: {
+			...page.context,
+			pageMetadata: pageMetadata,
+		}
+	});
+}
+
+
+// Manually create pages and generate the associated Open Graph images
+export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage: gatsbyCreatePage }, graphql }) => {
 	const pinnedReposResponseData = await fetchPinnedRepos(graphql);
 	const pinnedRepos = pinnedReposResponseData.map(responseData => {
 		assertResponseDataIsNonEmpty(responseData);
 
-		const projectInfo = ResponseMapper.map(ResponseParser.parse(responseData as PinnedRepoResponseInterface));
+		const projectInfo = ResponseMapper.map(
+			ResponseParser.parse(responseData as PinnedRepoResponseInterface)
+		);
 
 		// Create project pages
-		createPage({
-			path: path.join('/', PROJECTS_DIR, projectInfo.slug),
+		createPage(gatsbyCreatePage, {
+			path: join(PROJECTS_DIR, projectInfo.slug) as Path,
 			component: PROJECT_PAGE_TEMPLATE,
+			socialImageComponent: PROJECT_OG_IMAGE_TEMPLATE,
 			context: {
 				repo: projectInfo,
-			}
-		});
-
-		generateOpenGraphImage(createPage, {
-			id: projectInfo.slug,
-			component: PROJECT_OG_IMAGE_TEMPLATE,
-			context: {
-				repo: projectInfo,
-			}
+			},
 		});
 
 		return projectInfo;
 	});
 
 	// Create landing page
-	createPage({
+	createPage(gatsbyCreatePage, {
 		path: '/',
 		component: INDEX_PAGE_TEMPLATE,
+		socialImageComponent: INDEX_OG_IMAGE_TEMPLATE,
 		context: {
 			pinnedRepos: pinnedRepos,
-		}
-	});
-
-	// Create Open Graph images
-	generateOpenGraphImage(createPage, {
-		id: 'index',
-		component: INDEX_OG_IMAGE_TEMPLATE,
-	});
-	generateOpenGraphImage(createPage, {
-		id: 'privacy-policy',
-		component: OTHER_OG_IMAGE_TEMPLATE,
-		context: {
-			pageName: 'Privacy Policy',
-		}
-	});
-	generateOpenGraphImage(createPage, {
-		id: '404',
-		component: OTHER_OG_IMAGE_TEMPLATE,
-		context: {
-			pageName: '404',
-		}
+		},
 	});
 }
