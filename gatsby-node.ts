@@ -6,7 +6,7 @@ import { PROJECTS_DIR, SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR } from './src
 import ConfigManager from './src/common/config-manager';
 import ResponseParser from './src/node/response-parser';
 import ResponseMapper from './src/node/response-mapper';
-import { assertIsDefined, removeTrailingSlash } from './src/common/utilities';
+import { removeTrailingSlash } from './src/common/utilities';
 import assert from 'assert';
 
 
