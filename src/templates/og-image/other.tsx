@@ -3,21 +3,38 @@
 	---------------------------------------------------------------
 */
 
-// TODO: Implement this template
 
-import React from 'react'
-import { Node } from 'gatsby'
+import React, { useCallback } from 'react';
+import { PageProps } from 'gatsby';
+import { ButtonElementRenderFunction, ImageMetadataProp, PageMetadataProp } from '../../common/types';
+import OgImage from '../../components/seo/og-image';
+import { Article } from '../../components/text/article';
+import Section from '../../components/layout/section';
+import SignatureGhostButtonLink from '../../components/seo/signature-ghost-button';
 
 
-export default function (props: Node) {
-	console.warn('props', props)
+// Types
+
+interface PageContext {
+	pageContext: PageMetadataProp & ImageMetadataProp;
+}
+
+export default function OtherOgImageTemplate({ pageContext: { pageMetadata, imageMetadata } }: PageContext & PageProps) {
+	const renderButton = useCallback((({ className, tooltipPosition }) => (
+		<SignatureGhostButtonLink className={className} tooltipPosition={tooltipPosition} />
+	)) as ButtonElementRenderFunction, []);
 
 	return (
-		<div className="flex flex-row size-full bg-error">
-			<h1>Open Graph image for other pages</h1>
-			<output>
-				{JSON.stringify(props, null, 2)}
-			</output>
-		</div>
+		<OgImage size={imageMetadata.size} className="justify-center">
+			<Section title={pageMetadata.title} responsive={false} renderButton={renderButton} className="py-0 px-10 max-w-[70%]">
+				<Article>
+					<p>
+						{pageMetadata.description}
+					</p>
+				</Article>
+			</Section>
+		</OgImage>
 	)
 }
+
+export { default as Head } from '../../components/seo/og-image-head'
