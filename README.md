@@ -27,11 +27,15 @@
 
 
 ## Installation
-1. Install Node.js and NPM (if they are not already set up on your system). See [nodejs.org](https://nodejs.org/) for more details.
-2. Install Yarn 3 (if it is not already set up on your system). See the [Yarn docs](https://yarnpkg.com/getting-started/install) for more details.
-3. Clone the repo with `https://github.com/jerboa88/jerboa88.github.io.git`. Alternatively, you can download the repository as a zip file and extract it.
-4. Enter the project root with `cd jerboa88.github.io`.
-5. Use `yarn install` to install the app and all of its dependencies.
+### Prerequisites
+
+- Node.js and NPM (see [nodejs.org](https://nodejs.org/) for more details)
+- Yarn 4 (see the [Yarn docs](https://yarnpkg.com/getting-started/install) for more details)
+
+### Setup
+1. Clone the repo with `https://github.com/jerboa88/jerboa88.github.io.git`. Alternatively, you can download the repository as a zip file and extract it.
+2. Enter the project root with `cd jerboa88.github.io`.
+4. Use `yarn install` to install the app and all of its dependencies.
 
 
 ## Usage
