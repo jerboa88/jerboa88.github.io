@@ -1,12 +1,13 @@
 import { resolve, join } from 'path';
-import type { Actions, CreatePagesArgs, GatsbyNode } from 'gatsby';
+import type { Actions, CreatePagesArgs, GatsbyNode, Reporter } from 'gatsby';
 import { createImage } from 'gatsby-plugin-component-to-image';
 import { Path, PinnedRepoResponseInterface, SocialImageTypes } from './src/common/types';
 import { PROJECTS_DIR, SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR } from './src/common/constants';
 import ConfigManager from './src/common/config-manager';
 import ResponseParser from './src/node/response-parser';
 import ResponseMapper from './src/node/response-mapper';
-import { removeTrailingSlash } from './src/common/utilities';
+import { assertIsDefined, removeTrailingSlash } from './src/common/utilities';
+import assert from 'assert';
 
 
 // Constants
@@ -19,6 +20,13 @@ const PROJECT_OG_IMAGE_TEMPLATE = resolve('./src/templates/og-image/project.tsx'
 const OTHER_OG_IMAGE_TEMPLATE = resolve('./src/templates/og-image/other.tsx');
 
 const configManager = new ConfigManager();
+
+
+// Runtime variables
+
+let gatsbyCreatePage: Actions['createPage'] | undefined = undefined;
+let gatsbyDeletePage: Actions['deletePage'] | undefined = undefined;
+let gatsbyReporter: Reporter | undefined = undefined;
 
 
 // Types
@@ -139,8 +147,10 @@ function createSocialImages(options: CreateSocialImagesOptions) {
 }
 
 // Create a page and generate the associated social images for it
-function createPage(gatsbyCreatePage: Actions['createPage'], { path, component, socialImageComponent, context }: CreatePageOptions) {
-	console.debug(`Creating page at ${path}`);
+function createPage({ path, component, socialImageComponent, context }: CreatePageOptions) {
+	gatsbyReporter?.info(`Creating page at ${path}`);
+
+	assert(gatsbyCreatePage !== undefined);
 
 	const socialImagesMetadata = createSocialImages({
 		path: path,
@@ -159,12 +169,16 @@ function createPage(gatsbyCreatePage: Actions['createPage'], { path, component, 
 }
 
 
+// Save Gatsby Node API Helpers for later use
+export const onPluginInit: GatsbyNode['onPluginInit'] = ({ reporter, actions: { createPage, deletePage } }) => {
+	gatsbyCreatePage = createPage;
+	gatsbyDeletePage = deletePage;
+	gatsbyReporter = reporter;
+}
+
+
 // Add metadata to automatically generated pages and generate the associated Open Graph images
-export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page, actions }) => {
-	const {
-		createPage: gatsbyCreatePage,
-		deletePage: gatsbyDeletePage
-	} = actions;
+export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
 	if (!page.path) {
 		return;
 	}
@@ -177,14 +191,16 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page, actions }) => {
 	const pageMetadata = configManager.getPageMetadata(page.path);
 
 	if (!pageMetadata) {
-		console.warn(`Skipped adding metadata to ${page.path}`);
+		gatsbyReporter?.warn(`Skipped adding metadata to ${page.path}`);
 
 		return;
 	}
 
+	assert(gatsbyDeletePage !== undefined);
+
 	gatsbyDeletePage(page);
 
-	createPage(gatsbyCreatePage, {
+	createPage({
 		...page,
 		path: page.path as Path,
 		socialImageComponent: OTHER_OG_IMAGE_TEMPLATE,
@@ -197,7 +213,7 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page, actions }) => {
 
 
 // Manually create pages and generate the associated Open Graph images
-export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage: gatsbyCreatePage }, graphql }) => {
+export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 	const pinnedReposResponseData = await fetchPinnedRepos(graphql);
 	const pinnedRepos = pinnedReposResponseData.map(responseData => {
 		assertResponseDataIsNonEmpty(responseData);
@@ -207,7 +223,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 		);
 
 		// Create project pages
-		createPage(gatsbyCreatePage, {
+		createPage({
 			path: join(PROJECTS_DIR, projectInfo.slug) as Path,
 			component: PROJECT_PAGE_TEMPLATE,
 			socialImageComponent: PROJECT_OG_IMAGE_TEMPLATE,
@@ -220,7 +236,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 	});
 
 	// Create landing page
-	createPage(gatsbyCreatePage, {
+	createPage({
 		path: '/',
 		component: INDEX_PAGE_TEMPLATE,
 		socialImageComponent: INDEX_OG_IMAGE_TEMPLATE,
