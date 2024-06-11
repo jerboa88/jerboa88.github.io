@@ -3,21 +3,34 @@
 	-------------------------------------------------------------
 */
 
-// TODO: Implement this template
 
-import React from 'react'
-import { Node } from 'gatsby'
+import React, { useCallback } from 'react'
+import { PageProps } from 'gatsby';
+import { ButtonElementRenderFunction, ImageMetadataProp, ProjectInfoInterface } from '../../common/types';
+import OgImage from '../../components/seo/og-image';
+import ProjectCard from '../../components/project-card'
+import Section from '../../components/layout/section';
+import SignatureGhostButtonLink from '../../components/seo/signature-ghost-button';
 
 
-export default function (props: Node) {
-	console.log('props', props)
+interface PageContext {
+	pageContext: ImageMetadataProp & {
+		repo: ProjectInfoInterface;
+	};
+}
+
+export default function ProjectOgImageTemplate({ pageContext: { repo, imageMetadata } }: PageContext & PageProps) {
+	const renderButton = useCallback((({ className, tooltipPosition }) => (
+		<SignatureGhostButtonLink className={className} tooltipPosition={tooltipPosition} />
+	)) as ButtonElementRenderFunction, []);
 
 	return (
-		<div className="flex flex-row size-full bg-error">
-			<h1>Open Graph image for project pages</h1>
-			<output>
-				{JSON.stringify(props, null, 2)}
-			</output>
-		</div>
+		<OgImage size={imageMetadata.size} className="justify-center">
+			<Section title="Project" responsive={false} renderButton={renderButton} className="py-0 px-10">
+				<ProjectCard repo={repo} />
+			</Section>
+		</OgImage>
 	)
 }
+
+export { default as Head } from '../../components/seo/og-image-head'
