@@ -13,6 +13,7 @@ import PageHead from '../../components/seo/page-head';
 import Section from '../../components/layout/section';
 import { Article } from '../../components/text/article';
 import InlineLink from '../../components/links/inline-link';
+import { getAbsoluteUrl } from '../../common/utilities';
 
 
 // Types
@@ -76,13 +77,12 @@ export const Head = ({ location, pageContext: { repo } }: HeadProps & ProjectPag
 		description: repo.longDesc,
 		shortDescription: repo.shortDesc,
 		path: location.pathname,
-		ogImageUrl: repo.imageUrl,
 		structuredData: {
 			'@context': 'https://schema.org',
 			'@type': 'SoftwareApplication',
 			name: repo.name,
 			description: repo.longDesc,
-			url: new URL(location.pathname, SITE_METADATA.siteUrl).toString(),
+			url: getAbsoluteUrl(location.pathname).toString(),
 			image: repo.imageUrl,
 			license: repo.license,
 		}
