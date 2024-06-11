@@ -39,7 +39,7 @@ const SITE_METADATA = configManager.getSiteMetadata();
 const JOBS = configManager.getJobs();
 
 
-export default function IndexPageTemplate({ pageContext }: IndexPageTemplatePropsInterface) {
+export default function IndexPageTemplate({ pageContext: { pinnedRepos } }: IndexPageTemplatePropsInterface) {
 	const inViewTriggerRef = useRef(null);
 	const expandTitle = useInView(inViewTriggerRef, USE_IN_VIEW_OPTIONS);
 	const sections = [
@@ -107,7 +107,7 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 				</Article>
 			</Section>
 			<Section renderButton={projectsSectionButton} className="min-h-lvh" {...sections[1]}>
-				<ProjectCardGallery projects={pageContext.pinnedRepos} />
+				<ProjectCardGallery projects={pinnedRepos} />
 			</Section>
 			<Section renderButton={experienceSectionButton} className="min-h-lvh" {...sections[2]}>
 				<Timeline roles={JOBS} />
@@ -124,13 +124,12 @@ export default function IndexPageTemplate({ pageContext }: IndexPageTemplateProp
 	);
 }
 
-export const Head = ({ location }: HeadProps) => {
-	const pageMetadata = {
+export const Head = ({ location }: IndexPageTemplatePropsInterface & HeadProps) => {
+	const computedPageMetadata = {
 		title: SITE_METADATA.title,
 		description: SITE_METADATA.description,
 		shortDescription: SITE_METADATA.shortDescription,
 		path: location.pathname,
-		ogImageUrl: new URL("TODO", SITE_METADATA.siteUrl).toString(),
 		structuredData: {
 			'@type': 'WebSite',
 			name: SITE_METADATA.title,
@@ -140,6 +139,6 @@ export const Head = ({ location }: HeadProps) => {
 	};
 
 	return (
-		<PageHead pageMetadata={pageMetadata} />
+		<PageHead pageMetadata={computedPageMetadata} />
 	);
 }
