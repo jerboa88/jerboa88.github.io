@@ -47,5 +47,12 @@ There are two ways to build & serve the site:
 See the [Gatsby CLI docs](https://www.gatsbyjs.com/docs/reference/gatsby-cli/) for additional commands and options. You will likely have to prefix commands with `yarn` to make sure package resolution works properly. For example, the above `yarn develop` is actually just a shortcut for `yarn gatsby develop`.
 
 
+## Contributing
+This project is not open to code contributions, but feedback and bug reports are always welcome.
+
+### Versioning
+x.1 releases mark the final update for a given design, while x.0 releases are reserved for major redesigns. Changes between the first and last release of a design are not explicitly versioned.
+
+
 ## License
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details. This project includes various resources which carry their own copyright notices and license terms. See [LICENSE-THIRD-PARTY.md](LICENSE-THIRD-PARTY.md) for more details.
