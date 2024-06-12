@@ -7,7 +7,7 @@
 import React, { useCallback } from 'react';
 import { PageProps } from 'gatsby';
 import { ButtonElementRenderFunction, ImageMetadataProp, PageMetadataProp } from '../../common/types';
-import SocialImage from '../../components/seo/og-image';
+import SocialImage from '../../components/seo/social-image';
 import { Article } from '../../components/text/article';
 import Section from '../../components/layout/section';
 import SignatureGhostButtonLink from '../../components/seo/signature-ghost-button';
@@ -37,4 +37,4 @@ export default function OtherSocialImageTemplate({ pageContext: { pageMetadata, 
 	)
 }
 
-export { default as Head } from '../../components/seo/og-image-head'
+export { default as Head } from '../../components/seo/social-image-head'

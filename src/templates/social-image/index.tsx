@@ -8,7 +8,7 @@ import React from 'react'
 import { PageProps } from 'gatsby';
 import { ImageMetadataProp } from '../../common/types';
 import HeroHeader from '../../components/layout/hero-header';
-import SocialImage from '../../components/seo/og-image';
+import SocialImage from '../../components/seo/social-image';
 import GhostButton from '../../components/input/ghost-button';
 import SignatureGhostButtonLink from '../../components/seo/signature-ghost-button';
 
@@ -30,4 +30,4 @@ export default function IndexSocialImageTemplate({ pageContext: { imageMetadata 
 	)
 }
 
-export { default as Head } from '../../components/seo/og-image-head'
+export { default as Head } from '../../components/seo/social-image-head'

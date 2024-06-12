@@ -2,7 +2,7 @@ import { resolve, join } from 'path';
 import type { Actions, CreatePagesArgs, GatsbyNode, Reporter } from 'gatsby';
 import { createImage } from 'gatsby-plugin-component-to-image';
 import { Path, PinnedRepoResponseInterface, SocialImageTypes } from './src/common/types';
-import { PROJECTS_DIR, SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR } from './src/common/constants';
+import { PAGE_TEMPLATES_DIR, PROJECTS_DIR, SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR, SOCIAL_IMAGE_TEMPLATES_DIR } from './src/common/constants';
 import ConfigManager from './src/common/config-manager';
 import ResponseParser from './src/node/response-parser';
 import ResponseMapper from './src/node/response-mapper';
@@ -12,12 +12,12 @@ import assert from 'assert';
 
 // Constants
 
-const INDEX_PAGE_TEMPLATE = resolve('./src/templates/page/index.tsx');
-const PROJECT_PAGE_TEMPLATE = resolve('./src/templates/page/project.tsx');
+const INDEX_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'index.tsx');
+const PROJECT_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'project.tsx');
 
-const INDEX_OG_IMAGE_TEMPLATE = resolve('./src/templates/og-image/index.tsx');
-const PROJECT_OG_IMAGE_TEMPLATE = resolve('./src/templates/og-image/project.tsx');
-const OTHER_OG_IMAGE_TEMPLATE = resolve('./src/templates/og-image/other.tsx');
+const INDEX_OG_IMAGE_TEMPLATE = resolve(SOCIAL_IMAGE_TEMPLATES_DIR, 'index.tsx');
+const PROJECT_OG_IMAGE_TEMPLATE = resolve(SOCIAL_IMAGE_TEMPLATES_DIR, 'project.tsx');
+const OTHER_OG_IMAGE_TEMPLATE = resolve(SOCIAL_IMAGE_TEMPLATES_DIR, 'other.tsx');
 
 const configManager = new ConfigManager();
 
