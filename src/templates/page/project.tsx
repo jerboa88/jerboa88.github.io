@@ -105,6 +105,9 @@ export const Head = ({ location, pageContext: { repo, socialImagesMetadata } }: 
 			'@type': 'SoftwareApplication',
 			name: repo.name,
 			description: repo.longDesc,
+			author: {
+				'@id': '/author',
+			},
 			url: getAbsoluteUrl(location.pathname).toString(),
 			image: repo.imageUrl,
 			// TODO: Add applicationCategory and operatingSystem properties
