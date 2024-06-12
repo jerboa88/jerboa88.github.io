@@ -14,6 +14,7 @@ import PageLayout from '../components/layout/page-layout';
 import PageHead from '../components/seo/page-head';
 import SolidButtonLink from '../components/links/solid-button-link';
 import { Article } from '../components/text/article';
+import { getAbsoluteUrl } from '../common/utilities';
 
 
 // Types
@@ -56,16 +57,25 @@ export default function PrivacyPolicyPage({ data, pageContext: { pageMetadata } 
 }
 
 export const Head = ({ location, pageContext: { pageMetadata, socialImagesMetadata } }: PageContextProp & DataProp & HeadProps) => {
+	const pageTitle = `${pageMetadata.title} | ${SITE_METADATA.shortTitle}`;
 	const metadata = {
-		title: `${pageMetadata.title} | ${SITE_METADATA.shortTitle}`,
+		title: pageTitle,
 		shortTitle: pageMetadata.shortTitle,
 		description: pageMetadata.description,
 	};
 	const structuredData = {
-		'@type': 'WebSite',
-		name: pageMetadata.title,
+		'@type': 'WebPage',
+		name: pageTitle,
 		description: pageMetadata.description,
-		url: SITE_METADATA.siteUrl,
+		url: getAbsoluteUrl(location.pathname),
+		mainEntity: {
+			'@type': 'Article',
+			headline: pageMetadata.shortTitle,
+			description: pageMetadata.description,
+			author: {
+				'@id': '/author'
+			}
+		},
 	}
 
 	return (
