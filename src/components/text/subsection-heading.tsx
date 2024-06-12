@@ -9,9 +9,9 @@ import { PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 
 
-interface TextComponentPropsInterface extends PropsWithClassName, PropsWithChildren { }
+interface Props extends PropsWithClassName, PropsWithChildren { }
 
-export default function SubsectionHeading({ className = '', children }: TextComponentPropsInterface) {
+export default function SubsectionHeading({ className = '', children }: Props) {
 	const classNameProps = getClassNameProps(
 		'my-4 text-lg font-heading font-semibold drop-shadow',
 		className,

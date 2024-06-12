@@ -10,11 +10,11 @@ import { getClassNameProps } from '../common/utilities';
 import TimelineEntry from './timeline-entry';
 
 
-interface TimelinePropsInterface {
+interface Props {
 	roles: RoleInterface[];
 }
 
-export default function Timeline({ roles }: TimelinePropsInterface) {
+export default function Timeline({ roles }: Props) {
 	const lastIndex = roles.length - 1;
 
 	return (

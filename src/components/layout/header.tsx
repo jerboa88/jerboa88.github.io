@@ -14,14 +14,14 @@ import Heading from '../text/heading';
 import Divider from '../divider';
 
 
-interface HeaderPropsInterface {
+interface Props {
 	siteMetadata: SiteMetadataInterface;
 	expandTitle?: boolean;
 	sections: SectionInterface[];
 }
 
 
-export default function Header({ siteMetadata, expandTitle = false, sections }: HeaderPropsInterface) {
+export default function Header({ siteMetadata, expandTitle = false, sections }: Props) {
 	const headerClassNameProps = getClassNameProps(
 		'fixed top-0 z-30 w-full transition',
 		!expandTitle && 'bg-glass backdrop-blur-md shadow-lg',	// Transparent bg when title is expanded

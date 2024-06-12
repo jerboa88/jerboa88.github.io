@@ -9,9 +9,9 @@ import { PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 
 
-interface TextComponentPropsInterface extends PropsWithClassName, PropsWithChildren { }
+interface Props extends PropsWithClassName, PropsWithChildren { }
 
-export default function SectionHeading({ className = '', children }: TextComponentPropsInterface) {
+export default function SectionHeading({ className = '', children }: Props) {
 	const classNameProps = getClassNameProps(
 		'py-4 text-3xl align-middle font-heading font-medium drop-shadow',
 		className,

@@ -11,12 +11,12 @@ import SectionHeading from '../text/section-heading';
 import Divider from '../divider';
 
 
-interface SectionHeaderPropsInterface extends PropsWithClassName, PropsWithChildren {
+interface Props extends PropsWithClassName, PropsWithChildren {
 	title: string;
 	renderButton?: ButtonElementRenderFunction;
 }
 
-export default function SectionHeader({ className, title, renderButton }: SectionHeaderPropsInterface) {
+export default function SectionHeader({ className, title, renderButton }: Props) {
 	const classNameProps = getClassNameProps(
 		'w-full flex flex-row justify-between items-baseline',
 		className,

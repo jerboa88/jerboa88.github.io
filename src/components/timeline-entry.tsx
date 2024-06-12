@@ -16,11 +16,11 @@ import Pill from './pill';
 import Card from './card';
 
 
-interface TimelineEntryPropsInterface {
+interface Props {
 	role: RoleInterface;
 }
 
-export default function TimelineEntry({ role }: TimelineEntryPropsInterface) {
+export default function TimelineEntry({ role }: Props) {
 	const roleTypeColor = new ConfigManager().getRoleTypeColor(role.type);
 	const pillClassNameProps = getClassNameProps('capitalize', roleTypeColor);
 

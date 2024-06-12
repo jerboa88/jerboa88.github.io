@@ -16,7 +16,7 @@ import ParticlesBackground from './particles-background';
 
 // Types
 
-interface PageLayoutPropsInterface extends PropsWithClassName, PropsWithChildren {
+interface Props extends PropsWithClassName, PropsWithChildren {
 	siteMetadata: SiteMetadataInterface;
 	expandTitle?: boolean;
 	sections?: SectionInterface[];
@@ -32,7 +32,7 @@ const BG_GRADIENT_PROPS = {
 }
 
 
-export default function PageLayout({ className = '', siteMetadata, expandTitle = false, sections = [], children }: PageLayoutPropsInterface) {
+export default function PageLayout({ className = '', siteMetadata, expandTitle = false, sections = [], children }: Props) {
 	const classNameProps = getClassNameProps(
 		'flex-col gap-32 justify-between items-center mx-auto text-base min-h-svh scroll-smooth selection:bg-primary selection:text-primary-content',
 		className,

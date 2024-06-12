@@ -11,11 +11,11 @@ import ConfigManager from '../../common/config-manager';
 import Heading from '../../components/text/heading';
 
 
-interface HeroHeaderProps {
+interface Props {
 	expandTitle?: boolean;
 }
 
-export default function HeroHeader({ expandTitle = false }: HeroHeaderProps) {
+export default function HeroHeader({ expandTitle = false }: Props) {
 	const siteMetadata = new ConfigManager().getSiteMetadata();
 
 	const titleElement = (

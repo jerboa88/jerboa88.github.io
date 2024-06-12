@@ -10,13 +10,13 @@ import ConfigManager from '../../common/config-manager';
 import { getAbsoluteUrl, getMimeType } from '../../common/utilities';
 
 
-interface PageHeadPropsInterface extends SocialImagesMetadataProp {
+interface Props extends SocialImagesMetadataProp {
 	path: string;
 	metadata: PageMetadata;
 	structuredData: object;
 }
 
-export default function PageHead({ path, metadata, structuredData, socialImagesMetadata }: PageHeadPropsInterface) {
+export default function PageHead({ path, metadata, structuredData, socialImagesMetadata }: Props) {
 	// Grab site metadata from Gatsby config
 	const configManager = new ConfigManager();
 	const siteMetadata = configManager.getSiteMetadata();

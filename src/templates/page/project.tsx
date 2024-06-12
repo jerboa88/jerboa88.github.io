@@ -18,7 +18,7 @@ import { getAbsoluteUrl } from '../../common/utilities';
 
 // Types
 
-interface ProjectPageTemplatePropsInterface {
+interface Props {
 	pageContext: SocialImagesMetadataProp & {
 		repo: ProjectInfoInterface;
 	};
@@ -29,7 +29,7 @@ interface ProjectPageTemplatePropsInterface {
 const SITE_METADATA = new ConfigManager().getSiteMetadata();
 
 
-export default function ProjectPageTemplate({ pageContext: { repo } }: ProjectPageTemplatePropsInterface) {
+export default function ProjectPageTemplate({ pageContext: { repo } }: Props) {
 	return (
 		<PageLayout siteMetadata={SITE_METADATA}>
 			{/* Dummy element to force center alignment of section */}
@@ -70,7 +70,7 @@ export default function ProjectPageTemplate({ pageContext: { repo } }: ProjectPa
 	);
 }
 
-export const Head = ({ location, pageContext: { repo, socialImagesMetadata } }: HeadProps & ProjectPageTemplatePropsInterface) => {
+export const Head = ({ location, pageContext: { repo, socialImagesMetadata } }: HeadProps & Props) => {
 	const pageTitle = `${repo.name} | ${SITE_METADATA.shortTitle}`;
 	const metadata = {
 		title: pageTitle,

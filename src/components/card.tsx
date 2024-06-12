@@ -12,7 +12,7 @@ import { clamp, doesDeviceSupportHover, getClassNameProps } from '../common/util
 
 // Types
 
-interface CardPropsInterface extends PropsWithChildren {
+interface Props extends PropsWithChildren {
 	outerClassName?: string;
 	middleClassName?: string;
 	innerClassName?: string;
@@ -66,7 +66,7 @@ function getBackgroundScale(xCoords: number, zCoords: number) {
 }
 
 
-export default function Card({ outerClassName = '', middleClassName = '', innerClassName = '', disabled = false, children }: CardPropsInterface) {
+export default function Card({ outerClassName = '', middleClassName = '', innerClassName = '', disabled = false, children }: Props) {
 	// Hooks
 
 	const shouldReduceMotion = useReducedMotion();

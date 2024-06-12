@@ -11,11 +11,11 @@ import GhostButtonLink from '../links/ghost-button-link';
 import Divider from '../divider';
 
 
-interface FooterPropsInterface {
+interface Props {
 	siteMetadata: SiteMetadataInterface;
 }
 
-export default function Footer({ siteMetadata }: FooterPropsInterface) {
+export default function Footer({ siteMetadata }: Props) {
 	return (
 		<footer className="z-30 w-full shadow-lg backdrop-blur-md bg-glass">
 			<div className="mix-blend-overlay">
