@@ -132,7 +132,11 @@ export const Head = ({ location, pageContext: { socialImagesMetadata } }: IndexP
 	};
 	const structuredData = {
 		'@type': 'WebSite',
-		name: SITE_METADATA.title,
+		name: SITE_METADATA.shortTitle,
+		alternateName: [
+			SITE_METADATA.title,
+			new URL(SITE_METADATA.siteUrl).hostname,
+		],
 		description: SITE_METADATA.description,
 		url: SITE_METADATA.siteUrl,
 	}
