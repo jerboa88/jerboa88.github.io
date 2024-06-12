@@ -4,18 +4,20 @@
 */
 
 
-import type { BgColor, ProjectTypeColorMappingsInterface, RoleInterface, RoleTypeColorMappingsInterface, SiteMetadataInterface, ThemeInterface } from '../common/types';
+import type { BgColor, PageMetadata, ProjectTypeColorMappingsInterface, RoleInterface, RoleTypeColorMappingsInterface, SiteMetadataInterface, SocialImageTypes, SocialImagesGenerationConfig, ThemeInterface } from '../common/types';
 import siteMetadataConfig from '../config/site-metadata';
+import pageMetadataConfig from '../config/pages-metadata';
+import socialImagesGenerationConfig from '../config/social-images-generation';
 import externalServicesConfig from '../config/external-services';
 import jobsConfig from '../config/jobs';
 import themesConfig from '../config/themes';
 import colorMappingsConfig from '../config/color-mappings';
+import { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 
 
 // Class for loading and formatting configuration data
 export default class ConfigManager {
-	// TODO: Rename this method to getSiteMetadata
-	getMetadata(): SiteMetadataInterface {
+	getSiteMetadata(): SiteMetadataInterface {
 		const smc = siteMetadataConfig;
 		const authorFullName = `${smc.author.name.first} ${smc.author.name.last}`;
 
@@ -26,8 +28,6 @@ export default class ConfigManager {
 			shortDescription: `Portfolio site for ${authorFullName}`,
 			description: `Portfolio site for ${authorFullName}, a ${smc.author.jobTitle} based in ${smc.author.location.city}, ${smc.author.location.state}.`,
 			iconPath: smc.iconPath,
-			ogImagePath: smc.ogImagePath,
-			ogImageAltText: smc.ogImageAltText,
 			siteUrl: smc.siteUrl,
 			sourceUrl: smc.sourceUrl,
 			author: {
@@ -58,6 +58,33 @@ export default class ConfigManager {
 		};
 	}
 
+	// Returns the metadata for a given page
+	getPageMetadata(pagePath: string): PageMetadata {
+		const pmc = pageMetadataConfig[pagePath as keyof typeof pageMetadataConfig];
+
+		if (!pmc) {
+			console.warn(`Page metadata for ${pagePath} not found`);
+		}
+
+		return pmc;
+	}
+
+	// Returns the social image generation config for a given type
+	getSocialImageGenerationConfigDefaults(): SocialImagesGenerationConfig['defaults'] {
+		return socialImagesGenerationConfig.defaults;
+	}
+
+	// Returns the social image generation config for a given type
+	getSocialImageGenerationConfigForType(type: SocialImageTypes): JobOptions {
+		const sigc = socialImagesGenerationConfig.types[type as keyof typeof socialImagesGenerationConfig['types']];
+
+		if (!sigc) {
+			console.warn(`Social image generation config for '${type}' not found`);
+		}
+
+		return sigc;
+	}
+
 	getExternalServices() {
 		return externalServicesConfig;
 	}
@@ -76,7 +103,7 @@ export default class ConfigManager {
 		const theme = themesConfig[themeName];
 
 		if (!theme) {
-			throw new Error(`Theme ${themeName} not found`);
+			throw new Error(`Theme '${themeName}' not found`);
 		}
 
 		return theme;

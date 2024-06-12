@@ -5,17 +5,32 @@
 
 
 import React, { PropsWithChildren } from 'react';
-import { PropsWithClassName } from '../common/types';
+import { PropsWithClassName, TooltipPosition } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
 
 
-interface TooltipPropsInterface extends PropsWithClassName, PropsWithChildren {
-	text: string;
+// Types
+
+export interface TooltipPropsInterface extends PropsWithClassName, PropsWithChildren {
+	text: string | number;
+	position?: TooltipPosition;
 }
 
-export default function Tooltip({ className, children, text }: TooltipPropsInterface) {
+
+// Constants
+
+const POSITION_CLASS_MAP = {
+	[TooltipPosition.Left]: '!tooltip-left',
+	[TooltipPosition.Right]: '!tooltip-right',
+	[TooltipPosition.Top]: '!tooltip-top',
+	[TooltipPosition.Bottom]: '!tooltip-bottom',
+};
+
+
+export default function Tooltip({ className, text, position = TooltipPosition.Top, children }: TooltipPropsInterface) {
 	const classNameProps = getClassNameProps(
 		'mouse-only:tooltip mouse-only:[--tooltip-color:oklch(var(--b1)/1)] mouse-only:[--tooltip-text-color:oklch(var(--bc)/1)] hover:before:delay-1000 hover:after:delay-1000 hover:before:shadow-md',
+		POSITION_CLASS_MAP[position],
 		className,
 	);
 

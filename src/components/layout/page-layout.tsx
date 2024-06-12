@@ -18,8 +18,7 @@ import ParticlesBackground from './particles-background';
 
 interface PageLayoutPropsInterface extends PropsWithClassName, PropsWithChildren {
 	siteMetadata: SiteMetadataInterface;
-	titleLayoutId?: string;
-	isTitleExpanded?: boolean;
+	expandTitle?: boolean;
 	sections?: SectionInterface[];
 }
 
@@ -33,7 +32,7 @@ const BG_GRADIENT_PROPS = {
 }
 
 
-export default function PageLayout({ className = '', siteMetadata, titleLayoutId, isTitleExpanded = false, sections = [], children }: PageLayoutPropsInterface) {
+export default function PageLayout({ className = '', siteMetadata, expandTitle = false, sections = [], children }: PageLayoutPropsInterface) {
 	const classNameProps = getClassNameProps(
 		'flex-col gap-32 justify-between items-center mx-auto text-base min-h-svh scroll-smooth selection:bg-primary selection:text-primary-content',
 		className,
@@ -112,7 +111,7 @@ export default function PageLayout({ className = '', siteMetadata, titleLayoutId
 				{/* Page body */}
 				<div {...BG_GRADIENT_PROPS} {...classNameProps}>
 					<ParticlesBackground />
-					<Header {...{ siteMetadata, titleLayoutId, isTitleExpanded, sections }} />
+					<Header {...{ siteMetadata, expandTitle, sections }} />
 					{children}
 					<Footer siteMetadata={siteMetadata} />
 				</div>

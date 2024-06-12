@@ -5,27 +5,27 @@
 
 
 import React, { PropsWithChildren } from 'react';
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { PropsWithClassName } from '../../common/types';
+import { ButtonElementRenderFunction, PropsWithClassName, TooltipPosition } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import SectionHeading from '../text/section-heading';
-import GhostButtonLink from '../links/ghost-button-link';
-import Tooltip from '../tooltip';
+import Divider from '../divider';
 
 
 interface SectionHeaderPropsInterface extends PropsWithClassName, PropsWithChildren {
 	title: string;
-	button?: {
-		text: string;
-		icon: IconDefinition;
-		to: string;
-	};
+	renderButton?: ButtonElementRenderFunction;
 }
 
-export default function SectionHeader({ className = '', title, button }: SectionHeaderPropsInterface) {
+export default function SectionHeader({ className, title, renderButton }: SectionHeaderPropsInterface) {
 	const classNameProps = getClassNameProps(
-		'w-full flex flex-row justify-between items-baseline pt-8',
+		'w-full flex flex-row justify-between items-baseline',
 		className,
+	);
+	const buttonElement = renderButton ? renderButton({
+		className: 'self-baseline',
+		tooltipPosition: TooltipPosition.Left,
+	}) : (
+		undefined
 	);
 
 	return (
@@ -34,13 +34,9 @@ export default function SectionHeader({ className = '', title, button }: Section
 				<SectionHeading>
 					{title}
 				</SectionHeading>
-				{button && (
-					<Tooltip text={button.text} className="!tooltip-left">
-						<GhostButtonLink {...button} className="self-baseline" responsive flip />
-					</Tooltip>
-				)}
+				{buttonElement}
 			</div>
-			<div className="pb-8 m-0 h-auto opacity-100 divider" />
+			<Divider className="pb-8" />
 		</>
 	);
 }

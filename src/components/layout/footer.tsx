@@ -6,9 +6,9 @@
 
 import React from 'react';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { SiteMetadataInterface } from '../../common/types';
+import { SiteMetadataInterface, TooltipPosition } from '../../common/types';
 import GhostButtonLink from '../links/ghost-button-link';
-import Tooltip from '../tooltip';
+import Divider from '../divider';
 
 
 interface FooterPropsInterface {
@@ -19,23 +19,32 @@ export default function Footer({ siteMetadata }: FooterPropsInterface) {
 	return (
 		<footer className="z-30 w-full shadow-lg backdrop-blur-md bg-glass">
 			<div className="mix-blend-overlay">
-				<div className="m-0 h-auto opacity-100 divider" />
+				<Divider />
 				<div className="flex flex-row justify-between items-center p-4 pb-4">
 					<nav className="flex flex-row justify-center tabs font-button">
-						<Tooltip text="View the source code on GitHub" className="!tooltip-right">
-							<GhostButtonLink text="Source" to={siteMetadata.sourceUrl} />
-						</Tooltip>
-						<Tooltip text="View the Privacy Policy" className="!tooltip-right">
-							<GhostButtonLink text="Privacy" to="/privacy-policy" isInternal />
-						</Tooltip>
+						<GhostButtonLink
+							to={siteMetadata.sourceUrl}
+							text="Source"
+							tooltipText="View the source code on GitHub"
+							tooltipPosition={TooltipPosition.Right} />
+						<GhostButtonLink
+							to="/privacy-policy"
+							text="Privacy"
+							tooltipText="View the Privacy Policy"
+							tooltipPosition={TooltipPosition.Right}
+							isInternal />
 					</nav>
 					<nav className="flex flex-row justify-center">
-						<Tooltip text="View my profile on LinkedIn" className="!tooltip-left">
-							<GhostButtonLink to={siteMetadata.author.link.linkedin} icon={faLinkedin} />
-						</Tooltip>
-						<Tooltip text="View my profile on GitHub" className="!tooltip-left">
-							<GhostButtonLink to={siteMetadata.author.link.github} icon={faGithub} />
-						</Tooltip>
+						<GhostButtonLink
+							to={siteMetadata.author.link.linkedin}
+							icon={faLinkedin}
+							tooltipText="View my profile on LinkedIn"
+							tooltipPosition={TooltipPosition.Left} />
+						<GhostButtonLink
+							to={siteMetadata.author.link.github}
+							icon={faGithub}
+							tooltipText="View my profile on GitHub"
+							tooltipPosition={TooltipPosition.Left} />
 					</nav>
 				</div>
 			</div>

@@ -7,39 +7,40 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { SiteMetadataInterface, SectionInterface } from '../../common/types';
+import { TITLE_LAYOUT_ID } from '../../common/constants';
 import { getClassNameProps } from '../../common/utilities';
 import Tabs from '../tabs';
 import Heading from '../text/heading';
+import Divider from '../divider';
 
 
 interface HeaderPropsInterface {
 	siteMetadata: SiteMetadataInterface;
-	titleLayoutId?: string;
-	isTitleExpanded?: boolean;
+	expandTitle?: boolean;
 	sections: SectionInterface[];
 }
 
 
-export default function Header({ siteMetadata, titleLayoutId = 'title-layout', isTitleExpanded = false, sections }: HeaderPropsInterface) {
+export default function Header({ siteMetadata, expandTitle = false, sections }: HeaderPropsInterface) {
 	const headerClassNameProps = getClassNameProps(
 		'fixed top-0 z-30 w-full transition',
-		!isTitleExpanded && 'bg-glass backdrop-blur-md shadow-lg',	// Transparent bg when title is expanded
+		!expandTitle && 'bg-glass backdrop-blur-md shadow-lg',	// Transparent bg when title is expanded
 	);
 	const containerClassNameProps = getClassNameProps(
 		'flex-row items-center p-4',
-		isTitleExpanded ? 'justify-center' : 'justify-between',	// Center title when expanded
+		expandTitle ? 'justify-center' : 'justify-between',	// Center title when expanded
 	);
 	const dividerClassNameProps = getClassNameProps(
-		'm-0 h-auto transition-opacity divider',
-		isTitleExpanded ? 'opacity-0' : 'opacity-100',	// Hide divider when title is expanded
+		'transition-opacity',
+		expandTitle ? 'opacity-0' : 'opacity-100',	// Hide divider when title is expanded
 	);
 
 	return (
 		<header {...headerClassNameProps}>
 			<div className="mix-blend-overlay">
 				<div {...containerClassNameProps}>
-					{!isTitleExpanded && (
-						<motion.a href="/" layoutId={titleLayoutId}>
+					{!expandTitle && (
+						<motion.a href="/" layoutId={TITLE_LAYOUT_ID}>
 							<Heading className="px-2 m-0 text-xl">
 								<span className="inline sm:hidden">
 									{siteMetadata.author.name.initial}
@@ -53,9 +54,9 @@ export default function Header({ siteMetadata, titleLayoutId = 'title-layout', i
 							</Heading>
 						</motion.a>
 					)}
-					<Tabs sections={sections} hideIndicator={isTitleExpanded} />
+					<Tabs sections={sections} hideIndicator={expandTitle} />
 				</div>
-				<div {...dividerClassNameProps} />
+				<Divider {...dividerClassNameProps} />
 			</div>
 		</header>
 	);

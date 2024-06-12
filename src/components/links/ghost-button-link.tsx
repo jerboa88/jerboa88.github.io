@@ -12,10 +12,10 @@ import GhostButton from '../input/ghost-button';
 
 interface GhostButtonLinkPropsInterface extends ButtonInterface, LinkInterface { }
 
-export default function GhostButtonLink({ className, iconClassName, textClassName, icon, text, disabled, responsive, flip, to, isInternal, rel }: GhostButtonLinkPropsInterface) {
+export default function GhostButtonLink({ to, isInternal, rel, ...remainingProps }: GhostButtonLinkPropsInterface) {
 	return (
 		<LinkWrapper to={to} isInternal={isInternal} rel={rel} className="contents">
-			<GhostButton {...{ className, iconClassName, textClassName, icon, text, disabled, responsive, flip }} />
+			<GhostButton {...remainingProps} />
 		</LinkWrapper>
 	);
 }

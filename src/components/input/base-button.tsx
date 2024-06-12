@@ -11,9 +11,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ButtonInterface } from '../../common/types';
 import { FADE_IN_ANIMATION_PROPS } from '../../common/constants';
 import { getClassNameProps } from '../../common/utilities';
+import Tooltip from '../tooltip';
 
 
-export default function BaseButton({ className = '', type = 'button', iconClassName = '', textClassName = '', disabled = false, responsive = false, flip = false, icon, text, layout, layoutRoot }: ButtonInterface) {
+export default function BaseButton({ className, iconClassName, textClassName, tooltipClassName, type = 'button', icon, text, tooltipText, tooltipPosition, disabled = false, responsive = false, flip = false, layout, layoutRoot }: ButtonInterface) {
 	const buttonClassNameProps = getClassNameProps(
 		'flex flex-row justify-center items-center self-center gap-2 z-20 text-sm font-button uppercase',
 		flip && 'flex-row-reverse',	// Button flip styles
@@ -29,9 +30,9 @@ export default function BaseButton({ className = '', type = 'button', iconClassN
 		textClassName,
 	);
 
-	return (
+	const buttonElement = (
 		<motion.button {...{ type, disabled, layout, layoutRoot, ...buttonClassNameProps }}>
-			<AnimatePresence mode="popLayout">
+			<AnimatePresence mode="popLayout" initial={false}>
 				{icon && (
 					<motion.span key="icon" layout="position" {...FADE_IN_ANIMATION_PROPS}>
 						<FontAwesomeIcon icon={icon} {...iconClassNameProps} />
@@ -44,5 +45,15 @@ export default function BaseButton({ className = '', type = 'button', iconClassN
 				)}
 			</AnimatePresence>
 		</motion.button>
+	);
+
+	const computedTooltipText = tooltipText ?? text;
+
+	return computedTooltipText ? (
+		<Tooltip text={computedTooltipText} position={tooltipPosition} className={tooltipClassName}>
+			{buttonElement}
+		</Tooltip>
+	) : (
+		buttonElement
 	);
 }

@@ -27,11 +27,15 @@
 
 
 ## Installation
-1. Install Node.js and NPM (if they are not already set up on your system). See [nodejs.org](https://nodejs.org/) for more details.
-2. Install Yarn 3 (if it is not already set up on your system). See the [Yarn docs](https://yarnpkg.com/getting-started/install) for more details.
-3. Clone the repo with `https://github.com/jerboa88/jerboa88.github.io.git`. Alternatively, you can download the repository as a zip file and extract it.
-4. Enter the project root with `cd jerboa88.github.io`.
-5. Use `yarn install` to install the app and all of its dependencies.
+### Prerequisites
+
+- Node.js and NPM (see [nodejs.org](https://nodejs.org/) for more details)
+- Yarn 4 (see the [Yarn docs](https://yarnpkg.com/getting-started/install) for more details)
+
+### Setup
+1. Clone the repo with `https://github.com/jerboa88/jerboa88.github.io.git`. Alternatively, you can download the repository as a zip file and extract it.
+2. Enter the project root with `cd jerboa88.github.io`.
+4. Use `yarn install` to install the app and all of its dependencies.
 
 
 ## Usage
@@ -45,6 +49,13 @@ There are two ways to build & serve the site:
 `yarn clean` can be used to clear the local Gatsby cache if you encounter any issues with stale data/dependencies.
 
 See the [Gatsby CLI docs](https://www.gatsbyjs.com/docs/reference/gatsby-cli/) for additional commands and options. You will likely have to prefix commands with `yarn` to make sure package resolution works properly. For example, the above `yarn develop` is actually just a shortcut for `yarn gatsby develop`.
+
+
+## Contributing
+This project is not open to code contributions, but feedback and bug reports are always welcome.
+
+### Versioning
+x.1 releases mark the final update for a given design, while x.0 releases are reserved for major redesigns. Changes between the first and last release of a design are not explicitly versioned.
 
 
 ## License

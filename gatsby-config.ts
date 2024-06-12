@@ -6,12 +6,14 @@
 
 import type { GatsbyConfig } from 'gatsby';
 import dotenv from 'dotenv';
-import ConfigManager from './src/common/config-manager';
 import * as tailwindConfig from './tailwind.config';
+import ConfigManager from './src/common/config-manager';
+import { getAbsoluteUrl } from './src/common/utilities';
+import { SOCIAL_IMAGES_DIR } from './src/common/constants';
 
 
 const configManager = new ConfigManager();
-const metadata = configManager.getMetadata();
+const metadata = configManager.getSiteMetadata();
 const lightTheme = configManager.getTheme('light');
 const darkTheme = configManager.getTheme('dark');
 
@@ -38,6 +40,10 @@ const config: GatsbyConfig = {
 		// Required by gatsby-plugin-image for dynamic images
 		'gatsby-transformer-sharp',
 		{
+			resolve: 'gatsby-plugin-component-to-image',
+			options: configManager.getSocialImageGenerationConfigDefaults()
+		},
+		{
 			resolve: 'gatsby-plugin-postcss',
 			options: {
 				postCssPlugins: [
@@ -49,21 +55,23 @@ const config: GatsbyConfig = {
 		{
 			resolve: 'gatsby-plugin-sitemap',
 			options: {
-				// Generate sitemaps at the root of the site
+				// The sitemap index will be generated at /sitemap-index.xml
 				output: '/',
-				serialize: ({ path }: { path: string }) => (
-					{
-						url: path,
-						changefreq: 'monthly',
-					}
-				)
+				serialize: ({ path }: { path: string }) => ({
+					url: path,
+					changefreq: 'monthly',
+				}),
+				// Prevent temporary components rendered by gatsby-plugin-open-graph-images from being included in the sitemap
+				excludes: [
+					`/${SOCIAL_IMAGES_DIR}/**/*`,
+				],
 			}
 		},
 		{
 			resolve: 'gatsby-plugin-robots-txt',
 			options: {
 				// Link to the sitemap index generated above
-				sitemap: new URL('sitemap-index.xml', metadata.siteUrl).toString(),
+				sitemap: getAbsoluteUrl('sitemap-index.xml').toString(),
 				policy: [
 					{
 						userAgent: '*',
@@ -90,16 +98,8 @@ const config: GatsbyConfig = {
 		{
 			resolve: 'gatsby-source-filesystem',
 			options: {
-				'name': 'images',
-				'path': `${__dirname}/src/images/`
-			},
-			__key: 'images'
-		},
-		{
-			resolve: 'gatsby-source-filesystem',
-			options: {
 				name: 'content',
-				path: `${__dirname}/src/content`,
+				path: `${__dirname}/src/content/`,
 			},
 		},
 		{
@@ -125,7 +125,7 @@ const config: GatsbyConfig = {
 					Authorization: `Bearer ${process.env.GH_TOKEN}`,
 				},
 			},
-		}
+		},
 	]
 };
 

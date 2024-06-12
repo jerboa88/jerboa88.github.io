@@ -12,10 +12,10 @@ import SolidButton from '../input/solid-button';
 
 interface SolidButtonLinkPropsInterface extends ButtonInterface, LinkInterface { }
 
-export default function SolidButtonLink({ className, iconClassName, textClassName, icon, text, disabled, responsive, flip, to, isInternal, rel }: SolidButtonLinkPropsInterface) {
+export default function SolidButtonLink({ to, isInternal, rel, ...remainingProps }: SolidButtonLinkPropsInterface) {
 	return (
 		<LinkWrapper to={to} isInternal={isInternal} rel={rel}>
-			<SolidButton {...{ className, iconClassName, textClassName, icon, text, disabled, responsive, flip }} />
+			<SolidButton {...remainingProps} />
 		</LinkWrapper>
 	);
 }

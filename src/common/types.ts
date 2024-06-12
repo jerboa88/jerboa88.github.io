@@ -6,6 +6,7 @@
 
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { LayoutProps } from 'framer-motion';
+import { DefaultOptions, JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import { Context, RefObject } from 'react';
 import { FieldErrors, UseFormRegister, UseFormRegisterReturn } from 'react-hook-form';
 
@@ -27,6 +28,10 @@ export interface PropsWithLayoutAnimations {
 export type BgColor = `bg-${string}`;
 
 
+// Absolute path
+export type Path = `/${string}`;
+
+
 // HTTPS URL
 type Url = `https://${string}`;
 
@@ -41,8 +46,6 @@ export interface ExternalServicesConfigInterface {
 // Raw site metadata config
 export interface SiteMetadataConfigInterface {
 	iconPath: string;
-	ogImagePath: string;
-	ogImageAltText: string;
 	siteUrl: Url;
 	sourceUrl: Url;
 	author: {
@@ -75,8 +78,6 @@ export interface SiteMetadataInterface {
 	shortDescription: string;
 	description: string;
 	iconPath: string;
-	ogImagePath: string;
-	ogImageAltText: string;
 	siteUrl: Url;
 	sourceUrl: Url;
 	author: {
@@ -104,6 +105,60 @@ export interface SiteMetadataInterface {
 			country: string;
 		},
 	}
+}
+
+
+// Page metadata fields
+export interface PageMetadata {
+	title: string;
+	shortTitle: string;
+	description: string;
+}
+
+
+// Page metadata added to pageContext when pages are created
+export interface PageMetadataProp {
+	pageMetadata: {
+		title: string;
+		shortTitle: string;
+		description: string;
+	}
+}
+
+
+// Raw pages metadata config
+export interface PagesMetadataConfigInterface {
+	[key: Path]: PageMetadata;
+}
+
+
+// TODO: Use this type in interfaces below
+// TODO: Change this to an enum
+export type SocialImageTypes = 'og' | 'twitter';
+
+
+// Raw social image metadata config
+export interface SocialImagesGenerationConfig {
+	defaults: DefaultOptions
+	types: {
+		og: JobOptions;
+		twitter: JobOptions;
+	}
+}
+
+
+// Social image metadata added to the pageContext of pages when they are created
+export interface SocialImagesMetadataProp {
+	socialImagesMetadata: {
+		og: JobOptions;
+		twitter: JobOptions;
+	};
+}
+
+
+// Open Graph image metadata added to the pageContext of gatsby-plugin-component-to-image components when they are created
+export interface ImageMetadataProp {
+	imageMetadata: JobOptions;
 }
 
 
@@ -160,15 +215,10 @@ export interface ColorMappingsConfigInterface {
 
 
 export interface SectionInterface {
-	id: string;
 	title: string;
 	ref: RefObject<HTMLElement>;
-	button?: {
-		text: string;
-		icon: IconDefinition;
-		to: string;
-	}
 }
+
 
 export interface LinkInterface {
 	to: string;
@@ -177,15 +227,31 @@ export interface LinkInterface {
 }
 
 
+export enum TooltipPosition {
+	Left,
+	Right,
+	Top,
+	Bottom,
+}
+
+
 export interface ButtonInterface extends PropsWithClassName, PropsWithLayoutAnimations {
 	iconClassName?: string;
 	textClassName?: string;
+	tooltipClassName?: string;
 	type?: React.ButtonHTMLAttributes<any>['type'];
 	icon?: IconDefinition;
 	text?: string | number;
+	tooltipText?: string;
+	tooltipPosition?: TooltipPosition;
 	disabled?: boolean;
 	responsive?: boolean;
 	flip?: boolean;
+}
+
+
+export interface ButtonElementRenderFunction {
+	({ className, tooltipPosition }: { className: string, tooltipPosition: TooltipPosition }): JSX.Element;
 }
 
 
@@ -245,6 +311,7 @@ export interface ProjectInfoInterface {
 	stargazers: number;
 	updatedAt: string;
 	license: string;
+	licenseUrl: Url;
 	languages: ProjectLanguageInterface[];
 	name: string;
 	longDesc: string;

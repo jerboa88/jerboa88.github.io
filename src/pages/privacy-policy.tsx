@@ -5,21 +5,25 @@
 
 
 import React, { useRef } from 'react';
-import type { HeadProps } from 'gatsby';
+import type { HeadProps, PageProps } from 'gatsby';
 import { graphql } from 'gatsby';
+import { PageMetadataProp, SocialImagesMetadataProp } from '../common/types';
 import ConfigManager from '../common/config-manager';
-import { SectionInterface } from '../common/types';
 import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
-import SEO from '../components/layout/seo';
+import PageHead from '../components/seo/page-head';
 import SolidButtonLink from '../components/links/solid-button-link';
 import { Article } from '../components/text/article';
+import { getAbsoluteUrl } from '../common/utilities';
 
 
-const pageTitle = 'Privacy Policy';
+// Types
 
+interface PageContextProp {
+	pageContext: PageMetadataProp & SocialImagesMetadataProp;
+}
 
-interface PrivacyPolicyPageProps {
+interface DataProp {
 	data: {
 		file: {
 			childMarkdownRemark: {
@@ -30,21 +34,19 @@ interface PrivacyPolicyPageProps {
 }
 
 
-export default function PrivacyPolicyPage({ data }: PrivacyPolicyPageProps) {
-	const configManager = new ConfigManager();
-	const siteMetadata = configManager.getMetadata();
-	const section = {
-		id: 'privacy-policy',
-		title: pageTitle,
-		ref: useRef(null),
-	} as SectionInterface;
+// Constants
+
+const SITE_METADATA = new ConfigManager().getSiteMetadata();
+
+
+export default function PrivacyPolicyPage({ data, pageContext: { pageMetadata } }: PageContextProp & DataProp & PageProps) {
 	const articleHtml = data.file.childMarkdownRemark.html;
 
 	return (
-		<PageLayout siteMetadata={siteMetadata}>
+		<PageLayout siteMetadata={SITE_METADATA}>
 			{/* Dummy element to force center alignment of section */}
-			<div></div>
-			<Section className="items-center" {...section}>
+			<div />
+			<Section title={pageMetadata.title} ref={useRef(null)} className="items-center" >
 				<div className="flex flex-col gap-8 items-center">
 					<Article html={articleHtml} />
 					<SolidButtonLink text="Home" to="/" isInternal />
@@ -54,26 +56,30 @@ export default function PrivacyPolicyPage({ data }: PrivacyPolicyPageProps) {
 	);
 }
 
-export const Head = ({ location }: HeadProps) => {
-	const configManager = new ConfigManager();
-	const siteMetadata = configManager.getMetadata();
-	const pageMetadata = {
-		title: `${pageTitle} | ${siteMetadata.shortTitle}`,
-		description: siteMetadata.description,
-		shortDescription: siteMetadata.shortDescription,
-		path: location.pathname,
-		ogImageUrl: new URL(siteMetadata.ogImagePath, siteMetadata.siteUrl).toString(),
-		ogImageAltText: siteMetadata.ogImageAltText,
-		structuredData: {
-			'@type': 'WebSite',
-			name: pageTitle,
-			description: siteMetadata.description,
-			url: siteMetadata.siteUrl,
-		}
+export const Head = ({ location, pageContext: { pageMetadata, socialImagesMetadata } }: PageContextProp & DataProp & HeadProps) => {
+	const pageTitle = `${pageMetadata.title} | ${SITE_METADATA.shortTitle}`;
+	const metadata = {
+		title: pageTitle,
+		shortTitle: pageMetadata.shortTitle,
+		description: pageMetadata.description,
 	};
+	const structuredData = {
+		'@type': 'WebPage',
+		name: pageTitle,
+		description: pageMetadata.description,
+		url: getAbsoluteUrl(location.pathname),
+		mainEntity: {
+			'@type': 'Article',
+			headline: pageMetadata.shortTitle,
+			description: pageMetadata.description,
+			author: {
+				'@id': '/author'
+			}
+		},
+	}
 
 	return (
-		<SEO pageMetadata={pageMetadata} />
+		<PageHead path={location.pathname} {...{ metadata, structuredData, socialImagesMetadata }} />
 	);
 }
 
