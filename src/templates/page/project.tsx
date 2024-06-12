@@ -71,22 +71,51 @@ export default function ProjectPageTemplate({ pageContext: { repo } }: ProjectPa
 }
 
 export const Head = ({ location, pageContext: { repo, socialImagesMetadata } }: HeadProps & ProjectPageTemplatePropsInterface) => {
+	const pageTitle = `${repo.name} | ${SITE_METADATA.shortTitle}`;
 	const metadata = {
-		title: `${repo.name} | ${SITE_METADATA.shortTitle}`,
+		title: pageTitle,
 		shortTitle: repo.name,
 		// TODO: Strip newlines and HTML tags from the long description
 		description: repo.longDesc,
 		path: location.pathname,
 	};
+
 	const structuredData = {
-		'@context': 'https://schema.org',
-		'@type': 'SoftwareApplication',
-		name: repo.name,
+		'@type': 'WebPage',
+		name: pageTitle,
 		description: repo.longDesc,
 		url: getAbsoluteUrl(location.pathname).toString(),
-		image: repo.imageUrl,
-		license: repo.license,
-	};
+		breadcrumb: {
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{
+					'@type': 'ListItem',
+					position: 1,
+					name: 'Projects',
+					item: getAbsoluteUrl('#projects').toString(),
+				},
+				{
+					'@type': 'ListItem',
+					position: 2,
+					name: repo.name,
+				},
+			],
+		},
+		mainEntity: {
+			'@type': 'SoftwareApplication',
+			name: repo.name,
+			description: repo.longDesc,
+			url: getAbsoluteUrl(location.pathname).toString(),
+			image: repo.imageUrl,
+			// TODO: Add applicationCategory and operatingSystem properties
+			license: repo.licenseUrl,
+			offers: {
+				'@type': 'Offer',
+				price: 0,
+			}
+		}
+	}
+
 
 	return (
 		<PageHead path={location.pathname} {...{ metadata, structuredData, socialImagesMetadata }} />
