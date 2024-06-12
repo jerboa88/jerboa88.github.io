@@ -12,6 +12,7 @@ import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
 import PageHead from '../components/seo/page-head';
 import SolidButtonLink from '../components/links/solid-button-link';
+import { getAbsoluteUrl } from '../common/utilities';
 
 
 // Types
@@ -60,16 +61,17 @@ export default function NotFoundPage({ pageContext: { pageMetadata } }: PageCont
 }
 
 export const Head = ({ location, pageContext: { pageMetadata, socialImagesMetadata } }: PageContext & HeadProps) => {
+	const pageTitle = `${pageMetadata.title} | ${SITE_METADATA.shortTitle}`;
 	const metadata = {
-		title: `${pageMetadata.title} | ${SITE_METADATA.shortTitle}`,
+		title: pageTitle,
 		shortTitle: pageMetadata.shortTitle,
 		description: pageMetadata.description,
 	};
 	const structuredData = {
-		'@type': 'WebSite',
-		name: pageMetadata.title,
+		'@type': 'WebPage',
+		name: pageTitle,
 		description: pageMetadata.description,
-		url: SITE_METADATA.siteUrl,
+		url: getAbsoluteUrl(location.pathname),
 	};
 
 	return (
