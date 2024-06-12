@@ -12,12 +12,12 @@ import { getClassNameProps, toKebabCase } from '../common/utilities';
 import GhostButtonLink from './links/ghost-button-link';
 
 
-interface TabsPropsInterface {
+interface Props {
 	sections: SectionInterface[];
 	hideIndicator?: boolean;
 }
 
-export default function Tabs({ sections, hideIndicator = false }: TabsPropsInterface) {
+export default function Tabs({ sections, hideIndicator = false }: Props) {
 	// Map is used here because we need to call the same number of hooks every time. Otherwise, React will complain
 	const sectionInViewHooks = sections.map(section => useInView(section.ref, USE_IN_VIEW_OPTIONS));
 	const currentSectionIndex = hideIndicator ? -1 : sectionInViewHooks.findIndex(inView => inView);

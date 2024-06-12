@@ -15,7 +15,7 @@ import { getClassNameProps } from '../common/utilities';
 
 // Types
 
-interface GhostAlertPropsInterface extends PropsWithClassName {
+interface Props extends PropsWithClassName {
 	type?: AlertType;
 	text: string;
 	show?: boolean;
@@ -38,7 +38,7 @@ const ALERT_TYPE_ICON_MAP = {
 }
 
 
-export default function GhostAlert({ className = '', type = AlertType.Info, text, show = true }: GhostAlertPropsInterface) {
+export default function GhostAlert({ className = '', type = AlertType.Info, text, show = true }: Props) {
 	const classNameProps = getClassNameProps(
 		'flex flex-row p-0 pl-1 bg-transparent border-none alert w-fit',
 		ALERT_TYPE_STYLES_MAP[type],	// Styles per alert type

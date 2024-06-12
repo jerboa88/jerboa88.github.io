@@ -9,7 +9,7 @@ import { PropsWithClassName } from '../../common/types'
 import { getClassNameProps } from '../../common/utilities'
 
 
-interface OgImagePropsInterface extends PropsWithClassName, PropsWithChildren {
+interface Props extends PropsWithClassName, PropsWithChildren {
 	size: {
 		width: number;
 		height: number;
@@ -17,7 +17,7 @@ interface OgImagePropsInterface extends PropsWithClassName, PropsWithChildren {
 }
 
 
-export default function OgImage({ className, size, children }: OgImagePropsInterface) {
+export default function OgImage({ className, size, children }: Props) {
 	const classNameProps = getClassNameProps(
 		'flex flex-col items-center size-full p-6 bg-glass overflow-hidden',
 		className,

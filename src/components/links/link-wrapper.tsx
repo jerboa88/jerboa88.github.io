@@ -10,9 +10,9 @@ import { LinkInterface, PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 
 
-interface LinkWrapperProps extends LinkInterface, PropsWithClassName, PropsWithChildren { }
+interface Props extends LinkInterface, PropsWithClassName, PropsWithChildren { }
 
-export default function LinkWrapper({ className = '', to, isInternal = false, rel = '', children }: LinkWrapperProps) {
+export default function LinkWrapper({ className = '', to, isInternal = false, rel = '', children }: Props) {
 	const classNameProps = getClassNameProps('whitespace-nowrap', className);
 
 	return isInternal ? (

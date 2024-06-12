@@ -25,7 +25,7 @@ import Timeline from '../../components/timeline';
 
 // Types
 
-interface IndexPageTemplatePropsInterface {
+interface Props {
 	pageContext: SocialImagesMetadataProp & {
 		pinnedRepos: ProjectInfoInterface[];
 	};
@@ -39,7 +39,7 @@ const SITE_METADATA = configManager.getSiteMetadata();
 const JOBS = configManager.getJobs();
 
 
-export default function IndexPageTemplate({ pageContext: { pinnedRepos } }: IndexPageTemplatePropsInterface) {
+export default function IndexPageTemplate({ pageContext: { pinnedRepos } }: Props) {
 	const inViewTriggerRef = useRef(null);
 	const expandTitle = useInView(inViewTriggerRef, USE_IN_VIEW_OPTIONS);
 	const sections = [
@@ -124,7 +124,7 @@ export default function IndexPageTemplate({ pageContext: { pinnedRepos } }: Inde
 	);
 }
 
-export const Head = ({ location, pageContext: { socialImagesMetadata } }: IndexPageTemplatePropsInterface & HeadProps) => {
+export const Head = ({ location, pageContext: { socialImagesMetadata } }: Props & HeadProps) => {
 	const metadata = {
 		title: SITE_METADATA.title,
 		shortTitle: SITE_METADATA.shortTitle,

@@ -9,12 +9,12 @@ import { PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 
 
-interface DateRangePropsInterface extends PropsWithClassName {
+interface Props extends PropsWithClassName {
 	startDate: Date;
 	endDate: Date;
 }
 
-export default function DateRange({ className = '', startDate, endDate }: DateRangePropsInterface) {
+export default function DateRange({ className = '', startDate, endDate }: Props) {
 	const classNameProps = getClassNameProps('font-bold', className);
 
 	const startMonth = startDate.toLocaleString('default', { month: 'long' });

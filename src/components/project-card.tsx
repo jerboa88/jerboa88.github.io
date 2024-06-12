@@ -19,7 +19,7 @@ import Card from './card';
 
 // Types
 
-interface ProjectCardPropsInterface {
+interface Props {
 	repo: ProjectInfoInterface;
 }
 
@@ -29,7 +29,7 @@ interface ProjectCardPropsInterface {
 const SHOW_ON_CARD_HOVER_STYLES = 'opacity-0 mouse-only:group-hover:opacity-100 transition-opacity transition-200';
 
 
-export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
+export default function ProjectCard({ repo }: Props) {
 	const ghostButtonClassNameProps = getClassNameProps('!p-0 m-0', SHOW_ON_CARD_HOVER_STYLES);
 	const pillClassNameProps = getClassNameProps('border', SHOW_ON_CARD_HOVER_STYLES);
 	const projectTypeColor = new ConfigManager().getProjectTypeColor(repo.typeName);

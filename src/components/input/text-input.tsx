@@ -10,7 +10,7 @@ import { getClassNameProps } from '../../common/utilities';
 import BaseInput from './base-input';
 
 
-export interface TextInputPropsInterface extends InputInterface {
+export interface Props extends InputInterface {
 	inputOptions?: {
 		type?: string;
 		placeholder?: string;
@@ -21,7 +21,7 @@ const defaultInputOptions = {
 	type: 'text'
 };
 
-export default function TextInput({ inputClassName = '', name, inputOptions = defaultInputOptions, errors, ...remainingProps }: TextInputPropsInterface) {
+export default function TextInput({ inputClassName = '', name, inputOptions = defaultInputOptions, errors, ...remainingProps }: Props) {
 	const classNameProps = getClassNameProps(
 		'input border-2 border-base-content/5 w-full mix-blend-overlay bg-transparent shadow-md',
 		!!errors[name] && 'input-error',

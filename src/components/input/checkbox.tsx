@@ -10,13 +10,13 @@ import { getClassNameProps } from '../../common/utilities';
 import BaseInput from './base-input';
 
 
-export interface CheckboxPropsInterface extends InputInterface {
+export interface Props extends InputInterface {
 	inputOptions?: {
 		defaultChecked?: boolean;
 	} & InputOptions;
 }
 
-export default function Checkbox({ inputClassName = '', name, inputOptions, errors, ...remainingProps }: CheckboxPropsInterface) {
+export default function Checkbox({ inputClassName = '', name, inputOptions, errors, ...remainingProps }: Props) {
 	const classNameProps = getClassNameProps('checkbox', inputClassName);
 
 	// A function for rendering the input element
