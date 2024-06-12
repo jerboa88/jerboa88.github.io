@@ -7,7 +7,7 @@
 import React from 'react';
 
 
-export default function OgImageHead() {
+export default function SocialImageHead() {
 	// Scale all components by increasing the root font size
 	return (
 		<>

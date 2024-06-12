@@ -8,7 +8,7 @@ import React from 'react'
 import { PageProps } from 'gatsby';
 import { ImageMetadataProp } from '../../common/types';
 import HeroHeader from '../../components/layout/hero-header';
-import OgImage from '../../components/seo/og-image';
+import SocialImage from '../../components/seo/og-image';
 import GhostButton from '../../components/input/ghost-button';
 import SignatureGhostButtonLink from '../../components/seo/signature-ghost-button';
 
@@ -17,16 +17,16 @@ interface PageContext {
 	pageContext: ImageMetadataProp;
 }
 
-export default function IndexOgImageTemplate({ pageContext: { imageMetadata } }: PageContext & PageProps) {
+export default function IndexSocialImageTemplate({ pageContext: { imageMetadata } }: PageContext & PageProps) {
 	return (
-		<OgImage size={imageMetadata.size} className="justify-between text-center">
+		<SocialImage size={imageMetadata.size} className="justify-between text-center">
 			<SignatureGhostButtonLink />
 			<div className="flex flex-col">
 				<HeroHeader expandTitle />
 			</div>
 			{/* Dummy element to force center alignment of section */}
 			<GhostButton text="" />
-		</OgImage>
+		</SocialImage>
 	)
 }
 
