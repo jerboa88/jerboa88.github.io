@@ -63,10 +63,10 @@ export default function PageHead({ path, metadata, structuredData, socialImagesM
 			<script type="application/ld+json">
 				{JSON.stringify({
 					'@context': 'http://schema.org',
-					// TODO: This doesn't work correctly for lists
 					...structuredData,
 					author: {
 						'@type': 'Person',
+						'@id': '/author',
 						name: siteMetadata.author.name.full,
 						url: siteMetadata.siteUrl,
 						image: siteMetadata.author.image,
