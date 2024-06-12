@@ -7,24 +7,29 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { TITLE_LAYOUT_ID } from '../../common/constants';
-import ConfigManager from '../../common/config-manager';
 import Heading from '../../components/text/heading';
+import { getSiteMetadata } from '../../common/config-manager';
 
+
+// Types
 
 interface Props {
 	expandTitle?: boolean;
 }
 
-export default function HeroHeader({ expandTitle = false }: Props) {
-	const siteMetadata = new ConfigManager().getSiteMetadata();
 
+// Constants
+const SITE_METADATA = getSiteMetadata();
+
+
+export default function HeroHeader({ expandTitle = false }: Props) {
 	const titleElement = (
 		<Heading className="m-4 text-6xl">
 			<span className="inline md:hidden">
-				{siteMetadata.author.name.short}
+				{SITE_METADATA.author.name.short}
 			</span>
 			<span className="hidden md:inline">
-				{siteMetadata.author.name.full}
+				{SITE_METADATA.author.name.full}
 			</span>
 		</Heading>
 	);
@@ -43,7 +48,7 @@ export default function HeroHeader({ expandTitle = false }: Props) {
 		<>
 			{titleWrapperElement}
 			<span className="m-4">
-				{siteMetadata.tagline}
+				{SITE_METADATA.tagline}
 			</span>
 		</>
 	);

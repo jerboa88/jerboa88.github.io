@@ -6,9 +6,11 @@
 
 import React from 'react';
 import { PageMetadata, SocialImagesMetadataProp } from '../../common/types';
-import ConfigManager from '../../common/config-manager';
 import { getAbsoluteUrl, getMimeType } from '../../common/utilities';
+import { getSiteMetadata, getTheme } from '../../common/config-manager';
 
+
+// Types
 
 interface Props extends SocialImagesMetadataProp {
 	path: string;
@@ -16,15 +18,15 @@ interface Props extends SocialImagesMetadataProp {
 	structuredData: object;
 }
 
+
+// Constants
+
+const SITE_METADATA = getSiteMetadata();
+// TODO: Replace hardcoded value
+const THEME = getTheme('dark');
+
+
 export default function PageHead({ path, metadata, structuredData, socialImagesMetadata }: Props) {
-	// Grab site metadata from Gatsby config
-	const configManager = new ConfigManager();
-	const siteMetadata = configManager.getSiteMetadata();
-
-	// TODO: Replace hardcoded value
-	const theme = configManager.getTheme('dark');
-	const primaryThemeColor = theme.primary;
-
 	const pageUrl = getAbsoluteUrl(path);
 	const ogImageUrl = getAbsoluteUrl(socialImagesMetadata.og.imagePath);
 	const twitterImageUrl = getAbsoluteUrl(socialImagesMetadata.twitter.imagePath);
@@ -33,7 +35,7 @@ export default function PageHead({ path, metadata, structuredData, socialImagesM
 		<>
 			<html lang="en-US" />
 			<title>{metadata.title}</title>
-			<meta name="author" content={siteMetadata.author.name.full} />
+			<meta name="author" content={SITE_METADATA.author.name.full} />
 			<meta name="description" content={metadata.description} />
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -50,12 +52,12 @@ export default function PageHead({ path, metadata, structuredData, socialImagesM
 			{/* Twitter meta tags */}
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:title" content={metadata.title} />
-			<meta name="twitter:creator" content={siteMetadata.author.username.twitter} />
+			<meta name="twitter:creator" content={SITE_METADATA.author.username.twitter} />
 			<meta name="twitter:description" content={metadata.description} />
 			<meta name="twitter:image" content={twitterImageUrl.toString()} />
 
 			<meta name="google" content="nositelinkssearchbox" />
-			<meta content={primaryThemeColor} name="theme-color" />
+			<meta content={THEME.primary} name="theme-color" />
 
 			<link rel="canonical" href={pageUrl.toString()} />
 
@@ -67,21 +69,21 @@ export default function PageHead({ path, metadata, structuredData, socialImagesM
 					author: {
 						'@type': 'Person',
 						'@id': '/author',
-						name: siteMetadata.author.name.full,
-						url: siteMetadata.siteUrl,
-						image: siteMetadata.author.image,
-						alumniOf: siteMetadata.author.alumniOf,
-						jobTitle: siteMetadata.author.jobTitle,
+						name: SITE_METADATA.author.name.full,
+						url: SITE_METADATA.siteUrl,
+						image: SITE_METADATA.author.image,
+						alumniOf: SITE_METADATA.author.alumniOf,
+						jobTitle: SITE_METADATA.author.jobTitle,
 						sameAs: [
-							siteMetadata.author.link.linkedin,
-							siteMetadata.author.link.github,
-							siteMetadata.author.link.twitter,
+							SITE_METADATA.author.link.linkedin,
+							SITE_METADATA.author.link.github,
+							SITE_METADATA.author.link.twitter,
 						],
 						address: {
 							'@type': 'PostalAddress',
-							addressLocality: siteMetadata.author.location.city,
-							addressRegion: siteMetadata.author.location.state,
-							addressCountry: siteMetadata.author.location.country,
+							addressLocality: SITE_METADATA.author.location.city,
+							addressRegion: SITE_METADATA.author.location.state,
+							addressCountry: SITE_METADATA.author.location.country,
 						},
 					}
 				})}

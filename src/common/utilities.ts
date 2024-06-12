@@ -4,11 +4,13 @@
 */
 
 
+import { getSiteMetadata } from './config-manager';
 import { PropsWithClassName } from './types';
-import ConfigManager from './config-manager';
 
 
-const SITE_METADATA = new ConfigManager().getSiteMetadata();
+// Constants
+
+const SITE_METADATA = getSiteMetadata();
 
 const MIME_TYPE_MAP = {
 	apng: 'image/apng',
@@ -81,6 +83,8 @@ const STATUS_CODE_MESSAGE_MAP = {
 	511: 'Network Authentication Required',
 } as const;
 
+
+// Functions
 
 // Check if the window object exists
 // This will return false if the method is called from a server-side environment

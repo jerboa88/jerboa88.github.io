@@ -10,7 +10,6 @@ import { useInView } from 'framer-motion';
 import { faAngleDown, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { ButtonElementRenderFunction, SocialImagesMetadataProp, ProjectInfoInterface, SectionInterface } from '../../common/types';
 import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
-import ConfigManager from '../../common/config-manager';
 import { toKebabCase } from '../../common/utilities';
 import Section from '../../components/layout/section';
 import PageLayout from '../../components/layout/page-layout';
@@ -21,6 +20,7 @@ import GhostButtonLink from '../../components/links/ghost-button-link';
 import ContactForm from '../../components/input/contact-form';
 import ProjectCardGallery from '../../components/project-card-gallery';
 import Timeline from '../../components/timeline';
+import { getJobs, getSiteMetadata } from '../../common/config-manager';
 
 
 // Types
@@ -34,9 +34,8 @@ interface Props {
 
 // Constants
 
-const configManager = new ConfigManager();
-const SITE_METADATA = configManager.getSiteMetadata();
-const JOBS = configManager.getJobs();
+const SITE_METADATA = getSiteMetadata();
+const JOBS = getJobs();
 
 
 export default function IndexPageTemplate({ pageContext: { pinnedRepos } }: Props) {

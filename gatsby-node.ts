@@ -3,11 +3,11 @@ import type { Actions, CreatePagesArgs, GatsbyNode, Reporter } from 'gatsby';
 import { createImage } from 'gatsby-plugin-component-to-image';
 import { Path, PinnedRepoResponseInterface, SocialImageTypes } from './src/common/types';
 import { PAGE_TEMPLATES_DIR, PROJECTS_DIR, SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR, SOCIAL_IMAGE_TEMPLATES_DIR } from './src/common/constants';
-import ConfigManager from './src/common/config-manager';
 import ResponseParser from './src/node/response-parser';
 import ResponseMapper from './src/node/response-mapper';
 import { removeTrailingSlash } from './src/common/utilities';
 import assert from 'assert';
+import { getPageMetadata, getSocialImageGenerationConfigForType } from './src/common/config-manager';
 
 
 // Constants
@@ -18,8 +18,6 @@ const PROJECT_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'project.tsx');
 const INDEX_OG_IMAGE_TEMPLATE = resolve(SOCIAL_IMAGE_TEMPLATES_DIR, 'index.tsx');
 const PROJECT_OG_IMAGE_TEMPLATE = resolve(SOCIAL_IMAGE_TEMPLATES_DIR, 'project.tsx');
 const OTHER_OG_IMAGE_TEMPLATE = resolve(SOCIAL_IMAGE_TEMPLATES_DIR, 'other.tsx');
-
-const configManager = new ConfigManager();
 
 
 // Runtime variables
@@ -126,7 +124,7 @@ function createSocialImage(type: SocialImageTypes, { path, component, context }:
 	const pagePath = join(SOCIAL_IMAGE_PAGES_DIR, type, path);
 	const imageFileName = path === '/' ? 'index' : removeTrailingSlash(path);
 	const imagePath = join('/', 'images', type, `${imageFileName}.webp`);
-	const { size } = configManager.getSocialImageGenerationConfigForType(type);
+	const { size } = getSocialImageGenerationConfigForType(type);
 	const socialImageMetadata = createImage({
 		pagePath,
 		imagePath,
@@ -188,7 +186,7 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
 		return;
 	}
 
-	const pageMetadata = configManager.getPageMetadata(page.path);
+	const pageMetadata = getPageMetadata(page.path);
 
 	if (!pageMetadata) {
 		gatsbyReporter?.warn(`Skipped adding metadata to ${page.path}`);

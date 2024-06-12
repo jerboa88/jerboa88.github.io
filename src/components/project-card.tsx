@@ -8,13 +8,13 @@ import React from 'react';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { ProjectInfoInterface } from '../common/types';
-import ConfigManager from '../common/config-manager';
 import { getClassNameProps } from '../common/utilities';
 import SubsectionHeading from './text/subsection-heading';
 import LinkWrapper from './links/link-wrapper';
 import GhostButton from './input/ghost-button';
 import Pill from './pill';
 import Card from './card';
+import { getProjectTypeColor } from '../common/config-manager';
 
 
 // Types
@@ -32,7 +32,7 @@ const SHOW_ON_CARD_HOVER_STYLES = 'opacity-0 mouse-only:group-hover:opacity-100 
 export default function ProjectCard({ repo }: Props) {
 	const ghostButtonClassNameProps = getClassNameProps('!p-0 m-0', SHOW_ON_CARD_HOVER_STYLES);
 	const pillClassNameProps = getClassNameProps('border', SHOW_ON_CARD_HOVER_STYLES);
-	const projectTypeColor = new ConfigManager().getProjectTypeColor(repo.typeName);
+	const projectTypeColor = getProjectTypeColor(repo.typeName);
 
 	return (
 		<LinkWrapper to={repo.githubUrl}>

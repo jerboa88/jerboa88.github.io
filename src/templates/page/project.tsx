@@ -6,7 +6,6 @@
 
 import React, { useRef } from 'react';
 import type { HeadProps } from 'gatsby';
-import ConfigManager from '../../common/config-manager';
 import { ProjectInfoInterface, SocialImagesMetadataProp } from '../../common/types';
 import PageLayout from '../../components/layout/page-layout';
 import PageHead from '../../components/seo/page-head';
@@ -14,6 +13,7 @@ import Section from '../../components/layout/section';
 import { Article } from '../../components/text/article';
 import InlineLink from '../../components/links/inline-link';
 import { getAbsoluteUrl } from '../../common/utilities';
+import { getSiteMetadata } from '../../common/config-manager';
 
 
 // Types
@@ -26,7 +26,8 @@ interface Props {
 
 
 // Constants
-const SITE_METADATA = new ConfigManager().getSiteMetadata();
+
+const SITE_METADATA = getSiteMetadata();
 
 
 export default function ProjectPageTemplate({ pageContext: { repo } }: Props) {

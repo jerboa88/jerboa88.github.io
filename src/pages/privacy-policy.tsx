@@ -8,13 +8,13 @@ import React, { useRef } from 'react';
 import type { HeadProps, PageProps } from 'gatsby';
 import { graphql } from 'gatsby';
 import { PageMetadataProp, SocialImagesMetadataProp } from '../common/types';
-import ConfigManager from '../common/config-manager';
 import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
 import PageHead from '../components/seo/page-head';
 import SolidButtonLink from '../components/links/solid-button-link';
 import { Article } from '../components/text/article';
 import { getAbsoluteUrl } from '../common/utilities';
+import { getSiteMetadata } from '../common/config-manager';
 
 
 // Types
@@ -36,7 +36,7 @@ interface DataProp {
 
 // Constants
 
-const SITE_METADATA = new ConfigManager().getSiteMetadata();
+const SITE_METADATA = getSiteMetadata();
 
 
 export default function PrivacyPolicyPage({ data, pageContext: { pageMetadata } }: PageContextProp & DataProp & PageProps) {
