@@ -7,7 +7,7 @@
 import React, { useCallback } from 'react'
 import { PageProps } from 'gatsby';
 import { ButtonElementRenderFunction, ImageMetadataProp, ProjectInfoInterface } from '../../common/types';
-import SocialImage from '../../components/seo/og-image';
+import SocialImage from '../../components/seo/social-image';
 import ProjectCard from '../../components/project-card'
 import Section from '../../components/layout/section';
 import SignatureGhostButtonLink from '../../components/seo/signature-ghost-button';
@@ -33,4 +33,4 @@ export default function ProjectSocialImageTemplate({ pageContext: { repo, imageM
 	)
 }
 
-export { default as Head } from '../../components/seo/og-image-head'
+export { default as Head } from '../../components/seo/social-image-head'

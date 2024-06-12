@@ -18,9 +18,9 @@ const FADE_TRANSITION_VARIANTS = {
 } as const;
 
 // Directories
+export const PAGE_TEMPLATES_DIR = './src/templates/page' as const;
+export const SOCIAL_IMAGE_TEMPLATES_DIR = './src/templates/social-image' as const;
 export const PROJECTS_DIR = '/projects' as const;
-// TODO: Remove this
-export const OG_IMAGE_DIR = 'og-image' as const;
 export const SOCIAL_IMAGES_DIR = '/__generatedSocialImages' as const;
 
 // ID used to group together elements for the title animation
