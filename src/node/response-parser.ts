@@ -111,6 +111,7 @@ export default class ResponseParser {
 			stargazers: getProp(responseData, 'stargazerCount'),
 			updatedAt: getProp(responseData, 'updatedAt'),
 			license: getProp(getProp(responseData, 'licenseInfo'), 'spdxId'),
+			licenseUrl: getProp(getProp(responseData, 'licenseInfo'), 'url'),
 			languages: languages,
 			name,
 			longDesc,

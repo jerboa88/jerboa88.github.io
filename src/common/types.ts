@@ -311,6 +311,7 @@ export interface ProjectInfoInterface {
 	stargazers: number;
 	updatedAt: string;
 	license: string;
+	licenseUrl: Url;
 	languages: ProjectLanguageInterface[];
 	name: string;
 	longDesc: string;
