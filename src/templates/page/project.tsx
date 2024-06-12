@@ -7,7 +7,7 @@
 import React, { useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import ConfigManager from '../../common/config-manager';
-import { ProjectInfoInterface } from '../../common/types';
+import { ProjectInfoInterface, SocialImagesMetadataProp } from '../../common/types';
 import PageLayout from '../../components/layout/page-layout';
 import PageHead from '../../components/seo/page-head';
 import Section from '../../components/layout/section';
@@ -19,7 +19,7 @@ import { getAbsoluteUrl } from '../../common/utilities';
 // Types
 
 interface ProjectPageTemplatePropsInterface {
-	pageContext: {
+	pageContext: SocialImagesMetadataProp & {
 		repo: ProjectInfoInterface;
 	};
 }
@@ -70,25 +70,25 @@ export default function ProjectPageTemplate({ pageContext: { repo } }: ProjectPa
 	);
 }
 
-export const Head = ({ location, pageContext: { repo } }: HeadProps & ProjectPageTemplatePropsInterface) => {
-	const pageMetadata = {
+export const Head = ({ location, pageContext: { repo, socialImagesMetadata } }: HeadProps & ProjectPageTemplatePropsInterface) => {
+	const metadata = {
 		title: `${repo.name} | ${SITE_METADATA.shortTitle}`,
+		shortTitle: repo.name,
 		// TODO: Strip newlines and HTML tags from the long description
 		description: repo.longDesc,
-		shortDescription: repo.shortDesc,
 		path: location.pathname,
-		structuredData: {
-			'@context': 'https://schema.org',
-			'@type': 'SoftwareApplication',
-			name: repo.name,
-			description: repo.longDesc,
-			url: getAbsoluteUrl(location.pathname).toString(),
-			image: repo.imageUrl,
-			license: repo.license,
-		}
+	};
+	const structuredData = {
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		name: repo.name,
+		description: repo.longDesc,
+		url: getAbsoluteUrl(location.pathname).toString(),
+		image: repo.imageUrl,
+		license: repo.license,
 	};
 
 	return (
-		<PageHead pageMetadata={pageMetadata} />
+		<PageHead path={location.pathname} {...{ metadata, structuredData, socialImagesMetadata }} />
 	);
 }

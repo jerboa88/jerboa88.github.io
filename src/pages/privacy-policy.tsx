@@ -7,7 +7,7 @@
 import React, { useRef } from 'react';
 import type { HeadProps, PageProps } from 'gatsby';
 import { graphql } from 'gatsby';
-import { PageMetadataProp } from '../common/types';
+import { PageMetadataProp, SocialImagesMetadataProp } from '../common/types';
 import ConfigManager from '../common/config-manager';
 import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
@@ -19,7 +19,7 @@ import { Article } from '../components/text/article';
 // Types
 
 interface PageContextProp {
-	pageContext: PageMetadataProp;
+	pageContext: PageMetadataProp & SocialImagesMetadataProp;
 }
 
 interface DataProp {
@@ -55,22 +55,21 @@ export default function PrivacyPolicyPage({ data, pageContext: { pageMetadata } 
 	);
 }
 
-export const Head = ({ location, pageContext: { pageMetadata } }: PageContextProp & DataProp & HeadProps) => {
-	const computedPageMetadata = {
+export const Head = ({ location, pageContext: { pageMetadata, socialImagesMetadata } }: PageContextProp & DataProp & HeadProps) => {
+	const metadata = {
 		title: `${pageMetadata.title} | ${SITE_METADATA.shortTitle}`,
+		shortTitle: pageMetadata.shortTitle,
 		description: pageMetadata.description,
-		shortDescription: pageMetadata.description,
-		path: location.pathname,
-		structuredData: {
-			'@type': 'WebSite',
-			name: pageMetadata.title,
-			description: pageMetadata.description,
-			url: SITE_METADATA.siteUrl,
-		}
 	};
+	const structuredData = {
+		'@type': 'WebSite',
+		name: pageMetadata.title,
+		description: pageMetadata.description,
+		url: SITE_METADATA.siteUrl,
+	}
 
 	return (
-		<PageHead pageMetadata={computedPageMetadata} />
+		<PageHead path={location.pathname} {...{ metadata, structuredData, socialImagesMetadata }} />
 	);
 }
 

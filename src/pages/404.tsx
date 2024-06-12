@@ -6,7 +6,7 @@
 
 import React, { useRef } from 'react';
 import type { HeadProps, PageProps } from 'gatsby';
-import { PageMetadataProp } from '../common/types';
+import { PageMetadataProp, SocialImagesMetadataProp } from '../common/types';
 import ConfigManager from '../common/config-manager';
 import Section from '../components/layout/section';
 import PageLayout from '../components/layout/page-layout';
@@ -17,7 +17,7 @@ import SolidButtonLink from '../components/links/solid-button-link';
 // Types
 
 interface PageContext {
-	pageContext: PageMetadataProp;
+	pageContext: PageMetadataProp & SocialImagesMetadataProp;
 }
 
 
@@ -59,21 +59,20 @@ export default function NotFoundPage({ pageContext: { pageMetadata } }: PageCont
 	);
 }
 
-export const Head = ({ location, pageContext: { pageMetadata } }: PageContext & HeadProps) => {
-	const computedPageMetadata = {
+export const Head = ({ location, pageContext: { pageMetadata, socialImagesMetadata } }: PageContext & HeadProps) => {
+	const metadata = {
 		title: `${pageMetadata.title} | ${SITE_METADATA.shortTitle}`,
+		shortTitle: pageMetadata.shortTitle,
 		description: pageMetadata.description,
-		shortDescription: pageMetadata.description,
-		path: location.pathname,
-		structuredData: {
-			'@type': 'WebSite',
-			name: pageMetadata.title,
-			description: pageMetadata.description,
-			url: SITE_METADATA.siteUrl,
-		}
+	};
+	const structuredData = {
+		'@type': 'WebSite',
+		name: pageMetadata.title,
+		description: pageMetadata.description,
+		url: SITE_METADATA.siteUrl,
 	};
 
 	return (
-		<PageHead pageMetadata={pageMetadata} />
+		<PageHead path={location.pathname} {...{ metadata, structuredData, socialImagesMetadata }} />
 	);
 }

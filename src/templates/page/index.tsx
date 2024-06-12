@@ -8,7 +8,7 @@ import React, { useCallback, useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import { useInView } from 'framer-motion';
 import { faAngleDown, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import { ButtonElementRenderFunction, ProjectInfoInterface, SectionInterface } from '../../common/types';
+import { ButtonElementRenderFunction, SocialImagesMetadataProp, ProjectInfoInterface, SectionInterface } from '../../common/types';
 import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
 import ConfigManager from '../../common/config-manager';
 import { toKebabCase } from '../../common/utilities';
@@ -26,7 +26,7 @@ import Timeline from '../../components/timeline';
 // Types
 
 interface IndexPageTemplatePropsInterface {
-	pageContext: {
+	pageContext: SocialImagesMetadataProp & {
 		pinnedRepos: ProjectInfoInterface[];
 	};
 }
@@ -124,21 +124,20 @@ export default function IndexPageTemplate({ pageContext: { pinnedRepos } }: Inde
 	);
 }
 
-export const Head = ({ location }: IndexPageTemplatePropsInterface & HeadProps) => {
-	const computedPageMetadata = {
+export const Head = ({ location, pageContext: { socialImagesMetadata } }: IndexPageTemplatePropsInterface & HeadProps) => {
+	const metadata = {
 		title: SITE_METADATA.title,
+		shortTitle: SITE_METADATA.shortTitle,
 		description: SITE_METADATA.description,
-		shortDescription: SITE_METADATA.shortDescription,
-		path: location.pathname,
-		structuredData: {
-			'@type': 'WebSite',
-			name: SITE_METADATA.title,
-			description: SITE_METADATA.description,
-			url: SITE_METADATA.siteUrl,
-		}
 	};
+	const structuredData = {
+		'@type': 'WebSite',
+		name: SITE_METADATA.title,
+		description: SITE_METADATA.description,
+		url: SITE_METADATA.siteUrl,
+	}
 
 	return (
-		<PageHead pageMetadata={computedPageMetadata} />
+		<PageHead path={location.pathname} {...{ metadata, structuredData, socialImagesMetadata }} />
 	);
 }
