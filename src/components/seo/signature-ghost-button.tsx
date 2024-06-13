@@ -7,13 +7,12 @@
 import React from 'react';
 import { faSignature } from '@fortawesome/free-solid-svg-icons';
 import { ButtonInterface } from '../../common/types';
-import ConfigManager from '../../common/config-manager';
 import GhostButton from '../input/ghost-button';
+import { getSiteMetadata } from '../../common/config-manager';
 
 
-const { siteUrl } = new ConfigManager().getSiteMetadata();
 const BUTTON_PROPS = {
-	text: new URL(siteUrl).hostname,
+	text: new URL(getSiteMetadata().siteUrl).hostname,
 	icon: faSignature,
 	flip: false,
 };

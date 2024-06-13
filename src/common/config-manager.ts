@@ -4,7 +4,7 @@
 */
 
 
-import type { BgColor, PageMetadata, ProjectTypeColorMappingsInterface, RoleInterface, RoleTypeColorMappingsInterface, SiteMetadataInterface, SocialImageTypes, SocialImagesGenerationConfig, ThemeInterface } from '../common/types';
+import type { BgColor, PageMetadata, RoleInterface, SiteMetadataInterface, SocialImageTypes, SocialImagesGenerationConfig, ThemeInterface } from '../common/types';
 import siteMetadataConfig from '../config/site-metadata';
 import pageMetadataConfig from '../config/pages-metadata';
 import socialImagesGenerationConfig from '../config/social-images-generation';
@@ -13,117 +13,121 @@ import jobsConfig from '../config/jobs';
 import themesConfig from '../config/themes';
 import colorMappingsConfig from '../config/color-mappings';
 import { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
+import { getOrDefault } from './utilities';
 
 
-// Class for loading and formatting configuration data
-export default class ConfigManager {
-	getSiteMetadata(): SiteMetadataInterface {
-		const smc = siteMetadataConfig;
-		const authorFullName = `${smc.author.name.first} ${smc.author.name.last}`;
+export function getSiteMetadata(): SiteMetadataInterface {
+	const config = siteMetadataConfig;
+	const authorFullName = `${config.author.name.first} ${config.author.name.last}`;
 
-		return {
-			shortTitle: authorFullName,
-			title: `${authorFullName} | ${smc.author.jobTitle}`,
-			tagline: `${smc.author.jobTitle} & Cat Whisperer`,
-			shortDescription: `Portfolio site for ${authorFullName}`,
-			description: `Portfolio site for ${authorFullName}, a ${smc.author.jobTitle} based in ${smc.author.location.city}, ${smc.author.location.state}.`,
-			iconPath: smc.iconPath,
-			siteUrl: smc.siteUrl,
-			sourceUrl: smc.sourceUrl,
-			author: {
-				name: {
-					first: smc.author.name.first,
-					last: smc.author.name.last,
-					initial: smc.author.name.first[0],
-					short: `${smc.author.name.first} ${smc.author.name.last[0]}`,
-					full: authorFullName,
-				},
-				jobTitle: smc.author.jobTitle,
-				alumniOf: smc.author.alumniOf,
-				image: smc.author.image,
-				username: {
-					twitter: smc.author.username.twitter,
-				},
-				link: {
-					linkedin: `https://www.linkedin.com/in/${smc.author.username.linkedin}`,
-					github: `https://github.com/${smc.author.username.github}`,
-					twitter: `https://twitter.com/${smc.author.username.twitter}`,
-				},
-				location: {
-					city: smc.author.location.city,
-					state: smc.author.location.state,
-					country: smc.author.location.country,
-				},
-			}
-		};
-	}
-
-	// Returns the metadata for a given page
-	getPageMetadata(pagePath: string): PageMetadata {
-		const pmc = pageMetadataConfig[pagePath as keyof typeof pageMetadataConfig];
-
-		if (!pmc) {
-			console.warn(`Page metadata for ${pagePath} not found`);
+	return {
+		shortTitle: authorFullName,
+		title: `${authorFullName} | ${config.author.jobTitle}`,
+		tagline: `${config.author.jobTitle} & Cat Whisperer`,
+		shortDescription: `Portfolio site for ${authorFullName}`,
+		description: `Portfolio site for ${authorFullName}, a ${config.author.jobTitle} based in ${config.author.location.city}, ${config.author.location.state}.`,
+		iconPath: config.iconPath,
+		siteUrl: config.siteUrl,
+		sourceUrl: config.sourceUrl,
+		author: {
+			name: {
+				first: config.author.name.first,
+				last: config.author.name.last,
+				initial: config.author.name.first[0],
+				short: `${config.author.name.first} ${config.author.name.last[0]}`,
+				full: authorFullName,
+			},
+			jobTitle: config.author.jobTitle,
+			alumniOf: config.author.alumniOf,
+			image: config.author.image,
+			username: {
+				twitter: config.author.username.twitter,
+			},
+			link: {
+				linkedin: `https://www.linkedin.com/in/${config.author.username.linkedin}`,
+				github: `https://github.com/${config.author.username.github}`,
+				twitter: `https://twitter.com/${config.author.username.twitter}`,
+			},
+			location: {
+				city: config.author.location.city,
+				state: config.author.location.state,
+				country: config.author.location.country,
+			},
 		}
+	};
+}
 
-		return pmc;
+
+// Returns the metadata for a given page
+export function getPageMetadata(pagePath: string): PageMetadata {
+	const config = pageMetadataConfig[pagePath as keyof typeof pageMetadataConfig];
+
+	if (!config) {
+		console.warn(`Page metadata for ${pagePath} not found`);
 	}
 
-	// Returns the social image generation config for a given type
-	getSocialImageGenerationConfigDefaults(): SocialImagesGenerationConfig['defaults'] {
-		return socialImagesGenerationConfig.defaults;
+	return config;
+}
+
+
+// Returns the social image generation config for a given type
+export function getSocialImageGenerationConfigDefaults(): SocialImagesGenerationConfig['defaults'] {
+	return socialImagesGenerationConfig.defaults;
+}
+
+
+// Returns the social image generation config for a given type
+export function getSocialImageGenerationConfigForType(type: SocialImageTypes): JobOptions {
+	const config = socialImagesGenerationConfig.types[type as keyof typeof socialImagesGenerationConfig['types']];
+
+	if (!config) {
+		console.warn(`Social image generation config for '${type}' not found`);
 	}
 
-	// Returns the social image generation config for a given type
-	getSocialImageGenerationConfigForType(type: SocialImageTypes): JobOptions {
-		const sigc = socialImagesGenerationConfig.types[type as keyof typeof socialImagesGenerationConfig['types']];
+	return config;
+}
 
-		if (!sigc) {
-			console.warn(`Social image generation config for '${type}' not found`);
-		}
 
-		return sigc;
+export function getExternalServices() {
+	return externalServicesConfig;
+}
+
+
+// Returns a list of jobs with formatted date objects
+export function getJobs(): RoleInterface[] {
+	return jobsConfig.map(job => ({
+		...job,
+		startDate: new Date(job.startDate),
+		endDate: new Date(job.endDate),
+	}));
+}
+
+
+// Returns a daisyUI theme given its name
+export function getTheme(themeName: 'light' | 'dark'): ThemeInterface {
+	const config = themesConfig[themeName];
+
+	if (!config) {
+		throw new Error(`Theme '${themeName}' not found`);
 	}
 
-	getExternalServices() {
-		return externalServicesConfig;
-	}
+	return config;
+}
 
-	// Returns a list of jobs with formatted date objects
-	getJobs(): RoleInterface[] {
-		return jobsConfig.map(job => ({
-			...job,
-			startDate: new Date(job.startDate),
-			endDate: new Date(job.endDate),
-		}));
-	}
 
-	// Returns a daisyUI theme given its name
-	getTheme(themeName: 'light' | 'dark'): ThemeInterface {
-		const theme = themesConfig[themeName];
+// Returns the color for a given project type
+export function getProjectTypeColor(projectType: string): BgColor | '' {
+	const colorMap = colorMappingsConfig.projectType;
+	const key = projectType.toLowerCase();
 
-		if (!theme) {
-			throw new Error(`Theme '${themeName}' not found`);
-		}
+	return getOrDefault(colorMap, key, '');
+}
 
-		return theme;
-	}
 
-	// Returns the color for a given project type
-	getProjectTypeColor(projectType: string): BgColor | '' {
-		const colorMap = colorMappingsConfig.projectType;
+// Returns the color for a given role type
+export function getRoleTypeColor(roleType: string): BgColor | '' {
+	const colorMap = colorMappingsConfig.roleType;
+	const key = roleType.toLowerCase();
 
-		projectType = projectType.toLowerCase();
-
-		return projectType in colorMap ? colorMap[projectType as keyof ProjectTypeColorMappingsInterface] : '';
-	}
-
-	// Returns the color for a given role type
-	getRoleTypeColor(roleType: string): BgColor | '' {
-		const colorMap = colorMappingsConfig.roleType;
-
-		roleType = roleType.toLowerCase();
-
-		return roleType in colorMap ? colorMap[roleType as keyof RoleTypeColorMappingsInterface] : '';
-	}
-};
+	return getOrDefault(colorMap, key, '');
+}

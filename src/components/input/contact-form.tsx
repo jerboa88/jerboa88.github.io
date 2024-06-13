@@ -11,12 +11,12 @@ import Botpoison from '@botpoison/browser';
 import { faCircleNotch, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { PropsWithClassName, InputValidationOptions, AlertType, TooltipPosition } from '../../common/types';
 import { getClassNameProps, getOrDefault, getStatusCodeDescription } from '../../common/utilities';
-import ConfigManager from '../../common/config-manager';
 import TextInput from './text-input';
 import MultilineTextInput from './multiline-text-input';
 import SolidButton from './solid-button';
 import GhostAlert from '../ghost-alert';
 import Checkbox from './checkbox';
+import { getExternalServices } from '../../common/config-manager';
 
 
 // Types
@@ -108,13 +108,10 @@ const INPUT_PROPS = {
 	},
 } as const;
 
-const {
-	botpoisonPublicKey: BOTPOISON_PUBLIC_KEY,
-	contactFormPostUrl: CONTACT_FORM_POST_URL,
-} = new ConfigManager().getExternalServices();
+const EXTERNAL_SERVICES = getExternalServices();
 
 const botpoison = new Botpoison({
-	publicKey: BOTPOISON_PUBLIC_KEY,
+	publicKey: EXTERNAL_SERVICES.botpoisonPublicKey,
 });
 
 function getValidationOptions(formState: FormState) {
@@ -201,7 +198,7 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 
 		console.debug('Submitting form with data:', requestBody);
 
-		fetch(CONTACT_FORM_POST_URL, {
+		fetch(EXTERNAL_SERVICES.contactFormPostUrl, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

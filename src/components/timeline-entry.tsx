@@ -9,11 +9,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { RoleInterface } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
-import ConfigManager from '../common/config-manager';
 import SubsectionHeading from './text/subsection-heading';
 import DateRange from './text/date-range';
 import Pill from './pill';
 import Card from './card';
+import { getRoleTypeColor } from '../common/config-manager';
 
 
 interface Props {
@@ -21,7 +21,7 @@ interface Props {
 }
 
 export default function TimelineEntry({ role }: Props) {
-	const roleTypeColor = new ConfigManager().getRoleTypeColor(role.type);
+	const roleTypeColor = getRoleTypeColor(role.type);
 	const pillClassNameProps = getClassNameProps('capitalize', roleTypeColor);
 
 	return (

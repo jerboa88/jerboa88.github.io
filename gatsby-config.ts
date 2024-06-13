@@ -7,15 +7,14 @@
 import type { GatsbyConfig } from 'gatsby';
 import dotenv from 'dotenv';
 import * as tailwindConfig from './tailwind.config';
-import ConfigManager from './src/common/config-manager';
+import { getSiteMetadata, getSocialImageGenerationConfigDefaults, getTheme } from './src/common/config-manager';
 import { getAbsoluteUrl } from './src/common/utilities';
 import { SOCIAL_IMAGES_DIR } from './src/common/constants';
 
 
-const configManager = new ConfigManager();
-const metadata = configManager.getSiteMetadata();
-const lightTheme = configManager.getTheme('light');
-const darkTheme = configManager.getTheme('dark');
+const SITE_METADATA = getSiteMetadata();
+const LIGHT_THEME = getTheme('light');
+const DARK_THEME = getTheme('dark');
 
 
 // Load environment variables from relevant .env file
@@ -26,9 +25,9 @@ dotenv.config({
 
 const config: GatsbyConfig = {
 	siteMetadata: {
-		...metadata,
-		lightTheme,
-		darkTheme
+		...SITE_METADATA,
+		lightTheme: LIGHT_THEME,
+		darkTheme: DARK_THEME
 	},
 	graphqlTypegen: {
 		typesOutputPath: 'src/common/gatsby-types.d.ts',
@@ -41,7 +40,7 @@ const config: GatsbyConfig = {
 		'gatsby-transformer-sharp',
 		{
 			resolve: 'gatsby-plugin-component-to-image',
-			options: configManager.getSocialImageGenerationConfigDefaults()
+			options: getSocialImageGenerationConfigDefaults()
 		},
 		{
 			resolve: 'gatsby-plugin-postcss',
@@ -83,13 +82,13 @@ const config: GatsbyConfig = {
 		{
 			resolve: 'gatsby-plugin-manifest',
 			options: {
-				name: metadata.title,
-				short_name: metadata.shortTitle,
+				name: SITE_METADATA.title,
+				short_name: SITE_METADATA.shortTitle,
 				start_url: '/',
-				background_color: darkTheme['base-100'],
-				theme_color: darkTheme['primary'],
+				background_color: DARK_THEME['base-100'],
+				theme_color: DARK_THEME['primary'],
 				display: 'standalone',
-				icon: `${__dirname}/src/${metadata.iconPath}`,
+				icon: `${__dirname}/src/${SITE_METADATA.iconPath}`,
 				crossOrigin: 'use-credentials',
 			}
 		},

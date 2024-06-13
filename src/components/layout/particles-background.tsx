@@ -10,14 +10,14 @@ import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { IOptions, RecursivePartial } from '@tsparticles/engine';
 import { loadBasic } from '@tsparticles/basic';
 import { loadSquareShape } from '@tsparticles/shape-square';
-import ConfigManager from '../../common/config-manager';
 import { getClassNameProps } from '../../common/utilities';
+import { getTheme } from '../../common/config-manager';
 
 
 // Constants
 
 // TODO: Replace hardcoded value here
-const { neutral } = new ConfigManager().getTheme('dark');
+const THEME = getTheme('dark');
 
 
 function ParticlesBackground() {
@@ -33,7 +33,7 @@ function ParticlesBackground() {
 		detectRetina: true,
 		particles: {
 			color: {
-				value: neutral,
+				value: THEME.neutral,
 			},
 			move: {
 				enable: !shouldReduceMotion,

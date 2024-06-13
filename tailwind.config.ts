@@ -5,10 +5,7 @@
 
 
 import plugin from 'tailwindcss/plugin';
-import ConfigManager from './src/common/config-manager';
-
-
-const configManager = new ConfigManager();
+import { getTheme } from './src/common/config-manager';
 
 
 module.exports = {
@@ -41,8 +38,8 @@ module.exports = {
 	],
 	daisyui: {
 		themes: [
-			{ dark: configManager.getTheme('dark') },
-			{ light: configManager.getTheme('light') },
+			{ dark: getTheme('dark') },
+			{ light: getTheme('light') },
 		],
 		darkTheme: 'dark',
 	},
