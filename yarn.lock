@@ -1639,6 +1639,97 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@biomejs/biome@npm:1.8.1":
+  version: 1.8.1
+  resolution: "@biomejs/biome@npm:1.8.1"
+  dependencies:
+    "@biomejs/cli-darwin-arm64": "npm:1.8.1"
+    "@biomejs/cli-darwin-x64": "npm:1.8.1"
+    "@biomejs/cli-linux-arm64": "npm:1.8.1"
+    "@biomejs/cli-linux-arm64-musl": "npm:1.8.1"
+    "@biomejs/cli-linux-x64": "npm:1.8.1"
+    "@biomejs/cli-linux-x64-musl": "npm:1.8.1"
+    "@biomejs/cli-win32-arm64": "npm:1.8.1"
+    "@biomejs/cli-win32-x64": "npm:1.8.1"
+  dependenciesMeta:
+    "@biomejs/cli-darwin-arm64":
+      optional: true
+    "@biomejs/cli-darwin-x64":
+      optional: true
+    "@biomejs/cli-linux-arm64":
+      optional: true
+    "@biomejs/cli-linux-arm64-musl":
+      optional: true
+    "@biomejs/cli-linux-x64":
+      optional: true
+    "@biomejs/cli-linux-x64-musl":
+      optional: true
+    "@biomejs/cli-win32-arm64":
+      optional: true
+    "@biomejs/cli-win32-x64":
+      optional: true
+  bin:
+    biome: bin/biome
+  checksum: 10/93732980dd65b6bca772e5b7980f46f061ca10e5bcb22c0b24b1d9e9018445bd19cd565e16302e5588c4bf46c2a8a6c394a62650b42d129da281385ebba9bb1c
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-darwin-arm64@npm:1.8.1":
+  version: 1.8.1
+  resolution: "@biomejs/cli-darwin-arm64@npm:1.8.1"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-darwin-x64@npm:1.8.1":
+  version: 1.8.1
+  resolution: "@biomejs/cli-darwin-x64@npm:1.8.1"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-linux-arm64-musl@npm:1.8.1":
+  version: 1.8.1
+  resolution: "@biomejs/cli-linux-arm64-musl@npm:1.8.1"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-linux-arm64@npm:1.8.1":
+  version: 1.8.1
+  resolution: "@biomejs/cli-linux-arm64@npm:1.8.1"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-linux-x64-musl@npm:1.8.1":
+  version: 1.8.1
+  resolution: "@biomejs/cli-linux-x64-musl@npm:1.8.1"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-linux-x64@npm:1.8.1":
+  version: 1.8.1
+  resolution: "@biomejs/cli-linux-x64@npm:1.8.1"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-win32-arm64@npm:1.8.1":
+  version: 1.8.1
+  resolution: "@biomejs/cli-win32-arm64@npm:1.8.1"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@biomejs/cli-win32-x64@npm:1.8.1":
+  version: 1.8.1
+  resolution: "@biomejs/cli-win32-x64@npm:1.8.1"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@botpoison/browser@npm:^0.1.30":
   version: 0.1.30
   resolution: "@botpoison/browser@npm:0.1.30"
@@ -7622,15 +7713,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:^4.6.2":
-  version: 4.6.2
-  resolution: "eslint-plugin-react-hooks@npm:4.6.2"
-  peerDependencies:
-    eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
-  checksum: 10/5a0680941f34e70cf505bcb6082df31a3e445d193ee95a88ff3483041eb944f4cefdaf7e81b0eb1feb4eeceee8c7c6ddb8a2a6e8c4c0388514a42e16ac7b7a69
-  languageName: node
-  linkType: hard
-
 "eslint-plugin-react@npm:^7.32.2":
   version: 7.33.2
   resolution: "eslint-plugin-react@npm:7.33.2"
@@ -10896,6 +10978,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "johng-io@workspace:."
   dependencies:
+    "@biomejs/biome": "npm:1.8.1"
     "@botpoison/browser": "npm:^0.1.30"
     "@fontsource/poppins": "npm:^5.0.14"
     "@fontsource/roboto-flex": "npm:^5.0.15"
@@ -10917,7 +11000,6 @@ __metadata:
     daisyui: "npm:^4.10.5"
     dompurify: "npm:^3.1.2"
     dotenv: "npm:^16.4.5"
-    eslint-plugin-react-hooks: "npm:^4.6.2"
     framer-motion: "npm:^11.1.8"
     gatsby: "npm:^5.13.4"
     gatsby-plugin-component-to-image: "npm:^1.0.1"

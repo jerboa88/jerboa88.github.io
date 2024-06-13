@@ -27,6 +27,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@biomejs/biome", "npm:1.8.1"],\
           ["@botpoison/browser", "npm:0.1.30"],\
           ["@fontsource/poppins", "npm:5.0.14"],\
           ["@fontsource/roboto-flex", "npm:5.0.15"],\
@@ -48,7 +49,6 @@ const RAW_RUNTIME_STATE =
           ["daisyui", "npm:4.10.5"],\
           ["dompurify", "npm:3.1.2"],\
           ["dotenv", "npm:16.4.5"],\
-          ["eslint-plugin-react-hooks", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:4.6.2"],\
           ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.1.8"],\
           ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.4"],\
           ["gatsby-plugin-component-to-image", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.0.1"],\
@@ -2942,6 +2942,95 @@ const RAW_RUNTIME_STATE =
           ["@babel/helper-string-parser", "npm:7.23.4"],\
           ["@babel/helper-validator-identifier", "npm:7.22.20"],\
           ["to-fast-properties", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@biomejs/biome", [\
+      ["npm:1.8.1", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-biome-npm-1.8.1-4be05805a3/node_modules/@biomejs/biome/",\
+        "packageDependencies": [\
+          ["@biomejs/biome", "npm:1.8.1"],\
+          ["@biomejs/cli-darwin-arm64", "npm:1.8.1"],\
+          ["@biomejs/cli-darwin-x64", "npm:1.8.1"],\
+          ["@biomejs/cli-linux-arm64", "npm:1.8.1"],\
+          ["@biomejs/cli-linux-arm64-musl", "npm:1.8.1"],\
+          ["@biomejs/cli-linux-x64", "npm:1.8.1"],\
+          ["@biomejs/cli-linux-x64-musl", "npm:1.8.1"],\
+          ["@biomejs/cli-win32-arm64", "npm:1.8.1"],\
+          ["@biomejs/cli-win32-x64", "npm:1.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@biomejs/cli-darwin-arm64", [\
+      ["npm:1.8.1", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-darwin-arm64-npm-1.8.1-fa6a917e15/node_modules/@biomejs/cli-darwin-arm64/",\
+        "packageDependencies": [\
+          ["@biomejs/cli-darwin-arm64", "npm:1.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@biomejs/cli-darwin-x64", [\
+      ["npm:1.8.1", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-darwin-x64-npm-1.8.1-f14dde4c3a/node_modules/@biomejs/cli-darwin-x64/",\
+        "packageDependencies": [\
+          ["@biomejs/cli-darwin-x64", "npm:1.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@biomejs/cli-linux-arm64", [\
+      ["npm:1.8.1", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-linux-arm64-npm-1.8.1-3e38c54469/node_modules/@biomejs/cli-linux-arm64/",\
+        "packageDependencies": [\
+          ["@biomejs/cli-linux-arm64", "npm:1.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@biomejs/cli-linux-arm64-musl", [\
+      ["npm:1.8.1", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-linux-arm64-musl-npm-1.8.1-425187df27/node_modules/@biomejs/cli-linux-arm64-musl/",\
+        "packageDependencies": [\
+          ["@biomejs/cli-linux-arm64-musl", "npm:1.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@biomejs/cli-linux-x64", [\
+      ["npm:1.8.1", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-linux-x64-npm-1.8.1-54bd694c62/node_modules/@biomejs/cli-linux-x64/",\
+        "packageDependencies": [\
+          ["@biomejs/cli-linux-x64", "npm:1.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@biomejs/cli-linux-x64-musl", [\
+      ["npm:1.8.1", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-linux-x64-musl-npm-1.8.1-1abe51b131/node_modules/@biomejs/cli-linux-x64-musl/",\
+        "packageDependencies": [\
+          ["@biomejs/cli-linux-x64-musl", "npm:1.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@biomejs/cli-win32-arm64", [\
+      ["npm:1.8.1", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-win32-arm64-npm-1.8.1-af9020bdec/node_modules/@biomejs/cli-win32-arm64/",\
+        "packageDependencies": [\
+          ["@biomejs/cli-win32-arm64", "npm:1.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@biomejs/cli-win32-x64", [\
+      ["npm:1.8.1", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-win32-x64-npm-1.8.1-ee3a4bab50/node_modules/@biomejs/cli-win32-x64/",\
+        "packageDependencies": [\
+          ["@biomejs/cli-win32-x64", "npm:1.8.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -10727,26 +10816,6 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["npm:4.6.2", {\
-        "packageLocation": "./.yarn/cache/eslint-plugin-react-hooks-npm-4.6.2-05bc129286-5a0680941f.zip/node_modules/eslint-plugin-react-hooks/",\
-        "packageDependencies": [\
-          ["eslint-plugin-react-hooks", "npm:4.6.2"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:4.6.2", {\
-        "packageLocation": "./.yarn/__virtual__/eslint-plugin-react-hooks-virtual-5e1d8e87f1/0/cache/eslint-plugin-react-hooks-npm-4.6.2-05bc129286-5a0680941f.zip/node_modules/eslint-plugin-react-hooks/",\
-        "packageDependencies": [\
-          ["eslint-plugin-react-hooks", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:4.6.2"],\
-          ["@types/eslint", null],\
-          ["eslint", null]\
-        ],\
-        "packagePeers": [\
-          "@types/eslint",\
-          "eslint"\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["virtual:9e428134103afefe632e0b525e4891f187e19b1a88d7f1226ed15bc1a33e78dadce5609ed69efdbfcf1e9a8b92b21395d8875947fab28742e76101d66c8be0d8#npm:4.6.0", {\
         "packageLocation": "./.yarn/__virtual__/eslint-plugin-react-hooks-virtual-e396625d6d/0/cache/eslint-plugin-react-hooks-npm-4.6.0-b429fac07f-3c63134e05.zip/node_modules/eslint-plugin-react-hooks/",\
         "packageDependencies": [\
@@ -14722,6 +14791,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["johng-io", "workspace:."],\
+          ["@biomejs/biome", "npm:1.8.1"],\
           ["@botpoison/browser", "npm:0.1.30"],\
           ["@fontsource/poppins", "npm:5.0.14"],\
           ["@fontsource/roboto-flex", "npm:5.0.15"],\
@@ -14743,7 +14813,6 @@ const RAW_RUNTIME_STATE =
           ["daisyui", "npm:4.10.5"],\
           ["dompurify", "npm:3.1.2"],\
           ["dotenv", "npm:16.4.5"],\
-          ["eslint-plugin-react-hooks", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:4.6.2"],\
           ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.1.8"],\
           ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.4"],\
           ["gatsby-plugin-component-to-image", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.0.1"],\
