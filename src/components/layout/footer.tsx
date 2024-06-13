@@ -6,16 +6,18 @@
 
 import React from 'react';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { SiteMetadataInterface, TooltipPosition } from '../../common/types';
+import { TooltipPosition } from '../../common/types';
 import GhostButtonLink from '../links/ghost-button-link';
 import Divider from '../divider';
+import { getSiteMetadata } from '../../common/config-manager';
 
 
-interface Props {
-	siteMetadata: SiteMetadataInterface;
-}
+// Constants
 
-export default function Footer({ siteMetadata }: Props) {
+const SITE_METADATA = getSiteMetadata();
+
+
+export default function Footer() {
 	return (
 		<footer className="z-30 w-full shadow-lg backdrop-blur-md bg-glass">
 			<div className="mix-blend-overlay">
@@ -23,7 +25,7 @@ export default function Footer({ siteMetadata }: Props) {
 				<div className="flex flex-row justify-between items-center p-4 pb-4">
 					<nav className="flex flex-row justify-center tabs font-button">
 						<GhostButtonLink
-							to={siteMetadata.sourceUrl}
+							to={SITE_METADATA.sourceUrl}
 							text="Source"
 							tooltipText="View the source code on GitHub"
 							tooltipPosition={TooltipPosition.Right} />
@@ -36,12 +38,12 @@ export default function Footer({ siteMetadata }: Props) {
 					</nav>
 					<nav className="flex flex-row justify-center">
 						<GhostButtonLink
-							to={siteMetadata.author.link.linkedin}
+							to={SITE_METADATA.author.link.linkedin}
 							icon={faLinkedin}
 							tooltipText="View my profile on LinkedIn"
 							tooltipPosition={TooltipPosition.Left} />
 						<GhostButtonLink
-							to={siteMetadata.author.link.github}
+							to={SITE_METADATA.author.link.github}
 							icon={faGithub}
 							tooltipText="View my profile on GitHub"
 							tooltipPosition={TooltipPosition.Left} />

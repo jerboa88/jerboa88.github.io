@@ -42,7 +42,7 @@ export default function NotFoundPage({ pageContext: { pageMetadata } }: PageCont
 	].join('\n');
 
 	return (
-		<PageLayout siteMetadata={SITE_METADATA}>
+		<PageLayout>
 			{/* Dummy element to force center alignment of section */}
 			<div />
 			<Section title={pageMetadata.shortTitle} ref={useRef(null)} className="items-center">

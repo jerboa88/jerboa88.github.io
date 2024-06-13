@@ -6,7 +6,7 @@
 
 import React, { PropsWithChildren, StrictMode } from 'react';
 import { MotionConfig } from 'framer-motion';
-import { SiteMetadataInterface, SectionInterface, PropsWithClassName } from '../../common/types';
+import { SectionInterface, PropsWithClassName } from '../../common/types';
 import { SPRING_TRANSITION_PROPS } from '../../common/constants';
 import { getClassNameProps } from '../../common/utilities';
 import Header from './header';
@@ -17,7 +17,6 @@ import ParticlesBackground from './particles-background';
 // Types
 
 interface Props extends PropsWithClassName, PropsWithChildren {
-	siteMetadata: SiteMetadataInterface;
 	expandTitle?: boolean;
 	sections?: SectionInterface[];
 }
@@ -32,7 +31,7 @@ const BG_GRADIENT_PROPS = {
 }
 
 
-export default function PageLayout({ className = '', siteMetadata, expandTitle = false, sections = [], children }: Props) {
+export default function PageLayout({ className = '', expandTitle = false, sections = [], children }: Props) {
 	const classNameProps = getClassNameProps(
 		'flex-col gap-32 justify-between items-center mx-auto text-base min-h-svh scroll-smooth selection:bg-primary selection:text-primary-content',
 		className,
@@ -111,9 +110,9 @@ export default function PageLayout({ className = '', siteMetadata, expandTitle =
 				{/* Page body */}
 				<div {...BG_GRADIENT_PROPS} {...classNameProps}>
 					<ParticlesBackground />
-					<Header {...{ siteMetadata, expandTitle, sections }} />
+					<Header {...{ expandTitle, sections }} />
 					{children}
-					<Footer siteMetadata={siteMetadata} />
+					<Footer />
 				</div>
 			</MotionConfig>
 		</StrictMode>
