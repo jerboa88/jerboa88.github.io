@@ -3,19 +3,23 @@
 	--------------------------------
 */
 
-
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { LayoutProps } from 'framer-motion';
-import { DefaultOptions, JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
+import {
+	DefaultOptions,
+	JobOptions,
+} from 'gatsby-plugin-component-to-image/lib/types';
 import { Context, RefObject } from 'react';
-import { FieldErrors, UseFormRegister, UseFormRegisterReturn } from 'react-hook-form';
-
+import {
+	FieldErrors,
+	UseFormRegister,
+	UseFormRegisterReturn,
+} from 'react-hook-form';
 
 // Props for components that accept an optional class name
 export interface PropsWithClassName {
 	className?: string;
 }
-
 
 // Props for components that accept optional layout animations
 export interface PropsWithLayoutAnimations {
@@ -23,25 +27,20 @@ export interface PropsWithLayoutAnimations {
 	layoutRoot?: LayoutProps['layoutRoot'];
 }
 
-
 // Tailwind CSS background color
 export type BgColor = `bg-${string}`;
-
 
 // Absolute path
 export type Path = `/${string}`;
 
-
 // HTTPS URL
 export type Url = `https://${string}`;
-
 
 // Raw external services config
 export interface ExternalServicesConfigInterface {
 	botpoisonPublicKey: `pk_${string}`;
 	contactFormPostUrl: Url;
 }
-
 
 // Raw site metadata config
 export interface SiteMetadataConfigInterface {
@@ -60,15 +59,14 @@ export interface SiteMetadataConfigInterface {
 			linkedin: string;
 			github: string;
 			twitter: string;
-		},
+		};
 		location: {
 			city: string;
 			state: string;
 			country: string;
-		},
-	}
+		};
+	};
 }
-
 
 // Page metadata fields
 export interface PageMetadata {
@@ -77,33 +75,28 @@ export interface PageMetadata {
 	description: string;
 }
 
-
 // Page metadata added to pageContext when pages are created
 export interface PageMetadataProp {
 	pageMetadata: PageMetadata;
 }
-
 
 // Raw pages metadata config
 export interface PagesMetadataConfigInterface {
 	[key: Path]: PageMetadata;
 }
 
-
 // TODO: Use this type in interfaces below
 // TODO: Change this to an enum
 export type SocialImageTypes = 'og' | 'twitter';
 
-
 // Raw social image metadata config
 export interface SocialImagesGenerationConfig {
-	defaults: DefaultOptions
+	defaults: DefaultOptions;
 	types: {
 		og: JobOptions;
 		twitter: JobOptions;
-	}
+	};
 }
-
 
 // Social image metadata added to the pageContext of pages when they are created
 export interface SocialImagesMetadataProp {
@@ -113,28 +106,25 @@ export interface SocialImagesMetadataProp {
 	};
 }
 
-
 // Open Graph image metadata added to the pageContext of gatsby-plugin-component-to-image components when they are created
 export interface ImageMetadataProp {
 	imageMetadata: JobOptions;
 }
 
-
 // Theme object used to style the site
 export interface ThemeInterface {
-	'accent': string;
+	accent: string;
 	'base-100': string;
 	'base-200': string;
 	'base-300': string;
-	'error': string;
-	'info': string;
-	'neutral': string;
-	'primary': string;
-	'secondary': string;
-	'success': string;
-	'warning': string;
+	error: string;
+	info: string;
+	neutral: string;
+	primary: string;
+	secondary: string;
+	success: string;
+	warning: string;
 }
-
 
 // Raw themes config used to generate theme objects
 export interface ThemesConfigInterface {
@@ -142,28 +132,25 @@ export interface ThemesConfigInterface {
 	dark: ThemeInterface;
 }
 
-
 // Color mappings for project types
 export interface ProjectTypeColorMappingsInterface {
 	'android app': BgColor;
-	'extension': BgColor;
+	extension: BgColor;
 	'cli app': BgColor;
 	'js library': BgColor;
 	'node.js module': BgColor;
-	'markdown': BgColor;
-	'website': BgColor;
+	markdown: BgColor;
+	website: BgColor;
 	'web app': BgColor;
 	'gimp plugin': BgColor;
-	'other': BgColor;
+	other: BgColor;
 }
-
 
 // Color mappings for role types
 export interface RoleTypeColorMappingsInterface {
-	'internship': BgColor;
+	internship: BgColor;
 	'summer job': BgColor;
 }
-
 
 // Raw color mappings config used to generate color mappings
 export interface ColorMappingsConfigInterface {
@@ -171,19 +158,16 @@ export interface ColorMappingsConfigInterface {
 	roleType: RoleTypeColorMappingsInterface;
 }
 
-
 export interface SectionInterface {
 	title: string;
 	ref: RefObject<HTMLElement>;
 }
-
 
 export interface LinkInterface {
 	to: string;
 	isInternal?: boolean;
 	rel?: string;
 }
-
 
 export enum TooltipPosition {
 	Left,
@@ -192,8 +176,9 @@ export enum TooltipPosition {
 	Bottom,
 }
 
-
-export interface ButtonInterface extends PropsWithClassName, PropsWithLayoutAnimations {
+export interface ButtonInterface
+	extends PropsWithClassName,
+		PropsWithLayoutAnimations {
 	iconClassName?: string;
 	textClassName?: string;
 	tooltipClassName?: string;
@@ -207,11 +192,12 @@ export interface ButtonInterface extends PropsWithClassName, PropsWithLayoutAnim
 	flip?: boolean;
 }
 
-
 export interface ButtonElementRenderFunction {
-	({ className, tooltipPosition }: { className: string, tooltipPosition: TooltipPosition }): JSX.Element;
+	({
+		className,
+		tooltipPosition,
+	}: { className: string; tooltipPosition: TooltipPosition }): JSX.Element;
 }
-
 
 // Possible options for input validation using react-hook-form
 export interface InputValidationOptions {
@@ -229,13 +215,13 @@ export interface InputOptions {
 	autoComplete?: React.InputHTMLAttributes<HTMLInputElement>['autoComplete'];
 }
 
-
 export interface InputElementRenderFunction {
 	(props: UseFormRegisterReturn<string>): JSX.Element;
 }
 
-
-export interface InputInterface extends PropsWithClassName, PropsWithLayoutAnimations {
+export interface InputInterface
+	extends PropsWithClassName,
+		PropsWithLayoutAnimations {
 	labelClassName?: string;
 	inputClassName?: string;
 	name: string;
@@ -245,7 +231,6 @@ export interface InputInterface extends PropsWithClassName, PropsWithLayoutAnima
 	validationOptions?: InputValidationOptions;
 }
 
-
 export enum AlertType {
 	Info,
 	Success,
@@ -253,12 +238,10 @@ export enum AlertType {
 	Error,
 }
 
-
 export interface ProjectLanguageInterface {
 	name: string;
 	color: string;
 }
-
 
 export interface ProjectInfoInterface {
 	slug: string;
@@ -277,7 +260,6 @@ export interface ProjectInfoInterface {
 	typeColor: string;
 }
 
-
 // Raw role config
 export interface RoleConfigInterface {
 	type: 'internship' | 'summer job';
@@ -288,7 +270,6 @@ export interface RoleConfigInterface {
 	location: string;
 	tasks: string[];
 }
-
 
 // Role object used to represent jobs and volunteer positions
 export interface RoleInterface {
@@ -301,7 +282,6 @@ export interface RoleInterface {
 	tasks: string[];
 }
 
-
 // Queries.PinnedRepoQueryQuery['github']['user']['pinnedItems']
 export type PinnedRepoResponseInterface = {
 	name: string;
@@ -313,29 +293,39 @@ export type PinnedRepoResponseInterface = {
 	updatedAt: any;
 	githubUrl: Url;
 	languages: {
-		nodes: ({
-			name: string;
-			color: string | null;
-		} | null)[] | null;
+		nodes:
+			| ({
+					name: string;
+					color: string | null;
+			  } | null)[]
+			| null;
 	} | null;
 	licenseInfo: {
 		spdxId: string | null;
 		name: string;
 		url: any;
 	} | null;
-	readmeFromMaster: {} | {
-		text: string | null;
-	} | null;
-	readmeFromMain: {} | {
-		text: string | null;
-	} | null;
-	readmeFromGhPages: {} | {
-		text: string | null;
-	} | null;
-}
-
+	readmeFromMaster:
+		| {}
+		| {
+				text: string | null;
+		  }
+		| null;
+	readmeFromMain:
+		| {}
+		| {
+				text: string | null;
+		  }
+		| null;
+	readmeFromGhPages:
+		| {}
+		| {
+				text: string | null;
+		  }
+		| null;
+};
 
 export type ToggleContextInterface = Context<{
 	isEnabled: boolean;
 	toggle: () => void;
-}>
+}>;

@@ -3,9 +3,10 @@
 	-------------------------------------------------------------------
 */
 
-
-import { ProjectInfoInterface, ProjectLanguageInterface } from '../common/types';
-
+import {
+	ProjectInfoInterface,
+	ProjectLanguageInterface,
+} from '../common/types';
 
 // Exports
 
@@ -22,7 +23,7 @@ export default class ResponseMapper {
 	static defaultTypeColor = this.colorMap.gray;
 	static langMap = {
 		JavaScript: 'JS',
-		TypeScript: 'TS'
+		TypeScript: 'TS',
 	};
 	static defaultText = 'Unknown';
 
@@ -42,18 +43,19 @@ export default class ResponseMapper {
 	}
 
 	private static mapLanguages(languages: ProjectLanguageInterface[]) {
-		return languages.map(language => {
+		return languages.map((language) => {
 			const propsFromLanguage = {
 				name: language.name || this.defaultText,
 				color: language.color || this.defaultTypeColor,
-			}
+			};
 
 			if (!language.name || !language.color) {
 				return propsFromLanguage;
 			}
 
 			if (this.langMap.hasOwnProperty(language.name)) {
-				propsFromLanguage.name = this.langMap[language.name as keyof typeof this.langMap];
+				propsFromLanguage.name =
+					this.langMap[language.name as keyof typeof this.langMap];
 			}
 
 			return propsFromLanguage;
@@ -61,10 +63,16 @@ export default class ResponseMapper {
 	}
 
 	private static mapSlugToName(slug: string) {
-		return slug.split('-').map(word => `${word[0].toUpperCase()}${word.substring(1)}`).join(' ');
+		return slug
+			.split('-')
+			.map((word) => `${word[0].toUpperCase()}${word.substring(1)}`)
+			.join(' ');
 	}
 
-	private static assertExists<T extends Partial<ProjectInfoInterface>, K extends keyof T>(obj: T, key: K): Required<T>[K] {
+	private static assertExists<
+		T extends Partial<ProjectInfoInterface>,
+		K extends keyof T,
+	>(obj: T, key: K): Required<T>[K] {
 		if (obj.hasOwnProperty(key)) {
 			const property = obj[key];
 
@@ -75,10 +83,15 @@ export default class ResponseMapper {
 
 		const slug = (obj.hasOwnProperty('slug') && obj.slug) || 'Unknown';
 
-		throw new TypeError(`[${slug}] Required property '${String(key)}' is missing from project info`);
-	};
+		throw new TypeError(
+			`[${slug}] Required property '${String(key)}' is missing from project info`,
+		);
+	}
 
-	private static useFallback<T extends Partial<ProjectInfoInterface>, K extends keyof T>(obj: T, key: K, fallbackValue: T[K]): Required<T>[K] {
+	private static useFallback<
+		T extends Partial<ProjectInfoInterface>,
+		K extends keyof T,
+	>(obj: T, key: K, fallbackValue: T[K]): Required<T>[K] {
 		if (obj.hasOwnProperty(key)) {
 			const property = obj[key];
 
@@ -94,15 +107,23 @@ export default class ResponseMapper {
 
 		const slug = (obj.hasOwnProperty('slug') && obj.slug) || 'Unknown';
 
-		throw new TypeError(`[${slug}] Required property '${String(key)}' and fallback value are missing from project info`);
+		throw new TypeError(
+			`[${slug}] Required property '${String(key)}' and fallback value are missing from project info`,
+		);
 	}
 
-	public static map(projectInfo: Partial<ProjectInfoInterface>): ProjectInfoInterface {
+	public static map(
+		projectInfo: Partial<ProjectInfoInterface>,
+	): ProjectInfoInterface {
 		const slug = this.assertExists(projectInfo, 'slug');
 
 		return {
 			slug: slug,
-			shortDesc: this.useFallback(projectInfo, 'shortDesc', projectInfo.longDesc),
+			shortDesc: this.useFallback(
+				projectInfo,
+				'shortDesc',
+				projectInfo.longDesc,
+			),
 			homepageUrl: this.useFallback(projectInfo, 'homepageUrl', ''),
 			githubUrl: this.assertExists(projectInfo, 'githubUrl'),
 			imageUrl: projectInfo.imageUrl || '',
@@ -111,9 +132,15 @@ export default class ResponseMapper {
 			license: this.assertExists(projectInfo, 'license'),
 			languages: this.mapLanguages(this.assertExists(projectInfo, 'languages')),
 			name: this.useFallback(projectInfo, 'name', this.mapSlugToName(slug)),
-			longDesc: this.useFallback(projectInfo, 'longDesc', projectInfo.shortDesc),
+			longDesc: this.useFallback(
+				projectInfo,
+				'longDesc',
+				projectInfo.shortDesc,
+			),
 			typeName: this.assertExists(projectInfo, 'typeName'),
-			typeColor: this.mapColorStringToHex(this.assertExists(projectInfo, 'typeColor')),
-		}
+			typeColor: this.mapColorStringToHex(
+				this.assertExists(projectInfo, 'typeColor'),
+			),
+		};
 	}
 }

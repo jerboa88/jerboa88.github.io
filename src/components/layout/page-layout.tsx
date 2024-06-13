@@ -3,7 +3,6 @@
 	--------------------------------------------------------------------------------
 */
 
-
 import React, { PropsWithChildren, StrictMode } from 'react';
 import { MotionConfig } from 'framer-motion';
 import { SectionInterface, PropsWithClassName } from '../../common/types';
@@ -13,7 +12,6 @@ import Header from './header';
 import Footer from './footer';
 import ParticlesBackground from './particles-background';
 
-
 // Types
 
 interface Props extends PropsWithClassName, PropsWithChildren {
@@ -21,17 +19,20 @@ interface Props extends PropsWithClassName, PropsWithChildren {
 	sections?: SectionInterface[];
 }
 
-
 // Constants
 
 const BG_GRADIENT_PROPS = {
 	style: {
-		background: `radial-gradient(100% 100% at 0% 0%,oklch(var(--a)),oklch(var(--b2)),transparent),radial-gradient(100% 100% at 100% 100%,oklch(var(--a)),oklch(var(--b2)),transparent)`
-	}
-}
+		background: `radial-gradient(100% 100% at 0% 0%,oklch(var(--a)),oklch(var(--b2)),transparent),radial-gradient(100% 100% at 100% 100%,oklch(var(--a)),oklch(var(--b2)),transparent)`,
+	},
+};
 
-
-export default function PageLayout({ className = '', expandTitle = false, sections = [], children }: Props) {
+export default function PageLayout({
+	className = '',
+	expandTitle = false,
+	sections = [],
+	children,
+}: Props) {
 	const classNameProps = getClassNameProps(
 		'flex-col gap-32 justify-between items-center mx-auto text-base min-h-svh scroll-smooth selection:bg-primary selection:text-primary-content',
 		className,

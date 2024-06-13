@@ -3,7 +3,6 @@
 	------------------------------------------
 */
 
-
 import React from 'react';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -16,22 +15,26 @@ import Pill from './pill';
 import Card from './card';
 import { getProjectTypeColor } from '../common/config-manager';
 
-
 // Types
 
 interface Props {
 	repo: ProjectInfoInterface;
 }
 
-
 // Constants
 
-const SHOW_ON_CARD_HOVER_STYLES = 'opacity-0 mouse-only:group-hover:opacity-100 transition-opacity transition-200';
-
+const SHOW_ON_CARD_HOVER_STYLES =
+	'opacity-0 mouse-only:group-hover:opacity-100 transition-opacity transition-200';
 
 export default function ProjectCard({ repo }: Props) {
-	const ghostButtonClassNameProps = getClassNameProps('!p-0 m-0', SHOW_ON_CARD_HOVER_STYLES);
-	const pillClassNameProps = getClassNameProps('border', SHOW_ON_CARD_HOVER_STYLES);
+	const ghostButtonClassNameProps = getClassNameProps(
+		'!p-0 m-0',
+		SHOW_ON_CARD_HOVER_STYLES,
+	);
+	const pillClassNameProps = getClassNameProps(
+		'border',
+		SHOW_ON_CARD_HOVER_STYLES,
+	);
 	const projectTypeColor = getProjectTypeColor(repo.typeName);
 
 	return (
@@ -40,7 +43,11 @@ export default function ProjectCard({ repo }: Props) {
 				<div className="flex flex-col justify-between items-start p-6 align-middle size-full text-ellipsis group">
 					<div className="flex flex-row justify-between items-center pr-2 w-full">
 						<Pill text={repo.typeName} className={projectTypeColor} />
-						<GhostButton icon={faGithub} {...ghostButtonClassNameProps} disabled />
+						<GhostButton
+							icon={faGithub}
+							{...ghostButtonClassNameProps}
+							disabled
+						/>
 					</div>
 					<div className="flex flex-row justify-center w-full">
 						{/* TODO: Put project icon here? */}
@@ -48,20 +55,23 @@ export default function ProjectCard({ repo }: Props) {
 							<SubsectionHeading className="font-semibold">
 								{repo.name}
 							</SubsectionHeading>
-							<span className="text-wrap">
-								{repo.shortDesc}
-							</span>
+							<span className="text-wrap">{repo.shortDesc}</span>
 						</div>
 					</div>
 					<div className="flex flex-row justify-between items-center pr-2 w-full">
 						<div className="flex flex-row gap-2 justify-start items-center">
-							{
-								repo.languages.map(({ name }) => (
-									<Pill key={name} text={name} {...pillClassNameProps} />
-								))
-							}
+							{repo.languages.map(({ name }) => (
+								<Pill key={name} text={name} {...pillClassNameProps} />
+							))}
 						</div>
-						<GhostButton icon={faStar} text={repo.stargazers} className="!p-0" iconClassName="text-xl" textClassName="font-bold" disabled />
+						<GhostButton
+							icon={faStar}
+							text={repo.stargazers}
+							className="!p-0"
+							iconClassName="text-xl"
+							textClassName="font-bold"
+							disabled
+						/>
 					</div>
 				</div>
 			</Card>

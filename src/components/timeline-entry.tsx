@@ -3,7 +3,6 @@
 	-------------------------------------------
 */
 
-
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +13,6 @@ import DateRange from './text/date-range';
 import Pill from './pill';
 import Card from './card';
 import { getRoleTypeColor } from '../common/config-manager';
-
 
 interface Props {
 	role: RoleInterface;
@@ -29,9 +27,7 @@ export default function TimelineEntry({ role }: Props) {
 			<div className="timeline-start !m-0 pb-8 !row-start-2 !self-start w-fit flex flex-col justify-between items-start gap-4 max-lg:flex-row max-lg:w-full max-lg:items-center text-left">
 				<div className="max-lg:pl-1">
 					<DateRange startDate={role.startDate} endDate={role.endDate} />
-					<span className="text-sm">
-						{role.location}
-					</span>
+					<span className="text-sm">{role.location}</span>
 				</div>
 				<Pill text={role.type} {...pillClassNameProps} />
 			</div>
@@ -47,20 +43,16 @@ export default function TimelineEntry({ role }: Props) {
 							</SubsectionHeading>
 							<div className="flex flex-row items-center">
 								<FontAwesomeIcon className="pr-2" icon={faBuilding} />
-								<span className="text-sm italic">
-									{role.company}
-								</span>
+								<span className="text-sm italic">{role.company}</span>
 							</div>
 						</div>
 					</div>
 					<ul className="list-[circle] m-4">
-						{
-							role.tasks.map((task, index) => (
-								<li key={index} className="my-2">
-									{task}
-								</li>
-							))
-						}
+						{role.tasks.map((task, index) => (
+							<li key={index} className="my-2">
+								{task}
+							</li>
+						))}
 					</ul>
 				</div>
 			</Card>

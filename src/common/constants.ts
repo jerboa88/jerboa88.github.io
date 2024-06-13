@@ -3,23 +3,23 @@
 	--------------------------------------------------
 */
 
-
 // Constants
 
 const FADE_TRANSITION_VARIANTS = {
 	hidden: {
 		opacity: 0,
-		scale: .8,
+		scale: 0.8,
 	},
 	show: {
 		opacity: 1,
 		scale: 1,
-	}
+	},
 } as const;
 
 // Directories
 export const PAGE_TEMPLATES_DIR = './src/templates/page' as const;
-export const SOCIAL_IMAGE_TEMPLATES_DIR = './src/templates/social-image' as const;
+export const SOCIAL_IMAGE_TEMPLATES_DIR =
+	'./src/templates/social-image' as const;
 export const PROJECTS_DIR = '/projects' as const;
 export const SOCIAL_IMAGES_DIR = '/__generatedSocialImages' as const;
 
@@ -45,7 +45,7 @@ export const SPRING_TRANSITION_PROPS = {
 		type: 'spring',
 		stiffness: 220,
 		damping: 20,
-		restSpeed: .2,
-		restDelta: .08,
-	}
+		restSpeed: 0.2,
+		restDelta: 0.08,
+	},
 } as const;

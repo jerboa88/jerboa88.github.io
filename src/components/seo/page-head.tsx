@@ -3,12 +3,10 @@
 	----------------------------------------------------
 */
 
-
 import React from 'react';
 import { PageMetadata, SocialImagesMetadataProp } from '../../common/types';
 import { getAbsoluteUrl, getMimeType } from '../../common/utilities';
 import { getSiteMetadata, getTheme } from '../../common/config-manager';
-
 
 // Types
 
@@ -18,18 +16,23 @@ interface Props extends SocialImagesMetadataProp {
 	structuredData: object;
 }
 
-
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
 // TODO: Replace hardcoded value
 const THEME = getTheme('dark');
 
-
-export default function PageHead({ path, metadata, structuredData, socialImagesMetadata }: Props) {
+export default function PageHead({
+	path,
+	metadata,
+	structuredData,
+	socialImagesMetadata,
+}: Props) {
 	const pageUrl = getAbsoluteUrl(path);
 	const ogImageUrl = getAbsoluteUrl(socialImagesMetadata.og.imagePath);
-	const twitterImageUrl = getAbsoluteUrl(socialImagesMetadata.twitter.imagePath);
+	const twitterImageUrl = getAbsoluteUrl(
+		socialImagesMetadata.twitter.imagePath,
+	);
 
 	return (
 		<>
@@ -46,13 +49,22 @@ export default function PageHead({ path, metadata, structuredData, socialImagesM
 			<meta property="og:url" content={pageUrl.toString()} />
 			<meta property="og:image" content={ogImageUrl.toString()} />
 			<meta property="og:image:type" content={getMimeType(ogImageUrl)} />
-			<meta property="og:image:width" content={socialImagesMetadata.og.size.width.toString()} />
-			<meta property="og:image:height" content={socialImagesMetadata.og.size.height.toString()} />
+			<meta
+				property="og:image:width"
+				content={socialImagesMetadata.og.size.width.toString()}
+			/>
+			<meta
+				property="og:image:height"
+				content={socialImagesMetadata.og.size.height.toString()}
+			/>
 
 			{/* Twitter meta tags */}
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:title" content={metadata.title} />
-			<meta name="twitter:creator" content={SITE_METADATA.author.username.twitter} />
+			<meta
+				name="twitter:creator"
+				content={SITE_METADATA.author.username.twitter}
+			/>
 			<meta name="twitter:description" content={metadata.description} />
 			<meta name="twitter:image" content={twitterImageUrl.toString()} />
 
@@ -85,9 +97,9 @@ export default function PageHead({ path, metadata, structuredData, socialImagesM
 							addressRegion: SITE_METADATA.author.location.state,
 							addressCountry: SITE_METADATA.author.location.country,
 						},
-					}
+					},
 				})}
 			</script>
 		</>
-	)
+	);
 }

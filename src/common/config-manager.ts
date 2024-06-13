@@ -3,8 +3,15 @@
 	----------------------------------------------
 */
 
-
-import type { BgColor, PageMetadata, RoleInterface, SocialImageTypes, SocialImagesGenerationConfig, ThemeInterface, Url } from '../common/types';
+import type {
+	BgColor,
+	PageMetadata,
+	RoleInterface,
+	SocialImageTypes,
+	SocialImagesGenerationConfig,
+	ThemeInterface,
+	Url,
+} from '../common/types';
 import siteMetadataConfig from '../config/site-metadata';
 import pageMetadataConfig from '../config/pages-metadata';
 import socialImagesGenerationConfig from '../config/social-images-generation';
@@ -14,7 +21,6 @@ import themesConfig from '../config/themes';
 import colorMappingsConfig from '../config/color-mappings';
 import { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import { getOrDefault } from './utilities';
-
 
 // Types
 
@@ -35,26 +41,25 @@ type SiteMetadata = {
 			initial: string;
 			short: string;
 			full: string;
-		}
+		};
 		jobTitle: string;
 		alumniOf: string;
 		image: string;
 		username: {
 			twitter: string;
-		},
+		};
 		link: {
 			linkedin: string;
 			github: string;
 			twitter: string;
-		},
+		};
 		location: {
 			city: string;
 			state: string;
 			country: string;
-		},
-	}
-}
-
+		};
+	};
+};
 
 // Returns metadata for the site
 export function getSiteMetadata(): SiteMetadata {
@@ -94,14 +99,14 @@ export function getSiteMetadata(): SiteMetadata {
 				state: config.author.location.state,
 				country: config.author.location.country,
 			},
-		}
+		},
 	};
 }
 
-
 // Returns the metadata for a given page
 export function getPageMetadata(pagePath: string): PageMetadata {
-	const config = pageMetadataConfig[pagePath as keyof typeof pageMetadataConfig];
+	const config =
+		pageMetadataConfig[pagePath as keyof typeof pageMetadataConfig];
 
 	if (!config) {
 		console.warn(`Page metadata for ${pagePath} not found`);
@@ -110,16 +115,19 @@ export function getPageMetadata(pagePath: string): PageMetadata {
 	return config;
 }
 
-
 // Returns the social image generation config for a given type
 export function getSocialImageGenerationConfigDefaults(): SocialImagesGenerationConfig['defaults'] {
 	return socialImagesGenerationConfig.defaults;
 }
 
-
 // Returns the social image generation config for a given type
-export function getSocialImageGenerationConfigForType(type: SocialImageTypes): JobOptions {
-	const config = socialImagesGenerationConfig.types[type as keyof typeof socialImagesGenerationConfig['types']];
+export function getSocialImageGenerationConfigForType(
+	type: SocialImageTypes,
+): JobOptions {
+	const config =
+		socialImagesGenerationConfig.types[
+			type as keyof (typeof socialImagesGenerationConfig)['types']
+		];
 
 	if (!config) {
 		console.warn(`Social image generation config for '${type}' not found`);
@@ -128,21 +136,18 @@ export function getSocialImageGenerationConfigForType(type: SocialImageTypes): J
 	return config;
 }
 
-
 export function getExternalServices() {
 	return externalServicesConfig;
 }
 
-
 // Returns a list of jobs with formatted date objects
 export function getJobs(): RoleInterface[] {
-	return jobsConfig.map(job => ({
+	return jobsConfig.map((job) => ({
 		...job,
 		startDate: new Date(job.startDate),
 		endDate: new Date(job.endDate),
 	}));
 }
-
 
 // Returns a daisyUI theme given its name
 export function getTheme(themeName: 'light' | 'dark'): ThemeInterface {
@@ -155,7 +160,6 @@ export function getTheme(themeName: 'light' | 'dark'): ThemeInterface {
 	return config;
 }
 
-
 // Returns the color for a given project type
 export function getProjectTypeColor(projectType: string): BgColor | '' {
 	const colorMap = colorMappingsConfig.projectType;
@@ -163,7 +167,6 @@ export function getProjectTypeColor(projectType: string): BgColor | '' {
 
 	return getOrDefault(colorMap, key, '');
 }
-
 
 // Returns the color for a given role type
 export function getRoleTypeColor(roleType: string): BgColor | '' {

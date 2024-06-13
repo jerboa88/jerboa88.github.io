@@ -3,11 +3,9 @@
 	----------------------------------------------------
 */
 
-
-import React, { PropsWithChildren } from 'react'
-import { PropsWithClassName } from '../../common/types'
-import { getClassNameProps } from '../../common/utilities'
-
+import React, { PropsWithChildren } from 'react';
+import { PropsWithClassName } from '../../common/types';
+import { getClassNameProps } from '../../common/utilities';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
 	size: {
@@ -16,7 +14,6 @@ interface Props extends PropsWithClassName, PropsWithChildren {
 	};
 }
 
-
 export default function SocialImage({ className, size, children }: Props) {
 	const classNameProps = getClassNameProps(
 		'flex flex-col items-center size-full p-6 bg-glass overflow-hidden',
@@ -24,10 +21,11 @@ export default function SocialImage({ className, size, children }: Props) {
 	);
 
 	return (
-		<div style={{ maxWidth: size.width, maxHeight: size.height }} className="fixed size-full bg-base-300">
-			<div {...classNameProps}>
-				{children}
-			</div>
+		<div
+			style={{ maxWidth: size.width, maxHeight: size.height }}
+			className="fixed size-full bg-base-300"
+		>
+			<div {...classNameProps}>{children}</div>
 		</div>
-	)
+	);
 }
