@@ -13,7 +13,6 @@ import { SOCIAL_IMAGES_DIR } from './src/common/constants';
 
 
 const SITE_METADATA = getSiteMetadata();
-const LIGHT_THEME = getTheme('light');
 const DARK_THEME = getTheme('dark');
 
 
@@ -24,11 +23,7 @@ dotenv.config({
 
 
 const config: GatsbyConfig = {
-	siteMetadata: {
-		...SITE_METADATA,
-		lightTheme: LIGHT_THEME,
-		darkTheme: DARK_THEME
-	},
+	siteMetadata: SITE_METADATA,
 	graphqlTypegen: {
 		typesOutputPath: 'src/common/gatsby-types.d.ts',
 	},

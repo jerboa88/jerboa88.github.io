@@ -33,7 +33,7 @@ export type Path = `/${string}`;
 
 
 // HTTPS URL
-type Url = `https://${string}`;
+export type Url = `https://${string}`;
 
 
 // Raw external services config
@@ -70,44 +70,6 @@ export interface SiteMetadataConfigInterface {
 }
 
 
-// Site metadata object used to populate the site's metadata
-export interface SiteMetadataInterface {
-	shortTitle: string;
-	title: string;
-	tagline: string;
-	shortDescription: string;
-	description: string;
-	iconPath: string;
-	siteUrl: Url;
-	sourceUrl: Url;
-	author: {
-		name: {
-			first: string;
-			last: string;
-			initial: string;
-			short: string;
-			full: string;
-		}
-		jobTitle: string;
-		alumniOf: string;
-		image: string;
-		username: {
-			twitter: string;
-		},
-		link: {
-			linkedin: string;
-			github: string;
-			twitter: string;
-		},
-		location: {
-			city: string;
-			state: string;
-			country: string;
-		},
-	}
-}
-
-
 // Page metadata fields
 export interface PageMetadata {
 	title: string;
@@ -118,11 +80,7 @@ export interface PageMetadata {
 
 // Page metadata added to pageContext when pages are created
 export interface PageMetadataProp {
-	pageMetadata: {
-		title: string;
-		shortTitle: string;
-		description: string;
-	}
+	pageMetadata: PageMetadata;
 }
 
 

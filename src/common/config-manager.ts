@@ -4,7 +4,7 @@
 */
 
 
-import type { BgColor, PageMetadata, RoleInterface, SiteMetadataInterface, SocialImageTypes, SocialImagesGenerationConfig, ThemeInterface } from '../common/types';
+import type { BgColor, PageMetadata, RoleInterface, SocialImageTypes, SocialImagesGenerationConfig, ThemeInterface, Url } from '../common/types';
 import siteMetadataConfig from '../config/site-metadata';
 import pageMetadataConfig from '../config/pages-metadata';
 import socialImagesGenerationConfig from '../config/social-images-generation';
@@ -16,8 +16,48 @@ import { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import { getOrDefault } from './utilities';
 
 
+// Types
+
+// Site metadata object used to populate the site's metadata
+type SiteMetadata = {
+	shortTitle: string;
+	title: string;
+	tagline: string;
+	shortDescription: string;
+	description: string;
+	iconPath: string;
+	siteUrl: Url;
+	sourceUrl: Url;
+	author: {
+		name: {
+			first: string;
+			last: string;
+			initial: string;
+			short: string;
+			full: string;
+		}
+		jobTitle: string;
+		alumniOf: string;
+		image: string;
+		username: {
+			twitter: string;
+		},
+		link: {
+			linkedin: string;
+			github: string;
+			twitter: string;
+		},
+		location: {
+			city: string;
+			state: string;
+			country: string;
+		},
+	}
+}
+
+
 // Returns metadata for the site
-export function getSiteMetadata(): SiteMetadataInterface {
+export function getSiteMetadata(): SiteMetadata {
 	const config = siteMetadataConfig;
 	const authorFullName = `${config.author.name.first} ${config.author.name.last}`;
 
