@@ -16,6 +16,7 @@ import { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import { getOrDefault } from './utilities';
 
 
+// Returns metadata for the site
 export function getSiteMetadata(): SiteMetadataInterface {
 	const config = siteMetadataConfig;
 	const authorFullName = `${config.author.name.first} ${config.author.name.last}`;

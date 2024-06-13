@@ -6,22 +6,29 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { SiteMetadataInterface, SectionInterface } from '../../common/types';
+import { SectionInterface } from '../../common/types';
 import { TITLE_LAYOUT_ID } from '../../common/constants';
 import { getClassNameProps } from '../../common/utilities';
 import Tabs from '../tabs';
 import Heading from '../text/heading';
 import Divider from '../divider';
+import { getSiteMetadata } from '../../common/config-manager';
 
+
+// Types
 
 interface Props {
-	siteMetadata: SiteMetadataInterface;
 	expandTitle?: boolean;
 	sections: SectionInterface[];
 }
 
 
-export default function Header({ siteMetadata, expandTitle = false, sections }: Props) {
+// Constants
+
+const SITE_METADATA = getSiteMetadata();
+
+
+export default function Header({ expandTitle = false, sections }: Props) {
 	const headerClassNameProps = getClassNameProps(
 		'fixed top-0 z-30 w-full transition',
 		!expandTitle && 'bg-glass backdrop-blur-md shadow-lg',	// Transparent bg when title is expanded
@@ -43,13 +50,13 @@ export default function Header({ siteMetadata, expandTitle = false, sections }: 
 						<motion.a href="/" layoutId={TITLE_LAYOUT_ID}>
 							<Heading className="px-2 m-0 text-xl">
 								<span className="inline sm:hidden">
-									{siteMetadata.author.name.initial}
+									{SITE_METADATA.author.name.initial}
 								</span>
 								<span className="hidden sm:inline md:hidden">
-									{siteMetadata.author.name.short}
+									{SITE_METADATA.author.name.short}
 								</span>
 								<span className="hidden md:inline">
-									{siteMetadata.author.name.full}
+									{SITE_METADATA.author.name.full}
 								</span>
 							</Heading>
 						</motion.a>

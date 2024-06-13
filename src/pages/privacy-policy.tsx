@@ -43,7 +43,7 @@ export default function PrivacyPolicyPage({ data, pageContext: { pageMetadata } 
 	const articleHtml = data.file.childMarkdownRemark.html;
 
 	return (
-		<PageLayout siteMetadata={SITE_METADATA}>
+		<PageLayout>
 			{/* Dummy element to force center alignment of section */}
 			<div />
 			<Section title={pageMetadata.title} ref={useRef(null)} className="items-center" >

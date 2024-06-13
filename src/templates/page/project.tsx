@@ -32,7 +32,7 @@ const SITE_METADATA = getSiteMetadata();
 
 export default function ProjectPageTemplate({ pageContext: { repo } }: Props) {
 	return (
-		<PageLayout siteMetadata={SITE_METADATA}>
+		<PageLayout>
 			{/* Dummy element to force center alignment of section */}
 			<div />
 			<Section title={repo.name} ref={useRef(null)}>

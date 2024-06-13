@@ -79,7 +79,7 @@ export default function IndexPageTemplate({ pageContext: { pinnedRepos } }: Prop
 	)) as ButtonElementRenderFunction, []);
 
 	return (
-		<PageLayout siteMetadata={SITE_METADATA} expandTitle={expandTitle} sections={sections}>
+		<PageLayout expandTitle={expandTitle} sections={sections}>
 			<Section className="text-center min-h-svh">
 				<span ref={inViewTriggerRef} />
 				<HeroHeader expandTitle={expandTitle} />
