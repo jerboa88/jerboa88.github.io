@@ -16,6 +16,8 @@ import type {
 	UseFormRegisterReturn,
 } from 'react-hook-form';
 
+export type EmptyObject = Record<string, never>;
+
 // Props for components that accept an optional class name
 export interface PropsWithClassName {
 	className?: string;
@@ -280,48 +282,9 @@ export interface RoleInterface {
 	tasks: string[];
 }
 
-// Queries.PinnedRepoQueryQuery['github']['user']['pinnedItems']
-export type PinnedRepoResponseInterface = {
-	name: string;
-	description: string | null;
-	homepageUrl: Url;
-	usesCustomOpenGraphImage: boolean;
-	openGraphImageUrl: any;
-	stargazerCount: number;
-	updatedAt: any;
-	githubUrl: Url;
-	languages: {
-		nodes:
-			| ({
-					name: string;
-					color: string | null;
-			  } | null)[]
-			| null;
-	} | null;
-	licenseInfo: {
-		spdxId: string | null;
-		name: string;
-		url: any;
-	} | null;
-	readmeFromMaster:
-		| {}
-		| {
-				text: string | null;
-		  }
-		| null;
-	readmeFromMain:
-		| {}
-		| {
-				text: string | null;
-		  }
-		| null;
-	readmeFromGhPages:
-		| {}
-		| {
-				text: string | null;
-		  }
-		| null;
-};
+export type PinnedReposResponseInterface = NonNullable<
+	Queries.PinnedReposQuery['github']['user']
+>['pinnedItems'];
 
 export type ToggleContextInterface = Context<{
 	isEnabled: boolean;

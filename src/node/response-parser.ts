@@ -5,7 +5,7 @@
 
 import { JSDOM } from 'jsdom';
 import type {
-	PinnedRepoResponseInterface,
+	PinnedReposResponseInterface,
 	ProjectInfoInterface,
 	ProjectLanguageInterface,
 } from '../common/types';
@@ -102,7 +102,7 @@ export default class ResponseParser {
 	}
 
 	public static parse(
-		responseData: PinnedRepoResponseInterface,
+		responseData: PinnedReposResponseInterface,
 	): Partial<ProjectInfoInterface> {
 		const slug = getProp(responseData, 'name');
 
@@ -145,7 +145,7 @@ export default class ResponseParser {
 }
 
 // Returns a prop if it exists, otherwise returns undefined
-export function getProp<T extends { [key: string]: any }, K extends keyof T>(
+function getProp<T extends { [key: string]: any }, K extends keyof T>(
 	obj: T | {} | undefined,
 	key: K,
 ): Exclude<T[K], null> | undefined {

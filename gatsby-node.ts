@@ -14,7 +14,7 @@ import {
 } from './src/common/constants';
 import type {
 	Path,
-	PinnedRepoResponseInterface,
+	PinnedReposResponseInterface,
 	SocialImageTypes,
 } from './src/common/types';
 import { removeTrailingSlash } from './src/common/utilities';
@@ -65,7 +65,7 @@ interface CreateSocialImagesOptions {
 // Fetch pinned repos from a GitHub profile
 async function fetchPinnedRepos(graphql: CreatePagesArgs['graphql']) {
 	const response = await graphql(`
-		query PinnedRepoQuery {
+		query PinnedRepos {
 			github {
 				user(login: "jerboa88") {
 					pinnedItems(first: 10) {
@@ -120,7 +120,7 @@ async function fetchPinnedRepos(graphql: CreatePagesArgs['graphql']) {
 		);
 	}
 
-	const data = response.data as Queries.PinnedRepoQueryQuery;
+	const data = response.data as Queries.PinnedReposQuery;
 	const pinnedRepos = data.github.user?.pinnedItems.nodes;
 
 	if (!pinnedRepos) {
@@ -243,7 +243,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 		assertResponseDataIsNonEmpty(responseData);
 
 		const projectInfo = ResponseMapper.map(
-			ResponseParser.parse(responseData as PinnedRepoResponseInterface),
+			ResponseParser.parse(responseData as PinnedReposResponseInterface),
 		);
 
 		// Create project pages
