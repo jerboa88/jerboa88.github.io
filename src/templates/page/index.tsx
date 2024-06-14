@@ -3,7 +3,7 @@
 	------------------------------------------
 */
 
-import React, { useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import type { HeadProps } from 'gatsby';
 import { useInView } from 'framer-motion';
 import {

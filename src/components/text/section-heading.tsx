@@ -3,11 +3,11 @@
 	---------------------------------------------
 */
 
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 
-interface Props extends PropsWithClassName, PropsWithChildren {}
+interface Props extends PropsWithClassName, PropsWithChildren { }
 
 export default function SectionHeading({ className = '', children }: Props) {
 	const classNameProps = getClassNameProps(

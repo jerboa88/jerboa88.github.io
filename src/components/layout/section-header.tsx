@@ -3,7 +3,7 @@
 	-------------------------------------------------------
 */
 
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import {
 	ButtonElementRenderFunction,
 	PropsWithClassName,
@@ -29,9 +29,9 @@ export default function SectionHeader({
 	);
 	const buttonElement = renderButton
 		? renderButton({
-				className: 'self-baseline',
-				tooltipPosition: TooltipPosition.Left,
-			})
+			className: 'self-baseline',
+			tooltipPosition: TooltipPosition.Left,
+		})
 		: undefined;
 
 	return (

@@ -3,7 +3,7 @@
 	------------------------------------------
 */
 
-import React, { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { IOptions, RecursivePartial } from '@tsparticles/engine';
@@ -88,6 +88,6 @@ function ParticlesBackground() {
 }
 
 // Never re-render this component
-const MemoizedParticlesBackground = React.memo(ParticlesBackground);
+const MemoizedParticlesBackground = memo(ParticlesBackground);
 
 export default MemoizedParticlesBackground;

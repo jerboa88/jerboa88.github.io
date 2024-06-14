@@ -3,7 +3,7 @@
 	-------------------
 */
 
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import type { HeadProps, PageProps } from 'gatsby';
 import { graphql } from 'gatsby';
 import { PageMetadataProp, SocialImagesMetadataProp } from '../common/types';

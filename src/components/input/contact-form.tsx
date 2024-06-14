@@ -3,7 +3,7 @@
 	----------------------
 */
 
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, useFormState, SubmitHandler } from 'react-hook-form';
 import { LayoutGroup, motion } from 'framer-motion';
 import Botpoison from '@botpoison/browser';
@@ -165,9 +165,9 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 		className,
 	);
 
-	const [formState, setFormState] = React.useState<FormState>(FormState.Idle);
+	const [formState, setFormState] = useState<FormState>(FormState.Idle);
 	const [botpoisonSolution, setBotpoisonSolution] =
-		React.useState<Promise<string>>();
+		useState<Promise<string>>();
 
 	// Options passed to React Hook Form for input validation
 	const validationOptions = getValidationOptions(formState);

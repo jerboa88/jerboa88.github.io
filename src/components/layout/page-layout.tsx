@@ -3,7 +3,7 @@
 	--------------------------------------------------------------------------------
 */
 
-import React, { PropsWithChildren, StrictMode } from 'react';
+import { PropsWithChildren, StrictMode } from 'react';
 import { MotionConfig } from 'framer-motion';
 import { SectionInterface, PropsWithClassName } from '../../common/types';
 import { SPRING_TRANSITION_PROPS } from '../../common/constants';

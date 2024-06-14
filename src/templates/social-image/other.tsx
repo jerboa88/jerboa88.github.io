@@ -3,7 +3,7 @@
 	---------------------------------------------------------------
 */
 
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { PageProps } from 'gatsby';
 import {
 	ButtonElementRenderFunction,

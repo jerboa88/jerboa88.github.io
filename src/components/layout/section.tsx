@@ -3,7 +3,7 @@
 	------------
 */
 
-import React, { ForwardedRef, PropsWithChildren, forwardRef } from 'react';
+import { ForwardedRef, PropsWithChildren, forwardRef } from 'react';
 import {
 	ButtonElementRenderFunction,
 	PropsWithClassName,

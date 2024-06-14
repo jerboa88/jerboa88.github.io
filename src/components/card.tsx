@@ -3,7 +3,7 @@
 	-----------------------
 */
 
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import {
 	AnimationProps,
 	motion,
@@ -63,11 +63,11 @@ function getMouseCoords(event: React.MouseEvent<HTMLDivElement>) {
 	return {
 		x:
 			(2 * MOUSE_XY_COORDS_MAX * (event.clientX - cardBoundingBox.left)) /
-				cardBoundingBox.width -
+			cardBoundingBox.width -
 			MOUSE_XY_COORDS_MAX,
 		y:
 			(2 * MOUSE_XY_COORDS_MAX * (event.clientY - cardBoundingBox.top)) /
-				cardBoundingBox.height -
+			cardBoundingBox.height -
 			MOUSE_XY_COORDS_MAX,
 	};
 }
