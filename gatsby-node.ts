@@ -1,5 +1,5 @@
-import assert from 'assert';
-import { join, resolve } from 'path';
+import assert from 'node:assert';
+import { join, resolve } from 'node:path';
 import type { Actions, CreatePagesArgs, GatsbyNode, Reporter } from 'gatsby';
 import { createImage } from 'gatsby-plugin-component-to-image';
 import {

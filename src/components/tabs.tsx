@@ -25,8 +25,7 @@ export default function Tabs({ sections, hideIndicator = false }: Props) {
 
 	return (
 		<motion.nav layout="position" className="flex flex-row justify-center tabs">
-			{sections &&
-				sections.map(({ title }, i) => {
+			{sections?.map(({ title }, i) => {
 					const ghostButtonLinkClassNameProps = getClassNameProps(
 						'tab !py-0',
 						currentSectionIndex === i && 'tab-active',

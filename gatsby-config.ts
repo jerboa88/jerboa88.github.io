@@ -81,7 +81,7 @@ const config: GatsbyConfig = {
 				short_name: SITE_METADATA.shortTitle,
 				start_url: '/',
 				background_color: DARK_THEME['base-100'],
-				theme_color: DARK_THEME['primary'],
+				theme_color: DARK_THEME.primary,
 				display: 'standalone',
 				icon: `${__dirname}/src/${SITE_METADATA.iconPath}`,
 				crossOrigin: 'use-credentials',

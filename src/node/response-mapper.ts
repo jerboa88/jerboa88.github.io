@@ -33,29 +33,29 @@ export default class ResponseMapper {
 	// }
 
 	private static mapColorStringToHex(colorString: string) {
-		if (this.colorMap.hasOwnProperty(colorString)) {
-			return this.colorMap[colorString as keyof typeof this.colorMap];
-		} else if (/^[a-f0-9]{6}$/i.exec(colorString)) {
+		if (ResponseMapper.colorMap.hasOwnProperty(colorString)) {
+			return ResponseMapper.colorMap[colorString as keyof typeof this.colorMap];
+		}if (/^[a-f0-9]{6}$/i.exec(colorString)) {
 			return `#${colorString}`;
 		}
 
-		return this.defaultTypeColor;
+		return ResponseMapper.defaultTypeColor;
 	}
 
 	private static mapLanguages(languages: ProjectLanguageInterface[]) {
 		return languages.map((language) => {
 			const propsFromLanguage = {
-				name: language.name || this.defaultText,
-				color: language.color || this.defaultTypeColor,
+				name: language.name || ResponseMapper.defaultText,
+				color: language.color || ResponseMapper.defaultTypeColor,
 			};
 
 			if (!language.name || !language.color) {
 				return propsFromLanguage;
 			}
 
-			if (this.langMap.hasOwnProperty(language.name)) {
+			if (ResponseMapper.langMap.hasOwnProperty(language.name)) {
 				propsFromLanguage.name =
-					this.langMap[language.name as keyof typeof this.langMap];
+					ResponseMapper.langMap[language.name as keyof typeof this.langMap];
 			}
 
 			return propsFromLanguage;
@@ -115,31 +115,31 @@ export default class ResponseMapper {
 	public static map(
 		projectInfo: Partial<ProjectInfoInterface>,
 	): ProjectInfoInterface {
-		const slug = this.assertExists(projectInfo, 'slug');
+		const slug = ResponseMapper.assertExists(projectInfo, 'slug');
 
 		return {
 			slug: slug,
-			shortDesc: this.useFallback(
+			shortDesc: ResponseMapper.useFallback(
 				projectInfo,
 				'shortDesc',
 				projectInfo.longDesc,
 			),
-			homepageUrl: this.useFallback(projectInfo, 'homepageUrl', ''),
-			githubUrl: this.assertExists(projectInfo, 'githubUrl'),
+			homepageUrl: ResponseMapper.useFallback(projectInfo, 'homepageUrl', ''),
+			githubUrl: ResponseMapper.assertExists(projectInfo, 'githubUrl'),
 			imageUrl: projectInfo.imageUrl || '',
-			stargazers: this.useFallback(projectInfo, 'stargazers', 0),
-			updatedAt: this.assertExists(projectInfo, 'updatedAt'),
-			license: this.assertExists(projectInfo, 'license'),
-			languages: this.mapLanguages(this.assertExists(projectInfo, 'languages')),
-			name: this.useFallback(projectInfo, 'name', this.mapSlugToName(slug)),
-			longDesc: this.useFallback(
+			stargazers: ResponseMapper.useFallback(projectInfo, 'stargazers', 0),
+			updatedAt: ResponseMapper.assertExists(projectInfo, 'updatedAt'),
+			license: ResponseMapper.assertExists(projectInfo, 'license'),
+			languages: ResponseMapper.mapLanguages(ResponseMapper.assertExists(projectInfo, 'languages')),
+			name: ResponseMapper.useFallback(projectInfo, 'name', ResponseMapper.mapSlugToName(slug)),
+			longDesc: ResponseMapper.useFallback(
 				projectInfo,
 				'longDesc',
 				projectInfo.shortDesc,
 			),
-			typeName: this.assertExists(projectInfo, 'typeName'),
-			typeColor: this.mapColorStringToHex(
-				this.assertExists(projectInfo, 'typeColor'),
+			typeName: ResponseMapper.assertExists(projectInfo, 'typeName'),
+			typeColor: ResponseMapper.mapColorStringToHex(
+				ResponseMapper.assertExists(projectInfo, 'typeColor'),
 			),
 		};
 	}

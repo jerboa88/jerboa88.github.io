@@ -86,10 +86,10 @@ export default class ResponseParser {
 
 		const fragment = JSDOM.fragment(readmeObj.text);
 
-		propsFromReadme.name = this.getProjectName(fragment);
-		propsFromReadme.longDesc = this.getProjectDesc(fragment);
+		propsFromReadme.name = ResponseParser.getProjectName(fragment);
+		propsFromReadme.longDesc = ResponseParser.getProjectDesc(fragment);
 
-		const projectType = this.getProjectType(fragment);
+		const projectType = ResponseParser.getProjectType(fragment);
 
 		if (!projectType) {
 			return propsFromReadme;
@@ -116,7 +116,7 @@ export default class ResponseParser {
 		)?.filter(
 			(language) => language && 'name' in language && 'color' in language,
 		) as ProjectLanguageInterface[];
-		const { name, longDesc, typeName, typeColor } = this.parseReadme(
+		const { name, longDesc, typeName, typeColor } = ResponseParser.parseReadme(
 			slug,
 			getProp(responseData, 'readmeFromMaster') ||
 				getProp(responseData, 'readmeFromMain') ||

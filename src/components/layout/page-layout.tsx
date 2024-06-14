@@ -23,7 +23,7 @@ interface Props extends PropsWithClassName, PropsWithChildren {
 
 const BG_GRADIENT_PROPS = {
 	style: {
-		background: `radial-gradient(100% 100% at 0% 0%,oklch(var(--a)),oklch(var(--b2)),transparent),radial-gradient(100% 100% at 100% 100%,oklch(var(--a)),oklch(var(--b2)),transparent)`,
+		background: 'radial-gradient(100% 100% at 0% 0%,oklch(var(--a)),oklch(var(--b2)),transparent),radial-gradient(100% 100% at 100% 100%,oklch(var(--a)),oklch(var(--b2)),transparent)',
 	},
 };
 
