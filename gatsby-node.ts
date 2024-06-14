@@ -18,7 +18,7 @@ import type {
 	SocialImageTypes,
 } from './src/common/types';
 import { removeTrailingSlash } from './src/common/utilities';
-import ResponseMapper from './src/node/response-mapper';
+import { mapResponse } from './src/node/response-mapper';
 import ResponseParser from './src/node/response-parser';
 
 // Constants
@@ -242,7 +242,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 	const pinnedRepos = pinnedReposResponseData.map((responseData) => {
 		assertResponseDataIsNonEmpty(responseData);
 
-		const projectInfo = ResponseMapper.map(
+		const projectInfo = mapResponse(
 			ResponseParser.parse(responseData as PinnedReposResponseInterface),
 		);
 
