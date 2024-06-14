@@ -286,6 +286,18 @@ export type PinnedReposResponseInterface = NonNullable<
 	Queries.PinnedReposQuery['github']['user']
 >['pinnedItems'];
 
+export type ReadmeResponse = NonNullable<
+	NonNullable<
+		NonNullable<
+			NonNullable<Queries.PinnedReposQuery['github']>['user']
+		>['pinnedItems']
+	>['nodes']
+>[number] extends infer R
+	? R extends { readonly readmeFromMain: unknown }
+		? R['readmeFromMain']
+		: never
+	: never;
+
 export type ToggleContextInterface = Context<{
 	isEnabled: boolean;
 	toggle: () => void;

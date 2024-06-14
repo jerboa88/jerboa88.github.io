@@ -8,6 +8,7 @@ import type {
 	PinnedReposResponseInterface,
 	ProjectInfoInterface,
 	ProjectLanguageInterface,
+	ReadmeResponse,
 } from '../common/types';
 
 type ReadmePropsInterface = Pick<
@@ -69,7 +70,7 @@ export default class ResponseParser {
 
 	private static parseReadme<R extends ReadmePropsInterface>(
 		slug: string,
-		readmeObj: { text: string } | {} | undefined,
+		readmeObj: ReadmeResponse,
 	): R {
 		const propsFromReadme = {
 			name: undefined,
@@ -146,7 +147,7 @@ export default class ResponseParser {
 
 // Returns a prop if it exists, otherwise returns undefined
 function getProp<T extends { [key: string]: any }, K extends keyof T>(
-	obj: T | {} | undefined,
+	obj: T | object | undefined,
 	key: K,
 ): Exclude<T[K], null> | undefined {
 	return (obj && key in obj && obj[key]) || undefined;
