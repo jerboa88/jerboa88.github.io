@@ -3,10 +3,8 @@
 	---------------------------------------------------------
 */
 
-
 import { getSiteMetadata } from './config-manager';
-import { PropsWithClassName } from './types';
-
+import type { PropsWithClassName } from './types';
 
 // Constants
 
@@ -62,7 +60,7 @@ const STATUS_CODE_MESSAGE_MAP = {
 	415: 'Unsupported Media Type',
 	416: 'Requested Range Not Satisfiable',
 	417: 'Expectation Failed',
-	418: 'I\'m a teapot',
+	418: "I'm a teapot",
 	419: 'Insufficient Space on Resource',
 	421: 'Misdirected Request',
 	422: 'Unprocessable Entity',
@@ -83,7 +81,6 @@ const STATUS_CODE_MESSAGE_MAP = {
 	511: 'Network Authentication Required',
 } as const;
 
-
 // Functions
 
 // Check if the window object exists
@@ -92,19 +89,23 @@ export function doesWindowExist(): boolean {
 	return typeof window !== 'undefined';
 }
 
-
 // CHeck if the device supports hover interactions or if it is a touch-only device
 export function doesDeviceSupportHover() {
 	return doesWindowExist() && window.matchMedia('(pointer: fine)').matches;
 }
 
-
 // Get a value from an object or return a default value if the key does not exist
 // If defaultValue is not provided, throw an error when the key is not in the object
-export function getOrDefault<T extends object, K extends keyof T, D extends any>(obj: T, key: K | number | string | undefined, defaultValue?: D): T[K] | D {
+export function getOrDefault<T extends object, K extends keyof T, D>(
+	obj: T,
+	key: K | number | string | undefined,
+	defaultValue?: D,
+): T[K] | D {
 	if (key === undefined || !(key in obj)) {
 		if (defaultValue === undefined) {
-			throw new Error(`Key '${String(key)}' not found in object and no default value provided.`);
+			throw new Error(
+				`Key '${String(key)}' not found in object and no default value provided.`,
+			);
 		}
 
 		return defaultValue as D;
@@ -113,26 +114,28 @@ export function getOrDefault<T extends object, K extends keyof T, D extends any>
 	return obj[key as K];
 }
 
-
 // Get the description associated with a given status code
 export function getStatusCodeDescription(statusCode: number): string {
-	return getOrDefault(STATUS_CODE_MESSAGE_MAP, statusCode, 'Unknown Status Code');
+	return getOrDefault(
+		STATUS_CODE_MESSAGE_MAP,
+		statusCode,
+		'Unknown Status Code',
+	);
 }
-
 
 // Combine multiple class names into a single string
-export function getClassNameProps(...classNames: (string | false | undefined)[]): PropsWithClassName {
+export function getClassNameProps(
+	...classNames: (string | false | undefined)[]
+): PropsWithClassName {
 	return {
-		className: classNames.filter(className => className).join(' '),
+		className: classNames.filter((className) => className).join(' '),
 	};
 }
-
 
 // Clamp a value between a minimum and maximum value
 export function clamp(value: number, min: number, max: number) {
 	return Math.min(Math.max(value, min), max);
-};
-
+}
 
 // Convert a string to kebab case
 export function toKebabCase(string: string) {
@@ -142,12 +145,10 @@ export function toKebabCase(string: string) {
 		.toLowerCase();
 }
 
-
 // Given a path, return the absolute URL
 export function getAbsoluteUrl(path: string) {
 	return new URL(path, SITE_METADATA.siteUrl);
 }
-
 
 // Get the MIME type of a file URL based on its extension
 export function getMimeType(fileUrl: URL) {
@@ -159,7 +160,6 @@ export function getMimeType(fileUrl: URL) {
 
 	return getOrDefault(MIME_TYPE_MAP, extension) as string;
 }
-
 
 // Remove a trailing slash from a path if it exists
 export function removeTrailingSlash(path: string) {

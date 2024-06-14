@@ -1,4 +1,7 @@
 {
+	"editor.codeActionsOnSave": {
+		"source.organizeImports.biome": "explicit"
+	},
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true

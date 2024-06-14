@@ -3,9 +3,7 @@
 	--------------------------------------
 */
 
-
 import type { SocialImagesGenerationConfig } from '../common/types';
-
 
 export default {
 	defaults: {
@@ -26,5 +24,5 @@ export default {
 				height: 1200,
 			},
 		},
-	}
+	},
 } as SocialImagesGenerationConfig;

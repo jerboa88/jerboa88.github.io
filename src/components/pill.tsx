@@ -3,11 +3,8 @@
 	-----------
 */
 
-
-import React from 'react';
-import { PropsWithClassName } from '../common/types';
+import type { PropsWithClassName } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
-
 
 interface Props extends PropsWithClassName {
 	text: string;
@@ -21,9 +18,7 @@ export default function Pill({ className = '', text }: Props) {
 
 	return (
 		<div key={text} {...classNameProps}>
-			<span className="text-sm">
-				{text}
-			</span>
+			<span className="text-sm">{text}</span>
 		</div>
 	);
 }

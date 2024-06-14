@@ -3,29 +3,36 @@
 	----------------------
 */
 
-
-import React, { useEffect } from 'react';
-import { useForm, useFormState, SubmitHandler } from 'react-hook-form';
-import { LayoutGroup, motion } from 'framer-motion';
 import Botpoison from '@botpoison/browser';
 import { faCircleNotch, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { PropsWithClassName, InputValidationOptions, AlertType, TooltipPosition } from '../../common/types';
-import { getClassNameProps, getOrDefault, getStatusCodeDescription } from '../../common/utilities';
-import TextInput from './text-input';
-import MultilineTextInput from './multiline-text-input';
-import SolidButton from './solid-button';
+import { LayoutGroup, motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { type SubmitHandler, useForm, useFormState } from 'react-hook-form';
+import { getExternalServices } from '../../common/config-manager';
+import {
+	AlertType,
+	type InputValidationOptions,
+	type PropsWithClassName,
+	TooltipPosition,
+} from '../../common/types';
+import {
+	getClassNameProps,
+	getOrDefault,
+	getStatusCodeDescription,
+} from '../../common/utilities';
 import GhostAlert from '../ghost-alert';
 import Checkbox from './checkbox';
-import { getExternalServices } from '../../common/config-manager';
-
+import MultilineTextInput from './multiline-text-input';
+import SolidButton from './solid-button';
+import TextInput from './text-input';
 
 // Types
 
 enum FormState {
-	Idle,
-	Busy,
-	Submitted,
-	Error,
+	Idle = 0,
+	Busy = 1,
+	Submitted = 2,
+	Error = 3,
 }
 
 // Allowed fields for the contact form
@@ -35,7 +42,6 @@ interface ContactFormFieldsInterface {
 	message: string;
 	_gotcha?: 'on';
 }
-
 
 // Constants
 
@@ -123,7 +129,8 @@ function getValidationOptions(formState: FormState) {
 		} as InputValidationOptions,
 		email: {
 			maxLength: 50,
-			pattern: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i,
+			pattern:
+				/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i,
 			required: true,
 			disabled: formState === FormState.Busy,
 		} as InputValidationOptions,
@@ -141,16 +148,16 @@ async function computeBotPoisonSolution() {
 	console.debug('Computing Botpoison solution...');
 
 	return new Promise<string>((resolve, reject) => {
-		botpoison.challenge()
+		botpoison
+			.challenge()
 			.then(({ solution }) => {
 				console.debug('Botpoison solution found');
 
-				resolve(solution)
+				resolve(solution);
 			})
 			.catch(reject);
 	});
 }
-
 
 export default function ContactForm({ className = '' }: PropsWithClassName) {
 	const formClassNameProps = getClassNameProps(
@@ -158,18 +165,19 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 		className,
 	);
 
-	const [formState, setFormState] = React.useState<FormState>(FormState.Idle);
-	const [botpoisonSolution, setBotpoisonSolution] = React.useState<Promise<string>>();
+	const [formState, setFormState] = useState<FormState>(FormState.Idle);
+	const [botpoisonSolution, setBotpoisonSolution] = useState<Promise<string>>();
 
 	// Options passed to React Hook Form for input validation
 	const validationOptions = getValidationOptions(formState);
-	const submitButtonProps = (formState === FormState.Busy) ? SUBMIT_BUTTON_PROPS_BUSY : SUBMIT_BUTTON_PROPS_DEFAULT;
+	const submitButtonProps =
+		formState === FormState.Busy
+			? SUBMIT_BUTTON_PROPS_BUSY
+			: SUBMIT_BUTTON_PROPS_DEFAULT;
 	const alertProps = getOrDefault(ALERT_PROPS, formState, ALERT_PROPS_DEFAULT);
 
 	const {
-		formState: {
-			errors
-		},
+		formState: { errors },
 		control,
 		register,
 		reset,
@@ -177,16 +185,16 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 	} = useForm<ContactFormFieldsInterface>({ mode: 'onBlur' });
 	const { isValid } = useFormState({ control });
 
-
 	// Handle form submission errors
 	const handleSubmissionError = (errorMsg: string) => {
 		setFormState(FormState.Error);
 
 		console.error(`Something went wrong during form submission. ${errorMsg}`);
-	}
+	};
 
-
-	const onSubmit: SubmitHandler<ContactFormFieldsInterface> = async formData => {
+	const onSubmit: SubmitHandler<ContactFormFieldsInterface> = async (
+		formData,
+	) => {
 		setFormState(FormState.Busy);
 
 		console.debug('Waiting for Botpoison solution...');
@@ -206,11 +214,14 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 			},
 			body: requestBody,
 		})
-			.then(response => {
+			.then((response) => {
 				if (!response.ok) {
-					const statusText = response.statusText || getStatusCodeDescription(response.status);
+					const statusText =
+						response.statusText || getStatusCodeDescription(response.status);
 
-					handleSubmissionError(`The server returned status code ${response.status} (${statusText})`);
+					handleSubmissionError(
+						`The server returned status code ${response.status} (${statusText})`,
+					);
 
 					return;
 				}
@@ -218,11 +229,10 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 				setFormState(FormState.Submitted);
 				reset();
 			})
-			.catch(error => {
+			.catch((error) => {
 				handleSubmissionError(`The following error was caught: ${error}`);
 			});
-	}
-
+	};
 
 	// Compute Botpoison solution as soon as the form is valid
 	useEffect(() => {
@@ -230,7 +240,6 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 			setBotpoisonSolution(computeBotPoisonSolution());
 		}
 	}, [isValid, botpoisonSolution]);
-
 
 	// Reset the form state a few seconds after submission
 	useEffect(() => {
@@ -243,13 +252,26 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 		}
 	}, [formState]);
 
-
 	return (
-		<motion.form method="post" onSubmit={handleSubmit(onSubmit)} {...formClassNameProps} layout>
+		<motion.form
+			method="post"
+			onSubmit={handleSubmit(onSubmit)}
+			{...formClassNameProps}
+			layout
+		>
 			<LayoutGroup>
-				<TextInput {...{ register, errors, ...INPUT_PROPS.name }} validationOptions={validationOptions.name} />
-				<TextInput {...{ register, errors, ...INPUT_PROPS.email }} validationOptions={validationOptions.email} />
-				<MultilineTextInput {...{ register, errors, ...INPUT_PROPS.message }} validationOptions={validationOptions.message} />
+				<TextInput
+					{...{ register, errors, ...INPUT_PROPS.name }}
+					validationOptions={validationOptions.name}
+				/>
+				<TextInput
+					{...{ register, errors, ...INPUT_PROPS.email }}
+					validationOptions={validationOptions.email}
+				/>
+				<MultilineTextInput
+					{...{ register, errors, ...INPUT_PROPS.message }}
+					validationOptions={validationOptions.message}
+				/>
 				<Checkbox {...{ register, errors, ...INPUT_PROPS._gotcha }} />
 				<SolidButton
 					type="submit"
@@ -260,7 +282,8 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 					tooltipClassName="w-full"
 					className="w-full"
 					layoutRoot
-					{...submitButtonProps} />
+					{...submitButtonProps}
+				/>
 				<GhostAlert {...alertProps} />
 			</LayoutGroup>
 		</motion.form>

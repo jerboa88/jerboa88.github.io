@@ -3,22 +3,19 @@
 	------------------------------------------
 */
 
-
-import React, { useEffect, useState } from 'react';
-import { useReducedMotion } from 'framer-motion';
-import Particles, { initParticlesEngine } from '@tsparticles/react';
-import { IOptions, RecursivePartial } from '@tsparticles/engine';
 import { loadBasic } from '@tsparticles/basic';
+import type { IOptions, RecursivePartial } from '@tsparticles/engine';
+import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSquareShape } from '@tsparticles/shape-square';
-import { getClassNameProps } from '../../common/utilities';
+import { useReducedMotion } from 'framer-motion';
+import { memo, useEffect, useState } from 'react';
 import { getTheme } from '../../common/config-manager';
-
+import { getClassNameProps } from '../../common/utilities';
 
 // Constants
 
 // TODO: Replace hardcoded value here
 const THEME = getTheme('dark');
-
 
 function ParticlesBackground() {
 	const shouldReduceMotion = useReducedMotion();
@@ -26,7 +23,7 @@ function ParticlesBackground() {
 
 	const classNameProps = getClassNameProps(
 		'fixed top-0 left-0 size-full mix-blend-overlay transition-opacity ease-out duration-[2s]',
-		init ? 'opacity-100' : 'opacity-0'	// Hide until loaded
+		init ? 'opacity-100' : 'opacity-0', // Hide until loaded
 	);
 	const tsParticlesConfig = {
 		fpsLimit: 30,
@@ -55,7 +52,7 @@ function ParticlesBackground() {
 			opacity: {
 				value: {
 					min: 0,
-					max: 1
+					max: 1,
 				},
 				animation: {
 					enable: true,
@@ -76,9 +73,8 @@ function ParticlesBackground() {
 		},
 	} as RecursivePartial<IOptions>;
 
-
 	useEffect(() => {
-		initParticlesEngine(async engine => {
+		initParticlesEngine(async (engine) => {
 			await loadBasic(engine);
 			await loadSquareShape(engine);
 		}).then(() => {
@@ -88,13 +84,10 @@ function ParticlesBackground() {
 		});
 	});
 
-
-	return (
-		<Particles options={tsParticlesConfig} {...classNameProps} />
-	);
+	return <Particles options={tsParticlesConfig} {...classNameProps} />;
 }
 
 // Never re-render this component
-const MemoizedParticlesBackground = React.memo(ParticlesBackground);
+const MemoizedParticlesBackground = memo(ParticlesBackground);
 
 export default MemoizedParticlesBackground;

@@ -3,9 +3,7 @@
 	------------------
 */
 
-
 import type { RoleConfigInterface } from '../common/types';
-
 
 export default [
 	{

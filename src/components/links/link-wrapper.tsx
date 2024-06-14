@@ -3,16 +3,20 @@
 	-------------------------------------------------------------------------------------------------
 */
 
-
-import React, { PropsWithChildren } from 'react';
 import { Link } from 'gatsby';
-import { LinkInterface, PropsWithClassName } from '../../common/types';
+import type { PropsWithChildren } from 'react';
+import type { LinkInterface, PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 
+interface Props extends LinkInterface, PropsWithClassName, PropsWithChildren {}
 
-interface Props extends LinkInterface, PropsWithClassName, PropsWithChildren { }
-
-export default function LinkWrapper({ className = '', to, isInternal = false, rel = '', children }: Props) {
+export default function LinkWrapper({
+	className = '',
+	to,
+	isInternal = false,
+	rel = '',
+	children,
+}: Props) {
 	const classNameProps = getClassNameProps('whitespace-nowrap', className);
 
 	return isInternal ? (
@@ -20,7 +24,12 @@ export default function LinkWrapper({ className = '', to, isInternal = false, re
 			{children}
 		</Link>
 	) : (
-		<a href={to} target="_blank" rel={`noopener external ${rel}`} {...classNameProps}>
+		<a
+			href={to}
+			target="_blank"
+			rel={`noopener external ${rel}`}
+			{...classNameProps}
+		>
 			{children}
 		</a>
 	);

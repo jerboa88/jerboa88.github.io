@@ -1,31 +1,49 @@
-import { resolve, join } from 'path';
+import assert from 'node:assert';
+import { join, resolve } from 'node:path';
 import type { Actions, CreatePagesArgs, GatsbyNode, Reporter } from 'gatsby';
 import { createImage } from 'gatsby-plugin-component-to-image';
-import { Path, PinnedRepoResponseInterface, SocialImageTypes } from './src/common/types';
-import { PAGE_TEMPLATES_DIR, PROJECTS_DIR, SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR, SOCIAL_IMAGE_TEMPLATES_DIR } from './src/common/constants';
-import ResponseParser from './src/node/response-parser';
-import ResponseMapper from './src/node/response-mapper';
+import {
+	getPageMetadata,
+	getSocialImageGenerationConfigForType,
+} from './src/common/config-manager';
+import {
+	PAGE_TEMPLATES_DIR,
+	PROJECTS_DIR,
+	SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR,
+	SOCIAL_IMAGE_TEMPLATES_DIR,
+} from './src/common/constants';
+import type {
+	Path,
+	PinnedReposResponseInterface,
+	SocialImageTypes,
+} from './src/common/types';
 import { removeTrailingSlash } from './src/common/utilities';
-import assert from 'assert';
-import { getPageMetadata, getSocialImageGenerationConfigForType } from './src/common/config-manager';
-
+import ResponseMapper from './src/node/response-mapper';
+import ResponseParser from './src/node/response-parser';
 
 // Constants
 
 const INDEX_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'index.tsx');
 const PROJECT_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'project.tsx');
 
-const INDEX_OG_IMAGE_TEMPLATE = resolve(SOCIAL_IMAGE_TEMPLATES_DIR, 'index.tsx');
-const PROJECT_OG_IMAGE_TEMPLATE = resolve(SOCIAL_IMAGE_TEMPLATES_DIR, 'project.tsx');
-const OTHER_OG_IMAGE_TEMPLATE = resolve(SOCIAL_IMAGE_TEMPLATES_DIR, 'other.tsx');
-
+const INDEX_OG_IMAGE_TEMPLATE = resolve(
+	SOCIAL_IMAGE_TEMPLATES_DIR,
+	'index.tsx',
+);
+const PROJECT_OG_IMAGE_TEMPLATE = resolve(
+	SOCIAL_IMAGE_TEMPLATES_DIR,
+	'project.tsx',
+);
+const OTHER_OG_IMAGE_TEMPLATE = resolve(
+	SOCIAL_IMAGE_TEMPLATES_DIR,
+	'other.tsx',
+);
 
 // Runtime variables
 
 let gatsbyCreatePage: Actions['createPage'] | undefined = undefined;
 let gatsbyDeletePage: Actions['deletePage'] | undefined = undefined;
 let gatsbyReporter: Reporter | undefined = undefined;
-
 
 // Types
 
@@ -42,13 +60,12 @@ interface CreateSocialImagesOptions {
 	context?: object;
 }
 
-
 // Functions
 
 // Fetch pinned repos from a GitHub profile
 async function fetchPinnedRepos(graphql: CreatePagesArgs['graphql']) {
 	const response = await graphql(`
-		query PinnedRepoQuery {
+		query PinnedRepos {
 			github {
 				user(login: "jerboa88") {
 					pinnedItems(first: 10) {
@@ -97,10 +114,13 @@ async function fetchPinnedRepos(graphql: CreatePagesArgs['graphql']) {
 	`);
 
 	if (!response || 'errors' in response) {
-		throw new Error('The response from GitHub contains errors', response?.errors);
+		throw new Error(
+			'The response from GitHub contains errors',
+			response?.errors,
+		);
 	}
 
-	const data = response.data as Queries.PinnedRepoQueryQuery;
+	const data = response.data as Queries.PinnedReposQuery;
 	const pinnedRepos = data.github.user?.pinnedItems.nodes;
 
 	if (!pinnedRepos) {
@@ -110,7 +130,6 @@ async function fetchPinnedRepos(graphql: CreatePagesArgs['graphql']) {
 	return pinnedRepos;
 }
 
-
 // Assert that the response data is non-empty before we start processing it
 function assertResponseDataIsNonEmpty(responseData) {
 	if (!responseData || Object.keys(responseData).length === 0) {
@@ -118,9 +137,11 @@ function assertResponseDataIsNonEmpty(responseData) {
 	}
 }
 
-
 // Generate a single social image for a page
-function createSocialImage(type: SocialImageTypes, { path, component, context }: CreateSocialImagesOptions) {
+function createSocialImage(
+	type: SocialImageTypes,
+	{ path, component, context }: CreateSocialImagesOptions,
+) {
 	const pagePath = join(SOCIAL_IMAGE_PAGES_DIR, type, path);
 	const imageFileName = path === '/' ? 'index' : removeTrailingSlash(path);
 	const imagePath = join('/', 'images', type, `${imageFileName}.webp`);
@@ -145,7 +166,12 @@ function createSocialImages(options: CreateSocialImagesOptions) {
 }
 
 // Create a page and generate the associated social images for it
-function createPage({ path, component, socialImageComponent, context }: CreatePageOptions) {
+function createPage({
+	path,
+	component,
+	socialImageComponent,
+	context,
+}: CreatePageOptions) {
 	gatsbyReporter?.info(`Creating page at ${path}`);
 
 	assert(gatsbyCreatePage !== undefined);
@@ -162,18 +188,19 @@ function createPage({ path, component, socialImageComponent, context }: CreatePa
 		context: {
 			...context,
 			socialImagesMetadata: socialImagesMetadata,
-		}
+		},
 	});
 }
 
-
 // Save Gatsby Node API Helpers for later use
-export const onPluginInit: GatsbyNode['onPluginInit'] = ({ reporter, actions: { createPage, deletePage } }) => {
+export const onPluginInit: GatsbyNode['onPluginInit'] = ({
+	reporter,
+	actions: { createPage, deletePage },
+}) => {
 	gatsbyCreatePage = createPage;
 	gatsbyDeletePage = deletePage;
 	gatsbyReporter = reporter;
-}
-
+};
 
 // Add metadata to automatically generated pages and generate the associated Open Graph images
 export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
@@ -205,19 +232,18 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
 		context: {
 			...page.context,
 			pageMetadata: pageMetadata,
-		}
+		},
 	});
-}
-
+};
 
 // Manually create pages and generate the associated Open Graph images
 export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 	const pinnedReposResponseData = await fetchPinnedRepos(graphql);
-	const pinnedRepos = pinnedReposResponseData.map(responseData => {
+	const pinnedRepos = pinnedReposResponseData.map((responseData) => {
 		assertResponseDataIsNonEmpty(responseData);
 
 		const projectInfo = ResponseMapper.map(
-			ResponseParser.parse(responseData as PinnedRepoResponseInterface)
+			ResponseParser.parse(responseData as PinnedReposResponseInterface),
 		);
 
 		// Create project pages
@@ -242,4 +268,4 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 			pinnedRepos: pinnedRepos,
 		},
 	});
-}
+};

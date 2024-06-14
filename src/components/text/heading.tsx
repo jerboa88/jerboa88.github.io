@@ -3,13 +3,11 @@
 	---------------------------------------------
 */
 
-
-import React, { PropsWithChildren } from 'react';
-import { PropsWithClassName } from '../../common/types';
+import type { PropsWithChildren } from 'react';
+import type { PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 
-
-interface Props extends PropsWithClassName, PropsWithChildren { }
+interface Props extends PropsWithClassName, PropsWithChildren {}
 
 export default function Heading({ className = '', children }: Props) {
 	const classNameProps = getClassNameProps(
@@ -17,9 +15,5 @@ export default function Heading({ className = '', children }: Props) {
 		className,
 	);
 
-	return (
-		<h1 {...classNameProps}>
-			{children}
-		</h1>
-	);
+	return <h1 {...classNameProps}>{children}</h1>;
 }

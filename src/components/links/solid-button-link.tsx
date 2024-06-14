@@ -3,16 +3,18 @@
 	----------------------------------------------
 */
 
-
-import React from 'react';
-import { ButtonInterface, LinkInterface } from '../../common/types';
-import LinkWrapper from './link-wrapper';
+import type { ButtonInterface, LinkInterface } from '../../common/types';
 import SolidButton from '../input/solid-button';
+import LinkWrapper from './link-wrapper';
 
+interface Props extends ButtonInterface, LinkInterface {}
 
-interface Props extends ButtonInterface, LinkInterface { }
-
-export default function SolidButtonLink({ to, isInternal, rel, ...remainingProps }: Props) {
+export default function SolidButtonLink({
+	to,
+	isInternal,
+	rel,
+	...remainingProps
+}: Props) {
 	return (
 		<LinkWrapper to={to} isInternal={isInternal} rel={rel}>
 			<SolidButton {...remainingProps} />

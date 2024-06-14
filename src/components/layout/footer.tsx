@@ -3,19 +3,15 @@
 	-------------------------------
 */
 
-
-import React from 'react';
-import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { TooltipPosition } from '../../common/types';
-import GhostButtonLink from '../links/ghost-button-link';
-import Divider from '../divider';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { getSiteMetadata } from '../../common/config-manager';
-
+import { TooltipPosition } from '../../common/types';
+import Divider from '../divider';
+import GhostButtonLink from '../links/ghost-button-link';
 
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
-
 
 export default function Footer() {
 	return (
@@ -28,25 +24,29 @@ export default function Footer() {
 							to={SITE_METADATA.sourceUrl}
 							text="Source"
 							tooltipText="View the source code on GitHub"
-							tooltipPosition={TooltipPosition.Right} />
+							tooltipPosition={TooltipPosition.Right}
+						/>
 						<GhostButtonLink
 							to="/privacy-policy"
 							text="Privacy"
 							tooltipText="View the Privacy Policy"
 							tooltipPosition={TooltipPosition.Right}
-							isInternal />
+							isInternal
+						/>
 					</nav>
 					<nav className="flex flex-row justify-center">
 						<GhostButtonLink
 							to={SITE_METADATA.author.link.linkedin}
 							icon={faLinkedin}
 							tooltipText="View my profile on LinkedIn"
-							tooltipPosition={TooltipPosition.Left} />
+							tooltipPosition={TooltipPosition.Left}
+						/>
 						<GhostButtonLink
 							to={SITE_METADATA.author.link.github}
 							icon={faGithub}
 							tooltipText="View my profile on GitHub"
-							tooltipPosition={TooltipPosition.Left} />
+							tooltipPosition={TooltipPosition.Left}
+						/>
 					</nav>
 				</div>
 			</div>

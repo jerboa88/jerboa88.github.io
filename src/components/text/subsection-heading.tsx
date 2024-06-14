@@ -3,13 +3,11 @@
 	-----------------------------------------------------
 */
 
-
-import React, { PropsWithChildren } from 'react';
-import { PropsWithClassName } from '../../common/types';
+import type { PropsWithChildren } from 'react';
+import type { PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 
-
-interface Props extends PropsWithClassName, PropsWithChildren { }
+interface Props extends PropsWithClassName, PropsWithChildren {}
 
 export default function SubsectionHeading({ className = '', children }: Props) {
 	const classNameProps = getClassNameProps(
@@ -17,9 +15,5 @@ export default function SubsectionHeading({ className = '', children }: Props) {
 		className,
 	);
 
-	return (
-		<h3 {...classNameProps}>
-			{children}
-		</h3>
-	);
+	return <h3 {...classNameProps}>{children}</h3>;
 }

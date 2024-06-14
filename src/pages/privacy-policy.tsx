@@ -3,19 +3,20 @@
 	-------------------
 */
 
-
-import React, { useRef } from 'react';
 import type { HeadProps, PageProps } from 'gatsby';
 import { graphql } from 'gatsby';
-import { PageMetadataProp, SocialImagesMetadataProp } from '../common/types';
-import Section from '../components/layout/section';
-import PageLayout from '../components/layout/page-layout';
-import PageHead from '../components/seo/page-head';
-import SolidButtonLink from '../components/links/solid-button-link';
-import { Article } from '../components/text/article';
-import { getAbsoluteUrl } from '../common/utilities';
+import { useRef } from 'react';
 import { getSiteMetadata } from '../common/config-manager';
-
+import type {
+	PageMetadataProp,
+	SocialImagesMetadataProp,
+} from '../common/types';
+import { getAbsoluteUrl } from '../common/utilities';
+import PageLayout from '../components/layout/page-layout';
+import Section from '../components/layout/section';
+import SolidButtonLink from '../components/links/solid-button-link';
+import PageHead from '../components/seo/page-head';
+import { Article } from '../components/text/article';
 
 // Types
 
@@ -33,20 +34,25 @@ interface DataProp {
 	};
 }
 
-
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
 
-
-export default function PrivacyPolicyPage({ data, pageContext: { pageMetadata } }: PageContextProp & DataProp & PageProps) {
+export default function PrivacyPolicyPage({
+	data,
+	pageContext: { pageMetadata },
+}: PageContextProp & DataProp & PageProps) {
 	const articleHtml = data.file.childMarkdownRemark.html;
 
 	return (
 		<PageLayout>
 			{/* Dummy element to force center alignment of section */}
 			<div />
-			<Section title={pageMetadata.title} ref={useRef(null)} className="items-center" >
+			<Section
+				title={pageMetadata.title}
+				ref={useRef(null)}
+				className="items-center"
+			>
 				<div className="flex flex-col gap-8 items-center">
 					<Article html={articleHtml} />
 					<SolidButtonLink text="Home" to="/" isInternal />
@@ -56,7 +62,10 @@ export default function PrivacyPolicyPage({ data, pageContext: { pageMetadata } 
 	);
 }
 
-export const Head = ({ location, pageContext: { pageMetadata, socialImagesMetadata } }: PageContextProp & DataProp & HeadProps) => {
+export const Head = ({
+	location,
+	pageContext: { pageMetadata, socialImagesMetadata },
+}: PageContextProp & DataProp & HeadProps) => {
 	const pageTitle = `${pageMetadata.title} | ${SITE_METADATA.shortTitle}`;
 	const metadata = {
 		title: pageTitle,
@@ -73,23 +82,25 @@ export const Head = ({ location, pageContext: { pageMetadata, socialImagesMetada
 			headline: pageMetadata.shortTitle,
 			description: pageMetadata.description,
 			author: {
-				'@id': '/author'
-			}
+				'@id': '/author',
+			},
 		},
-	}
+	};
 
 	return (
-		<PageHead path={location.pathname} {...{ metadata, structuredData, socialImagesMetadata }} />
+		<PageHead
+			path={location.pathname}
+			{...{ metadata, structuredData, socialImagesMetadata }}
+		/>
 	);
-}
-
+};
 
 export const pageQuery = graphql`
-  query {
+  query PrivacyPolicyPage {
 		file(name: {eq: "privacy-policy"}) {
 			childMarkdownRemark {
 				html
 			}
 		}
   }
-`
+`;

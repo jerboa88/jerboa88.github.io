@@ -3,27 +3,29 @@
 	-------------------------
 */
 
-
-import type { GatsbyConfig } from 'gatsby';
 import dotenv from 'dotenv';
-import * as tailwindConfig from './tailwind.config';
-import { getSiteMetadata, getSocialImageGenerationConfigDefaults, getTheme } from './src/common/config-manager';
-import { getAbsoluteUrl } from './src/common/utilities';
+import type { GatsbyConfig } from 'gatsby';
+import {
+	getSiteMetadata,
+	getSocialImageGenerationConfigDefaults,
+	getTheme,
+} from './src/common/config-manager';
 import { SOCIAL_IMAGES_DIR } from './src/common/constants';
-
+import { getAbsoluteUrl } from './src/common/utilities';
+import * as tailwindConfig from './tailwind.config';
 
 const SITE_METADATA = getSiteMetadata();
 const DARK_THEME = getTheme('dark');
-
 
 // Load environment variables from relevant .env file
 dotenv.config({
 	path: `.env.${process.env.NODE_ENV}`,
 });
 
-
 const config: GatsbyConfig = {
 	siteMetadata: SITE_METADATA,
+	// Enable the new JSX transform so that we can use JSX without importing React
+	jsxRuntime: 'automatic',
 	graphqlTypegen: {
 		typesOutputPath: 'src/common/gatsby-types.d.ts',
 	},
@@ -35,7 +37,7 @@ const config: GatsbyConfig = {
 		'gatsby-transformer-sharp',
 		{
 			resolve: 'gatsby-plugin-component-to-image',
-			options: getSocialImageGenerationConfigDefaults()
+			options: getSocialImageGenerationConfigDefaults(),
 		},
 		{
 			resolve: 'gatsby-plugin-postcss',
@@ -56,10 +58,8 @@ const config: GatsbyConfig = {
 					changefreq: 'monthly',
 				}),
 				// Prevent temporary components rendered by gatsby-plugin-open-graph-images from being included in the sitemap
-				excludes: [
-					`/${SOCIAL_IMAGES_DIR}/**/*`,
-				],
-			}
+				excludes: [`/${SOCIAL_IMAGES_DIR}/**/*`],
+			},
 		},
 		{
 			resolve: 'gatsby-plugin-robots-txt',
@@ -70,9 +70,9 @@ const config: GatsbyConfig = {
 					{
 						userAgent: '*',
 						allow: '/',
-					}
-				]
-			}
+					},
+				],
+			},
 		},
 		{
 			resolve: 'gatsby-plugin-manifest',
@@ -81,11 +81,11 @@ const config: GatsbyConfig = {
 				short_name: SITE_METADATA.shortTitle,
 				start_url: '/',
 				background_color: DARK_THEME['base-100'],
-				theme_color: DARK_THEME['primary'],
+				theme_color: DARK_THEME.primary,
 				display: 'standalone',
 				icon: `${__dirname}/src/${SITE_METADATA.iconPath}`,
 				crossOrigin: 'use-credentials',
-			}
+			},
 		},
 		// This plugin needs to be listed after gatsby-plugin-manifest so that it can cache the generated manifest.webmanifest
 		'gatsby-plugin-offline',
@@ -120,7 +120,7 @@ const config: GatsbyConfig = {
 				},
 			},
 		},
-	]
+	],
 };
 
 export default config;
