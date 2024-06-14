@@ -4,7 +4,6 @@
 	-----------------------------------------------------------------------------------
 */
 
-import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ButtonInterface } from '../../common/types';

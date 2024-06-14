@@ -3,7 +3,6 @@
 	------------------------------------------
 */
 
-import React from 'react';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { ProjectInfoInterface } from '../common/types';

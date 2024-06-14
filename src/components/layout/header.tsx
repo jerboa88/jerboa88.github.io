@@ -3,7 +3,6 @@
 	---------------------------------
 */
 
-import React from 'react';
 import { motion } from 'framer-motion';
 import { SectionInterface } from '../../common/types';
 import { TITLE_LAYOUT_ID } from '../../common/constants';

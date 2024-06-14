@@ -3,7 +3,6 @@
 	---------------------------
 */
 
-import React from 'react';
 import { ProjectInfoInterface, PropsWithClassName } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
 import ProjectCard from '../components/project-card';

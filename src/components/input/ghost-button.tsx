@@ -3,7 +3,6 @@
 	-------------------------------------------
 */
 
-import React from 'react';
 import { ButtonInterface } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import BaseButton from './base-button';

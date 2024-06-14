@@ -3,7 +3,6 @@
 	-------------------------------
 */
 
-import React from 'react';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { TooltipPosition } from '../../common/types';
 import GhostButtonLink from '../links/ghost-button-link';

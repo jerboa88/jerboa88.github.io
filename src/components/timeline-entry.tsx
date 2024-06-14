@@ -3,7 +3,6 @@
 	-------------------------------------------
 */
 
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { RoleInterface } from '../common/types';

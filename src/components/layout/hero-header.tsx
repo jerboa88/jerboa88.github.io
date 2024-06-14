@@ -3,7 +3,6 @@
 	---------------------------------------------------------------
 */
 
-import React from 'react';
 import { motion } from 'framer-motion';
 import { TITLE_LAYOUT_ID } from '../../common/constants';
 import Heading from '../../components/text/heading';

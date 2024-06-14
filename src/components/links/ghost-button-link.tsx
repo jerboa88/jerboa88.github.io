@@ -3,12 +3,11 @@
 	------------------------------------------------
 */
 
-import React from 'react';
 import { ButtonInterface, LinkInterface } from '../../common/types';
 import LinkWrapper from './link-wrapper';
 import GhostButton from '../input/ghost-button';
 
-interface Props extends ButtonInterface, LinkInterface {}
+interface Props extends ButtonInterface, LinkInterface { }
 
 export default function GhostButtonLink({
 	to,

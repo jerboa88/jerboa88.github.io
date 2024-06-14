@@ -3,7 +3,6 @@
 	----------------------------------------
 */
 
-import React from 'react';
 import { faSignature } from '@fortawesome/free-solid-svg-icons';
 import { ButtonInterface } from '../../common/types';
 import GhostButton from '../input/ghost-button';

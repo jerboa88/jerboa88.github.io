@@ -3,7 +3,6 @@
 	------------------------
 */
 
-import React from 'react';
 import { LinkInterface, PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import LinkWrapper from './link-wrapper';

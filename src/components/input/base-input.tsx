@@ -4,7 +4,6 @@
 	----------------------------------------------------------------------------------
 */
 
-import React from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import {
@@ -19,7 +18,7 @@ import GhostAlert from '../ghost-alert';
 
 interface BaseInputInterface
 	extends PropsWithClassName,
-		PropsWithLayoutAnimations {
+	PropsWithLayoutAnimations {
 	labelClassName?: string;
 	name: string;
 	label?: string;

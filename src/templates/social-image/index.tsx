@@ -3,7 +3,6 @@
 	------------------------------------------------------------------
 */
 
-import React from 'react';
 import { PageProps } from 'gatsby';
 import { ImageMetadataProp } from '../../common/types';
 import HeroHeader from '../../components/layout/hero-header';

@@ -3,7 +3,6 @@
 	-------------------------
 */
 
-import React from 'react';
 import { PropsWithClassName } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
 

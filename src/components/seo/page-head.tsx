@@ -3,7 +3,6 @@
 	----------------------------------------------------
 */
 
-import React from 'react';
 import { PageMetadata, SocialImagesMetadataProp } from '../../common/types';
 import { getAbsoluteUrl, getMimeType } from '../../common/utilities';
 import { getSiteMetadata, getTheme } from '../../common/config-manager';

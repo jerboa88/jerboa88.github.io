@@ -3,7 +3,6 @@
 	------------------------
 */
 
-import React from 'react';
 import { RoleInterface } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
 import TimelineEntry from './timeline-entry';
