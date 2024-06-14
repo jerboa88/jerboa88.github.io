@@ -47,8 +47,8 @@ export default function TimelineEntry({ role }: Props) {
 						</div>
 					</div>
 					<ul className="list-[circle] m-4">
-						{role.tasks.map((task, index) => (
-							<li key={index} className="my-2">
+						{role.tasks.map((task) => (
+							<li key={task} className="my-2">
 								{task}
 							</li>
 						))}

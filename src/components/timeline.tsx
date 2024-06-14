@@ -24,7 +24,7 @@ export default function Timeline({ roles }: Props) {
 				);
 
 				return (
-					<li key={index}>
+					<li key={`${entry.startDate}-${entry.company}`}>
 						<hr {...hrStyles} />
 						<TimelineEntry role={entry} />
 						<hr {...hrStyles} />

@@ -33,9 +33,10 @@ export default class ResponseMapper {
 	// }
 
 	private static mapColorStringToHex(colorString: string) {
-		if (ResponseMapper.colorMap.hasOwnProperty(colorString)) {
+		if (Object.hasOwn(ResponseMapper.colorMap, colorString)) {
 			return ResponseMapper.colorMap[colorString as keyof typeof this.colorMap];
-		}if (/^[a-f0-9]{6}$/i.exec(colorString)) {
+		}
+		if (/^[a-f0-9]{6}$/i.exec(colorString)) {
 			return `#${colorString}`;
 		}
 
@@ -53,7 +54,7 @@ export default class ResponseMapper {
 				return propsFromLanguage;
 			}
 
-			if (ResponseMapper.langMap.hasOwnProperty(language.name)) {
+			if (Object.hasOwn(ResponseMapper.langMap, language.name)) {
 				propsFromLanguage.name =
 					ResponseMapper.langMap[language.name as keyof typeof this.langMap];
 			}
@@ -73,7 +74,7 @@ export default class ResponseMapper {
 		T extends Partial<ProjectInfoInterface>,
 		K extends keyof T,
 	>(obj: T, key: K): Required<T>[K] {
-		if (obj.hasOwnProperty(key)) {
+		if (Object.hasOwn(obj, key)) {
 			const property = obj[key];
 
 			if (property) {
@@ -81,7 +82,7 @@ export default class ResponseMapper {
 			}
 		}
 
-		const slug = (obj.hasOwnProperty('slug') && obj.slug) || 'Unknown';
+		const slug = (Object.hasOwn(obj, 'slug') && obj.slug) || 'Unknown';
 
 		throw new TypeError(
 			`[${slug}] Required property '${String(key)}' is missing from project info`,
@@ -92,7 +93,7 @@ export default class ResponseMapper {
 		T extends Partial<ProjectInfoInterface>,
 		K extends keyof T,
 	>(obj: T, key: K, fallbackValue: T[K]): Required<T>[K] {
-		if (obj.hasOwnProperty(key)) {
+		if (Object.hasOwn(obj, key)) {
 			const property = obj[key];
 
 			if (property) {
@@ -105,7 +106,7 @@ export default class ResponseMapper {
 			return fallbackValue;
 		}
 
-		const slug = (obj.hasOwnProperty('slug') && obj.slug) || 'Unknown';
+		const slug = (Object.hasOwn(obj, 'slug') && obj.slug) || 'Unknown';
 
 		throw new TypeError(
 			`[${slug}] Required property '${String(key)}' and fallback value are missing from project info`,
@@ -130,8 +131,14 @@ export default class ResponseMapper {
 			stargazers: ResponseMapper.useFallback(projectInfo, 'stargazers', 0),
 			updatedAt: ResponseMapper.assertExists(projectInfo, 'updatedAt'),
 			license: ResponseMapper.assertExists(projectInfo, 'license'),
-			languages: ResponseMapper.mapLanguages(ResponseMapper.assertExists(projectInfo, 'languages')),
-			name: ResponseMapper.useFallback(projectInfo, 'name', ResponseMapper.mapSlugToName(slug)),
+			languages: ResponseMapper.mapLanguages(
+				ResponseMapper.assertExists(projectInfo, 'languages'),
+			),
+			name: ResponseMapper.useFallback(
+				projectInfo,
+				'name',
+				ResponseMapper.mapSlugToName(slug),
+			),
 			longDesc: ResponseMapper.useFallback(
 				projectInfo,
 				'longDesc',
