@@ -24,6 +24,8 @@ dotenv.config({
 
 const config: GatsbyConfig = {
 	siteMetadata: SITE_METADATA,
+	// Enable the new JSX transform so that we can use JSX without importing React
+	jsxRuntime: 'automatic',
 	graphqlTypegen: {
 		typesOutputPath: 'src/common/gatsby-types.d.ts',
 	},
