@@ -31,7 +31,7 @@
 		"clean": "yarn gatsby clean",
 		"typecheck": "yarn tsc --noEmit",
 		"lint": "yarn biome lint --write",
-		"format": "yarn biome format --write; biome check --write"
+		"format": "yarn biome format --write"
 	},
 	"dependencies": {
 		"@botpoison/browser": "^0.1.30",
