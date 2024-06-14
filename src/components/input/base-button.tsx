@@ -4,10 +4,10 @@
 	-----------------------------------------------------------------------------------
 */
 
-import { AnimatePresence, motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ButtonInterface } from '../../common/types';
+import { AnimatePresence, motion } from 'framer-motion';
 import { FADE_IN_ANIMATION_PROPS } from '../../common/constants';
+import type { ButtonInterface } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import Tooltip from '../tooltip';
 

@@ -3,7 +3,7 @@
 	------------------------
 */
 
-import { LinkInterface, PropsWithClassName } from '../../common/types';
+import type { LinkInterface, PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import LinkWrapper from './link-wrapper';
 

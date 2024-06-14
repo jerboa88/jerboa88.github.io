@@ -3,8 +3,8 @@
 	----------------------------------------------------
 */
 
-import { PropsWithChildren } from 'react';
-import { PropsWithClassName } from '../../common/types';
+import type { PropsWithChildren } from 'react';
+import type { PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 
 interface Props extends PropsWithClassName, PropsWithChildren {

@@ -3,14 +3,14 @@
 	------------------------------------------
 */
 
-import { memo, useEffect, useState } from 'react';
-import { useReducedMotion } from 'framer-motion';
-import Particles, { initParticlesEngine } from '@tsparticles/react';
-import { IOptions, RecursivePartial } from '@tsparticles/engine';
 import { loadBasic } from '@tsparticles/basic';
+import type { IOptions, RecursivePartial } from '@tsparticles/engine';
+import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSquareShape } from '@tsparticles/shape-square';
-import { getClassNameProps } from '../../common/utilities';
+import { useReducedMotion } from 'framer-motion';
+import { memo, useEffect, useState } from 'react';
 import { getTheme } from '../../common/config-manager';
+import { getClassNameProps } from '../../common/utilities';
 
 // Constants
 

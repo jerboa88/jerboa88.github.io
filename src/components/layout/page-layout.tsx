@@ -3,13 +3,13 @@
 	--------------------------------------------------------------------------------
 */
 
-import { PropsWithChildren, StrictMode } from 'react';
 import { MotionConfig } from 'framer-motion';
-import { SectionInterface, PropsWithClassName } from '../../common/types';
+import { type PropsWithChildren, StrictMode } from 'react';
 import { SPRING_TRANSITION_PROPS } from '../../common/constants';
+import type { PropsWithClassName, SectionInterface } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
-import Header from './header';
 import Footer from './footer';
+import Header from './header';
 import ParticlesBackground from './particles-background';
 
 // Types

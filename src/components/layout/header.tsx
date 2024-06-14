@@ -4,13 +4,13 @@
 */
 
 import { motion } from 'framer-motion';
-import { SectionInterface } from '../../common/types';
+import { getSiteMetadata } from '../../common/config-manager';
 import { TITLE_LAYOUT_ID } from '../../common/constants';
+import type { SectionInterface } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
+import Divider from '../divider';
 import Tabs from '../tabs';
 import Heading from '../text/heading';
-import Divider from '../divider';
-import { getSiteMetadata } from '../../common/config-manager';
 
 // Types
 

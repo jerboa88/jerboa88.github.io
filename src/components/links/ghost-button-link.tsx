@@ -3,11 +3,11 @@
 	------------------------------------------------
 */
 
-import { ButtonInterface, LinkInterface } from '../../common/types';
-import LinkWrapper from './link-wrapper';
+import type { ButtonInterface, LinkInterface } from '../../common/types';
 import GhostButton from '../input/ghost-button';
+import LinkWrapper from './link-wrapper';
 
-interface Props extends ButtonInterface, LinkInterface { }
+interface Props extends ButtonInterface, LinkInterface {}
 
 export default function GhostButtonLink({
 	to,

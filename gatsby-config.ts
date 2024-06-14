@@ -3,16 +3,16 @@
 	-------------------------
 */
 
-import type { GatsbyConfig } from 'gatsby';
 import dotenv from 'dotenv';
-import * as tailwindConfig from './tailwind.config';
+import type { GatsbyConfig } from 'gatsby';
 import {
 	getSiteMetadata,
 	getSocialImageGenerationConfigDefaults,
 	getTheme,
 } from './src/common/config-manager';
-import { getAbsoluteUrl } from './src/common/utilities';
 import { SOCIAL_IMAGES_DIR } from './src/common/constants';
+import { getAbsoluteUrl } from './src/common/utilities';
+import * as tailwindConfig from './tailwind.config';
 
 const SITE_METADATA = getSiteMetadata();
 const DARK_THEME = getTheme('dark');

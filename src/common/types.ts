@@ -3,14 +3,14 @@
 	--------------------------------
 */
 
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { LayoutProps } from 'framer-motion';
-import {
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import type { LayoutProps } from 'framer-motion';
+import type {
 	DefaultOptions,
 	JobOptions,
 } from 'gatsby-plugin-component-to-image/lib/types';
-import { Context, RefObject } from 'react';
-import {
+import type { Context, RefObject } from 'react';
+import type {
 	FieldErrors,
 	UseFormRegister,
 	UseFormRegisterReturn,
@@ -170,10 +170,10 @@ export interface LinkInterface {
 }
 
 export enum TooltipPosition {
-	Left,
-	Right,
-	Top,
-	Bottom,
+	Left = 0,
+	Right = 1,
+	Top = 2,
+	Bottom = 3,
 }
 
 export interface ButtonInterface
@@ -192,12 +192,10 @@ export interface ButtonInterface
 	flip?: boolean;
 }
 
-export interface ButtonElementRenderFunction {
-	({
-		className,
-		tooltipPosition,
-	}: { className: string; tooltipPosition: TooltipPosition }): JSX.Element;
-}
+export type ButtonElementRenderFunction = ({
+	className,
+	tooltipPosition,
+}: { className: string; tooltipPosition: TooltipPosition }) => JSX.Element;
 
 // Possible options for input validation using react-hook-form
 export interface InputValidationOptions {
@@ -215,9 +213,9 @@ export interface InputOptions {
 	autoComplete?: React.InputHTMLAttributes<HTMLInputElement>['autoComplete'];
 }
 
-export interface InputElementRenderFunction {
-	(props: UseFormRegisterReturn<string>): JSX.Element;
-}
+export type InputElementRenderFunction = (
+	props: UseFormRegisterReturn<string>,
+) => JSX.Element;
 
 export interface InputInterface
 	extends PropsWithClassName,
@@ -232,10 +230,10 @@ export interface InputInterface
 }
 
 export enum AlertType {
-	Info,
-	Success,
-	Warning,
-	Error,
+	Info = 0,
+	Success = 1,
+	Warning = 2,
+	Error = 3,
 }
 
 export interface ProjectLanguageInterface {

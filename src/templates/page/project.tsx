@@ -3,19 +3,19 @@
 	--------------------------------------------------
 */
 
-import { useRef } from 'react';
 import type { HeadProps } from 'gatsby';
-import {
+import { useRef } from 'react';
+import { getSiteMetadata } from '../../common/config-manager';
+import type {
 	ProjectInfoInterface,
 	SocialImagesMetadataProp,
 } from '../../common/types';
-import PageLayout from '../../components/layout/page-layout';
-import PageHead from '../../components/seo/page-head';
-import Section from '../../components/layout/section';
-import { Article } from '../../components/text/article';
-import InlineLink from '../../components/links/inline-link';
 import { getAbsoluteUrl } from '../../common/utilities';
-import { getSiteMetadata } from '../../common/config-manager';
+import PageLayout from '../../components/layout/page-layout';
+import Section from '../../components/layout/section';
+import InlineLink from '../../components/links/inline-link';
+import PageHead from '../../components/seo/page-head';
+import { Article } from '../../components/text/article';
 
 // Types
 

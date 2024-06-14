@@ -3,8 +3,8 @@
 	--------------------------
 */
 
-import { PropsWithChildren } from 'react';
-import { PropsWithClassName, TooltipPosition } from '../common/types';
+import type { PropsWithChildren } from 'react';
+import { type PropsWithClassName, TooltipPosition } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
 
 // Types

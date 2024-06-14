@@ -3,7 +3,7 @@
 	-------------------------------------------
 */
 
-import { ButtonInterface } from '../../common/types';
+import type { ButtonInterface } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import BaseButton from './base-button';
 

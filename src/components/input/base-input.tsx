@@ -4,21 +4,21 @@
 	----------------------------------------------------------------------------------
 */
 
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { motion } from 'framer-motion';
+import type { FieldErrors, UseFormRegister } from 'react-hook-form';
 import {
-	PropsWithClassName,
-	PropsWithLayoutAnimations,
-	InputElementRenderFunction,
-	InputValidationOptions,
 	AlertType,
+	type InputElementRenderFunction,
+	type InputValidationOptions,
+	type PropsWithClassName,
+	type PropsWithLayoutAnimations,
 } from '../../common/types';
 import { getClassNameProps, getOrDefault } from '../../common/utilities';
 import GhostAlert from '../ghost-alert';
 
 interface BaseInputInterface
 	extends PropsWithClassName,
-	PropsWithLayoutAnimations {
+		PropsWithLayoutAnimations {
 	labelClassName?: string;
 	name: string;
 	label?: string;

@@ -3,9 +3,12 @@
 	----------------------------------------------------
 */
 
-import { PageMetadata, SocialImagesMetadataProp } from '../../common/types';
-import { getAbsoluteUrl, getMimeType } from '../../common/utilities';
 import { getSiteMetadata, getTheme } from '../../common/config-manager';
+import type {
+	PageMetadata,
+	SocialImagesMetadataProp,
+} from '../../common/types';
+import { getAbsoluteUrl, getMimeType } from '../../common/utilities';
 
 // Types
 

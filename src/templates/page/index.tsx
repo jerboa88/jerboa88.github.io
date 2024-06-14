@@ -3,31 +3,31 @@
 	------------------------------------------
 */
 
-import { useCallback, useRef } from 'react';
-import type { HeadProps } from 'gatsby';
-import { useInView } from 'framer-motion';
 import {
 	faAngleDown,
 	faArrowUpRightFromSquare,
 } from '@fortawesome/free-solid-svg-icons';
-import {
+import { useInView } from 'framer-motion';
+import type { HeadProps } from 'gatsby';
+import { useCallback, useRef } from 'react';
+import { getJobs, getSiteMetadata } from '../../common/config-manager';
+import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
+import type {
 	ButtonElementRenderFunction,
-	SocialImagesMetadataProp,
 	ProjectInfoInterface,
 	SectionInterface,
+	SocialImagesMetadataProp,
 } from '../../common/types';
-import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
 import { toKebabCase } from '../../common/utilities';
-import Section from '../../components/layout/section';
-import PageLayout from '../../components/layout/page-layout';
-import PageHead from '../../components/seo/page-head';
-import HeroHeader from '../../components/layout/hero-header';
-import { Article } from '../../components/text/article';
-import GhostButtonLink from '../../components/links/ghost-button-link';
 import ContactForm from '../../components/input/contact-form';
+import HeroHeader from '../../components/layout/hero-header';
+import PageLayout from '../../components/layout/page-layout';
+import Section from '../../components/layout/section';
+import GhostButtonLink from '../../components/links/ghost-button-link';
 import ProjectCardGallery from '../../components/project-card-gallery';
+import PageHead from '../../components/seo/page-head';
+import { Article } from '../../components/text/article';
 import Timeline from '../../components/timeline';
-import { getJobs, getSiteMetadata } from '../../common/config-manager';
 
 // Types
 

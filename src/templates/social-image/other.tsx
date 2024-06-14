@@ -3,17 +3,17 @@
 	---------------------------------------------------------------
 */
 
+import type { PageProps } from 'gatsby';
 import { useCallback } from 'react';
-import { PageProps } from 'gatsby';
-import {
+import type {
 	ButtonElementRenderFunction,
 	ImageMetadataProp,
 	PageMetadataProp,
 } from '../../common/types';
-import SocialImage from '../../components/seo/social-image';
-import { Article } from '../../components/text/article';
 import Section from '../../components/layout/section';
 import SignatureGhostButtonLink from '../../components/seo/signature-ghost-button';
+import SocialImage from '../../components/seo/social-image';
+import { Article } from '../../components/text/article';
 
 // Types
 

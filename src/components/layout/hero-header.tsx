@@ -4,9 +4,9 @@
 */
 
 import { motion } from 'framer-motion';
+import { getSiteMetadata } from '../../common/config-manager';
 import { TITLE_LAYOUT_ID } from '../../common/constants';
 import Heading from '../../components/text/heading';
-import { getSiteMetadata } from '../../common/config-manager';
 
 // Types
 

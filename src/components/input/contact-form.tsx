@@ -3,15 +3,16 @@
 	----------------------
 */
 
-import { useEffect, useState } from 'react';
-import { useForm, useFormState, SubmitHandler } from 'react-hook-form';
-import { LayoutGroup, motion } from 'framer-motion';
 import Botpoison from '@botpoison/browser';
 import { faCircleNotch, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { LayoutGroup, motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { type SubmitHandler, useForm, useFormState } from 'react-hook-form';
+import { getExternalServices } from '../../common/config-manager';
 import {
-	PropsWithClassName,
-	InputValidationOptions,
 	AlertType,
+	type InputValidationOptions,
+	type PropsWithClassName,
 	TooltipPosition,
 } from '../../common/types';
 import {
@@ -19,20 +20,19 @@ import {
 	getOrDefault,
 	getStatusCodeDescription,
 } from '../../common/utilities';
-import TextInput from './text-input';
-import MultilineTextInput from './multiline-text-input';
-import SolidButton from './solid-button';
 import GhostAlert from '../ghost-alert';
 import Checkbox from './checkbox';
-import { getExternalServices } from '../../common/config-manager';
+import MultilineTextInput from './multiline-text-input';
+import SolidButton from './solid-button';
+import TextInput from './text-input';
 
 // Types
 
 enum FormState {
-	Idle,
-	Busy,
-	Submitted,
-	Error,
+	Idle = 0,
+	Busy = 1,
+	Submitted = 2,
+	Error = 3,
 }
 
 // Allowed fields for the contact form
@@ -166,8 +166,7 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 	);
 
 	const [formState, setFormState] = useState<FormState>(FormState.Idle);
-	const [botpoisonSolution, setBotpoisonSolution] =
-		useState<Promise<string>>();
+	const [botpoisonSolution, setBotpoisonSolution] = useState<Promise<string>>();
 
 	// Options passed to React Hook Form for input validation
 	const validationOptions = getValidationOptions(formState);

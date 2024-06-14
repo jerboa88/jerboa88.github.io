@@ -3,11 +3,11 @@
 	-------------------------------
 */
 
-import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { TooltipPosition } from '../../common/types';
-import GhostButtonLink from '../links/ghost-button-link';
-import Divider from '../divider';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { getSiteMetadata } from '../../common/config-manager';
+import { TooltipPosition } from '../../common/types';
+import Divider from '../divider';
+import GhostButtonLink from '../links/ghost-button-link';
 
 // Constants
 

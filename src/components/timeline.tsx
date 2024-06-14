@@ -3,7 +3,7 @@
 	------------------------
 */
 
-import { RoleInterface } from '../common/types';
+import type { RoleInterface } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
 import TimelineEntry from './timeline-entry';
 

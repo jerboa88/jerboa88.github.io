@@ -4,7 +4,7 @@
 */
 
 import { JSDOM } from 'jsdom';
-import {
+import type {
 	PinnedRepoResponseInterface,
 	ProjectInfoInterface,
 	ProjectLanguageInterface,

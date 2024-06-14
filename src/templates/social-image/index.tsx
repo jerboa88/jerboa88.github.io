@@ -3,12 +3,12 @@
 	------------------------------------------------------------------
 */
 
-import { PageProps } from 'gatsby';
-import { ImageMetadataProp } from '../../common/types';
-import HeroHeader from '../../components/layout/hero-header';
-import SocialImage from '../../components/seo/social-image';
+import type { PageProps } from 'gatsby';
+import type { ImageMetadataProp } from '../../common/types';
 import GhostButton from '../../components/input/ghost-button';
+import HeroHeader from '../../components/layout/hero-header';
 import SignatureGhostButtonLink from '../../components/seo/signature-ghost-button';
+import SocialImage from '../../components/seo/social-image';
 
 interface PageContext {
 	pageContext: ImageMetadataProp;

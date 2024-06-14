@@ -4,7 +4,7 @@
 */
 
 import { getSiteMetadata } from './config-manager';
-import { PropsWithClassName } from './types';
+import type { PropsWithClassName } from './types';
 
 // Constants
 
@@ -96,11 +96,11 @@ export function doesDeviceSupportHover() {
 
 // Get a value from an object or return a default value if the key does not exist
 // If defaultValue is not provided, throw an error when the key is not in the object
-export function getOrDefault<
-	T extends object,
-	K extends keyof T,
-	D extends any,
->(obj: T, key: K | number | string | undefined, defaultValue?: D): T[K] | D {
+export function getOrDefault<T extends object, K extends keyof T, D>(
+	obj: T,
+	key: K | number | string | undefined,
+	defaultValue?: D,
+): T[K] | D {
 	if (key === undefined || !(key in obj)) {
 		if (defaultValue === undefined) {
 			throw new Error(

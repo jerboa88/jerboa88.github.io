@@ -3,7 +3,7 @@
 	-------------------------------------------------------------------
 */
 
-import {
+import type {
 	ProjectInfoInterface,
 	ProjectLanguageInterface,
 } from '../common/types';

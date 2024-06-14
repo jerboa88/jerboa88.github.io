@@ -3,15 +3,15 @@
 	-------------------------------------------------------
 */
 
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import {
-	ButtonElementRenderFunction,
-	PropsWithClassName,
+	type ButtonElementRenderFunction,
+	type PropsWithClassName,
 	TooltipPosition,
 } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
-import SectionHeading from '../text/section-heading';
 import Divider from '../divider';
+import SectionHeading from '../text/section-heading';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
 	title: string;
@@ -29,9 +29,9 @@ export default function SectionHeader({
 	);
 	const buttonElement = renderButton
 		? renderButton({
-			className: 'self-baseline',
-			tooltipPosition: TooltipPosition.Left,
-		})
+				className: 'self-baseline',
+				tooltipPosition: TooltipPosition.Left,
+			})
 		: undefined;
 
 	return (

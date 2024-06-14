@@ -3,17 +3,17 @@
 	-------------------------------------------------------------
 */
 
+import type { PageProps } from 'gatsby';
 import { useCallback } from 'react';
-import { PageProps } from 'gatsby';
-import {
+import type {
 	ButtonElementRenderFunction,
 	ImageMetadataProp,
 	ProjectInfoInterface,
 } from '../../common/types';
-import SocialImage from '../../components/seo/social-image';
-import ProjectCard from '../../components/project-card';
 import Section from '../../components/layout/section';
+import ProjectCard from '../../components/project-card';
 import SignatureGhostButtonLink from '../../components/seo/signature-ghost-button';
+import SocialImage from '../../components/seo/social-image';
 
 interface PageContext {
 	pageContext: ImageMetadataProp & {

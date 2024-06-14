@@ -3,12 +3,12 @@
 	-------------------------------------------------------------------------------------------------
 */
 
-import { PropsWithChildren } from 'react';
 import { Link } from 'gatsby';
-import { LinkInterface, PropsWithClassName } from '../../common/types';
+import type { PropsWithChildren } from 'react';
+import type { LinkInterface, PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 
-interface Props extends LinkInterface, PropsWithClassName, PropsWithChildren { }
+interface Props extends LinkInterface, PropsWithClassName, PropsWithChildren {}
 
 export default function LinkWrapper({
 	className = '',

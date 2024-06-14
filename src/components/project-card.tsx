@@ -3,16 +3,16 @@
 	------------------------------------------
 */
 
-import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { ProjectInfoInterface } from '../common/types';
-import { getClassNameProps } from '../common/utilities';
-import SubsectionHeading from './text/subsection-heading';
-import LinkWrapper from './links/link-wrapper';
-import GhostButton from './input/ghost-button';
-import Pill from './pill';
-import Card from './card';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { getProjectTypeColor } from '../common/config-manager';
+import type { ProjectInfoInterface } from '../common/types';
+import { getClassNameProps } from '../common/utilities';
+import Card from './card';
+import GhostButton from './input/ghost-button';
+import LinkWrapper from './links/link-wrapper';
+import Pill from './pill';
+import SubsectionHeading from './text/subsection-heading';
 
 // Types
 

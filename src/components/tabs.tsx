@@ -4,8 +4,8 @@
 */
 
 import { motion, useInView } from 'framer-motion';
-import { SectionInterface, TooltipPosition } from '../common/types';
 import { USE_IN_VIEW_OPTIONS } from '../common/constants';
+import { type SectionInterface, TooltipPosition } from '../common/types';
 import { getClassNameProps, toKebabCase } from '../common/utilities';
 import GhostButtonLink from './links/ghost-button-link';
 

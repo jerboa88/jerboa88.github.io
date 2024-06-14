@@ -3,8 +3,8 @@
 	------------
 */
 
-import { ForwardedRef, PropsWithChildren, forwardRef } from 'react';
-import {
+import { type ForwardedRef, type PropsWithChildren, forwardRef } from 'react';
+import type {
 	ButtonElementRenderFunction,
 	PropsWithClassName,
 } from '../../common/types';

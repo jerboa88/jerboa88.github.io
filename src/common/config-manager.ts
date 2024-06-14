@@ -3,6 +3,7 @@
 	----------------------------------------------
 */
 
+import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import type {
 	BgColor,
 	PageMetadata,
@@ -12,14 +13,13 @@ import type {
 	ThemeInterface,
 	Url,
 } from '../common/types';
-import siteMetadataConfig from '../config/site-metadata';
-import pageMetadataConfig from '../config/pages-metadata';
-import socialImagesGenerationConfig from '../config/social-images-generation';
+import colorMappingsConfig from '../config/color-mappings';
 import externalServicesConfig from '../config/external-services';
 import jobsConfig from '../config/jobs';
+import pageMetadataConfig from '../config/pages-metadata';
+import siteMetadataConfig from '../config/site-metadata';
+import socialImagesGenerationConfig from '../config/social-images-generation';
 import themesConfig from '../config/themes';
-import colorMappingsConfig from '../config/color-mappings';
-import { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import { getOrDefault } from './utilities';
 
 // Types

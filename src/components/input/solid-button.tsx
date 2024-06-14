@@ -3,10 +3,10 @@
 	-----------------------------------------
 */
 
-import { ButtonInterface } from '../../common/types';
+import type { ButtonInterface } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
-import BaseButton from './base-button';
 import Card from '../card';
+import BaseButton from './base-button';
 
 interface SolidButtonInterface extends ButtonInterface {
 	cardClassName?: string;

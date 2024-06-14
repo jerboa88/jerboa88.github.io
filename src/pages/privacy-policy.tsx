@@ -3,17 +3,20 @@
 	-------------------
 */
 
-import { useRef } from 'react';
 import type { HeadProps, PageProps } from 'gatsby';
 import { graphql } from 'gatsby';
-import { PageMetadataProp, SocialImagesMetadataProp } from '../common/types';
-import Section from '../components/layout/section';
-import PageLayout from '../components/layout/page-layout';
-import PageHead from '../components/seo/page-head';
-import SolidButtonLink from '../components/links/solid-button-link';
-import { Article } from '../components/text/article';
-import { getAbsoluteUrl } from '../common/utilities';
+import { useRef } from 'react';
 import { getSiteMetadata } from '../common/config-manager';
+import type {
+	PageMetadataProp,
+	SocialImagesMetadataProp,
+} from '../common/types';
+import { getAbsoluteUrl } from '../common/utilities';
+import PageLayout from '../components/layout/page-layout';
+import Section from '../components/layout/section';
+import SolidButtonLink from '../components/links/solid-button-link';
+import PageHead from '../components/seo/page-head';
+import { Article } from '../components/text/article';
 
 // Types
 

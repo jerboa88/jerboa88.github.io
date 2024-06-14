@@ -3,7 +3,7 @@
 	-----------
 */
 
-import { PropsWithClassName } from '../common/types';
+import type { PropsWithClassName } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
 
 interface Props extends PropsWithClassName {

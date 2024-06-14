@@ -3,15 +3,15 @@
 	-----------------------
 */
 
-import { PropsWithChildren } from 'react';
 import {
-	AnimationProps,
+	type AnimationProps,
 	motion,
 	useMotionTemplate,
 	useReducedMotion,
 	useSpring,
 	useTransform,
 } from 'framer-motion';
+import type { PropsWithChildren } from 'react';
 import { SPRING_TRANSITION_PROPS } from '../common/constants';
 import {
 	clamp,
@@ -63,11 +63,11 @@ function getMouseCoords(event: React.MouseEvent<HTMLDivElement>) {
 	return {
 		x:
 			(2 * MOUSE_XY_COORDS_MAX * (event.clientX - cardBoundingBox.left)) /
-			cardBoundingBox.width -
+				cardBoundingBox.width -
 			MOUSE_XY_COORDS_MAX,
 		y:
 			(2 * MOUSE_XY_COORDS_MAX * (event.clientY - cardBoundingBox.top)) /
-			cardBoundingBox.height -
+				cardBoundingBox.height -
 			MOUSE_XY_COORDS_MAX,
 	};
 }

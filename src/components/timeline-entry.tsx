@@ -3,15 +3,15 @@
 	-------------------------------------------
 */
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import { RoleInterface } from '../common/types';
-import { getClassNameProps } from '../common/utilities';
-import SubsectionHeading from './text/subsection-heading';
-import DateRange from './text/date-range';
-import Pill from './pill';
-import Card from './card';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getRoleTypeColor } from '../common/config-manager';
+import type { RoleInterface } from '../common/types';
+import { getClassNameProps } from '../common/utilities';
+import Card from './card';
+import Pill from './pill';
+import DateRange from './text/date-range';
+import SubsectionHeading from './text/subsection-heading';
 
 interface Props {
 	role: RoleInterface;
