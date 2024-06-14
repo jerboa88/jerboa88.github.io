@@ -29,7 +29,9 @@
 		"build": "yarn gatsby build",
 		"serve": "yarn gatsby serve -H 0.0.0.0",
 		"clean": "yarn gatsby clean",
-		"typecheck": "yarn tsc --noEmit"
+		"typecheck": "yarn tsc --noEmit",
+		"lint": "yarn biome lint --write",
+		"format": "yarn biome format --write; biome check --write"
 	},
 	"dependencies": {
 		"@botpoison/browser": "^0.1.30",
