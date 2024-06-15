@@ -16,18 +16,41 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true,
+			"all": true,
 			"correctness": {
 				"noUnusedImports": {
 					"level": "warn",
 					"fix": "none"
-				}
+				},
+				"noNodejsModules": "off"
+			},
+			"style": {
+				"noImplicitBoolean": "off"
 			}
 		}
 	},
 	"javascript": {
+		"jsxRuntime": "transparent",
 		"formatter": {
 			"quoteStyle": "single"
+		},
+		"globals": [
+			"Queries",
+			"React"
+		]
+	},
+	"overrides": [
+		{
+			"include": [
+				"404.tsx"
+			],
+			"linter": {
+				"rules": {
+					"style": {
+						"useFilenamingConvention": "off"
+					}
+				}
+			}
 		}
-	}
+	]
 }
