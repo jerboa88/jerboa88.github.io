@@ -40,14 +40,12 @@ const RAW_RUNTIME_STATE =
           ["@tsparticles/engine", "npm:3.3.0"],\
           ["@tsparticles/react", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.0.0"],\
           ["@tsparticles/shape-square", "npm:3.3.0"],\
-          ["@types/dompurify", "npm:3.0.5"],\
           ["@types/jsdom", "npm:21.1.6"],\
           ["@types/node", "npm:20.12.10"],\
           ["@types/react", "npm:18.3.1"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["autoprefixer", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:10.4.19"],\
           ["daisyui", "npm:4.10.5"],\
-          ["dompurify", "npm:3.1.2"],\
           ["dotenv", "npm:16.4.5"],\
           ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.1.8"],\
           ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.4"],\
@@ -64,6 +62,7 @@ const RAW_RUNTIME_STATE =
           ["gatsby-source-graphql", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-transformer-remark", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
           ["gatsby-transformer-sharp", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
+          ["isomorphic-dompurify", "npm:2.12.0"],\
           ["jsdom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:24.0.0"],\
           ["postcss", "npm:8.4.38"],\
           ["react", "npm:18.3.1"],\
@@ -9957,10 +9956,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["dompurify", [\
-      ["npm:3.1.2", {\
-        "packageLocation": "./.yarn/cache/dompurify-npm-3.1.2-c70fe59d46-9d5f4464d6.zip/node_modules/dompurify/",\
+      ["npm:3.1.5", {\
+        "packageLocation": "./.yarn/cache/dompurify-npm-3.1.5-f168088e8f-4ea935df48.zip/node_modules/dompurify/",\
         "packageDependencies": [\
-          ["dompurify", "npm:3.1.2"]\
+          ["dompurify", "npm:3.1.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -14721,6 +14720,18 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["isomorphic-dompurify", [\
+      ["npm:2.12.0", {\
+        "packageLocation": "./.yarn/cache/isomorphic-dompurify-npm-2.12.0-980d22c154-eae98e5148.zip/node_modules/isomorphic-dompurify/",\
+        "packageDependencies": [\
+          ["isomorphic-dompurify", "npm:2.12.0"],\
+          ["@types/dompurify", "npm:3.0.5"],\
+          ["dompurify", "npm:3.1.5"],\
+          ["jsdom", "virtual:980d22c154c3a9d380c0b2ba02e33929a0396cad637d2c4c209770e3a878fbabd307c4bc5fc289823881c51a1a7bfc5cffaa2f5e1c3ff1d527e7288a852ecc2e#npm:24.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["iterator.prototype", [\
       ["npm:1.1.2", {\
         "packageLocation": "./.yarn/cache/iterator.prototype-npm-1.1.2-009f234a21-b5013967ad.zip/node_modules/iterator.prototype/",\
@@ -14804,14 +14815,12 @@ const RAW_RUNTIME_STATE =
           ["@tsparticles/engine", "npm:3.3.0"],\
           ["@tsparticles/react", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.0.0"],\
           ["@tsparticles/shape-square", "npm:3.3.0"],\
-          ["@types/dompurify", "npm:3.0.5"],\
           ["@types/jsdom", "npm:21.1.6"],\
           ["@types/node", "npm:20.12.10"],\
           ["@types/react", "npm:18.3.1"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["autoprefixer", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:10.4.19"],\
           ["daisyui", "npm:4.10.5"],\
-          ["dompurify", "npm:3.1.2"],\
           ["dotenv", "npm:16.4.5"],\
           ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.1.8"],\
           ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.4"],\
@@ -14828,6 +14837,7 @@ const RAW_RUNTIME_STATE =
           ["gatsby-source-graphql", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-transformer-remark", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
           ["gatsby-transformer-sharp", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
+          ["isomorphic-dompurify", "npm:2.12.0"],\
           ["jsdom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:24.0.0"],\
           ["postcss", "npm:8.4.38"],\
           ["react", "npm:18.3.1"],\
@@ -14900,6 +14910,13 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
+      ["npm:24.1.0", {\
+        "packageLocation": "./.yarn/cache/jsdom-npm-24.1.0-31752dcdec-0821daf73e.zip/node_modules/jsdom/",\
+        "packageDependencies": [\
+          ["jsdom", "npm:24.1.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
       ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:24.0.0", {\
         "packageLocation": "./.yarn/__virtual__/jsdom-virtual-18462305dc/0/cache/jsdom-npm-24.0.0-0398765e22-75e9cc0256.zip/node_modules/jsdom/",\
         "packageDependencies": [\
@@ -14926,6 +14943,40 @@ const RAW_RUNTIME_STATE =
           ["whatwg-mimetype", "npm:4.0.0"],\
           ["whatwg-url", "npm:14.0.0"],\
           ["ws", "virtual:18462305dc592a8178711de14581aaa08eca24fd42384da3e985109eeb17b72c61a02c336d13aa87ceacdb22e225aec79c3e854d9e9d0defeee749fe6f02366e#npm:8.16.0"],\
+          ["xml-name-validator", "npm:5.0.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/canvas",\
+          "canvas"\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["virtual:980d22c154c3a9d380c0b2ba02e33929a0396cad637d2c4c209770e3a878fbabd307c4bc5fc289823881c51a1a7bfc5cffaa2f5e1c3ff1d527e7288a852ecc2e#npm:24.1.0", {\
+        "packageLocation": "./.yarn/__virtual__/jsdom-virtual-def5c340cc/0/cache/jsdom-npm-24.1.0-31752dcdec-0821daf73e.zip/node_modules/jsdom/",\
+        "packageDependencies": [\
+          ["jsdom", "virtual:980d22c154c3a9d380c0b2ba02e33929a0396cad637d2c4c209770e3a878fbabd307c4bc5fc289823881c51a1a7bfc5cffaa2f5e1c3ff1d527e7288a852ecc2e#npm:24.1.0"],\
+          ["@types/canvas", null],\
+          ["canvas", null],\
+          ["cssstyle", "npm:4.0.1"],\
+          ["data-urls", "npm:5.0.0"],\
+          ["decimal.js", "npm:10.4.3"],\
+          ["form-data", "npm:4.0.0"],\
+          ["html-encoding-sniffer", "npm:4.0.0"],\
+          ["http-proxy-agent", "npm:7.0.2"],\
+          ["https-proxy-agent", "npm:7.0.4"],\
+          ["is-potential-custom-element-name", "npm:1.0.1"],\
+          ["nwsapi", "npm:2.2.10"],\
+          ["parse5", "npm:7.1.2"],\
+          ["rrweb-cssom", "npm:0.7.1"],\
+          ["saxes", "npm:6.0.0"],\
+          ["symbol-tree", "npm:3.2.4"],\
+          ["tough-cookie", "npm:4.1.4"],\
+          ["w3c-xmlserializer", "npm:5.0.0"],\
+          ["webidl-conversions", "npm:7.0.0"],\
+          ["whatwg-encoding", "npm:3.1.1"],\
+          ["whatwg-mimetype", "npm:4.0.0"],\
+          ["whatwg-url", "npm:14.0.0"],\
+          ["ws", "virtual:def5c340cc6e9b4b989ea8670b9daa2cbeb37f47e522b372f44fed6d527f55f45ab7cacde13672765f38e017b45d28a9f3ade39e88bd78f0bb5fcf0febb48ade#npm:8.17.0"],\
           ["xml-name-validator", "npm:5.0.0"]\
         ],\
         "packagePeers": [\
@@ -16779,6 +16830,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["nwsapi", [\
+      ["npm:2.2.10", {\
+        "packageLocation": "./.yarn/cache/nwsapi-npm-2.2.10-d9c9a3f5f1-b310e9dd08.zip/node_modules/nwsapi/",\
+        "packageDependencies": [\
+          ["nwsapi", "npm:2.2.10"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:2.2.7", {\
         "packageLocation": "./.yarn/cache/nwsapi-npm-2.2.7-3bed340fab-22c002080f.zip/node_modules/nwsapi/",\
         "packageDependencies": [\
@@ -18778,7 +18836,7 @@ const RAW_RUNTIME_STATE =
           ["chromium-bidi", "virtual:b08b96c9dc011589359e3d36e7abf3b897fdf5b89922108b9b7ea9cbff89c0a0f8d6aa7d820b61886e6be1e8a140cde299777053a34415d86527ce05fb66672d#npm:0.5.19"],\
           ["debug", "virtual:4b12ba5111caf7e8338099bdbc7cb046a9f8e079a44e74d0c03dca469876e3071ebbe671c5e90ae6b78ae33e22c205fa5ed32169a4aabd1404b13c56d09986e1#npm:4.3.4"],\
           ["devtools-protocol", "npm:0.0.1286932"],\
-          ["ws", "virtual:b08b96c9dc011589359e3d36e7abf3b897fdf5b89922108b9b7ea9cbff89c0a0f8d6aa7d820b61886e6be1e8a140cde299777053a34415d86527ce05fb66672d#npm:8.17.0"]\
+          ["ws", "virtual:def5c340cc6e9b4b989ea8670b9daa2cbeb37f47e522b372f44fed6d527f55f45ab7cacde13672765f38e017b45d28a9f3ade39e88bd78f0bb5fcf0febb48ade#npm:8.17.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -19668,6 +19726,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/rrweb-cssom-npm-0.6.0-04bbb1169b-5411836a4a.zip/node_modules/rrweb-cssom/",\
         "packageDependencies": [\
           ["rrweb-cssom", "npm:0.6.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:0.7.1", {\
+        "packageLocation": "./.yarn/cache/rrweb-cssom-npm-0.7.1-fbf1786bb7-e80cf25c22.zip/node_modules/rrweb-cssom/",\
+        "packageDependencies": [\
+          ["rrweb-cssom", "npm:0.7.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -21320,6 +21385,17 @@ const RAW_RUNTIME_STATE =
           ["url-parse", "npm:1.5.10"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:4.1.4", {\
+        "packageLocation": "./.yarn/cache/tough-cookie-npm-4.1.4-8293cc8bd5-75663f4e2c.zip/node_modules/tough-cookie/",\
+        "packageDependencies": [\
+          ["tough-cookie", "npm:4.1.4"],\
+          ["psl", "npm:1.9.0"],\
+          ["punycode", "npm:2.3.1"],\
+          ["universalify", "npm:0.2.0"],\
+          ["url-parse", "npm:1.5.10"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["tr46", [\
@@ -22809,10 +22885,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["virtual:b08b96c9dc011589359e3d36e7abf3b897fdf5b89922108b9b7ea9cbff89c0a0f8d6aa7d820b61886e6be1e8a140cde299777053a34415d86527ce05fb66672d#npm:8.17.0", {\
-        "packageLocation": "./.yarn/__virtual__/ws-virtual-b0be5da839/0/cache/ws-npm-8.17.0-05fb441faf-5e1dcb0ae7.zip/node_modules/ws/",\
+      ["virtual:def5c340cc6e9b4b989ea8670b9daa2cbeb37f47e522b372f44fed6d527f55f45ab7cacde13672765f38e017b45d28a9f3ade39e88bd78f0bb5fcf0febb48ade#npm:8.17.0", {\
+        "packageLocation": "./.yarn/__virtual__/ws-virtual-9674a28cca/0/cache/ws-npm-8.17.0-05fb441faf-5e1dcb0ae7.zip/node_modules/ws/",\
         "packageDependencies": [\
-          ["ws", "virtual:b08b96c9dc011589359e3d36e7abf3b897fdf5b89922108b9b7ea9cbff89c0a0f8d6aa7d820b61886e6be1e8a140cde299777053a34415d86527ce05fb66672d#npm:8.17.0"],\
+          ["ws", "virtual:def5c340cc6e9b4b989ea8670b9daa2cbeb37f47e522b372f44fed6d527f55f45ab7cacde13672765f38e017b45d28a9f3ade39e88bd78f0bb5fcf0febb48ade#npm:8.17.0"],\
           ["@types/bufferutil", null],\
           ["@types/utf-8-validate", null],\
           ["bufferutil", null],\
