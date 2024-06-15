@@ -51,6 +51,18 @@
 					}
 				}
 			}
+		},
+		{
+			"include": [
+				"card.tsx"
+			],
+			"linter": {
+				"rules": {
+					"style": {
+						"useNamingConvention": "off"
+					}
+				}
+			}
 		}
 	]
 }
