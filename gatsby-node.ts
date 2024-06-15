@@ -1,4 +1,4 @@
-import assert from 'node:assert';
+import assert from 'node:assert/strict';
 import { join, resolve } from 'node:path';
 import type { Actions, CreatePagesArgs, GatsbyNode, Reporter } from 'gatsby';
 import { createImage } from 'gatsby-plugin-component-to-image';
@@ -23,16 +23,16 @@ import { parseResponse } from './src/node/response-parser';
 // Constants
 
 const INDEX_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'index.tsx');
-const PROJECT_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'project.tsx');
+// const PROJECT_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'project.tsx');
 
 const INDEX_OG_IMAGE_TEMPLATE = resolve(
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 	'index.tsx',
 );
-const PROJECT_OG_IMAGE_TEMPLATE = resolve(
-	SOCIAL_IMAGE_TEMPLATES_DIR,
-	'project.tsx',
-);
+// const PROJECT_OG_IMAGE_TEMPLATE = resolve(
+// 	SOCIAL_IMAGE_TEMPLATES_DIR,
+// 	'project.tsx',
+// );
 const OTHER_OG_IMAGE_TEMPLATE = resolve(
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 	'other.tsx',

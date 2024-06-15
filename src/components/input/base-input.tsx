@@ -16,9 +16,7 @@ import {
 import { getClassNameProps, getOrDefault } from '../../common/utilities';
 import GhostAlert from '../ghost-alert';
 
-interface BaseInput
-	extends PropsWithClassName,
-		PropsWithLayoutAnimations {
+interface BaseInput extends PropsWithClassName, PropsWithLayoutAnimations {
 	labelClassName?: string;
 	name: string;
 	label?: string;

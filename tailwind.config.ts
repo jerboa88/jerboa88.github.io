@@ -20,6 +20,7 @@ module.exports = {
 			],
 		},
 		transitionDuration: {
+			// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by Tailwind CSS
 			DEFAULT: '200ms',
 		},
 		extend: {

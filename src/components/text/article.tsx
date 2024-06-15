@@ -3,7 +3,7 @@
 	------------------------------------------
 */
 
-import DOMPurify from 'isomorphic-dompurify';
+import domPurify from 'isomorphic-dompurify';
 import type { PropsWithChildren } from 'react';
 import type { PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
@@ -24,15 +24,11 @@ export function Article({ className = '', children, html }: Props) {
 		return (
 			<article
 				// biome-ignore lint/security/noDangerouslySetInnerHtml: HTML is not user provided and is sanitized using DOMPurify
-				dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html)}}
+				dangerouslySetInnerHTML={{ __html: domPurify.sanitize(html) }}
 				{...classNameProps}
 			/>
 		);
 	}
 
-	return (
-		<article {...classNameProps}>
-			{children}
-		</article>
-	);
+	return <article {...classNameProps}>{children}</article>;
 }

@@ -6,10 +6,7 @@
 import type { HeadProps } from 'gatsby';
 import { useRef } from 'react';
 import { getSiteMetadata } from '../../common/config-manager';
-import type {
-	ProjectInfo,
-	SocialImagesMetadataProp,
-} from '../../common/types';
+import type { ProjectInfo, SocialImagesMetadataProp } from '../../common/types';
 import { getAbsoluteUrl } from '../../common/utilities';
 import PageLayout from '../../components/layout/page-layout';
 import Section from '../../components/layout/section';

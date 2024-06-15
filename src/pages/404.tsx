@@ -57,11 +57,14 @@ export default function NotFoundPage({
 						<pre
 							role="img"
 							aria-label="ASCII Sad Cat"
-							aria-description="ASCII art of a sad cat, sitting down"
+							aria-describedby="ascii-sad-cat-description"
 							className="leading-normal text-left"
 						>
 							{sadCat}
 						</pre>
+						<span id="ascii-sad-cat-description" hidden>
+							ASCII art of a sad cat, sitting down
+						</span>
 					</figure>
 					<SolidButtonLink text="Home" to="/" isInternal />
 				</div>

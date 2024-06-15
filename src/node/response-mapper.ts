@@ -16,8 +16,8 @@ const COLOR_MAP = {
 } as const;
 const COLOR_DEFAULT = COLOR_MAP.gray;
 const LANGUAGE_MAP = {
-	JavaScript: 'JS',
-	TypeScript: 'TS',
+	javascript: 'JS',
+	typescript: 'TS',
 } as const;
 const TEXT_DEFAULT = 'Unknown' as const;
 
@@ -39,13 +39,13 @@ function mapLanguages(languages: ProjectLanguage[]) {
 			color: language.color || COLOR_DEFAULT,
 		};
 
-		if (!language.name || !language.color) {
+		if (!(language.name && language.color)) {
 			return propsFromLanguage;
 		}
 
 		if (Object.hasOwn(LANGUAGE_MAP, language.name)) {
 			propsFromLanguage.name =
-				LANGUAGE_MAP[language.name as keyof typeof LANGUAGE_MAP];
+				LANGUAGE_MAP[language.name.toLowerCase() as keyof typeof LANGUAGE_MAP];
 		}
 
 		return propsFromLanguage;

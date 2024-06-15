@@ -32,4 +32,5 @@ export default function IndexSocialImageTemplate({
 	);
 }
 
+// biome-ignore lint/performance/noBarrelFile: We need to export the Head component for Gatsby to recognize it
 export { default as Head } from '../../components/seo/social-image-head';

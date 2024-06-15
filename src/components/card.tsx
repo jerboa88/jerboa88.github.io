@@ -155,7 +155,7 @@ export default function Card({
 		mouseZCoords.set(MOUSE_Z_COORDS_MIN);
 	};
 
-	if (!disabled && !shouldReduceMotion && doesDeviceSupportHover()) {
+	if (!(disabled || shouldReduceMotion) && doesDeviceSupportHover()) {
 		// Update the mouse position when the mouse moves within the card
 		handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
 			const { x, y } = getMouseCoords(event);

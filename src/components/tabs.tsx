@@ -17,6 +17,7 @@ interface Props {
 export default function Tabs({ sections, hideIndicator = false }: Props) {
 	// Map is used here because we need to call the same number of hooks every time. Otherwise, React will complain
 	const sectionInViewHooks = sections.map((section) =>
+		// biome-ignore lint/correctness/useHookAtTopLevel: We need a loop to create the right number of hooks. Array order should be consistent
 		useInView(section.ref, USE_IN_VIEW_OPTIONS),
 	);
 	const currentSectionIndex = hideIndicator

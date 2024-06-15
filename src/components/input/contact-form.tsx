@@ -192,9 +192,7 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 		console.error(`Something went wrong during form submission. ${errorMsg}`);
 	};
 
-	const onSubmit: SubmitHandler<ContactFormFields> = async (
-		formData,
-	) => {
+	const onSubmit: SubmitHandler<ContactFormFields> = async (formData) => {
 		setFormState(FormState.Busy);
 
 		console.debug('Waiting for Botpoison solution...');
@@ -209,8 +207,8 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 		fetch(EXTERNAL_SERVICES.contactFormPostUrl, {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
+				'content-type': 'application/json',
+				accept: 'application/json',
 			},
 			body: requestBody,
 		})
