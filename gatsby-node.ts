@@ -246,15 +246,16 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 			parseResponse(responseData as PinnedReposResponseInterface),
 		);
 
+		// TODO: Renable this when project pages are implemented
 		// Create project pages
-		createPage({
-			path: join(PROJECTS_DIR, projectInfo.slug) as Path,
-			component: PROJECT_PAGE_TEMPLATE,
-			socialImageComponent: PROJECT_OG_IMAGE_TEMPLATE,
-			context: {
-				repo: projectInfo,
-			},
-		});
+		// createPage({
+		// 	path: join(PROJECTS_DIR, projectInfo.slug) as Path,
+		// 	component: PROJECT_PAGE_TEMPLATE,
+		// 	socialImageComponent: PROJECT_OG_IMAGE_TEMPLATE,
+		// 	context: {
+		// 		repo: projectInfo,
+		// 	},
+		// });
 
 		return projectInfo;
 	});
