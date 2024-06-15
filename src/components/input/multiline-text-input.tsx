@@ -42,7 +42,7 @@ export default function MultilineTextInput({
 		((registerObj) => (
 			<textarea {...{ ...classNameProps, ...registerObj, ...inputOptions }} />
 		)) as InputElementRenderFunction,
-		[classNameProps, inputOptions],
+		[],
 	);
 
 	return <BaseInput {...{ renderInput, name, errors, ...remainingProps }} />;

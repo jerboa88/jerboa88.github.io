@@ -36,7 +36,7 @@ export default function Checkbox({
 				{...{ ...classNameProps, ...registerObj, ...inputOptions }}
 			/>
 		)) as InputElementRenderFunction,
-		[classNameProps, inputOptions],
+		[],
 	);
 
 	return <BaseInput {...{ renderInput, name, errors, ...remainingProps }} />;
