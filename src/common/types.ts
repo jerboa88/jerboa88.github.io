@@ -39,13 +39,13 @@ export type Path = `/${string}`;
 export type Url = `https://${string}`;
 
 // Raw external services config
-export interface ExternalServicesConfigInterface {
+export interface ExternalServicesConfig {
 	botpoisonPublicKey: `pk_${string}`;
 	contactFormPostUrl: Url;
 }
 
 // Raw site metadata config
-export interface SiteMetadataConfigInterface {
+export interface SiteMetadataConfig {
 	iconPath: string;
 	siteUrl: Url;
 	sourceUrl: Url;
@@ -83,7 +83,7 @@ export interface PageMetadataProp {
 }
 
 // Raw pages metadata config
-export interface PagesMetadataConfigInterface {
+export interface PagesMetadataConfig {
 	[key: Path]: PageMetadata;
 }
 
@@ -114,7 +114,7 @@ export interface ImageMetadataProp {
 }
 
 // Theme object used to style the site
-export interface ThemeInterface {
+export interface Theme {
 	accent: string;
 	'base-100': string;
 	'base-200': string;
@@ -129,13 +129,13 @@ export interface ThemeInterface {
 }
 
 // Raw themes config used to generate theme objects
-export interface ThemesConfigInterface {
-	light: ThemeInterface;
-	dark: ThemeInterface;
+export interface ThemesConfig {
+	light: Theme;
+	dark: Theme;
 }
 
 // Color mappings for project types
-export interface ProjectTypeColorMappingsInterface {
+export interface ProjectTypeColorMappings {
 	'android app': BgColor;
 	extension: BgColor;
 	'cli app': BgColor;
@@ -149,23 +149,23 @@ export interface ProjectTypeColorMappingsInterface {
 }
 
 // Color mappings for role types
-export interface RoleTypeColorMappingsInterface {
+export interface RoleTypeColorMappings {
 	internship: BgColor;
 	'summer job': BgColor;
 }
 
 // Raw color mappings config used to generate color mappings
-export interface ColorMappingsConfigInterface {
-	projectType: ProjectTypeColorMappingsInterface;
-	roleType: RoleTypeColorMappingsInterface;
+export interface ColorMappingsConfig {
+	projectType: ProjectTypeColorMappings;
+	roleType: RoleTypeColorMappings;
 }
 
-export interface SectionInterface {
+export interface PageSection {
 	title: string;
 	ref: RefObject<HTMLElement>;
 }
 
-export interface LinkInterface {
+export interface Link {
 	to: string;
 	isInternal?: boolean;
 	rel?: string;
@@ -178,9 +178,7 @@ export enum TooltipPosition {
 	Bottom = 3,
 }
 
-export interface ButtonInterface
-	extends PropsWithClassName,
-		PropsWithLayoutAnimations {
+export interface Button extends PropsWithClassName, PropsWithLayoutAnimations {
 	iconClassName?: string;
 	textClassName?: string;
 	tooltipClassName?: string;
@@ -219,9 +217,7 @@ export type InputElementRenderFunction = (
 	props: UseFormRegisterReturn<string>,
 ) => JSX.Element;
 
-export interface InputInterface
-	extends PropsWithClassName,
-		PropsWithLayoutAnimations {
+export interface Input extends PropsWithClassName, PropsWithLayoutAnimations {
 	labelClassName?: string;
 	inputClassName?: string;
 	name: string;
@@ -238,12 +234,12 @@ export enum AlertType {
 	Error = 3,
 }
 
-export interface ProjectLanguageInterface {
+export interface ProjectLanguage {
 	name: string;
 	color: string;
 }
 
-export interface ProjectInfoInterface {
+export interface ProjectInfo {
 	slug: string;
 	shortDesc: string;
 	homepageUrl: Url;
@@ -253,7 +249,7 @@ export interface ProjectInfoInterface {
 	updatedAt: string;
 	license: string;
 	licenseUrl: Url;
-	languages: ProjectLanguageInterface[];
+	languages: ProjectLanguage[];
 	name: string;
 	longDesc: string;
 	typeName: string;
@@ -261,7 +257,7 @@ export interface ProjectInfoInterface {
 }
 
 // Raw role config
-export interface RoleConfigInterface {
+export interface RoleConfig {
 	type: 'internship' | 'summer job';
 	title: string;
 	company: string;
@@ -272,7 +268,7 @@ export interface RoleConfigInterface {
 }
 
 // Role object used to represent jobs and volunteer positions
-export interface RoleInterface {
+export interface Role {
 	type: 'internship' | 'summer job';
 	title: string;
 	company: string;
@@ -282,7 +278,7 @@ export interface RoleInterface {
 	tasks: string[];
 }
 
-export type PinnedReposResponseInterface = NonNullable<
+export type PinnedReposResponse = NonNullable<
 	NonNullable<
 		NonNullable<Queries.PinnedReposQuery['github']>['user']
 	>['pinnedItems']['nodes']
@@ -302,7 +298,7 @@ export type ReadmeResponse = NonNullable<
 		: never
 	: never;
 
-export type ToggleContextInterface = Context<{
+export type ToggleContext = Context<{
 	isEnabled: boolean;
 	toggle: () => void;
 }>;

@@ -6,7 +6,7 @@
 import { MotionConfig } from 'framer-motion';
 import { type PropsWithChildren, StrictMode } from 'react';
 import { SPRING_TRANSITION_PROPS } from '../../common/constants';
-import type { PropsWithClassName, SectionInterface } from '../../common/types';
+import type { PageSection, PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import Footer from './footer';
 import Header from './header';
@@ -16,7 +16,7 @@ import ParticlesBackground from './particles-background';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
 	expandTitle?: boolean;
-	sections?: SectionInterface[];
+	sections?: PageSection[];
 }
 
 // Constants

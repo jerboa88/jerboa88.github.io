@@ -3,10 +3,7 @@
 	-------------------------------------------------------------------
 */
 
-import type {
-	ProjectInfoInterface,
-	ProjectLanguageInterface,
-} from '../common/types';
+import type { ProjectInfo, ProjectLanguage } from '../common/types';
 
 const COLOR_MAP = {
 	red: '#f44336',
@@ -35,7 +32,7 @@ function mapColorStringToHex(colorString: string) {
 	return COLOR_DEFAULT;
 }
 
-function mapLanguages(languages: ProjectLanguageInterface[]) {
+function mapLanguages(languages: ProjectLanguage[]) {
 	return languages.map((language) => {
 		const propsFromLanguage = {
 			name: language.name || TEXT_DEFAULT,
@@ -62,10 +59,10 @@ function mapSlugToName(slug: string) {
 		.join(' ');
 }
 
-function assertExists<
-	T extends Partial<ProjectInfoInterface>,
-	K extends keyof T,
->(obj: T, key: K): Required<T>[K] {
+function assertExists<T extends Partial<ProjectInfo>, K extends keyof T>(
+	obj: T,
+	key: K,
+): Required<T>[K] {
 	if (Object.hasOwn(obj, key)) {
 		const property = obj[key];
 
@@ -81,10 +78,11 @@ function assertExists<
 	);
 }
 
-function useFallback<
-	T extends Partial<ProjectInfoInterface>,
-	K extends keyof T,
->(obj: T, key: K, fallbackValue: T[K]): Required<T>[K] {
+function useFallback<T extends Partial<ProjectInfo>, K extends keyof T>(
+	obj: T,
+	key: K,
+	fallbackValue: T[K],
+): Required<T>[K] {
 	if (Object.hasOwn(obj, key)) {
 		const property = obj[key];
 
@@ -105,9 +103,7 @@ function useFallback<
 	);
 }
 
-export function mapResponse(
-	projectInfo: Partial<ProjectInfoInterface>,
-): ProjectInfoInterface {
+export function mapResponse(projectInfo: Partial<ProjectInfo>): ProjectInfo {
 	const slug = assertExists(projectInfo, 'slug');
 
 	return {

@@ -16,7 +16,7 @@ import {
 import { getClassNameProps, getOrDefault } from '../../common/utilities';
 import GhostAlert from '../ghost-alert';
 
-interface BaseInputInterface
+interface BaseInput
 	extends PropsWithClassName,
 		PropsWithLayoutAnimations {
 	labelClassName?: string;
@@ -39,7 +39,7 @@ export default function BaseInput({
 	validationOptions,
 	layout,
 	layoutRoot,
-}: BaseInputInterface) {
+}: BaseInput) {
 	const labelClassNameProps = getClassNameProps('z-20 form-control', className);
 	const spanClassNameProps = getClassNameProps(
 		'justify-start label label-text',

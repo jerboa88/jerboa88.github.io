@@ -5,12 +5,12 @@
 
 import { motion, useInView } from 'framer-motion';
 import { USE_IN_VIEW_OPTIONS } from '../common/constants';
-import { type SectionInterface, TooltipPosition } from '../common/types';
+import { type PageSection, TooltipPosition } from '../common/types';
 import { getClassNameProps, toKebabCase } from '../common/utilities';
 import GhostButtonLink from './links/ghost-button-link';
 
 interface Props {
-	sections: SectionInterface[];
+	sections: PageSection[];
 	hideIndicator?: boolean;
 }
 

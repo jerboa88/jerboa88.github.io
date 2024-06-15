@@ -8,7 +8,7 @@ import { useCallback } from 'react';
 import type {
 	ButtonElementRenderFunction,
 	ImageMetadataProp,
-	ProjectInfoInterface,
+	ProjectInfo,
 } from '../../common/types';
 import Section from '../../components/layout/section';
 import ProjectCard from '../../components/project-card';
@@ -17,7 +17,7 @@ import SocialImage from '../../components/seo/social-image';
 
 interface PageContext {
 	pageContext: ImageMetadataProp & {
-		repo: ProjectInfoInterface;
+		repo: ProjectInfo;
 	};
 }
 

@@ -8,13 +8,12 @@ import {
 } from './src/common/config-manager';
 import {
 	PAGE_TEMPLATES_DIR,
-	PROJECTS_DIR,
 	SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR,
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 } from './src/common/constants';
 import type {
 	Path,
-	PinnedReposResponseInterface,
+	PinnedReposResponse,
 	SocialImageTypes,
 } from './src/common/types';
 import { removeTrailingSlash } from './src/common/utilities';
@@ -243,7 +242,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 		assertResponseDataIsNonEmpty(responseData);
 
 		const projectInfo = mapResponse(
-			parseResponse(responseData as PinnedReposResponseInterface),
+			parseResponse(responseData as PinnedReposResponse),
 		);
 
 		// TODO: Renable this when project pages are implemented

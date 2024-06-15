@@ -5,14 +5,14 @@
 
 import { JSDOM } from 'jsdom';
 import type {
-	PinnedReposResponseInterface,
-	ProjectInfoInterface,
-	ProjectLanguageInterface,
+	PinnedReposResponse,
+	ProjectInfo,
+	ProjectLanguage,
 	ReadmeResponse,
 } from '../common/types';
 
-type ReadmePropsInterface = Pick<
-	Partial<ProjectInfoInterface>,
+type ReadmeProps = Pick<
+	Partial<ProjectInfo>,
 	'name' | 'longDesc' | 'typeName' | 'typeColor'
 >;
 
@@ -59,7 +59,7 @@ function getProjectType(
 	};
 }
 
-function parseReadme<R extends ReadmePropsInterface>(
+function parseReadme<R extends ReadmeProps>(
 	slug: string,
 	readmeObj: ReadmeResponse,
 ): R {
@@ -94,8 +94,8 @@ function parseReadme<R extends ReadmePropsInterface>(
 }
 
 export function parseResponse(
-	responseData: PinnedReposResponseInterface,
-): Partial<ProjectInfoInterface> {
+	responseData: PinnedReposResponse,
+): Partial<ProjectInfo> {
 	const slug = getProp(responseData, 'name');
 
 	if (!slug) {
@@ -107,7 +107,7 @@ export function parseResponse(
 		'nodes',
 	)?.filter(
 		(language) => language && 'name' in language && 'color' in language,
-	) as ProjectLanguageInterface[];
+	) as ProjectLanguage[];
 	const { name, longDesc, typeName, typeColor } = parseReadme(
 		slug,
 		getProp(responseData, 'readmeFromMaster') ||

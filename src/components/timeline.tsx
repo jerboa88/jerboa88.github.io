@@ -3,12 +3,12 @@
 	------------------------
 */
 
-import type { RoleInterface } from '../common/types';
+import type { Role } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
 import TimelineEntry from './timeline-entry';
 
 interface Props {
-	roles: RoleInterface[];
+	roles: Role[];
 }
 
 export default function Timeline({ roles }: Props) {

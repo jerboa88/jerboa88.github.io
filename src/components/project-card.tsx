@@ -6,7 +6,7 @@
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { getProjectTypeColor } from '../common/config-manager';
-import type { ProjectInfoInterface } from '../common/types';
+import type { ProjectInfo } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
 import Card from './card';
 import GhostButton from './input/ghost-button';
@@ -17,7 +17,7 @@ import SubsectionHeading from './text/subsection-heading';
 // Types
 
 interface Props {
-	repo: ProjectInfoInterface;
+	repo: ProjectInfo;
 }
 
 // Constants

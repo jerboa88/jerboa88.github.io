@@ -3,7 +3,7 @@
 	-------------------------------------------
 */
 
-import type { ButtonInterface } from '../../common/types';
+import type { Button } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import BaseButton from './base-button';
 
@@ -11,7 +11,7 @@ export default function GhostButton({
 	className = '',
 	disabled,
 	...remainingProps
-}: ButtonInterface) {
+}: Button) {
 	const classNameProps = getClassNameProps(
 		'p-2 sm:p-4 drop-shadow',
 		!disabled && 'interactive-text', // Enable hover effect only when button is not disabled

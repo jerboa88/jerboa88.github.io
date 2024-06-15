@@ -14,8 +14,8 @@ import { getJobs, getSiteMetadata } from '../../common/config-manager';
 import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
 import type {
 	ButtonElementRenderFunction,
-	ProjectInfoInterface,
-	SectionInterface,
+	PageSection,
+	ProjectInfo,
 	SocialImagesMetadataProp,
 } from '../../common/types';
 import { toKebabCase } from '../../common/utilities';
@@ -33,7 +33,7 @@ import Timeline from '../../components/timeline';
 
 interface Props {
 	pageContext: SocialImagesMetadataProp & {
-		pinnedRepos: ProjectInfoInterface[];
+		pinnedRepos: ProjectInfo[];
 	};
 }
 
@@ -64,7 +64,7 @@ export default function IndexPageTemplate({
 			title: 'Contact',
 			ref: useRef(null),
 		},
-	] as SectionInterface[];
+	] as PageSection[];
 
 	const projectsSectionButton = useCallback(
 		((remainingProps) => (

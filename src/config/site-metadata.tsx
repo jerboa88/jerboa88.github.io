@@ -3,7 +3,7 @@
 	-------------
 */
 
-import type { SiteMetadataConfigInterface } from '../common/types';
+import type { SiteMetadataConfig } from '../common/types';
 
 export default {
 	iconPath: 'images/icon.svg',
@@ -29,4 +29,4 @@ export default {
 			country: 'Canada',
 		},
 	},
-} as SiteMetadataConfigInterface;
+} as SiteMetadataConfig;

@@ -7,10 +7,10 @@ import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import type {
 	BgColor,
 	PageMetadata,
-	RoleInterface,
+	Role,
 	SocialImageTypes,
 	SocialImagesGenerationConfig,
-	ThemeInterface,
+	Theme,
 	Url,
 } from '../common/types';
 import colorMappingsConfig from '../config/color-mappings';
@@ -141,7 +141,7 @@ export function getExternalServices() {
 }
 
 // Returns a list of jobs with formatted date objects
-export function getJobs(): RoleInterface[] {
+export function getJobs(): Role[] {
 	return jobsConfig.map((job) => ({
 		...job,
 		startDate: new Date(job.startDate),
@@ -150,7 +150,7 @@ export function getJobs(): RoleInterface[] {
 }
 
 // Returns a daisyUI theme given its name
-export function getTheme(themeName: 'light' | 'dark'): ThemeInterface {
+export function getTheme(themeName: 'light' | 'dark'): Theme {
 	const config = themesConfig[themeName];
 
 	if (!config) {

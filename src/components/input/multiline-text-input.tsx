@@ -5,14 +5,14 @@
 
 import { useCallback } from 'react';
 import type {
+	Input,
 	InputElementRenderFunction,
-	InputInterface,
 	InputOptions,
 } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import BaseInput from './base-input';
 
-interface Props extends InputInterface {
+interface Props extends Input {
 	inputOptions?: {
 		rows?: number;
 		placeholder?: string;
@@ -42,7 +42,7 @@ export default function MultilineTextInput({
 		((registerObj) => (
 			<textarea {...{ ...classNameProps, ...registerObj, ...inputOptions }} />
 		)) as InputElementRenderFunction,
-		[classNameProps, inputOptions],
+		[],
 	);
 
 	return <BaseInput {...{ renderInput, name, errors, ...remainingProps }} />;
