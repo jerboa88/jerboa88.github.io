@@ -283,15 +283,19 @@ export interface RoleInterface {
 }
 
 export type PinnedReposResponseInterface = NonNullable<
-	Queries.PinnedReposQuery['github']['user']
->['pinnedItems'];
+	NonNullable<
+		NonNullable<Queries.PinnedReposQuery['github']>['user']
+	>['pinnedItems']['nodes']
+>[number] extends infer R
+	? R extends { readonly readmeFromMain: unknown }
+		? R
+		: never
+	: never;
 
 export type ReadmeResponse = NonNullable<
 	NonNullable<
-		NonNullable<
-			NonNullable<Queries.PinnedReposQuery['github']>['user']
-		>['pinnedItems']
-	>['nodes']
+		NonNullable<Queries.PinnedReposQuery['github']>['user']
+	>['pinnedItems']['nodes']
 >[number] extends infer R
 	? R extends { readonly readmeFromMain: unknown }
 		? R['readmeFromMain']

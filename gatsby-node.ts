@@ -19,7 +19,7 @@ import type {
 } from './src/common/types';
 import { removeTrailingSlash } from './src/common/utilities';
 import { mapResponse } from './src/node/response-mapper';
-import ResponseParser from './src/node/response-parser';
+import { parseResponse } from './src/node/response-parser';
 
 // Constants
 
@@ -243,7 +243,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 		assertResponseDataIsNonEmpty(responseData);
 
 		const projectInfo = mapResponse(
-			ResponseParser.parse(responseData as PinnedReposResponseInterface),
+			parseResponse(responseData as PinnedReposResponseInterface),
 		);
 
 		// Create project pages
