@@ -3,12 +3,13 @@
 	------------------------------------------
 */
 
+import DOMPurify from 'isomorphic-dompurify';
 import type { PropsWithChildren } from 'react';
 import type { PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
-	html?: string | TrustedHTML;
+	html?: string;
 }
 
 export function Article({ className = '', children, html }: Props) {
@@ -19,11 +20,18 @@ export function Article({ className = '', children, html }: Props) {
 		className,
 	);
 
+	if (html) {
+		return (
+			<article
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: HTML is not user provided and is sanitized using DOMPurify
+				dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html)}}
+				{...classNameProps}
+			/>
+		);
+	}
+
 	return (
-		<article
-			dangerouslySetInnerHTML={html ? { __html: html } : undefined}
-			{...classNameProps}
-		>
+		<article {...classNameProps}>
 			{children}
 		</article>
 	);
