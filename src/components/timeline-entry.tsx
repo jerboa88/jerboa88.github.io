@@ -6,7 +6,7 @@
 import { faBuilding, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getRoleTypeColor } from '../common/config-manager';
-import type { RoleInterface } from '../common/types';
+import type { Role } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
 import Card from './card';
 import Pill from './pill';
@@ -14,7 +14,7 @@ import DateRange from './text/date-range';
 import SubsectionHeading from './text/subsection-heading';
 
 interface Props {
-	role: RoleInterface;
+	role: Role;
 }
 
 export default function TimelineEntry({ role }: Props) {

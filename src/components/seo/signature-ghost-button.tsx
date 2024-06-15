@@ -5,7 +5,7 @@
 
 import { faSignature } from '@fortawesome/free-solid-svg-icons';
 import { getSiteMetadata } from '../../common/config-manager';
-import type { ButtonInterface } from '../../common/types';
+import type { Button } from '../../common/types';
 import GhostButton from '../input/ghost-button';
 
 const BUTTON_PROPS = {
@@ -14,6 +14,6 @@ const BUTTON_PROPS = {
 	flip: false,
 };
 
-export default function SignatureGhostButton(props: ButtonInterface) {
+export default function SignatureGhostButton(props: Button) {
 	return <GhostButton {...{ ...props, ...BUTTON_PROPS }} />;
 }

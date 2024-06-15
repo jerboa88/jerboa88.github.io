@@ -7,7 +7,7 @@ import type { HeadProps } from 'gatsby';
 import { useRef } from 'react';
 import { getSiteMetadata } from '../../common/config-manager';
 import type {
-	ProjectInfoInterface,
+	ProjectInfo,
 	SocialImagesMetadataProp,
 } from '../../common/types';
 import { getAbsoluteUrl } from '../../common/utilities';
@@ -21,7 +21,7 @@ import { Article } from '../../components/text/article';
 
 interface Props {
 	pageContext: SocialImagesMetadataProp & {
-		repo: ProjectInfoInterface;
+		repo: ProjectInfo;
 	};
 }
 

@@ -3,7 +3,7 @@
 	-----------------------------
 */
 
-import type { PagesMetadataConfigInterface } from '../common/types';
+import type { PagesMetadataConfig } from '../common/types';
 
 export default {
 	'/privacy-policy/': {
@@ -17,4 +17,4 @@ export default {
 		shortTitle: '404',
 		description: "Oof, there's nothing here",
 	},
-} as PagesMetadataConfigInterface;
+} as PagesMetadataConfig;

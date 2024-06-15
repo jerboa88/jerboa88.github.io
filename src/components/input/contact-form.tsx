@@ -36,7 +36,7 @@ enum FormState {
 }
 
 // Allowed fields for the contact form
-interface ContactFormFieldsInterface {
+interface ContactFormFields {
 	name: string;
 	email: string;
 	message: string;
@@ -182,7 +182,7 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 		register,
 		reset,
 		handleSubmit,
-	} = useForm<ContactFormFieldsInterface>({ mode: 'onBlur' });
+	} = useForm<ContactFormFields>({ mode: 'onBlur' });
 	const { isValid } = useFormState({ control });
 
 	// Handle form submission errors
@@ -192,7 +192,7 @@ export default function ContactForm({ className = '' }: PropsWithClassName) {
 		console.error(`Something went wrong during form submission. ${errorMsg}`);
 	};
 
-	const onSubmit: SubmitHandler<ContactFormFieldsInterface> = async (
+	const onSubmit: SubmitHandler<ContactFormFields> = async (
 		formData,
 	) => {
 		setFormState(FormState.Busy);

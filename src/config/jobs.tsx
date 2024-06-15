@@ -3,7 +3,7 @@
 	------------------
 */
 
-import type { RoleConfigInterface } from '../common/types';
+import type { RoleConfig } from '../common/types';
 
 export default [
 	{
@@ -34,4 +34,4 @@ export default [
 			'Monitored actively changing flight arrival/departure times to ensure no delays were taken',
 		],
 	},
-] as RoleConfigInterface[];
+] as RoleConfig[];

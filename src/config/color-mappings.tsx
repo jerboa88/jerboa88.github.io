@@ -3,7 +3,7 @@
 	---------------------------------------------------
 */
 
-import type { ColorMappingsConfigInterface } from '../common/types';
+import type { ColorMappingsConfig } from '../common/types';
 
 export default {
 	projectType: {
@@ -22,4 +22,4 @@ export default {
 		internship: 'bg-secondary',
 		'summer job': 'bg-secondary',
 	},
-} as ColorMappingsConfigInterface;
+} as ColorMappingsConfig;

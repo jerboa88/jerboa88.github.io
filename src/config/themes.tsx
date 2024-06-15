@@ -3,7 +3,7 @@
 	---------------------------
 */
 
-import type { ThemesConfigInterface } from '../common/types';
+import type { ThemesConfig } from '../common/types';
 
 export default {
 	light: {
@@ -34,4 +34,4 @@ export default {
 		'base-300': '#030303',
 		'base-content': '#FFF',
 	},
-} as ThemesConfigInterface;
+} as ThemesConfig;

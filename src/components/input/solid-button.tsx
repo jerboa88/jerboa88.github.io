@@ -3,12 +3,14 @@
 	-----------------------------------------
 */
 
-import type { ButtonInterface } from '../../common/types';
+import type { Button } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import Card from '../card';
 import BaseButton from './base-button';
 
-interface SolidButtonInterface extends ButtonInterface {
+// Types
+
+interface SolidButton extends Button {
 	cardClassName?: string;
 }
 
@@ -17,7 +19,7 @@ export default function SolidButton({
 	cardClassName = '',
 	disabled,
 	...remainingProps
-}: SolidButtonInterface) {
+}: SolidButton) {
 	const classNameProps = getClassNameProps('px-4 py-3 sm:px-8', className);
 
 	return (

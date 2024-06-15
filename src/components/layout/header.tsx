@@ -6,7 +6,7 @@
 import { motion } from 'framer-motion';
 import { getSiteMetadata } from '../../common/config-manager';
 import { TITLE_LAYOUT_ID } from '../../common/constants';
-import type { SectionInterface } from '../../common/types';
+import type { PageSection } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import Divider from '../divider';
 import Tabs from '../tabs';
@@ -16,7 +16,7 @@ import Heading from '../text/heading';
 
 interface Props {
 	expandTitle?: boolean;
-	sections: SectionInterface[];
+	sections: PageSection[];
 }
 
 // Constants

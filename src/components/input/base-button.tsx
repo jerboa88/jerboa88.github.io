@@ -7,7 +7,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FADE_IN_ANIMATION_PROPS } from '../../common/constants';
-import type { ButtonInterface } from '../../common/types';
+import type { Button } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import Tooltip from '../tooltip';
 
@@ -26,7 +26,7 @@ export default function BaseButton({
 	flip = false,
 	layout,
 	layoutRoot,
-}: ButtonInterface) {
+}: Button) {
 	const buttonClassNameProps = getClassNameProps(
 		'flex flex-row justify-center items-center self-center gap-2 z-20 text-sm font-button uppercase',
 		flip && 'flex-row-reverse', // Button flip styles

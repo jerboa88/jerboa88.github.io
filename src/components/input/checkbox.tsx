@@ -5,14 +5,14 @@
 
 import { useCallback } from 'react';
 import type {
+	Input,
 	InputElementRenderFunction,
-	InputInterface,
 	InputOptions,
 } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import BaseInput from './base-input';
 
-export interface Props extends InputInterface {
+export interface Props extends Input {
 	inputOptions?: {
 		defaultChecked?: boolean;
 	} & InputOptions;
