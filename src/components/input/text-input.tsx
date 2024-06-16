@@ -24,7 +24,7 @@ const defaultInputOptions = {
 };
 
 export function TextInput({
-	inputClassName = '',
+	inputClassName,
 	name,
 	inputOptions = defaultInputOptions,
 	errors,
