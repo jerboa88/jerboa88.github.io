@@ -19,7 +19,7 @@ interface Props extends PropsWithClassName, PropsWithChildren {
 
 export const Section = forwardRef(
 	(
-		{ className = '', title, renderButton, responsive = true, children }: Props,
+		{ className, title, renderButton, responsive = true, children }: Props,
 		ref: ForwardedRef<HTMLElement>,
 	) => {
 		const classNameProps = getClassNameProps(

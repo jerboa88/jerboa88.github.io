@@ -159,7 +159,7 @@ async function computeBotPoisonSolution() {
 	});
 }
 
-export function ContactForm({ className = '' }: PropsWithClassName) {
+export function ContactForm({ className }: PropsWithClassName) {
 	const formClassNameProps = getClassNameProps(
 		'flex flex-col gap-4 p-0 w-full max-w-xl sm:p-8',
 		className,

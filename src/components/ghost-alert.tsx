@@ -39,7 +39,7 @@ const ALERT_TYPE_ICON_MAP = {
 };
 
 export function GhostAlert({
-	className = '',
+	className,
 	type = AlertType.Info,
 	text,
 	show = true,

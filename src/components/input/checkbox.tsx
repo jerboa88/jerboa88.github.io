@@ -19,7 +19,7 @@ export interface Props extends Input {
 }
 
 export function Checkbox({
-	inputClassName = '',
+	inputClassName,
 	name,
 	inputOptions,
 	errors,

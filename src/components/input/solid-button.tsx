@@ -15,8 +15,8 @@ interface SolidButton extends Button {
 }
 
 export function SolidButton({
-	className = '',
-	cardClassName = '',
+	className,
+	cardClassName,
 	disabled,
 	...remainingProps
 }: SolidButton) {

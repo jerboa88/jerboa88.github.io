@@ -11,7 +11,7 @@ interface Props extends PropsWithClassName {
 	endDate: Date;
 }
 
-export function DateRange({ className = '', startDate, endDate }: Props) {
+export function DateRange({ className, startDate, endDate }: Props) {
 	const classNameProps = getClassNameProps('font-bold', className);
 
 	const startMonth = startDate.toLocaleString('default', { month: 'long' });

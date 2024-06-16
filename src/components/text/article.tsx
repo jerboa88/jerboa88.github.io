@@ -12,7 +12,7 @@ interface Props extends PropsWithClassName, PropsWithChildren {
 	html?: string;
 }
 
-export function Article({ className = '', children, html }: Props) {
+export function Article({ className, children, html }: Props) {
 	const classNameProps = getClassNameProps(
 		'prose dark:prose-invert max-w-none', // General styles
 		'prose-a:no-underline prose-a:pb-0.5 [&:not(.anchor)]:prose-a:border-b-[1px] prose-a:transition-colors prose-a:font-semibold prose-a:border-primary hover:prose-a:border-secondary', // Link styles

@@ -81,9 +81,9 @@ function getBackgroundScale(xCoords: number, zCoords: number) {
 }
 
 export function Card({
-	outerClassName = '',
-	middleClassName = '',
-	innerClassName = '',
+	outerClassName,
+	middleClassName,
+	innerClassName,
 	disabled = false,
 	children,
 }: Props) {
@@ -182,6 +182,7 @@ export function Card({
 		onMouseLeave: handleMouseLeave,
 		onMouseDown: handleMouseDown,
 	};
+	const outerClassNameProps = getClassNameProps(outerClassName);
 	const middleClassNameProps = getClassNameProps(
 		'size-full shadow-md !bg-clip-content rounded-2xl backdrop-blur-md',
 		middleClassName,
@@ -203,7 +204,7 @@ export function Card({
 	return (
 		<div
 			style={{ perspective: 500 }}
-			className={outerClassName}
+			{...outerClassNameProps}
 			{...outerEventHandlerProps}
 		>
 			<motion.div

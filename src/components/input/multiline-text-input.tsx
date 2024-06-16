@@ -24,7 +24,7 @@ const defaultInputOptions = {
 };
 
 export function MultilineTextInput({
-	inputClassName = '',
+	inputClassName,
 	name,
 	inputOptions = defaultInputOptions,
 	errors,

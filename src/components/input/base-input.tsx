@@ -27,8 +27,8 @@ interface BaseInput extends PropsWithClassName, PropsWithLayoutAnimations {
 }
 
 export function BaseInput({
-	className = '',
-	labelClassName = '',
+	className,
+	labelClassName,
 	name,
 	label = '',
 	renderInput,

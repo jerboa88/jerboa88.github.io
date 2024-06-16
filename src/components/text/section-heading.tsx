@@ -9,7 +9,7 @@ import { getClassNameProps } from '../../common/utilities';
 
 interface Props extends PropsWithClassName, PropsWithChildren {}
 
-export function SectionHeading({ className = '', children }: Props) {
+export function SectionHeading({ className, children }: Props) {
 	const classNameProps = getClassNameProps(
 		'py-4 text-3xl align-middle font-heading font-medium drop-shadow',
 		className,

@@ -8,7 +8,7 @@ import { getClassNameProps } from '../../common/utilities';
 import { BaseButton } from './base-button';
 
 export function GhostButton({
-	className = '',
+	className,
 	disabled,
 	...remainingProps
 }: Button) {

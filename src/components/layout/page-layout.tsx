@@ -29,7 +29,7 @@ const BG_GRADIENT_PROPS = {
 };
 
 export function PageLayout({
-	className = '',
+	className,
 	expandTitle = false,
 	sections = [],
 	children,
