@@ -15,8 +15,8 @@ import type {
 } from '../common/types';
 import { colorMappingsConfig } from '../config/color-mappings';
 import { externalServicesConfig } from '../config/external-services';
-import { roleConfig as jobsConfig } from '../config/jobs';
 import { pagesMetadataConfig as pageMetadataConfig } from '../config/pages-metadata';
+import { rolesConfig } from '../config/roles';
 import { siteMetadataConfig } from '../config/site-metadata';
 import { socialImagesGenerationConfig } from '../config/social-images-generation';
 import { themesConfig } from '../config/themes';
@@ -140,12 +140,12 @@ export function getExternalServices() {
 	return externalServicesConfig;
 }
 
-// Returns a list of jobs with formatted date objects
-export function getJobs(): Role[] {
-	return jobsConfig.map((job) => ({
-		...job,
-		startDate: new Date(job.startDate),
-		endDate: new Date(job.endDate),
+// Returns a list of roles with formatted date objects
+export function getRoles(): Role[] {
+	return rolesConfig.map((role) => ({
+		...role,
+		startDate: new Date(role.startDate),
+		endDate: new Date(role.endDate),
 	}));
 }
 

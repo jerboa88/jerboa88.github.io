@@ -10,7 +10,7 @@ import {
 import { useInView } from 'framer-motion';
 import type { HeadProps } from 'gatsby';
 import { useCallback, useRef } from 'react';
-import { getJobs, getSiteMetadata } from '../../common/config-manager';
+import { getRoles, getSiteMetadata } from '../../common/config-manager';
 import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
 import type {
 	ButtonElementRenderFunction,
@@ -40,7 +40,7 @@ interface Props {
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
-const JOBS = getJobs();
+const ROLES = getRoles();
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function IndexPageTemplate({
@@ -143,7 +143,7 @@ export default function IndexPageTemplate({
 				className="min-h-lvh"
 				{...sections[2]}
 			>
-				<Timeline roles={JOBS} />
+				<Timeline roles={ROLES} />
 			</Section>
 			<Section className="min-h-lvh" {...sections[3]}>
 				<Article className="flex flex-col justify-center w-full">
