@@ -5,7 +5,7 @@
 
 import type { SiteMetadataConfig } from '../common/types';
 
-export default {
+export const siteMetadataConfig = {
 	iconPath: 'images/icon.svg',
 	siteUrl: 'https://johng.io/',
 	sourceUrl: 'https://github.com/jerboa88/jerboa88.github.io/',

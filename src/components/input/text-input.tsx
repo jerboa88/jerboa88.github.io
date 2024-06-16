@@ -10,7 +10,7 @@ import type {
 	InputOptions,
 } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
-import BaseInput from './base-input';
+import { BaseInput } from './base-input';
 
 export interface Props extends Input {
 	inputOptions?: {
@@ -23,8 +23,8 @@ const defaultInputOptions = {
 	type: 'text',
 };
 
-export default function TextInput({
-	inputClassName = '',
+export function TextInput({
+	inputClassName,
 	name,
 	inputOptions = defaultInputOptions,
 	errors,

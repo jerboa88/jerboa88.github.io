@@ -5,7 +5,7 @@
 
 import type { PagesMetadataConfig } from '../common/types';
 
-export default {
+export const pagesMetadataConfig = {
 	'/privacy-policy/': {
 		title: 'Privacy Policy',
 		shortTitle: 'Privacy',

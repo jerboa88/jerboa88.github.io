@@ -10,7 +10,7 @@ import type {
 	InputOptions,
 } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
-import BaseInput from './base-input';
+import { BaseInput } from './base-input';
 
 export interface Props extends Input {
 	inputOptions?: {
@@ -18,8 +18,8 @@ export interface Props extends Input {
 	} & InputOptions;
 }
 
-export default function Checkbox({
-	inputClassName = '',
+export function Checkbox({
+	inputClassName,
 	name,
 	inputOptions,
 	errors,

@@ -11,10 +11,10 @@ import type {
 	SocialImagesMetadataProp,
 } from '../common/types';
 import { getAbsoluteUrl } from '../common/utilities';
-import PageLayout from '../components/layout/page-layout';
-import Section from '../components/layout/section';
-import SolidButtonLink from '../components/links/solid-button-link';
-import PageHead from '../components/seo/page-head';
+import { PageLayout } from '../components/layout/page-layout';
+import { Section } from '../components/layout/section';
+import { SolidButtonLink } from '../components/links/solid-button-link';
+import { PageHead } from '../components/seo/page-head';
 
 // Types
 
@@ -26,6 +26,7 @@ interface PageContext {
 
 const SITE_METADATA = getSiteMetadata();
 
+// biome-ignore lint/style/noDefaultExport: Pages must use default exports
 export default function NotFoundPage({
 	pageContext: { pageMetadata },
 }: PageContext & PageProps) {
@@ -57,11 +58,14 @@ export default function NotFoundPage({
 						<pre
 							role="img"
 							aria-label="ASCII Sad Cat"
-							aria-description="ASCII art of a sad cat, sitting down"
+							aria-describedby="ascii-sad-cat-description"
 							className="leading-normal text-left"
 						>
 							{sadCat}
 						</pre>
+						<span id="ascii-sad-cat-description" hidden>
+							ASCII art of a sad cat, sitting down
+						</span>
 					</figure>
 					<SolidButtonLink text="Home" to="/" isInternal />
 				</div>

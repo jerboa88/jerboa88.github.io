@@ -5,10 +5,10 @@
 
 import type { Button } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
-import BaseButton from './base-button';
+import { BaseButton } from './base-button';
 
-export default function GhostButton({
-	className = '',
+export function GhostButton({
+	className,
 	disabled,
 	...remainingProps
 }: Button) {

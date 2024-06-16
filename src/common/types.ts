@@ -195,7 +195,10 @@ export interface Button extends PropsWithClassName, PropsWithLayoutAnimations {
 export type ButtonElementRenderFunction = ({
 	className,
 	tooltipPosition,
-}: { className: string; tooltipPosition: TooltipPosition }) => JSX.Element;
+}: {
+	className: string;
+	tooltipPosition: TooltipPosition;
+}) => React.JSX.Element;
 
 // Possible options for input validation using react-hook-form
 export interface InputValidationOptions {
@@ -215,7 +218,7 @@ export interface InputOptions {
 
 export type InputElementRenderFunction = (
 	props: UseFormRegisterReturn<string>,
-) => JSX.Element;
+) => React.JSX.Element;
 
 export interface Input extends PropsWithClassName, PropsWithLayoutAnimations {
 	labelClassName?: string;

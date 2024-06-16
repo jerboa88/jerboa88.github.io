@@ -5,7 +5,7 @@
 
 import type { ColorMappingsConfig } from '../common/types';
 
-export default {
+export const colorMappingsConfig = {
 	projectType: {
 		'android app': 'bg-lime-500',
 		extension: 'bg-amber-500',

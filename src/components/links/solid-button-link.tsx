@@ -4,12 +4,12 @@
 */
 
 import type { Button, Link } from '../../common/types';
-import SolidButton from '../input/solid-button';
-import LinkWrapper from './link-wrapper';
+import { SolidButton } from '../input/solid-button';
+import { LinkWrapper } from './link-wrapper';
 
 interface Props extends Button, Link {}
 
-export default function SolidButtonLink({
+export function SolidButtonLink({
 	to,
 	isInternal,
 	rel,

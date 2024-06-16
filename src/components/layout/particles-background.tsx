@@ -17,7 +17,7 @@ import { getClassNameProps } from '../../common/utilities';
 // TODO: Replace hardcoded value here
 const THEME = getTheme('dark');
 
-function ParticlesBackground() {
+function UnmemoizedParticlesBackground() {
 	const shouldReduceMotion = useReducedMotion();
 	const [init, setInit] = useState(false);
 
@@ -88,6 +88,4 @@ function ParticlesBackground() {
 }
 
 // Never re-render this component
-const MemoizedParticlesBackground = memo(ParticlesBackground);
-
-export default MemoizedParticlesBackground;
+export const ParticlesBackground = memo(UnmemoizedParticlesBackground);

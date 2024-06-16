@@ -80,10 +80,10 @@ function getBackgroundScale(xCoords: number, zCoords: number) {
 	return 100 * scaleModifier * skewModifier;
 }
 
-export default function Card({
-	outerClassName = '',
-	middleClassName = '',
-	innerClassName = '',
+export function Card({
+	outerClassName,
+	middleClassName,
+	innerClassName,
 	disabled = false,
 	children,
 }: Props) {
@@ -155,7 +155,7 @@ export default function Card({
 		mouseZCoords.set(MOUSE_Z_COORDS_MIN);
 	};
 
-	if (!disabled && !shouldReduceMotion && doesDeviceSupportHover()) {
+	if (!(disabled || shouldReduceMotion) && doesDeviceSupportHover()) {
 		// Update the mouse position when the mouse moves within the card
 		handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
 			const { x, y } = getMouseCoords(event);
@@ -182,6 +182,7 @@ export default function Card({
 		onMouseLeave: handleMouseLeave,
 		onMouseDown: handleMouseDown,
 	};
+	const outerClassNameProps = getClassNameProps(outerClassName);
 	const middleClassNameProps = getClassNameProps(
 		'size-full shadow-md !bg-clip-content rounded-2xl backdrop-blur-md',
 		middleClassName,
@@ -203,7 +204,7 @@ export default function Card({
 	return (
 		<div
 			style={{ perspective: 500 }}
-			className={outerClassName}
+			{...outerClassNameProps}
 			{...outerEventHandlerProps}
 		>
 			<motion.div

@@ -70,7 +70,7 @@ function parseReadme<R extends ReadmeProps>(
 		typeColor: undefined,
 	} as R;
 
-	if (!readmeObj || !('text' in readmeObj)) {
+	if (!(readmeObj && 'text' in readmeObj)) {
 		console.warn(`[${slug}] No README found`);
 
 		return propsFromReadme;

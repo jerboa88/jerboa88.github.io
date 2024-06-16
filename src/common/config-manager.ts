@@ -13,13 +13,13 @@ import type {
 	Theme,
 	Url,
 } from '../common/types';
-import colorMappingsConfig from '../config/color-mappings';
-import externalServicesConfig from '../config/external-services';
-import jobsConfig from '../config/jobs';
-import pageMetadataConfig from '../config/pages-metadata';
-import siteMetadataConfig from '../config/site-metadata';
-import socialImagesGenerationConfig from '../config/social-images-generation';
-import themesConfig from '../config/themes';
+import { colorMappingsConfig } from '../config/color-mappings';
+import { externalServicesConfig } from '../config/external-services';
+import { pagesMetadataConfig } from '../config/pages-metadata';
+import { rolesConfig } from '../config/roles';
+import { siteMetadataConfig } from '../config/site-metadata';
+import { socialImagesGenerationConfig } from '../config/social-images-generation';
+import { themesConfig } from '../config/themes';
 import { getOrDefault } from './utilities';
 
 // Types
@@ -106,7 +106,7 @@ export function getSiteMetadata(): SiteMetadata {
 // Returns the metadata for a given page
 export function getPageMetadata(pagePath: string): PageMetadata {
 	const config =
-		pageMetadataConfig[pagePath as keyof typeof pageMetadataConfig];
+		pagesMetadataConfig[pagePath as keyof typeof pagesMetadataConfig];
 
 	if (!config) {
 		console.warn(`Page metadata for ${pagePath} not found`);
@@ -140,12 +140,12 @@ export function getExternalServices() {
 	return externalServicesConfig;
 }
 
-// Returns a list of jobs with formatted date objects
-export function getJobs(): Role[] {
-	return jobsConfig.map((job) => ({
-		...job,
-		startDate: new Date(job.startDate),
-		endDate: new Date(job.endDate),
+// Returns a list of roles with formatted date objects
+export function getRoles(): Role[] {
+	return rolesConfig.map((role) => ({
+		...role,
+		startDate: new Date(role.startDate),
+		endDate: new Date(role.endDate),
 	}));
 }
 

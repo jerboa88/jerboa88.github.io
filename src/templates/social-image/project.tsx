@@ -10,10 +10,10 @@ import type {
 	ImageMetadataProp,
 	ProjectInfo,
 } from '../../common/types';
-import Section from '../../components/layout/section';
-import ProjectCard from '../../components/project-card';
-import SignatureGhostButtonLink from '../../components/seo/signature-ghost-button';
-import SocialImage from '../../components/seo/social-image';
+import { Section } from '../../components/layout/section';
+import { ProjectCard } from '../../components/project-card';
+import { SignatureGhostButton } from '../../components/seo/signature-ghost-button';
+import { SocialImage } from '../../components/seo/social-image';
 
 interface PageContext {
 	pageContext: ImageMetadataProp & {
@@ -21,12 +21,13 @@ interface PageContext {
 	};
 }
 
+// biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function ProjectSocialImageTemplate({
 	pageContext: { repo, imageMetadata },
 }: PageContext & PageProps) {
 	const renderButton = useCallback(
 		(({ className, tooltipPosition }) => (
-			<SignatureGhostButtonLink
+			<SignatureGhostButton
 				className={className}
 				tooltipPosition={tooltipPosition}
 			/>
@@ -48,4 +49,5 @@ export default function ProjectSocialImageTemplate({
 	);
 }
 
-export { default as Head } from '../../components/seo/social-image-head';
+// biome-ignore lint/performance/noBarrelFile: We need to export the Head component for Gatsby to recognize it
+export { SocialImageHead as Head } from '../../components/seo/social-image-head';

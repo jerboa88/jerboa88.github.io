@@ -5,7 +5,7 @@
 
 import type { ThemesConfig } from '../common/types';
 
-export default {
+export const themesConfig = {
 	light: {
 		primary: '#0F766E', // TW Teal 700
 		secondary: '#E11D48', // TW Rose 600

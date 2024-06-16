@@ -12,6 +12,7 @@ import {
 } from './src/common/config-manager';
 import { SOCIAL_IMAGES_DIR } from './src/common/constants';
 import { getAbsoluteUrl } from './src/common/utilities';
+// biome-ignore lint/style/noNamespaceImport: We need to import the entire Tailwind CSS configuration file
 import * as tailwindConfig from './tailwind.config';
 
 const SITE_METADATA = getSiteMetadata();
@@ -78,9 +79,13 @@ const config: GatsbyConfig = {
 			resolve: 'gatsby-plugin-manifest',
 			options: {
 				name: SITE_METADATA.title,
+				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
 				short_name: SITE_METADATA.shortTitle,
+				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
 				start_url: '/',
+				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
 				background_color: DARK_THEME['base-100'],
+				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
 				theme_color: DARK_THEME.primary,
 				display: 'standalone',
 				icon: `${__dirname}/src/${SITE_METADATA.iconPath}`,
@@ -116,11 +121,12 @@ const config: GatsbyConfig = {
 				fieldName: 'github',
 				url: 'https://api.github.com/graphql',
 				headers: {
-					Authorization: `Bearer ${process.env.GH_TOKEN}`,
+					authorization: `Bearer ${process.env.GH_TOKEN}`,
 				},
 			},
 		},
 	],
 };
 
+// biome-ignore lint/style/noDefaultExport: Gatsby config must use default exports
 export default config;

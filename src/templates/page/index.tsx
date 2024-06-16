@@ -10,7 +10,7 @@ import {
 import { useInView } from 'framer-motion';
 import type { HeadProps } from 'gatsby';
 import { useCallback, useRef } from 'react';
-import { getJobs, getSiteMetadata } from '../../common/config-manager';
+import { getRoles, getSiteMetadata } from '../../common/config-manager';
 import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
 import type {
 	ButtonElementRenderFunction,
@@ -19,15 +19,15 @@ import type {
 	SocialImagesMetadataProp,
 } from '../../common/types';
 import { toKebabCase } from '../../common/utilities';
-import ContactForm from '../../components/input/contact-form';
-import HeroHeader from '../../components/layout/hero-header';
-import PageLayout from '../../components/layout/page-layout';
-import Section from '../../components/layout/section';
-import GhostButtonLink from '../../components/links/ghost-button-link';
-import ProjectCardGallery from '../../components/project-card-gallery';
-import PageHead from '../../components/seo/page-head';
+import { ContactForm } from '../../components/input/contact-form';
+import { HeroHeader } from '../../components/layout/hero-header';
+import { PageLayout } from '../../components/layout/page-layout';
+import { Section } from '../../components/layout/section';
+import { GhostButtonLink } from '../../components/links/ghost-button-link';
+import { ProjectCardGallery } from '../../components/project-card-gallery';
+import { PageHead } from '../../components/seo/page-head';
 import { Article } from '../../components/text/article';
-import Timeline from '../../components/timeline';
+import { Timeline } from '../../components/timeline';
 
 // Types
 
@@ -40,8 +40,9 @@ interface Props {
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
-const JOBS = getJobs();
+const ROLES = getRoles();
 
+// biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function IndexPageTemplate({
 	pageContext: { pinnedRepos },
 }: Props) {
@@ -142,7 +143,7 @@ export default function IndexPageTemplate({
 				className="min-h-lvh"
 				{...sections[2]}
 			>
-				<Timeline roles={JOBS} />
+				<Timeline roles={ROLES} />
 			</Section>
 			<Section className="min-h-lvh" {...sections[3]}>
 				<Article className="flex flex-col justify-center w-full">

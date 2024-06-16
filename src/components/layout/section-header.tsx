@@ -10,19 +10,15 @@ import {
 	TooltipPosition,
 } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
-import Divider from '../divider';
-import SectionHeading from '../text/section-heading';
+import { Divider } from '../divider';
+import { SectionHeading } from '../text/section-heading';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
 	title: string;
 	renderButton?: ButtonElementRenderFunction;
 }
 
-export default function SectionHeader({
-	className,
-	title,
-	renderButton,
-}: Props) {
+export function SectionHeader({ className, title, renderButton }: Props) {
 	const classNameProps = getClassNameProps(
 		'w-full flex flex-row justify-between items-baseline',
 		className,

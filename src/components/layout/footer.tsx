@@ -6,14 +6,14 @@
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { getSiteMetadata } from '../../common/config-manager';
 import { TooltipPosition } from '../../common/types';
-import Divider from '../divider';
-import GhostButtonLink from '../links/ghost-button-link';
+import { Divider } from '../divider';
+import { GhostButtonLink } from '../links/ghost-button-link';
 
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
 
-export default function Footer() {
+export function Footer() {
 	return (
 		<footer className="z-30 w-full shadow-lg backdrop-blur-md bg-glass">
 			<div className="mix-blend-overlay">

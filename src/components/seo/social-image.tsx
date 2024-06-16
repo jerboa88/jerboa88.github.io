@@ -14,7 +14,7 @@ interface Props extends PropsWithClassName, PropsWithChildren {
 	};
 }
 
-export default function SocialImage({ className, size, children }: Props) {
+export function SocialImage({ className, size, children }: Props) {
 	const classNameProps = getClassNameProps(
 		'flex flex-col items-center size-full p-6 bg-glass overflow-hidden',
 		className,

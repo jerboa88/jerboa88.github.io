@@ -4,12 +4,12 @@
 */
 
 import type { Button, Link } from '../../common/types';
-import GhostButton from '../input/ghost-button';
-import LinkWrapper from './link-wrapper';
+import { GhostButton } from '../input/ghost-button';
+import { LinkWrapper } from './link-wrapper';
 
 interface Props extends Button, Link {}
 
-export default function GhostButtonLink({
+export function GhostButtonLink({
 	to,
 	isInternal,
 	rel,

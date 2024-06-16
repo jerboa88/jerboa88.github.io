@@ -5,18 +5,18 @@
 
 import type { Role } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
-import TimelineEntry from './timeline-entry';
+import { TimelineEntry } from './timeline-entry';
 
 interface Props {
 	roles: Role[];
 }
 
-export default function Timeline({ roles }: Props) {
+export function Timeline({ roles }: Props) {
 	const lastIndex = roles.length - 1;
 
 	return (
 		<ul className="timeline timeline-vertical timeline-snap-icon max-lg:timeline-compact">
-			{roles.map((entry, index) => {
+			{roles.map((role, index) => {
 				const hrStyles = getClassNameProps(
 					'mx-10 bg-primary rounded-b-full',
 					index === 0 && 'rounded-t-full', // hr styles for the first list item
@@ -24,9 +24,9 @@ export default function Timeline({ roles }: Props) {
 				);
 
 				return (
-					<li key={`${entry.startDate}-${entry.company}`}>
+					<li key={`${role.startDate}-${role.company}`}>
 						<hr {...hrStyles} />
-						<TimelineEntry role={entry} />
+						<TimelineEntry role={role} />
 						<hr {...hrStyles} />
 					</li>
 				);
