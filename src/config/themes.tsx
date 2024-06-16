@@ -32,6 +32,6 @@ export const themesConfig = {
 		'base-100': '#131313',
 		'base-200': '#080808',
 		'base-300': '#030303',
-		'base-content': '#FFF',
+		'base-content': '#E5E5E5', // TW Neutral 200
 	},
 } as ThemesConfig;
