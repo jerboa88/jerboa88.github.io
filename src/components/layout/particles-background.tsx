@@ -25,7 +25,7 @@ function UnmemoizedParticlesBackground() {
 		'fixed top-0 left-0 size-full mix-blend-overlay transition-opacity ease-out duration-[2s]',
 		init ? 'opacity-100' : 'opacity-0', // Hide until loaded
 	);
-	const tsParticlesConfig = {
+	const tsParticlesConfig: RecursivePartial<IOptions> = {
 		fpsLimit: 30,
 		detectRetina: true,
 		particles: {
@@ -43,11 +43,7 @@ function UnmemoizedParticlesBackground() {
 				},
 			},
 			number: {
-				density: {
-					enable: true,
-					area: 800,
-				},
-				value: 200,
+				value: 100,
 			},
 			opacity: {
 				value: {
@@ -71,7 +67,7 @@ function UnmemoizedParticlesBackground() {
 				},
 			},
 		},
-	} as RecursivePartial<IOptions>;
+	};
 
 	useEffect(() => {
 		initParticlesEngine(async (engine) => {
