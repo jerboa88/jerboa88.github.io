@@ -7,7 +7,7 @@ import type { PageProps } from 'gatsby';
 import type { ImageMetadataProp } from '../../common/types';
 import { GhostButton } from '../../components/input/ghost-button';
 import { HeroHeader } from '../../components/layout/hero-header';
-import { SignatureGhostButton as SignatureGhostButtonLink } from '../../components/seo/signature-ghost-button';
+import { SignatureGhostButton } from '../../components/seo/signature-ghost-button';
 import { SocialImage } from '../../components/seo/social-image';
 
 interface PageContext {
@@ -23,7 +23,7 @@ export default function IndexSocialImageTemplate({
 			size={imageMetadata.size}
 			className="justify-between text-center"
 		>
-			<SignatureGhostButtonLink />
+			<SignatureGhostButton />
 			<div className="flex flex-col">
 				<HeroHeader expandTitle />
 			</div>

@@ -15,7 +15,7 @@ import type {
 } from '../common/types';
 import { colorMappingsConfig } from '../config/color-mappings';
 import { externalServicesConfig } from '../config/external-services';
-import { pagesMetadataConfig as pageMetadataConfig } from '../config/pages-metadata';
+import { pagesMetadataConfig } from '../config/pages-metadata';
 import { rolesConfig } from '../config/roles';
 import { siteMetadataConfig } from '../config/site-metadata';
 import { socialImagesGenerationConfig } from '../config/social-images-generation';
@@ -106,7 +106,7 @@ export function getSiteMetadata(): SiteMetadata {
 // Returns the metadata for a given page
 export function getPageMetadata(pagePath: string): PageMetadata {
 	const config =
-		pageMetadataConfig[pagePath as keyof typeof pageMetadataConfig];
+		pagesMetadataConfig[pagePath as keyof typeof pagesMetadataConfig];
 
 	if (!config) {
 		console.warn(`Page metadata for ${pagePath} not found`);

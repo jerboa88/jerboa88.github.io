@@ -10,7 +10,7 @@ import type { PageSection, PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import { Footer } from './footer';
 import { Header } from './header';
-import { MemoizedParticlesBackground as ParticlesBackground } from './particles-background';
+import { ParticlesBackground } from './particles-background';
 
 // Types
 

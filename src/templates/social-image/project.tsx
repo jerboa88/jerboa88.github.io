@@ -12,7 +12,7 @@ import type {
 } from '../../common/types';
 import { Section } from '../../components/layout/section';
 import { ProjectCard } from '../../components/project-card';
-import { SignatureGhostButton as SignatureGhostButtonLink } from '../../components/seo/signature-ghost-button';
+import { SignatureGhostButton } from '../../components/seo/signature-ghost-button';
 import { SocialImage } from '../../components/seo/social-image';
 
 interface PageContext {
@@ -27,7 +27,7 @@ export default function ProjectSocialImageTemplate({
 }: PageContext & PageProps) {
 	const renderButton = useCallback(
 		(({ className, tooltipPosition }) => (
-			<SignatureGhostButtonLink
+			<SignatureGhostButton
 				className={className}
 				tooltipPosition={tooltipPosition}
 			/>

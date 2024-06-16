@@ -11,7 +11,7 @@ import type {
 	PageMetadataProp,
 } from '../../common/types';
 import { Section } from '../../components/layout/section';
-import { SignatureGhostButton as SignatureGhostButtonLink } from '../../components/seo/signature-ghost-button';
+import { SignatureGhostButton } from '../../components/seo/signature-ghost-button';
 import { SocialImage } from '../../components/seo/social-image';
 import { Article } from '../../components/text/article';
 
@@ -27,7 +27,7 @@ export default function OtherSocialImageTemplate({
 }: PageContext & PageProps) {
 	const renderButton = useCallback(
 		(({ className, tooltipPosition }) => (
-			<SignatureGhostButtonLink
+			<SignatureGhostButton
 				className={className}
 				tooltipPosition={tooltipPosition}
 			/>
