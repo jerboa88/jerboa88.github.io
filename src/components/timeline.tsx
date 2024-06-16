@@ -11,23 +11,25 @@ interface Props {
 	roles: Role[];
 }
 
-export function Timeline({ roles }: Props) {
-	const lastIndex = roles.length - 1;
+const HR_ELEMENT = (
+	<hr
+		{...getClassNameProps(
+			'mx-10 bg-primary',
+			'first:rounded-b-full last:rounded-t-full last:shadow-emboss first:shadow-emboss-none',
+			'group-first:rounded-t-full group-last:rounded-b-full',
+		)}
+	/>
+);
 
+export function Timeline({ roles }: Props) {
 	return (
 		<ul className="timeline timeline-vertical timeline-snap-icon max-lg:timeline-compact">
-			{roles.map((role, index) => {
-				const hrStyles = getClassNameProps(
-					'mx-10 bg-primary rounded-b-full',
-					index === 0 && 'rounded-t-full', // hr styles for the first list item
-					index === lastIndex && 'rounded-b-full', // hr styles for the last list item
-				);
-
+			{roles.map((role) => {
 				return (
-					<li key={`${role.startDate}-${role.company}`}>
-						<hr {...hrStyles} />
+					<li key={`${role.startDate}-${role.company}`} className="group">
+						{HR_ELEMENT}
 						<TimelineEntry role={role} />
-						<hr {...hrStyles} />
+						{HR_ELEMENT}
 					</li>
 				);
 			})}

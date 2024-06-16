@@ -20,10 +20,12 @@ const SITE_METADATA = getSiteMetadata();
 export function HeroHeader({ expandTitle = false }: Props) {
 	const titleElement = (
 		<Heading className="m-4 text-6xl">
-			<span className="inline md:hidden">
+			<span className="inline md:hidden drop-shadow-emboss">
 				{SITE_METADATA.author.name.short}
 			</span>
-			<span className="hidden md:inline">{SITE_METADATA.author.name.full}</span>
+			<span className="hidden md:inline drop-shadow-emboss">
+				{SITE_METADATA.author.name.full}
+			</span>
 		</Heading>
 	);
 
