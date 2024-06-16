@@ -28,6 +28,13 @@ module.exports = {
 				glass:
 					'radial-gradient(100% 100% at 50% 25%, oklch(var(--n)/.03), oklch(var(--b3)/.03))',
 			},
+			boxShadow: {
+				emboss: 'inset 0 2px 1px 0 oklch(var(--n) / .2)',
+				'emboss-none': 'inset 0 0 1px 0 oklch(var(--n) / .2)',
+			},
+			dropShadow: {
+				emboss: '0 -2px 0 oklch(var(--n))',
+			},
 			fontFamily: {
 				heading: [
 					'Poppins',

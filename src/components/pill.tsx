@@ -12,7 +12,7 @@ interface Props extends PropsWithClassName {
 
 export function Pill({ className, text }: Props) {
 	const classNameProps = getClassNameProps(
-		'inline-block size-fit px-3 py-2 rounded-lg drop-shadow-sm',
+		'inline-block size-fit px-3 py-2 rounded-lg drop-shadow-sm shadow-emboss',
 		className,
 	);
 

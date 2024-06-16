@@ -35,7 +35,7 @@ export function Tabs({ sections, hideIndicator = false }: Props) {
 					currentSectionIndex === i ? (
 						<motion.div
 							key={title}
-							className="w-4 h-1 rounded-full bg-primary"
+							className="w-4 h-1 rounded-full bg-primary shadow-emboss"
 							layoutId="active-tab-indicator"
 						/>
 					) : (
