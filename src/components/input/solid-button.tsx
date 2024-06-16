@@ -5,8 +5,8 @@
 
 import type { Button } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
-import Card from '../card';
-import BaseButton from './base-button';
+import { Card } from '../card';
+import { BaseButton } from './base-button';
 
 // Types
 
@@ -14,7 +14,7 @@ interface SolidButton extends Button {
 	cardClassName?: string;
 }
 
-export default function SolidButton({
+export function SolidButton({
 	className = '',
 	cardClassName = '',
 	disabled,

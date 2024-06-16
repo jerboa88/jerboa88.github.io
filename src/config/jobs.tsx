@@ -5,7 +5,7 @@
 
 import type { RoleConfig } from '../common/types';
 
-export default [
+export const roleConfig = [
 	{
 		type: 'internship',
 		title: 'Systems Analyst',

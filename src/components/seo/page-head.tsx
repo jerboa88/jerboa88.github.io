@@ -24,7 +24,7 @@ const SITE_METADATA = getSiteMetadata();
 // TODO: Replace hardcoded value
 const THEME = getTheme('dark');
 
-export default function PageHead({
+export function PageHead({
 	path,
 	metadata,
 	structuredData,

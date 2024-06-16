@@ -5,7 +5,7 @@
 
 import type { SocialImagesGenerationConfig } from '../common/types';
 
-export default {
+export const socialImagesGenerationConfig = {
 	defaults: {
 		type: 'webp',
 		quality: 100,

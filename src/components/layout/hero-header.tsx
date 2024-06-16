@@ -6,7 +6,7 @@
 import { motion } from 'framer-motion';
 import { getSiteMetadata } from '../../common/config-manager';
 import { TITLE_LAYOUT_ID } from '../../common/constants';
-import Heading from '../../components/text/heading';
+import { Heading } from '../../components/text/heading';
 
 // Types
 
@@ -17,7 +17,7 @@ interface Props {
 // Constants
 const SITE_METADATA = getSiteMetadata();
 
-export default function HeroHeader({ expandTitle = false }: Props) {
+export function HeroHeader({ expandTitle = false }: Props) {
 	const titleElement = (
 		<Heading className="m-4 text-6xl">
 			<span className="inline md:hidden">

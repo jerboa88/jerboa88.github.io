@@ -8,11 +8,11 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { getProjectTypeColor } from '../common/config-manager';
 import type { ProjectInfo } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
-import Card from './card';
-import GhostButton from './input/ghost-button';
-import LinkWrapper from './links/link-wrapper';
-import Pill from './pill';
-import SubsectionHeading from './text/subsection-heading';
+import { Card } from './card';
+import { GhostButton } from './input/ghost-button';
+import { LinkWrapper } from './links/link-wrapper';
+import { Pill } from './pill';
+import { SubsectionHeading } from './text/subsection-heading';
 
 // Types
 
@@ -25,7 +25,7 @@ interface Props {
 const SHOW_ON_CARD_HOVER_STYLES =
 	'opacity-0 mouse-only:group-hover:opacity-100 transition-opacity transition-200';
 
-export default function ProjectCard({ repo }: Props) {
+export function ProjectCard({ repo }: Props) {
 	const ghostButtonClassNameProps = getClassNameProps(
 		'!p-0 m-0',
 		SHOW_ON_CARD_HOVER_STYLES,

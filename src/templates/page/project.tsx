@@ -8,10 +8,10 @@ import { useRef } from 'react';
 import { getSiteMetadata } from '../../common/config-manager';
 import type { ProjectInfo, SocialImagesMetadataProp } from '../../common/types';
 import { getAbsoluteUrl } from '../../common/utilities';
-import PageLayout from '../../components/layout/page-layout';
-import Section from '../../components/layout/section';
-import InlineLink from '../../components/links/inline-link';
-import PageHead from '../../components/seo/page-head';
+import { PageLayout } from '../../components/layout/page-layout';
+import { Section } from '../../components/layout/section';
+import { InlineLink } from '../../components/links/inline-link';
+import { PageHead } from '../../components/seo/page-head';
 import { Article } from '../../components/text/article';
 
 // Types
@@ -26,6 +26,7 @@ interface Props {
 
 const SITE_METADATA = getSiteMetadata();
 
+// biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function ProjectPageTemplate({ pageContext: { repo } }: Props) {
 	return (
 		<PageLayout>

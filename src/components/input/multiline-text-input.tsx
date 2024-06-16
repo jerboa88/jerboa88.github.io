@@ -10,7 +10,7 @@ import type {
 	InputOptions,
 } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
-import BaseInput from './base-input';
+import { BaseInput } from './base-input';
 
 interface Props extends Input {
 	inputOptions?: {
@@ -23,7 +23,7 @@ const defaultInputOptions = {
 	rows: 3,
 };
 
-export default function MultilineTextInput({
+export function MultilineTextInput({
 	inputClassName = '',
 	name,
 	inputOptions = defaultInputOptions,

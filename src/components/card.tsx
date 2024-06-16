@@ -80,7 +80,7 @@ function getBackgroundScale(xCoords: number, zCoords: number) {
 	return 100 * scaleModifier * skewModifier;
 }
 
-export default function Card({
+export function Card({
 	outerClassName = '',
 	middleClassName = '',
 	innerClassName = '',

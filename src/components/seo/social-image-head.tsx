@@ -3,7 +3,7 @@
 	--------------------------------------------------
 */
 
-export default function SocialImageHead() {
+export function SocialImageHead() {
 	// Scale all components by making the root font size proportional to the viewport size
 	return (
 		<>

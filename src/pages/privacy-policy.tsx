@@ -12,10 +12,10 @@ import type {
 	SocialImagesMetadataProp,
 } from '../common/types';
 import { getAbsoluteUrl } from '../common/utilities';
-import PageLayout from '../components/layout/page-layout';
-import Section from '../components/layout/section';
-import SolidButtonLink from '../components/links/solid-button-link';
-import PageHead from '../components/seo/page-head';
+import { PageLayout } from '../components/layout/page-layout';
+import { Section } from '../components/layout/section';
+import { SolidButtonLink } from '../components/links/solid-button-link';
+import { PageHead } from '../components/seo/page-head';
 import { Article } from '../components/text/article';
 
 // Types
@@ -38,6 +38,7 @@ interface DataProp {
 
 const SITE_METADATA = getSiteMetadata();
 
+// biome-ignore lint/style/noDefaultExport: Pages must use default exports
 export default function PrivacyPolicyPage({
 	data,
 	pageContext: { pageMetadata },

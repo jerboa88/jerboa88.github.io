@@ -38,7 +38,7 @@ const ALERT_TYPE_ICON_MAP = {
 	[AlertType.Error]: faCircleExclamation,
 };
 
-export default function GhostAlert({
+export function GhostAlert({
 	className = '',
 	type = AlertType.Info,
 	text,

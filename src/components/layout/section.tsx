@@ -9,7 +9,7 @@ import type {
 	PropsWithClassName,
 } from '../../common/types';
 import { getClassNameProps, toKebabCase } from '../../common/utilities';
-import SectionHeader from './section-header';
+import { SectionHeader } from './section-header';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
 	title?: string;
@@ -17,7 +17,7 @@ interface Props extends PropsWithClassName, PropsWithChildren {
 	responsive?: boolean;
 }
 
-const Section = forwardRef(
+export const Section = forwardRef(
 	(
 		{ className = '', title, renderButton, responsive = true, children }: Props,
 		ref: ForwardedRef<HTMLElement>,
@@ -45,5 +45,3 @@ const Section = forwardRef(
 		);
 	},
 );
-
-export default Section;

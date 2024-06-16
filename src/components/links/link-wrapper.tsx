@@ -10,7 +10,7 @@ import { getClassNameProps } from '../../common/utilities';
 
 interface Props extends Link, PropsWithClassName, PropsWithChildren {}
 
-export default function LinkWrapper({
+export function LinkWrapper({
 	className = '',
 	to,
 	isInternal = false,

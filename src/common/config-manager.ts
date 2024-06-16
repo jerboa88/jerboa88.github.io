@@ -13,13 +13,13 @@ import type {
 	Theme,
 	Url,
 } from '../common/types';
-import colorMappingsConfig from '../config/color-mappings';
-import externalServicesConfig from '../config/external-services';
-import jobsConfig from '../config/jobs';
-import pageMetadataConfig from '../config/pages-metadata';
-import siteMetadataConfig from '../config/site-metadata';
-import socialImagesGenerationConfig from '../config/social-images-generation';
-import themesConfig from '../config/themes';
+import { colorMappingsConfig } from '../config/color-mappings';
+import { externalServicesConfig } from '../config/external-services';
+import { roleConfig as jobsConfig } from '../config/jobs';
+import { pagesMetadataConfig as pageMetadataConfig } from '../config/pages-metadata';
+import { siteMetadataConfig } from '../config/site-metadata';
+import { socialImagesGenerationConfig } from '../config/social-images-generation';
+import { themesConfig } from '../config/themes';
 import { getOrDefault } from './utilities';
 
 // Types

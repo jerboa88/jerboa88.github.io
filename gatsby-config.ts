@@ -128,4 +128,5 @@ const config: GatsbyConfig = {
 	],
 };
 
+// biome-ignore lint/style/noDefaultExport: Gatsby config must use default exports
 export default config;

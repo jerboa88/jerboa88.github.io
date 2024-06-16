@@ -7,14 +7,14 @@ import { motion, useInView } from 'framer-motion';
 import { USE_IN_VIEW_OPTIONS } from '../common/constants';
 import { type PageSection, TooltipPosition } from '../common/types';
 import { getClassNameProps, toKebabCase } from '../common/utilities';
-import GhostButtonLink from './links/ghost-button-link';
+import { GhostButtonLink } from './links/ghost-button-link';
 
 interface Props {
 	sections: PageSection[];
 	hideIndicator?: boolean;
 }
 
-export default function Tabs({ sections, hideIndicator = false }: Props) {
+export function Tabs({ sections, hideIndicator = false }: Props) {
 	// Map is used here because we need to call the same number of hooks every time. Otherwise, React will complain
 	const sectionInViewHooks = sections.map((section) =>
 		// biome-ignore lint/correctness/useHookAtTopLevel: We need a loop to create the right number of hooks. Array order should be consistent

@@ -34,16 +34,11 @@
 		"formatter": {
 			"quoteStyle": "single"
 		},
-		"globals": [
-			"Queries",
-			"React"
-		]
+		"globals": ["Queries", "React"]
 	},
 	"overrides": [
 		{
-			"include": [
-				"404.tsx"
-			],
+			"include": ["404.tsx"],
 			"linter": {
 				"rules": {
 					"style": {
@@ -53,9 +48,7 @@
 			}
 		},
 		{
-			"include": [
-				"card.tsx"
-			],
+			"include": ["card.tsx"],
 			"linter": {
 				"rules": {
 					"style": {

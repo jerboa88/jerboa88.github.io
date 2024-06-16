@@ -8,9 +8,9 @@ import { type PropsWithChildren, StrictMode } from 'react';
 import { SPRING_TRANSITION_PROPS } from '../../common/constants';
 import type { PageSection, PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
-import Footer from './footer';
-import Header from './header';
-import ParticlesBackground from './particles-background';
+import { Footer } from './footer';
+import { Header } from './header';
+import { MemoizedParticlesBackground as ParticlesBackground } from './particles-background';
 
 // Types
 
@@ -28,7 +28,7 @@ const BG_GRADIENT_PROPS = {
 	},
 };
 
-export default function PageLayout({
+export function PageLayout({
 	className = '',
 	expandTitle = false,
 	sections = [],

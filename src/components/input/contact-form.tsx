@@ -20,11 +20,11 @@ import {
 	getOrDefault,
 	getStatusCodeDescription,
 } from '../../common/utilities';
-import GhostAlert from '../ghost-alert';
-import Checkbox from './checkbox';
-import MultilineTextInput from './multiline-text-input';
-import SolidButton from './solid-button';
-import TextInput from './text-input';
+import { GhostAlert } from '../ghost-alert';
+import { Checkbox } from './checkbox';
+import { MultilineTextInput } from './multiline-text-input';
+import { SolidButton } from './solid-button';
+import { TextInput } from './text-input';
 
 // Types
 
@@ -159,7 +159,7 @@ async function computeBotPoisonSolution() {
 	});
 }
 
-export default function ContactForm({ className = '' }: PropsWithClassName) {
+export function ContactForm({ className = '' }: PropsWithClassName) {
 	const formClassNameProps = getClassNameProps(
 		'flex flex-col gap-4 p-0 w-full max-w-xl sm:p-8',
 		className,

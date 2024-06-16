@@ -8,9 +8,9 @@ import { getSiteMetadata } from '../../common/config-manager';
 import { TITLE_LAYOUT_ID } from '../../common/constants';
 import type { PageSection } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
-import Divider from '../divider';
-import Tabs from '../tabs';
-import Heading from '../text/heading';
+import { Divider } from '../divider';
+import { Tabs } from '../tabs';
+import { Heading } from '../text/heading';
 
 // Types
 
@@ -23,7 +23,7 @@ interface Props {
 
 const SITE_METADATA = getSiteMetadata();
 
-export default function Header({ expandTitle = false, sections }: Props) {
+export function Header({ expandTitle = false, sections }: Props) {
 	const headerClassNameProps = getClassNameProps(
 		'fixed top-0 z-30 w-full transition',
 		!expandTitle && 'bg-glass backdrop-blur-md shadow-lg', // Transparent bg when title is expanded

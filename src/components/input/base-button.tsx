@@ -9,9 +9,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FADE_IN_ANIMATION_PROPS } from '../../common/constants';
 import type { Button } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
-import Tooltip from '../tooltip';
+import { Tooltip } from '../tooltip';
 
-export default function BaseButton({
+export function BaseButton({
 	className,
 	iconClassName,
 	textClassName,

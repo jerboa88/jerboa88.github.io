@@ -88,6 +88,4 @@ function ParticlesBackground() {
 }
 
 // Never re-render this component
-const MemoizedParticlesBackground = memo(ParticlesBackground);
-
-export default MemoizedParticlesBackground;
+export const MemoizedParticlesBackground = memo(ParticlesBackground);

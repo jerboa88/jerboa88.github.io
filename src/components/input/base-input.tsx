@@ -14,7 +14,7 @@ import {
 	type PropsWithLayoutAnimations,
 } from '../../common/types';
 import { getClassNameProps, getOrDefault } from '../../common/utilities';
-import GhostAlert from '../ghost-alert';
+import { GhostAlert } from '../ghost-alert';
 
 interface BaseInput extends PropsWithClassName, PropsWithLayoutAnimations {
 	labelClassName?: string;
@@ -26,7 +26,7 @@ interface BaseInput extends PropsWithClassName, PropsWithLayoutAnimations {
 	validationOptions?: InputValidationOptions;
 }
 
-export default function BaseInput({
+export function BaseInput({
 	className = '',
 	labelClassName = '',
 	name,

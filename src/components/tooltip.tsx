@@ -23,7 +23,7 @@ const POSITION_CLASS_MAP = {
 	[TooltipPosition.Bottom]: '!tooltip-bottom',
 };
 
-export default function Tooltip({
+export function Tooltip({
 	className,
 	text,
 	position = TooltipPosition.Top,

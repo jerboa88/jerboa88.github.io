@@ -5,13 +5,13 @@
 
 import type { Role } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
-import TimelineEntry from './timeline-entry';
+import { TimelineEntry } from './timeline-entry';
 
 interface Props {
 	roles: Role[];
 }
 
-export default function Timeline({ roles }: Props) {
+export function Timeline({ roles }: Props) {
 	const lastIndex = roles.length - 1;
 
 	return (

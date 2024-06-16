@@ -19,15 +19,15 @@ import type {
 	SocialImagesMetadataProp,
 } from '../../common/types';
 import { toKebabCase } from '../../common/utilities';
-import ContactForm from '../../components/input/contact-form';
-import HeroHeader from '../../components/layout/hero-header';
-import PageLayout from '../../components/layout/page-layout';
-import Section from '../../components/layout/section';
-import GhostButtonLink from '../../components/links/ghost-button-link';
-import ProjectCardGallery from '../../components/project-card-gallery';
-import PageHead from '../../components/seo/page-head';
+import { ContactForm } from '../../components/input/contact-form';
+import { HeroHeader } from '../../components/layout/hero-header';
+import { PageLayout } from '../../components/layout/page-layout';
+import { Section } from '../../components/layout/section';
+import { GhostButtonLink } from '../../components/links/ghost-button-link';
+import { ProjectCardGallery } from '../../components/project-card-gallery';
+import { PageHead } from '../../components/seo/page-head';
 import { Article } from '../../components/text/article';
-import Timeline from '../../components/timeline';
+import { Timeline } from '../../components/timeline';
 
 // Types
 
@@ -42,6 +42,7 @@ interface Props {
 const SITE_METADATA = getSiteMetadata();
 const JOBS = getJobs();
 
+// biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function IndexPageTemplate({
 	pageContext: { pinnedRepos },
 }: Props) {
