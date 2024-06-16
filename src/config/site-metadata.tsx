@@ -5,7 +5,7 @@
 
 import type { SiteMetadataConfig } from '../common/types';
 
-export const siteMetadataConfig = {
+export const siteMetadataConfig: SiteMetadataConfig = {
 	iconPath: 'images/icon.svg',
 	siteUrl: 'https://johng.io/',
 	sourceUrl: 'https://github.com/jerboa88/jerboa88.github.io/',
@@ -29,4 +29,4 @@ export const siteMetadataConfig = {
 			country: 'Canada',
 		},
 	},
-} as SiteMetadataConfig;
+};

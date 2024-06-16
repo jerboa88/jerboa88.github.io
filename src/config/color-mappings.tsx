@@ -5,7 +5,7 @@
 
 import type { ColorMappingsConfig } from '../common/types';
 
-export const colorMappingsConfig = {
+export const colorMappingsConfig: ColorMappingsConfig = {
 	projectType: {
 		'android app': 'bg-lime-500',
 		extension: 'bg-amber-500',
@@ -22,4 +22,4 @@ export const colorMappingsConfig = {
 		internship: 'bg-secondary',
 		'summer job': 'bg-secondary',
 	},
-} as ColorMappingsConfig;
+};

@@ -5,7 +5,7 @@
 
 import type { PagesMetadataConfig } from '../common/types';
 
-export const pagesMetadataConfig = {
+export const pagesMetadataConfig: PagesMetadataConfig = {
 	'/privacy-policy/': {
 		title: 'Privacy Policy',
 		shortTitle: 'Privacy',
@@ -17,4 +17,4 @@ export const pagesMetadataConfig = {
 		shortTitle: '404',
 		description: "Oof, there's nothing here",
 	},
-} as PagesMetadataConfig;
+};
