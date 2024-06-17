@@ -3,204 +3,176 @@
 	----------------------------------------------
 */
 
+import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
+import type {
+	BgColor,
+	PageMetadata,
+	Role,
+	SocialImageTypes,
+	SocialImagesGenerationConfig,
+	Theme,
+	ThemesConfig,
+	Url,
+} from '../common/types';
+import { colorMappingsConfig } from '../config/color-mappings';
+import { externalServicesConfig } from '../config/external-services';
+import { pagesMetadataConfig } from '../config/pages-metadata';
+import { rolesConfig } from '../config/roles';
+import { siteMetadataConfig } from '../config/site-metadata';
+import { socialImagesGenerationConfig } from '../config/social-images-generation';
+import { themesConfig } from '../config/themes';
+import { getOrDefault } from './utilities';
 
-// Constants
-const config = {
-	metadata: {
-		shortTitle: 'John\'s Portfolio',
-		title: 'John Goodliff - Software Developer & Student',
-		author: 'John Goodliff',
-		authorUsername: 'jerboa88',
-		shortDescription: 'A portfolio site for John Goodliff, a Software Developer and Student based in Edmonton, Alberta.',
-		description: 'A portfolio site for John Goodliff, a Software Developer and Student based in Edmonton, Alberta.',
-		ogImagePath: 'images/og-image.png',
-		ogImageAltText: 'Sample OpenGraph cover image',
-		siteUrl: 'https://johng.io/',
-		githubUrl: 'https://github.com/jerboa88/jerboa88.github.io/',
-		trackingId: 'G-1PTSNX2F57',
-	},
-	theme: {
-		light: {
-			'primary-header': '#F4511E',		// MD Deep Orange 600
-			'primary': '#E64A19',						// MD Deep Orange 700
-			'secondary-header': '#1976D2',	// MD Blue 700
-			'secondary': '#1565C0',					// MD Blue 800
-			'accent': '#673AB7',						// MD Purple 500
-			'neutral': '#111111',
-			'info': '#0277BD',							// MD Light Blue 800
-			'success': '#558B2F',						// MD Light Green 800
-			'warning': '#FF6F00',						// MD Amber 800
-			'error': '#C62828',							// MD Red 800
-			'base-100': 'hsl(0 0% 100%)',
-			'base-200': 'hsl(0 0% 98%)',
-			'base-300': 'hsl(0 0% 96%)',
-			'base-content': '#000000',
-		},
-		dark: {
-			'primary-header': '#FFC107',		// MD Amber 500
-			'primary': '#FFCA28',						// MD Amber 400
-			'secondary-header': '#E91E63',	// MD Pink 500
-			'secondary': '#F06292',					// MD Pink 300
-			'accent': '#26C6DA',						// MD Cyan 400
-			'neutral': '#111111',
-			'info': '#4FC3F7',							// MD Light Blue 300
-			'success': '#AED581',						// MD Light Green 300
-			'warning': '#FFD54F',						// MD Amber 300
-			'error': '#E57373',							// MD Red 300
-			'base-100': '#212121',
-			'base-200': '#111111',
-			'base-300': '#000000',
-			'base-content': '#ffffff',
-		},
-	},
-	// Image generation config to pass to gatsby-plugin-image-generator
-	ogImage: {
-		from: 'images/og-image.png',
-		to: [
-			{
-				path: 'images/og-image.png',
-				size: [1200, 630],
-			}
-		]
-	},
-	// We can generate the webmanifest config from this
-	icons: [
-		{
-			from: 'images/maskable-icon.png',
-			to: [
-				{
-					path: 'icons/maskable-icon.png',
-					size: 512
-				}
-			],
-			options: {
-				optimize: true
-			}
-		},
-		{
-			from: 'images/icon.png',
-			to: [
-				// {
-				// 	path: 'favicon.svg',
-				// 	size: 1024
-				// },
-				{
-					path: 'favicon-32x32.png',
-					size: 32
-				},
-				{
-					path: 'icons/icon-48x48.png',
-					size: 48
-				},
-				{
-					path: 'icons/icon-72x72.png',
-					size: 72
-				},
-				{
-					path: 'icons/icon-96x96.png',
-					size: 96
-				},
-				{
-					path: 'icons/icon-144x144.png',
-					size: 144
-				},
-				{
-					path: 'icons/icon-192x192.png',
-					size: 192
-				},
-				{
-					path: 'icons/icon-256x256.png',
-					size: 256
-				},
-				{
-					path: 'icons/icon-384x384.png',
-					size: 384
-				},
-				{
-					path: 'icons/icon-512x512.png',
-					size: 512
-				}
-			],
-			options: {
-				optimize: true
-			}
-		},
-	],
-};
+// Types
 
-
-// Exports
-
-// Class for loading and formatting configuration data
-export default class ConfigManager {
-	// Return metadata for the site
-	getMetadata() {
-		return config.metadata;
-	}
-
-	// Return a a daisyUI theme given its name
-	getTheme(themeName: 'light' | 'dark') {
-		const theme = config.theme[themeName];
-
-		if (!theme) {
-			throw new Error(`Theme ${themeName} not found`);
-		}
-
-		const bgColor = theme['base-100'];
-
-		return {
-			...theme,
-			// Custom vars for header colors
-			'--ph': theme['primary-header'],
-			'--sh': theme['secondary-header'],
-			'primary-content': bgColor,
-			'secondary-content': bgColor,
-			'accent-content': bgColor,
-			'info-content': bgColor,
-			'success-content': bgColor,
-			'warning-content': bgColor,
-			'error-content': bgColor,
+// Site metadata object used to populate the site's metadata
+type SiteMetadata = {
+	shortTitle: string;
+	title: string;
+	tagline: string;
+	shortDescription: string;
+	description: string;
+	iconPath: string;
+	siteUrl: Url;
+	sourceUrl: Url;
+	author: {
+		name: {
+			first: string;
+			last: string;
+			initial: string;
+			short: string;
+			full: string;
 		};
-	}
-
-	// Returns the OpenGraph image generation config
-	getOgImage() {
-		return config.ogImage;
-	}
-
-	// Returns the icon generation config
-	getIcons() {
-		return config.icons;
-	}
-
-	// Generate icon entries for the site's webmanifest using the provided icon generation config
-	getIconManifestEntries() {
-		// Flatten after mapping as we do not need to keep any info about how the icons are generated
-		return config.icons.flatMap(inputRule => {
-			return inputRule.to.map(outputRule => {
-				return {
-					src: outputRule.path,
-					sizes: `${outputRule.size}x${outputRule.size}`,
-					type: this.getMimeTypeFromPath(outputRule.path),
-					// If the icon name contains `maskable`, set the purpose property to `maskable`
-					purpose: outputRule.path.match(/maskable/) ? 'maskable' : 'any'
-				};
-			});
-		});
-	}
-
-	// Returns the mime type for the provided image path
-	getMimeTypeFromPath(path: string) {
-		if (path.endsWith('.svg')) {
-			return 'image/svg+xml';
-		} else {
-			const match = path.match(/\.(jpg|jpeg|png|webp|gif|avif|tif|tiff)$/i);
-
-			if (!match || match.length < 2) {
-				throw new Error(`Could not determine mime type for image path ${path}`);
-			}
-
-			return `image/${match[1]}`;
-		}
-	}
+		jobTitle: string;
+		alumniOf: string;
+		image: string;
+		username: {
+			twitter: string;
+		};
+		link: {
+			linkedin: string;
+			github: string;
+			twitter: string;
+		};
+		location: {
+			city: string;
+			state: string;
+			country: string;
+		};
+	};
 };
+
+// Returns metadata for the site
+export function getSiteMetadata(): SiteMetadata {
+	const config = siteMetadataConfig;
+	const authorFullName = `${config.author.name.first} ${config.author.name.last}`;
+
+	return {
+		shortTitle: authorFullName,
+		title: `${authorFullName} | ${config.author.jobTitle}`,
+		tagline: `${config.author.jobTitle} & Cat Whisperer`,
+		shortDescription: `Portfolio site for ${authorFullName}`,
+		description: `Portfolio site for ${authorFullName}, a ${config.author.jobTitle} based in ${config.author.location.city}, ${config.author.location.state}.`,
+		iconPath: config.iconPath,
+		siteUrl: config.siteUrl,
+		sourceUrl: config.sourceUrl,
+		author: {
+			name: {
+				first: config.author.name.first,
+				last: config.author.name.last,
+				initial: config.author.name.first[0],
+				short: `${config.author.name.first} ${config.author.name.last[0]}`,
+				full: authorFullName,
+			},
+			jobTitle: config.author.jobTitle,
+			alumniOf: config.author.alumniOf,
+			image: config.author.image,
+			username: {
+				twitter: config.author.username.twitter,
+			},
+			link: {
+				linkedin: `https://www.linkedin.com/in/${config.author.username.linkedin}`,
+				github: `https://github.com/${config.author.username.github}`,
+				twitter: `https://twitter.com/${config.author.username.twitter}`,
+			},
+			location: {
+				city: config.author.location.city,
+				state: config.author.location.state,
+				country: config.author.location.country,
+			},
+		},
+	};
+}
+
+// Returns the metadata for a given page
+export function getPageMetadata(pagePath: string): PageMetadata {
+	const config =
+		pagesMetadataConfig[pagePath as keyof typeof pagesMetadataConfig];
+
+	if (!config) {
+		console.warn(`Page metadata for ${pagePath} not found`);
+	}
+
+	return config;
+}
+
+// Returns the social image generation config for a given type
+export function getSocialImageGenerationConfigDefaults(): SocialImagesGenerationConfig['defaults'] {
+	return socialImagesGenerationConfig.defaults;
+}
+
+// Returns the social image generation config for a given type
+export function getSocialImageGenerationConfigForType(
+	type: SocialImageTypes,
+): JobOptions {
+	const config =
+		socialImagesGenerationConfig.types[
+			type as keyof (typeof socialImagesGenerationConfig)['types']
+		];
+
+	if (!config) {
+		console.warn(`Social image generation config for '${type}' not found`);
+	}
+
+	return config;
+}
+
+export function getExternalServices() {
+	return externalServicesConfig;
+}
+
+// Returns a list of roles with formatted date objects
+export function getRoles(): Role[] {
+	return rolesConfig.map((role) => ({
+		...role,
+		startDate: new Date(role.startDate),
+		endDate: new Date(role.endDate),
+	}));
+}
+
+// Returns a daisyUI theme given its name
+export function getTheme(themeName: keyof ThemesConfig): Theme {
+	const config = themesConfig[themeName];
+
+	if (!config) {
+		throw new Error(`Theme '${themeName}' not found`);
+	}
+
+	return config;
+}
+
+// Returns the color for a given project type
+export function getProjectTypeColor(projectType: string): BgColor | '' {
+	const colorMap = colorMappingsConfig.projectType;
+	const key = projectType.toLowerCase();
+
+	return getOrDefault(colorMap, key, '');
+}
+
+// Returns the color for a given role type
+export function getRoleTypeColor(roleType: string): BgColor | '' {
+	const colorMap = colorMappingsConfig.roleType;
+	const key = roleType.toLowerCase();
+
+	return getOrDefault(colorMap, key, '');
+}

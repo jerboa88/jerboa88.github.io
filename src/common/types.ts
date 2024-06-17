@@ -3,125 +3,314 @@
 	--------------------------------
 */
 
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import type { LayoutProps } from 'framer-motion';
+import type {
+	DefaultOptions,
+	JobOptions,
+} from 'gatsby-plugin-component-to-image/lib/types';
+import type { Context, RefObject } from 'react';
+import type {
+	FieldErrors,
+	UseFormRegister,
+	UseFormRegisterReturn,
+} from 'react-hook-form';
 
-import { Context, RefObject } from 'react';
+export type EmptyObject = Record<string, never>;
 
+// Props for components that accept an optional class name
+export interface PropsWithClassName {
+	className?: string;
+}
 
-export interface DaisyUiThemeInterface {
-	'accent': string;
+// Props for components that accept optional layout animations
+export interface PropsWithLayoutAnimations {
+	layout?: LayoutProps['layout'];
+	layoutRoot?: LayoutProps['layoutRoot'];
+}
+
+// Tailwind CSS background color
+export type BgColor = `bg-${string}`;
+
+// Absolute path
+export type Path = `/${string}`;
+
+// HTTPS URL
+export type Url = `https://${string}`;
+
+// Raw external services config
+export interface ExternalServicesConfig {
+	botpoisonPublicKey: `pk_${string}`;
+	contactFormPostUrl: Url;
+}
+
+// Raw site metadata config
+export interface SiteMetadataConfig {
+	iconPath: string;
+	siteUrl: Url;
+	sourceUrl: Url;
+	author: {
+		name: {
+			first: string;
+			last: string;
+		};
+		jobTitle: string;
+		alumniOf: string;
+		image: string;
+		username: {
+			linkedin: string;
+			github: string;
+			twitter: string;
+		};
+		location: {
+			city: string;
+			state: string;
+			country: string;
+		};
+	};
+}
+
+// Page metadata fields
+export interface PageMetadata {
+	title: string;
+	shortTitle: string;
+	description: string;
+}
+
+// Page metadata added to pageContext when pages are created
+export interface PageMetadataProp {
+	pageMetadata: PageMetadata;
+}
+
+// Raw pages metadata config
+export interface PagesMetadataConfig {
+	[key: Path]: PageMetadata;
+}
+
+// TODO: Use this type in interfaces below
+// TODO: Change this to an enum
+export type SocialImageTypes = 'og' | 'twitter';
+
+// Raw social image metadata config
+export interface SocialImagesGenerationConfig {
+	defaults: DefaultOptions;
+	types: {
+		og: JobOptions;
+		twitter: JobOptions;
+	};
+}
+
+// Social image metadata added to the pageContext of pages when they are created
+export interface SocialImagesMetadataProp {
+	socialImagesMetadata: {
+		og: JobOptions;
+		twitter: JobOptions;
+	};
+}
+
+// Open Graph image metadata added to the pageContext of gatsby-plugin-component-to-image components when they are created
+export interface ImageMetadataProp {
+	imageMetadata: JobOptions;
+}
+
+// Theme object used to style the site
+export type Theme = Partial<{
+	primary: string;
+	'primary-content': string;
+	secondary: string;
+	'secondary-content': string;
+	accent: string;
 	'accent-content': string;
+	neutral: string;
+	'neutral-content': string;
 	'base-100': string;
 	'base-200': string;
 	'base-300': string;
 	'base-content': string;
-	'neutral': string;
-	'neutral-content': string;
-	'neutral-focus': string;
-	'primary': string;
-	'primary-content': string;
-	'secondary': string;
-	'secondary-content': string;
+	info: string;
+	'info-content': string;
+	success: string;
+	'success-content': string;
+	warning: string;
+	'warning-content': string;
+	error: string;
+	'error-content': string;
+}>;
+
+// Raw themes config used to generate theme objects
+export interface ThemesConfig {
+	light: Theme;
+	dark: Theme;
 }
 
-
-// This needs to be a type rather than an interface due to existing TS 'functionality'
-// See https://github.com/microsoft/TypeScript/issues/15300 for more details
-export type MetadataInterface = {
-	shortTitle: string;
-	title: string;
-	author: string;
-	authorUsername: string;
-	shortDescription: string;
-	description: string;
-	ogImagePath: string;
-	ogImageAltText: string;
-	siteUrl: string;
-	githubUrl: string;
-	trackingId: string;
+// Color mappings for project types
+export interface ProjectTypeColorMappings {
+	'android app': BgColor;
+	extension: BgColor;
+	'cli app': BgColor;
+	'js library': BgColor;
+	'node.js module': BgColor;
+	markdown: BgColor;
+	website: BgColor;
+	'web app': BgColor;
+	'gimp plugin': BgColor;
+	other: BgColor;
 }
 
-
-export type ThemeInterface = {
-	'primary-header': string;
-	'primary': string;
-	'secondary-header': string;
-	'secondary': string;
-	'accent': string;
-	'neutral': string;
-	'info': string;
-	'success': string;
-	'warning': string;
-	'error': string;
-	'base-100': string;
-	'base-200': string;
-	'base-300': string;
+// Color mappings for role types
+export interface RoleTypeColorMappings {
+	internship: BgColor;
+	'summer job': BgColor;
 }
 
+// Raw color mappings config used to generate color mappings
+export interface ColorMappingsConfig {
+	projectType: ProjectTypeColorMappings;
+	roleType: RoleTypeColorMappings;
+}
 
-export interface SectionInterface {
-	id: string;
+export interface PageSection {
 	title: string;
 	ref: RefObject<HTMLElement>;
 }
 
+export interface Link {
+	to: string;
+	isInternal?: boolean;
+	rel?: string;
+}
 
-export interface ProjectLanguageInterface {
+export enum TooltipPosition {
+	Left = 0,
+	Right = 1,
+	Top = 2,
+	Bottom = 3,
+}
+
+export interface Button extends PropsWithClassName, PropsWithLayoutAnimations {
+	iconClassName?: string;
+	textClassName?: string;
+	tooltipClassName?: string;
+	type?: React.ButtonHTMLAttributes<any>['type'];
+	icon?: IconDefinition;
+	text?: string | number;
+	tooltipText?: string;
+	tooltipPosition?: TooltipPosition;
+	disabled?: boolean;
+	responsive?: boolean;
+	flip?: boolean;
+}
+
+export type ButtonElementRenderFunction = ({
+	className,
+	tooltipPosition,
+}: {
+	className: string;
+	tooltipPosition: TooltipPosition;
+}) => React.JSX.Element;
+
+// Possible options for input validation using react-hook-form
+export interface InputValidationOptions {
+	minLength?: number;
+	maxLength?: number;
+	pattern?: RegExp;
+	required?: boolean;
+	disabled?: boolean;
+}
+
+// Common options for different input elements
+export interface InputOptions {
+	tabIndex?: React.HTMLAttributes<HTMLInputElement>['tabIndex'];
+	// autocomplete is not supposed to have any effect on checkbox and radio inputs, but Firefox uses it anyway
+	autoComplete?: React.InputHTMLAttributes<HTMLInputElement>['autoComplete'];
+}
+
+export type InputElementRenderFunction = (
+	props: UseFormRegisterReturn<string>,
+) => React.JSX.Element;
+
+export interface Input extends PropsWithClassName, PropsWithLayoutAnimations {
+	labelClassName?: string;
+	inputClassName?: string;
+	name: string;
+	label?: string;
+	register: UseFormRegister<any>;
+	errors: FieldErrors<any>;
+	validationOptions?: InputValidationOptions;
+}
+
+export enum AlertType {
+	Info = 0,
+	Success = 1,
+	Warning = 2,
+	Error = 3,
+}
+
+export interface ProjectLanguage {
 	name: string;
 	color: string;
 }
 
-
-export interface ProjectInfoInterface {
+export interface ProjectInfo {
 	slug: string;
 	shortDesc: string;
-	homepageUrl: string;
-	githubUrl: string;
-	imageUrl: string;
+	homepageUrl: Url;
+	githubUrl: Url;
+	imageUrl: Url;
 	stargazers: number;
 	updatedAt: string;
 	license: string;
-	languages: ProjectLanguageInterface[];
+	licenseUrl: Url;
+	languages: ProjectLanguage[];
 	name: string;
 	longDesc: string;
 	typeName: string;
 	typeColor: string;
 }
 
-
-// Queries.PinnedRepoQueryQuery['github']['user']['pinnedItems']
-export type PinnedRepoResponseInterface = {
-	name: string;
-	description: string | null;
-	homepageUrl: any;
-	usesCustomOpenGraphImage: boolean;
-	openGraphImageUrl: any;
-	stargazerCount: number;
-	updatedAt: any;
-	githubUrl: any;
-	languages: {
-		nodes: ({
-			name: string;
-			color: string | null;
-		} | null)[] | null;
-	} | null;
-	licenseInfo: {
-		spdxId: string | null;
-		name: string;
-		url: any;
-	} | null;
-	readmeFromMaster: {} | {
-		text: string | null;
-	} | null;
-	readmeFromMain: {} | {
-		text: string | null;
-	} | null;
-	readmeFromGhPages: {} | {
-		text: string | null;
-	} | null;
+// Raw role config
+export interface RoleConfig {
+	type: 'internship' | 'summer job';
+	title: string;
+	company: string;
+	startDate: string;
+	endDate: string;
+	location: string;
+	tasks: string[];
 }
 
+// Role object used to represent jobs and volunteer positions
+export interface Role {
+	type: 'internship' | 'summer job';
+	title: string;
+	company: string;
+	startDate: Date;
+	endDate: Date;
+	location: string;
+	tasks: string[];
+}
 
-export type ToggleContextInterface = Context<{
+export type PinnedReposResponse = NonNullable<
+	NonNullable<
+		NonNullable<Queries.PinnedReposQuery['github']>['user']
+	>['pinnedItems']['nodes']
+>[number] extends infer R
+	? R extends { readonly readmeFromMain: unknown }
+		? R
+		: never
+	: never;
+
+export type ReadmeResponse = NonNullable<
+	NonNullable<
+		NonNullable<Queries.PinnedReposQuery['github']>['user']
+	>['pinnedItems']['nodes']
+>[number] extends infer R
+	? R extends { readonly readmeFromMain: unknown }
+		? R['readmeFromMain']
+		: never
+	: never;
+
+export type ToggleContext = Context<{
 	isEnabled: boolean;
 	toggle: () => void;
-}>
+}>;

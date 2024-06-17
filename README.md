@@ -1,9 +1,9 @@
 <!-- Project Header -->
 <div align="center">
-  <img class="projectLogo" src="src/images/icon.png" alt="Project logo" title="Project logo" width="256">
+  <img class="projectLogo" src="src/images/icon.svg" alt="Project logo" title="Project logo" width="256">
 
   <h1 class="projectName">
-    <a href="https://johng.io">johng.io</a>
+    <a href="https://johng.io" title="Project URL">johng.io</a>
   </h1>
 
   <p class="projectBadges">
@@ -13,6 +13,9 @@
     <a href="LICENSE">
       <img src="https://img.shields.io/github/license/jerboa88/jerboa88.github.io.svg" alt="Project license" title="Project license"/>
     </a>
+    <a href="https://johng.io" title="Project URL">
+			<img src="https://img.shields.io/website?url=https%3A%2F%2Fjohng.io&up_message=johng.io%20%E2%86%97" alt="Project URL" title="Project URL">
+		</a>
   </p>
 
   <p class="projectDesc">
@@ -24,11 +27,15 @@
 
 
 ## Installation
-1. Install Node.js and NPM (if they are not already set up on your system). See [nodejs.org](https://nodejs.org/) for more details.
-2. Install Yarn 3 (if it is not already set up on your system). See the [Yarn docs](https://yarnpkg.com/getting-started/install) for more details.
-3. Clone the repo with `https://github.com/jerboa88/jerboa88.github.io.git`. Alternatively, you can download the repository as a zip file and extract it.
-4. Enter the project root with `cd jerboa88.github.io`.
-5. Use `yarn install` to install the app and all of its dependencies.
+### Prerequisites
+
+- Node.js and NPM (see [nodejs.org](https://nodejs.org/) for more details)
+- Yarn 4 (see the [Yarn docs](https://yarnpkg.com/getting-started/install) for more details)
+
+### Setup
+1. Clone the repo with `https://github.com/jerboa88/jerboa88.github.io.git`. Alternatively, you can download the repository as a zip file and extract it.
+2. Enter the project root with `cd jerboa88.github.io`.
+4. Use `yarn install` to install the app and all of its dependencies.
 
 
 ## Usage
@@ -42,6 +49,13 @@ There are two ways to build & serve the site:
 `yarn clean` can be used to clear the local Gatsby cache if you encounter any issues with stale data/dependencies.
 
 See the [Gatsby CLI docs](https://www.gatsbyjs.com/docs/reference/gatsby-cli/) for additional commands and options. You will likely have to prefix commands with `yarn` to make sure package resolution works properly. For example, the above `yarn develop` is actually just a shortcut for `yarn gatsby develop`.
+
+
+## Contributing
+This project is not open to code contributions, but feedback and bug reports are always welcome.
+
+### Versioning
+x.1 releases mark the final update for a given design, while x.0 releases are reserved for major redesigns. Changes between the first and last release of a design are not explicitly versioned.
 
 
 ## License

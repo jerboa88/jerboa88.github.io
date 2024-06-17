@@ -3,111 +3,77 @@
 	------------------------------------------
 */
 
-
-import React, { useCallback, useState } from 'react';
-import { Link } from 'gatsby';
-import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { getProjectImage } from '../common/utilities';
-import { ProjectInfoInterface } from '../common/types';
-import { H3, P, C } from '../components/text-components';
-import Pill from '../components/pill';
-import TagsWidget from '../components/tags-widget';
-import { IconButton } from '../components/button-components';
-import * as styles from '../styles/project-card.module.css';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { getProjectTypeColor } from '../common/config-manager';
+import type { ProjectInfo } from '../common/types';
+import { getClassNameProps } from '../common/utilities';
+import { Card } from './card';
+import { GhostButton } from './input/ghost-button';
+import { LinkWrapper } from './links/link-wrapper';
+import { Pill } from './pill';
+import { SubsectionHeading } from './text/subsection-heading';
 
+// Types
 
-interface CardRotationInfoInterface {
-	x: number;
-	y: number;
-	correctionRads: number;
-	isFlipped: boolean;
+interface Props {
+	repo: ProjectInfo;
 }
 
-interface ProjectCardPropsInterface {
-	repo: ProjectInfoInterface;
-}
+// Constants
 
-export default function ProjectCard({ repo }: ProjectCardPropsInterface) {
-	const [state, setState] = useState<CardRotationInfoInterface>({
-		x: 0,
-		y: 0,
-		correctionRads: 0,
-		isFlipped: false
-	});
+const SHOW_ON_CARD_HOVER_STYLES =
+	'opacity-0 mouse-only:group-hover:opacity-100 transition-opacity transition-200';
 
-	const handleMouseEnter = useCallback((event: any) => {
-		if (!state.isFlipped) {
-			const { top, bottom, right, left } = event.target.getBoundingClientRect();
-
-			// Get cursor position relative to element
-			const x = (((event.clientX - left) / (right - left)) - 0.5) * 2;
-			const y = -(((event.clientY - top) / (bottom - top)) - 0.5) * 2;
-
-			// If we rotate around a single axis vector, the card will not always be in the correct orientation
-			// Calculate a rotation around the Z axis to correct this
-			const correctionRads = Math.atan2(x, y) - Math.atan2(y, x) - Math.PI / 2;
-
-			setState({
-				x: x,
-				y: y,
-				correctionRads: correctionRads,
-				isFlipped: true
-			});
-		}
-	}, [state]);
-
-	const handleMouseLeave = useCallback(() => {
-		if (state.isFlipped) {
-			setState({
-				x: 0,
-				y: 0,
-				correctionRads: 0,
-				isFlipped: false
-			});
-		}
-	}, [state]);
+export function ProjectCard({ repo }: Props) {
+	const ghostButtonClassNameProps = getClassNameProps(
+		'!p-0 m-0',
+		SHOW_ON_CARD_HOVER_STYLES,
+	);
+	const pillClassNameProps = getClassNameProps(
+		'border',
+		SHOW_ON_CARD_HOVER_STYLES,
+	);
+	const projectTypeColor = getProjectTypeColor(repo.typeName);
 
 	return (
-		<Link to={`/${repo.slug}`} className="group">
-			{/* TODO: Use pointer-events-none to disable Link element before card is fully flipped. May need to add an event listener on to know when card has finished flipping? Or prevent default on first tap event */}
-			{/* TODO: Move Link element to cardBack component instead? */}
-			{/* TODO: Add events for touch */}
-			<div role='presentation' className={`flex flex-col items-start text-ellipsis ${styles.card}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-				<div className={`relative flex z-40 justify-center align-middle bg-red-500 w-full h-64 rounded-2xl overflow-hidden transition-transform transform-gpu duration-700 ease-out`} style={{
-					background: `url(${getProjectImage(repo.imageUrl)}) center center / cover no-repeat`,
-					transform: `rotate3d(${state.y}, ${state.x}, 0, 180deg) rotate(${state.correctionRads}rad)`
-				}}>
-					<C>Overlay for lighting FX</C>
-					<div className={`absolute z-30 w-[200%] h-[200%] top-[-50%] pointer-events-none transition-transform duration-700 ease-out ${styles.overlay}`} style={{
-						transform: `rotate(${-state.correctionRads}rad) rotate3d(${-state.y}, ${-state.x}, 0, -180deg)`
-					}} />
-
-					<C>Back of Card</C>
-					<div className={`absolute flex z-20 w-full h-full p-8 items-center rounded-2xl opacity-0 transition-opacity transform-gpu duration-600 group-hover:opacity-100 ${styles.cardBack}`} style={{ background: `${repo.typeColor}cc` }}>
-						<IconButton icon={faExpand} className='absolute top-0 right-0' />
-						<P className={`origin-center my-0 mx-auto drop-shadow group-hover:drop-shadow-md`}>{repo.shortDesc}</P>
-
-						<C>Project type & language widget</C>
-						<div className='absolute top-0 left-0 flex flex-row w-max m-4 rounded-full bg-black/10 shadow-inner'>
-							<Pill className='self-center' text={repo.typeName} color={repo.typeColor} />
-							<TagsWidget className='self-center' tags={repo.languages} />
+		<LinkWrapper to={repo.githubUrl}>
+			<Card outerClassName="size-full">
+				<div className="flex flex-col justify-between items-start p-6 align-middle size-full text-ellipsis group">
+					<div className="flex flex-row justify-between items-center pr-2 w-full">
+						<Pill text={repo.typeName} className={projectTypeColor} />
+						<GhostButton
+							icon={faGithub}
+							{...ghostButtonClassNameProps}
+							disabled
+						/>
+					</div>
+					<div className="flex flex-row justify-center w-full">
+						{/* TODO: Put project icon here? */}
+						<div className="flex flex-col justify-center p-8 px-10 h-full rounded-2xl z-16 text-wrap">
+							<SubsectionHeading className="font-semibold">
+								{repo.name}
+							</SubsectionHeading>
+							<span className="text-wrap">{repo.shortDesc}</span>
 						</div>
 					</div>
-
-					<C>Front of Card</C>
-					<div className={`absolute flex z-10 w-full h-full p-8 items-center rounded-2xl opacity-100 transition-opacity transform-gpu duration-600 group-hover:opacity-0`}>
-						<Pill className='absolute top-0 right-0 m-4' text={repo.typeName} color={repo.typeColor} />
-						<IconButton icon={faGithub} className='absolute top-0 left-0' disabled />
+					<div className="flex flex-row justify-between items-center pr-2 w-full">
+						<div className="flex flex-row gap-2 justify-start items-center">
+							{repo.languages.map(({ name }) => (
+								<Pill key={name} text={name} {...pillClassNameProps} />
+							))}
+						</div>
+						<GhostButton
+							icon={faStar}
+							text={repo.stargazers}
+							className="!p-0"
+							iconClassName="text-xl"
+							textClassName="font-bold"
+							disabled
+						/>
 					</div>
 				</div>
-
-				<div className="mx-2 text-left group-hover:scale-105 transition-transform transform-gpu duration-600">
-					<H3 className="group-hover:drop-shadow-md font-semibold">
-						{repo.name}
-					</H3>
-				</div>
-			</div>
-		</Link >
+			</Card>
+		</LinkWrapper>
 	);
 }

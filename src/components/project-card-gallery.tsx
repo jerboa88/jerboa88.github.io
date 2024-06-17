@@ -3,23 +3,25 @@
 	---------------------------
 */
 
+import type { ProjectInfo, PropsWithClassName } from '../common/types';
+import { getClassNameProps } from '../common/utilities';
+import { ProjectCard } from '../components/project-card';
 
-import React from 'react';
-import { ProjectInfoInterface } from '../common/types';
-import ProjectCard from '../components/project-card';
-
-
-interface ProjectCardGalleryPropsInterface {
-	className?: string;
-	projects: ProjectInfoInterface[];
+interface Props extends PropsWithClassName {
+	projects: ProjectInfo[];
 }
 
-export default function ProjectCardGallery({ className = '', projects }: ProjectCardGalleryPropsInterface) {
+export function ProjectCardGallery({ className, projects }: Props) {
+	const classNameProps = getClassNameProps(
+		'grid grid-flow-row-dense flex-1 w-full gap-10 grid-cols-1 xl:grid-cols-2',
+		className,
+	);
+
 	return (
-		<div className={`grid gap-10 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ${className}`}>
-			{
-				projects.map(repo => <ProjectCard key={repo.slug} repo={repo}></ProjectCard>)
-			}
+		<div {...classNameProps}>
+			{projects.map((repo) => (
+				<ProjectCard key={repo.slug} repo={repo} />
+			))}
 		</div>
 	);
 }

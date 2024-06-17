@@ -3,141 +3,116 @@
 	-------------------------
 */
 
-
-import type { GatsbyConfig } from 'gatsby';
 import dotenv from 'dotenv';
-import ConfigManager from './src/common/config-manager';
-import { MetadataInterface } from './src/common/types';
+import type { GatsbyConfig } from 'gatsby';
+import {
+	getSiteMetadata,
+	getSocialImageGenerationConfigDefaults,
+	getTheme,
+} from './src/common/config-manager';
+import { SOCIAL_IMAGES_DIR } from './src/common/constants';
+import { getAbsoluteUrl } from './src/common/utilities';
+// biome-ignore lint/style/noNamespaceImport: We need to import the entire Tailwind CSS configuration file
 import * as tailwindConfig from './tailwind.config';
 
-
-const configManager = new ConfigManager();
-const metadata = configManager.getMetadata();
-const lightTheme = configManager.getTheme('light');
-const darkTheme = configManager.getTheme('dark');
-
+const SITE_METADATA = getSiteMetadata();
+const DARK_THEME = getTheme('dark');
 
 // Load environment variables from relevant .env file
 dotenv.config({
 	path: `.env.${process.env.NODE_ENV}`,
 });
 
-
 const config: GatsbyConfig = {
-	siteMetadata: {
-		...metadata as MetadataInterface,
-		lightTheme,
-		darkTheme
-	},
+	siteMetadata: SITE_METADATA,
+	// Enable the new JSX transform so that we can use JSX without importing React
+	jsxRuntime: 'automatic',
 	graphqlTypegen: {
-		typesOutputPath: `src/common/gatsby-types.d.ts`,
+		typesOutputPath: 'src/common/gatsby-types.d.ts',
 	},
 	plugins: [
 		'gatsby-plugin-image',
+		// Required by gatsby-plugin-image
 		'gatsby-plugin-sharp',
+		// Required by gatsby-plugin-image for dynamic images
 		'gatsby-transformer-sharp',
-		'gatsby-plugin-react-helmet',
+		{
+			resolve: 'gatsby-plugin-component-to-image',
+			options: getSocialImageGenerationConfigDefaults(),
+		},
 		{
 			resolve: 'gatsby-plugin-postcss',
 			options: {
 				postCssPlugins: [
 					require('tailwindcss')(tailwindConfig),
-					require('autoprefixer')
+					require('autoprefixer'),
 				],
 			},
 		},
 		{
 			resolve: 'gatsby-plugin-sitemap',
 			options: {
-				// Generate sitemaps at the root of the site
+				// The sitemap index will be generated at /sitemap-index.xml
 				output: '/',
-				serialize: ({ path }: { path: string }) => {
-					return {
-						url: path,
-						changefreq: 'monthly'
-					}
-				},
-			}
+				serialize: ({ path }: { path: string }) => ({
+					url: path,
+					changefreq: 'monthly',
+				}),
+				// Prevent temporary components rendered by gatsby-plugin-open-graph-images from being included in the sitemap
+				excludes: [`/${SOCIAL_IMAGES_DIR}/**/*`],
+			},
 		},
 		{
 			resolve: 'gatsby-plugin-robots-txt',
 			options: {
 				// Link to the sitemap index generated above
-				sitemap: new URL('sitemap-index.xml', metadata.siteUrl).toString(),
+				sitemap: getAbsoluteUrl('sitemap-index.xml').toString(),
 				policy: [
 					{
 						userAgent: '*',
-						allow: '/'
-					}
-				]
-			}
-		},
-		{
-			resolve: 'gatsby-plugin-google-gtag',
-			options: {
-				trackingIds: [
-					metadata.trackingId
+						allow: '/',
+					},
 				],
-				gtagConfig: {
-					// Opt-out of personalized advertising features
-					anonymize_ip: true,
-					allow_google_signals: false,
-					allow_ad_personalization_signals: false
-				},
-				pluginConfig: {
-					head: true
-				}
-			}
+			},
 		},
-		// {
-		// 	resolve: 'gatsby-plugin-image-generator',
-		// 	options: {
-		// 		generate: [
-		// 			configManager.getOgImage(),
-		// 			...configManager.getIcons()
-		// 		]
-		// 	}
-		// },
 		{
 			resolve: 'gatsby-plugin-manifest',
 			options: {
-				name: metadata.title,
-				short_name: metadata.shortTitle,
+				name: SITE_METADATA.title,
+				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
+				short_name: SITE_METADATA.shortTitle,
+				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
 				start_url: '/',
-				background_color: darkTheme['base-100'],
-				theme_color: darkTheme['primary'],
+				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
+				background_color: DARK_THEME['base-100'],
+				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
+				theme_color: DARK_THEME.primary,
 				display: 'standalone',
-				icons: configManager.getIconManifestEntries(),
-				// Favicon declarations and theme color meta tags are added to the document head manually using React Helmet
-				include_favicon: false,
-				theme_color_in_head: false
-			}
+				icon: `${__dirname}/src/${SITE_METADATA.iconPath}`,
+				crossOrigin: 'use-credentials',
+			},
 		},
-		// This plugin need to be listed after gatsby-plugin-manifest
+		// This plugin needs to be listed after gatsby-plugin-manifest so that it can cache the generated manifest.webmanifest
 		'gatsby-plugin-offline',
-		{
-			resolve: 'gatsby-plugin-react-svg',
-			options: {
-				rule: {
-					include: /\.svg$/
-				}
-			}
-		},
-		{
-			resolve: 'gatsby-plugin-web-font-loader',
-			options: {
-				google: {
-					families: ['Montserrat:900', 'Open Sans:400']
-				}
-			}
-		},
 		{
 			resolve: 'gatsby-source-filesystem',
 			options: {
-				'name': 'images',
-				'path': './src/images/'
+				name: 'content',
+				path: `${__dirname}/src/content/`,
 			},
-			__key: 'images'
+		},
+		{
+			resolve: 'gatsby-transformer-remark',
+			options: {
+				plugins: [
+					{
+						resolve: 'gatsby-remark-autolink-headers',
+						options: {
+							isIconAfterHeader: true,
+						},
+					},
+				],
+			},
 		},
 		{
 			resolve: 'gatsby-source-graphql',
@@ -146,11 +121,12 @@ const config: GatsbyConfig = {
 				fieldName: 'github',
 				url: 'https://api.github.com/graphql',
 				headers: {
-					Authorization: `Bearer ${process.env.GH_TOKEN}`,
+					authorization: `Bearer ${process.env.GH_TOKEN}`,
 				},
 			},
-		}
-	]
+		},
+	],
 };
 
+// biome-ignore lint/style/noDefaultExport: Gatsby config must use default exports
 export default config;

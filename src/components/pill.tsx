@@ -3,21 +3,22 @@
 	-----------
 */
 
+import type { PropsWithClassName } from '../common/types';
+import { getClassNameProps } from '../common/utilities';
 
-import React from 'react';
-import { P } from '../components/text-components';
-
-
-interface PillPropsInterface {
-	className?: string;
+interface Props extends PropsWithClassName {
 	text: string;
-	color: string;
 }
 
-export default function Pills({ className = '', text, color }: PillPropsInterface) {
+export function Pill({ className, text }: Props) {
+	const classNameProps = getClassNameProps(
+		'inline-block size-fit px-3 py-2 rounded-lg drop-shadow-sm shadow-emboss',
+		className,
+	);
+
 	return (
-		<div key={text} className={`inline-block px-3 py-2 rounded-full drop-shadow-sm ${className}`} style={{ background: `${color}` }}>
-			<P className='block m-0'>{text}</P>
+		<div key={text} {...classNameProps}>
+			<span className="text-sm">{text}</span>
 		</div>
 	);
 }
