@@ -7313,7 +7313,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/axios-npm-0.21.4-e278873748-da644592cb.zip/node_modules/axios/",\
         "packageDependencies": [\
           ["axios", "npm:0.21.4"],\
-          ["follow-redirects", "virtual:e278873748b4e9d158db595d2f6cb0351c74052f52b53924aec4d9299e7b6babfb62aead374cf2f6e453bc8bea3b052380dc6b1137a162bbfc102bbb1c8cac42#npm:1.15.5"]\
+          ["follow-redirects", "virtual:e278873748b4e9d158db595d2f6cb0351c74052f52b53924aec4d9299e7b6babfb62aead374cf2f6e453bc8bea3b052380dc6b1137a162bbfc102bbb1c8cac42#npm:1.15.6"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -11396,17 +11396,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["follow-redirects", [\
-      ["npm:1.15.5", {\
-        "packageLocation": "./.yarn/cache/follow-redirects-npm-1.15.5-9d14db76ca-d467f13c1c.zip/node_modules/follow-redirects/",\
+      ["npm:1.15.6", {\
+        "packageLocation": "./.yarn/cache/follow-redirects-npm-1.15.6-50635fe51d-70c7612c4c.zip/node_modules/follow-redirects/",\
         "packageDependencies": [\
-          ["follow-redirects", "npm:1.15.5"]\
+          ["follow-redirects", "npm:1.15.6"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:e278873748b4e9d158db595d2f6cb0351c74052f52b53924aec4d9299e7b6babfb62aead374cf2f6e453bc8bea3b052380dc6b1137a162bbfc102bbb1c8cac42#npm:1.15.5", {\
-        "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-bc31d41c99/0/cache/follow-redirects-npm-1.15.5-9d14db76ca-d467f13c1c.zip/node_modules/follow-redirects/",\
+      ["virtual:e278873748b4e9d158db595d2f6cb0351c74052f52b53924aec4d9299e7b6babfb62aead374cf2f6e453bc8bea3b052380dc6b1137a162bbfc102bbb1c8cac42#npm:1.15.6", {\
+        "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-0e75712e65/0/cache/follow-redirects-npm-1.15.6-50635fe51d-70c7612c4c.zip/node_modules/follow-redirects/",\
         "packageDependencies": [\
-          ["follow-redirects", "virtual:e278873748b4e9d158db595d2f6cb0351c74052f52b53924aec4d9299e7b6babfb62aead374cf2f6e453bc8bea3b052380dc6b1137a162bbfc102bbb1c8cac42#npm:1.15.5"],\
+          ["follow-redirects", "virtual:e278873748b4e9d158db595d2f6cb0351c74052f52b53924aec4d9299e7b6babfb62aead374cf2f6e453bc8bea3b052380dc6b1137a162bbfc102bbb1c8cac42#npm:1.15.6"],\
           ["@types/debug", null],\
           ["debug", null]\
         ],\
