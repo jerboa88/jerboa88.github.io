@@ -5,7 +5,7 @@
 
 import type { RoleConfig } from '../common/types';
 
-export const rolesConfig = [
+export const rolesConfig: RoleConfig[] = [
 	{
 		type: 'internship',
 		title: 'Systems Analyst',
@@ -34,4 +34,4 @@ export const rolesConfig = [
 			'Monitored actively changing flight arrival/departure times to ensure no delays were taken',
 		],
 	},
-] as RoleConfig[];
+];

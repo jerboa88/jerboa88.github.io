@@ -11,6 +11,7 @@ import type {
 	SocialImageTypes,
 	SocialImagesGenerationConfig,
 	Theme,
+	ThemesConfig,
 	Url,
 } from '../common/types';
 import { colorMappingsConfig } from '../config/color-mappings';
@@ -150,7 +151,7 @@ export function getRoles(): Role[] {
 }
 
 // Returns a daisyUI theme given its name
-export function getTheme(themeName: 'light' | 'dark'): Theme {
+export function getTheme(themeName: keyof ThemesConfig): Theme {
 	const config = themesConfig[themeName];
 
 	if (!config) {

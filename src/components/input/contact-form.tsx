@@ -120,26 +120,28 @@ const botpoison = new Botpoison({
 	publicKey: EXTERNAL_SERVICES.botpoisonPublicKey,
 });
 
-function getValidationOptions(formState: FormState) {
+function getValidationOptions(
+	formState: FormState,
+): Partial<Record<keyof ContactFormFields, InputValidationOptions>> {
 	return {
 		name: {
 			maxLength: 50,
 			required: true,
 			disabled: formState === FormState.Busy,
-		} as InputValidationOptions,
+		},
 		email: {
 			maxLength: 50,
 			pattern:
 				/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i,
 			required: true,
 			disabled: formState === FormState.Busy,
-		} as InputValidationOptions,
+		},
 		message: {
 			minLength: 30,
 			maxLength: 3000,
 			required: true,
 			disabled: formState === FormState.Busy,
-		} as InputValidationOptions,
+		},
 	};
 }
 

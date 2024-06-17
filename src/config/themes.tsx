@@ -5,7 +5,7 @@
 
 import type { ThemesConfig } from '../common/types';
 
-export const themesConfig = {
+export const themesConfig: ThemesConfig = {
 	light: {
 		primary: '#0F766E', // TW Teal 700
 		secondary: '#E11D48', // TW Rose 600
@@ -18,7 +18,8 @@ export const themesConfig = {
 		'base-100': 'hsl(0 0% 100%)',
 		'base-200': 'hsl(0 0% 98%)',
 		'base-300': 'hsl(0 0% 96%)',
-		'base-content': '#000',
+		'base-content': '#000', // Pure black
+		'neutral-content': '#000',
 	},
 	dark: {
 		primary: '#2DD4BF', // TW Teal 400
@@ -32,6 +33,7 @@ export const themesConfig = {
 		'base-100': '#131313',
 		'base-200': '#080808',
 		'base-300': '#030303',
-		'base-content': '#E5E5E5', // TW Neutral 200
+		'base-content': '#FFF', // Pure white
+		'neutral-content': '#E5E5E5', // TW Neutral 200
 	},
-} as ThemesConfig;
+};
