@@ -25,6 +25,8 @@ jobs:
         run: yarn install --immutable
 
       - name: Build with Gatsby
+				env:
+					GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: yarn build
 
       - name: Deploy to gh-pages branch
