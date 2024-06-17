@@ -2,7 +2,7 @@
 name: Gatsby Build & Deploy
 
 on:
-	workflow_dispatch:
+  workflow_dispatch:
   push:
     branches: [$default-branch]
 
@@ -58,7 +58,7 @@ jobs:
       - name: Build with Gatsby
         env:
           PREFIX_PATHS: 'true'
-					GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: yarn build
 
       - name: Upload artifact
