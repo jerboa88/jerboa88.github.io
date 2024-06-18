@@ -3,7 +3,7 @@
   <img class="projectLogo" src="src/images/icon.svg" alt="Project logo" title="Project logo" width="256">
 
   <h1 class="projectName">
-    <a href="https://johng.io" title="Project URL">johng.io</a>
+    <a href="https://johng.io" title="johng.io">johng.io</a>
   </h1>
 
   <p class="projectBadges">
@@ -26,11 +26,19 @@
 </div>
 
 
+## About
+This portfolio site is designed to showcase my work and provide a way to contact me.
+
+It uses [React] on top of the [Gatsby] framework for static site generation. At build time, it fetches repository data from the [GitHub API] to display a selection of my public repositories.
+
+The UI is styled with [Tailwind CSS] and [daisyUI]. [TypeScript] is used for type checking, and [Biome.js] is used for linting and formatting. [gatsby-plugin-component-to-image] is used to dynamically generate social images from React components.
+
+
 ## Installation
 ### Prerequisites
-
-- Node.js and NPM (see [nodejs.org](https://nodejs.org/) for more details)
-- Yarn 4 (see the [Yarn docs](https://yarnpkg.com/getting-started/install) for more details)
+- [Node.js]
+- [Yarn 4]
+- A [GitHub personal access token] (PAT) that can be used to access the GitHub API. This token should have public (read-only) access to all repositories as it is used to fetch repository data for the projects section.
 
 ### Setup
 1. Clone the repo with `https://github.com/jerboa88/jerboa88.github.io.git`. Alternatively, you can download the repository as a zip file and extract it.
@@ -39,16 +47,39 @@
 
 
 ## Usage
-We can build the site using the Gatsby CLI, which should have been installed with the install command above. All of the necessary commands are declared in `package.json` for convenience.
+### Configuration
+#### Required
+The `GH_TOKEN` environment variable must be set to your GitHub PAT in order to fetch repository data, otherwise the build will fail. An easy way to do this is to create an `.env.development` or `.env.production` file in the project root like so:
 
-There are two ways to build & serve the site:
-1. Use `yarn develop` to run the app in development mode. This will start the development server at [localhost:8000](https://localhost:8000) (by default). The project will automatically be rebuilt when changes are made.
+```sh
+# .env.development
+GH_TOKEN=your_github_pat_here
+```
 
-2. Use `yarn build` to generate a production build of the app, then use `yarn serve` to serve it. The site can be viewed at [localhost:9000](https://localhost:9000) (by default).
+The site is configured to fetch repository data from the `jerboa88` GitHub account by default, so if you want to fetch data for a different user, you will need to replace all instances of `jerboa88` in the code with your own username.
 
+#### Optional
+Most of the site's configuration options are set in [src/common/constants.tsx] and [src/config/*.tsx].
+
+
+### Building
+We can build the site with the Gatsby CLI. All of the necessary commands are declared in `package.json` for convenience.
+
+#### Development
+Use `yarn develop` to run the app in development mode. This will start the development server at [localhost:8000] (by default). The project will automatically be rebuilt when changes are made.
+
+#### Production
+Use `yarn build` to generate a production build of the app, then use `yarn serve` to serve it. The site can be viewed at [localhost:9000] (by default).
+
+
+### Other
 `yarn clean` can be used to clear the local Gatsby cache if you encounter any issues with stale data/dependencies.
 
-See the [Gatsby CLI docs](https://www.gatsbyjs.com/docs/reference/gatsby-cli/) for additional commands and options. You will likely have to prefix commands with `yarn` to make sure package resolution works properly. For example, the above `yarn develop` is actually just a shortcut for `yarn gatsby develop`.
+`yarn typecheck` can be used to perform type checking using TypeScript.
+
+`yarn lint` and `yarn format` can be used to apply linting and formatting fixes to the codebase using Biome.js.
+
+See the [Gatsby CLI docs] for additional commands and options. To run an arbitrary command, prefix it with `yarn` (ex. `yarn gatsby repl`).
 
 
 ## Contributing
@@ -59,4 +90,24 @@ x.1 releases mark the final update for a given design, while x.0 releases are re
 
 
 ## License
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details. This project includes various resources which carry their own copyright notices and license terms. See [LICENSE-THIRD-PARTY.md](LICENSE-THIRD-PARTY.md) for more details.
+This project is licensed under the MIT License. See [LICENSE] for details. This project includes various resources which carry their own copyright notices and license terms. See [LICENSE-THIRD-PARTY.md] for more details.
+
+
+[Biome.js]: https://biomejs.dev/
+[daisyUI]: https://daisyui.com/
+[Gatsby CLI docs]: https://www.gatsbyjs.com/docs/reference/gatsby-cli/
+[gatsby-plugin-component-to-image]: https://github.com/jerboa88/gatsby-plugin-component-to-image
+[Gatsby]: https://www.gatsbyjs.com/
+[GitHub API]: https://docs.github.com/en/graphql
+[GitHub personal access token]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+[LICENSE-THIRD-PARTY.md]: LICENSE-THIRD-PARTY.md
+[LICENSE]: LICENSE
+[localhost:8000]: https://localhost:8000
+[localhost:9000]: https://localhost:9000
+[Node.js]: https://nodejs.org/
+[React]: https://react.dev/
+[src/common/constants.tsx]: /src/common/constants.tsx
+[src/config/*.tsx]: /src/config/*.tsx
+[Tailwind CSS]: https://tailwindcss.com/
+[TypeScript]: https://www.typescriptlang.org/
+[Yarn 4]: https://yarnpkg.com/
