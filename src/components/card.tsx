@@ -208,6 +208,7 @@ export function Card({
 			{...outerEventHandlerProps}
 		>
 			<motion.div
+				tabIndex={-1}
 				{...{
 					...middleStyleProps,
 					...middleHoverProps,
