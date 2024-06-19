@@ -31,11 +31,6 @@ const config: GatsbyConfig = {
 		typesOutputPath: 'src/common/gatsby-types.d.ts',
 	},
 	plugins: [
-		'gatsby-plugin-image',
-		// Required by gatsby-plugin-image
-		'gatsby-plugin-sharp',
-		// Required by gatsby-plugin-image for dynamic images
-		'gatsby-transformer-sharp',
 		{
 			resolve: 'gatsby-plugin-component-to-image',
 			options: getSocialImageGenerationConfigDefaults(),
