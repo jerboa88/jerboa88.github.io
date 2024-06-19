@@ -12,6 +12,7 @@ export default {
 	theme: {
 		fontFamily: {
 			sans: [
+				'Roboto Flex Variable',
 				'Roboto Flex',
 				'Roboto',
 				'Tahoma',

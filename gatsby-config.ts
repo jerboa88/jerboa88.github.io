@@ -30,11 +30,6 @@ const config: GatsbyConfig = {
 		typesOutputPath: 'src/common/gatsby-types.d.ts',
 	},
 	plugins: [
-		'gatsby-plugin-image',
-		// Required by gatsby-plugin-image
-		'gatsby-plugin-sharp',
-		// Required by gatsby-plugin-image for dynamic images
-		'gatsby-transformer-sharp',
 		{
 			resolve: 'gatsby-plugin-component-to-image',
 			options: getSocialImageGenerationConfigDefaults(),
@@ -46,6 +41,18 @@ const config: GatsbyConfig = {
 					require('tailwindcss')(tailwindConfig),
 					require('autoprefixer'),
 				],
+			},
+		},
+		// This plugin needs to be listed after gatsby-plugin-postcss so that it can purge unused CSS
+		{
+			resolve: 'gatsby-plugin-purgecss',
+			options: {
+				// printRejected: true,
+				// printAll: true,
+				tailwind: true,
+				purgeCSSOptions: {
+					safelist: [/where/],
+				},
 			},
 		},
 		{
