@@ -71,7 +71,7 @@ export function PageHead({
 			<meta name="twitter:image" content={twitterImageUrl.toString()} />
 
 			<meta name="google" content="nositelinkssearchbox" />
-			<meta content={THEME.primary} name="theme-color" />
+			<meta name="theme-color" content={THEME.primary} />
 
 			<link rel="canonical" href={pageUrl.toString()} />
 

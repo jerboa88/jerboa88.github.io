@@ -42,8 +42,11 @@ export function BaseButton({
 		textClassName,
 	);
 
+	const computedButtonLabel = tooltipText ?? text;
+
 	const buttonElement = (
 		<motion.button
+			aria-label={computedButtonLabel}
 			{...{ type, disabled, layout, layoutRoot, ...buttonClassNameProps }}
 		>
 			<AnimatePresence mode="popLayout" initial={false}>
@@ -70,11 +73,9 @@ export function BaseButton({
 		</motion.button>
 	);
 
-	const computedTooltipText = tooltipText ?? text;
-
-	return computedTooltipText ? (
+	return !disabled && computedButtonLabel ? (
 		<Tooltip
-			text={computedTooltipText}
+			text={computedButtonLabel}
 			position={tooltipPosition}
 			className={tooltipClassName}
 		>

@@ -12,8 +12,7 @@ import {
 } from './src/common/config-manager';
 import { SOCIAL_IMAGES_DIR } from './src/common/constants';
 import { getAbsoluteUrl } from './src/common/utilities';
-// biome-ignore lint/style/noNamespaceImport: We need to import the entire Tailwind CSS configuration file
-import * as tailwindConfig from './tailwind.config';
+import tailwindConfig from './tailwind.config';
 
 const SITE_METADATA = getSiteMetadata();
 const DARK_THEME = getTheme('dark');
