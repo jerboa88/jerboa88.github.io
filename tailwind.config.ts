@@ -11,6 +11,7 @@ module.exports = {
 	theme: {
 		fontFamily: {
 			sans: [
+				'Roboto Flex Variable',
 				'Roboto Flex',
 				'Roboto',
 				'Tahoma',
