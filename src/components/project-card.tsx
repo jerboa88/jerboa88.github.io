@@ -44,6 +44,7 @@ export function ProjectCard({ repo }: Props) {
 						<Pill text={repo.typeName} className={projectTypeColor} />
 						<GhostButton
 							icon={faGithub}
+							tooltipText={`View ${repo.name} on GitHub`}
 							{...ghostButtonClassNameProps}
 							disabled
 						/>

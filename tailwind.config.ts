@@ -3,14 +3,16 @@
 	-------------------------------
 */
 
+import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 import { getTheme } from './src/common/config-manager';
 
-module.exports = {
-	content: ['./src/**/*.{js,jsx,ts,tsx}'],
+export default {
+	content: ['src/**/*.{js,jsx,ts,tsx}'],
 	theme: {
 		fontFamily: {
 			sans: [
+				'Roboto Flex Variable',
 				'Roboto Flex',
 				'Roboto',
 				'Tahoma',
@@ -69,4 +71,4 @@ module.exports = {
 		themes: [{ dark: getTheme('dark') }, { light: getTheme('light') }],
 		darkTheme: 'dark',
 	},
-};
+} satisfies Config;

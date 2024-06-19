@@ -12,8 +12,7 @@ import {
 } from './src/common/config-manager';
 import { SOCIAL_IMAGES_DIR } from './src/common/constants';
 import { getAbsoluteUrl } from './src/common/utilities';
-// biome-ignore lint/style/noNamespaceImport: We need to import the entire Tailwind CSS configuration file
-import * as tailwindConfig from './tailwind.config';
+import tailwindConfig from './tailwind.config';
 
 const SITE_METADATA = getSiteMetadata();
 const DARK_THEME = getTheme('dark');
@@ -31,11 +30,6 @@ const config: GatsbyConfig = {
 		typesOutputPath: 'src/common/gatsby-types.d.ts',
 	},
 	plugins: [
-		'gatsby-plugin-image',
-		// Required by gatsby-plugin-image
-		'gatsby-plugin-sharp',
-		// Required by gatsby-plugin-image for dynamic images
-		'gatsby-transformer-sharp',
 		{
 			resolve: 'gatsby-plugin-component-to-image',
 			options: getSocialImageGenerationConfigDefaults(),
@@ -47,6 +41,18 @@ const config: GatsbyConfig = {
 					require('tailwindcss')(tailwindConfig),
 					require('autoprefixer'),
 				],
+			},
+		},
+		// This plugin needs to be listed after gatsby-plugin-postcss so that it can purge unused CSS
+		{
+			resolve: 'gatsby-plugin-purgecss',
+			options: {
+				// printRejected: true,
+				// printAll: true,
+				tailwind: true,
+				purgeCSSOptions: {
+					safelist: [/where/],
+				},
 			},
 		},
 		{
