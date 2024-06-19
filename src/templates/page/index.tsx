@@ -113,9 +113,9 @@ export default function IndexPageTemplate({
 			<Section className="min-h-lvh" {...sections[0]}>
 				<Article>
 					<p>
-						I am a recent graduate with a Bachelors Specialization in Computing
-						Science from the University of Alberta. During my time at the U of
-						A, I had the opportunity to share my expertise with Haemonetics
+						I am a recent graduate from the University of Alberta with a
+						Bachelors Specialization in Computing Science. During my time at the
+						U of A, I had the opportunity to share my expertise with Haemonetics
 						Corporation in Edmonton, where I was involved in end-to-end
 						development of their NexLynk Donor Management System.
 					</p>
