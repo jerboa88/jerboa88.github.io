@@ -7,16 +7,16 @@ import type { ColorMappingsConfig } from '../common/types';
 
 export const colorMappingsConfig: ColorMappingsConfig = {
 	projectType: {
-		'android app': 'bg-lime-500',
-		extension: 'bg-amber-500',
-		'cli app': 'bg-red-500',
-		'js library': 'bg-green-500',
-		'node.js module': 'bg-green-500',
-		markdown: 'bg-purple-500',
-		website: 'bg-orange-500',
-		'web app': 'bg-orange-500',
-		other: 'bg-blue-500',
-		'gimp plugin': 'bg-blue-500',
+		'android app': 'bg-lime-600',
+		extension: 'bg-amber-600',
+		'cli app': 'bg-red-600',
+		'js library': 'bg-green-600',
+		'node.js module': 'bg-green-600',
+		markdown: 'bg-purple-600',
+		website: 'bg-orange-600',
+		'web app': 'bg-orange-600',
+		other: 'bg-blue-600',
+		'gimp plugin': 'bg-blue-600',
 	},
 	roleType: {
 		internship: 'bg-secondary',
