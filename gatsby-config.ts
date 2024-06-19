@@ -49,6 +49,18 @@ const config: GatsbyConfig = {
 				],
 			},
 		},
+		// This plugin needs to be listed after gatsby-plugin-postcss so that it can purge unused CSS
+		{
+			resolve: 'gatsby-plugin-purgecss',
+			options: {
+				// printRejected: true,
+				// printAll: true,
+				tailwind: true,
+				purgeCSSOptions: {
+					safelist: [/where/],
+				},
+			},
+		},
 		{
 			resolve: 'gatsby-plugin-sitemap',
 			options: {

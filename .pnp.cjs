@@ -53,6 +53,7 @@ const RAW_RUNTIME_STATE =
           ["gatsby-plugin-manifest", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-plugin-offline", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.2"],\
           ["gatsby-plugin-postcss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
+          ["gatsby-plugin-purgecss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.2.1"],\
           ["gatsby-plugin-robots-txt", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.8.0"],\
           ["gatsby-plugin-sitemap", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
           ["gatsby-remark-autolink-headers", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
@@ -8629,6 +8630,13 @@ const RAW_RUNTIME_STATE =
           ["commander", "npm:7.2.0"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:8.3.0", {\
+        "packageLocation": "./.yarn/cache/commander-npm-8.3.0-c0d18c66d5-6b7b5d3344.zip/node_modules/commander/",\
+        "packageDependencies": [\
+          ["commander", "npm:8.3.0"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["common-path-prefix", [\
@@ -12173,6 +12181,32 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["gatsby-plugin-purgecss", [\
+      ["npm:6.2.1", {\
+        "packageLocation": "./.yarn/cache/gatsby-plugin-purgecss-npm-6.2.1-6486dee524-5efc90abef.zip/node_modules/gatsby-plugin-purgecss/",\
+        "packageDependencies": [\
+          ["gatsby-plugin-purgecss", "npm:6.2.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.2.1", {\
+        "packageLocation": "./.yarn/__virtual__/gatsby-plugin-purgecss-virtual-b3a9c3d392/0/cache/gatsby-plugin-purgecss-npm-6.2.1-6486dee524-5efc90abef.zip/node_modules/gatsby-plugin-purgecss/",\
+        "packageDependencies": [\
+          ["gatsby-plugin-purgecss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.2.1"],\
+          ["@types/gatsby", null],\
+          ["fs-extra", "npm:11.2.0"],\
+          ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.6"],\
+          ["loader-utils", "npm:3.3.1"],\
+          ["merge-anything", "npm:5.1.7"],\
+          ["purgecss", "npm:4.1.3"]\
+        ],\
+        "packagePeers": [\
+          "@types/gatsby",\
+          "gatsby"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["gatsby-plugin-robots-txt", [\
       ["npm:1.8.0", {\
         "packageLocation": "./.yarn/cache/gatsby-plugin-robots-txt-npm-1.8.0-5f10a9345e-ae5c1517f3.zip/node_modules/gatsby-plugin-robots-txt/",\
@@ -14318,6 +14352,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["is-what", [\
+      ["npm:4.1.16", {\
+        "packageLocation": "./.yarn/cache/is-what-npm-4.1.16-1622ed8fd8-f6400634ba.zip/node_modules/is-what/",\
+        "packageDependencies": [\
+          ["is-what", "npm:4.1.16"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["is-windows", [\
       ["npm:1.0.2", {\
         "packageLocation": "./.yarn/cache/is-windows-npm-1.0.2-898cd6f3d7-438b7e5265.zip/node_modules/is-windows/",\
@@ -14504,6 +14547,7 @@ const RAW_RUNTIME_STATE =
           ["gatsby-plugin-manifest", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-plugin-offline", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.2"],\
           ["gatsby-plugin-postcss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
+          ["gatsby-plugin-purgecss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.2.1"],\
           ["gatsby-plugin-robots-txt", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.8.0"],\
           ["gatsby-plugin-sitemap", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
           ["gatsby-remark-autolink-headers", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
@@ -14910,6 +14954,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/loader-utils-npm-3.2.1-76ae2fd253-177f5bb9b4.zip/node_modules/loader-utils/",\
         "packageDependencies": [\
           ["loader-utils", "npm:3.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:3.3.1", {\
+        "packageLocation": "./.yarn/cache/loader-utils-npm-3.3.1-eed38ce75b-3f994a948d.zip/node_modules/loader-utils/",\
+        "packageDependencies": [\
+          ["loader-utils", "npm:3.3.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -15574,6 +15625,16 @@ const RAW_RUNTIME_STATE =
           ["trim-newlines", "npm:3.0.1"],\
           ["type-fest", "npm:0.13.1"],\
           ["yargs-parser", "npm:18.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["merge-anything", [\
+      ["npm:5.1.7", {\
+        "packageLocation": "./.yarn/cache/merge-anything-npm-5.1.7-6cc5f839be-53d034b2a1.zip/node_modules/merge-anything/",\
+        "packageDependencies": [\
+          ["merge-anything", "npm:5.1.7"],\
+          ["is-what", "npm:4.1.16"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18102,6 +18163,15 @@ const RAW_RUNTIME_STATE =
           ["util-deprecate", "npm:1.0.2"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:6.1.0", {\
+        "packageLocation": "./.yarn/cache/postcss-selector-parser-npm-6.1.0-f392fdf6ae-2f9e5045b8.zip/node_modules/postcss-selector-parser/",\
+        "packageDependencies": [\
+          ["postcss-selector-parser", "npm:6.1.0"],\
+          ["cssesc", "npm:3.0.0"],\
+          ["util-deprecate", "npm:1.0.2"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["postcss-svgo", [\
@@ -18419,6 +18489,19 @@ const RAW_RUNTIME_STATE =
           ["debug", "virtual:c9e1a4b59e37cb479517edede3bf2093b28c0ca1a9d0e517f3c345075bd1e468980b94b4957e389116607ee7155441dfd7d09e19a4229d5d09bcf06244401590#npm:4.3.4"],\
           ["devtools-protocol", "npm:0.0.1286932"],\
           ["ws", "virtual:def5c340cc6e9b4b989ea8670b9daa2cbeb37f47e522b372f44fed6d527f55f45ab7cacde13672765f38e017b45d28a9f3ade39e88bd78f0bb5fcf0febb48ade#npm:8.17.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["purgecss", [\
+      ["npm:4.1.3", {\
+        "packageLocation": "./.yarn/cache/purgecss-npm-4.1.3-9099a5bb50-d495ff1737.zip/node_modules/purgecss/",\
+        "packageDependencies": [\
+          ["purgecss", "npm:4.1.3"],\
+          ["commander", "npm:8.3.0"],\
+          ["glob", "npm:7.2.3"],\
+          ["postcss", "npm:8.4.38"],\
+          ["postcss-selector-parser", "npm:6.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
