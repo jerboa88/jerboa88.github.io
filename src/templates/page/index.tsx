@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useInView } from 'framer-motion';
 import type { HeadProps } from 'gatsby';
-import { useCallback, useRef } from 'react';
+import { Suspense, lazy, useCallback, useRef } from 'react';
 import { getRoles, getSiteMetadata } from '../../common/config-manager';
 import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
 import type {
@@ -19,11 +19,11 @@ import type {
 	SocialImagesMetadataProp,
 } from '../../common/types';
 import { toKebabCase } from '../../common/utilities';
-import { ContactForm } from '../../components/input/contact-form';
 import { HeroHeader } from '../../components/layout/hero-header';
 import { PageLayout } from '../../components/layout/page-layout';
 import { Section } from '../../components/layout/section';
 import { GhostButtonLink } from '../../components/links/ghost-button-link';
+import { Loader } from '../../components/loader';
 import { ProjectCardGallery } from '../../components/project-card-gallery';
 import { PageHead } from '../../components/seo/page-head';
 import { Article } from '../../components/text/article';
@@ -41,6 +41,12 @@ interface Props {
 
 const SITE_METADATA = getSiteMetadata();
 const ROLES = getRoles();
+
+const ContactForm = lazy(() =>
+	import('../../components/input/contact-form').then((module) => ({
+		default: module.ContactForm,
+	})),
+);
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function IndexPageTemplate({
@@ -105,7 +111,7 @@ export default function IndexPageTemplate({
 						to={`#${toKebabCase(sections[0].title)}`}
 						icon={faAngleDown}
 						tooltipText={`Go to ${sections[0].title} section`}
-						className={expandTitle ? '' : 'opacity-0'}
+						className={expandTitle ? '':'opacity-0'}
 						isInternal
 					/>
 				</div>
@@ -148,11 +154,16 @@ export default function IndexPageTemplate({
 			<Section className="min-h-lvh" {...sections[3]}>
 				<Article className="flex flex-col justify-center w-full">
 					<p>
-						Got something on your mind? Whether it's a query, a collaboration
-						proposal, or just a friendly hello, feel free to reach out using the
-						form below.
+						Got something on your mind? Whether you have a question or just want
+						to say hello, feel free to reach out to me using the form below.
 					</p>
-					<ContactForm className="self-center" />
+					<Suspense
+						fallback={
+							<Loader className="max-w-xl h-[29rem] p-0 sm:p-8 self-center" />
+						}
+					>
+						<ContactForm className="self-center" />
+					</Suspense>
 				</Article>
 			</Section>
 		</PageLayout>
