@@ -8,6 +8,7 @@ import type { GatsbyConfig } from 'gatsby';
 import {
 	getSiteMetadata,
 	getSocialImageGenerationConfigDefaults,
+	getSocialImageGenerationConfigForType,
 	getTheme,
 } from './src/common/config-manager';
 import { SOCIAL_IMAGES_DIR } from './src/common/constants';
@@ -16,6 +17,7 @@ import tailwindConfig from './tailwind.config';
 
 const SITE_METADATA = getSiteMetadata();
 const DARK_THEME = getTheme('dark');
+const OG_IMAGE_GENERATION_CONFIG = getSocialImageGenerationConfigForType('og');
 
 // Load environment variables from relevant .env file
 dotenv.config({
@@ -47,8 +49,6 @@ const config: GatsbyConfig = {
 		{
 			resolve: 'gatsby-plugin-purgecss',
 			options: {
-				// printRejected: true,
-				// printAll: true,
 				tailwind: true,
 				purgeCSSOptions: {
 					safelist: [/where/],
@@ -85,6 +85,7 @@ const config: GatsbyConfig = {
 			resolve: 'gatsby-plugin-manifest',
 			options: {
 				name: SITE_METADATA.title,
+				description: SITE_METADATA.description,
 				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
 				short_name: SITE_METADATA.shortTitle,
 				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
@@ -95,6 +96,13 @@ const config: GatsbyConfig = {
 				theme_color: DARK_THEME.primary,
 				display: 'standalone',
 				icon: `${__dirname}/src/${SITE_METADATA.iconPath}`,
+				screenshots: [
+					{
+						src: 'images/og/index.webp',
+						sizes: `${OG_IMAGE_GENERATION_CONFIG.size.width}x${OG_IMAGE_GENERATION_CONFIG.size.height}`,
+						type: 'image/webp',
+					},
+				],
 				crossOrigin: 'use-credentials',
 			},
 		},

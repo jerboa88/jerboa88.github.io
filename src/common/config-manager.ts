@@ -72,7 +72,7 @@ export function getSiteMetadata(): SiteMetadata {
 		title: `${authorFullName} | ${config.author.jobTitle}`,
 		tagline: `${config.author.jobTitle} & Cat Whisperer`,
 		shortDescription: `Portfolio site for ${authorFullName}`,
-		description: `Portfolio site for ${authorFullName}, a ${config.author.jobTitle} based in ${config.author.location.city}, ${config.author.location.state}.`,
+		description: `Portfolio site for ${authorFullName}, a ${config.author.jobTitle.toLowerCase()} based in ${config.author.location.city}, ${config.author.location.state}.`,
 		iconPath: config.iconPath,
 		siteUrl: config.siteUrl,
 		sourceUrl: config.sourceUrl,

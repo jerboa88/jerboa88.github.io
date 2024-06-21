@@ -4,13 +4,12 @@
 */
 
 import { MotionConfig } from 'framer-motion';
-import { type PropsWithChildren, StrictMode } from 'react';
+import { type PropsWithChildren, StrictMode, lazy } from 'react';
 import { SPRING_TRANSITION_PROPS } from '../../common/constants';
 import type { PageSection, PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 import { Footer } from './footer';
 import { Header } from './header';
-import { ParticlesBackground } from './particles-background';
 
 // Types
 
@@ -27,6 +26,12 @@ const BG_GRADIENT_PROPS = {
 			'radial-gradient(100% 100% at 0% 0%,oklch(var(--a)),oklch(var(--b2)),transparent),radial-gradient(100% 100% at 100% 100%,oklch(var(--a)),oklch(var(--b2)),transparent)',
 	},
 };
+
+const ParticlesBackground = lazy(() =>
+	import('./particles-background').then((module) => ({
+		default: module.ParticlesBackground,
+	})),
+);
 
 export function PageLayout({
 	className,

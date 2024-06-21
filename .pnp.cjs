@@ -27,7 +27,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["@biomejs/biome", "npm:1.8.1"],\
+          ["@biomejs/biome", "npm:1.8.2"],\
           ["@botpoison/browser", "npm:0.1.30"],\
           ["@fontsource-variable/roboto-flex", "npm:5.0.15"],\
           ["@fontsource/poppins", "npm:5.0.14"],\
@@ -41,13 +41,13 @@ const RAW_RUNTIME_STATE =
           ["@tsparticles/react", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.0.0"],\
           ["@tsparticles/shape-square", "npm:3.4.0"],\
           ["@types/jsdom", "npm:21.1.7"],\
-          ["@types/node", "npm:20.14.2"],\
+          ["@types/node", "npm:20.14.7"],\
           ["@types/react", "npm:18.3.3"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["autoprefixer", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:10.4.19"],\
           ["daisyui", "npm:4.12.2"],\
           ["dotenv", "npm:16.4.5"],\
-          ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.2.10"],\
+          ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.2.11"],\
           ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.6"],\
           ["gatsby-plugin-component-to-image", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.0.1"],\
           ["gatsby-plugin-manifest", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
@@ -67,7 +67,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:18.3.1"],\
           ["react-hook-form", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:7.52.0"],\
           ["tailwindcss", "npm:3.4.4"],\
-          ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"]\
+          ["typescript", "patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=b45daf"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -2942,90 +2942,90 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@biomejs/biome", [\
-      ["npm:1.8.1", {\
-        "packageLocation": "./.yarn/unplugged/@biomejs-biome-npm-1.8.1-4be05805a3/node_modules/@biomejs/biome/",\
+      ["npm:1.8.2", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-biome-npm-1.8.2-25c3fe898b/node_modules/@biomejs/biome/",\
         "packageDependencies": [\
-          ["@biomejs/biome", "npm:1.8.1"],\
-          ["@biomejs/cli-darwin-arm64", "npm:1.8.1"],\
-          ["@biomejs/cli-darwin-x64", "npm:1.8.1"],\
-          ["@biomejs/cli-linux-arm64", "npm:1.8.1"],\
-          ["@biomejs/cli-linux-arm64-musl", "npm:1.8.1"],\
-          ["@biomejs/cli-linux-x64", "npm:1.8.1"],\
-          ["@biomejs/cli-linux-x64-musl", "npm:1.8.1"],\
-          ["@biomejs/cli-win32-arm64", "npm:1.8.1"],\
-          ["@biomejs/cli-win32-x64", "npm:1.8.1"]\
+          ["@biomejs/biome", "npm:1.8.2"],\
+          ["@biomejs/cli-darwin-arm64", "npm:1.8.2"],\
+          ["@biomejs/cli-darwin-x64", "npm:1.8.2"],\
+          ["@biomejs/cli-linux-arm64", "npm:1.8.2"],\
+          ["@biomejs/cli-linux-arm64-musl", "npm:1.8.2"],\
+          ["@biomejs/cli-linux-x64", "npm:1.8.2"],\
+          ["@biomejs/cli-linux-x64-musl", "npm:1.8.2"],\
+          ["@biomejs/cli-win32-arm64", "npm:1.8.2"],\
+          ["@biomejs/cli-win32-x64", "npm:1.8.2"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@biomejs/cli-darwin-arm64", [\
-      ["npm:1.8.1", {\
-        "packageLocation": "./.yarn/unplugged/@biomejs-cli-darwin-arm64-npm-1.8.1-fa6a917e15/node_modules/@biomejs/cli-darwin-arm64/",\
+      ["npm:1.8.2", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-darwin-arm64-npm-1.8.2-a5e9a6de6f/node_modules/@biomejs/cli-darwin-arm64/",\
         "packageDependencies": [\
-          ["@biomejs/cli-darwin-arm64", "npm:1.8.1"]\
+          ["@biomejs/cli-darwin-arm64", "npm:1.8.2"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@biomejs/cli-darwin-x64", [\
-      ["npm:1.8.1", {\
-        "packageLocation": "./.yarn/unplugged/@biomejs-cli-darwin-x64-npm-1.8.1-f14dde4c3a/node_modules/@biomejs/cli-darwin-x64/",\
+      ["npm:1.8.2", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-darwin-x64-npm-1.8.2-26068ca6ef/node_modules/@biomejs/cli-darwin-x64/",\
         "packageDependencies": [\
-          ["@biomejs/cli-darwin-x64", "npm:1.8.1"]\
+          ["@biomejs/cli-darwin-x64", "npm:1.8.2"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@biomejs/cli-linux-arm64", [\
-      ["npm:1.8.1", {\
-        "packageLocation": "./.yarn/unplugged/@biomejs-cli-linux-arm64-npm-1.8.1-3e38c54469/node_modules/@biomejs/cli-linux-arm64/",\
+      ["npm:1.8.2", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-linux-arm64-npm-1.8.2-d1eb73176f/node_modules/@biomejs/cli-linux-arm64/",\
         "packageDependencies": [\
-          ["@biomejs/cli-linux-arm64", "npm:1.8.1"]\
+          ["@biomejs/cli-linux-arm64", "npm:1.8.2"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@biomejs/cli-linux-arm64-musl", [\
-      ["npm:1.8.1", {\
-        "packageLocation": "./.yarn/unplugged/@biomejs-cli-linux-arm64-musl-npm-1.8.1-425187df27/node_modules/@biomejs/cli-linux-arm64-musl/",\
+      ["npm:1.8.2", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-linux-arm64-musl-npm-1.8.2-58fa874396/node_modules/@biomejs/cli-linux-arm64-musl/",\
         "packageDependencies": [\
-          ["@biomejs/cli-linux-arm64-musl", "npm:1.8.1"]\
+          ["@biomejs/cli-linux-arm64-musl", "npm:1.8.2"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@biomejs/cli-linux-x64", [\
-      ["npm:1.8.1", {\
-        "packageLocation": "./.yarn/unplugged/@biomejs-cli-linux-x64-npm-1.8.1-54bd694c62/node_modules/@biomejs/cli-linux-x64/",\
+      ["npm:1.8.2", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-linux-x64-npm-1.8.2-ad3321c921/node_modules/@biomejs/cli-linux-x64/",\
         "packageDependencies": [\
-          ["@biomejs/cli-linux-x64", "npm:1.8.1"]\
+          ["@biomejs/cli-linux-x64", "npm:1.8.2"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@biomejs/cli-linux-x64-musl", [\
-      ["npm:1.8.1", {\
-        "packageLocation": "./.yarn/unplugged/@biomejs-cli-linux-x64-musl-npm-1.8.1-1abe51b131/node_modules/@biomejs/cli-linux-x64-musl/",\
+      ["npm:1.8.2", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-linux-x64-musl-npm-1.8.2-8039af47ca/node_modules/@biomejs/cli-linux-x64-musl/",\
         "packageDependencies": [\
-          ["@biomejs/cli-linux-x64-musl", "npm:1.8.1"]\
+          ["@biomejs/cli-linux-x64-musl", "npm:1.8.2"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@biomejs/cli-win32-arm64", [\
-      ["npm:1.8.1", {\
-        "packageLocation": "./.yarn/unplugged/@biomejs-cli-win32-arm64-npm-1.8.1-af9020bdec/node_modules/@biomejs/cli-win32-arm64/",\
+      ["npm:1.8.2", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-win32-arm64-npm-1.8.2-5171aed723/node_modules/@biomejs/cli-win32-arm64/",\
         "packageDependencies": [\
-          ["@biomejs/cli-win32-arm64", "npm:1.8.1"]\
+          ["@biomejs/cli-win32-arm64", "npm:1.8.2"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@biomejs/cli-win32-x64", [\
-      ["npm:1.8.1", {\
-        "packageLocation": "./.yarn/unplugged/@biomejs-cli-win32-x64-npm-1.8.1-ee3a4bab50/node_modules/@biomejs/cli-win32-x64/",\
+      ["npm:1.8.2", {\
+        "packageLocation": "./.yarn/unplugged/@biomejs-cli-win32-x64-npm-1.8.2-5f2f7b2634/node_modules/@biomejs/cli-win32-x64/",\
         "packageDependencies": [\
-          ["@biomejs/cli-win32-x64", "npm:1.8.1"]\
+          ["@biomejs/cli-win32-x64", "npm:1.8.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5824,6 +5824,14 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@types-node-npm-20.14.2-fa12d1e34b-c38e47b190.zip/node_modules/@types/node/",\
         "packageDependencies": [\
           ["@types/node", "npm:20.14.2"],\
+          ["undici-types", "npm:5.26.5"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:20.14.7", {\
+        "packageLocation": "./.yarn/cache/@types-node-npm-20.14.7-5bbf751584-f2cb458126.zip/node_modules/@types/node/",\
+        "packageDependencies": [\
+          ["@types/node", "npm:20.14.7"],\
           ["undici-types", "npm:5.26.5"]\
         ],\
         "linkType": "HARD"\
@@ -11264,17 +11272,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["framer-motion", [\
-      ["npm:11.2.10", {\
-        "packageLocation": "./.yarn/cache/framer-motion-npm-11.2.10-3bbc864848-3f09356c08.zip/node_modules/framer-motion/",\
+      ["npm:11.2.11", {\
+        "packageLocation": "./.yarn/cache/framer-motion-npm-11.2.11-e90adc9148-2969da7c39.zip/node_modules/framer-motion/",\
         "packageDependencies": [\
-          ["framer-motion", "npm:11.2.10"]\
+          ["framer-motion", "npm:11.2.11"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.2.10", {\
-        "packageLocation": "./.yarn/__virtual__/framer-motion-virtual-d1abb5ad2a/0/cache/framer-motion-npm-11.2.10-3bbc864848-3f09356c08.zip/node_modules/framer-motion/",\
+      ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.2.11", {\
+        "packageLocation": "./.yarn/__virtual__/framer-motion-virtual-9fe71fcc57/0/cache/framer-motion-npm-11.2.11-e90adc9148-2969da7c39.zip/node_modules/framer-motion/",\
         "packageDependencies": [\
-          ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.2.10"],\
+          ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.2.11"],\
           ["@emotion/is-prop-valid", null],\
           ["@types/emotion__is-prop-valid", null],\
           ["@types/react", "npm:18.3.3"],\
@@ -14303,7 +14311,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["johng-io", "workspace:."],\
-          ["@biomejs/biome", "npm:1.8.1"],\
+          ["@biomejs/biome", "npm:1.8.2"],\
           ["@botpoison/browser", "npm:0.1.30"],\
           ["@fontsource-variable/roboto-flex", "npm:5.0.15"],\
           ["@fontsource/poppins", "npm:5.0.14"],\
@@ -14317,13 +14325,13 @@ const RAW_RUNTIME_STATE =
           ["@tsparticles/react", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.0.0"],\
           ["@tsparticles/shape-square", "npm:3.4.0"],\
           ["@types/jsdom", "npm:21.1.7"],\
-          ["@types/node", "npm:20.14.2"],\
+          ["@types/node", "npm:20.14.7"],\
           ["@types/react", "npm:18.3.3"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["autoprefixer", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:10.4.19"],\
           ["daisyui", "npm:4.12.2"],\
           ["dotenv", "npm:16.4.5"],\
-          ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.2.10"],\
+          ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.2.11"],\
           ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.6"],\
           ["gatsby-plugin-component-to-image", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.0.1"],\
           ["gatsby-plugin-manifest", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
@@ -14343,7 +14351,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:18.3.1"],\
           ["react-hook-form", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:7.52.0"],\
           ["tailwindcss", "npm:3.4.4"],\
-          ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"]\
+          ["typescript", "patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=b45daf"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -20997,10 +21005,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["typescript", [\
-      ["patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c", {\
-        "packageLocation": "./.yarn/cache/typescript-patch-6e159bfddb-760f7d92fb.zip/node_modules/typescript/",\
+      ["patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=b45daf", {\
+        "packageLocation": "./.yarn/cache/typescript-patch-719176cb0c-28b3de2dda.zip/node_modules/typescript/",\
         "packageDependencies": [\
-          ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"]\
+          ["typescript", "patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=b45daf"]\
         ],\
         "linkType": "HARD"\
       }]\
