@@ -3718,12 +3718,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.14.7":
-  version: 20.14.7
-  resolution: "@types/node@npm:20.14.7"
+"@types/node@npm:^20.14.8":
+  version: 20.14.8
+  resolution: "@types/node@npm:20.14.8"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 10/f2cb458126a136719d9da6febdbc7afc9bb622047a30c5e6163db4206ff8c8002ec56b340d722fe1ad6280ebe7a505e0a5a10a39a3b5718837200201b94d5d07
+  checksum: 10/73822f66f269ce865df7e2f586787ac7444bd1169fd265cbed1e851b72787f1170517c5b616e0308ec2fbc0934ec6403b0f28d4152acbb0486071aec41167d51
   languageName: node
   linkType: hard
 
@@ -8460,13 +8460,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-fontawesome-css@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "gatsby-plugin-fontawesome-css@npm:1.2.0"
+"gatsby-plugin-fontawesome@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "gatsby-plugin-fontawesome@npm:1.3.1"
   peerDependencies:
-    "@fortawesome/fontawesome-svg-core": ^1.2.0
-    gatsby: ^4.0.0
-  checksum: 10/c0419d163f48d233d77150a9cc2af9b5a1d966b6fb14a752030cb6d1c2b1498fa78b264cebd1b93ff87354b5fb79de2d73ad0b36e00f85e425db5917dcea3b77
+    "@fortawesome/fontawesome-svg-core": ^6.4.0
+    gatsby: ^5.8.1
+  checksum: 10/36b4b615cfe11177c9904382cd1622db7cc3135d479ebf5d9939c8a739bc9b3af0ff274bbdcee5c18e562dc87f591457231b908305349c0b9efa6ad4372bd351
   languageName: node
   linkType: hard
 
@@ -10589,7 +10589,7 @@ __metadata:
     "@tsparticles/react": "npm:^3.0.0"
     "@tsparticles/shape-square": "npm:^3.4.0"
     "@types/jsdom": "npm:^21.1.7"
-    "@types/node": "npm:^20.14.7"
+    "@types/node": "npm:^20.14.8"
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
     autoprefixer: "npm:^10.4.19"
@@ -10598,7 +10598,7 @@ __metadata:
     framer-motion: "npm:^11.2.11"
     gatsby: "npm:^5.13.6"
     gatsby-plugin-component-to-image: "npm:^1.0.1"
-    gatsby-plugin-fontawesome-css: "npm:^1.2.0"
+    gatsby-plugin-fontawesome: "npm:^1.3.1"
     gatsby-plugin-manifest: "npm:^5.13.1"
     gatsby-plugin-offline: "npm:^6.13.2"
     gatsby-plugin-postcss: "npm:^6.13.1"

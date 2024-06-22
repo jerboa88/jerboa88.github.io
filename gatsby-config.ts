@@ -32,7 +32,7 @@ const config: GatsbyConfig = {
 		typesOutputPath: 'src/common/gatsby-types.d.ts',
 	},
 	plugins: [
-		'gatsby-plugin-fontawesome-css',
+		'gatsby-plugin-fontawesome',
 		{
 			resolve: 'gatsby-plugin-component-to-image',
 			options: getSocialImageGenerationConfigDefaults(),

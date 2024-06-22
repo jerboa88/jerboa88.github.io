@@ -41,7 +41,7 @@ const RAW_RUNTIME_STATE =
           ["@tsparticles/react", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.0.0"],\
           ["@tsparticles/shape-square", "npm:3.4.0"],\
           ["@types/jsdom", "npm:21.1.7"],\
-          ["@types/node", "npm:20.14.7"],\
+          ["@types/node", "npm:20.14.8"],\
           ["@types/react", "npm:18.3.3"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["autoprefixer", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:10.4.19"],\
@@ -50,7 +50,7 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.2.11"],\
           ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.6"],\
           ["gatsby-plugin-component-to-image", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.0.1"],\
-          ["gatsby-plugin-fontawesome-css", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.2.0"],\
+          ["gatsby-plugin-fontawesome", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.3.1"],\
           ["gatsby-plugin-manifest", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-plugin-offline", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.2"],\
           ["gatsby-plugin-postcss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
@@ -5829,10 +5829,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:20.14.7", {\
-        "packageLocation": "./.yarn/cache/@types-node-npm-20.14.7-5bbf751584-f2cb458126.zip/node_modules/@types/node/",\
+      ["npm:20.14.8", {\
+        "packageLocation": "./.yarn/cache/@types-node-npm-20.14.8-e4f4af022f-73822f66f2.zip/node_modules/@types/node/",\
         "packageDependencies": [\
-          ["@types/node", "npm:20.14.7"],\
+          ["@types/node", "npm:20.14.8"],\
           ["undici-types", "npm:5.26.5"]\
         ],\
         "linkType": "HARD"\
@@ -11846,18 +11846,18 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["gatsby-plugin-fontawesome-css", [\
-      ["npm:1.2.0", {\
-        "packageLocation": "./.yarn/cache/gatsby-plugin-fontawesome-css-npm-1.2.0-8138f32ad8-c0419d163f.zip/node_modules/gatsby-plugin-fontawesome-css/",\
+    ["gatsby-plugin-fontawesome", [\
+      ["npm:1.3.1", {\
+        "packageLocation": "./.yarn/cache/gatsby-plugin-fontawesome-npm-1.3.1-b9b55fba6d-36b4b615cf.zip/node_modules/gatsby-plugin-fontawesome/",\
         "packageDependencies": [\
-          ["gatsby-plugin-fontawesome-css", "npm:1.2.0"]\
+          ["gatsby-plugin-fontawesome", "npm:1.3.1"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.2.0", {\
-        "packageLocation": "./.yarn/__virtual__/gatsby-plugin-fontawesome-css-virtual-01bcf4597d/0/cache/gatsby-plugin-fontawesome-css-npm-1.2.0-8138f32ad8-c0419d163f.zip/node_modules/gatsby-plugin-fontawesome-css/",\
+      ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.3.1", {\
+        "packageLocation": "./.yarn/__virtual__/gatsby-plugin-fontawesome-virtual-c8b548ae1b/0/cache/gatsby-plugin-fontawesome-npm-1.3.1-b9b55fba6d-36b4b615cf.zip/node_modules/gatsby-plugin-fontawesome/",\
         "packageDependencies": [\
-          ["gatsby-plugin-fontawesome-css", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.2.0"],\
+          ["gatsby-plugin-fontawesome", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.3.1"],\
           ["@fortawesome/fontawesome-svg-core", "npm:6.5.2"],\
           ["@types/fortawesome__fontawesome-svg-core", null],\
           ["@types/gatsby", null],\
@@ -14352,7 +14352,7 @@ const RAW_RUNTIME_STATE =
           ["@tsparticles/react", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.0.0"],\
           ["@tsparticles/shape-square", "npm:3.4.0"],\
           ["@types/jsdom", "npm:21.1.7"],\
-          ["@types/node", "npm:20.14.7"],\
+          ["@types/node", "npm:20.14.8"],\
           ["@types/react", "npm:18.3.3"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["autoprefixer", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:10.4.19"],\
@@ -14361,7 +14361,7 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:11.2.11"],\
           ["gatsby", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.6"],\
           ["gatsby-plugin-component-to-image", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.0.1"],\
-          ["gatsby-plugin-fontawesome-css", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.2.0"],\
+          ["gatsby-plugin-fontawesome", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.3.1"],\
           ["gatsby-plugin-manifest", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
           ["gatsby-plugin-offline", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.2"],\
           ["gatsby-plugin-postcss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
