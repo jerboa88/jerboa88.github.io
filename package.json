@@ -51,6 +51,7 @@
 		"framer-motion": "^11.2.11",
 		"gatsby": "^5.13.6",
 		"gatsby-plugin-component-to-image": "^1.0.1",
+		"gatsby-plugin-fontawesome-css": "^1.2.0",
 		"gatsby-plugin-manifest": "^5.13.1",
 		"gatsby-plugin-offline": "^6.13.2",
 		"gatsby-plugin-postcss": "^6.13.1",
