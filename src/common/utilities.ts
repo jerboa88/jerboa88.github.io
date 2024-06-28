@@ -170,3 +170,8 @@ export function removeTrailingSlash(path: string) {
 export function removeProtocol(url: string) {
 	return url.replace(/.*?:\/\//g, '');
 }
+
+// Return the first n elements of an array
+export function limit<T>(array: T[], limit: number): T[] {
+	return array.slice(0, limit);
+}
