@@ -19,8 +19,9 @@ import { colorMappingsConfig } from '../config/color-mappings';
 import { externalServicesConfig } from '../config/external-services';
 import { pagesMetadataConfig } from '../config/metadata/pages';
 import { siteMetadataConfig } from '../config/metadata/site';
-import { employmentRolesConfig } from '../config/roles/employment-roles';
-import { volunteeringRolesConfig } from '../config/roles/volunteering-roles';
+import { educationRolesConfig } from '../config/roles/education';
+import { employmentRolesConfig } from '../config/roles/employment';
+import { volunteeringRolesConfig } from '../config/roles/volunteering';
 import { socialImagesGenerationConfig } from '../config/social-images-generation';
 import { themesConfig } from '../config/themes';
 import { getOrDefault } from './utilities';
@@ -146,6 +147,17 @@ export function getExternalServices() {
 // Returns a list of employment roles with formatted date objects
 export function getEmploymentRoles(): EmploymentRole[] {
 	return employmentRolesConfig
+		.map((role) => ({
+			...role,
+			startDate: new Date(role.startDate),
+			endDate: new Date(role.endDate),
+		}))
+		.sort((a, b) => b.endDate.getTime() - a.endDate.getTime());
+}
+
+// Returns a list of education roles with formatted date objects
+export function getEducationRoles(): Role[] {
+	return educationRolesConfig
 		.map((role) => ({
 			...role,
 			startDate: new Date(role.startDate),
