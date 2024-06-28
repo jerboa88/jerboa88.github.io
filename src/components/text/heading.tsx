@@ -11,7 +11,7 @@ interface Props extends PropsWithClassName, PropsWithChildren {}
 
 export function Heading({ className, children }: Props) {
 	const classNameProps = getClassNameProps(
-		'align-middle font-heading font-bold uppercase drop-shadow interactive-text text-neutral-content',
+		'align-middle font-heading font-bold uppercase dark:drop-shadow interactive-text text-neutral-content',
 		className,
 	);
 

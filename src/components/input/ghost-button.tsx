@@ -13,7 +13,7 @@ export function GhostButton({
 	...remainingProps
 }: Button) {
 	const classNameProps = getClassNameProps(
-		'p-2 sm:p-4 drop-shadow',
+		'p-2 sm:p-4 dark:drop-shadow',
 		!disabled && 'interactive-text', // Enable hover effect only when button is not disabled
 		className,
 	);

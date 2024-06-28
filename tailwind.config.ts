@@ -9,6 +9,7 @@ import { getTheme } from './src/common/config-manager';
 
 export default {
 	content: ['src/**/*.{js,jsx,ts,tsx}'],
+	darkMode: ['class', '[data-theme="dark"]'],
 	theme: {
 		fontFamily: {
 			sans: [
