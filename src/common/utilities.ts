@@ -165,3 +165,8 @@ export function getMimeType(fileUrl: URL) {
 export function removeTrailingSlash(path: string) {
 	return path.endsWith('/') ? path.slice(0, -1) : path;
 }
+
+// Remove the protocol from a URL
+export function removeProtocol(url: string) {
+	return url.replace(/.*?:\/\//g, '');
+}
