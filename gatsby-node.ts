@@ -12,7 +12,7 @@ import {
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 } from './src/common/constants';
 import type {
-	Path,
+	AbsolutePathString,
 	PinnedReposResponse,
 	SocialImageTypes,
 } from './src/common/types';
@@ -47,7 +47,7 @@ let gatsbyReporter: Reporter | undefined = undefined;
 // Types
 
 interface CreatePageOptions {
-	path: Path;
+	path: AbsolutePathString;
 	component: string;
 	socialImageComponent: string;
 	context: object;
@@ -226,7 +226,7 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
 
 	createPage({
 		...page,
-		path: page.path as Path,
+		path: page.path as AbsolutePathString,
 		socialImageComponent: OTHER_OG_IMAGE_TEMPLATE,
 		context: {
 			...page.context,

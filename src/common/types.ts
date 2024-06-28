@@ -33,14 +33,14 @@ export interface PropsWithLayoutAnimations {
 	layoutRoot?: LayoutProps['layoutRoot'];
 }
 
-// Tailwind CSS background color
-export type BgColor = `bg-${string}`;
+// Tailwind CSS background color string
+export type BgColorString = `bg-${string}`;
 
-// Absolute path
-export type Path = `/${string}`;
+// Absolute path string
+export type AbsolutePathString = `/${string}`;
 
-// HTTPS URL
-export type Url = `https://${string}`;
+// HTTPS URL string
+export type UrlString = `https://${string}`;
 
 // Date string in the format YYYY-MM-DD
 type DateString = `${string}-${string}-${string}`;
@@ -51,14 +51,14 @@ type CityAndStateString = `${string}, ${string}`;
 // Raw external services config
 export interface ExternalServicesConfig {
 	botpoisonPublicKey: `pk_${string}`;
-	contactFormPostUrl: Url;
+	contactFormPostUrl: UrlString;
 }
 
 // Raw site metadata config
 export interface SiteMetadataConfig {
 	iconPath: string;
-	siteUrl: Url;
-	sourceUrl: Url;
+	siteUrl: UrlString;
+	sourceUrl: UrlString;
 	author: {
 		name: {
 			first: string;
@@ -94,7 +94,7 @@ export interface PageMetadataProp {
 
 // Raw pages metadata config
 export interface PagesMetadataConfig {
-	[key: Path]: PageMetadata;
+	[key: AbsolutePathString]: PageMetadata;
 }
 
 // TODO: Use this type in interfaces below
@@ -155,22 +155,22 @@ export interface ThemesConfig {
 
 // Color mappings for project types
 export interface ProjectTypeColorMappings {
-	'android app': BgColor;
-	extension: BgColor;
-	'cli app': BgColor;
-	'js library': BgColor;
-	'node.js module': BgColor;
-	markdown: BgColor;
-	website: BgColor;
-	'web app': BgColor;
-	'gimp plugin': BgColor;
-	other: BgColor;
+	'android app': BgColorString;
+	extension: BgColorString;
+	'cli app': BgColorString;
+	'js library': BgColorString;
+	'node.js module': BgColorString;
+	markdown: BgColorString;
+	website: BgColorString;
+	'web app': BgColorString;
+	'gimp plugin': BgColorString;
+	other: BgColorString;
 }
 
 // Color mappings for role types
 export interface RoleTypeColorMappings {
-	internship: BgColor;
-	'summer job': BgColor;
+	internship: BgColorString;
+	'summer job': BgColorString;
 }
 
 // Raw color mappings config used to generate color mappings
@@ -264,13 +264,13 @@ export interface ProjectLanguage {
 export interface ProjectInfo {
 	slug: string;
 	shortDesc: string;
-	homepageUrl: Url;
-	githubUrl: Url;
-	imageUrl: Url;
+	homepageUrl: UrlString;
+	githubUrl: UrlString;
+	imageUrl: UrlString;
 	stargazers: number;
 	updatedAt: string;
 	license: string;
-	licenseUrl: Url;
+	licenseUrl: UrlString;
 	languages: ProjectLanguage[];
 	name: string;
 	longDesc: string;

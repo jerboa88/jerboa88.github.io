@@ -5,14 +5,14 @@
 
 import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import type {
-	BgColor,
+	BgColorString,
 	EmploymentRole,
 	PageMetadata,
 	SocialImageTypes,
 	SocialImagesGenerationConfig,
 	Theme,
 	ThemesConfig,
-	Url,
+	UrlString,
 } from '../common/types';
 import { colorMappingsConfig } from '../config/color-mappings';
 import { externalServicesConfig } from '../config/external-services';
@@ -33,8 +33,8 @@ type SiteMetadata = {
 	shortDescription: string;
 	description: string;
 	iconPath: string;
-	siteUrl: Url;
-	sourceUrl: Url;
+	siteUrl: UrlString;
+	sourceUrl: UrlString;
 	author: {
 		name: {
 			first: string;
@@ -162,7 +162,7 @@ export function getTheme(themeName: keyof ThemesConfig): Theme {
 }
 
 // Returns the color for a given project type
-export function getProjectTypeColor(projectType: string): BgColor | '' {
+export function getProjectTypeColor(projectType: string): BgColorString | '' {
 	const colorMap = colorMappingsConfig.projectType;
 	const key = projectType?.toLowerCase();
 
@@ -170,7 +170,7 @@ export function getProjectTypeColor(projectType: string): BgColor | '' {
 }
 
 // Returns the color for a given role type
-export function getRoleTypeColor(roleType: string): BgColor | '' {
+export function getRoleTypeColor(roleType: string): BgColorString | '' {
 	const colorMap = colorMappingsConfig.roleType;
 	const key = roleType?.toLowerCase();
 
