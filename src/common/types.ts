@@ -46,10 +46,10 @@ export type UrlString = `https://${string}`;
 type DateString = `${20}${number}-${number}-${number}`;
 
 // City and state string
-type CityAndStateString = Capitalize<`${string}, ${string}`>;
+export type CityAndStateString = Capitalize<`${string}, ${string}`>;
 
 // Sentence string with proper capitalization and punctuation
-type SentenceString = Capitalize<`${string}.` | `${string}!` | `${string}?`>;
+export type SentenceString = Capitalize<`${string}${'.' | '!' | '?'}`>;
 
 // Raw external services config
 export interface ExternalServicesConfig {
