@@ -16,7 +16,11 @@ import type {
 	UseFormRegisterReturn,
 } from 'react-hook-form';
 
+// An object with no keys
 export type EmptyObject = Record<string, never>;
+
+// Extend a type, overwriting existing properties with new ones
+export type Overwrite<T, U> = Omit<T, keyof U> & U;
 
 // Props for components that accept an optional class name
 export interface PropsWithClassName {
@@ -37,6 +41,12 @@ export type Path = `/${string}`;
 
 // HTTPS URL
 export type Url = `https://${string}`;
+
+// Date string in the format YYYY-MM-DD
+type DateString = `${string}-${string}-${string}`;
+
+// City and state string
+type CityAndStateString = `${string}, ${string}`;
 
 // Raw external services config
 export interface ExternalServicesConfig {
@@ -268,27 +278,41 @@ export interface ProjectInfo {
 	typeColor: string;
 }
 
+type EmploymentRoleTypes = 'internship' | 'summer job';
+
 // Raw role config
-export interface RoleConfig {
-	type: 'internship' | 'summer job';
+type RoleConfig = {
+	type?: string;
 	title: string;
 	company: string;
-	startDate: string;
-	endDate: string;
-	location: string;
-	tasks: string[];
-}
+	startDate: DateString;
+	endDate: DateString;
+	location: CityAndStateString;
+	bullets: string[];
+};
 
 // Role object used to represent jobs and volunteer positions
-export interface Role {
-	type: 'internship' | 'summer job';
-	title: string;
-	company: string;
-	startDate: Date;
-	endDate: Date;
-	location: string;
-	tasks: string[];
-}
+export type Role = Overwrite<
+	RoleConfig,
+	{
+		startDate: Date;
+		endDate: Date;
+	}
+>;
+
+export type EmploymentRoleConfig = Overwrite<
+	RoleConfig,
+	{
+		type?: EmploymentRoleTypes;
+	}
+>;
+
+export type EmploymentRole = Overwrite<
+	Role,
+	{
+		type?: EmploymentRoleTypes;
+	}
+>;
 
 export type PinnedReposResponse = NonNullable<
 	NonNullable<

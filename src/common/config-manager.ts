@@ -6,8 +6,8 @@
 import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import type {
 	BgColor,
+	EmploymentRole,
 	PageMetadata,
-	Role,
 	SocialImageTypes,
 	SocialImagesGenerationConfig,
 	Theme,
@@ -18,7 +18,7 @@ import { colorMappingsConfig } from '../config/color-mappings';
 import { externalServicesConfig } from '../config/external-services';
 import { pagesMetadataConfig } from '../config/metadata/pages';
 import { siteMetadataConfig } from '../config/metadata/site';
-import { rolesConfig } from '../config/roles';
+import { employmentRolesConfig } from '../config/roles/employment-roles';
 import { socialImagesGenerationConfig } from '../config/social-images-generation';
 import { themesConfig } from '../config/themes';
 import { getOrDefault } from './utilities';
@@ -141,9 +141,9 @@ export function getExternalServices() {
 	return externalServicesConfig;
 }
 
-// Returns a list of roles with formatted date objects
-export function getRoles(): Role[] {
-	return rolesConfig.map((role) => ({
+// Returns a list of employment roles with formatted date objects
+export function getEmploymentRoles(): EmploymentRole[] {
+	return employmentRolesConfig.map((role) => ({
 		...role,
 		startDate: new Date(role.startDate),
 		endDate: new Date(role.endDate),
@@ -164,7 +164,7 @@ export function getTheme(themeName: keyof ThemesConfig): Theme {
 // Returns the color for a given project type
 export function getProjectTypeColor(projectType: string): BgColor | '' {
 	const colorMap = colorMappingsConfig.projectType;
-	const key = projectType.toLowerCase();
+	const key = projectType?.toLowerCase();
 
 	return getOrDefault(colorMap, key, '');
 }
@@ -172,7 +172,7 @@ export function getProjectTypeColor(projectType: string): BgColor | '' {
 // Returns the color for a given role type
 export function getRoleTypeColor(roleType: string): BgColor | '' {
 	const colorMap = colorMappingsConfig.roleType;
-	const key = roleType.toLowerCase();
+	const key = roleType?.toLowerCase();
 
 	return getOrDefault(colorMap, key, '');
 }
