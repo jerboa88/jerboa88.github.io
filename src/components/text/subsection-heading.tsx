@@ -11,7 +11,7 @@ interface Props extends PropsWithClassName, PropsWithChildren {}
 
 export function SubsectionHeading({ className, children }: Props) {
 	const classNameProps = getClassNameProps(
-		'text-lg font-heading font-semibold drop-shadow',
+		'text-lg font-heading font-semibold dark:drop-shadow',
 		className,
 	);
 
