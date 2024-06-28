@@ -284,7 +284,7 @@ export interface ProjectInfo {
 type EmploymentRoleTypes = 'internship' | 'summer job';
 
 // Raw role config
-type RoleConfig = {
+export type RoleConfig = {
 	type?: string;
 	title: Capitalize<string>;
 	company: Capitalize<string>;
