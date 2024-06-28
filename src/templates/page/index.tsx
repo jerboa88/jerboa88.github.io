@@ -10,7 +10,10 @@ import {
 import { useInView } from 'framer-motion';
 import type { HeadProps } from 'gatsby';
 import { Suspense, lazy, useCallback, useRef } from 'react';
-import { getRoles, getSiteMetadata } from '../../common/config-manager';
+import {
+	getEmploymentRoles,
+	getSiteMetadata,
+} from '../../common/config-manager';
 import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
 import type {
 	ButtonElementRenderFunction,
@@ -18,7 +21,7 @@ import type {
 	ProjectInfo,
 	SocialImagesMetadataProp,
 } from '../../common/types';
-import { toKebabCase } from '../../common/utilities';
+import { limit, toKebabCase } from '../../common/utilities';
 import { HeroHeader } from '../../components/layout/hero-header';
 import { PageLayout } from '../../components/layout/page-layout';
 import { Section } from '../../components/layout/section';
@@ -40,7 +43,7 @@ interface Props {
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
-const ROLES = getRoles();
+const EMPLOYMENT_ROLES = limit(getEmploymentRoles(), 2);
 
 const ContactForm = lazy(() =>
 	import('../../components/input/contact-form').then((module) => ({
@@ -111,7 +114,7 @@ export default function IndexPageTemplate({
 						to={`#${toKebabCase(sections[0].title)}`}
 						icon={faAngleDown}
 						tooltipText={`Go to ${sections[0].title} section`}
-						className={expandTitle ? '':'opacity-0'}
+						className={expandTitle ? '' : 'opacity-0'}
 						isInternal
 					/>
 				</div>
@@ -149,7 +152,7 @@ export default function IndexPageTemplate({
 				className="min-h-lvh"
 				{...sections[2]}
 			>
-				<Timeline roles={ROLES} />
+				<Timeline roles={EMPLOYMENT_ROLES} />
 			</Section>
 			<Section className="min-h-lvh" {...sections[3]}>
 				<Article className="flex flex-col justify-center w-full">

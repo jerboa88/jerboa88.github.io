@@ -5,20 +5,20 @@
 
 import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import type {
-	BgColor,
+	BgColorString,
+	EmploymentRole,
 	PageMetadata,
-	Role,
 	SocialImageTypes,
 	SocialImagesGenerationConfig,
 	Theme,
 	ThemesConfig,
-	Url,
+	UrlString,
 } from '../common/types';
 import { colorMappingsConfig } from '../config/color-mappings';
 import { externalServicesConfig } from '../config/external-services';
-import { pagesMetadataConfig } from '../config/pages-metadata';
-import { rolesConfig } from '../config/roles';
-import { siteMetadataConfig } from '../config/site-metadata';
+import { pagesMetadataConfig } from '../config/metadata/pages';
+import { siteMetadataConfig } from '../config/metadata/site';
+import { employmentRolesConfig } from '../config/roles/employment-roles';
 import { socialImagesGenerationConfig } from '../config/social-images-generation';
 import { themesConfig } from '../config/themes';
 import { getOrDefault } from './utilities';
@@ -33,8 +33,8 @@ type SiteMetadata = {
 	shortDescription: string;
 	description: string;
 	iconPath: string;
-	siteUrl: Url;
-	sourceUrl: Url;
+	siteUrl: UrlString;
+	sourceUrl: UrlString;
 	author: {
 		name: {
 			first: string;
@@ -141,13 +141,15 @@ export function getExternalServices() {
 	return externalServicesConfig;
 }
 
-// Returns a list of roles with formatted date objects
-export function getRoles(): Role[] {
-	return rolesConfig.map((role) => ({
-		...role,
-		startDate: new Date(role.startDate),
-		endDate: new Date(role.endDate),
-	}));
+// Returns a list of employment roles with formatted date objects
+export function getEmploymentRoles(): EmploymentRole[] {
+	return employmentRolesConfig
+		.map((role) => ({
+			...role,
+			startDate: new Date(role.startDate),
+			endDate: new Date(role.endDate),
+		}))
+		.sort((a, b) => b.endDate.getTime() - a.endDate.getTime());
 }
 
 // Returns a daisyUI theme given its name
@@ -162,17 +164,17 @@ export function getTheme(themeName: keyof ThemesConfig): Theme {
 }
 
 // Returns the color for a given project type
-export function getProjectTypeColor(projectType: string): BgColor | '' {
+export function getProjectTypeColor(projectType: string): BgColorString | '' {
 	const colorMap = colorMappingsConfig.projectType;
-	const key = projectType.toLowerCase();
+	const key = projectType?.toLowerCase();
 
 	return getOrDefault(colorMap, key, '');
 }
 
 // Returns the color for a given role type
-export function getRoleTypeColor(roleType: string): BgColor | '' {
+export function getRoleTypeColor(roleType: string): BgColorString | '' {
 	const colorMap = colorMappingsConfig.roleType;
-	const key = roleType.toLowerCase();
+	const key = roleType?.toLowerCase();
 
 	return getOrDefault(colorMap, key, '');
 }

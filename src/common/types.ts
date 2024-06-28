@@ -16,7 +16,11 @@ import type {
 	UseFormRegisterReturn,
 } from 'react-hook-form';
 
+// An object with no keys
 export type EmptyObject = Record<string, never>;
+
+// Extend a type, overwriting existing properties with new ones
+export type Overwrite<T, U> = Omit<T, keyof U> & U;
 
 // Props for components that accept an optional class name
 export interface PropsWithClassName {
@@ -29,26 +33,35 @@ export interface PropsWithLayoutAnimations {
 	layoutRoot?: LayoutProps['layoutRoot'];
 }
 
-// Tailwind CSS background color
-export type BgColor = `bg-${string}`;
+// Tailwind CSS background color string
+export type BgColorString = `bg-${string}`;
 
-// Absolute path
-export type Path = `/${string}`;
+// Absolute path string
+export type AbsolutePathString = `/${string}`;
 
-// HTTPS URL
-export type Url = `https://${string}`;
+// HTTPS URL string
+export type UrlString = `https://${string}`;
+
+// Date string in the format YYYY-MM-DD
+type DateString = `${20}${number}-${number}-${number}`;
+
+// City and state string
+type CityAndStateString = Capitalize<`${string}, ${string}`>;
+
+// Sentence string with proper capitalization and punctuation
+type SentenceString = Capitalize<`${string}.` | `${string}!` | `${string}?`>;
 
 // Raw external services config
 export interface ExternalServicesConfig {
 	botpoisonPublicKey: `pk_${string}`;
-	contactFormPostUrl: Url;
+	contactFormPostUrl: UrlString;
 }
 
 // Raw site metadata config
 export interface SiteMetadataConfig {
 	iconPath: string;
-	siteUrl: Url;
-	sourceUrl: Url;
+	siteUrl: UrlString;
+	sourceUrl: UrlString;
 	author: {
 		name: {
 			first: string;
@@ -84,7 +97,7 @@ export interface PageMetadataProp {
 
 // Raw pages metadata config
 export interface PagesMetadataConfig {
-	[key: Path]: PageMetadata;
+	[key: AbsolutePathString]: PageMetadata;
 }
 
 // TODO: Use this type in interfaces below
@@ -145,22 +158,22 @@ export interface ThemesConfig {
 
 // Color mappings for project types
 export interface ProjectTypeColorMappings {
-	'android app': BgColor;
-	extension: BgColor;
-	'cli app': BgColor;
-	'js library': BgColor;
-	'node.js module': BgColor;
-	markdown: BgColor;
-	website: BgColor;
-	'web app': BgColor;
-	'gimp plugin': BgColor;
-	other: BgColor;
+	'android app': BgColorString;
+	extension: BgColorString;
+	'cli app': BgColorString;
+	'js library': BgColorString;
+	'node.js module': BgColorString;
+	markdown: BgColorString;
+	website: BgColorString;
+	'web app': BgColorString;
+	'gimp plugin': BgColorString;
+	other: BgColorString;
 }
 
 // Color mappings for role types
 export interface RoleTypeColorMappings {
-	internship: BgColor;
-	'summer job': BgColor;
+	internship: BgColorString;
+	'summer job': BgColorString;
 }
 
 // Raw color mappings config used to generate color mappings
@@ -254,13 +267,13 @@ export interface ProjectLanguage {
 export interface ProjectInfo {
 	slug: string;
 	shortDesc: string;
-	homepageUrl: Url;
-	githubUrl: Url;
-	imageUrl: Url;
+	homepageUrl: UrlString;
+	githubUrl: UrlString;
+	imageUrl: UrlString;
 	stargazers: number;
 	updatedAt: string;
 	license: string;
-	licenseUrl: Url;
+	licenseUrl: UrlString;
 	languages: ProjectLanguage[];
 	name: string;
 	longDesc: string;
@@ -268,27 +281,41 @@ export interface ProjectInfo {
 	typeColor: string;
 }
 
+type EmploymentRoleTypes = 'internship' | 'summer job';
+
 // Raw role config
-export interface RoleConfig {
-	type: 'internship' | 'summer job';
-	title: string;
-	company: string;
-	startDate: string;
-	endDate: string;
-	location: string;
-	tasks: string[];
-}
+type RoleConfig = {
+	type?: string;
+	title: Capitalize<string>;
+	company: Capitalize<string>;
+	startDate: DateString;
+	endDate: DateString;
+	location: CityAndStateString;
+	bullets: SentenceString[];
+};
 
 // Role object used to represent jobs and volunteer positions
-export interface Role {
-	type: 'internship' | 'summer job';
-	title: string;
-	company: string;
-	startDate: Date;
-	endDate: Date;
-	location: string;
-	tasks: string[];
-}
+export type Role = Overwrite<
+	RoleConfig,
+	{
+		startDate: Date;
+		endDate: Date;
+	}
+>;
+
+export type EmploymentRoleConfig = Overwrite<
+	RoleConfig,
+	{
+		type?: EmploymentRoleTypes;
+	}
+>;
+
+export type EmploymentRole = Overwrite<
+	Role,
+	{
+		type?: EmploymentRoleTypes;
+	}
+>;
 
 export type PinnedReposResponse = NonNullable<
 	NonNullable<

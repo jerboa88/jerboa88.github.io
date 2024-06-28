@@ -28,7 +28,7 @@ export function TimelineEntry({ role }: Props) {
 					<DateRange startDate={role.startDate} endDate={role.endDate} />
 					<span className="text-sm">{role.location}</span>
 				</div>
-				<Pill text={role.type} {...pillClassNameProps} />
+				{role?.type && <Pill text={role.type} {...pillClassNameProps} />}
 			</div>
 			<div className="timeline-middle">
 				<FontAwesomeIcon icon={faCircleCheck} />
@@ -47,9 +47,9 @@ export function TimelineEntry({ role }: Props) {
 						</div>
 					</div>
 					<ul className="list-[circle] m-4">
-						{role.tasks.map((task) => (
-							<li key={task} className="my-2">
-								{task}
+						{role.bullets.map((bullet) => (
+							<li key={bullet} className="my-2">
+								{bullet}
 							</li>
 						))}
 					</ul>
