@@ -91,7 +91,7 @@ export function getSiteMetadata(): SiteMetadata {
 				twitter: config.author.username.twitter,
 			},
 			link: {
-				linkedin: `https://www.linkedin.com/in/${config.author.username.linkedin}`,
+				linkedin: `https://linkedin.com/in/${config.author.username.linkedin}`,
 				github: `https://github.com/${config.author.username.github}`,
 				twitter: `https://twitter.com/${config.author.username.twitter}`,
 			},
