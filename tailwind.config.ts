@@ -6,10 +6,11 @@
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 import { getTheme } from './src/common/config-manager';
+import { ThemeType } from './src/common/types';
 
 export default {
 	content: ['src/**/*.{js,jsx,ts,tsx}'],
-	darkMode: ['class', '[data-theme="dark"]'],
+	darkMode: ['class', `[data-theme="${ThemeType.Dark}"]`],
 	theme: {
 		fontFamily: {
 			sans: [
@@ -69,7 +70,10 @@ export default {
 		}),
 	],
 	daisyui: {
-		themes: [{ dark: getTheme('dark') }, { light: getTheme('light') }],
-		darkTheme: 'dark',
+		themes: [
+			{ [ThemeType.Dark]: getTheme(ThemeType.Dark) },
+			{ [ThemeType.Light]: getTheme(ThemeType.Light) },
+		],
+		darkTheme: ThemeType.Dark,
 	},
 } satisfies Config;

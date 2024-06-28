@@ -12,11 +12,12 @@ import {
 	getTheme,
 } from './src/common/config-manager';
 import { SOCIAL_IMAGES_DIR } from './src/common/constants';
+import { ThemeType } from './src/common/types';
 import { getAbsoluteUrl } from './src/common/utilities';
 import tailwindConfig from './tailwind.config';
 
 const SITE_METADATA = getSiteMetadata();
-const DARK_THEME = getTheme('dark');
+const DARK_THEME = getTheme(ThemeType.Dark);
 const OG_IMAGE_GENERATION_CONFIG = getSocialImageGenerationConfigForType('og');
 
 // Load environment variables from relevant .env file
