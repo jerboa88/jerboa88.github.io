@@ -15,6 +15,7 @@ interface Props {
 }
 
 // Constants
+
 const SITE_METADATA = getSiteMetadata();
 
 export function HeroHeader({ expandTitle = false }: Props) {

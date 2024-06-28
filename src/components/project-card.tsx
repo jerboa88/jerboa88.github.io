@@ -52,7 +52,7 @@ export function ProjectCard({ repo }: Props) {
 					<div className="flex flex-row justify-center w-full">
 						{/* TODO: Put project icon here? */}
 						<div className="flex flex-col justify-center p-8 px-10 h-full rounded-2xl z-16 text-wrap">
-							<SubsectionHeading className="font-semibold">
+							<SubsectionHeading className="my-4 font-semibold">
 								{repo.name}
 							</SubsectionHeading>
 							<span className="text-wrap">{repo.shortDesc}</span>
