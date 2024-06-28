@@ -16310,6 +16310,8 @@ type GITHUB_PropertyTargetDefinition = {
   readonly name: Scalars['String'];
   /** The values to match for */
   readonly propertyValues: ReadonlyArray<Scalars['String']>;
+  /** The source of the property. Choose 'custom' or 'system'. Defaults to 'custom' if not specified */
+  readonly source: Maybe<Scalars['String']>;
 };
 
 /** A property that must match */
@@ -16318,6 +16320,8 @@ type GITHUB_PropertyTargetDefinitionInput = {
   readonly name: Scalars['String'];
   /** The values to match for */
   readonly propertyValues: ReadonlyArray<Scalars['String']>;
+  /** The source of the property. Choose 'custom' or 'system'. Defaults to 'custom' if not specified */
+  readonly source: InputMaybe<Scalars['String']>;
 };
 
 /** A user's public key. */
