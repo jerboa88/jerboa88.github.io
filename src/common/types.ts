@@ -43,10 +43,13 @@ export type AbsolutePathString = `/${string}`;
 export type UrlString = `https://${string}`;
 
 // Date string in the format YYYY-MM-DD
-type DateString = `${string}-${string}-${string}`;
+type DateString = `${20}${number}-${number}-${number}`;
 
 // City and state string
-type CityAndStateString = `${string}, ${string}`;
+type CityAndStateString = Capitalize<`${string}, ${string}`>;
+
+// Sentence string with proper capitalization and punctuation
+type SentenceString = Capitalize<`${string}.` | `${string}!` | `${string}?`>;
 
 // Raw external services config
 export interface ExternalServicesConfig {
@@ -283,12 +286,12 @@ type EmploymentRoleTypes = 'internship' | 'summer job';
 // Raw role config
 type RoleConfig = {
 	type?: string;
-	title: string;
-	company: string;
+	title: Capitalize<string>;
+	company: Capitalize<string>;
 	startDate: DateString;
 	endDate: DateString;
 	location: CityAndStateString;
-	bullets: string[];
+	bullets: SentenceString[];
 };
 
 // Role object used to represent jobs and volunteer positions
