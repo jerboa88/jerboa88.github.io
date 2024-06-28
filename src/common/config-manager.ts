@@ -143,11 +143,13 @@ export function getExternalServices() {
 
 // Returns a list of employment roles with formatted date objects
 export function getEmploymentRoles(): EmploymentRole[] {
-	return employmentRolesConfig.map((role) => ({
-		...role,
-		startDate: new Date(role.startDate),
-		endDate: new Date(role.endDate),
-	}));
+	return employmentRolesConfig
+		.map((role) => ({
+			...role,
+			startDate: new Date(role.startDate),
+			endDate: new Date(role.endDate),
+		}))
+		.sort((a, b) => b.endDate.getTime() - a.endDate.getTime());
 }
 
 // Returns a daisyUI theme given its name

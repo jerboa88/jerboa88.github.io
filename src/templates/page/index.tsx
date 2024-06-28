@@ -21,7 +21,7 @@ import type {
 	ProjectInfo,
 	SocialImagesMetadataProp,
 } from '../../common/types';
-import { toKebabCase } from '../../common/utilities';
+import { limit, toKebabCase } from '../../common/utilities';
 import { HeroHeader } from '../../components/layout/hero-header';
 import { PageLayout } from '../../components/layout/page-layout';
 import { Section } from '../../components/layout/section';
@@ -43,7 +43,7 @@ interface Props {
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
-const EMPLOYMENT_ROLES = getEmploymentRoles();
+const EMPLOYMENT_ROLES = limit(getEmploymentRoles(), 2);
 
 const ContactForm = lazy(() =>
 	import('../../components/input/contact-form').then((module) => ({
