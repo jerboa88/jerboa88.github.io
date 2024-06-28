@@ -16,9 +16,9 @@ import type {
 } from '../common/types';
 import { colorMappingsConfig } from '../config/color-mappings';
 import { externalServicesConfig } from '../config/external-services';
-import { pagesMetadataConfig } from '../config/pages-metadata';
+import { pagesMetadataConfig } from '../config/metadata/pages';
+import { siteMetadataConfig } from '../config/metadata/site';
 import { rolesConfig } from '../config/roles';
-import { siteMetadataConfig } from '../config/site-metadata';
 import { socialImagesGenerationConfig } from '../config/social-images-generation';
 import { themesConfig } from '../config/themes';
 import { getOrDefault } from './utilities';

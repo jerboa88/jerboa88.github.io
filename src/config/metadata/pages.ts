@@ -3,7 +3,7 @@
 	-----------------------------
 */
 
-import type { PagesMetadataConfig } from '../common/types';
+import type { PagesMetadataConfig } from '../../common/types';
 
 export const pagesMetadataConfig: PagesMetadataConfig = {
 	'/privacy-policy/': {
