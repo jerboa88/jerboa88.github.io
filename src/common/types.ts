@@ -39,6 +39,9 @@ export type BgColorString = `bg-${string}`;
 // Absolute path string
 export type AbsolutePathString = `/${string}`;
 
+// Working path string
+export type WorkingPathString = `./${string}`;
+
 // HTTPS URL string
 export type UrlString = `https://${string}`;
 
