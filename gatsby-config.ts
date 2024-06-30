@@ -29,6 +29,7 @@ const config: GatsbyConfig = {
 	siteMetadata: SITE_METADATA,
 	// Enable the new JSX transform so that we can use JSX without importing React
 	jsxRuntime: 'automatic',
+	trailingSlash: 'never',
 	graphqlTypegen: {
 		typesOutputPath: 'src/common/gatsby-types.d.ts',
 	},
@@ -139,6 +140,13 @@ const config: GatsbyConfig = {
 				headers: {
 					authorization: `Bearer ${process.env.GH_TOKEN}`,
 				},
+			},
+		},
+		// We are using a fork of gatsby-plugin-meta-redirect that supports disabling trailing slashes
+		{
+			resolve: 'gatsby-plugin-meta-redirect',
+			options: {
+				disableTrailingSlash: true,
 			},
 		},
 	],
