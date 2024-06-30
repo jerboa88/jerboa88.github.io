@@ -46,10 +46,10 @@ export type UrlString = `https://${string}`;
 type DateString = `${20}${number}-${number}-${number}`;
 
 // City and state string
-type CityAndStateString = Capitalize<`${string}, ${string}`>;
+export type CityAndStateString = Capitalize<`${string}, ${string}`>;
 
 // Sentence string with proper capitalization and punctuation
-type SentenceString = Capitalize<`${string}.` | `${string}!` | `${string}?`>;
+export type SentenceString = Capitalize<`${string}${'.' | '!' | '?'}`>;
 
 // Raw external services config
 export interface ExternalServicesConfig {
@@ -126,6 +126,12 @@ export interface ImageMetadataProp {
 	imageMetadata: JobOptions;
 }
 
+// Theme names
+export enum ThemeType {
+	Light = 'light',
+	Dark = 'dark',
+}
+
 // Theme object used to style the site
 export type Theme = Partial<{
 	primary: string;
@@ -152,8 +158,8 @@ export type Theme = Partial<{
 
 // Raw themes config used to generate theme objects
 export interface ThemesConfig {
-	light: Theme;
-	dark: Theme;
+	[ThemeType.Light]: Theme;
+	[ThemeType.Dark]: Theme;
 }
 
 // Color mappings for project types

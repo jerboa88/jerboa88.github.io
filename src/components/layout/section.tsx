@@ -12,6 +12,7 @@ import { getClassNameProps, toKebabCase } from '../../common/utilities';
 import { SectionHeader } from './section-header';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
+	sectionHeaderClassName?: string;
 	title?: string;
 	renderButton?: ButtonElementRenderFunction;
 	responsive?: boolean;
@@ -19,7 +20,14 @@ interface Props extends PropsWithClassName, PropsWithChildren {
 
 export const Section = forwardRef(
 	(
-		{ className, title, renderButton, responsive = true, children }: Props,
+		{
+			className,
+			sectionHeaderClassName,
+			title,
+			renderButton,
+			responsive = true,
+			children,
+		}: Props,
 		ref: ForwardedRef<HTMLElement>,
 	) => {
 		const classNameProps = getClassNameProps(
@@ -29,6 +37,7 @@ export const Section = forwardRef(
 		);
 		const sectionHeaderClassNameProps = getClassNameProps(
 			responsive && 'pt-10', // Add padding to account for floating page header
+			sectionHeaderClassName,
 		);
 
 		const sectionId = title ? toKebabCase(title) : 'top';

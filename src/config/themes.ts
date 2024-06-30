@@ -3,10 +3,10 @@
 	---------------------------
 */
 
-import type { ThemesConfig } from '../common/types';
+import { ThemeType, type ThemesConfig } from '../common/types';
 
 export const themesConfig: ThemesConfig = {
-	light: {
+	[ThemeType.Light]: {
 		primary: '#0F766E', // TW Teal 700
 		secondary: '#E11D48', // TW Rose 600
 		accent: '#E11D48', // TW Rose 600
@@ -21,7 +21,7 @@ export const themesConfig: ThemesConfig = {
 		'base-content': '#000', // Pure black
 		'neutral-content': '#000',
 	},
-	dark: {
+	[ThemeType.Dark]: {
 		primary: '#2DD4BF', // TW Teal 400
 		secondary: '#FB7185', // TW Rose 400
 		accent: '#E11D48', // TW Rose 600

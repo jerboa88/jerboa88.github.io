@@ -1,6 +1,6 @@
 /*
-	Layout component that provides basic styles and metadata tags for the whole page
-	--------------------------------------------------------------------------------
+	Layout component that provides basic styles for the whole page
+	--------------------------------------------------------------
 */
 
 import { MotionConfig } from 'framer-motion';

@@ -10,12 +10,13 @@ import { loadSquareShape } from '@tsparticles/shape-square';
 import { useReducedMotion } from 'framer-motion';
 import { memo, useEffect, useState } from 'react';
 import { getTheme } from '../../common/config-manager';
+import { ThemeType } from '../../common/types';
 import { getClassNameProps } from '../../common/utilities';
 
 // Constants
 
 // TODO: Replace hardcoded value here
-const THEME = getTheme('dark');
+const THEME = getTheme(ThemeType.Dark);
 
 function UnmemoizedParticlesBackground() {
 	const shouldReduceMotion = useReducedMotion();

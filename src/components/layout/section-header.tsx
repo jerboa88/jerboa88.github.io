@@ -15,7 +15,7 @@ import { SectionHeading } from '../text/section-heading';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
 	title: string;
-	renderButton?: ButtonElementRenderFunction;
+	renderButton?: ButtonElementRenderFunction | undefined;
 }
 
 export function SectionHeader({ className, title, renderButton }: Props) {

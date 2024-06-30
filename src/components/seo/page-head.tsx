@@ -4,9 +4,10 @@
 */
 
 import { getSiteMetadata, getTheme } from '../../common/config-manager';
-import type {
-	PageMetadata,
-	SocialImagesMetadataProp,
+import {
+	type PageMetadata,
+	type SocialImagesMetadataProp,
+	ThemeType,
 } from '../../common/types';
 import { getAbsoluteUrl, getMimeType } from '../../common/utilities';
 
@@ -22,7 +23,7 @@ interface Props extends SocialImagesMetadataProp {
 
 const SITE_METADATA = getSiteMetadata();
 // TODO: Replace hardcoded value
-const THEME = getTheme('dark');
+const THEME = getTheme(ThemeType.Dark);
 
 export function PageHead({
 	path,
