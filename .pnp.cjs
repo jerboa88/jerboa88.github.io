@@ -52,6 +52,7 @@ const RAW_RUNTIME_STATE =
           ["gatsby-plugin-component-to-image", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.0.1"],\
           ["gatsby-plugin-fontawesome", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.3.1"],\
           ["gatsby-plugin-manifest", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
+          ["gatsby-plugin-meta-redirect", "https://github.com/sandro768/gatsby-plugin-meta-redirect.git#commit=295bc660524a99c697373ae063cba1d0a04e8a7e"],\
           ["gatsby-plugin-offline", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.2"],\
           ["gatsby-plugin-postcss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
           ["gatsby-plugin-purgecss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.2.1"],\
@@ -11351,6 +11352,16 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
+      ["npm:7.0.1", {\
+        "packageLocation": "./.yarn/cache/fs-extra-npm-7.0.1-b33a5e53e9-3fc6e56ba2.zip/node_modules/fs-extra/",\
+        "packageDependencies": [\
+          ["fs-extra", "npm:7.0.1"],\
+          ["graceful-fs", "npm:4.2.11"],\
+          ["jsonfile", "npm:4.0.0"],\
+          ["universalify", "npm:0.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:9.1.0", {\
         "packageLocation": "./.yarn/cache/fs-extra-npm-9.1.0-983c2ddb4c-08600da1b4.zip/node_modules/fs-extra/",\
         "packageDependencies": [\
@@ -11895,6 +11906,16 @@ const RAW_RUNTIME_STATE =
         "packagePeers": [\
           "@types/gatsby",\
           "gatsby"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["gatsby-plugin-meta-redirect", [\
+      ["https://github.com/sandro768/gatsby-plugin-meta-redirect.git#commit=295bc660524a99c697373ae063cba1d0a04e8a7e", {\
+        "packageLocation": "./.yarn/cache/gatsby-plugin-meta-redirect-https-47ac1347ee-174ee98162.zip/node_modules/gatsby-plugin-meta-redirect/",\
+        "packageDependencies": [\
+          ["gatsby-plugin-meta-redirect", "https://github.com/sandro768/gatsby-plugin-meta-redirect.git#commit=295bc660524a99c697373ae063cba1d0a04e8a7e"],\
+          ["fs-extra", "npm:7.0.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -14363,6 +14384,7 @@ const RAW_RUNTIME_STATE =
           ["gatsby-plugin-component-to-image", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.0.1"],\
           ["gatsby-plugin-fontawesome", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:1.3.1"],\
           ["gatsby-plugin-manifest", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:5.13.1"],\
+          ["gatsby-plugin-meta-redirect", "https://github.com/sandro768/gatsby-plugin-meta-redirect.git#commit=295bc660524a99c697373ae063cba1d0a04e8a7e"],\
           ["gatsby-plugin-offline", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.2"],\
           ["gatsby-plugin-postcss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.13.1"],\
           ["gatsby-plugin-purgecss", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:6.2.1"],\
