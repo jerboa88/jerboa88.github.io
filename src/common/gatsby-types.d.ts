@@ -30066,6 +30066,11 @@ type PrivacyPolicyPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 type PrivacyPolicyPageQuery = { readonly file: { readonly childMarkdownRemark: { readonly html: string | null } | null } | null };
 
+type ResumePageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type ResumePageQuery = { readonly file: { readonly childMarkdownRemark: { readonly html: string | null } | null } | null };
+
 type PinnedReposQueryVariables = Exact<{ [key: string]: never; }>;
 
 
