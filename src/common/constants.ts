@@ -3,6 +3,8 @@
 	--------------------------------------------------
 */
 
+import type { AbsolutePathString, WorkingPathString } from './types';
+
 // Constants
 
 const FADE_TRANSITION_VARIANTS = {
@@ -17,11 +19,12 @@ const FADE_TRANSITION_VARIANTS = {
 } as const;
 
 // Directories
-export const PAGE_TEMPLATES_DIR = './src/templates/page' as const;
-export const SOCIAL_IMAGE_TEMPLATES_DIR =
-	'./src/templates/social-image' as const;
-export const PROJECTS_DIR = '/projects' as const;
-export const SOCIAL_IMAGES_DIR = '/__generatedSocialImages' as const;
+export const PAGE_TEMPLATES_DIR: WorkingPathString = './src/templates/page';
+export const SOCIAL_IMAGE_TEMPLATES_DIR: WorkingPathString =
+	'./src/templates/social-image';
+export const PROJECTS_DIR: AbsolutePathString = '/projects';
+export const PROJECTS_DIR_SHORT: AbsolutePathString = '/p';
+export const SOCIAL_IMAGES_DIR: AbsolutePathString = '/__generatedSocialImages';
 
 // ID used to group together elements for the title animation
 export const TITLE_LAYOUT_ID = 'title-layout' as const;

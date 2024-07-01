@@ -8,6 +8,8 @@ import {
 } from './src/common/config-manager';
 import {
 	PAGE_TEMPLATES_DIR,
+	PROJECTS_DIR,
+	PROJECTS_DIR_SHORT,
 	SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR,
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 } from './src/common/constants';
@@ -42,6 +44,7 @@ const OTHER_OG_IMAGE_TEMPLATE = resolve(
 
 let gatsbyCreatePage: Actions['createPage'] | undefined = undefined;
 let gatsbyDeletePage: Actions['deletePage'] | undefined = undefined;
+let gatsbyCreateRedirect: Actions['createRedirect'] | undefined = undefined;
 let gatsbyReporter: Reporter | undefined = undefined;
 
 // Types
@@ -191,13 +194,25 @@ function createPage({
 	});
 }
 
+// Create a client-side redirect
+function createRedirect(fromPath: string, toPath: string) {
+	assert(gatsbyCreateRedirect !== undefined);
+
+	gatsbyCreateRedirect({
+		fromPath: fromPath,
+		toPath: toPath,
+		isPermanent: true,
+	});
+}
+
 // Save Gatsby Node API Helpers for later use
 export const onPluginInit: GatsbyNode['onPluginInit'] = ({
 	reporter,
-	actions: { createPage, deletePage },
+	actions: { createPage, deletePage, createRedirect },
 }) => {
 	gatsbyCreatePage = createPage;
 	gatsbyDeletePage = deletePage;
+	gatsbyCreateRedirect = createRedirect;
 	gatsbyReporter = reporter;
 };
 
@@ -244,17 +259,27 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 		const projectInfo = mapResponse(
 			parseResponse(responseData as PinnedReposResponse),
 		);
+		const path: AbsolutePathString = join(
+			PROJECTS_DIR,
+			projectInfo.slug,
+		) as AbsolutePathString;
+		const shortPath: AbsolutePathString = join(
+			PROJECTS_DIR_SHORT,
+			projectInfo.slug,
+		) as AbsolutePathString;
 
 		// TODO: Renable this when project pages are implemented
 		// Create project pages
 		// createPage({
-		// 	path: join(PROJECTS_DIR, projectInfo.slug) as Path,
+		// 	path: path,
 		// 	component: PROJECT_PAGE_TEMPLATE,
 		// 	socialImageComponent: PROJECT_OG_IMAGE_TEMPLATE,
 		// 	context: {
 		// 		repo: projectInfo,
 		// 	},
 		// });
+
+		createRedirect(shortPath, path);
 
 		return projectInfo;
 	});
@@ -268,4 +293,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 			pinnedRepos: pinnedRepos,
 		},
 	});
+
+	createRedirect('/about', '/#about');
+	createRedirect('/projects', '/#projects');
+	createRedirect('/experience', '/#experience');
+	createRedirect('/contact', '/#contact');
 };
