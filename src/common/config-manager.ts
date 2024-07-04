@@ -50,6 +50,7 @@ type SiteMetadata = {
 		alumniOf: string;
 		image: string;
 		username: {
+			github: string;
 			twitter: string;
 		};
 		link: {
@@ -91,6 +92,7 @@ export function getSiteMetadata(): SiteMetadata {
 			alumniOf: config.author.alumniOf,
 			image: config.author.image,
 			username: {
+				github: config.author.username.github,
 				twitter: config.author.username.twitter,
 			},
 			link: {
