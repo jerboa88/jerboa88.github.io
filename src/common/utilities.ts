@@ -175,3 +175,8 @@ export function removeProtocol(url: string) {
 export function limit<T>(array: T[], limit: number): T[] {
 	return array.slice(0, limit);
 }
+
+// Return true if a value is defined
+export function isDefined<T>(value: T): value is NonNullable<T> {
+	return value !== undefined && value !== null;
+}
