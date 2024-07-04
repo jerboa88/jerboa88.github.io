@@ -6,6 +6,7 @@
 import type { ColorMappingsConfig } from '../common/types';
 
 export const colorMappingsConfig: ColorMappingsConfig = {
+	default: 'bg-rose-600',
 	projectType: {
 		'android app': 'bg-lime-600',
 		extension: 'bg-amber-600',
@@ -19,7 +20,7 @@ export const colorMappingsConfig: ColorMappingsConfig = {
 		'gimp plugin': 'bg-blue-600',
 	},
 	roleType: {
-		internship: 'bg-secondary',
-		'summer job': 'bg-secondary',
+		internship: 'bg-rose-600',
+		'summer job': 'bg-rose-600',
 	},
 };

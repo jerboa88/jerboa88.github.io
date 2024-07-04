@@ -187,6 +187,7 @@ export interface RoleTypeColorMappings {
 
 // Raw color mappings config used to generate color mappings
 export interface ColorMappingsConfig {
+	default: BgColorString;
 	projectType: ProjectTypeColorMappings;
 	roleType: RoleTypeColorMappings;
 }

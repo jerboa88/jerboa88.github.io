@@ -24,7 +24,7 @@ import { employmentRolesConfig } from '../config/roles/employment';
 import { volunteeringRolesConfig } from '../config/roles/volunteering';
 import { socialImagesGenerationConfig } from '../config/social-images-generation';
 import { themesConfig } from '../config/themes';
-import { getOrDefault } from './utilities';
+import { isDefined } from './utilities';
 
 // Types
 
@@ -191,11 +191,19 @@ export function getTheme(themeName: keyof ThemesConfig): Theme {
 }
 
 // Returns the color for a given project type
-export function getProjectTypeColor(projectType: string): BgColorString | '' {
+export function getProjectTypeColor(
+	projectType: string | undefined | null,
+): BgColorString | '' {
 	const colorMap = colorMappingsConfig.projectType;
 	const key = projectType?.toLowerCase();
 
-	return getOrDefault(colorMap, key, '');
+	if (isDefined(key) && key in colorMap) {
+		return colorMap[key as keyof typeof colorMap];
+	}
+
+	console.warn(`Color for project type '${projectType}' not found`);
+
+	return colorMappingsConfig.default;
 }
 
 // Returns the color for a given role type
@@ -203,5 +211,11 @@ export function getRoleTypeColor(roleType: string): BgColorString | '' {
 	const colorMap = colorMappingsConfig.roleType;
 	const key = roleType?.toLowerCase();
 
-	return getOrDefault(colorMap, key, '');
+	if (isDefined(key) && key in colorMap) {
+		return colorMap[key as keyof typeof colorMap];
+	}
+
+	console.warn(`Color for role type '${roleType}' not found`);
+
+	return colorMappingsConfig.default;
 }
