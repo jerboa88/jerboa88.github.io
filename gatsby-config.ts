@@ -132,20 +132,66 @@ const config: GatsbyConfig = {
 			},
 		},
 		{
-			resolve: 'gatsby-source-graphql',
+			resolve: 'gatsby-source-github-api',
 			options: {
-				typeName: 'GITHUB',
-				fieldName: 'github',
-				url: 'https://api.github.com/graphql',
-				headers: {
-					authorization: `Bearer ${process.env.GH_TOKEN}`,
+				token: process.env.GH_TOKEN,
+				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
+				graphQLQuery: `
+					query ($author: String = "", $repoLimit: Int = 0, $topicLimit: Int = 0, $languageLimit: Int = 0) {
+						user(login: $author) {
+							repositories(first: $repoLimit, orderBy: {field: STARGAZERS, direction: DESC}) {
+								nodes {
+									description
+									forkCount
+									homepageUrl
+									languages(first: $languageLimit) {
+										nodes {
+											name
+										}
+									}
+									licenseInfo {
+										spdxId
+										name
+										url
+									}
+									name
+									openGraphImageUrl
+									owner {
+										login
+									}
+									readme: object(expression: "HEAD:README.md") {
+										... on Blob {
+											text
+										}
+									}
+									repositoryTopics(first: $topicLimit) {
+										nodes {
+											topic {
+												name
+											}
+										}
+									}
+									stargazerCount
+									updatedAt
+									url
+									usesCustomOpenGraphImage
+								}
+							}
+						}
+					}
+				`,
+				variables: {
+					repoLimit: 100,
+					topicLimit: 20,
+					languageLimit: 6,
+					author: SITE_METADATA.author.username.github,
 				},
 			},
 		},
-		// We are using a fork of gatsby-plugin-meta-redirect that supports disabling trailing slashes
 		{
 			resolve: 'gatsby-plugin-meta-redirect',
 			options: {
+				// We are using a fork of gatsby-plugin-meta-redirect that supports disabling trailing slashes
 				disableTrailingSlash: true,
 			},
 		},
