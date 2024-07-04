@@ -145,6 +145,19 @@ export function toKebabCase(string: string) {
 		.toLowerCase();
 }
 
+// Convert a string to title case
+export function toTitleCase(string: string) {
+	return string
+		.split(/[-_ ]/)
+		.map((word) => `${word[0].toUpperCase()}${word.substring(1)}`)
+		.join(' ');
+}
+
+// Return a JSON string with human-readable formatting
+export function prettify(json: object | undefined | null) {
+	return JSON.stringify(json, null, 2);
+}
+
 // Given a path, return the absolute URL
 export function getAbsoluteUrl(path: string) {
 	return new URL(path, SITE_METADATA.siteUrl);
@@ -174,4 +187,9 @@ export function removeProtocol(url: string) {
 // Return the first n elements of an array
 export function limit<T>(array: T[], limit: number): T[] {
 	return array.slice(0, limit);
+}
+
+// Return true if a value is defined
+export function isDefined<T>(value: T): value is NonNullable<T> {
+	return value !== undefined && value !== null;
 }

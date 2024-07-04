@@ -15,12 +15,11 @@ import {
 } from './src/common/constants';
 import type {
 	AbsolutePathString,
-	PinnedReposResponse,
+	GithubReposQueryResponse,
 	SocialImageTypes,
 } from './src/common/types';
 import { removeTrailingSlash } from './src/common/utilities';
-import { mapResponse } from './src/node/response-mapper';
-import { parseResponse } from './src/node/response-parser';
+import { transformGithubResponse } from './src/node/github-response-transformer';
 
 // Constants
 
@@ -59,54 +58,52 @@ interface CreatePageOptions {
 interface CreateSocialImagesOptions {
 	path: string;
 	component: string;
-	context?: object;
+	context: object;
 }
 
 // Functions
 
 // Fetch pinned repos from a GitHub profile
-async function fetchPinnedRepos(graphql: CreatePagesArgs['graphql']) {
-	const response = await graphql(`
-		query PinnedRepos {
-			github {
-				user(login: "jerboa88") {
-					pinnedItems(first: 10) {
-						nodes {
-							... on GITHUB_Repository {
-								name
+async function fetchGithubRepos(graphql: CreatePagesArgs['graphql']) {
+	const response: GithubReposQueryResponse = await graphql(`
+		query GithubRepos {
+			githubData {
+				data {
+					user {
+						repositories {
+							nodes {
 								description
+								forkCount
 								homepageUrl
-								usesCustomOpenGraphImage
-								openGraphImageUrl
-								stargazerCount
-								githubUrl: url
-								updatedAt
-								languages(first: 4) {
+								languages {
 									nodes {
 										name
-										color
 									}
 								}
 								licenseInfo {
-									spdxId
 									name
+									spdxId
 									url
 								}
-								readmeFromMaster: object(expression: "master:README.md") {
-									... on GITHUB_Blob {
-										text
+								name
+								openGraphImageUrl
+								owner {
+									login
+								}
+								readme {
+									text
+								}
+								repositoryTopics {
+									nodes {
+										topic {
+											name
+										}
 									}
 								}
-								readmeFromMain: object(expression: "main:README.md") {
-									... on GITHUB_Blob {
-										text
-									}
-								}
-								readmeFromGhPages: object(expression: "gh-pages:README.md") {
-									... on GITHUB_Blob {
-										text
-									}
-								}
+								stargazerCount
+								updatedAt
+								url
+								usesCustomOpenGraphImage
 							}
 						}
 					}
@@ -115,28 +112,7 @@ async function fetchPinnedRepos(graphql: CreatePagesArgs['graphql']) {
 		}
 	`);
 
-	if (!response || 'errors' in response) {
-		throw new Error(
-			'The response from GitHub contains errors',
-			response?.errors,
-		);
-	}
-
-	const data = response.data as Queries.PinnedReposQuery;
-	const pinnedRepos = data.github.user?.pinnedItems.nodes;
-
-	if (!pinnedRepos) {
-		throw new Error('No pinned repos found');
-	}
-
-	return pinnedRepos;
-}
-
-// Assert that the response data is non-empty before we start processing it
-function assertResponseDataIsNonEmpty(responseData) {
-	if (!responseData || Object.keys(responseData).length === 0) {
-		throw new Error('Pinned repo does not contain any data');
-	}
+	return transformGithubResponse(response);
 }
 
 // Generate a single social image for a page
@@ -252,37 +228,31 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
 
 // Manually create pages and generate the associated Open Graph images
 export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
-	const pinnedReposResponseData = await fetchPinnedRepos(graphql);
-	const pinnedRepos = pinnedReposResponseData.map((responseData) => {
-		assertResponseDataIsNonEmpty(responseData);
+	const githubRepos = await fetchGithubRepos(graphql);
 
-		const projectInfo = mapResponse(
-			parseResponse(responseData as PinnedReposResponse),
-		);
+	for (const githubRepo of githubRepos) {
 		const path: AbsolutePathString = join(
 			PROJECTS_DIR,
-			projectInfo.slug,
+			githubRepo.slug,
 		) as AbsolutePathString;
 		const shortPath: AbsolutePathString = join(
 			PROJECTS_DIR_SHORT,
-			projectInfo.slug,
+			githubRepo.slug,
 		) as AbsolutePathString;
 
-		// TODO: Renable this when project pages are implemented
+		// TODO: Re-enable this when project pages are implemented
 		// Create project pages
 		// createPage({
 		// 	path: path,
 		// 	component: PROJECT_PAGE_TEMPLATE,
 		// 	socialImageComponent: PROJECT_OG_IMAGE_TEMPLATE,
 		// 	context: {
-		// 		repo: projectInfo,
+		// 		githubRepo: githubRepo,
 		// 	},
 		// });
 
 		createRedirect(shortPath, path);
-
-		return projectInfo;
-	});
+	}
 
 	// Create landing page
 	createPage({
@@ -290,7 +260,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 		component: INDEX_PAGE_TEMPLATE,
 		socialImageComponent: INDEX_OG_IMAGE_TEMPLATE,
 		context: {
-			pinnedRepos: pinnedRepos,
+			githubRepos: githubRepos,
 		},
 	});
 

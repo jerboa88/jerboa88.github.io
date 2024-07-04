@@ -100,7 +100,7 @@ export interface PageMetadataProp {
 
 // Raw pages metadata config
 export interface PagesMetadataConfig {
-	[key: AbsolutePathString]: PageMetadata;
+	[pagePath: AbsolutePathString]: PageMetadata;
 }
 
 // TODO: Use this type in interfaces below
@@ -165,30 +165,16 @@ export interface ThemesConfig {
 	[ThemeType.Dark]: Theme;
 }
 
-// Color mappings for project types
-export interface ProjectTypeColorMappings {
-	'android app': BgColorString;
-	extension: BgColorString;
-	'cli app': BgColorString;
-	'js library': BgColorString;
-	'node.js module': BgColorString;
-	markdown: BgColorString;
-	website: BgColorString;
-	'web app': BgColorString;
-	'gimp plugin': BgColorString;
-	other: BgColorString;
-}
-
-// Color mappings for role types
-export interface RoleTypeColorMappings {
-	internship: BgColorString;
-	'summer job': BgColorString;
+// Color mappings for project and role types
+export interface ColorMappings {
+	[type: string]: BgColorString;
 }
 
 // Raw color mappings config used to generate color mappings
 export interface ColorMappingsConfig {
-	projectType: ProjectTypeColorMappings;
-	roleType: RoleTypeColorMappings;
+	default: BgColorString;
+	projectType: ColorMappings;
+	roleType: ColorMappings;
 }
 
 export interface PageSection {
@@ -268,28 +254,6 @@ export enum AlertType {
 	Error = 3,
 }
 
-export interface ProjectLanguage {
-	name: string;
-	color: string;
-}
-
-export interface ProjectInfo {
-	slug: string;
-	shortDesc: string;
-	homepageUrl: UrlString;
-	githubUrl: UrlString;
-	imageUrl: UrlString;
-	stargazers: number;
-	updatedAt: string;
-	license: string;
-	licenseUrl: UrlString;
-	languages: ProjectLanguage[];
-	name: string;
-	longDesc: string;
-	typeName: string;
-	typeColor: string;
-}
-
 type EmploymentRoleTypes = 'internship' | 'summer job';
 
 // Raw role config
@@ -326,25 +290,67 @@ export type EmploymentRole = Overwrite<
 	}
 >;
 
-export type PinnedReposResponse = NonNullable<
+export type GithubRepoRules = {
+	hide?: boolean;
+	pin?: boolean;
+};
+
+export type GithubReposConfig = {
+	defaults: GithubRepoRules & {
+		limit: number;
+	};
+	slugs: {
+		[repoSlug: string]: GithubRepoRules;
+	};
+};
+
+// Raw response from the GitHub GraphQL query
+export type GithubReposQueryResponse = {
+	errors?: unknown[];
+	data?: Queries.GithubReposQuery;
+};
+
+// Raw, non-null repo object response from GitHub
+export type GithubRepoQuery = NonNullable<
 	NonNullable<
-		NonNullable<Queries.PinnedReposQuery['github']>['user']
-	>['pinnedItems']['nodes']
+		NonNullable<
+			NonNullable<
+				NonNullable<Queries.GithubReposQuery['githubData']>['data']
+			>['user']
+		>['repositories']
+	>['nodes']
 >[number] extends infer R
-	? R extends { readonly readmeFromMain: unknown }
+	? R extends { readonly name: unknown }
 		? R
 		: never
 	: never;
 
-export type ReadmeResponse = NonNullable<
-	NonNullable<
-		NonNullable<Queries.PinnedReposQuery['github']>['user']
-	>['pinnedItems']['nodes']
->[number] extends infer R
-	? R extends { readonly readmeFromMain: unknown }
-		? R['readmeFromMain']
-		: never
-	: never;
+// Transformed repo object with additional properties
+export type GithubRepo = Pick<
+	GithubRepoQuery,
+	| 'forkCount'
+	| 'url'
+	| 'homepageUrl'
+	| 'licenseInfo'
+	| 'openGraphImageUrl'
+	| 'stargazerCount'
+	| 'usesCustomOpenGraphImage'
+> & {
+	description: string | null;
+	languages: string[];
+	logoUrl: string | null;
+	name: string;
+	owner: string;
+	readmeText: string | null;
+	shortDescription: string | null;
+	slug: string;
+	topics: string[];
+	type: {
+		color: string;
+		name: string | null;
+	};
+	updatedAt: Date | null;
+};
 
 export type ToggleContext = Context<{
 	isEnabled: boolean;

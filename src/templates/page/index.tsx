@@ -17,8 +17,8 @@ import {
 import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
 import type {
 	ButtonElementRenderFunction,
+	GithubRepo,
 	PageSection,
-	ProjectInfo,
 	SocialImagesMetadataProp,
 } from '../../common/types';
 import { limit, toKebabCase } from '../../common/utilities';
@@ -36,7 +36,7 @@ import { Timeline } from '../../components/timeline';
 
 interface Props {
 	pageContext: SocialImagesMetadataProp & {
-		pinnedRepos: ProjectInfo[];
+		githubRepos: GithubRepo[];
 	};
 }
 
@@ -53,7 +53,7 @@ const ContactForm = lazy(() =>
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function IndexPageTemplate({
-	pageContext: { pinnedRepos },
+	pageContext: { githubRepos },
 }: Props) {
 	const inViewTriggerRef = useRef(null);
 	const expandTitle = useInView(inViewTriggerRef, USE_IN_VIEW_OPTIONS);
@@ -145,7 +145,7 @@ export default function IndexPageTemplate({
 				className="min-h-lvh"
 				{...sections[1]}
 			>
-				<ProjectCardGallery projects={pinnedRepos} />
+				<ProjectCardGallery projects={githubRepos} />
 			</Section>
 			<Section
 				renderButton={experienceSectionButton}

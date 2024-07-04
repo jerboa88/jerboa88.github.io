@@ -6,19 +6,20 @@
 import type { HeadProps } from 'gatsby';
 import { useRef } from 'react';
 import { getSiteMetadata } from '../../common/config-manager';
-import type { ProjectInfo, SocialImagesMetadataProp } from '../../common/types';
+import type { GithubRepo, SocialImagesMetadataProp } from '../../common/types';
 import { getAbsoluteUrl } from '../../common/utilities';
 import { PageLayout } from '../../components/layout/page-layout';
 import { Section } from '../../components/layout/section';
 import { InlineLink } from '../../components/links/inline-link';
 import { PageHead } from '../../components/seo/page-head';
 import { Article } from '../../components/text/article';
+import { DateRange } from '../../components/text/date-range';
 
 // Types
 
 interface Props {
 	pageContext: SocialImagesMetadataProp & {
-		repo: ProjectInfo;
+		githubRepo: GithubRepo;
 	};
 }
 
@@ -27,26 +28,48 @@ interface Props {
 const SITE_METADATA = getSiteMetadata();
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
-export default function ProjectPageTemplate({ pageContext: { repo } }: Props) {
+export default function ProjectPageTemplate({
+	pageContext: { githubRepo },
+}: Props) {
+	// Dates are serialized when passed through page context, so we need to deserialize them
+	const updatedAt = githubRepo.updatedAt
+		? new Date(githubRepo.updatedAt)
+		: null;
+
 	return (
 		<PageLayout>
 			{/* Dummy element to force center alignment of section */}
 			<div />
-			<Section title={repo.name} ref={useRef(null)}>
+			<Section title={githubRepo.name} ref={useRef(null)}>
 				<Article>
-					<img src={repo.imageUrl} width="500" alt="TODO" />
-					<p>{repo.shortDesc}</p>
-					<p>{repo.typeName}</p>
-					<p>{repo.typeColor}</p>
-					<InlineLink to={repo.homepageUrl} text={repo.homepageUrl} />
+					{githubRepo.logoUrl && (
+						<img src={githubRepo.logoUrl} width="500" alt="TODO" />
+					)}
+					{githubRepo.openGraphImageUrl && (
+						<img src={githubRepo.openGraphImageUrl} width="500" alt="TODO" />
+					)}
+					<p>{githubRepo.shortDescription}</p>
+					<p>{githubRepo.type.name}</p>
+					<p>{githubRepo.type.color}</p>
+					{githubRepo.homepageUrl && (
+						<InlineLink
+							to={githubRepo.homepageUrl}
+							text={githubRepo.homepageUrl}
+						/>
+					)}
 					<br />
-					<InlineLink to={repo.githubUrl} text={repo.githubUrl} />
-					<p>{repo.stargazers}</p>
-					<p>{repo.updatedAt}</p>
-					<p>{repo.license}</p>
-					<p>{repo.name}</p>
-					<p>{repo.longDesc}</p>
+					{githubRepo.url && (
+						<InlineLink to={githubRepo.url} text={githubRepo.url} />
+					)}
+					<p>{githubRepo.stargazerCount}</p>
+					{updatedAt && <DateRange endDate={updatedAt} />}
+					<p>{githubRepo.licenseInfo?.name}</p>
+					<p>{githubRepo.licenseInfo?.spdxId}</p>
+					<p>{githubRepo.licenseInfo?.url}</p>
+					<p>{githubRepo.name}</p>
+					<p>{githubRepo.description}</p>
 				</Article>
+				{githubRepo.readmeText && <Article html={githubRepo.readmeText} />}
 			</Section>
 		</PageLayout>
 	);
@@ -54,21 +77,21 @@ export default function ProjectPageTemplate({ pageContext: { repo } }: Props) {
 
 export const Head = ({
 	location,
-	pageContext: { repo, socialImagesMetadata },
+	pageContext: { githubRepo, socialImagesMetadata },
 }: HeadProps & Props) => {
-	const pageTitle = `${repo.name} | ${SITE_METADATA.shortTitle}`;
+	const pageTitle = `${githubRepo.name} | ${SITE_METADATA.shortTitle}`;
 	const metadata = {
 		title: pageTitle,
-		shortTitle: repo.name,
+		shortTitle: githubRepo.name,
 		// TODO: Strip newlines and HTML tags from the long description
-		description: repo.longDesc,
+		description: githubRepo.description ?? githubRepo.shortDescription ?? '',
 		path: location.pathname,
 	};
 
 	const structuredData = {
 		'@type': 'WebPage',
 		name: pageTitle,
-		description: repo.longDesc,
+		description: githubRepo.description,
 		url: getAbsoluteUrl(location.pathname).toString(),
 		breadcrumb: {
 			'@type': 'BreadcrumbList',
@@ -82,21 +105,21 @@ export const Head = ({
 				{
 					'@type': 'ListItem',
 					position: 2,
-					name: repo.name,
+					name: githubRepo.name,
 				},
 			],
 		},
 		mainEntity: {
 			'@type': 'SoftwareApplication',
-			name: repo.name,
-			description: repo.longDesc,
+			name: githubRepo.name,
+			description: githubRepo.description,
 			author: {
 				'@id': '/author',
 			},
 			url: getAbsoluteUrl(location.pathname).toString(),
-			image: repo.imageUrl,
+			image: githubRepo.openGraphImageUrl,
 			// TODO: Add applicationCategory and operatingSystem properties
-			license: repo.licenseUrl,
+			license: githubRepo.licenseInfo?.url,
 			offers: {
 				'@type': 'Offer',
 				price: 0,
