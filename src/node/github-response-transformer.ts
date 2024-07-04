@@ -4,7 +4,11 @@
 */
 
 import { JSDOM } from 'jsdom';
-import { getProjectTypeColor } from '../common/config-manager';
+import {
+	getGithubRepoRulesDefaults,
+	getGithubRepoRulesForSlug,
+	getProjectTypeColor,
+} from '../common/config-manager';
 import type {
 	GithubRepo,
 	GithubRepoQuery,
@@ -13,6 +17,7 @@ import type {
 } from '../common/types';
 import {
 	isDefined,
+	limit,
 	prettify,
 	toKebabCase,
 	toTitleCase,
@@ -35,7 +40,9 @@ type BuildLogMsgOptionalArgs = {
 
 // Constants
 
+const LOG_PREFIX = 'GitHub Response Transformer - ';
 const GITHUB_CONTENT_BASE_URL: UrlString = 'https://raw.githubusercontent.com';
+const REPOS_LIMIT = getGithubRepoRulesDefaults().limit;
 
 // Construct a log message for describing a missing property
 function buildLogMsg(property: string, optionalArgs?: BuildLogMsgOptionalArgs) {
@@ -46,7 +53,7 @@ function buildLogMsg(property: string, optionalArgs?: BuildLogMsgOptionalArgs) {
 		? `: ${prettify(optionalArgs.response)}`
 		: '';
 
-	return `[GitHub Response Transformer] ${property} missing ${repoSlugString}${responseString}`;
+	return `${LOG_PREFIX}${property} missing ${repoSlugString}${responseString}`;
 }
 
 // Extract a project's name from its README
@@ -294,11 +301,24 @@ function transformRepo(repo: GithubRepoQuery): GithubRepo {
 	};
 }
 
+// Check rules and return true if the repo should be included in the list
+function includeRepo(repo: GithubRepo): boolean {
+	const rules = getGithubRepoRulesForSlug(repo.slug);
+
+	if (rules.hide) {
+		console.info(`${LOG_PREFIX}Hiding repo '${repo.slug}'`);
+
+		return false;
+	}
+
+	return true;
+}
+
 // Transform the GitHub API response into a simple array of repos
 export function transformGithubResponse(response: GithubReposQueryResponse) {
 	if (response.errors) {
 		throw new Error(
-			`GitHub response contains errors: ${prettify(response.errors)}`,
+			`${LOG_PREFIX}GitHub response contains errors: ${prettify(response.errors)}`,
 		);
 	}
 
@@ -314,8 +334,12 @@ export function transformGithubResponse(response: GithubReposQueryResponse) {
 			throw new TypeError(buildLogMsg('node', { response: nodes }));
 		}
 
-		repos.push(transformRepo(node));
+		const repo = transformRepo(node);
+
+		if (includeRepo(repo)) {
+			repos.push(transformRepo(node));
+		}
 	}
 
-	return repos;
+	return limit(repos, REPOS_LIMIT);
 }
