@@ -7,6 +7,8 @@ import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import type {
 	BgColorString,
 	EmploymentRole,
+	GithubRepoRules,
+	GithubReposConfig,
 	PageMetadata,
 	Role,
 	SocialImageTypes,
@@ -17,6 +19,7 @@ import type {
 } from '../common/types';
 import { colorMappingsConfig } from '../config/color-mappings';
 import { externalServicesConfig } from '../config/external-services';
+import { githubReposConfig } from '../config/github-repos';
 import { pagesMetadataConfig } from '../config/metadata/pages';
 import { siteMetadataConfig } from '../config/metadata/site';
 import { educationRolesConfig } from '../config/roles/education';
@@ -144,6 +147,23 @@ export function getSocialImageGenerationConfigForType(
 
 export function getExternalServices() {
 	return externalServicesConfig;
+}
+
+// Returns a list of rules for a given GitHub repo slug
+export function getGithubRepoRulesForSlug(
+	slug: string,
+): Required<GithubRepoRules> {
+	const rules = githubReposConfig.slugs[slug];
+
+	return {
+		hide: githubReposConfig.defaults.hide ?? false,
+		pin: githubReposConfig.defaults.pin ?? false,
+		...rules,
+	};
+}
+
+export function getGithubRepoRulesDefaults(): GithubReposConfig['defaults'] {
+	return githubReposConfig.defaults;
 }
 
 // Returns a list of employment roles with formatted date objects

@@ -100,7 +100,7 @@ export interface PageMetadataProp {
 
 // Raw pages metadata config
 export interface PagesMetadataConfig {
-	[key: AbsolutePathString]: PageMetadata;
+	[pagePath: AbsolutePathString]: PageMetadata;
 }
 
 // TODO: Use this type in interfaces below
@@ -165,31 +165,16 @@ export interface ThemesConfig {
 	[ThemeType.Dark]: Theme;
 }
 
-// Color mappings for project types
-export interface ProjectTypeColorMappings {
-	'android app': BgColorString;
-	extension: BgColorString;
-	'cli app': BgColorString;
-	'js library': BgColorString;
-	'node.js module': BgColorString;
-	markdown: BgColorString;
-	website: BgColorString;
-	'web app': BgColorString;
-	'gimp plugin': BgColorString;
-	other: BgColorString;
-}
-
-// Color mappings for role types
-export interface RoleTypeColorMappings {
-	internship: BgColorString;
-	'summer job': BgColorString;
+// Color mappings for project and role types
+export interface ColorMappings {
+	[type: string]: BgColorString;
 }
 
 // Raw color mappings config used to generate color mappings
 export interface ColorMappingsConfig {
 	default: BgColorString;
-	projectType: ProjectTypeColorMappings;
-	roleType: RoleTypeColorMappings;
+	projectType: ColorMappings;
+	roleType: ColorMappings;
 }
 
 export interface PageSection {
@@ -304,6 +289,20 @@ export type EmploymentRole = Overwrite<
 		type?: EmploymentRoleTypes;
 	}
 >;
+
+export type GithubRepoRules = {
+	hide?: boolean;
+	pin?: boolean;
+};
+
+export type GithubReposConfig = {
+	defaults: GithubRepoRules & {
+		limit: number;
+	};
+	slugs: {
+		[repoSlug: string]: GithubRepoRules;
+	};
+};
 
 // Raw response from the GitHub GraphQL query
 export type GithubReposQueryResponse = {
