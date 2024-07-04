@@ -34,6 +34,7 @@ export function ProjectCard({ repo }: Props) {
 		SHOW_ON_CARD_HOVER_STYLES,
 	);
 
+	// Double negation is used for stargazerCount because 0 is evaluated as true for some reason
 	const cardElement = (
 		<Card outerClassName="size-full">
 			<div className="flex flex-col justify-between items-start p-6 align-middle size-full text-ellipsis group">
@@ -67,7 +68,7 @@ export function ProjectCard({ repo }: Props) {
 							/>
 						))}
 					</div>
-					{repo.stargazerCount && (
+					{!!repo.stargazerCount && (
 						<GhostButton
 							icon={faStar}
 							text={repo.stargazerCount}
