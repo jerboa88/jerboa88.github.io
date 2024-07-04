@@ -207,7 +207,9 @@ export function getProjectTypeColor(
 }
 
 // Returns the color for a given role type
-export function getRoleTypeColor(roleType: string): BgColorString | '' {
+export function getRoleTypeColor(
+	roleType: string | undefined | null,
+): BgColorString | '' {
 	const colorMap = colorMappingsConfig.roleType;
 	const key = roleType?.toLowerCase();
 
