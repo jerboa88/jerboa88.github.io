@@ -153,6 +153,11 @@ export function toTitleCase(string: string) {
 		.join(' ');
 }
 
+// Return a JSON string with human-readable formatting
+export function prettify(json: object | undefined | null) {
+	return JSON.stringify(json, null, 2);
+}
+
 // Given a path, return the absolute URL
 export function getAbsoluteUrl(path: string) {
 	return new URL(path, SITE_METADATA.siteUrl);
