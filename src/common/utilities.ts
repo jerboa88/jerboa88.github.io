@@ -145,6 +145,14 @@ export function toKebabCase(string: string) {
 		.toLowerCase();
 }
 
+// Convert a string to title case
+export function toTitleCase(string: string) {
+	return string
+		.split(/[-_ ]/)
+		.map((word) => `${word[0].toUpperCase()}${word.substring(1)}`)
+		.join(' ');
+}
+
 // Given a path, return the absolute URL
 export function getAbsoluteUrl(path: string) {
 	return new URL(path, SITE_METADATA.siteUrl);
