@@ -11,7 +11,7 @@ export const githubReposConfig: GithubReposConfig = {
 		limit: 10,
 	},
 	slugs: {
-		'bigly-bt-plugin-autostop': {
+		'BiglyBT-plugin-autostop': {
 			hide: true,
 		},
 		calculator: {
@@ -20,7 +20,7 @@ export const githubReposConfig: GithubReposConfig = {
 		'catppuccin-nvim': {
 			hide: true,
 		},
-		'custom-pi-hole-interface': {
+		'Custom-PiHole-Interface': {
 			hide: true,
 		},
 		formie: {
@@ -29,7 +29,7 @@ export const githubReposConfig: GithubReposConfig = {
 		hackathon: {
 			hide: true,
 		},
-		'image-signer': {
+		'Image-Signer': {
 			hide: true,
 		},
 		jerboa88: {
@@ -38,13 +38,13 @@ export const githubReposConfig: GithubReposConfig = {
 		'jerboa88.github.io': {
 			hide: true,
 		},
-		'make-me-laugh': {
+		'Make-me-laugh': {
 			hide: true,
 		},
 		'rtg-for-outlook': {
 			hide: true,
 		},
-		'schedule-storm': {
+		ScheduleStorm: {
 			hide: true,
 		},
 	},
