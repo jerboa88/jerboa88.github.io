@@ -44,7 +44,7 @@ export function warn(msg: string) {
 	reporter.warn(`${indentString}${msg}`);
 }
 
-// Print an error message
+// Print an error message and exit the program immediately if in build mode
 export function panicOnBuild(msg: string) {
 	if (!reporter) {
 		throw new Error('Reporter is not set');
