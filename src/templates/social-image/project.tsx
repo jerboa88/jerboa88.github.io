@@ -7,7 +7,6 @@ import type { PageProps } from 'gatsby';
 import { useCallback } from 'react';
 import type {
 	ButtonElementRenderFunction,
-	GithubRepo,
 	ImageMetadataProp,
 } from '../../common/types';
 import { Section } from '../../components/layout/section';
@@ -17,7 +16,7 @@ import { SocialImage } from '../../components/seo/social-image';
 
 interface PageContext {
 	pageContext: ImageMetadataProp & {
-		repo: GithubRepo;
+		repo: Queries.GithubRepo;
 	};
 }
 
