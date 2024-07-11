@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict';
 import { join, resolve } from 'node:path';
-import type { Actions, CreatePagesArgs, GatsbyNode, Reporter } from 'gatsby';
+import type { Actions, CreatePagesArgs, GatsbyNode } from 'gatsby';
 import { createImage } from 'gatsby-plugin-component-to-image';
 import {
+	getGithubRepoRulesDefaults,
 	getPageMetadata,
+	getSiteMetadata,
 	getSocialImageGenerationConfigForType,
 } from './src/common/config-manager';
 import {
@@ -15,11 +17,22 @@ import {
 } from './src/common/constants';
 import type {
 	AbsolutePathString,
-	GithubReposQueryResponse,
+	IndexPageContext,
+	ProjectPageContext,
 	SocialImageTypes,
 } from './src/common/types';
-import { removeTrailingSlash } from './src/common/utilities';
-import { transformGithubResponse } from './src/node/github-response-transformer';
+import {
+	isDefined,
+	limit,
+	prettify,
+	removeTrailingSlash,
+} from './src/common/utilities';
+import {
+	filterGithubRepoNodes,
+	transformGithubDataNode,
+} from './src/node/github-response-transformer';
+import { githubReposQuery, schema } from './src/node/graphql';
+import { info, panic, setReporter, warn } from './src/node/logger';
 
 // Constants
 
@@ -39,14 +52,22 @@ const OTHER_OG_IMAGE_TEMPLATE = resolve(
 	'other.tsx',
 );
 
+const SITE_METADATA = getSiteMetadata();
+const INDEX_PAGE_REPOS_MAX = getGithubRepoRulesDefaults().limit;
+
 // Runtime variables
 
 let gatsbyCreatePage: Actions['createPage'] | undefined = undefined;
 let gatsbyDeletePage: Actions['deletePage'] | undefined = undefined;
 let gatsbyCreateRedirect: Actions['createRedirect'] | undefined = undefined;
-let gatsbyReporter: Reporter | undefined = undefined;
 
 // Types
+
+type GithubReposQueryData = {
+	allGithubRepo: {
+		nodes: Queries.GithubRepo[];
+	};
+};
 
 interface CreatePageOptions {
 	path: AbsolutePathString;
@@ -64,55 +85,52 @@ interface CreateSocialImagesOptions {
 // Functions
 
 // Fetch pinned repos from a GitHub profile
-async function fetchGithubRepos(graphql: CreatePagesArgs['graphql']) {
-	const response: GithubReposQueryResponse = await graphql(`
-		query GithubRepos {
-			githubData {
-				data {
-					user {
-						repositories {
-							nodes {
-								description
-								forkCount
-								homepageUrl
-								languages {
-									nodes {
-										name
-									}
-								}
-								licenseInfo {
-									name
-									spdxId
-									url
-								}
-								name
-								openGraphImageUrl
-								owner {
-									login
-								}
-								readme {
-									text
-								}
-								repositoryTopics {
-									nodes {
-										topic {
-											name
-										}
-									}
-								}
-								stargazerCount
-								updatedAt
-								url
-								usesCustomOpenGraphImage
-							}
-						}
-					}
-				}
-			}
-		}
-	`);
+async function fetchGithubRepos(
+	graphql: CreatePagesArgs['graphql'],
+): Promise<Queries.GithubRepo[]> {
+	const response = await graphql<GithubReposQueryData, unknown>(
+		githubReposQuery,
+	);
 
-	return transformGithubResponse(response);
+	if (response.errors) {
+		panic(
+			`Failed to fetch GitHub repos. Response:\n${prettify(response.errors)}`,
+		);
+	}
+
+	const githubRepos: Queries.GithubRepo[] | undefined =
+		response.data?.allGithubRepo.nodes;
+
+	if (!isDefined(githubRepos)) {
+		panic(`Failed to fetch GitHub repos. Response:\n${prettify(response)}`);
+	}
+
+	return githubRepos;
+}
+
+// Find the GitHub profile repo and extract the author bio HTML from it
+function getAuthorBioHtml(githubRepos: Queries.GithubRepo[]) {
+	const profileReadmeRepo = githubRepos.find(
+		(githubRepo) => githubRepo.slug === SITE_METADATA.author.username.github,
+	);
+
+	if (!isDefined(profileReadmeRepo)) {
+		panic(
+			`Failed to find GitHub profile repo in list:\n${prettify(githubRepos.map((repo) => repo.slug))}`,
+		);
+	}
+
+	const authorBioHtml = profileReadmeRepo?.descriptionHtml;
+
+	if (!isDefined(authorBioHtml)) {
+		panic(
+			`Failed to extract author bio HTML from GitHub profile repo:\n${prettify(profileReadmeRepo)}`,
+		);
+	}
+
+	info(`Extracted author bio HTML from GitHub profile repo:\n${authorBioHtml}`);
+
+	return authorBioHtml;
 }
 
 // Generate a single social image for a page
@@ -150,7 +168,7 @@ function createPage({
 	socialImageComponent,
 	context,
 }: CreatePageOptions) {
-	gatsbyReporter?.info(`Creating page at ${path}`);
+	info(`Creating page at ${path}`);
 
 	assert(gatsbyCreatePage !== undefined);
 
@@ -189,7 +207,26 @@ export const onPluginInit: GatsbyNode['onPluginInit'] = ({
 	gatsbyCreatePage = createPage;
 	gatsbyDeletePage = deletePage;
 	gatsbyCreateRedirect = createRedirect;
-	gatsbyReporter = reporter;
+
+	setReporter(reporter);
+};
+
+// Add custom types to the GraphQL schema
+export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] =
+	({ actions: { createTypes } }) => {
+		// Overwrite fields that we know are non-null (as per the GitHub GraphQL schema)
+		createTypes(schema);
+	};
+
+// Transform source nodes into a more usable format
+export const onCreateNode: GatsbyNode<Queries.GithubData>['onCreateNode'] = ({
+	node,
+	actions: { createNode },
+	createContentDigest,
+}) => {
+	if (node.internal.type === 'GithubData') {
+		transformGithubDataNode(node, createNode, createContentDigest);
+	}
 };
 
 // Add metadata to automatically generated pages and generate the associated Open Graph images
@@ -206,7 +243,7 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
 	const pageMetadata = getPageMetadata(page.path);
 
 	if (!pageMetadata) {
-		gatsbyReporter?.warn(`Skipped adding metadata to ${page.path}`);
+		warn(`Skipped adding metadata to ${page.path}`);
 
 		return;
 	}
@@ -229,7 +266,9 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
 // Manually create pages and generate the associated Open Graph images
 export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 	const githubRepos = await fetchGithubRepos(graphql);
+	const authorBioHtml = getAuthorBioHtml(githubRepos);
 
+	// Create project pages
 	for (const githubRepo of githubRepos) {
 		const path: AbsolutePathString = join(
 			PROJECTS_DIR,
@@ -239,29 +278,36 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 			PROJECTS_DIR_SHORT,
 			githubRepo.slug,
 		) as AbsolutePathString;
+		const context: ProjectPageContext = {
+			githubRepo,
+		};
 
 		// TODO: Re-enable this when project pages are implemented
 		// Create project pages
 		// createPage({
-		// 	path: path,
+		// 	path,
 		// 	component: PROJECT_PAGE_TEMPLATE,
 		// 	socialImageComponent: PROJECT_OG_IMAGE_TEMPLATE,
-		// 	context: {
-		// 		githubRepo: githubRepo,
-		// 	},
+		// 	context,
 		// });
 
 		createRedirect(shortPath, path);
 	}
 
 	// Create landing page
+	const context: IndexPageContext = {
+		githubRepos: limit(
+			filterGithubRepoNodes(githubRepos),
+			INDEX_PAGE_REPOS_MAX,
+		),
+		authorBioHtml,
+	};
+
 	createPage({
 		path: '/',
 		component: INDEX_PAGE_TEMPLATE,
 		socialImageComponent: INDEX_OG_IMAGE_TEMPLATE,
-		context: {
-			githubRepos: githubRepos,
-		},
+		context,
 	});
 
 	createRedirect('/about', '/#about');

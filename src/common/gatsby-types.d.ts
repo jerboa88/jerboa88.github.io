@@ -741,7 +741,7 @@ type GithubDataDataSortInput = {
 };
 
 type GithubDataDataUser = {
-  readonly repositories: Maybe<GithubDataDataUserRepositories>;
+  readonly repositories: GithubDataDataUserRepositories;
 };
 
 type GithubDataDataUserFieldSelector = {
@@ -764,29 +764,22 @@ type GithubDataDataUserRepositoriesFilterInput = {
   readonly nodes: InputMaybe<GithubDataDataUserRepositoriesNodesFilterListInput>;
 };
 
+/** Define required fields from the GitHub GraphQL API schema */
 type GithubDataDataUserRepositoriesNodes = {
   readonly description: Maybe<Scalars['String']>;
-  readonly forkCount: Maybe<Scalars['Int']>;
+  readonly forkCount: Scalars['Int'];
   readonly homepageUrl: Maybe<Scalars['String']>;
   readonly languages: Maybe<GithubDataDataUserRepositoriesNodesLanguages>;
   readonly licenseInfo: Maybe<GithubDataDataUserRepositoriesNodesLicenseInfo>;
-  readonly name: Maybe<Scalars['String']>;
-  readonly openGraphImageUrl: Maybe<Scalars['String']>;
-  readonly owner: Maybe<GithubDataDataUserRepositoriesNodesOwner>;
+  readonly name: Scalars['String'];
+  readonly openGraphImageUrl: Scalars['String'];
+  readonly owner: GithubDataDataUserRepositoriesNodesOwner;
   readonly readme: Maybe<GithubDataDataUserRepositoriesNodesReadme>;
-  readonly repositoryTopics: Maybe<GithubDataDataUserRepositoriesNodesRepositoryTopics>;
-  readonly stargazerCount: Maybe<Scalars['Int']>;
-  readonly updatedAt: Maybe<Scalars['Date']>;
-  readonly url: Maybe<Scalars['String']>;
-  readonly usesCustomOpenGraphImage: Maybe<Scalars['Boolean']>;
-};
-
-
-type GithubDataDataUserRepositoriesNodes_updatedAtArgs = {
-  difference: InputMaybe<Scalars['String']>;
-  formatString: InputMaybe<Scalars['String']>;
-  fromNow: InputMaybe<Scalars['Boolean']>;
-  locale: InputMaybe<Scalars['String']>;
+  readonly repositoryTopics: GithubDataDataUserRepositoriesNodesRepositoryTopics;
+  readonly stargazerCount: Scalars['Int'];
+  readonly updatedAt: Scalars['Date'];
+  readonly url: Scalars['String'];
+  readonly usesCustomOpenGraphImage: Scalars['Boolean'];
 };
 
 type GithubDataDataUserRepositoriesNodesFieldSelector = {
@@ -864,7 +857,7 @@ type GithubDataDataUserRepositoriesNodesLanguagesSortInput = {
 };
 
 type GithubDataDataUserRepositoriesNodesLicenseInfo = {
-  readonly name: Maybe<Scalars['String']>;
+  readonly name: Scalars['String'];
   readonly spdxId: Maybe<Scalars['String']>;
   readonly url: Maybe<Scalars['String']>;
 };
@@ -888,7 +881,7 @@ type GithubDataDataUserRepositoriesNodesLicenseInfoSortInput = {
 };
 
 type GithubDataDataUserRepositoriesNodesOwner = {
-  readonly login: Maybe<Scalars['String']>;
+  readonly login: Scalars['String'];
 };
 
 type GithubDataDataUserRepositoriesNodesOwnerFieldSelector = {
@@ -932,7 +925,7 @@ type GithubDataDataUserRepositoriesNodesRepositoryTopicsFilterInput = {
 };
 
 type GithubDataDataUserRepositoriesNodesRepositoryTopicsNodes = {
-  readonly topic: Maybe<GithubDataDataUserRepositoriesNodesRepositoryTopicsNodesTopic>;
+  readonly topic: GithubDataDataUserRepositoriesNodesRepositoryTopicsNodesTopic;
 };
 
 type GithubDataDataUserRepositoriesNodesRepositoryTopicsNodesFieldSelector = {
@@ -952,7 +945,7 @@ type GithubDataDataUserRepositoriesNodesRepositoryTopicsNodesSortInput = {
 };
 
 type GithubDataDataUserRepositoriesNodesRepositoryTopicsNodesTopic = {
-  readonly name: Maybe<Scalars['String']>;
+  readonly name: Scalars['String'];
 };
 
 type GithubDataDataUserRepositoriesNodesRepositoryTopicsNodesTopicFieldSelector = {
@@ -1358,6 +1351,199 @@ type GithubDataSortInput = {
   readonly rawResult: InputMaybe<GithubDataRawResultSortInput>;
 };
 
+/** Define schema for custom GithubRepo nodes */
+type GithubRepo = Node & {
+  /** Returns the first child node of type MarkdownRemark or null if there are no children of given type on this node */
+  readonly childMarkdownRemark: Maybe<MarkdownRemark>;
+  readonly children: ReadonlyArray<Node>;
+  /** Returns all children nodes filtered by type MarkdownRemark */
+  readonly childrenMarkdownRemark: Maybe<ReadonlyArray<Maybe<MarkdownRemark>>>;
+  readonly description: Scalars['String'];
+  readonly descriptionHtml: Maybe<Scalars['String']>;
+  readonly forkCount: Scalars['Int'];
+  readonly homepageUrl: Maybe<Scalars['String']>;
+  readonly id: Scalars['ID'];
+  readonly internal: Internal;
+  readonly languages: ReadonlyArray<Scalars['String']>;
+  readonly licenseInfo: Maybe<GithubDataDataUserRepositoriesNodesLicenseInfo>;
+  readonly logoUrl: Maybe<Scalars['String']>;
+  readonly name: Scalars['String'];
+  readonly openGraphImageUrl: Scalars['String'];
+  readonly owner: Scalars['String'];
+  readonly parent: Maybe<Node>;
+  readonly slug: Scalars['String'];
+  readonly stargazerCount: Scalars['Int'];
+  readonly topics: ReadonlyArray<Scalars['String']>;
+  readonly type: ProjectType;
+  readonly updatedAt: Scalars['Date'];
+  readonly url: Scalars['String'];
+  readonly usesCustomOpenGraphImage: Scalars['Boolean'];
+};
+
+type GithubRepoConnection = {
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly edges: ReadonlyArray<GithubRepoEdge>;
+  readonly group: ReadonlyArray<GithubRepoGroupConnection>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly nodes: ReadonlyArray<GithubRepo>;
+  readonly pageInfo: PageInfo;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly totalCount: Scalars['Int'];
+};
+
+
+type GithubRepoConnection_distinctArgs = {
+  field: GithubRepoFieldSelector;
+};
+
+
+type GithubRepoConnection_groupArgs = {
+  field: GithubRepoFieldSelector;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+};
+
+
+type GithubRepoConnection_maxArgs = {
+  field: GithubRepoFieldSelector;
+};
+
+
+type GithubRepoConnection_minArgs = {
+  field: GithubRepoFieldSelector;
+};
+
+
+type GithubRepoConnection_sumArgs = {
+  field: GithubRepoFieldSelector;
+};
+
+type GithubRepoEdge = {
+  readonly next: Maybe<GithubRepo>;
+  readonly node: GithubRepo;
+  readonly previous: Maybe<GithubRepo>;
+};
+
+type GithubRepoFieldSelector = {
+  readonly childMarkdownRemark: InputMaybe<MarkdownRemarkFieldSelector>;
+  readonly children: InputMaybe<NodeFieldSelector>;
+  readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkFieldSelector>;
+  readonly description: InputMaybe<FieldSelectorEnum>;
+  readonly descriptionHtml: InputMaybe<FieldSelectorEnum>;
+  readonly forkCount: InputMaybe<FieldSelectorEnum>;
+  readonly homepageUrl: InputMaybe<FieldSelectorEnum>;
+  readonly id: InputMaybe<FieldSelectorEnum>;
+  readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly languages: InputMaybe<FieldSelectorEnum>;
+  readonly licenseInfo: InputMaybe<GithubDataDataUserRepositoriesNodesLicenseInfoFieldSelector>;
+  readonly logoUrl: InputMaybe<FieldSelectorEnum>;
+  readonly name: InputMaybe<FieldSelectorEnum>;
+  readonly openGraphImageUrl: InputMaybe<FieldSelectorEnum>;
+  readonly owner: InputMaybe<FieldSelectorEnum>;
+  readonly parent: InputMaybe<NodeFieldSelector>;
+  readonly slug: InputMaybe<FieldSelectorEnum>;
+  readonly stargazerCount: InputMaybe<FieldSelectorEnum>;
+  readonly topics: InputMaybe<FieldSelectorEnum>;
+  readonly type: InputMaybe<ProjectTypeFieldSelector>;
+  readonly updatedAt: InputMaybe<FieldSelectorEnum>;
+  readonly url: InputMaybe<FieldSelectorEnum>;
+  readonly usesCustomOpenGraphImage: InputMaybe<FieldSelectorEnum>;
+};
+
+type GithubRepoFilterInput = {
+  readonly childMarkdownRemark: InputMaybe<MarkdownRemarkFilterInput>;
+  readonly children: InputMaybe<NodeFilterListInput>;
+  readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkFilterListInput>;
+  readonly description: InputMaybe<StringQueryOperatorInput>;
+  readonly descriptionHtml: InputMaybe<StringQueryOperatorInput>;
+  readonly forkCount: InputMaybe<IntQueryOperatorInput>;
+  readonly homepageUrl: InputMaybe<StringQueryOperatorInput>;
+  readonly id: InputMaybe<StringQueryOperatorInput>;
+  readonly internal: InputMaybe<InternalFilterInput>;
+  readonly languages: InputMaybe<StringQueryOperatorInput>;
+  readonly licenseInfo: InputMaybe<GithubDataDataUserRepositoriesNodesLicenseInfoFilterInput>;
+  readonly logoUrl: InputMaybe<StringQueryOperatorInput>;
+  readonly name: InputMaybe<StringQueryOperatorInput>;
+  readonly openGraphImageUrl: InputMaybe<StringQueryOperatorInput>;
+  readonly owner: InputMaybe<StringQueryOperatorInput>;
+  readonly parent: InputMaybe<NodeFilterInput>;
+  readonly slug: InputMaybe<StringQueryOperatorInput>;
+  readonly stargazerCount: InputMaybe<IntQueryOperatorInput>;
+  readonly topics: InputMaybe<StringQueryOperatorInput>;
+  readonly type: InputMaybe<ProjectTypeFilterInput>;
+  readonly updatedAt: InputMaybe<DateQueryOperatorInput>;
+  readonly url: InputMaybe<StringQueryOperatorInput>;
+  readonly usesCustomOpenGraphImage: InputMaybe<BooleanQueryOperatorInput>;
+};
+
+type GithubRepoGroupConnection = {
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly edges: ReadonlyArray<GithubRepoEdge>;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+  readonly group: ReadonlyArray<GithubRepoGroupConnection>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly nodes: ReadonlyArray<GithubRepo>;
+  readonly pageInfo: PageInfo;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly totalCount: Scalars['Int'];
+};
+
+
+type GithubRepoGroupConnection_distinctArgs = {
+  field: GithubRepoFieldSelector;
+};
+
+
+type GithubRepoGroupConnection_groupArgs = {
+  field: GithubRepoFieldSelector;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+};
+
+
+type GithubRepoGroupConnection_maxArgs = {
+  field: GithubRepoFieldSelector;
+};
+
+
+type GithubRepoGroupConnection_minArgs = {
+  field: GithubRepoFieldSelector;
+};
+
+
+type GithubRepoGroupConnection_sumArgs = {
+  field: GithubRepoFieldSelector;
+};
+
+type GithubRepoSortInput = {
+  readonly childMarkdownRemark: InputMaybe<MarkdownRemarkSortInput>;
+  readonly children: InputMaybe<NodeSortInput>;
+  readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkSortInput>;
+  readonly description: InputMaybe<SortOrderEnum>;
+  readonly descriptionHtml: InputMaybe<SortOrderEnum>;
+  readonly forkCount: InputMaybe<SortOrderEnum>;
+  readonly homepageUrl: InputMaybe<SortOrderEnum>;
+  readonly id: InputMaybe<SortOrderEnum>;
+  readonly internal: InputMaybe<InternalSortInput>;
+  readonly languages: InputMaybe<SortOrderEnum>;
+  readonly licenseInfo: InputMaybe<GithubDataDataUserRepositoriesNodesLicenseInfoSortInput>;
+  readonly logoUrl: InputMaybe<SortOrderEnum>;
+  readonly name: InputMaybe<SortOrderEnum>;
+  readonly openGraphImageUrl: InputMaybe<SortOrderEnum>;
+  readonly owner: InputMaybe<SortOrderEnum>;
+  readonly parent: InputMaybe<NodeSortInput>;
+  readonly slug: InputMaybe<SortOrderEnum>;
+  readonly stargazerCount: InputMaybe<SortOrderEnum>;
+  readonly topics: InputMaybe<SortOrderEnum>;
+  readonly type: InputMaybe<ProjectTypeSortInput>;
+  readonly updatedAt: InputMaybe<SortOrderEnum>;
+  readonly url: InputMaybe<SortOrderEnum>;
+  readonly usesCustomOpenGraphImage: InputMaybe<SortOrderEnum>;
+};
+
 type IntQueryOperatorInput = {
   readonly eq: InputMaybe<Scalars['Int']>;
   readonly gt: InputMaybe<Scalars['Int']>;
@@ -1738,10 +1924,31 @@ type PageInfo = {
   readonly totalCount: Scalars['Int'];
 };
 
+type ProjectType = {
+  readonly color: Scalars['String'];
+  readonly name: Maybe<Scalars['String']>;
+};
+
+type ProjectTypeFieldSelector = {
+  readonly color: InputMaybe<FieldSelectorEnum>;
+  readonly name: InputMaybe<FieldSelectorEnum>;
+};
+
+type ProjectTypeFilterInput = {
+  readonly color: InputMaybe<StringQueryOperatorInput>;
+  readonly name: InputMaybe<StringQueryOperatorInput>;
+};
+
+type ProjectTypeSortInput = {
+  readonly color: InputMaybe<SortOrderEnum>;
+  readonly name: InputMaybe<SortOrderEnum>;
+};
+
 type Query = {
   readonly allDirectory: DirectoryConnection;
   readonly allFile: FileConnection;
   readonly allGithubData: GithubDataConnection;
+  readonly allGithubRepo: GithubRepoConnection;
   readonly allMarkdownRemark: MarkdownRemarkConnection;
   readonly allSite: SiteConnection;
   readonly allSiteBuildMetadata: SiteBuildMetadataConnection;
@@ -1751,6 +1958,7 @@ type Query = {
   readonly directory: Maybe<Directory>;
   readonly file: Maybe<File>;
   readonly githubData: Maybe<GithubData>;
+  readonly githubRepo: Maybe<GithubRepo>;
   readonly markdownRemark: Maybe<MarkdownRemark>;
   readonly site: Maybe<Site>;
   readonly siteBuildMetadata: Maybe<SiteBuildMetadata>;
@@ -1781,6 +1989,14 @@ type Query_allGithubDataArgs = {
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
   sort: InputMaybe<ReadonlyArray<InputMaybe<GithubDataSortInput>>>;
+};
+
+
+type Query_allGithubRepoArgs = {
+  filter: InputMaybe<GithubRepoFilterInput>;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+  sort: InputMaybe<ReadonlyArray<InputMaybe<GithubRepoSortInput>>>;
 };
 
 
@@ -1922,6 +2138,33 @@ type Query_githubDataArgs = {
   internal: InputMaybe<InternalFilterInput>;
   parent: InputMaybe<NodeFilterInput>;
   rawResult: InputMaybe<GithubDataRawResultFilterInput>;
+};
+
+
+type Query_githubRepoArgs = {
+  childMarkdownRemark: InputMaybe<MarkdownRemarkFilterInput>;
+  children: InputMaybe<NodeFilterListInput>;
+  childrenMarkdownRemark: InputMaybe<MarkdownRemarkFilterListInput>;
+  description: InputMaybe<StringQueryOperatorInput>;
+  descriptionHtml: InputMaybe<StringQueryOperatorInput>;
+  forkCount: InputMaybe<IntQueryOperatorInput>;
+  homepageUrl: InputMaybe<StringQueryOperatorInput>;
+  id: InputMaybe<StringQueryOperatorInput>;
+  internal: InputMaybe<InternalFilterInput>;
+  languages: InputMaybe<StringQueryOperatorInput>;
+  licenseInfo: InputMaybe<GithubDataDataUserRepositoriesNodesLicenseInfoFilterInput>;
+  logoUrl: InputMaybe<StringQueryOperatorInput>;
+  name: InputMaybe<StringQueryOperatorInput>;
+  openGraphImageUrl: InputMaybe<StringQueryOperatorInput>;
+  owner: InputMaybe<StringQueryOperatorInput>;
+  parent: InputMaybe<NodeFilterInput>;
+  slug: InputMaybe<StringQueryOperatorInput>;
+  stargazerCount: InputMaybe<IntQueryOperatorInput>;
+  topics: InputMaybe<StringQueryOperatorInput>;
+  type: InputMaybe<ProjectTypeFilterInput>;
+  updatedAt: InputMaybe<DateQueryOperatorInput>;
+  url: InputMaybe<StringQueryOperatorInput>;
+  usesCustomOpenGraphImage: InputMaybe<BooleanQueryOperatorInput>;
 };
 
 
@@ -2963,11 +3206,6 @@ type PrivacyPolicyPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type PrivacyPolicyPageQuery = { readonly file: { readonly childMarkdownRemark: { readonly html: string | null } | null } | null };
-
-type GithubReposQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type GithubReposQuery = { readonly githubData: { readonly data: { readonly user: { readonly repositories: { readonly nodes: ReadonlyArray<{ readonly description: string | null, readonly forkCount: number | null, readonly homepageUrl: string | null, readonly name: string | null, readonly openGraphImageUrl: string | null, readonly stargazerCount: number | null, readonly updatedAt: string | null, readonly url: string | null, readonly usesCustomOpenGraphImage: boolean | null, readonly languages: { readonly nodes: ReadonlyArray<{ readonly name: string | null } | null> | null } | null, readonly licenseInfo: { readonly name: string | null, readonly spdxId: string | null, readonly url: string | null } | null, readonly owner: { readonly login: string | null } | null, readonly readme: { readonly text: string | null } | null, readonly repositoryTopics: { readonly nodes: ReadonlyArray<{ readonly topic: { readonly name: string | null } | null } | null> | null } | null } | null> | null } | null } | null } | null } | null };
 
 
 }

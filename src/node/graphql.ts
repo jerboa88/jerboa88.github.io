@@ -1,8 +1,8 @@
 /*
-	Custom GraphQL types
+	GraphQL types and queries
 */
 
-export const graphqlSchema = `
+export const schema = `
 type GithubDataDataUser {
 	repositories: GithubDataDataUserRepositories!
 }
@@ -38,6 +38,9 @@ type ProjectType {
 	name: String
 }
 
+"""
+Define required fields from the GitHub GraphQL API schema
+"""
 type GithubDataDataUserRepositoriesNodes {
 	forkCount: Int!
 	licenseInfo: GithubDataDataUserRepositoriesNodesLicenseInfo
@@ -51,9 +54,12 @@ type GithubDataDataUserRepositoriesNodes {
 	usesCustomOpenGraphImage: Boolean!
 }
 
+"""
+Define schema for custom GithubRepo nodes
+"""
 type GithubRepo implements Node {
 	childMarkdownRemark: MarkdownRemark
-	description: String
+	description: String!
 	descriptionHtml: String
 	forkCount: Int!
 	homepageUrl: String
@@ -70,5 +76,41 @@ type GithubRepo implements Node {
 	updatedAt: Date!
 	url: String!
 	usesCustomOpenGraphImage: Boolean!
+}
+`;
+
+export const githubReposQuery = `
+query GithubRepos {
+	allGithubRepo {
+		nodes {
+			childMarkdownRemark {
+				html
+			}
+			description
+			descriptionHtml
+			forkCount
+			homepageUrl
+			languages
+			logoUrl
+			licenseInfo {
+				name
+				spdxId
+				url
+			}
+			name
+			openGraphImageUrl
+			owner
+			slug
+			stargazerCount
+			topics
+			type {
+				color
+				name
+			}
+			updatedAt
+			url
+			usesCustomOpenGraphImage
+		}
+	}
 }
 `;
