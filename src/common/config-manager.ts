@@ -217,11 +217,13 @@ export function getProjectTypeColor(
 	const colorMap = colorMappingsConfig.projectType;
 	const key = projectType?.toLowerCase();
 
-	if (isDefined(key) && key in colorMap) {
-		return colorMap[key as keyof typeof colorMap];
-	}
+	if (isDefined(key)) {
+		if (key in colorMap) {
+			return colorMap[key as keyof typeof colorMap];
+		}
 
-	console.warn(`Color for project type '${projectType}' not found`);
+		console.warn(`Color for project type '${projectType}' not found`);
+	}
 
 	return colorMappingsConfig.default;
 }
@@ -233,11 +235,13 @@ export function getRoleTypeColor(
 	const colorMap = colorMappingsConfig.roleType;
 	const key = roleType?.toLowerCase();
 
-	if (isDefined(key) && key in colorMap) {
-		return colorMap[key as keyof typeof colorMap];
-	}
+	if (isDefined(key)) {
+		if (key in colorMap) {
+			return colorMap[key as keyof typeof colorMap];
+		}
 
-	console.warn(`Color for role type '${roleType}' not found`);
+		console.warn(`Color for role type '${roleType}' not found`);
+	}
 
 	return colorMappingsConfig.default;
 }

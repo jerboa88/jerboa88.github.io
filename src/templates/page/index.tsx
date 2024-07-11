@@ -17,7 +17,7 @@ import {
 import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
 import type {
 	ButtonElementRenderFunction,
-	GithubRepo,
+	IndexPageContext,
 	PageSection,
 	SocialImagesMetadataProp,
 } from '../../common/types';
@@ -35,9 +35,7 @@ import { Timeline } from '../../components/timeline';
 // Types
 
 interface Props {
-	pageContext: SocialImagesMetadataProp & {
-		githubRepos: GithubRepo[];
-	};
+	pageContext: SocialImagesMetadataProp & IndexPageContext;
 }
 
 // Constants
@@ -53,7 +51,7 @@ const ContactForm = lazy(() =>
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function IndexPageTemplate({
-	pageContext: { githubRepos },
+	pageContext: { githubRepos, authorBioHtml },
 }: Props) {
 	const inViewTriggerRef = useRef(null);
 	const expandTitle = useInView(inViewTriggerRef, USE_IN_VIEW_OPTIONS);
@@ -120,25 +118,7 @@ export default function IndexPageTemplate({
 				</div>
 			</Section>
 			<Section className="min-h-lvh" {...sections[0]}>
-				<Article>
-					<p>
-						I am a recent graduate from the University of Alberta with a
-						Bachelors Specialization in Computing Science. During my time at the
-						U of A, I had the opportunity to share my expertise with Haemonetics
-						Corporation in Edmonton, where I was involved in end-to-end
-						development of their NexLynk Donor Management System.
-					</p>
-					<p>
-						Having a natural interest in science has allowed me to become
-						familiar with a wide variety of tech related subjects including
-						programming, design, and audio production. I have experience with
-						frontend web technologies, backend development, cloud computing, as
-						well as low-level programming like Arduino and MIPS assembly.
-					</p>
-					<p>
-						Some of my extracurricular interests include cats, cars, and music!
-					</p>
-				</Article>
+				<Article html={authorBioHtml} />
 			</Section>
 			<Section
 				renderButton={projectsSectionButton}

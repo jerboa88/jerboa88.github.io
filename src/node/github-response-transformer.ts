@@ -3,64 +3,36 @@
 	-------------------------------------------------------------------------
 */
 
+import type { Actions, NodePluginArgs } from 'gatsby';
 import { JSDOM } from 'jsdom';
 import {
-	getGithubRepoRulesDefaults,
 	getGithubRepoRulesForSlug,
 	getProjectTypeColor,
 } from '../common/config-manager';
-import type {
-	GithubRepo,
-	GithubRepoQuery,
-	GithubReposQueryResponse,
-	UrlString,
-} from '../common/types';
-import {
-	isDefined,
-	limit,
-	prettify,
-	toKebabCase,
-	toTitleCase,
-} from '../common/utilities';
+import type { GithubRepo, UrlString } from '../common/types';
+import { isDefined, toTitleCase } from '../common/utilities';
+import { group, groupEnd, info, panic, panicOnBuild, warn } from './logger';
 
 // Types
 
 type ReadmeInfo = {
-	text: string | null;
 	name: string | null;
-	description: string | null;
+	descriptionHtml: string | null;
 	logoUrl: string | null;
 	type: string | null;
 };
 
-type BuildLogMsgOptionalArgs = {
-	repoSlug?: string;
-	response?: object | undefined | null;
+type TransformRepoNodeReturnValue = {
+	githubRepo: GithubRepo | null;
+	readmeText: string | undefined | null;
 };
 
 // Constants
 
-const LOG_PREFIX = 'GitHub Response Transformer - ';
 const GITHUB_CONTENT_BASE_URL: UrlString = 'https://raw.githubusercontent.com';
-const REPOS_LIMIT = getGithubRepoRulesDefaults().limit;
-
-// Construct a log message for describing a missing property
-function buildLogMsg(property: string, optionalArgs?: BuildLogMsgOptionalArgs) {
-	const repoSlugString = isDefined(optionalArgs?.repoSlug)
-		? `for '${optionalArgs.repoSlug}' repo `
-		: '';
-	const responseString = isDefined(optionalArgs?.response)
-		? `: ${prettify(optionalArgs.response)}`
-		: '';
-
-	return `${LOG_PREFIX}${property} missing ${repoSlugString}${responseString}`;
-}
 
 // Extract a project's name from its README
-function parseReadmeName(
-	slug: string,
-	fragment: DocumentFragment,
-): ReadmeInfo['name'] {
+function parseReadmeName(fragment: DocumentFragment): ReadmeInfo['name'] {
 	const linkElement = fragment.querySelector('.projectName > a');
 	const name =
 		linkElement?.getAttribute('title') ??
@@ -71,23 +43,22 @@ function parseReadmeName(
 		return name.trim();
 	}
 
-	console.warn(buildLogMsg('README name', { repoSlug: slug }));
+	warn('README name not found');
 
 	return null;
 }
 
-// Extract a project's description from its README
-function parseReadmeDescription(
-	slug: string,
+// Extract a project's description from its README as HTML
+function parseReadmeDescriptionHtml(
 	fragment: DocumentFragment,
-): ReadmeInfo['description'] {
-	const description = fragment.querySelector('.projectDesc')?.textContent;
+): ReadmeInfo['descriptionHtml'] {
+	const descriptionHtml = fragment.querySelector('.projectDesc')?.innerHTML;
 
-	if (isDefined(description)) {
-		return description.trim();
+	if (isDefined(descriptionHtml)) {
+		return descriptionHtml.trim();
 	}
 
-	console.warn(buildLogMsg('README description', { repoSlug: slug }));
+	warn('README description not found');
 
 	return null;
 }
@@ -95,30 +66,34 @@ function parseReadmeDescription(
 // Extract a project's logo URL from its README
 function parseReadmeLogoUrl(
 	slug: string,
+	owner: string,
 	fragment: DocumentFragment,
 ): ReadmeInfo['name'] {
 	const logoUrl = fragment.querySelector('.projectLogo')?.getAttribute('src');
 
 	if (isDefined(logoUrl)) {
-		return logoUrl;
+		if (logoUrl.startsWith('http')) {
+			return logoUrl;
+		}
+
+		const relativeLogoPath = `${owner}/${slug}/HEAD/${logoUrl}`;
+
+		return new URL(relativeLogoPath, GITHUB_CONTENT_BASE_URL).toString();
 	}
 
-	console.warn(buildLogMsg('README logo URL', { repoSlug: slug }));
+	warn('README logo not found');
 
 	return null;
 }
 
 // Extract a project's type from its README
-function parseReadmeType(
-	slug: string,
-	fragment: DocumentFragment,
-): ReadmeInfo['type'] {
+function parseReadmeType(fragment: DocumentFragment): ReadmeInfo['type'] {
 	const badgeImgUrl = fragment
 		.querySelector('.projectBadges > img[alt="Project type"]')
 		?.getAttribute('src');
 
 	if (!isDefined(badgeImgUrl)) {
-		console.warn(buildLogMsg('README type', { repoSlug: slug }));
+		warn('README project type badge not found');
 
 		return null;
 	}
@@ -126,7 +101,7 @@ function parseReadmeType(
 	const typeMatches = /type-(\w+)-(\w+)/.exec(badgeImgUrl);
 
 	if (!typeMatches || typeMatches.length < 3) {
-		console.warn(buildLogMsg('README type', { repoSlug: slug }));
+		warn('README project type badge not found');
 
 		return null;
 	}
@@ -137,20 +112,15 @@ function parseReadmeType(
 // Parse a project's README to extract its name, description, and type
 function transformReadme(
 	slug: string,
-	readmeResponse: GithubRepoQuery['readme'],
+	owner: string,
+	readmeResponse: Queries.GithubDataDataUserRepositoriesNodes['readme'],
 ): ReadmeInfo {
 	if (!isDefined(readmeResponse?.text)) {
-		console.warn(
-			buildLogMsg('readme.text', {
-				repoSlug: slug,
-				response: readmeResponse,
-			}),
-		);
+		warn('README not found');
 
 		return {
-			text: null,
 			name: null,
-			description: null,
+			descriptionHtml: null,
 			logoUrl: null,
 			type: null,
 		};
@@ -159,29 +129,22 @@ function transformReadme(
 	const fragment = JSDOM.fragment(readmeResponse.text);
 
 	return {
-		text: readmeResponse.text,
-		name: parseReadmeName(slug, fragment),
-		description: parseReadmeDescription(slug, fragment),
-		logoUrl: parseReadmeLogoUrl(slug, fragment),
-		type: parseReadmeType(slug, fragment),
+		name: parseReadmeName(fragment),
+		descriptionHtml: parseReadmeDescriptionHtml(fragment),
+		logoUrl: parseReadmeLogoUrl(slug, owner, fragment),
+		type: parseReadmeType(fragment),
 	};
 }
 
 // Transform the languages object into a simple array of strings
 function transformLanguages(
-	slug: string,
-	languagesResponse: GithubRepoQuery['languages'],
+	languagesResponse: Queries.GithubDataDataUserRepositoriesNodes['languages'],
 ): string[] {
 	const nodes = languagesResponse?.nodes;
 	const languages: string[] = [];
 
 	if (!isDefined(nodes)) {
-		console.warn(
-			buildLogMsg('languages.nodes', {
-				repoSlug: slug,
-				response: languagesResponse,
-			}),
-		);
+		warn('languages.nodes is undefined');
 
 		return languages;
 	}
@@ -190,12 +153,7 @@ function transformLanguages(
 		if (isDefined(node?.name)) {
 			languages.push(node.name);
 		} else {
-			console.warn(
-				buildLogMsg('languages.nodes[].name', {
-					repoSlug: slug,
-					response: languagesResponse,
-				}),
-			);
+			warn('languages.nodes[].name is undefined');
 		}
 	}
 
@@ -204,19 +162,13 @@ function transformLanguages(
 
 // Transform the topics object into a simple array of strings
 function transformTopics(
-	slug: string,
-	topicsResponse: GithubRepoQuery['repositoryTopics'],
+	topicsResponse: Queries.GithubDataDataUserRepositoriesNodes['repositoryTopics'],
 ): string[] {
 	const nodes = topicsResponse?.nodes;
 	const topics: string[] = [];
 
 	if (!isDefined(nodes)) {
-		console.warn(
-			buildLogMsg('repositoryTopics.nodes', {
-				repoSlug: slug,
-				response: topicsResponse,
-			}),
-		);
+		warn('repositoryTopics.nodes is undefined');
 
 		return topics;
 	}
@@ -225,12 +177,7 @@ function transformTopics(
 		if (isDefined(node?.topic?.name)) {
 			topics.push(node.topic?.name);
 		} else {
-			console.warn(
-				buildLogMsg('repositoryTopics.nodes[].topic.name', {
-					repoSlug: slug,
-					response: topicsResponse,
-				}),
-			);
+			warn('repositoryTopics.nodes[].topic.name is undefined');
 		}
 	}
 
@@ -238,108 +185,142 @@ function transformTopics(
 }
 
 // Transform the repo object into a format we can use
-function transformRepo(repo: GithubRepoQuery): GithubRepo {
-	if (!isDefined(repo.name)) {
-		throw new Error(buildLogMsg('name', { response: repo }));
+function transformGithubRepoNode(
+	githubRepoNode: Queries.GithubDataDataUserRepositoriesNodes,
+): TransformRepoNodeReturnValue {
+	const slug = githubRepoNode.name;
+
+	if (!isDefined(githubRepoNode.description)) {
+		panicOnBuild('description is undefined');
+
+		return {
+			githubRepo: null,
+			readmeText: null,
+		};
 	}
 
-	if (!isDefined(repo.owner?.login)) {
-		throw new Error(buildLogMsg('owner.login', { response: repo }));
-	}
-
-	const slug = toKebabCase(repo.name);
-	const languages = transformLanguages(slug, repo?.languages);
-	const topics = transformTopics(slug, repo?.repositoryTopics);
-
-	let updatedAt: Date | null = null;
-
-	if (isDefined(repo.updatedAt)) {
-		updatedAt = new Date(repo.updatedAt);
-	} else {
-		console.warn(buildLogMsg('updatedAt', { repoSlug: slug, response: repo }));
-	}
-
-	const licenseInfo = repo.licenseInfo;
-	const readmeInfo = transformReadme(slug, repo.readme);
-	const readmeText = readmeInfo.text;
-
-	// Use the name from the README if it exists as it's more likely to be formatted correctly
-	const name = readmeInfo.name || toTitleCase(repo.name);
-
-	let logoUrl = readmeInfo.logoUrl;
-
-	if (isDefined(logoUrl)) {
-		if (!logoUrl.startsWith('http')) {
-			const relativeLogoPath = `${repo.owner.login}/${slug}/HEAD/${logoUrl}`;
-
-			logoUrl = new URL(relativeLogoPath, GITHUB_CONTENT_BASE_URL).toString();
-		}
-	}
-
-	return {
-		description: readmeInfo.description,
-		forkCount: repo.forkCount,
-		homepageUrl: repo.homepageUrl,
-		languages: languages,
-		logoUrl,
-		licenseInfo: licenseInfo,
-		name,
-		openGraphImageUrl: repo.openGraphImageUrl,
-		owner: repo.owner.login,
-		readmeText,
-		shortDescription: repo.description,
+	const languages = transformLanguages(githubRepoNode?.languages);
+	const topics = transformTopics(githubRepoNode?.repositoryTopics);
+	const updatedAt = new Date(githubRepoNode.updatedAt);
+	const readmeInfo = transformReadme(
 		slug,
-		stargazerCount: repo.stargazerCount,
+		githubRepoNode.owner.login,
+		githubRepoNode.readme,
+	);
+	// Use the name from the README if it exists as it's more likely to be formatted correctly
+	const name = readmeInfo.name || toTitleCase(githubRepoNode.name);
+	const githubRepo = {
+		description: githubRepoNode.description,
+		descriptionHtml: readmeInfo.descriptionHtml,
+		forkCount: githubRepoNode.forkCount,
+		homepageUrl: githubRepoNode.homepageUrl,
+		languages: languages,
+		logoUrl: readmeInfo.logoUrl,
+		licenseInfo: githubRepoNode.licenseInfo,
+		name,
+		openGraphImageUrl: githubRepoNode.openGraphImageUrl,
+		owner: githubRepoNode.owner.login,
+		slug,
+		stargazerCount: githubRepoNode.stargazerCount,
 		topics,
 		type: {
 			color: getProjectTypeColor(readmeInfo.type),
 			name: readmeInfo.type,
 		},
 		updatedAt,
-		url: repo.url,
-		usesCustomOpenGraphImage: repo.usesCustomOpenGraphImage,
+		url: githubRepoNode.url,
+		usesCustomOpenGraphImage: githubRepoNode.usesCustomOpenGraphImage,
+	};
+
+	return {
+		githubRepo,
+		readmeText: githubRepoNode.readme?.text,
 	};
 }
 
-// Check rules and return true if the repo should be included in the list
-function includeRepo(repo: GithubRepo): boolean {
-	const rules = getGithubRepoRulesForSlug(repo.slug);
+// Create a new node for a repo
+function createGithubRepoNode(
+	parentNode: Queries.GithubData,
+	githubRepo: TransformRepoNodeReturnValue['githubRepo'],
+	readmeText: TransformRepoNodeReturnValue['readmeText'],
+	gatsbyCreateNode: Actions['createNode'],
+	createContentDigest: NodePluginArgs['createContentDigest'],
+) {
+	if (!isDefined(githubRepo)) {
+		panicOnBuild('Skipping repo node creation due to missing data');
 
-	if (rules.hide) {
-		console.info(`${LOG_PREFIX}Hiding repo '${repo.slug}'`);
-
-		return false;
+		return;
 	}
 
-	return true;
+	gatsbyCreateNode({
+		...githubRepo,
+		id: `${githubRepo.slug}-GithubRepo`,
+		parent: parentNode.id,
+		internal: {
+			type: 'GithubRepo',
+			mediaType: 'text/markdown',
+			content: readmeText ?? '',
+			contentDigest: createContentDigest(readmeText ?? ''),
+		},
+	});
 }
 
 // Transform the GitHub API response into a simple array of repos
-export function transformGithubResponse(response: GithubReposQueryResponse) {
-	if (response.errors) {
-		throw new Error(
-			`${LOG_PREFIX}GitHub response contains errors: ${prettify(response.errors)}`,
+export function transformGithubDataNode(
+	githubDataNode: Queries.GithubData,
+	gatsbyCreateNode: Actions['createNode'],
+	createContentDigest: NodePluginArgs['createContentDigest'],
+) {
+	const githubRepoNodes = githubDataNode.data?.user?.repositories.nodes;
+
+	if (!isDefined(githubRepoNodes)) {
+		panic('node.data.user.repositories.nodes is undefined');
+	}
+
+	for (const githubRepoNode of githubRepoNodes) {
+		if (!isDefined(githubRepoNode)) {
+			panic('node.data.user.repositories.nodes[] is undefined');
+		}
+
+		info(`Transforming GithubRepo node for '${githubRepoNode.name}'...`);
+		group();
+
+		const { githubRepo, readmeText } = transformGithubRepoNode(githubRepoNode);
+
+		createGithubRepoNode(
+			githubDataNode,
+			githubRepo,
+			readmeText,
+			gatsbyCreateNode,
+			createContentDigest,
 		);
+
+		groupEnd();
 	}
 
-	const nodes = response.data?.githubData?.data?.user?.repositories?.nodes;
-	const repos: GithubRepo[] = [];
+	groupEnd();
+}
 
-	if (!isDefined(nodes)) {
-		throw new TypeError(buildLogMsg('nodes', { response }));
-	}
+// Filter out repos that should be hidden
+export function filterGithubRepoNodes(
+	githubRepoNodes: Queries.GithubRepo[],
+): Queries.GithubRepo[] {
+	info('Hiding repos...');
+	group();
 
-	for (const node of nodes) {
-		if (!isDefined(node)) {
-			throw new TypeError(buildLogMsg('node', { response: nodes }));
+	const filteredGithubRepoNodes = githubRepoNodes.filter((githubRepoNode) => {
+		const rules = getGithubRepoRulesForSlug(githubRepoNode.slug);
+
+		if (rules.hide) {
+			info(githubRepoNode.slug);
+
+			return false;
 		}
 
-		const repo = transformRepo(node);
+		return true;
+	});
 
-		if (includeRepo(repo)) {
-			repos.push(transformRepo(node));
-		}
-	}
+	groupEnd();
 
-	return limit(repos, REPOS_LIMIT);
+	return filteredGithubRepoNodes;
 }

@@ -3,12 +3,12 @@
 	---------------------------
 */
 
-import type { GithubRepo, PropsWithClassName } from '../common/types';
+import type { PropsWithClassName } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
 import { ProjectCard } from '../components/project-card';
 
 interface Props extends PropsWithClassName {
-	projects: GithubRepo[];
+	projects: Queries.GithubRepo[];
 }
 
 export function ProjectCardGallery({ className, projects }: Props) {

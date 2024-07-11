@@ -9,7 +9,7 @@ import type {
 	DefaultOptions,
 	JobOptions,
 } from 'gatsby-plugin-component-to-image/lib/types';
-import type { Context, RefObject } from 'react';
+import type { RefObject } from 'react';
 import type {
 	FieldErrors,
 	UseFormRegister,
@@ -304,55 +304,43 @@ export type GithubReposConfig = {
 	};
 };
 
-// Raw response from the GitHub GraphQL query
-export type GithubReposQueryResponse = {
-	errors?: unknown[];
-	data?: Queries.GithubReposQuery;
-};
-
-// Raw, non-null repo object response from GitHub
-export type GithubRepoQuery = NonNullable<
-	NonNullable<
-		NonNullable<
-			NonNullable<
-				NonNullable<Queries.GithubReposQuery['githubData']>['data']
-			>['user']
-		>['repositories']
-	>['nodes']
->[number] extends infer R
-	? R extends { readonly name: unknown }
-		? R
-		: never
-	: never;
-
-// Transformed repo object with additional properties
-export type GithubRepo = Pick<
-	GithubRepoQuery,
-	| 'forkCount'
-	| 'url'
-	| 'homepageUrl'
-	| 'licenseInfo'
-	| 'openGraphImageUrl'
-	| 'stargazerCount'
-	| 'usesCustomOpenGraphImage'
-> & {
-	description: string | null;
+// GitHub repo fields used to create a GithubRepo node
+export type GithubRepo = {
+	description: string;
+	descriptionHtml: string | null;
+	forkCount: number;
+	homepageUrl: string | null;
 	languages: string[];
+	licenseInfo: {
+		name: string;
+		spdxId: string | null;
+		url: string | null;
+	} | null;
 	logoUrl: string | null;
 	name: string;
+	openGraphImageUrl: string;
 	owner: string;
-	readmeText: string | null;
-	shortDescription: string | null;
 	slug: string;
+	stargazerCount: number;
 	topics: string[];
 	type: {
 		color: string;
 		name: string | null;
 	};
-	updatedAt: Date | null;
+	updatedAt: Date;
+	url: string;
+	usesCustomOpenGraphImage: boolean;
 };
 
-export type ToggleContext = Context<{
-	isEnabled: boolean;
-	toggle: () => void;
-}>;
+// export type GithubRepo = Queries.GithubReposQuery;
+
+// Page context for the index page
+export type IndexPageContext = {
+	githubRepos: Queries.GithubRepo[];
+	authorBioHtml: string;
+};
+
+// Page context for project pages
+export type ProjectPageContext = {
+	githubRepo: Queries.GithubRepo;
+};

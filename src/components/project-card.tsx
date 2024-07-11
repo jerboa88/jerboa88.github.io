@@ -5,7 +5,6 @@
 
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import type { GithubRepo } from '../common/types';
 import { getClassNameProps } from '../common/utilities';
 import { Card } from './card';
 import { GhostButton } from './input/ghost-button';
@@ -16,7 +15,7 @@ import { SubsectionHeading } from './text/subsection-heading';
 // Types
 
 interface Props {
-	repo: GithubRepo;
+	repo: Queries.GithubRepo;
 }
 
 // Constants
@@ -55,7 +54,7 @@ export function ProjectCard({ repo }: Props) {
 						<SubsectionHeading className="my-4 font-semibold">
 							{repo.name}
 						</SubsectionHeading>
-						<span className="text-wrap">{repo.shortDescription}</span>
+						<span className="text-wrap">{repo.description}</span>
 					</div>
 				</div>
 				<div className="flex flex-row justify-between items-center pr-2 w-full">

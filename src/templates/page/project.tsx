@@ -6,7 +6,10 @@
 import type { HeadProps } from 'gatsby';
 import { useRef } from 'react';
 import { getSiteMetadata } from '../../common/config-manager';
-import type { GithubRepo, SocialImagesMetadataProp } from '../../common/types';
+import type {
+	ProjectPageContext,
+	SocialImagesMetadataProp,
+} from '../../common/types';
 import { getAbsoluteUrl } from '../../common/utilities';
 import { PageLayout } from '../../components/layout/page-layout';
 import { Section } from '../../components/layout/section';
@@ -18,9 +21,7 @@ import { DateRange } from '../../components/text/date-range';
 // Types
 
 interface Props {
-	pageContext: SocialImagesMetadataProp & {
-		githubRepo: GithubRepo;
-	};
+	pageContext: SocialImagesMetadataProp & ProjectPageContext;
 }
 
 // Constants
@@ -32,9 +33,7 @@ export default function ProjectPageTemplate({
 	pageContext: { githubRepo },
 }: Props) {
 	// Dates are serialized when passed through page context, so we need to deserialize them
-	const updatedAt = githubRepo.updatedAt
-		? new Date(githubRepo.updatedAt)
-		: null;
+	const updatedAt = new Date(githubRepo.updatedAt);
 
 	return (
 		<PageLayout>
@@ -45,10 +44,8 @@ export default function ProjectPageTemplate({
 					{githubRepo.logoUrl && (
 						<img src={githubRepo.logoUrl} width="500" alt="TODO" />
 					)}
-					{githubRepo.openGraphImageUrl && (
-						<img src={githubRepo.openGraphImageUrl} width="500" alt="TODO" />
-					)}
-					<p>{githubRepo.shortDescription}</p>
+					<img src={githubRepo.openGraphImageUrl} width="500" alt="TODO" />
+					<p>{githubRepo.description}</p>
 					<p>{githubRepo.type.name}</p>
 					<p>{githubRepo.type.color}</p>
 					{githubRepo.homepageUrl && (
@@ -58,18 +55,18 @@ export default function ProjectPageTemplate({
 						/>
 					)}
 					<br />
-					{githubRepo.url && (
-						<InlineLink to={githubRepo.url} text={githubRepo.url} />
-					)}
+					<InlineLink to={githubRepo.url} text={githubRepo.url} />
 					<p>{githubRepo.stargazerCount}</p>
-					{updatedAt && <DateRange endDate={updatedAt} />}
+					<DateRange endDate={updatedAt} />
 					<p>{githubRepo.licenseInfo?.name}</p>
 					<p>{githubRepo.licenseInfo?.spdxId}</p>
 					<p>{githubRepo.licenseInfo?.url}</p>
 					<p>{githubRepo.name}</p>
-					<p>{githubRepo.description}</p>
+					<p>{githubRepo.descriptionHtml}</p>
 				</Article>
-				{githubRepo.readmeText && <Article html={githubRepo.readmeText} />}
+				{githubRepo.childMarkdownRemark?.html && (
+					<Article html={githubRepo.childMarkdownRemark.html} />
+				)}
 			</Section>
 		</PageLayout>
 	);
@@ -83,8 +80,7 @@ export const Head = ({
 	const metadata = {
 		title: pageTitle,
 		shortTitle: githubRepo.name,
-		// TODO: Strip newlines and HTML tags from the long description
-		description: githubRepo.description ?? githubRepo.shortDescription ?? '',
+		description: githubRepo.description,
 		path: location.pathname,
 	};
 
