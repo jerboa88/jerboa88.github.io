@@ -344,3 +344,8 @@ export type IndexPageContext = {
 export type ProjectPageContext = {
 	githubRepo: Queries.GithubRepo;
 };
+
+// Page context for the resume page
+export type ResumePageContext = {
+	githubRepos: Queries.GithubRepo[];
+};
