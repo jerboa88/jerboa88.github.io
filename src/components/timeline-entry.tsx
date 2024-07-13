@@ -7,7 +7,7 @@ import { faBuilding, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getRoleTypeColor } from '../common/config-manager';
 import type { Role } from '../common/types';
-import { getClassNameProps } from '../common/utilities';
+import { getClassNameProps } from '../common/utils';
 import { Card } from './card';
 import { Pill } from './pill';
 import { DateRange } from './text/date-range';

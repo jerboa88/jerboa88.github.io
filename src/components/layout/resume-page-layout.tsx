@@ -7,7 +7,7 @@ import { MotionConfig } from 'framer-motion';
 import { type PropsWithChildren, StrictMode } from 'react';
 import { SPRING_TRANSITION_PROPS } from '../../common/constants';
 import { type PropsWithClassName, ThemeType } from '../../common/types';
-import { getClassNameProps } from '../../common/utilities';
+import { getClassNameProps } from '../../common/utils';
 import { ResumeHeader } from './resume-header';
 
 // Types

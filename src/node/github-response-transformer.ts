@@ -10,7 +10,7 @@ import {
 	getProjectTypeColor,
 } from '../common/config-manager';
 import type { GithubRepo, UrlString } from '../common/types';
-import { isDefined, toTitleCase } from '../common/utilities';
+import { isDefined, toTitleCase } from '../common/utils';
 import { group, groupEnd, info, panic, warn } from './logger';
 
 // Types

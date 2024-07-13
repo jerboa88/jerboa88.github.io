@@ -4,7 +4,7 @@
 */
 
 import type { PropsWithClassName } from '../common/types';
-import { getClassNameProps } from '../common/utilities';
+import { getClassNameProps } from '../common/utils';
 import { ProjectCard } from '../components/project-card';
 
 interface Props extends PropsWithClassName {

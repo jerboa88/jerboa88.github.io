@@ -9,7 +9,7 @@ import {
 	type PropsWithClassName,
 	TooltipPosition,
 } from '../../common/types';
-import { getClassNameProps } from '../../common/utilities';
+import { getClassNameProps } from '../../common/utils';
 import { Divider } from '../divider';
 import { SectionHeading } from '../text/section-heading';
 

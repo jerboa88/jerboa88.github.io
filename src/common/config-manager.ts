@@ -28,7 +28,7 @@ import { employmentRolesConfig } from '../config/roles/employment';
 import { volunteeringRolesConfig } from '../config/roles/volunteering';
 import { socialImagesGenerationConfig } from '../config/social-images-generation';
 import { themesConfig } from '../config/themes';
-import { isDefined } from './utilities';
+import { isDefined } from './utils';
 
 // Types
 

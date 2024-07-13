@@ -8,7 +8,7 @@ import type {
 	ButtonElementRenderFunction,
 	PropsWithClassName,
 } from '../../common/types';
-import { getClassNameProps, toKebabCase } from '../../common/utilities';
+import { getClassNameProps, toKebabCase } from '../../common/utils';
 import { SectionHeader } from './section-header';
 
 interface Props extends PropsWithClassName, PropsWithChildren {

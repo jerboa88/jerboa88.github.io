@@ -21,7 +21,7 @@ import type {
 	PageSection,
 	SocialImagesMetadataProp,
 } from '../../common/types';
-import { limit, toKebabCase } from '../../common/utilities';
+import { limit, toKebabCase } from '../../common/utils';
 import { HeroHeader } from '../../components/layout/hero-header';
 import { PageLayout } from '../../components/layout/page-layout';
 import { Section } from '../../components/layout/section';

@@ -6,7 +6,7 @@
 import { motion, useInView } from 'framer-motion';
 import { USE_IN_VIEW_OPTIONS } from '../common/constants';
 import { type PageSection, TooltipPosition } from '../common/types';
-import { getClassNameProps, toKebabCase } from '../common/utilities';
+import { getClassNameProps, toKebabCase } from '../common/utils';
 import { GhostButtonLink } from './links/ghost-button-link';
 
 interface Props {

@@ -10,7 +10,7 @@ import type {
 	ProjectPageContext,
 	SocialImagesMetadataProp,
 } from '../../common/types';
-import { getAbsoluteUrl } from '../../common/utilities';
+import { getAbsoluteUrl } from '../../common/utils';
 import { PageLayout } from '../../components/layout/page-layout';
 import { Section } from '../../components/layout/section';
 import { InlineLink } from '../../components/links/inline-link';

@@ -13,7 +13,7 @@ import {
 } from './src/common/config-manager';
 import { SOCIAL_IMAGES_DIR } from './src/common/constants';
 import { ThemeType } from './src/common/types';
-import { getAbsoluteUrl } from './src/common/utilities';
+import { getAbsoluteUrl } from './src/common/utils';
 import tailwindConfig from './tailwind.config';
 
 const SITE_METADATA = getSiteMetadata();

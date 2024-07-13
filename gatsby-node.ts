@@ -26,7 +26,7 @@ import {
 	limit,
 	prettify,
 	removeTrailingSlash,
-} from './src/common/utilities';
+} from './src/common/utils';
 import {
 	filterGithubRepoNodes,
 	transformGithubDataNode,

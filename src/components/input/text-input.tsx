@@ -9,7 +9,7 @@ import type {
 	InputElementRenderFunction,
 	InputOptions,
 } from '../../common/types';
-import { getClassNameProps } from '../../common/utilities';
+import { getClassNameProps } from '../../common/utils';
 import { BaseInput } from './base-input';
 
 export interface Props extends Input {

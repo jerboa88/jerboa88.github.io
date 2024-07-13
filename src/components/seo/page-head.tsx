@@ -9,7 +9,7 @@ import {
 	type SocialImagesMetadataProp,
 	ThemeType,
 } from '../../common/types';
-import { getAbsoluteUrl, getMimeType } from '../../common/utilities';
+import { getAbsoluteUrl, getMimeType } from '../../common/utils';
 
 // Types
 

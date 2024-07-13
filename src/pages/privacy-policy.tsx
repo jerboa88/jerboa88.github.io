@@ -11,7 +11,7 @@ import type {
 	PageMetadataProp,
 	SocialImagesMetadataProp,
 } from '../common/types';
-import { getAbsoluteUrl } from '../common/utilities';
+import { getAbsoluteUrl } from '../common/utils';
 import { PageLayout } from '../components/layout/page-layout';
 import { Section } from '../components/layout/section';
 import { SolidButtonLink } from '../components/links/solid-button-link';
