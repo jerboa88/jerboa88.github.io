@@ -79,7 +79,7 @@ export default function IndexPageTemplate({
 			<GhostButtonLink
 				text="View more on GitHub"
 				icon={faArrowUpRightFromSquare}
-				to={SITE_METADATA.author.link.github}
+				to={SITE_METADATA.author.url.github}
 				responsive
 				flip
 				{...remainingProps}
@@ -93,7 +93,7 @@ export default function IndexPageTemplate({
 			<GhostButtonLink
 				text="View more on LinkedIn"
 				icon={faArrowUpRightFromSquare}
-				to={SITE_METADATA.author.link.linkedin}
+				to={SITE_METADATA.author.url.linkedin}
 				responsive
 				flip
 				{...remainingProps}

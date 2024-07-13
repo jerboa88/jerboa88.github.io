@@ -36,13 +36,13 @@ export function Footer() {
 					</nav>
 					<nav className="flex flex-row justify-center">
 						<GhostButtonLink
-							to={SITE_METADATA.author.link.linkedin}
+							to={SITE_METADATA.author.url.linkedin}
 							icon={faLinkedin}
 							tooltipText="View my profile on LinkedIn"
 							tooltipPosition={TooltipPosition.Left}
 						/>
 						<GhostButtonLink
-							to={SITE_METADATA.author.link.github}
+							to={SITE_METADATA.author.url.github}
 							icon={faGithub}
 							tooltipText="View my profile on GitHub"
 							tooltipPosition={TooltipPosition.Left}

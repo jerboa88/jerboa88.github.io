@@ -86,13 +86,13 @@ export function PageHead({
 						'@id': '/author',
 						name: SITE_METADATA.author.name.full,
 						url: SITE_METADATA.siteUrl,
-						image: SITE_METADATA.author.image,
+						image: SITE_METADATA.author.imageUrl,
 						alumniOf: SITE_METADATA.author.alumniOf,
 						jobTitle: SITE_METADATA.author.jobTitle,
 						sameAs: [
-							SITE_METADATA.author.link.linkedin,
-							SITE_METADATA.author.link.github,
-							SITE_METADATA.author.link.twitter,
+							SITE_METADATA.author.url.linkedin,
+							SITE_METADATA.author.url.github,
+							SITE_METADATA.author.url.twitter,
 						],
 						address: {
 							'@type': 'PostalAddress',

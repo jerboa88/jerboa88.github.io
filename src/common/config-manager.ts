@@ -11,6 +11,7 @@ import type {
 	GithubReposConfig,
 	PageMetadata,
 	Role,
+	SentenceString,
 	SocialImageTypes,
 	SocialImagesGenerationConfig,
 	Theme,
@@ -33,38 +34,38 @@ import { isDefined } from './utilities';
 
 // Site metadata object used to populate the site's metadata
 type SiteMetadata = {
-	shortTitle: string;
-	title: string;
-	tagline: string;
-	shortDescription: string;
-	description: string;
+	shortTitle: Capitalize<string>;
+	title: Capitalize<string>;
+	tagline: Capitalize<string>;
+	shortDescription: SentenceString;
+	description: SentenceString;
 	iconPath: string;
 	siteUrl: UrlString;
 	sourceUrl: UrlString;
 	author: {
 		name: {
-			first: string;
-			last: string;
-			initial: string;
-			short: string;
-			full: string;
+			first: Capitalize<string>;
+			last: Capitalize<string>;
+			initial: Capitalize<string>;
+			short: Capitalize<string>;
+			full: Capitalize<string>;
 		};
-		jobTitle: string;
-		alumniOf: string;
-		image: string;
+		jobTitle: Capitalize<string>;
+		alumniOf: Capitalize<string>;
+		imageUrl: UrlString;
 		username: {
 			github: string;
 			twitter: string;
 		};
-		link: {
-			linkedin: string;
-			github: string;
-			twitter: string;
+		url: {
+			linkedin: UrlString;
+			github: UrlString;
+			twitter: UrlString;
 		};
 		location: {
-			city: string;
-			state: string;
-			country: string;
+			city: Capitalize<string>;
+			state: Capitalize<string>;
+			country: Capitalize<string>;
 		};
 	};
 };
@@ -72,14 +73,18 @@ type SiteMetadata = {
 // Returns metadata for the site
 export function getSiteMetadata(): SiteMetadata {
 	const config = siteMetadataConfig;
-	const authorFullName = `${config.author.name.first} ${config.author.name.last}`;
+	const authorFullName: Capitalize<string> =
+		`${config.author.name.first} ${config.author.name.last}` as typeof config.author.name.first;
 
 	return {
 		shortTitle: authorFullName,
-		title: `${authorFullName} | ${config.author.jobTitle}`,
-		tagline: `${config.author.jobTitle} & Cat Whisperer`,
-		shortDescription: `Portfolio site for ${authorFullName}`,
-		description: `Portfolio site for ${authorFullName}, a ${config.author.jobTitle.toLowerCase()} based in ${config.author.location.city}, ${config.author.location.state}.`,
+		title:
+			`${authorFullName} | ${config.author.jobTitle}` as typeof authorFullName,
+		tagline:
+			`${config.author.jobTitle} & Cat Whisperer` as typeof config.author.jobTitle,
+		shortDescription: `Portfolio site for ${authorFullName}.` as SentenceString,
+		description:
+			`Portfolio site for ${authorFullName}, a ${config.author.jobTitle.toLowerCase()} based in ${config.author.location.city}, ${config.author.location.state}.` as SentenceString,
 		iconPath: config.iconPath,
 		siteUrl: config.siteUrl,
 		sourceUrl: config.sourceUrl,
@@ -87,18 +92,19 @@ export function getSiteMetadata(): SiteMetadata {
 			name: {
 				first: config.author.name.first,
 				last: config.author.name.last,
-				initial: config.author.name.first[0],
-				short: `${config.author.name.first} ${config.author.name.last[0]}`,
+				initial: config.author.name.first[0] as typeof config.author.name.first,
+				short:
+					`${config.author.name.first} ${config.author.name.last[0]}` as typeof config.author.name.first,
 				full: authorFullName,
 			},
 			jobTitle: config.author.jobTitle,
 			alumniOf: config.author.alumniOf,
-			image: config.author.image,
+			imageUrl: config.author.imageUrl,
 			username: {
 				github: config.author.username.github,
 				twitter: config.author.username.twitter,
 			},
-			link: {
+			url: {
 				linkedin: `https://linkedin.com/in/${config.author.username.linkedin}`,
 				github: `https://github.com/${config.author.username.github}`,
 				twitter: `https://twitter.com/${config.author.username.twitter}`,

@@ -1,6 +1,6 @@
 /*
-	Common types used in the project
-	--------------------------------
+	Reusable types for the project
+	------------------------------
 */
 
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -67,21 +67,21 @@ export interface SiteMetadataConfig {
 	sourceUrl: UrlString;
 	author: {
 		name: {
-			first: string;
-			last: string;
+			first: Capitalize<string>;
+			last: Capitalize<string>;
 		};
-		jobTitle: string;
-		alumniOf: string;
-		image: string;
+		jobTitle: Capitalize<string>;
+		alumniOf: Capitalize<string>;
+		imageUrl: UrlString;
 		username: {
 			linkedin: string;
 			github: string;
 			twitter: string;
 		};
 		location: {
-			city: string;
-			state: string;
-			country: string;
+			city: Capitalize<string>;
+			state: Capitalize<string>;
+			country: Capitalize<string>;
 		};
 	};
 }
