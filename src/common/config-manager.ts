@@ -53,6 +53,8 @@ type SiteMetadata = {
 		jobTitle: Capitalize<string>;
 		alumniOf: Capitalize<string>;
 		imageUrl: UrlString;
+		phone: string | undefined;
+		email: string | undefined;
 		username: {
 			github: string;
 			twitter: string;
@@ -100,6 +102,8 @@ export function getSiteMetadata(): SiteMetadata {
 			jobTitle: config.author.jobTitle,
 			alumniOf: config.author.alumniOf,
 			imageUrl: config.author.imageUrl,
+			phone: process.env.AUTHOR_PHONE,
+			email: process.env.AUTHOR_EMAIL,
 			username: {
 				github: config.author.username.github,
 				twitter: config.author.username.twitter,
