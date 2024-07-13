@@ -44,13 +44,22 @@ export function warn(msg: string) {
 	reporter.warn(`${indentString}${msg}`);
 }
 
+// Print an error message
+export function error(msg: string) {
+	if (!reporter) {
+		throw new Error('Reporter is not set');
+	}
+
+	reporter.error(`${indentString}${msg}`);
+}
+
 // Print an error message and exit the program immediately if in build mode
 export function panicOnBuild(msg: string) {
 	if (!reporter) {
 		throw new Error('Reporter is not set');
 	}
 
-	reporter.panicOnBuild(`${indentString}${msg}`);
+	reporter.panicOnBuild('', new Error(`${indentString}${msg}`));
 }
 
 // Print an error message and exit the program immediately
@@ -59,7 +68,7 @@ export function panic(msg: string): never {
 		throw new Error('Reporter is not set');
 	}
 
-	reporter.panic(`${indentString}${msg}`);
+	reporter.panic('', new Error(`${indentString}${msg}`));
 
 	throw new Error('Unreachable');
 }
