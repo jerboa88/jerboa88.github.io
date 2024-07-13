@@ -19,6 +19,7 @@ import type {
 	AbsolutePathString,
 	IndexPageContext,
 	ProjectPageContext,
+	ResumePageContext,
 	SocialImageTypes,
 } from './src/common/types';
 import {
@@ -37,16 +38,17 @@ import { info, panic, setReporter, warn } from './src/node/logger';
 // Constants
 
 const INDEX_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'index.tsx');
-// const PROJECT_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'project.tsx');
+const PROJECT_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'project.tsx');
 
 const INDEX_OG_IMAGE_TEMPLATE = resolve(
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 	'index.tsx',
 );
-// const PROJECT_OG_IMAGE_TEMPLATE = resolve(
-// 	SOCIAL_IMAGE_TEMPLATES_DIR,
-// 	'project.tsx',
-// );
+// const RESUME_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'resume.tsx');
+const PROJECT_OG_IMAGE_TEMPLATE = resolve(
+	SOCIAL_IMAGE_TEMPLATES_DIR,
+	'project.tsx',
+);
 const OTHER_OG_IMAGE_TEMPLATE = resolve(
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 	'other.tsx',
@@ -199,6 +201,85 @@ function createRedirect(fromPath: string, toPath: string) {
 	});
 }
 
+// Create the landing page
+function createIndexPage(
+	githubRepos: Queries.GithubRepo[],
+	authorBioHtml: string,
+) {
+	const context: IndexPageContext = {
+		githubRepos: limit(
+			filterGithubRepoNodes(githubRepos),
+			INDEX_PAGE_REPOS_MAX,
+		),
+		authorBioHtml,
+	};
+
+	createPage({
+		path: '/',
+		component: INDEX_PAGE_TEMPLATE,
+		socialImageComponent: INDEX_OG_IMAGE_TEMPLATE,
+		context: context,
+	});
+}
+
+// Create the resume page
+// function createResumePage(githubRepos: Queries.GithubRepo[]) {
+// 	const context: ResumePageContext = {
+// 		githubRepos: limit(
+// 			filterGithubRepoNodes(githubRepos),
+// 			INDEX_PAGE_REPOS_MAX,
+// 		),
+// 	};
+
+// 	createPage({
+// 		path: '/resume',
+// 		component: RESUME_PAGE_TEMPLATE,
+// 		socialImageComponent: INDEX_OG_IMAGE_TEMPLATE,
+// 		context: context,
+// 	});
+// }
+
+// Create project pages
+function createProjectPages(githubRepos: Queries.GithubRepo[]) {
+	for (const githubRepo of githubRepos) {
+		const path: AbsolutePathString = join(
+			PROJECTS_DIR,
+			githubRepo.slug,
+		) as AbsolutePathString;
+		const shortPath: AbsolutePathString = join(
+			PROJECTS_DIR_SHORT,
+			githubRepo.slug,
+		) as AbsolutePathString;
+		const context: ProjectPageContext = {
+			githubRepo,
+		};
+
+		// Create project pages
+		createPage({
+			path,
+			component: PROJECT_PAGE_TEMPLATE,
+			socialImageComponent: PROJECT_OG_IMAGE_TEMPLATE,
+			context,
+		});
+
+		createRedirect(shortPath, path);
+	}
+}
+
+// Create client-side redirects
+function createRedirects() {
+	const redirects = [
+		['/about', '/#about'],
+		['/projects', '/#projects'],
+		['/experience', '/#experience'],
+		['/contact', '/#contact'],
+	];
+
+	for (const [fromPath, toPath] of redirects) {
+		createRedirect(fromPath, toPath);
+	}
+}
+
 // Save Gatsby Node API Helpers for later use
 export const onPluginInit: GatsbyNode['onPluginInit'] = ({
 	reporter,
@@ -268,50 +349,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 	const githubRepos = await fetchGithubRepos(graphql);
 	const authorBioHtml = getAuthorBioHtml(githubRepos);
 
-	// Create project pages
-	for (const githubRepo of githubRepos) {
-		const path: AbsolutePathString = join(
-			PROJECTS_DIR,
-			githubRepo.slug,
-		) as AbsolutePathString;
-		const shortPath: AbsolutePathString = join(
-			PROJECTS_DIR_SHORT,
-			githubRepo.slug,
-		) as AbsolutePathString;
-		const context: ProjectPageContext = {
-			githubRepo,
-		};
-
-		// TODO: Re-enable this when project pages are implemented
-		// Create project pages
-		// createPage({
-		// 	path,
-		// 	component: PROJECT_PAGE_TEMPLATE,
-		// 	socialImageComponent: PROJECT_OG_IMAGE_TEMPLATE,
-		// 	context,
-		// });
-
-		createRedirect(shortPath, path);
-	}
-
-	// Create landing page
-	const context: IndexPageContext = {
-		githubRepos: limit(
-			filterGithubRepoNodes(githubRepos),
-			INDEX_PAGE_REPOS_MAX,
-		),
-		authorBioHtml,
-	};
-
-	createPage({
-		path: '/',
-		component: INDEX_PAGE_TEMPLATE,
-		socialImageComponent: INDEX_OG_IMAGE_TEMPLATE,
-		context,
-	});
-
-	createRedirect('/about', '/#about');
-	createRedirect('/projects', '/#projects');
-	createRedirect('/experience', '/#experience');
-	createRedirect('/contact', '/#contact');
+	// TODO: Re-enable this when project pages are implemented
+	// createProjectPages(githubRepos);
+	createIndexPage(githubRepos, authorBioHtml);
+	// Re-enable this when the resume page is implemented
+	// createResumePage(githubRepos);
+	createRedirects();
 };
