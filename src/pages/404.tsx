@@ -53,7 +53,7 @@ export default function NotFoundPage({
 				className="items-center"
 			>
 				<div className="flex flex-col gap-8 items-center">
-					Oof, there's nothing here
+					{pageMetadata.description}
 					<figure className="flex justify-center flex-column">
 						<pre
 							role="img"
