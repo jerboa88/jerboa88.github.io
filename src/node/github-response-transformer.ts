@@ -11,7 +11,7 @@ import {
 } from '../common/config-manager';
 import type { GithubRepo, UrlString } from '../common/types';
 import { isDefined, toTitleCase } from '../common/utils';
-import { group, groupEnd, info, panic, warn } from './logger';
+import { error, group, groupEnd, info, panic, warn } from './logger';
 
 // Types
 
@@ -191,7 +191,7 @@ function transformGithubRepoNode(
 	const slug = githubRepoNode.name;
 
 	if (!isDefined(githubRepoNode.description)) {
-		warn('description is undefined');
+		error('description is undefined');
 
 		return {
 			githubRepo: null,
@@ -247,7 +247,7 @@ function createGithubRepoNode(
 	createContentDigest: NodePluginArgs['createContentDigest'],
 ) {
 	if (!isDefined(githubRepo)) {
-		warn('Skipping repo node creation due to missing data!');
+		error('Skipping repo node creation due to missing data!');
 
 		return;
 	}
