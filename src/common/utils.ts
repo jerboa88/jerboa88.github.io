@@ -3,6 +3,7 @@
 	---------------------------------------------------------
 */
 
+import { panic } from '../node/logger';
 import { getSiteMetadata } from './config-manager';
 import type { PropsWithClassName } from './types';
 
@@ -192,4 +193,14 @@ export function limit<T>(array: T[], limit: number): T[] {
 // Return true if a value is defined
 export function isDefined<T>(value: T): value is NonNullable<T> {
 	return value !== undefined && value !== null;
+}
+
+// Throw an error if a value is not defined
+export function assertIsDefined<T>(
+	value: T,
+	msg?: string,
+): asserts value is NonNullable<T> {
+	if (!isDefined(value)) {
+		panic(msg ?? 'Expected value to be defined, but it was not');
+	}
 }
