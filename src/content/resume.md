@@ -1,0 +1,6 @@
+- Seeking to benefit your company and gain valuable skills via a computing science internship.
+- Passionate about a wide variety of compute related topics including programming, 3D/graphic design, and web design.
+- Experienced with a variety of programming languages and tools including HTML, CSS, JS, Python, C/C++, Java, and SQL.
+- Comfortable working both independently and as part of a team.
+- Capable of working with tight time constraints, limited human resources, and in challenging conditions as per previous work experience.
+- Creative and excited to learn more tools and technologies in the future!
