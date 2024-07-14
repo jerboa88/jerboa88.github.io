@@ -5,9 +5,13 @@
 
 import type { Actions, NodePluginArgs } from 'gatsby';
 import { JSDOM } from 'jsdom';
-import { getProjectTypeColor, getSiteMetadata } from '../common/config-manager';
-import type { GithubRepo, UrlString } from '../common/types';
-import { isDefined, toTitleCase } from '../common/utils';
+import {
+	getGithubRepoVisibility,
+	getProjectTypeColor,
+	getSiteMetadata,
+} from '../common/config-manager';
+import type { EntryVisibility, GithubRepo, UrlString } from '../common/types';
+import { isDefined, limit, toTitleCase } from '../common/utils';
 import { group, groupEnd, info, panic, warn } from './logger';
 
 // Types
@@ -340,26 +344,22 @@ export function transformGithubDataNode(
 	groupEnd();
 }
 
-// Filter out repos that should be hidden
-export function filterGithubRepoNodes(
-	githubRepoNodes: Queries.GithubRepo[],
-): Queries.GithubRepo[] {
-	info('Hiding repos...');
-	group();
+/**
+ * Get a subset of GitHub repos based on visibility and a maximum number of repos
+ *
+ * @param githubRepos A list of GitHub repos
+ * @param minVisibility The minimum visibility level of a repo for to be included in the subset
+ * @param maxRepos The maximum number of repos to include in the subset
+ * @returns
+ */
+export function getSubsetOfGithubRepos(
+	githubRepos: Queries.GithubRepo[],
+	minVisibility: EntryVisibility,
+	maxRepos: number,
+) {
+	const filteredGithubRepos = githubRepos.filter(
+		(githubRepo) => getGithubRepoVisibility(githubRepo.slug) < minVisibility,
+	);
 
-	const filteredGithubRepoNodes = githubRepoNodes.filter((githubRepoNode) => {
-		const rules = getGithubRepoRulesForSlug(githubRepoNode.slug);
-
-		if (rules.hide) {
-			info(githubRepoNode.slug);
-
-			return false;
-		}
-
-		return true;
-	});
-
-	groupEnd();
-
-	return filteredGithubRepoNodes;
+	return limit(filteredGithubRepos, maxRepos);
 }

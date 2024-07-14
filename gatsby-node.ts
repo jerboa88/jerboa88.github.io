@@ -1,7 +1,7 @@
 import { join, resolve } from 'node:path';
 import type { CreatePagesArgs, GatsbyNode } from 'gatsby';
 import {
-	getGithubRepoRulesDefaults,
+	getGithubRepoDefaults,
 	getPageMetadata,
 	getSiteMetadata,
 } from './src/common/config-manager';
@@ -12,15 +12,16 @@ import {
 	SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR,
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 } from './src/common/constants';
-import type {
-	AbsolutePathString,
-	IndexPageContext,
-	ProjectPageContext,
-	ResumePageContext,
-} from './src/common/types';
-import { assertIsDefined, limit, prettify } from './src/common/utils';
 import {
-	filterGithubRepoNodes,
+	type AbsolutePathString,
+	EntryVisibility,
+	type IndexPageContext,
+	type ProjectPageContext,
+	type ResumePageContext,
+} from './src/common/types';
+import { assertIsDefined, prettify } from './src/common/utils';
+import {
+	getSubsetOfGithubRepos,
 	transformGithubDataNode,
 } from './src/node/github-response-transformer';
 import { githubReposQuery, schema } from './src/node/graphql';
@@ -33,6 +34,10 @@ import {
 } from './src/node/utils';
 
 // Constants
+
+const SITE_METADATA = getSiteMetadata();
+const INDEX_PAGE_REPOS_MAX = getGithubRepoDefaults().limit.index;
+const RESUME_PAGE_REPOS_MAX = getGithubRepoDefaults().limit.resume;
 
 const INDEX_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'index.tsx');
 const PROJECT_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'project.tsx');
@@ -50,9 +55,6 @@ const OTHER_OG_IMAGE_TEMPLATE = resolve(
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 	'other.tsx',
 );
-
-const SITE_METADATA = getSiteMetadata();
-const INDEX_PAGE_REPOS_MAX = getGithubRepoRulesDefaults().limit;
 
 // Types
 
@@ -118,8 +120,9 @@ function createIndexPage(
 	authorBioHtml: string,
 ) {
 	const context: IndexPageContext = {
-		githubRepos: limit(
-			filterGithubRepoNodes(githubRepos),
+		githubRepos: getSubsetOfGithubRepos(
+			githubRepos,
+			EntryVisibility.Hide,
 			INDEX_PAGE_REPOS_MAX,
 		),
 		authorBioHtml,
@@ -136,9 +139,13 @@ function createIndexPage(
 // Create the resume page
 function createResumePage(githubRepos: Queries.GithubRepo[]) {
 	const context: ResumePageContext = {
-		githubRepos: limit(
-			filterGithubRepoNodes(githubRepos),
-			INDEX_PAGE_REPOS_MAX,
+		githubRepos: getSubsetOfGithubRepos(
+			githubRepos,
+			EntryVisibility.HideFromResume,
+			RESUME_PAGE_REPOS_MAX,
+		).sort(
+			(a, b) =>
+				new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
 		),
 	};
 
