@@ -5,13 +5,10 @@
 
 import type { Actions, NodePluginArgs } from 'gatsby';
 import { JSDOM } from 'jsdom';
-import {
-	getGithubRepoRulesForSlug,
-	getProjectTypeColor,
-} from '../common/config-manager';
+import { getProjectTypeColor, getSiteMetadata } from '../common/config-manager';
 import type { GithubRepo, UrlString } from '../common/types';
 import { isDefined, toTitleCase } from '../common/utils';
-import { error, group, groupEnd, info, panic, warn } from './logger';
+import { group, groupEnd, info, panic, warn } from './logger';
 
 // Types
 
@@ -29,6 +26,7 @@ type TransformRepoNodeReturnValue = {
 
 // Constants
 
+const SITE_METADATA = getSiteMetadata();
 const GITHUB_CONTENT_BASE_URL: UrlString = 'https://raw.githubusercontent.com';
 
 // Extract a project's name from its README
@@ -93,16 +91,12 @@ function parseReadmeType(fragment: DocumentFragment): ReadmeInfo['type'] {
 		?.getAttribute('src');
 
 	if (!isDefined(badgeImgUrl)) {
-		warn('README project type badge not found');
-
 		return null;
 	}
 
 	const typeMatches = /type-(\w+)-(\w+)/.exec(badgeImgUrl);
 
 	if (!typeMatches || typeMatches.length < 3) {
-		warn('README project type badge not found');
-
 		return null;
 	}
 
@@ -184,23 +178,58 @@ function transformTopics(
 	return topics.sort();
 }
 
+// Return true if the repo should be included in the list of repos
+function excludeRepo(
+	slug: string,
+	githubRepoNode: Queries.GithubDataDataUserRepositoriesNodes,
+	readmeInfo: ReadmeInfo,
+) {
+	// Skip repos with missing descriptions as these are hard to work with
+	if (!isDefined(githubRepoNode.description)) {
+		warn(
+			'Description not found. Please add a description to the repo on GitHub',
+		);
+
+		return true;
+	}
+
+	// Skip repos with unknown types, unless it's the author's profile repo
+	if (
+		!isDefined(readmeInfo.type) &&
+		slug !== SITE_METADATA.author.username.github
+	) {
+		warn(
+			'README project type badge not found. Please add a project type badge to the README',
+		);
+
+		return true;
+	}
+
+	// Skip forked repos, as they are less likely to be original projects
+	if (githubRepoNode.isFork) {
+		info('This is a forked repo');
+
+		return true;
+	}
+
+	// Skip markdown repos, as they are usually not remarkable enough to be featured
+	if (readmeInfo.type === 'Markdown') {
+		info('This is a Markdown repo');
+
+		return true;
+	}
+
+	return false;
+}
+
 // Transform the repo object into a format we can use
 function transformGithubRepoNode(
 	githubRepoNode: Queries.GithubDataDataUserRepositoriesNodes,
 ): TransformRepoNodeReturnValue {
 	const slug = githubRepoNode.name;
-
-	if (!isDefined(githubRepoNode.description)) {
-		error('description is undefined');
-
-		return {
-			githubRepo: null,
-			readmeText: null,
-		};
-	}
-
 	const languages = transformLanguages(githubRepoNode?.languages);
 	const topics = transformTopics(githubRepoNode?.repositoryTopics);
+	const createdAt = new Date(githubRepoNode.createdAt);
 	const updatedAt = new Date(githubRepoNode.updatedAt);
 	const readmeInfo = transformReadme(
 		slug,
@@ -209,11 +238,21 @@ function transformGithubRepoNode(
 	);
 	// Use the name from the README if it exists as it's more likely to be formatted correctly
 	const name = readmeInfo.name || toTitleCase(githubRepoNode.name);
+
+	if (excludeRepo(slug, githubRepoNode, readmeInfo)) {
+		return {
+			githubRepo: null,
+			readmeText: null,
+		};
+	}
+
 	const githubRepo = {
+		createdAt: createdAt,
 		description: githubRepoNode.description,
 		descriptionHtml: readmeInfo.descriptionHtml,
 		forkCount: githubRepoNode.forkCount,
 		homepageUrl: githubRepoNode.homepageUrl,
+		isFork: githubRepoNode.isFork,
 		languages: languages,
 		logoUrl: readmeInfo.logoUrl,
 		licenseInfo: githubRepoNode.licenseInfo,
@@ -247,7 +286,7 @@ function createGithubRepoNode(
 	createContentDigest: NodePluginArgs['createContentDigest'],
 ) {
 	if (!isDefined(githubRepo)) {
-		error('Skipping repo node creation due to missing data!');
+		info('🚫 Skipping repo node creation...');
 
 		return;
 	}

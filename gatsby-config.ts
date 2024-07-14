@@ -141,9 +141,11 @@ const config: GatsbyConfig = {
 						user(login: $author) {
 							repositories(first: $repoLimit, orderBy: {field: STARGAZERS, direction: DESC}) {
 								nodes {
+									createdAt
 									description
 									forkCount
 									homepageUrl
+									isFork
 									languages(first: $languageLimit) {
 										nodes {
 											name
