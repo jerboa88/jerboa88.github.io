@@ -254,6 +254,13 @@ export enum AlertType {
 	Error = 3,
 }
 
+// Visibility options for entries (e.g. projects, roles, etc.)
+export enum EntryVisibility {
+	Show = 0,
+	HideFromResume = 1,
+	Hide = 2,
+}
+
 type EmploymentRoleTypes = 'internship' | 'summer job';
 
 // Raw role config
@@ -290,17 +297,17 @@ export type EmploymentRole = Overwrite<
 	}
 >;
 
-export type GithubRepoRules = {
-	hide?: boolean;
-	pin?: boolean;
-};
-
+// Raw GitHub repos config
 export type GithubReposConfig = {
-	defaults: GithubRepoRules & {
-		limit: number;
+	defaults: {
+		visibility: EntryVisibility;
+		limit: {
+			index: number;
+			resume: number;
+		};
 	};
 	slugs: {
-		[repoSlug: string]: GithubRepoRules;
+		[repoSlug: string]: EntryVisibility;
 	};
 };
 

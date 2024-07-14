@@ -3,49 +3,31 @@
 	---------------------------------------------------
 */
 
-import type { GithubReposConfig } from '../common/types';
+import { EntryVisibility, type GithubReposConfig } from '../common/types';
 
 export const githubReposConfig: GithubReposConfig = {
 	defaults: {
-		hide: false,
-		limit: 10,
+		visibility: EntryVisibility.Show,
+		limit: {
+			index: 10,
+			resume: 6,
+		},
 	},
 	slugs: {
-		'BiglyBT-plugin-autostop': {
-			hide: true,
-		},
-		calculator: {
-			hide: true,
-		},
-		'catppuccin-nvim': {
-			hide: true,
-		},
-		'Custom-PiHole-Interface': {
-			hide: true,
-		},
-		formie: {
-			hide: true,
-		},
-		hackathon: {
-			hide: true,
-		},
-		'Image-Signer': {
-			hide: true,
-		},
-		jerboa88: {
-			hide: true,
-		},
-		'jerboa88.github.io': {
-			hide: true,
-		},
-		'Make-me-laugh': {
-			hide: true,
-		},
-		'rtg-for-outlook': {
-			hide: true,
-		},
-		ScheduleStorm: {
-			hide: true,
-		},
+		'BiglyBT-plugin-autostop': EntryVisibility.Hide,
+		calculator: EntryVisibility.Hide,
+		'catppuccin-nvim': EntryVisibility.Hide,
+		'Custom-PiHole-Interface': EntryVisibility.Hide,
+		formie: EntryVisibility.Hide,
+		'Game-Maps': EntryVisibility.HideFromResume,
+		'gimp-average-layers': EntryVisibility.HideFromResume,
+		hackathon: EntryVisibility.Hide,
+		'Image-Signer': EntryVisibility.Hide,
+		jerboa88: EntryVisibility.Hide,
+		'jerboa88.github.io': EntryVisibility.Hide,
+		'Make-me-laugh': EntryVisibility.Hide,
+		'rtg-for-outlook': EntryVisibility.Hide,
+		tinyi18n: EntryVisibility.HideFromResume,
+		ScheduleStorm: EntryVisibility.Hide,
 	},
 };
