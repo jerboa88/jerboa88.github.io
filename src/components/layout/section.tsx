@@ -31,8 +31,8 @@ export const Section = forwardRef(
 		ref: ForwardedRef<HTMLElement>,
 	) => {
 		const classNameProps = getClassNameProps(
-			'flex z-10 flex-col justify-center p-8 w-full',
-			responsive && 'max-w-5xl sm:w-10/12 lg:w-9/12 xl:w-8/12', // Adjust width based on screen size
+			'flex z-10 flex-col justify-center w-full',
+			responsive && 'w-10/12 max-w-5xl lg:w-9/12 xl:w-8/12', // Adjust width based on screen size
 			className,
 		);
 		const sectionHeaderClassNameProps = getClassNameProps(

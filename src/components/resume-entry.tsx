@@ -33,7 +33,7 @@ export function ResumeEntry({
 	location,
 }: Props) {
 	return (
-		<div className="flex flex-row justify-between items-start gap-4">
+		<div className="flex flex-row justify-between items-start gap-4 break-inside-avoid-page">
 			<div className="flex flex-col">
 				<div className="flex flex-row items-center gap-4">
 					<LinkWrapper to={url}>
