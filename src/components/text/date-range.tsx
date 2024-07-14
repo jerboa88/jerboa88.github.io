@@ -14,11 +14,11 @@ interface Props extends PropsWithClassName {
 export function DateRange({ className, startDate, endDate }: Props) {
 	const classNameProps = getClassNameProps('font-bold', className);
 
-	const endMonth = endDate?.toLocaleString('default', { month: 'long' });
+	const endMonth = endDate?.toLocaleString('default', { month: 'short' });
 	const endYear = endDate?.getFullYear();
 	const endDateString = `${endMonth} ${endYear}`;
 
-	const startMonth = startDate?.toLocaleString('default', { month: 'long' });
+	const startMonth = startDate?.toLocaleString('default', { month: 'short' });
 	const startYear = startDate?.getFullYear();
 	const startDateString = `${startMonth} ${startYear === endYear ? '' : startYear}`;
 
