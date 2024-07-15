@@ -10,7 +10,6 @@ import {
 	TooltipPosition,
 } from '../../common/types';
 import { getClassNameProps } from '../../common/utils';
-import { Divider } from '../divider';
 import { SectionHeading } from '../text/section-heading';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
@@ -36,7 +35,6 @@ export function SectionHeader({ className, title, renderButton }: Props) {
 				<SectionHeading>{title}</SectionHeading>
 				{buttonElement}
 			</div>
-			<Divider className="pb-8" />
 		</>
 	);
 }

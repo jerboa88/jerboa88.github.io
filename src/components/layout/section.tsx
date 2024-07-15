@@ -9,10 +9,12 @@ import type {
 	PropsWithClassName,
 } from '../../common/types';
 import { getClassNameProps, toKebabCase } from '../../common/utils';
+import { Divider } from '../divider';
 import { SectionHeader } from './section-header';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
 	sectionHeaderClassName?: string;
+	dividerClassName?: string;
 	title?: string;
 	renderButton?: ButtonElementRenderFunction;
 	responsive?: boolean;
@@ -23,6 +25,7 @@ export const Section = forwardRef(
 		{
 			className,
 			sectionHeaderClassName,
+			dividerClassName,
 			title,
 			renderButton,
 			responsive = true,
@@ -39,15 +42,19 @@ export const Section = forwardRef(
 			responsive && 'pt-10', // Add padding to account for floating page header
 			sectionHeaderClassName,
 		);
+		const dividerClassNameProps = getClassNameProps('pb-8', dividerClassName);
 
 		const sectionId = title ? toKebabCase(title) : 'top';
 
 		return (
 			<section id={sectionId} ref={ref} {...classNameProps}>
 				{title && (
-					<SectionHeader
-						{...{ title, renderButton, ...sectionHeaderClassNameProps }}
-					/>
+					<>
+						<SectionHeader
+							{...{ title, renderButton, ...sectionHeaderClassNameProps }}
+						/>
+						<Divider {...dividerClassNameProps} />
+					</>
 				)}
 				{children}
 			</section>

@@ -16,7 +16,7 @@ interface Props extends PropsWithClassName, PropsWithChildren {}
 
 export function ResumePageLayout({ className, children }: Props) {
 	const classNameProps = getClassNameProps(
-		'flex-col gap-8 p-[1.5cm] justify-between items-center mx-auto text-base min-h-svh scroll-smooth selection:bg-primary selection:text-primary-content',
+		'flex-col gap-4 p-[1.5cm] justify-between items-center mx-auto text-base min-h-svh scroll-smooth selection:bg-primary selection:text-primary-content',
 		className,
 	);
 

@@ -7,12 +7,12 @@ import type { PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utils';
 
 interface Props extends PropsWithClassName {
-	startDate?: Date;
-	endDate?: Date;
+	startDate?: Date | undefined;
+	endDate?: Date | undefined;
 }
 
 export function DateRange({ className, startDate, endDate }: Props) {
-	const classNameProps = getClassNameProps('font-bold', className);
+	const classNameProps = getClassNameProps('text-base font-bold', className);
 
 	const endMonth = endDate?.toLocaleString('default', { month: 'short' });
 	const endYear = endDate?.getFullYear();
