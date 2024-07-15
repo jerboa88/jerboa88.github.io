@@ -268,6 +268,7 @@ export type RoleConfig = {
 	type?: string;
 	title: Capitalize<string>;
 	company: Capitalize<string>;
+	companyUrl: UrlString;
 	startDate: DateString;
 	endDate: DateString;
 	location: CityAndStateString;

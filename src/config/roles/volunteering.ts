@@ -8,7 +8,9 @@ import type { RoleConfig } from '../../common/types';
 export const volunteeringRolesConfig: RoleConfig[] = [
 	{
 		title: 'Event Assistant, Office Volunteer',
-		company: 'International Student Services, University of Alberta',
+		company: 'International Student Services, U of A',
+		companyUrl:
+			'https://www.ualberta.ca/international/international-student-services',
 		location: 'Edmonton, AB',
 		startDate: '2019-02-01',
 		endDate: '2021-04-01',
