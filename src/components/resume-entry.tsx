@@ -3,21 +3,25 @@
 	-----------------------------------------------
 */
 
-import type {
-	CityAndStateString,
-	SentenceString,
-	UrlString,
+import {
+	type CityAndStateString,
+	type SentenceString,
+	TooltipPosition,
+	type UrlString,
 } from '../common/types';
 import { LinkWrapper } from './links/link-wrapper';
 import { Article } from './text/article';
 import { DateRange } from './text/date-range';
-import { SubsectionHeading } from './text/subsection-heading';
+import { Tooltip } from './tooltip';
 
 interface Props {
 	title: Capitalize<string>;
+	titleUrl?: UrlString;
+	titleTooltip?: Capitalize<string>;
 	tagline: Capitalize<string>;
+	taglineUrl?: UrlString;
+	taglineTooltip?: Capitalize<string>;
 	bullets: SentenceString[];
-	url?: UrlString;
 	startDate?: Date;
 	endDate?: Date;
 	location?: CityAndStateString;
@@ -25,23 +29,46 @@ interface Props {
 
 export function ResumeEntry({
 	title,
+	titleUrl,
+	titleTooltip,
 	tagline,
+	taglineUrl,
+	taglineTooltip,
 	bullets,
-	url,
 	startDate,
 	endDate,
 	location,
 }: Props) {
+	const titleElement = titleUrl ? (
+		<Tooltip text={titleTooltip ?? titleUrl} position={TooltipPosition.Right}>
+			<LinkWrapper to={titleUrl}>
+				<span className="font-bold">{title}</span>
+			</LinkWrapper>
+		</Tooltip>
+	) : (
+		<span className="font-bold">{title}</span>
+	);
+	const taglineElement = taglineUrl ? (
+		<Tooltip
+			text={taglineTooltip ?? taglineUrl}
+			position={TooltipPosition.Right}
+		>
+			<LinkWrapper to={taglineUrl}>
+				<span className="text-base italic">{tagline}</span>
+			</LinkWrapper>
+		</Tooltip>
+	) : (
+		<span className="text-base italic">{tagline}</span>
+	);
+
 	return (
 		<div className="flex flex-row justify-between items-start gap-4 break-inside-avoid-page">
 			<div className="flex flex-col">
 				<div className="flex flex-row items-center gap-4">
-					<LinkWrapper to={url}>
-						<SubsectionHeading>{title}</SubsectionHeading>
-					</LinkWrapper>
-					<span className="italic">{tagline}</span>
+					{titleElement}
+					{taglineElement}
 				</div>
-				<Article>
+				<Article className="prose-li:m-0">
 					<ul>
 						{bullets.map((bullet) => (
 							<li key={bullet}>{bullet}</li>
@@ -56,7 +83,7 @@ export function ResumeEntry({
 						endDate={endDate}
 						className="text-nowrap"
 					/>
-					{location && <span>{location}</span>}
+					{location && <span className="text-base">{location}</span>}
 				</div>
 			</div>
 		</div>
