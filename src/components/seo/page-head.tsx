@@ -39,7 +39,7 @@ export function PageHead({
 
 	return (
 		<>
-			<html lang="en-US" />
+			<html lang="en-US" className="print:text-xs/none" />
 			<title>{metadata.title}</title>
 			<meta name="author" content={SITE_METADATA.author.name.full} />
 			<meta name="description" content={metadata.description} />
