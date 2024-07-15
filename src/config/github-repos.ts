@@ -10,7 +10,7 @@ export const githubReposConfig: GithubReposConfig = {
 		visibility: EntryVisibility.Show,
 		limit: {
 			index: 10,
-			resume: 6,
+			resume: 4,
 		},
 	},
 	slugs: {
