@@ -10,15 +10,23 @@ import {
 	getProjectTypeColor,
 	getSiteMetadata,
 } from '../common/config-manager';
-import type { EntryVisibility, GithubRepo, UrlString } from '../common/types';
+import {
+	EntryVisibility,
+	type GithubRepo,
+	type UrlString,
+} from '../common/types';
 import { isDefined, limit, toTitleCase } from '../common/utils';
 import { group, groupEnd, info, panic, warn } from './logger';
 
 // Types
 
-type ReadmeInfo = {
-	name: string | null;
+type ParseReadmeDescriptionReturnValue = {
 	descriptionHtml: string | null;
+	commentary: string | null;
+};
+
+type TransformReadmeReturnValue = ParseReadmeDescriptionReturnValue & {
+	name: string | null;
 	logoUrl: string | null;
 	type: string | null;
 };
@@ -34,7 +42,9 @@ const SITE_METADATA = getSiteMetadata();
 const GITHUB_CONTENT_BASE_URL: UrlString = 'https://raw.githubusercontent.com';
 
 // Extract a project's name from its README
-function parseReadmeName(fragment: DocumentFragment): ReadmeInfo['name'] {
+function parseReadmeName(
+	fragment: DocumentFragment,
+): TransformReadmeReturnValue['name'] {
 	const linkElement = fragment.querySelector('.projectName > a');
 	const name =
 		linkElement?.getAttribute('title') ??
@@ -50,19 +60,27 @@ function parseReadmeName(fragment: DocumentFragment): ReadmeInfo['name'] {
 	return null;
 }
 
-// Extract a project's description from its README as HTML
-function parseReadmeDescriptionHtml(
+// Extract a project's commentary and description from its README
+function parseReadmeDescription(
 	fragment: DocumentFragment,
-): ReadmeInfo['descriptionHtml'] {
-	const descriptionHtml = fragment.querySelector('.projectDesc')?.innerHTML;
+): ParseReadmeDescriptionReturnValue {
+	const descriptionElement = fragment.querySelector('.projectDesc');
+	const descriptionHtml = descriptionElement?.innerHTML ?? null;
+	const commentary =
+		descriptionElement?.getAttribute('data-commentary') ?? null;
 
-	if (isDefined(descriptionHtml)) {
-		return descriptionHtml.trim();
+	if (!isDefined(descriptionHtml)) {
+		warn('README description not found');
 	}
 
-	warn('README description not found');
+	if (!isDefined(commentary)) {
+		warn('README commentary not found');
+	}
 
-	return null;
+	return {
+		descriptionHtml,
+		commentary,
+	};
 }
 
 // Extract a project's logo URL from its README
@@ -70,7 +88,7 @@ function parseReadmeLogoUrl(
 	slug: string,
 	owner: string,
 	fragment: DocumentFragment,
-): ReadmeInfo['name'] {
+): TransformReadmeReturnValue['name'] {
 	const logoUrl = fragment.querySelector('.projectLogo')?.getAttribute('src');
 
 	if (isDefined(logoUrl)) {
@@ -89,7 +107,9 @@ function parseReadmeLogoUrl(
 }
 
 // Extract a project's type from its README
-function parseReadmeType(fragment: DocumentFragment): ReadmeInfo['type'] {
+function parseReadmeType(
+	fragment: DocumentFragment,
+): TransformReadmeReturnValue['type'] {
 	const badgeImgUrl = fragment
 		.querySelector('.projectBadges > img[alt="Project type"]')
 		?.getAttribute('src');
@@ -112,23 +132,26 @@ function transformReadme(
 	slug: string,
 	owner: string,
 	readmeResponse: Queries.GithubDataDataUserRepositoriesNodes['readme'],
-): ReadmeInfo {
+): TransformReadmeReturnValue {
 	if (!isDefined(readmeResponse?.text)) {
 		warn('README not found');
 
 		return {
 			name: null,
 			descriptionHtml: null,
+			commentary: null,
 			logoUrl: null,
 			type: null,
 		};
 	}
 
 	const fragment = JSDOM.fragment(readmeResponse.text);
+	const { descriptionHtml, commentary } = parseReadmeDescription(fragment);
 
 	return {
 		name: parseReadmeName(fragment),
-		descriptionHtml: parseReadmeDescriptionHtml(fragment),
+		descriptionHtml,
+		commentary,
 		logoUrl: parseReadmeLogoUrl(slug, owner, fragment),
 		type: parseReadmeType(fragment),
 	};
@@ -186,7 +209,7 @@ function transformTopics(
 function excludeRepo(
 	slug: string,
 	githubRepoNode: Queries.GithubDataDataUserRepositoriesNodes,
-	readmeInfo: ReadmeInfo,
+	readmeInfo: TransformReadmeReturnValue,
 ) {
 	// Skip repos with missing descriptions as these are hard to work with
 	if (!isDefined(githubRepoNode.description)) {
@@ -250,9 +273,13 @@ function transformGithubRepoNode(
 		};
 	}
 
+	// If description is null, it will be caught by excludeRepo
+	const description: string = githubRepoNode.description as string;
+
 	const githubRepo = {
+		commentary: readmeInfo.commentary,
 		createdAt: createdAt,
-		description: githubRepoNode.description,
+		description: description,
 		descriptionHtml: readmeInfo.descriptionHtml,
 		forkCount: githubRepoNode.forkCount,
 		homepageUrl: githubRepoNode.homepageUrl,

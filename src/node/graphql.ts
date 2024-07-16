@@ -61,6 +61,7 @@ Define schema for custom GithubRepo nodes
 """
 type GithubRepo implements Node {
 	childMarkdownRemark: MarkdownRemark
+	commentary: String
 	createdAt: Date!
 	description: String!
 	descriptionHtml: String
@@ -90,6 +91,7 @@ query GithubRepos {
 			childMarkdownRemark {
 				html
 			}
+			commentary
 			createdAt
 			description
 			descriptionHtml
