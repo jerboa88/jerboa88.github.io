@@ -1377,8 +1377,12 @@ type GithubDataSortInput = {
 
 /** Define schema for custom GithubRepo nodes */
 type GithubRepo = Node & {
+  /** Returns the first child node of type MarkdownRemark or null if there are no children of given type on this node */
   readonly childMarkdownRemark: Maybe<MarkdownRemark>;
   readonly children: ReadonlyArray<Node>;
+  /** Returns all children nodes filtered by type MarkdownRemark */
+  readonly childrenMarkdownRemark: Maybe<ReadonlyArray<Maybe<MarkdownRemark>>>;
+  readonly commentary: Maybe<Scalars['String']>;
   readonly createdAt: Scalars['Date'];
   readonly description: Scalars['String'];
   readonly descriptionHtml: Maybe<Scalars['String']>;
@@ -1451,6 +1455,8 @@ type GithubRepoEdge = {
 type GithubRepoFieldSelector = {
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkFieldSelector>;
   readonly children: InputMaybe<NodeFieldSelector>;
+  readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkFieldSelector>;
+  readonly commentary: InputMaybe<FieldSelectorEnum>;
   readonly createdAt: InputMaybe<FieldSelectorEnum>;
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly descriptionHtml: InputMaybe<FieldSelectorEnum>;
@@ -1478,6 +1484,8 @@ type GithubRepoFieldSelector = {
 type GithubRepoFilterInput = {
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkFilterInput>;
   readonly children: InputMaybe<NodeFilterListInput>;
+  readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkFilterListInput>;
+  readonly commentary: InputMaybe<StringQueryOperatorInput>;
   readonly createdAt: InputMaybe<DateQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly descriptionHtml: InputMaybe<StringQueryOperatorInput>;
@@ -1546,6 +1554,8 @@ type GithubRepoGroupConnection_sumArgs = {
 type GithubRepoSortInput = {
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkSortInput>;
   readonly children: InputMaybe<NodeSortInput>;
+  readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkSortInput>;
+  readonly commentary: InputMaybe<SortOrderEnum>;
   readonly createdAt: InputMaybe<SortOrderEnum>;
   readonly description: InputMaybe<SortOrderEnum>;
   readonly descriptionHtml: InputMaybe<SortOrderEnum>;
@@ -2170,6 +2180,8 @@ type Query_githubDataArgs = {
 type Query_githubRepoArgs = {
   childMarkdownRemark: InputMaybe<MarkdownRemarkFilterInput>;
   children: InputMaybe<NodeFilterListInput>;
+  childrenMarkdownRemark: InputMaybe<MarkdownRemarkFilterListInput>;
+  commentary: InputMaybe<StringQueryOperatorInput>;
   createdAt: InputMaybe<DateQueryOperatorInput>;
   description: InputMaybe<StringQueryOperatorInput>;
   descriptionHtml: InputMaybe<StringQueryOperatorInput>;

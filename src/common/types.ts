@@ -52,7 +52,7 @@ type DateString = `${20}${number}-${number}-${number}`;
 export type CityAndStateString = Capitalize<`${string}, ${string}`>;
 
 // Sentence string with proper capitalization and punctuation
-export type SentenceString = Capitalize<`${string}${'.' | '!' | '?'}`>;
+export type SentenceString = Capitalize<`${string}${'.' | '!' | '?' | '…'}`>;
 
 // Raw external services config
 export interface ExternalServicesConfig {
@@ -256,9 +256,10 @@ export enum AlertType {
 
 // Visibility options for entries (e.g. projects, roles, etc.)
 export enum EntryVisibility {
-	Show = 0,
-	HideFromResume = 1,
-	Hide = 2,
+	Pin = 0,
+	Show = 1,
+	HideFromResume = 2,
+	Hide = 3,
 }
 
 type EmploymentRoleTypes = 'internship' | 'summer job';
@@ -314,6 +315,7 @@ export type GithubReposConfig = {
 
 // GitHub repo fields used to create a GithubRepo node
 export type GithubRepo = {
+	commentary: string | null;
 	createdAt: Date;
 	description: string;
 	descriptionHtml: string | null;
