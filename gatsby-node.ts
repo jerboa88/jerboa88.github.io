@@ -14,7 +14,7 @@ import {
 } from './src/common/constants';
 import {
 	type AbsolutePathString,
-	EntryVisibility,
+	EntryPage,
 	type IndexPageContext,
 	type ProjectPageContext,
 	type ResumePageContext,
@@ -122,7 +122,7 @@ function createIndexPage(
 	const context: IndexPageContext = {
 		githubRepos: getSubsetOfGithubRepos(
 			githubRepos,
-			EntryVisibility.Hide,
+			EntryPage.Index,
 			INDEX_PAGE_REPOS_MAX,
 		),
 		authorBioHtml,
@@ -136,16 +136,19 @@ function createIndexPage(
 	});
 }
 
+// Sort GitHub repos by creation date
+function sortByCreatedAt(a: Queries.GithubRepo, b: Queries.GithubRepo) {
+	return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+}
+
 // Create the resume page
 function createResumePage(githubRepos: Queries.GithubRepo[]) {
 	const context: ResumePageContext = {
 		githubRepos: getSubsetOfGithubRepos(
 			githubRepos,
-			EntryVisibility.HideFromResume,
+			EntryPage.Resume,
 			RESUME_PAGE_REPOS_MAX,
-		).sort(
-			(a, b) =>
-				new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+			sortByCreatedAt,
 		),
 	};
 

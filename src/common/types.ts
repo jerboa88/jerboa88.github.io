@@ -258,8 +258,13 @@ export enum AlertType {
 export enum EntryVisibility {
 	Pin = 0,
 	Show = 1,
-	HideFromResume = 2,
-	Hide = 3,
+	Hide = 2,
+}
+
+// Names of pages where entries can be displayed
+export enum EntryPage {
+	Index = 'index',
+	Resume = 'resume',
 }
 
 type EmploymentRoleTypes = 'internship' | 'summer job';
@@ -299,17 +304,24 @@ export type EmploymentRole = Overwrite<
 	}
 >;
 
+export type EntryVisibilityForPage = {
+	visibilityForPage: {
+		[EntryPage.Index]?: EntryVisibility;
+		[EntryPage.Resume]?: EntryVisibility;
+	};
+};
+
 // Raw GitHub repos config
 export type GithubReposConfig = {
 	defaults: {
 		visibility: EntryVisibility;
 		limit: {
-			index: number;
-			resume: number;
+			[EntryPage.Index]: number;
+			[EntryPage.Resume]: number;
 		};
 	};
 	slugs: {
-		[repoSlug: string]: EntryVisibility;
+		[repoSlug: string]: EntryVisibilityForPage;
 	};
 };
 

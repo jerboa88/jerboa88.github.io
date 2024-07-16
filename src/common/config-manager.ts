@@ -7,6 +7,7 @@ import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import type {
 	BgColorString,
 	EmploymentRole,
+	EntryPage,
 	EntryVisibility,
 	GithubReposConfig,
 	PageMetadata,
@@ -159,9 +160,12 @@ export function getExternalServices() {
 	return externalServicesConfig;
 }
 
-// Returns a list of display rules for a given GitHub repo slug
-export function getGithubRepoVisibility(slug: string): EntryVisibility {
-	const rules = githubReposConfig.slugs[slug];
+// Returns a list of display rules for a given GitHub repo slug and page name
+export function getGithubRepoVisibility(
+	page: EntryPage,
+	slug: string,
+): EntryVisibility {
+	const rules = githubReposConfig.slugs[slug]?.visibilityForPage[page];
 
 	return rules ?? githubReposConfig.defaults.visibility;
 }

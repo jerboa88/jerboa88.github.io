@@ -11,6 +11,7 @@ import {
 	getSiteMetadata,
 } from '../common/config-manager';
 import {
+	type EntryPage,
 	EntryVisibility,
 	type GithubRepo,
 	type UrlString,
@@ -375,18 +376,39 @@ export function transformGithubDataNode(
  * Get a subset of GitHub repos based on visibility and a maximum number of repos
  *
  * @param githubRepos A list of GitHub repos
+ * @param page The page to get the subset for
  * @param minVisibility The minimum visibility level of a repo for to be included in the subset
  * @param maxRepos The maximum number of repos to include in the subset
- * @returns
+ * @param sortFunction A optional function to sort the repos
+ * @returns A filtered subset of GitHub repos
  */
 export function getSubsetOfGithubRepos(
 	githubRepos: Queries.GithubRepo[],
-	minVisibility: EntryVisibility,
+	page: EntryPage,
 	maxRepos: number,
+	sortFunction?: (a: Queries.GithubRepo, b: Queries.GithubRepo) => number,
 ) {
-	const filteredGithubRepos = githubRepos.filter(
-		(githubRepo) => getGithubRepoVisibility(githubRepo.slug) < minVisibility,
+	const pinnedGithubRepos: Queries.GithubRepo[] = [];
+	const includedGithubRepos: Queries.GithubRepo[] = [];
+
+	for (const githubRepo of githubRepos) {
+		const visibility = getGithubRepoVisibility(page, githubRepo.slug);
+
+		if (visibility === EntryVisibility.Pin) {
+			pinnedGithubRepos.push(githubRepo);
+		} else if (visibility === EntryVisibility.Show) {
+			includedGithubRepos.push(githubRepo);
+		}
+	}
+
+	if (isDefined(sortFunction)) {
+		pinnedGithubRepos.sort(sortFunction);
+		includedGithubRepos.sort(sortFunction);
+	}
+
+	info(
+		`Showing top ${maxRepos} repos on ${page} page out of ${pinnedGithubRepos.length} pinned repos and ${includedGithubRepos.length} included repos`,
 	);
 
-	return limit(filteredGithubRepos, maxRepos);
+	return limit([...pinnedGithubRepos, ...includedGithubRepos], maxRepos);
 }

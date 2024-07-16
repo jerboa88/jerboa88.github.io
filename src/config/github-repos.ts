@@ -14,20 +14,92 @@ export const githubReposConfig: GithubReposConfig = {
 		},
 	},
 	slugs: {
-		'BiglyBT-plugin-autostop': EntryVisibility.Hide,
-		calculator: EntryVisibility.Hide,
-		'catppuccin-nvim': EntryVisibility.Hide,
-		'Custom-PiHole-Interface': EntryVisibility.Hide,
-		formie: EntryVisibility.Hide,
-		'Game-Maps': EntryVisibility.HideFromResume,
-		'gimp-average-layers': EntryVisibility.HideFromResume,
-		hackathon: EntryVisibility.Hide,
-		'Image-Signer': EntryVisibility.Hide,
-		jerboa88: EntryVisibility.Hide,
-		'jerboa88.github.io': EntryVisibility.Hide,
-		'Make-me-laugh': EntryVisibility.Hide,
-		'rtg-for-outlook': EntryVisibility.Hide,
-		tinyi18n: EntryVisibility.HideFromResume,
-		ScheduleStorm: EntryVisibility.Hide,
+		'BiglyBT-plugin-autostop': {
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
+		},
+		calculator: {
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
+		},
+		'catppuccin-nvim': {
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
+		},
+		'Custom-PiHole-Interface': {
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
+		},
+		formie: {
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
+		},
+		'Game-Maps': {
+			visibilityForPage: {
+				resume: EntryVisibility.Hide,
+			},
+		},
+		'gimp-average-layers': {
+			visibilityForPage: {
+				resume: EntryVisibility.Hide,
+			},
+		},
+		hackathon: {
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
+		},
+		'Image-Signer': {
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
+		},
+		jerboa88: {
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
+		},
+		'jerboa88.github.io': {
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
+		},
+		'Make-me-laugh': {
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
+		},
+		'rtg-for-outlook': {
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
+		},
+		tinyi18n: {
+			visibilityForPage: {
+				resume: EntryVisibility.Hide,
+			},
+		},
+		ScheduleStorm: {
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
+		},
 	},
 };
