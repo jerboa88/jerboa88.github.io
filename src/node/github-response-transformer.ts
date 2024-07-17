@@ -409,14 +409,18 @@ export function getSubsetOfGithubRepos(
 		}
 	}
 
+	const filteredGithubRepos = limit(
+		[...pinnedGithubRepos, ...includedGithubRepos],
+		maxRepos,
+	);
+
 	if (isDefined(sortFunction)) {
-		pinnedGithubRepos.sort(sortFunction);
-		includedGithubRepos.sort(sortFunction);
+		filteredGithubRepos.sort(sortFunction);
 	}
 
 	info(
 		`Showing top ${maxRepos} repos on ${page} page out of ${pinnedGithubRepos.length} pinned repos and ${includedGithubRepos.length} included repos`,
 	);
 
-	return limit([...pinnedGithubRepos, ...includedGithubRepos], maxRepos);
+	return filteredGithubRepos;
 }
