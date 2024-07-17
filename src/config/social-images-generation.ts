@@ -3,7 +3,10 @@
 	--------------------------------------
 */
 
-import type { SocialImagesGenerationConfig } from '../common/types';
+import {
+	SocialImageType,
+	type SocialImagesGenerationConfig,
+} from '../common/types';
 
 export const socialImagesGenerationConfig: SocialImagesGenerationConfig = {
 	defaults: {
@@ -12,13 +15,13 @@ export const socialImagesGenerationConfig: SocialImagesGenerationConfig = {
 		verbose: false,
 	},
 	types: {
-		og: {
+		[SocialImageType.OpenGraph]: {
 			size: {
 				width: 2400,
 				height: 1260,
 			},
 		},
-		twitter: {
+		[SocialImageType.Twitter]: {
 			size: {
 				width: 2400,
 				height: 1200,

@@ -7,7 +7,7 @@ import type { Actions, Page } from 'gatsby';
 import { createImage } from 'gatsby-plugin-component-to-image';
 import { getSocialImageGenerationConfigForType } from '../common/config-manager';
 import { SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR } from '../common/constants';
-import type { AbsolutePathString, SocialImageTypes } from '../common/types';
+import { type AbsolutePathString, SocialImageType } from '../common/types';
 import { assertIsDefined, removeTrailingSlash } from '../common/utils';
 import { info } from './logger';
 
@@ -59,7 +59,7 @@ export function setGatsbyNodeHelpers(
  * @returns The metadata for the generated social image
  */
 function createSocialImage(
-	type: SocialImageTypes,
+	type: SocialImageType,
 	{ path, component, context }: CreateSocialImagesOptions,
 ) {
 	const pagePath = join(SOCIAL_IMAGE_PAGES_DIR, type, path);
@@ -83,8 +83,14 @@ function createSocialImage(
  */
 function createSocialImages(options: CreateSocialImagesOptions) {
 	return {
-		og: createSocialImage('og', options),
-		twitter: createSocialImage('twitter', options),
+		[SocialImageType.OpenGraph]: createSocialImage(
+			SocialImageType.OpenGraph,
+			options,
+		),
+		[SocialImageType.Twitter]: createSocialImage(
+			SocialImageType.Twitter,
+			options,
+		),
 	};
 }
 

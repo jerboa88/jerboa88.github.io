@@ -12,7 +12,7 @@ import type {
 	PageMetadata,
 	Role,
 	SentenceString,
-	SocialImageTypes,
+	SocialImageType,
 	SocialImagesGenerationConfig,
 	Theme,
 	ThemesConfig,
@@ -141,12 +141,9 @@ export function getSocialImageGenerationConfigDefaults(): SocialImagesGeneration
 
 // Returns the social image generation config for a given type
 export function getSocialImageGenerationConfigForType(
-	type: SocialImageTypes,
-): JobOptions {
-	const config =
-		socialImagesGenerationConfig.types[
-			type as keyof (typeof socialImagesGenerationConfig)['types']
-		];
+	type: SocialImageType,
+): Partial<JobOptions> {
+	const config = socialImagesGenerationConfig.types[type];
 
 	if (!config) {
 		console.warn(`Social image generation config for '${type}' not found`);

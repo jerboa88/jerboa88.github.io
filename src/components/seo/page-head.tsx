@@ -6,6 +6,7 @@
 import { getSiteMetadata, getTheme } from '../../common/config-manager';
 import {
 	type PageMetadata,
+	SocialImageType,
 	type SocialImagesMetadataProp,
 	ThemeType,
 } from '../../common/types';
@@ -32,9 +33,11 @@ export function PageHead({
 	socialImagesMetadata,
 }: Props) {
 	const pageUrl = getAbsoluteUrl(path);
-	const ogImageUrl = getAbsoluteUrl(socialImagesMetadata.og.imagePath);
+	const ogImageUrl = getAbsoluteUrl(
+		socialImagesMetadata[SocialImageType.OpenGraph].imagePath,
+	);
 	const twitterImageUrl = getAbsoluteUrl(
-		socialImagesMetadata.twitter.imagePath,
+		socialImagesMetadata[SocialImageType.Twitter].imagePath,
 	);
 
 	return (
@@ -54,11 +57,15 @@ export function PageHead({
 			<meta property="og:image:type" content={getMimeType(ogImageUrl)} />
 			<meta
 				property="og:image:width"
-				content={socialImagesMetadata.og.size.width.toString()}
+				content={socialImagesMetadata[
+					SocialImageType.OpenGraph
+				].size.width.toString()}
 			/>
 			<meta
 				property="og:image:height"
-				content={socialImagesMetadata.og.size.height.toString()}
+				content={socialImagesMetadata[
+					SocialImageType.OpenGraph
+				].size.height.toString()}
 			/>
 
 			{/* Twitter meta tags */}
