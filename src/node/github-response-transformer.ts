@@ -67,9 +67,9 @@ function parseReadmeDescription(
 	fragment: DocumentFragment,
 ): ParseReadmeDescriptionReturnValue {
 	const descriptionElement = fragment.querySelector('.projectDesc');
-	const descriptionHtml = descriptionElement?.innerHTML ?? null;
+	const descriptionHtml = descriptionElement?.innerHTML?.trim() ?? null;
 	const commentary =
-		descriptionElement?.getAttribute('data-commentary') ?? null;
+		descriptionElement?.getAttribute('data-commentary')?.trim() ?? null;
 
 	if (!isDefined(descriptionHtml)) {
 		warn('README description not found');

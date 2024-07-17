@@ -1,6 +1,0 @@
-- Seeking to benefit your company and gain valuable skills as a software developer.
-- Passionate about a wide variety of compute related topics including programming, web design, and data security.
-- Experienced with a variety of programming languages and tools including React, TypeScript, CSS, Python, C/C++, Java, and SQL.
-- Comfortable working both independently and as part of a team.
-- Capable of working with tight time constraints, limited human resources, and in challenging conditions as per previous work experience.
-- Creative and excited to learn more tools and technologies in the future!

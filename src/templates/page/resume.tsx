@@ -186,7 +186,7 @@ export const Head = ({
 
 export const pageQuery = graphql`
   query ResumePage {
-		file(name: {eq: "resume"}) {
+		file(name: {eq: "resume-highlights"}) {
 			childMarkdownRemark {
 				html
 			}
