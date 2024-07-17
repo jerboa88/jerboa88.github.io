@@ -377,16 +377,30 @@ export function getSubsetOfGithubRepos(
 	const includedGithubRepos: Queries.GithubRepo[] = [];
 
 	for (const githubRepo of githubRepos) {
-		let defaultVisibility = EntryVisibility.Show;
+		let visibility = getGithubRepoVisibilityForPage(page, githubRepo.slug);
 
-		// If the repo is a fork or a Markdown repo, hide it by default
-		if (githubRepo.isFork || githubRepo.type.name === 'Markdown') {
-			defaultVisibility = EntryVisibility.Hide;
+		if (!isDefined(visibility)) {
+			let defaultVisibility = EntryVisibility.Show;
+
+			// If the repo is a fork or a Markdown repo, hide it by default
+			if (githubRepo.isFork) {
+				warn(
+					`Hiding repo '${githubRepo.slug}' on ${page} page as it is a fork`,
+				);
+
+				defaultVisibility = EntryVisibility.Hide;
+			}
+
+			if (githubRepo.type.name === 'Markdown') {
+				warn(
+					`Hiding repo '${githubRepo.slug}' on ${page} page as it is a Markdown repo`,
+				);
+
+				defaultVisibility = EntryVisibility.Hide;
+			}
+
+			visibility = defaultVisibility;
 		}
-
-		const visibility =
-			getGithubRepoVisibilityForPage(page, githubRepo.slug) ??
-			defaultVisibility;
 
 		if (visibility === EntryVisibility.Pin) {
 			pinnedGithubRepos.push(githubRepo);
