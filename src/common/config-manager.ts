@@ -9,7 +9,6 @@ import type {
 	EmploymentRole,
 	EntryPage,
 	EntryVisibility,
-	GithubReposConfig,
 	PageMetadata,
 	Role,
 	SentenceString,
@@ -160,19 +159,17 @@ export function getExternalServices() {
 	return externalServicesConfig;
 }
 
-// Returns a list of display rules for a given GitHub repo slug and page name
-export function getGithubRepoVisibility(
+// Returns the visibility of a GitHub repo for a given page
+export function getGithubRepoVisibilityForPage(
 	page: EntryPage,
 	slug: string,
-): EntryVisibility {
-	const rules = githubReposConfig.slugs[slug]?.visibilityForPage[page];
-
-	return rules ?? githubReposConfig.defaults.visibility;
+): EntryVisibility | undefined {
+	return githubReposConfig.slugs[slug]?.visibilityForPage[page];
 }
 
-// Returns the default display rules for GitHub repos
-export function getGithubRepoDefaults(): GithubReposConfig['defaults'] {
-	return githubReposConfig.defaults;
+// Returns the maximum number of GitHub repos to show for a given page
+export function getGithubRepoMaxForPage(page: EntryPage): number {
+	return githubReposConfig.maxForPage[page];
 }
 
 // Returns a list of employment roles with formatted date objects

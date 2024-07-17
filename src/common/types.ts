@@ -304,24 +304,19 @@ export type EmploymentRole = Overwrite<
 	}
 >;
 
-export type EntryVisibilityForPage = {
-	visibilityForPage: {
-		[EntryPage.Index]?: EntryVisibility;
-		[EntryPage.Resume]?: EntryVisibility;
-	};
-};
-
 // Raw GitHub repos config
 export type GithubReposConfig = {
-	defaults: {
-		visibility: EntryVisibility;
-		limit: {
-			[EntryPage.Index]: number;
-			[EntryPage.Resume]: number;
-		};
+	maxForPage: {
+		[EntryPage.Index]: number;
+		[EntryPage.Resume]: number;
 	};
 	slugs: {
-		[repoSlug: string]: EntryVisibilityForPage;
+		[repoSlug: string]: {
+			visibilityForPage: {
+				[EntryPage.Index]?: EntryVisibility;
+				[EntryPage.Resume]?: EntryVisibility;
+			};
+		};
 	};
 };
 

@@ -6,12 +6,9 @@
 import { EntryVisibility, type GithubReposConfig } from '../common/types';
 
 export const githubReposConfig: GithubReposConfig = {
-	defaults: {
-		visibility: EntryVisibility.Show,
-		limit: {
-			index: 10,
-			resume: 4,
-		},
+	maxForPage: {
+		index: 10,
+		resume: 4,
 	},
 	slugs: {
 		'BiglyBT-plugin-autostop': {
@@ -82,6 +79,12 @@ export const githubReposConfig: GithubReposConfig = {
 			visibilityForPage: {
 				index: EntryVisibility.Hide,
 				resume: EntryVisibility.Hide,
+			},
+		},
+		OnMyWay: {
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Pin,
 			},
 		},
 		'rtg-for-outlook': {

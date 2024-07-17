@@ -6,7 +6,8 @@
 import type { Actions, NodePluginArgs } from 'gatsby';
 import { JSDOM } from 'jsdom';
 import {
-	getGithubRepoVisibility,
+	getGithubRepoMaxForPage,
+	getGithubRepoVisibilityForPage,
 	getProjectTypeColor,
 	getSiteMetadata,
 } from '../common/config-manager';
@@ -233,20 +234,6 @@ function excludeRepo(
 		return true;
 	}
 
-	// Skip forked repos, as they are less likely to be original projects
-	if (githubRepoNode.isFork) {
-		info('This is a forked repo');
-
-		return true;
-	}
-
-	// Skip markdown repos, as they are usually not remarkable enough to be featured
-	if (readmeInfo.type === 'Markdown') {
-		info('This is a Markdown repo');
-
-		return true;
-	}
-
 	return false;
 }
 
@@ -377,22 +364,29 @@ export function transformGithubDataNode(
  *
  * @param githubRepos A list of GitHub repos
  * @param page The page to get the subset for
- * @param minVisibility The minimum visibility level of a repo for to be included in the subset
- * @param maxRepos The maximum number of repos to include in the subset
  * @param sortFunction A optional function to sort the repos
  * @returns A filtered subset of GitHub repos
  */
 export function getSubsetOfGithubRepos(
 	githubRepos: Queries.GithubRepo[],
 	page: EntryPage,
-	maxRepos: number,
 	sortFunction?: (a: Queries.GithubRepo, b: Queries.GithubRepo) => number,
 ) {
+	const maxRepos = getGithubRepoMaxForPage(page);
 	const pinnedGithubRepos: Queries.GithubRepo[] = [];
 	const includedGithubRepos: Queries.GithubRepo[] = [];
 
 	for (const githubRepo of githubRepos) {
-		const visibility = getGithubRepoVisibility(page, githubRepo.slug);
+		let defaultVisibility = EntryVisibility.Show;
+
+		// If the repo is a fork or a Markdown repo, hide it by default
+		if (githubRepo.isFork || githubRepo.type.name === 'Markdown') {
+			defaultVisibility = EntryVisibility.Hide;
+		}
+
+		const visibility =
+			getGithubRepoVisibilityForPage(page, githubRepo.slug) ??
+			defaultVisibility;
 
 		if (visibility === EntryVisibility.Pin) {
 			pinnedGithubRepos.push(githubRepo);

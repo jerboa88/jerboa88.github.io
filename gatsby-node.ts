@@ -1,10 +1,6 @@
 import { join, resolve } from 'node:path';
 import type { CreatePagesArgs, GatsbyNode } from 'gatsby';
-import {
-	getGithubRepoDefaults,
-	getPageMetadata,
-	getSiteMetadata,
-} from './src/common/config-manager';
+import { getPageMetadata, getSiteMetadata } from './src/common/config-manager';
 import {
 	PAGE_TEMPLATES_DIR,
 	PROJECTS_DIR,
@@ -36,8 +32,6 @@ import {
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
-const INDEX_PAGE_REPOS_MAX = getGithubRepoDefaults().limit.index;
-const RESUME_PAGE_REPOS_MAX = getGithubRepoDefaults().limit.resume;
 
 const INDEX_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'index.tsx');
 const PROJECT_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'project.tsx');
@@ -120,11 +114,7 @@ function createIndexPage(
 	authorBioHtml: string,
 ) {
 	const context: IndexPageContext = {
-		githubRepos: getSubsetOfGithubRepos(
-			githubRepos,
-			EntryPage.Index,
-			INDEX_PAGE_REPOS_MAX,
-		),
+		githubRepos: getSubsetOfGithubRepos(githubRepos, EntryPage.Index),
 		authorBioHtml,
 	};
 
@@ -147,7 +137,6 @@ function createResumePage(githubRepos: Queries.GithubRepo[]) {
 		githubRepos: getSubsetOfGithubRepos(
 			githubRepos,
 			EntryPage.Resume,
-			RESUME_PAGE_REPOS_MAX,
 			sortByCreatedAt,
 		),
 	};
