@@ -6,18 +6,29 @@
 import type { Actions, NodePluginArgs } from 'gatsby';
 import { JSDOM } from 'jsdom';
 import {
-	getGithubRepoRulesForSlug,
+	getGithubRepoMaxForPage,
+	getGithubRepoVisibilityForPage,
 	getProjectTypeColor,
+	getSiteMetadata,
 } from '../common/config-manager';
-import type { GithubRepo, UrlString } from '../common/types';
-import { isDefined, toTitleCase } from '../common/utilities';
+import {
+	type EntryPage,
+	EntryVisibility,
+	type GithubRepo,
+	type UrlString,
+} from '../common/types';
+import { isDefined, limit, toTitleCase } from '../common/utils';
 import { group, groupEnd, info, panic, warn } from './logger';
 
 // Types
 
-type ReadmeInfo = {
-	name: string | null;
+type ParseReadmeDescriptionReturnValue = {
 	descriptionHtml: string | null;
+	commentary: string | null;
+};
+
+type TransformReadmeReturnValue = ParseReadmeDescriptionReturnValue & {
+	name: string | null;
 	logoUrl: string | null;
 	type: string | null;
 };
@@ -29,10 +40,13 @@ type TransformRepoNodeReturnValue = {
 
 // Constants
 
+const SITE_METADATA = getSiteMetadata();
 const GITHUB_CONTENT_BASE_URL: UrlString = 'https://raw.githubusercontent.com';
 
 // Extract a project's name from its README
-function parseReadmeName(fragment: DocumentFragment): ReadmeInfo['name'] {
+function parseReadmeName(
+	fragment: DocumentFragment,
+): TransformReadmeReturnValue['name'] {
 	const linkElement = fragment.querySelector('.projectName > a');
 	const name =
 		linkElement?.getAttribute('title') ??
@@ -48,19 +62,27 @@ function parseReadmeName(fragment: DocumentFragment): ReadmeInfo['name'] {
 	return null;
 }
 
-// Extract a project's description from its README as HTML
-function parseReadmeDescriptionHtml(
+// Extract a project's commentary and description from its README
+function parseReadmeDescription(
 	fragment: DocumentFragment,
-): ReadmeInfo['descriptionHtml'] {
-	const descriptionHtml = fragment.querySelector('.projectDesc')?.innerHTML;
+): ParseReadmeDescriptionReturnValue {
+	const descriptionElement = fragment.querySelector('.projectDesc');
+	const descriptionHtml = descriptionElement?.innerHTML?.trim() ?? null;
+	const commentary =
+		descriptionElement?.getAttribute('data-commentary')?.trim() ?? null;
 
-	if (isDefined(descriptionHtml)) {
-		return descriptionHtml.trim();
+	if (!isDefined(descriptionHtml)) {
+		warn('README description not found');
 	}
 
-	warn('README description not found');
+	if (!isDefined(commentary)) {
+		warn('README commentary not found');
+	}
 
-	return null;
+	return {
+		descriptionHtml,
+		commentary,
+	};
 }
 
 // Extract a project's logo URL from its README
@@ -68,7 +90,7 @@ function parseReadmeLogoUrl(
 	slug: string,
 	owner: string,
 	fragment: DocumentFragment,
-): ReadmeInfo['name'] {
+): TransformReadmeReturnValue['name'] {
 	const logoUrl = fragment.querySelector('.projectLogo')?.getAttribute('src');
 
 	if (isDefined(logoUrl)) {
@@ -87,22 +109,20 @@ function parseReadmeLogoUrl(
 }
 
 // Extract a project's type from its README
-function parseReadmeType(fragment: DocumentFragment): ReadmeInfo['type'] {
+function parseReadmeType(
+	fragment: DocumentFragment,
+): TransformReadmeReturnValue['type'] {
 	const badgeImgUrl = fragment
 		.querySelector('.projectBadges > img[alt="Project type"]')
 		?.getAttribute('src');
 
 	if (!isDefined(badgeImgUrl)) {
-		warn('README project type badge not found');
-
 		return null;
 	}
 
 	const typeMatches = /type-(\w+)-(\w+)/.exec(badgeImgUrl);
 
 	if (!typeMatches || typeMatches.length < 3) {
-		warn('README project type badge not found');
-
 		return null;
 	}
 
@@ -114,23 +134,26 @@ function transformReadme(
 	slug: string,
 	owner: string,
 	readmeResponse: Queries.GithubDataDataUserRepositoriesNodes['readme'],
-): ReadmeInfo {
+): TransformReadmeReturnValue {
 	if (!isDefined(readmeResponse?.text)) {
 		warn('README not found');
 
 		return {
 			name: null,
 			descriptionHtml: null,
+			commentary: null,
 			logoUrl: null,
 			type: null,
 		};
 	}
 
 	const fragment = JSDOM.fragment(readmeResponse.text);
+	const { descriptionHtml, commentary } = parseReadmeDescription(fragment);
 
 	return {
 		name: parseReadmeName(fragment),
-		descriptionHtml: parseReadmeDescriptionHtml(fragment),
+		descriptionHtml,
+		commentary,
 		logoUrl: parseReadmeLogoUrl(slug, owner, fragment),
 		type: parseReadmeType(fragment),
 	};
@@ -184,23 +207,44 @@ function transformTopics(
 	return topics.sort();
 }
 
+// Return true if the repo should be included in the list of repos
+function excludeRepo(
+	slug: string,
+	githubRepoNode: Queries.GithubDataDataUserRepositoriesNodes,
+	readmeInfo: TransformReadmeReturnValue,
+) {
+	// Skip repos with missing descriptions as these are hard to work with
+	if (!isDefined(githubRepoNode.description)) {
+		warn(
+			'Description not found. Please add a description to the repo on GitHub',
+		);
+
+		return true;
+	}
+
+	// Skip repos with unknown types, unless it's the author's profile repo
+	if (
+		!isDefined(readmeInfo.type) &&
+		slug !== SITE_METADATA.author.username.github
+	) {
+		warn(
+			'README project type badge not found. Please add a project type badge to the README',
+		);
+
+		return true;
+	}
+
+	return false;
+}
+
 // Transform the repo object into a format we can use
 function transformGithubRepoNode(
 	githubRepoNode: Queries.GithubDataDataUserRepositoriesNodes,
 ): TransformRepoNodeReturnValue {
 	const slug = githubRepoNode.name;
-
-	if (!isDefined(githubRepoNode.description)) {
-		warn('description is undefined');
-
-		return {
-			githubRepo: null,
-			readmeText: null,
-		};
-	}
-
 	const languages = transformLanguages(githubRepoNode?.languages);
 	const topics = transformTopics(githubRepoNode?.repositoryTopics);
+	const createdAt = new Date(githubRepoNode.createdAt);
 	const updatedAt = new Date(githubRepoNode.updatedAt);
 	const readmeInfo = transformReadme(
 		slug,
@@ -209,11 +253,25 @@ function transformGithubRepoNode(
 	);
 	// Use the name from the README if it exists as it's more likely to be formatted correctly
 	const name = readmeInfo.name || toTitleCase(githubRepoNode.name);
+
+	if (excludeRepo(slug, githubRepoNode, readmeInfo)) {
+		return {
+			githubRepo: null,
+			readmeText: null,
+		};
+	}
+
+	// If description is null, it will be caught by excludeRepo
+	const description: string = githubRepoNode.description as string;
+
 	const githubRepo = {
-		description: githubRepoNode.description,
+		commentary: readmeInfo.commentary,
+		createdAt: createdAt,
+		description: description,
 		descriptionHtml: readmeInfo.descriptionHtml,
 		forkCount: githubRepoNode.forkCount,
 		homepageUrl: githubRepoNode.homepageUrl,
+		isFork: githubRepoNode.isFork,
 		languages: languages,
 		logoUrl: readmeInfo.logoUrl,
 		licenseInfo: githubRepoNode.licenseInfo,
@@ -247,7 +305,7 @@ function createGithubRepoNode(
 	createContentDigest: NodePluginArgs['createContentDigest'],
 ) {
 	if (!isDefined(githubRepo)) {
-		warn('Skipping repo node creation due to missing data!');
+		info('🚫 Skipping repo node creation...');
 
 		return;
 	}
@@ -301,26 +359,68 @@ export function transformGithubDataNode(
 	groupEnd();
 }
 
-// Filter out repos that should be hidden
-export function filterGithubRepoNodes(
-	githubRepoNodes: Queries.GithubRepo[],
-): Queries.GithubRepo[] {
-	info('Hiding repos...');
-	group();
+/**
+ * Get a subset of GitHub repos based on visibility and a maximum number of repos
+ *
+ * @param githubRepos A list of GitHub repos
+ * @param page The page to get the subset for
+ * @param sortFunction A optional function to sort the repos
+ * @returns A filtered subset of GitHub repos
+ */
+export function getSubsetOfGithubRepos(
+	githubRepos: Queries.GithubRepo[],
+	page: EntryPage,
+	sortFunction?: (a: Queries.GithubRepo, b: Queries.GithubRepo) => number,
+) {
+	const maxRepos = getGithubRepoMaxForPage(page);
+	const pinnedGithubRepos: Queries.GithubRepo[] = [];
+	const includedGithubRepos: Queries.GithubRepo[] = [];
 
-	const filteredGithubRepoNodes = githubRepoNodes.filter((githubRepoNode) => {
-		const rules = getGithubRepoRulesForSlug(githubRepoNode.slug);
+	for (const githubRepo of githubRepos) {
+		let visibility = getGithubRepoVisibilityForPage(page, githubRepo.slug);
 
-		if (rules.hide) {
-			info(githubRepoNode.slug);
+		if (!isDefined(visibility)) {
+			let defaultVisibility = EntryVisibility.Show;
 
-			return false;
+			// If the repo is a fork or a Markdown repo, hide it by default
+			if (githubRepo.isFork) {
+				warn(
+					`Hiding repo '${githubRepo.slug}' on ${page} page as it is a fork`,
+				);
+
+				defaultVisibility = EntryVisibility.Hide;
+			}
+
+			if (githubRepo.type.name === 'Markdown') {
+				warn(
+					`Hiding repo '${githubRepo.slug}' on ${page} page as it is a Markdown repo`,
+				);
+
+				defaultVisibility = EntryVisibility.Hide;
+			}
+
+			visibility = defaultVisibility;
 		}
 
-		return true;
-	});
+		if (visibility === EntryVisibility.Pin) {
+			pinnedGithubRepos.push(githubRepo);
+		} else if (visibility === EntryVisibility.Show) {
+			includedGithubRepos.push(githubRepo);
+		}
+	}
 
-	groupEnd();
+	const filteredGithubRepos = limit(
+		[...pinnedGithubRepos, ...includedGithubRepos],
+		maxRepos,
+	);
 
-	return filteredGithubRepoNodes;
+	if (isDefined(sortFunction)) {
+		filteredGithubRepos.sort(sortFunction);
+	}
+
+	info(
+		`Showing top ${maxRepos} repos on ${page} page out of ${pinnedGithubRepos.length} pinned repos and ${includedGithubRepos.length} included repos`,
+	);
+
+	return filteredGithubRepos;
 }

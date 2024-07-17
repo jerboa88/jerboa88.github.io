@@ -21,7 +21,7 @@ import type {
 	PageSection,
 	SocialImagesMetadataProp,
 } from '../../common/types';
-import { limit, toKebabCase } from '../../common/utilities';
+import { limit, toKebabCase } from '../../common/utils';
 import { HeroHeader } from '../../components/layout/hero-header';
 import { PageLayout } from '../../components/layout/page-layout';
 import { Section } from '../../components/layout/section';
@@ -79,7 +79,7 @@ export default function IndexPageTemplate({
 			<GhostButtonLink
 				text="View more on GitHub"
 				icon={faArrowUpRightFromSquare}
-				to={SITE_METADATA.author.link.github}
+				to={SITE_METADATA.author.url.github}
 				responsive
 				flip
 				{...remainingProps}
@@ -93,7 +93,7 @@ export default function IndexPageTemplate({
 			<GhostButtonLink
 				text="View more on LinkedIn"
 				icon={faArrowUpRightFromSquare}
-				to={SITE_METADATA.author.link.linkedin}
+				to={SITE_METADATA.author.url.linkedin}
 				responsive
 				flip
 				{...remainingProps}

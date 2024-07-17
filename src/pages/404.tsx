@@ -10,7 +10,7 @@ import type {
 	PageMetadataProp,
 	SocialImagesMetadataProp,
 } from '../common/types';
-import { getAbsoluteUrl } from '../common/utilities';
+import { getAbsoluteUrl } from '../common/utils';
 import { PageLayout } from '../components/layout/page-layout';
 import { Section } from '../components/layout/section';
 import { SolidButtonLink } from '../components/links/solid-button-link';
@@ -53,7 +53,7 @@ export default function NotFoundPage({
 				className="items-center"
 			>
 				<div className="flex flex-col gap-8 items-center">
-					Oof, there's nothing here
+					{pageMetadata.description}
 					<figure className="flex justify-center flex-column">
 						<pre
 							role="img"

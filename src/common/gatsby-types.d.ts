@@ -766,9 +766,11 @@ type GithubDataDataUserRepositoriesFilterInput = {
 
 /** Define required fields from the GitHub GraphQL API schema */
 type GithubDataDataUserRepositoriesNodes = {
+  readonly createdAt: Scalars['Date'];
   readonly description: Maybe<Scalars['String']>;
   readonly forkCount: Scalars['Int'];
   readonly homepageUrl: Maybe<Scalars['String']>;
+  readonly isFork: Scalars['Boolean'];
   readonly languages: Maybe<GithubDataDataUserRepositoriesNodesLanguages>;
   readonly licenseInfo: Maybe<GithubDataDataUserRepositoriesNodesLicenseInfo>;
   readonly name: Scalars['String'];
@@ -783,9 +785,11 @@ type GithubDataDataUserRepositoriesNodes = {
 };
 
 type GithubDataDataUserRepositoriesNodesFieldSelector = {
+  readonly createdAt: InputMaybe<FieldSelectorEnum>;
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly forkCount: InputMaybe<FieldSelectorEnum>;
   readonly homepageUrl: InputMaybe<FieldSelectorEnum>;
+  readonly isFork: InputMaybe<FieldSelectorEnum>;
   readonly languages: InputMaybe<GithubDataDataUserRepositoriesNodesLanguagesFieldSelector>;
   readonly licenseInfo: InputMaybe<GithubDataDataUserRepositoriesNodesLicenseInfoFieldSelector>;
   readonly name: InputMaybe<FieldSelectorEnum>;
@@ -800,9 +804,11 @@ type GithubDataDataUserRepositoriesNodesFieldSelector = {
 };
 
 type GithubDataDataUserRepositoriesNodesFilterInput = {
+  readonly createdAt: InputMaybe<DateQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly forkCount: InputMaybe<IntQueryOperatorInput>;
   readonly homepageUrl: InputMaybe<StringQueryOperatorInput>;
+  readonly isFork: InputMaybe<BooleanQueryOperatorInput>;
   readonly languages: InputMaybe<GithubDataDataUserRepositoriesNodesLanguagesFilterInput>;
   readonly licenseInfo: InputMaybe<GithubDataDataUserRepositoriesNodesLicenseInfoFilterInput>;
   readonly name: InputMaybe<StringQueryOperatorInput>;
@@ -965,9 +971,11 @@ type GithubDataDataUserRepositoriesNodesRepositoryTopicsSortInput = {
 };
 
 type GithubDataDataUserRepositoriesNodesSortInput = {
+  readonly createdAt: InputMaybe<SortOrderEnum>;
   readonly description: InputMaybe<SortOrderEnum>;
   readonly forkCount: InputMaybe<SortOrderEnum>;
   readonly homepageUrl: InputMaybe<SortOrderEnum>;
+  readonly isFork: InputMaybe<SortOrderEnum>;
   readonly languages: InputMaybe<GithubDataDataUserRepositoriesNodesLanguagesSortInput>;
   readonly licenseInfo: InputMaybe<GithubDataDataUserRepositoriesNodesLicenseInfoSortInput>;
   readonly name: InputMaybe<SortOrderEnum>;
@@ -1099,9 +1107,11 @@ type GithubDataRawResultDataUserRepositoriesFilterInput = {
 };
 
 type GithubDataRawResultDataUserRepositoriesNodes = {
+  readonly createdAt: Maybe<Scalars['Date']>;
   readonly description: Maybe<Scalars['String']>;
   readonly forkCount: Maybe<Scalars['Int']>;
   readonly homepageUrl: Maybe<Scalars['String']>;
+  readonly isFork: Maybe<Scalars['Boolean']>;
   readonly languages: Maybe<GithubDataRawResultDataUserRepositoriesNodesLanguages>;
   readonly licenseInfo: Maybe<GithubDataRawResultDataUserRepositoriesNodesLicenseInfo>;
   readonly name: Maybe<Scalars['String']>;
@@ -1116,6 +1126,14 @@ type GithubDataRawResultDataUserRepositoriesNodes = {
 };
 
 
+type GithubDataRawResultDataUserRepositoriesNodes_createdAtArgs = {
+  difference: InputMaybe<Scalars['String']>;
+  formatString: InputMaybe<Scalars['String']>;
+  fromNow: InputMaybe<Scalars['Boolean']>;
+  locale: InputMaybe<Scalars['String']>;
+};
+
+
 type GithubDataRawResultDataUserRepositoriesNodes_updatedAtArgs = {
   difference: InputMaybe<Scalars['String']>;
   formatString: InputMaybe<Scalars['String']>;
@@ -1124,9 +1142,11 @@ type GithubDataRawResultDataUserRepositoriesNodes_updatedAtArgs = {
 };
 
 type GithubDataRawResultDataUserRepositoriesNodesFieldSelector = {
+  readonly createdAt: InputMaybe<FieldSelectorEnum>;
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly forkCount: InputMaybe<FieldSelectorEnum>;
   readonly homepageUrl: InputMaybe<FieldSelectorEnum>;
+  readonly isFork: InputMaybe<FieldSelectorEnum>;
   readonly languages: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesLanguagesFieldSelector>;
   readonly licenseInfo: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesLicenseInfoFieldSelector>;
   readonly name: InputMaybe<FieldSelectorEnum>;
@@ -1141,9 +1161,11 @@ type GithubDataRawResultDataUserRepositoriesNodesFieldSelector = {
 };
 
 type GithubDataRawResultDataUserRepositoriesNodesFilterInput = {
+  readonly createdAt: InputMaybe<DateQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly forkCount: InputMaybe<IntQueryOperatorInput>;
   readonly homepageUrl: InputMaybe<StringQueryOperatorInput>;
+  readonly isFork: InputMaybe<BooleanQueryOperatorInput>;
   readonly languages: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesLanguagesFilterInput>;
   readonly licenseInfo: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesLicenseInfoFilterInput>;
   readonly name: InputMaybe<StringQueryOperatorInput>;
@@ -1306,9 +1328,11 @@ type GithubDataRawResultDataUserRepositoriesNodesRepositoryTopicsSortInput = {
 };
 
 type GithubDataRawResultDataUserRepositoriesNodesSortInput = {
+  readonly createdAt: InputMaybe<SortOrderEnum>;
   readonly description: InputMaybe<SortOrderEnum>;
   readonly forkCount: InputMaybe<SortOrderEnum>;
   readonly homepageUrl: InputMaybe<SortOrderEnum>;
+  readonly isFork: InputMaybe<SortOrderEnum>;
   readonly languages: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesLanguagesSortInput>;
   readonly licenseInfo: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesLicenseInfoSortInput>;
   readonly name: InputMaybe<SortOrderEnum>;
@@ -1358,12 +1382,15 @@ type GithubRepo = Node & {
   readonly children: ReadonlyArray<Node>;
   /** Returns all children nodes filtered by type MarkdownRemark */
   readonly childrenMarkdownRemark: Maybe<ReadonlyArray<Maybe<MarkdownRemark>>>;
+  readonly commentary: Maybe<Scalars['String']>;
+  readonly createdAt: Scalars['Date'];
   readonly description: Scalars['String'];
   readonly descriptionHtml: Maybe<Scalars['String']>;
   readonly forkCount: Scalars['Int'];
   readonly homepageUrl: Maybe<Scalars['String']>;
   readonly id: Scalars['ID'];
   readonly internal: Internal;
+  readonly isFork: Scalars['Boolean'];
   readonly languages: ReadonlyArray<Scalars['String']>;
   readonly licenseInfo: Maybe<GithubDataDataUserRepositoriesNodesLicenseInfo>;
   readonly logoUrl: Maybe<Scalars['String']>;
@@ -1429,12 +1456,15 @@ type GithubRepoFieldSelector = {
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkFieldSelector>;
   readonly children: InputMaybe<NodeFieldSelector>;
   readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkFieldSelector>;
+  readonly commentary: InputMaybe<FieldSelectorEnum>;
+  readonly createdAt: InputMaybe<FieldSelectorEnum>;
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly descriptionHtml: InputMaybe<FieldSelectorEnum>;
   readonly forkCount: InputMaybe<FieldSelectorEnum>;
   readonly homepageUrl: InputMaybe<FieldSelectorEnum>;
   readonly id: InputMaybe<FieldSelectorEnum>;
   readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly isFork: InputMaybe<FieldSelectorEnum>;
   readonly languages: InputMaybe<FieldSelectorEnum>;
   readonly licenseInfo: InputMaybe<GithubDataDataUserRepositoriesNodesLicenseInfoFieldSelector>;
   readonly logoUrl: InputMaybe<FieldSelectorEnum>;
@@ -1455,12 +1485,15 @@ type GithubRepoFilterInput = {
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkFilterInput>;
   readonly children: InputMaybe<NodeFilterListInput>;
   readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkFilterListInput>;
+  readonly commentary: InputMaybe<StringQueryOperatorInput>;
+  readonly createdAt: InputMaybe<DateQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly descriptionHtml: InputMaybe<StringQueryOperatorInput>;
   readonly forkCount: InputMaybe<IntQueryOperatorInput>;
   readonly homepageUrl: InputMaybe<StringQueryOperatorInput>;
   readonly id: InputMaybe<StringQueryOperatorInput>;
   readonly internal: InputMaybe<InternalFilterInput>;
+  readonly isFork: InputMaybe<BooleanQueryOperatorInput>;
   readonly languages: InputMaybe<StringQueryOperatorInput>;
   readonly licenseInfo: InputMaybe<GithubDataDataUserRepositoriesNodesLicenseInfoFilterInput>;
   readonly logoUrl: InputMaybe<StringQueryOperatorInput>;
@@ -1522,12 +1555,15 @@ type GithubRepoSortInput = {
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkSortInput>;
   readonly children: InputMaybe<NodeSortInput>;
   readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkSortInput>;
+  readonly commentary: InputMaybe<SortOrderEnum>;
+  readonly createdAt: InputMaybe<SortOrderEnum>;
   readonly description: InputMaybe<SortOrderEnum>;
   readonly descriptionHtml: InputMaybe<SortOrderEnum>;
   readonly forkCount: InputMaybe<SortOrderEnum>;
   readonly homepageUrl: InputMaybe<SortOrderEnum>;
   readonly id: InputMaybe<SortOrderEnum>;
   readonly internal: InputMaybe<InternalSortInput>;
+  readonly isFork: InputMaybe<SortOrderEnum>;
   readonly languages: InputMaybe<SortOrderEnum>;
   readonly licenseInfo: InputMaybe<GithubDataDataUserRepositoriesNodesLicenseInfoSortInput>;
   readonly logoUrl: InputMaybe<SortOrderEnum>;
@@ -2145,12 +2181,15 @@ type Query_githubRepoArgs = {
   childMarkdownRemark: InputMaybe<MarkdownRemarkFilterInput>;
   children: InputMaybe<NodeFilterListInput>;
   childrenMarkdownRemark: InputMaybe<MarkdownRemarkFilterListInput>;
+  commentary: InputMaybe<StringQueryOperatorInput>;
+  createdAt: InputMaybe<DateQueryOperatorInput>;
   description: InputMaybe<StringQueryOperatorInput>;
   descriptionHtml: InputMaybe<StringQueryOperatorInput>;
   forkCount: InputMaybe<IntQueryOperatorInput>;
   homepageUrl: InputMaybe<StringQueryOperatorInput>;
   id: InputMaybe<StringQueryOperatorInput>;
   internal: InputMaybe<InternalFilterInput>;
+  isFork: InputMaybe<BooleanQueryOperatorInput>;
   languages: InputMaybe<StringQueryOperatorInput>;
   licenseInfo: InputMaybe<GithubDataDataUserRepositoriesNodesLicenseInfoFilterInput>;
   logoUrl: InputMaybe<StringQueryOperatorInput>;
@@ -2999,56 +3038,32 @@ type SiteSiteMetadata = {
 
 type SiteSiteMetadataAuthor = {
   readonly alumniOf: Maybe<Scalars['String']>;
-  readonly image: Maybe<Scalars['String']>;
+  readonly imageUrl: Maybe<Scalars['String']>;
   readonly jobTitle: Maybe<Scalars['String']>;
-  readonly link: Maybe<SiteSiteMetadataAuthorLink>;
   readonly location: Maybe<SiteSiteMetadataAuthorLocation>;
   readonly name: Maybe<SiteSiteMetadataAuthorName>;
+  readonly url: Maybe<SiteSiteMetadataAuthorUrl>;
   readonly username: Maybe<SiteSiteMetadataAuthorUsername>;
 };
 
 type SiteSiteMetadataAuthorFieldSelector = {
   readonly alumniOf: InputMaybe<FieldSelectorEnum>;
-  readonly image: InputMaybe<FieldSelectorEnum>;
+  readonly imageUrl: InputMaybe<FieldSelectorEnum>;
   readonly jobTitle: InputMaybe<FieldSelectorEnum>;
-  readonly link: InputMaybe<SiteSiteMetadataAuthorLinkFieldSelector>;
   readonly location: InputMaybe<SiteSiteMetadataAuthorLocationFieldSelector>;
   readonly name: InputMaybe<SiteSiteMetadataAuthorNameFieldSelector>;
+  readonly url: InputMaybe<SiteSiteMetadataAuthorUrlFieldSelector>;
   readonly username: InputMaybe<SiteSiteMetadataAuthorUsernameFieldSelector>;
 };
 
 type SiteSiteMetadataAuthorFilterInput = {
   readonly alumniOf: InputMaybe<StringQueryOperatorInput>;
-  readonly image: InputMaybe<StringQueryOperatorInput>;
+  readonly imageUrl: InputMaybe<StringQueryOperatorInput>;
   readonly jobTitle: InputMaybe<StringQueryOperatorInput>;
-  readonly link: InputMaybe<SiteSiteMetadataAuthorLinkFilterInput>;
   readonly location: InputMaybe<SiteSiteMetadataAuthorLocationFilterInput>;
   readonly name: InputMaybe<SiteSiteMetadataAuthorNameFilterInput>;
+  readonly url: InputMaybe<SiteSiteMetadataAuthorUrlFilterInput>;
   readonly username: InputMaybe<SiteSiteMetadataAuthorUsernameFilterInput>;
-};
-
-type SiteSiteMetadataAuthorLink = {
-  readonly github: Maybe<Scalars['String']>;
-  readonly linkedin: Maybe<Scalars['String']>;
-  readonly twitter: Maybe<Scalars['String']>;
-};
-
-type SiteSiteMetadataAuthorLinkFieldSelector = {
-  readonly github: InputMaybe<FieldSelectorEnum>;
-  readonly linkedin: InputMaybe<FieldSelectorEnum>;
-  readonly twitter: InputMaybe<FieldSelectorEnum>;
-};
-
-type SiteSiteMetadataAuthorLinkFilterInput = {
-  readonly github: InputMaybe<StringQueryOperatorInput>;
-  readonly linkedin: InputMaybe<StringQueryOperatorInput>;
-  readonly twitter: InputMaybe<StringQueryOperatorInput>;
-};
-
-type SiteSiteMetadataAuthorLinkSortInput = {
-  readonly github: InputMaybe<SortOrderEnum>;
-  readonly linkedin: InputMaybe<SortOrderEnum>;
-  readonly twitter: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSiteMetadataAuthorLocation = {
@@ -3109,12 +3124,36 @@ type SiteSiteMetadataAuthorNameSortInput = {
 
 type SiteSiteMetadataAuthorSortInput = {
   readonly alumniOf: InputMaybe<SortOrderEnum>;
-  readonly image: InputMaybe<SortOrderEnum>;
+  readonly imageUrl: InputMaybe<SortOrderEnum>;
   readonly jobTitle: InputMaybe<SortOrderEnum>;
-  readonly link: InputMaybe<SiteSiteMetadataAuthorLinkSortInput>;
   readonly location: InputMaybe<SiteSiteMetadataAuthorLocationSortInput>;
   readonly name: InputMaybe<SiteSiteMetadataAuthorNameSortInput>;
+  readonly url: InputMaybe<SiteSiteMetadataAuthorUrlSortInput>;
   readonly username: InputMaybe<SiteSiteMetadataAuthorUsernameSortInput>;
+};
+
+type SiteSiteMetadataAuthorUrl = {
+  readonly github: Maybe<Scalars['String']>;
+  readonly linkedin: Maybe<Scalars['String']>;
+  readonly twitter: Maybe<Scalars['String']>;
+};
+
+type SiteSiteMetadataAuthorUrlFieldSelector = {
+  readonly github: InputMaybe<FieldSelectorEnum>;
+  readonly linkedin: InputMaybe<FieldSelectorEnum>;
+  readonly twitter: InputMaybe<FieldSelectorEnum>;
+};
+
+type SiteSiteMetadataAuthorUrlFilterInput = {
+  readonly github: InputMaybe<StringQueryOperatorInput>;
+  readonly linkedin: InputMaybe<StringQueryOperatorInput>;
+  readonly twitter: InputMaybe<StringQueryOperatorInput>;
+};
+
+type SiteSiteMetadataAuthorUrlSortInput = {
+  readonly github: InputMaybe<SortOrderEnum>;
+  readonly linkedin: InputMaybe<SortOrderEnum>;
+  readonly twitter: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSiteMetadataAuthorUsername = {
@@ -3206,6 +3245,11 @@ type PrivacyPolicyPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type PrivacyPolicyPageQuery = { readonly file: { readonly childMarkdownRemark: { readonly html: string | null } | null } | null };
+
+type ResumePageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type ResumePageQuery = { readonly file: { readonly childMarkdownRemark: { readonly html: string | null } | null } | null };
 
 
 }

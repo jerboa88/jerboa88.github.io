@@ -13,7 +13,7 @@ import {
 	type PropsWithClassName,
 	type PropsWithLayoutAnimations,
 } from '../../common/types';
-import { getClassNameProps, getOrDefault } from '../../common/utilities';
+import { getClassNameProps, getOrDefault } from '../../common/utils';
 import { GhostAlert } from '../ghost-alert';
 
 interface BaseInput extends PropsWithClassName, PropsWithLayoutAnimations {

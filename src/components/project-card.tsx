@@ -5,7 +5,7 @@
 
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { getClassNameProps } from '../common/utilities';
+import { getClassNameProps } from '../common/utils';
 import { Card } from './card';
 import { GhostButton } from './input/ghost-button';
 import { LinkWrapper } from './links/link-wrapper';

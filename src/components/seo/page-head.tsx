@@ -9,7 +9,7 @@ import {
 	type SocialImagesMetadataProp,
 	ThemeType,
 } from '../../common/types';
-import { getAbsoluteUrl, getMimeType } from '../../common/utilities';
+import { getAbsoluteUrl, getMimeType } from '../../common/utils';
 
 // Types
 
@@ -39,7 +39,7 @@ export function PageHead({
 
 	return (
 		<>
-			<html lang="en-US" />
+			<html lang="en-US" className="print:text-xs/none" />
 			<title>{metadata.title}</title>
 			<meta name="author" content={SITE_METADATA.author.name.full} />
 			<meta name="description" content={metadata.description} />
@@ -86,13 +86,13 @@ export function PageHead({
 						'@id': '/author',
 						name: SITE_METADATA.author.name.full,
 						url: SITE_METADATA.siteUrl,
-						image: SITE_METADATA.author.image,
+						image: SITE_METADATA.author.imageUrl,
 						alumniOf: SITE_METADATA.author.alumniOf,
 						jobTitle: SITE_METADATA.author.jobTitle,
 						sameAs: [
-							SITE_METADATA.author.link.linkedin,
-							SITE_METADATA.author.link.github,
-							SITE_METADATA.author.link.twitter,
+							SITE_METADATA.author.url.linkedin,
+							SITE_METADATA.author.url.github,
+							SITE_METADATA.author.url.twitter,
 						],
 						address: {
 							'@type': 'PostalAddress',

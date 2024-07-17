@@ -19,7 +19,7 @@ import {
 	getClassNameProps,
 	getOrDefault,
 	getStatusCodeDescription,
-} from '../../common/utilities';
+} from '../../common/utils';
 import { GhostAlert } from '../ghost-alert';
 import { Checkbox } from './checkbox';
 import { MultilineTextInput } from './multiline-text-input';

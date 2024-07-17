@@ -1,6 +1,6 @@
 /*
-	Common types used in the project
-	--------------------------------
+	Reusable types for the project
+	------------------------------
 */
 
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -52,7 +52,7 @@ type DateString = `${20}${number}-${number}-${number}`;
 export type CityAndStateString = Capitalize<`${string}, ${string}`>;
 
 // Sentence string with proper capitalization and punctuation
-export type SentenceString = Capitalize<`${string}${'.' | '!' | '?'}`>;
+export type SentenceString = Capitalize<`${string}${'.' | '!' | '?' | '…'}`>;
 
 // Raw external services config
 export interface ExternalServicesConfig {
@@ -67,21 +67,21 @@ export interface SiteMetadataConfig {
 	sourceUrl: UrlString;
 	author: {
 		name: {
-			first: string;
-			last: string;
+			first: Capitalize<string>;
+			last: Capitalize<string>;
 		};
-		jobTitle: string;
-		alumniOf: string;
-		image: string;
+		jobTitle: Capitalize<string>;
+		alumniOf: Capitalize<string>;
+		imageUrl: UrlString;
 		username: {
 			linkedin: string;
 			github: string;
 			twitter: string;
 		};
 		location: {
-			city: string;
-			state: string;
-			country: string;
+			city: Capitalize<string>;
+			state: Capitalize<string>;
+			country: Capitalize<string>;
 		};
 	};
 }
@@ -254,6 +254,19 @@ export enum AlertType {
 	Error = 3,
 }
 
+// Visibility options for entries (e.g. projects, roles, etc.)
+export enum EntryVisibility {
+	Pin = 0,
+	Show = 1,
+	Hide = 2,
+}
+
+// Names of pages where entries can be displayed
+export enum EntryPage {
+	Index = 'index',
+	Resume = 'resume',
+}
+
 type EmploymentRoleTypes = 'internship' | 'summer job';
 
 // Raw role config
@@ -261,6 +274,7 @@ export type RoleConfig = {
 	type?: string;
 	title: Capitalize<string>;
 	company: Capitalize<string>;
+	companyUrl: UrlString;
 	startDate: DateString;
 	endDate: DateString;
 	location: CityAndStateString;
@@ -290,26 +304,31 @@ export type EmploymentRole = Overwrite<
 	}
 >;
 
-export type GithubRepoRules = {
-	hide?: boolean;
-	pin?: boolean;
-};
-
+// Raw GitHub repos config
 export type GithubReposConfig = {
-	defaults: GithubRepoRules & {
-		limit: number;
+	maxForPage: {
+		[EntryPage.Index]: number;
+		[EntryPage.Resume]: number;
 	};
 	slugs: {
-		[repoSlug: string]: GithubRepoRules;
+		[repoSlug: string]: {
+			visibilityForPage: {
+				[EntryPage.Index]?: EntryVisibility;
+				[EntryPage.Resume]?: EntryVisibility;
+			};
+		};
 	};
 };
 
 // GitHub repo fields used to create a GithubRepo node
 export type GithubRepo = {
+	commentary: string | null;
+	createdAt: Date;
 	description: string;
 	descriptionHtml: string | null;
 	forkCount: number;
 	homepageUrl: string | null;
+	isFork: boolean;
 	languages: string[];
 	licenseInfo: {
 		name: string;
@@ -343,4 +362,9 @@ export type IndexPageContext = {
 // Page context for project pages
 export type ProjectPageContext = {
 	githubRepo: Queries.GithubRepo;
+};
+
+// Page context for the resume page
+export type ResumePageContext = {
+	githubRepos: Queries.GithubRepo[];
 };

@@ -3,8 +3,9 @@
 	---------------------------------------------------------
 */
 
+import { panic } from '../node/logger';
 import { getSiteMetadata } from './config-manager';
-import type { PropsWithClassName } from './types';
+import type { PropsWithClassName, SentenceString } from './types';
 
 // Constants
 
@@ -145,12 +146,26 @@ export function toKebabCase(string: string) {
 		.toLowerCase();
 }
 
+// Capitalize the first letter of a word
+function capitalizeWord(word: string): Capitalize<string> {
+	return `${word[0].toUpperCase()}${word.substring(1)}` as Capitalize<string>;
+}
+
 // Convert a string to title case
 export function toTitleCase(string: string) {
-	return string
-		.split(/[-_ ]/)
-		.map((word) => `${word[0].toUpperCase()}${word.substring(1)}`)
-		.join(' ');
+	return string.split(/[-_ ]/).map(capitalizeWord).join(' ');
+}
+
+// Take a string and return it formatted as a proper sentence if it is not already (ie. capitalized and punctuated)
+export function toSentence(string: string): SentenceString {
+	const capitalizedString = capitalizeWord(string);
+
+	// If string ends with period, comma, exclamation point, question mark, or ellipsis, return as is
+	if (capitalizedString.match(/[\.,!?\u2026]$/)) {
+		return capitalizedString as SentenceString;
+	}
+
+	return `${capitalizedString}.`;
 }
 
 // Return a JSON string with human-readable formatting
@@ -192,4 +207,14 @@ export function limit<T>(array: T[], limit: number): T[] {
 // Return true if a value is defined
 export function isDefined<T>(value: T): value is NonNullable<T> {
 	return value !== undefined && value !== null;
+}
+
+// Throw an error if a value is not defined
+export function assertIsDefined<T>(
+	value: T,
+	msg?: string,
+): asserts value is NonNullable<T> {
+	if (!isDefined(value)) {
+		panic(msg ?? 'Expected value to be defined, but it was not');
+	}
 }

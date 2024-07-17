@@ -4,7 +4,7 @@
 */
 
 import type { Button } from '../../common/types';
-import { getClassNameProps } from '../../common/utilities';
+import { getClassNameProps } from '../../common/utils';
 import { Card } from '../card';
 import { BaseButton } from './base-button';
 

@@ -42,7 +42,9 @@ type ProjectType {
 Define required fields from the GitHub GraphQL API schema
 """
 type GithubDataDataUserRepositoriesNodes {
+	createdAt: Date!
 	forkCount: Int!
+	isFork: Boolean!
 	licenseInfo: GithubDataDataUserRepositoriesNodesLicenseInfo
 	name: String!
 	openGraphImageUrl: String!
@@ -59,10 +61,13 @@ Define schema for custom GithubRepo nodes
 """
 type GithubRepo implements Node {
 	childMarkdownRemark: MarkdownRemark
+	commentary: String
+	createdAt: Date!
 	description: String!
 	descriptionHtml: String
 	forkCount: Int!
 	homepageUrl: String
+	isFork: Boolean!
 	languages: [String!]!
 	logoUrl: String
 	licenseInfo: GithubDataDataUserRepositoriesNodesLicenseInfo
@@ -86,10 +91,13 @@ query GithubRepos {
 			childMarkdownRemark {
 				html
 			}
+			commentary
+			createdAt
 			description
 			descriptionHtml
 			forkCount
 			homepageUrl
+			isFork
 			languages
 			logoUrl
 			licenseInfo {

@@ -61,6 +61,16 @@ The site is configured to fetch repository data from the `jerboa88` GitHub accou
 #### Optional
 Most of the site's configuration options are set in [src/common/constants.tsx] and [src/config/*.tsx].
 
+More sensitive configuration values like the author's phone number and email address can be set via environment variables like so:
+
+```sh
+# .env.development
+AUTHOR_PHONE='(555) 555-5555'
+AUTHOR_EMAIL='email@example.org'
+```
+
+Currently, these values are only used for the contact section of the resume.
+
 
 ### Building
 We can build the site with the Gatsby CLI. All of the necessary commands are declared in `package.json` for convenience.

@@ -3,49 +3,91 @@
 	---------------------------------------------------
 */
 
-import type { GithubReposConfig } from '../common/types';
+import { EntryVisibility, type GithubReposConfig } from '../common/types';
 
 export const githubReposConfig: GithubReposConfig = {
-	defaults: {
-		hide: false,
-		limit: 10,
+	maxForPage: {
+		index: 10,
+		resume: 4,
 	},
 	slugs: {
-		'BiglyBT-plugin-autostop': {
-			hide: true,
+		168421: {
+			visibilityForPage: {
+				resume: EntryVisibility.Hide,
+			},
 		},
-		calculator: {
-			hide: true,
+		'Compare-Form-Backends': {
+			visibilityForPage: {
+				index: EntryVisibility.Show,
+			},
 		},
-		'catppuccin-nvim': {
-			hide: true,
+		'custom-url-shortener': {
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
 		},
-		'Custom-PiHole-Interface': {
-			hide: true,
+		dotfiles: {
+			visibilityForPage: {
+				resume: EntryVisibility.Hide,
+			},
 		},
-		formie: {
-			hide: true,
+		'Game-Maps': {
+			visibilityForPage: {
+				resume: EntryVisibility.Hide,
+			},
+		},
+		'gimp-average-layers': {
+			visibilityForPage: {
+				index: EntryVisibility.Show,
+			},
 		},
 		hackathon: {
-			hide: true,
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
 		},
 		'Image-Signer': {
-			hide: true,
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
 		},
 		jerboa88: {
-			hide: true,
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
 		},
 		'jerboa88.github.io': {
-			hide: true,
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
 		},
 		'Make-me-laugh': {
-			hide: true,
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
+		},
+		OnMyWay: {
+			visibilityForPage: {
+				index: EntryVisibility.Show,
+				resume: EntryVisibility.Pin,
+			},
 		},
 		'rtg-for-outlook': {
-			hide: true,
+			visibilityForPage: {
+				index: EntryVisibility.Hide,
+				resume: EntryVisibility.Hide,
+			},
 		},
-		ScheduleStorm: {
-			hide: true,
+		tinyi18n: {
+			visibilityForPage: {
+				resume: EntryVisibility.Hide,
+			},
 		},
 	},
 };

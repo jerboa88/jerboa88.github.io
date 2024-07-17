@@ -1,13 +1,6 @@
-import assert from 'node:assert/strict';
 import { join, resolve } from 'node:path';
-import type { Actions, CreatePagesArgs, GatsbyNode } from 'gatsby';
-import { createImage } from 'gatsby-plugin-component-to-image';
-import {
-	getGithubRepoRulesDefaults,
-	getPageMetadata,
-	getSiteMetadata,
-	getSocialImageGenerationConfigForType,
-} from './src/common/config-manager';
+import type { CreatePagesArgs, GatsbyNode } from 'gatsby';
+import { getPageMetadata, getSiteMetadata } from './src/common/config-manager';
 import {
 	PAGE_TEMPLATES_DIR,
 	PROJECTS_DIR,
@@ -15,51 +8,47 @@ import {
 	SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR,
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 } from './src/common/constants';
-import type {
-	AbsolutePathString,
-	IndexPageContext,
-	ProjectPageContext,
-	SocialImageTypes,
+import {
+	type AbsolutePathString,
+	EntryPage,
+	type IndexPageContext,
+	type ProjectPageContext,
+	type ResumePageContext,
 } from './src/common/types';
+import { assertIsDefined, prettify } from './src/common/utils';
 import {
-	isDefined,
-	limit,
-	prettify,
-	removeTrailingSlash,
-} from './src/common/utilities';
-import {
-	filterGithubRepoNodes,
+	getSubsetOfGithubRepos,
 	transformGithubDataNode,
 } from './src/node/github-response-transformer';
 import { githubReposQuery, schema } from './src/node/graphql';
 import { info, panic, setReporter, warn } from './src/node/logger';
+import {
+	createPage,
+	createRedirect,
+	deletePage,
+	setGatsbyNodeHelpers,
+} from './src/node/utils';
 
 // Constants
 
+const SITE_METADATA = getSiteMetadata();
+
 const INDEX_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'index.tsx');
-// const PROJECT_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'project.tsx');
+const PROJECT_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'project.tsx');
 
 const INDEX_OG_IMAGE_TEMPLATE = resolve(
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 	'index.tsx',
 );
-// const PROJECT_OG_IMAGE_TEMPLATE = resolve(
-// 	SOCIAL_IMAGE_TEMPLATES_DIR,
-// 	'project.tsx',
-// );
+const RESUME_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'resume.tsx');
+const PROJECT_OG_IMAGE_TEMPLATE = resolve(
+	SOCIAL_IMAGE_TEMPLATES_DIR,
+	'project.tsx',
+);
 const OTHER_OG_IMAGE_TEMPLATE = resolve(
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 	'other.tsx',
 );
-
-const SITE_METADATA = getSiteMetadata();
-const INDEX_PAGE_REPOS_MAX = getGithubRepoRulesDefaults().limit;
-
-// Runtime variables
-
-let gatsbyCreatePage: Actions['createPage'] | undefined = undefined;
-let gatsbyDeletePage: Actions['deletePage'] | undefined = undefined;
-let gatsbyCreateRedirect: Actions['createRedirect'] | undefined = undefined;
 
 // Types
 
@@ -68,19 +57,6 @@ type GithubReposQueryData = {
 		nodes: Queries.GithubRepo[];
 	};
 };
-
-interface CreatePageOptions {
-	path: AbsolutePathString;
-	component: string;
-	socialImageComponent: string;
-	context: object;
-}
-
-interface CreateSocialImagesOptions {
-	path: string;
-	component: string;
-	context: object;
-}
 
 // Functions
 
@@ -101,9 +77,10 @@ async function fetchGithubRepos(
 	const githubRepos: Queries.GithubRepo[] | undefined =
 		response.data?.allGithubRepo.nodes;
 
-	if (!isDefined(githubRepos)) {
-		panic(`Failed to fetch GitHub repos. Response:\n${prettify(response)}`);
-	}
+	assertIsDefined(
+		githubRepos,
+		`Failed to fetch GitHub repos. Response:\n${prettify(response)}`,
+	);
 
 	return githubRepos;
 }
@@ -114,89 +91,103 @@ function getAuthorBioHtml(githubRepos: Queries.GithubRepo[]) {
 		(githubRepo) => githubRepo.slug === SITE_METADATA.author.username.github,
 	);
 
-	if (!isDefined(profileReadmeRepo)) {
-		panic(
-			`Failed to find GitHub profile repo in list:\n${prettify(githubRepos.map((repo) => repo.slug))}`,
-		);
-	}
+	assertIsDefined(
+		profileReadmeRepo,
+		`Failed to find GitHub profile repo in list:\n${prettify(githubRepos.map((repo) => repo.slug))}`,
+	);
 
 	const authorBioHtml = profileReadmeRepo?.descriptionHtml;
 
-	if (!isDefined(authorBioHtml)) {
-		panic(
-			`Failed to extract author bio HTML from GitHub profile repo:\n${prettify(profileReadmeRepo)}`,
-		);
-	}
+	assertIsDefined(
+		authorBioHtml,
+		`Failed to extract author bio HTML from GitHub profile repo:\n${prettify(profileReadmeRepo)}`,
+	);
 
 	info(`Extracted author bio HTML from GitHub profile repo:\n${authorBioHtml}`);
 
 	return authorBioHtml;
 }
 
-// Generate a single social image for a page
-function createSocialImage(
-	type: SocialImageTypes,
-	{ path, component, context }: CreateSocialImagesOptions,
+// Create the landing page
+function createIndexPage(
+	githubRepos: Queries.GithubRepo[],
+	authorBioHtml: string,
 ) {
-	const pagePath = join(SOCIAL_IMAGE_PAGES_DIR, type, path);
-	const imageFileName = path === '/' ? 'index' : removeTrailingSlash(path);
-	const imagePath = join('/', 'images', type, `${imageFileName}.webp`);
-	const { size } = getSocialImageGenerationConfigForType(type);
-	const socialImageMetadata = createImage({
-		pagePath,
-		imagePath,
-		component,
-		size,
-		context,
-	});
-
-	return socialImageMetadata;
-}
-
-// Generate a set of social images for a page
-function createSocialImages(options: CreateSocialImagesOptions) {
-	return {
-		og: createSocialImage('og', options),
-		twitter: createSocialImage('twitter', options),
+	const context: IndexPageContext = {
+		githubRepos: getSubsetOfGithubRepos(githubRepos, EntryPage.Index),
+		authorBioHtml,
 	};
-}
 
-// Create a page and generate the associated social images for it
-function createPage({
-	path,
-	component,
-	socialImageComponent,
-	context,
-}: CreatePageOptions) {
-	info(`Creating page at ${path}`);
-
-	assert(gatsbyCreatePage !== undefined);
-
-	const socialImagesMetadata = createSocialImages({
-		path: path,
-		component: socialImageComponent,
+	createPage({
+		path: '/',
+		component: INDEX_PAGE_TEMPLATE,
+		socialImageComponent: INDEX_OG_IMAGE_TEMPLATE,
 		context: context,
 	});
+}
 
-	gatsbyCreatePage({
-		path: path,
-		component: component,
-		context: {
-			...context,
-			socialImagesMetadata: socialImagesMetadata,
-		},
+// Sort GitHub repos by creation date
+function sortByCreatedAt(a: Queries.GithubRepo, b: Queries.GithubRepo) {
+	return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+}
+
+// Create the resume page
+function createResumePage(githubRepos: Queries.GithubRepo[]) {
+	const context: ResumePageContext = {
+		githubRepos: getSubsetOfGithubRepos(
+			githubRepos,
+			EntryPage.Resume,
+			sortByCreatedAt,
+		),
+	};
+
+	createPage({
+		path: '/resume',
+		component: RESUME_PAGE_TEMPLATE,
+		socialImageComponent: INDEX_OG_IMAGE_TEMPLATE,
+		context: context,
 	});
 }
 
-// Create a client-side redirect
-function createRedirect(fromPath: string, toPath: string) {
-	assert(gatsbyCreateRedirect !== undefined);
+// Create project pages
+function createProjectPages(githubRepos: Queries.GithubRepo[]) {
+	for (const githubRepo of githubRepos) {
+		const path: AbsolutePathString = join(
+			PROJECTS_DIR,
+			githubRepo.slug,
+		) as AbsolutePathString;
+		const shortPath: AbsolutePathString = join(
+			PROJECTS_DIR_SHORT,
+			githubRepo.slug,
+		) as AbsolutePathString;
+		const context: ProjectPageContext = {
+			githubRepo,
+		};
 
-	gatsbyCreateRedirect({
-		fromPath: fromPath,
-		toPath: toPath,
-		isPermanent: true,
-	});
+		// Create project pages
+		createPage({
+			path,
+			component: PROJECT_PAGE_TEMPLATE,
+			socialImageComponent: PROJECT_OG_IMAGE_TEMPLATE,
+			context,
+		});
+
+		createRedirect(shortPath, path);
+	}
+}
+
+// Create client-side redirects
+function createRedirects() {
+	const redirects = [
+		['/about', '/#about'],
+		['/projects', '/#projects'],
+		['/experience', '/#experience'],
+		['/contact', '/#contact'],
+	];
+
+	for (const [fromPath, toPath] of redirects) {
+		createRedirect(fromPath, toPath);
+	}
 }
 
 // Save Gatsby Node API Helpers for later use
@@ -204,11 +195,8 @@ export const onPluginInit: GatsbyNode['onPluginInit'] = ({
 	reporter,
 	actions: { createPage, deletePage, createRedirect },
 }) => {
-	gatsbyCreatePage = createPage;
-	gatsbyDeletePage = deletePage;
-	gatsbyCreateRedirect = createRedirect;
-
 	setReporter(reporter);
+	setGatsbyNodeHelpers(createPage, deletePage, createRedirect);
 };
 
 // Add custom types to the GraphQL schema
@@ -248,10 +236,7 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
 		return;
 	}
 
-	assert(gatsbyDeletePage !== undefined);
-
-	gatsbyDeletePage(page);
-
+	deletePage(page);
 	createPage({
 		...page,
 		path: page.path as AbsolutePathString,
@@ -268,50 +253,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 	const githubRepos = await fetchGithubRepos(graphql);
 	const authorBioHtml = getAuthorBioHtml(githubRepos);
 
-	// Create project pages
-	for (const githubRepo of githubRepos) {
-		const path: AbsolutePathString = join(
-			PROJECTS_DIR,
-			githubRepo.slug,
-		) as AbsolutePathString;
-		const shortPath: AbsolutePathString = join(
-			PROJECTS_DIR_SHORT,
-			githubRepo.slug,
-		) as AbsolutePathString;
-		const context: ProjectPageContext = {
-			githubRepo,
-		};
-
-		// TODO: Re-enable this when project pages are implemented
-		// Create project pages
-		// createPage({
-		// 	path,
-		// 	component: PROJECT_PAGE_TEMPLATE,
-		// 	socialImageComponent: PROJECT_OG_IMAGE_TEMPLATE,
-		// 	context,
-		// });
-
-		createRedirect(shortPath, path);
-	}
-
-	// Create landing page
-	const context: IndexPageContext = {
-		githubRepos: limit(
-			filterGithubRepoNodes(githubRepos),
-			INDEX_PAGE_REPOS_MAX,
-		),
-		authorBioHtml,
-	};
-
-	createPage({
-		path: '/',
-		component: INDEX_PAGE_TEMPLATE,
-		socialImageComponent: INDEX_OG_IMAGE_TEMPLATE,
-		context,
-	});
-
-	createRedirect('/about', '/#about');
-	createRedirect('/projects', '/#projects');
-	createRedirect('/experience', '/#experience');
-	createRedirect('/contact', '/#contact');
+	// TODO: Re-enable this when project pages are implemented
+	// createProjectPages(githubRepos);
+	createIndexPage(githubRepos, authorBioHtml);
+	// TODO: Re-enable this when the resume page is implemented
+	createResumePage(githubRepos);
+	createRedirects();
 };

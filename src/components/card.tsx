@@ -17,7 +17,7 @@ import {
 	clamp,
 	doesDeviceSupportHover,
 	getClassNameProps,
-} from '../common/utilities';
+} from '../common/utils';
 
 // Types
 
