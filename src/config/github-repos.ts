@@ -11,33 +11,24 @@ export const githubReposConfig: GithubReposConfig = {
 		resume: 4,
 	},
 	slugs: {
-		'BiglyBT-plugin-autostop': {
+		168421: {
+			visibilityForPage: {
+				resume: EntryVisibility.Hide,
+			},
+		},
+		'Compare-Form-Backends': {
+			visibilityForPage: {
+				index: EntryVisibility.Show,
+			},
+		},
+		'custom-url-shortener': {
 			visibilityForPage: {
 				index: EntryVisibility.Hide,
 				resume: EntryVisibility.Hide,
 			},
 		},
-		calculator: {
+		dotfiles: {
 			visibilityForPage: {
-				index: EntryVisibility.Hide,
-				resume: EntryVisibility.Hide,
-			},
-		},
-		'catppuccin-nvim': {
-			visibilityForPage: {
-				index: EntryVisibility.Hide,
-				resume: EntryVisibility.Hide,
-			},
-		},
-		'Custom-PiHole-Interface': {
-			visibilityForPage: {
-				index: EntryVisibility.Hide,
-				resume: EntryVisibility.Hide,
-			},
-		},
-		formie: {
-			visibilityForPage: {
-				index: EntryVisibility.Hide,
 				resume: EntryVisibility.Hide,
 			},
 		},
@@ -48,7 +39,7 @@ export const githubReposConfig: GithubReposConfig = {
 		},
 		'gimp-average-layers': {
 			visibilityForPage: {
-				resume: EntryVisibility.Hide,
+				index: EntryVisibility.Show,
 			},
 		},
 		hackathon: {
@@ -83,7 +74,7 @@ export const githubReposConfig: GithubReposConfig = {
 		},
 		OnMyWay: {
 			visibilityForPage: {
-				index: EntryVisibility.Hide,
+				index: EntryVisibility.Show,
 				resume: EntryVisibility.Pin,
 			},
 		},
@@ -95,12 +86,6 @@ export const githubReposConfig: GithubReposConfig = {
 		},
 		tinyi18n: {
 			visibilityForPage: {
-				resume: EntryVisibility.Hide,
-			},
-		},
-		ScheduleStorm: {
-			visibilityForPage: {
-				index: EntryVisibility.Hide,
 				resume: EntryVisibility.Hide,
 			},
 		},
