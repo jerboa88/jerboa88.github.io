@@ -103,24 +103,26 @@ export interface PagesMetadataConfig {
 	[pagePath: AbsolutePathString]: PageMetadata;
 }
 
-// TODO: Use this type in interfaces below
-// TODO: Change this to an enum
-export type SocialImageTypes = 'og' | 'twitter';
+// Variant names for social images
+export enum SocialImageType {
+	OpenGraph = 'og',
+	Twitter = 'twitter',
+}
 
 // Raw social image metadata config
 export interface SocialImagesGenerationConfig {
-	defaults: DefaultOptions;
+	defaults: Partial<DefaultOptions>;
 	types: {
-		og: JobOptions;
-		twitter: JobOptions;
+		[SocialImageType.OpenGraph]: Partial<JobOptions>;
+		[SocialImageType.Twitter]: Partial<JobOptions>;
 	};
 }
 
 // Social image metadata added to the pageContext of pages when they are created
 export interface SocialImagesMetadataProp {
 	socialImagesMetadata: {
-		og: JobOptions;
-		twitter: JobOptions;
+		[SocialImageType.OpenGraph]: JobOptions;
+		[SocialImageType.Twitter]: JobOptions;
 	};
 }
 
