@@ -55,8 +55,9 @@ const config: GatsbyConfig = {
 			resolve: 'gatsby-plugin-purgecss',
 			options: {
 				tailwind: true,
+				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
 				purgeCSSOptions: {
-					safelist: [/where/],
+					safelist: [/where/, /data-theme/],
 				},
 			},
 		},
