@@ -8,6 +8,7 @@ import { type PropsWithChildren, StrictMode } from 'react';
 import { SPRING_TRANSITION_PROPS } from '../../common/constants';
 import type { PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utils';
+import { PageCounter } from '../page-counter';
 import { ResumeHeader } from './resume-header';
 
 // Types
@@ -27,6 +28,7 @@ export function ResumePageLayout({ className, children }: Props) {
 				<div {...classNameProps}>
 					<ResumeHeader />
 					{children}
+					<PageCounter numOfPages={2} />
 				</div>
 			</MotionConfig>
 		</StrictMode>
