@@ -3249,7 +3249,7 @@ type PrivacyPolicyPageQuery = { readonly file: { readonly childMarkdownRemark: {
 type ResumePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type ResumePageQuery = { readonly file: { readonly childMarkdownRemark: { readonly html: string | null } | null } | null };
+type ResumePageQuery = { readonly resumeSummary: { readonly childMarkdownRemark: { readonly html: string | null } | null } | null, readonly resumeHighlights: { readonly childMarkdownRemark: { readonly html: string | null } | null } | null };
 
 
 }
