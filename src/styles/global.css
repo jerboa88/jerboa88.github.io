@@ -75,6 +75,15 @@
 		@apply align-middle;
 		@apply fill-current;
 	}
+
+	/* Styles for printed pages */
+	@page {
+		margin: 10mm 15mm;
+		/* This doesn't work as of 2024-07-19 due to missing browser support */
+		@bottom-right {
+			content: 'Page ' counter(page) ' of ' counter(pages);
+		}
+	}
 }
 
 
