@@ -12,10 +12,11 @@ import {
 	getSiteMetadata,
 	getVolunteeringRoles,
 } from '../../common/config-manager';
-import type {
-	PageSection,
-	ResumePageContext,
-	SocialImagesMetadataProp,
+import {
+	type PageSection,
+	type ResumePageContext,
+	type SocialImagesMetadataProp,
+	ThemeType,
 } from '../../common/types';
 import { getAbsoluteUrl, limit } from '../../common/utils';
 import { ResumePageLayout } from '../../components/layout/resume-page-layout';
@@ -196,6 +197,8 @@ export const Head = ({
 	return (
 		<PageHead
 			path={location.pathname}
+			theme={ThemeType.Light}
+			className="bg-base-100"
 			{...{ metadata, structuredData, socialImagesMetadata }}
 		/>
 	);

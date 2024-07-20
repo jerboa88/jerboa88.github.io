@@ -6,7 +6,7 @@
 import { MotionConfig } from 'framer-motion';
 import { type PropsWithChildren, StrictMode } from 'react';
 import { SPRING_TRANSITION_PROPS } from '../../common/constants';
-import { type PropsWithClassName, ThemeType } from '../../common/types';
+import type { PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utils';
 import { ResumeHeader } from './resume-header';
 
@@ -24,7 +24,7 @@ export function ResumePageLayout({ className, children }: Props) {
 		<StrictMode>
 			<MotionConfig {...SPRING_TRANSITION_PROPS} reducedMotion="user">
 				{/* Page body */}
-				<div data-theme={ThemeType.Light} {...classNameProps}>
+				<div {...classNameProps}>
 					<ResumeHeader />
 					{children}
 				</div>

@@ -6,18 +6,24 @@
 import { getSiteMetadata, getTheme } from '../../common/config-manager';
 import {
 	type PageMetadata,
+	type PropsWithClassName,
 	SocialImageType,
 	type SocialImagesMetadataProp,
 	ThemeType,
 } from '../../common/types';
-import { getAbsoluteUrl, getMimeType } from '../../common/utils';
+import {
+	getAbsoluteUrl,
+	getClassNameProps,
+	getMimeType,
+} from '../../common/utils';
 
 // Types
 
-interface Props extends SocialImagesMetadataProp {
+interface Props extends PropsWithClassName, SocialImagesMetadataProp {
 	path: string;
 	metadata: PageMetadata;
 	structuredData: object;
+	theme?: ThemeType;
 }
 
 // Constants
@@ -27,11 +33,14 @@ const SITE_METADATA = getSiteMetadata();
 const THEME = getTheme(ThemeType.Dark);
 
 export function PageHead({
+	className,
 	path,
 	metadata,
 	structuredData,
 	socialImagesMetadata,
+	theme = ThemeType.Dark,
 }: Props) {
+	const classNameProps = getClassNameProps('print:text-xs/none', className);
 	const pageUrl = getAbsoluteUrl(path);
 	const ogImageUrl = getAbsoluteUrl(
 		socialImagesMetadata[SocialImageType.OpenGraph].imagePath,
@@ -42,7 +51,8 @@ export function PageHead({
 
 	return (
 		<>
-			<html lang="en-US" className="print:text-xs/none" />
+			<html lang="en-US" data-theme={theme} {...classNameProps} />
+			<body {...classNameProps} />
 			<title>{metadata.title}</title>
 			<meta name="author" content={SITE_METADATA.author.name.full} />
 			<meta name="description" content={metadata.description} />
