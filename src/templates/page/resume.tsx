@@ -27,19 +27,20 @@ import { Article } from '../../components/text/article';
 
 // Types
 
-interface PageContextProp {
-	pageContext: SocialImagesMetadataProp & ResumePageContext;
-}
+type PageContext = SocialImagesMetadataProp & ResumePageContext;
 
-interface DataProp {
-	data: {
-		file: {
-			childMarkdownRemark: {
-				html: string;
-			};
+type Data = {
+	resumeSummary: {
+		childMarkdownRemark: {
+			html: string;
 		};
 	};
-}
+	resumeHighlights: {
+		childMarkdownRemark: {
+			html: string;
+		};
+	};
+};
 
 // Constants
 
@@ -52,10 +53,18 @@ const VOLUNTEERING_ROLES = limit(getVolunteeringRoles(), 1);
 export default function ResumePageTemplate({
 	data,
 	pageContext: { githubRepos },
-}: PageContextProp & DataProp & PageProps) {
+}: PageProps<Data, PageContext>) {
 	const sections = [
 		{
+			title: 'Summary',
+			ref: useRef(null),
+		},
+		{
 			title: 'Highlights',
+			ref: useRef(null),
+		},
+		{
+			title: 'Employment',
 			ref: useRef(null),
 		},
 		{
@@ -67,15 +76,12 @@ export default function ResumePageTemplate({
 			ref: useRef(null),
 		},
 		{
-			title: 'Employment',
-			ref: useRef(null),
-		},
-		{
 			title: 'Volunteering',
 			ref: useRef(null),
 		},
 	] as PageSection[];
-	const articleHtml = data.file.childMarkdownRemark.html;
+	const summaryHtml = data.resumeSummary.childMarkdownRemark.html;
+	const highlightsHtml = data.resumeHighlights.childMarkdownRemark.html;
 
 	return (
 		<ResumePageLayout>
@@ -86,8 +92,8 @@ export default function ResumePageTemplate({
 				responsive={false}
 			>
 				<Article
-					html={articleHtml}
 					className="text-base-content prose-li:m-0"
+					html={summaryHtml}
 				/>
 			</Section>
 			<Section
@@ -96,7 +102,10 @@ export default function ResumePageTemplate({
 				dividerClassName="!pb-4"
 				responsive={false}
 			>
-				<ResumeRoleEntries roles={EDUCATION_ROLES} />
+				<Article
+					html={highlightsHtml}
+					className="text-base-content prose-li:m-0"
+				/>
 			</Section>
 			<Section
 				{...sections[2]}
@@ -104,7 +113,7 @@ export default function ResumePageTemplate({
 				dividerClassName="!pb-4"
 				responsive={false}
 			>
-				<ResumeProjectEntries githubRepos={githubRepos} />
+				<ResumeRoleEntries roles={EMPLOYMENT_ROLES} />
 			</Section>
 			<Section
 				{...sections[3]}
@@ -112,10 +121,18 @@ export default function ResumePageTemplate({
 				dividerClassName="!pb-4"
 				responsive={false}
 			>
-				<ResumeRoleEntries roles={EMPLOYMENT_ROLES} />
+				<ResumeRoleEntries roles={EDUCATION_ROLES} />
 			</Section>
 			<Section
 				{...sections[4]}
+				sectionHeaderClassName="text-primary"
+				dividerClassName="!pb-4"
+				responsive={false}
+			>
+				<ResumeProjectEntries githubRepos={githubRepos} />
+			</Section>
+			<Section
+				{...sections[5]}
 				sectionHeaderClassName="text-primary"
 				dividerClassName="!pb-4"
 				responsive={false}
@@ -136,7 +153,7 @@ export default function ResumePageTemplate({
 export const Head = ({
 	location,
 	pageContext: { socialImagesMetadata },
-}: PageContextProp & DataProp & HeadProps) => {
+}: HeadProps<Data, PageContext>) => {
 	const pageMetadata = getPageMetadata('/resume');
 	const pageTitle = `${pageMetadata.title} | ${SITE_METADATA.shortTitle}`;
 	const metadata = {
@@ -186,7 +203,12 @@ export const Head = ({
 
 export const pageQuery = graphql`
   query ResumePage {
-		file(name: {eq: "resume-highlights"}) {
+		resumeSummary: file(name: {eq: "resume-summary"}) {
+			childMarkdownRemark {
+				html
+			}
+		}
+  	resumeHighlights: file(name: {eq: "resume-highlights"}) {
 			childMarkdownRemark {
 				html
 			}
