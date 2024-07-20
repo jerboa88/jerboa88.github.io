@@ -1,5 +1,5 @@
 - **Creative Powerhouse:** Passionate about designing, creating, and sharing new things. Over 20 public projects on GitHub with a combined 60+ stars.
 - **Polyglot Programmer:** Experienced with a variety of programming languages and tools including React, TypeScript, CSS, Python, C/C++, Java, and SQL.
-- **Team Player:** Comfortable working both independently and as part of a team. Worked on various projects following Agile methodologies and effectively collaborated as part of cross-functional teams.
+- **Team Player:** Comfortable working both independently and as part of a team. Contributed to various projects following Agile methodologies and effectively collaborated as part of cross-functional teams.
 - **Problem Solver:** Capable of working with tight time constraints, limited human resources, and in challenging conditions as per previous work experience.
 - **Lifelong Learner:** Creative and excited to learn more tools and technologies in the future!
