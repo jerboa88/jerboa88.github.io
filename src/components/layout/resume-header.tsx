@@ -24,7 +24,7 @@ const PLACEHOLDER_PHONE = '(***) ***-****';
 const PLACEHOLDER_EMAIL = '*****@*****.com';
 const COMMON_GHOST_BUTTON_LINK_PROPS = {
 	tooltipPosition: TooltipPosition.Left,
-	className: 'py-0 sm:py-0',
+	className: '!p-0',
 	iconClassName: 'text-xl text-primary',
 };
 
@@ -34,12 +34,12 @@ export function ResumeHeader() {
 	const location: CityAndStateString = `${SITE_METADATA.author.location.city}, ${SITE_METADATA.author.location.state}`;
 
 	return (
-		<header className="flex flex-row justify-between items-center w-full">
-			<Heading className="text-5xl text-primary">
-				<span className="inline md:hidden drop-shadow-emboss">
+		<header className="flex flex-col gap-8 sm:flex-row justify-between items-center w-full">
+			<Heading className="text-5xl text-primary text-right">
+				<span className="inline sm:hidden">
 					{SITE_METADATA.author.name.short}
 				</span>
-				<span className="hidden md:inline drop-shadow-emboss">
+				<span className="hidden sm:inline">
 					{SITE_METADATA.author.name.full}
 				</span>
 			</Heading>

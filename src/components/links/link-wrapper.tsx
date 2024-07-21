@@ -17,7 +17,7 @@ export function LinkWrapper({
 	rel = '',
 	children,
 }: Props) {
-	const classNameProps = getClassNameProps('whitespace-nowrap', className);
+	const classNameProps = getClassNameProps(className);
 
 	return isInternal ? (
 		<GatsbyLink to={to} {...classNameProps}>

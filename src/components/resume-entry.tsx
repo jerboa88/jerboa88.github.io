@@ -42,11 +42,11 @@ export function ResumeEntry({
 	const titleElement = titleUrl ? (
 		<Tooltip text={titleTooltip ?? titleUrl} position={TooltipPosition.Right}>
 			<LinkWrapper to={titleUrl}>
-				<span className="font-bold">{title}</span>
+				<span className="font-bold text-balance">{title}</span>
 			</LinkWrapper>
 		</Tooltip>
 	) : (
-		<span className="font-bold">{title}</span>
+		<span className="font-bold text-balance">{title}</span>
 	);
 	const taglineElement = taglineUrl ? (
 		<Tooltip
@@ -63,8 +63,8 @@ export function ResumeEntry({
 
 	return (
 		<div className="flex flex-row justify-between items-start gap-4 break-inside-avoid-page">
-			<div className="flex flex-col">
-				<div className="flex flex-row items-center gap-4">
+			<div className="flex flex-col gap-2 sm:gap-0">
+				<div className="flex flex-col items-start sm:flex-row sm:items-center sm:gap-4">
 					{titleElement}
 					{taglineElement}
 				</div>

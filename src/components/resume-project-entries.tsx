@@ -31,9 +31,7 @@ export function ResumeProjectEntries({ githubRepos }: Props) {
 						titleTooltip="View project on GitHub"
 						tagline={githubRepo.languages.join(', ')}
 						bullets={[descriptionSentences.join(' ') as SentenceString]}
-						// bullets={bullet}
-						startDate={new Date(githubRepo.createdAt)}
-						endDate={new Date(githubRepo.updatedAt)}
+						endDate={new Date(githubRepo.createdAt)}
 					/>
 				);
 			})}
