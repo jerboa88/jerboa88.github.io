@@ -263,8 +263,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 	const githubRepos = await fetchGithubRepos(graphql);
 	const authorBioHtml = getAuthorBioHtml(githubRepos);
 
-	// TODO: Re-enable this when project pages are implemented
-	// createProjectPages(githubRepos);
+	createProjectPages(githubRepos);
 	createIndexPage(githubRepos, authorBioHtml);
 	createResumePage(githubRepos);
 	createRedirects();
