@@ -3,20 +3,21 @@
 	--------------------------------------------------
 */
 
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import type { HeadProps, PageProps } from 'gatsby';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { getSiteMetadata } from '../../common/config-manager';
 import type {
+	ButtonElementRenderFunction,
 	ProjectPageContext,
 	SocialImagesMetadataProp,
 } from '../../common/types';
 import { getAbsoluteUrl } from '../../common/utils';
 import { PageLayout } from '../../components/layout/page-layout';
 import { Section } from '../../components/layout/section';
-import { InlineLink } from '../../components/links/inline-link';
+import { GhostButtonLink } from '../../components/links/ghost-button-link';
 import { PageHead } from '../../components/seo/page-head';
 import { Article } from '../../components/text/article';
-import { DateRange } from '../../components/text/date-range';
 
 // Types
 
@@ -30,40 +31,36 @@ const SITE_METADATA = getSiteMetadata();
 export default function ProjectPageTemplate({
 	pageContext: { githubRepo },
 }: PageProps<null, PageContext>) {
-	const updatedAt = new Date(githubRepo.updatedAt);
+	const githubButton = useCallback(
+		((remainingProps) => (
+			<GhostButtonLink
+				text="View project on GitHub"
+				icon={faArrowUpRightFromSquare}
+				to={githubRepo.url}
+				responsive
+				flip
+				{...remainingProps}
+			/>
+		)) as ButtonElementRenderFunction,
+		[],
+	);
 
 	return (
 		<PageLayout>
 			{/* Dummy element to force center alignment of section */}
 			<div />
-			<Section title={githubRepo.name} ref={useRef(null)}>
+			<Section
+				title={githubRepo.name}
+				renderButton={githubButton}
+				ref={useRef(null)}
+			>
 				<Article>
-					{githubRepo.logoUrl && (
-						<img src={githubRepo.logoUrl} width="500" alt="TODO" />
-					)}
-					<img src={githubRepo.openGraphImageUrl} width="500" alt="TODO" />
 					<p>{githubRepo.description}</p>
-					<p>{githubRepo.type.name}</p>
-					<p>{githubRepo.type.color}</p>
-					{githubRepo.homepageUrl && (
-						<InlineLink
-							to={githubRepo.homepageUrl}
-							text={githubRepo.homepageUrl}
-						/>
-					)}
-					<br />
-					<InlineLink to={githubRepo.url} text={githubRepo.url} />
-					<p>{githubRepo.stargazerCount}</p>
-					<DateRange endDate={updatedAt} />
-					<p>{githubRepo.licenseInfo?.name}</p>
-					<p>{githubRepo.licenseInfo?.spdxId}</p>
-					<p>{githubRepo.licenseInfo?.url}</p>
-					<p>{githubRepo.name}</p>
-					<p>{githubRepo.descriptionHtml}</p>
 				</Article>
-				{githubRepo.childMarkdownRemark?.html && (
+				{/* TODO: Re-enable this when code highlighting, relative image URLS, and custom styling is fixed */}
+				{/* {githubRepo.childMarkdownRemark?.html && (
 					<Article html={githubRepo.childMarkdownRemark.html} />
-				)}
+				)} */}
 			</Section>
 		</PageLayout>
 	);
