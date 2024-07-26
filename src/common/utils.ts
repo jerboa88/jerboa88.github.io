@@ -5,7 +5,7 @@
 
 import { panic } from '../node/logger';
 import { getSiteMetadata } from './config-manager';
-import type { PropsWithClassName, SentenceString } from './types';
+import type { PropsWithClassName, SentenceString, UrlString } from './types';
 
 // Constants
 
@@ -195,8 +195,10 @@ export function removeTrailingSlash(path: string) {
 }
 
 // Remove the protocol from a URL
-export function removeProtocol(url: string) {
-	return url.replace(/.*?:\/\//g, '');
+export function removeProtocol(url: UrlString | URL) {
+	const urlString = url instanceof URL ? url.toString() : url;
+
+	return urlString.replace(/.*?:\/\//g, '');
 }
 
 // Return the first n elements of an array

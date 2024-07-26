@@ -5,7 +5,7 @@
 
 import { getSiteMetadata, getTheme } from '../../common/config-manager';
 import {
-	type PageMetadata,
+	type PageMetadataProp,
 	type PropsWithClassName,
 	SocialImageType,
 	type SocialImagesMetadataProp,
@@ -19,9 +19,11 @@ import {
 
 // Types
 
-interface Props extends PropsWithClassName, SocialImagesMetadataProp {
+interface Props
+	extends PropsWithClassName,
+		PageMetadataProp,
+		SocialImagesMetadataProp {
 	path: string;
-	metadata: PageMetadata;
 	structuredData: object;
 	theme?: ThemeType;
 }
@@ -35,7 +37,7 @@ const THEME = getTheme(ThemeType.Dark);
 export function PageHead({
 	className,
 	path,
-	metadata,
+	pageMetadata,
 	structuredData,
 	socialImagesMetadata,
 	theme = ThemeType.Dark,
@@ -53,14 +55,14 @@ export function PageHead({
 		<>
 			<html lang="en-US" data-theme={theme} {...classNameProps} />
 			<body {...classNameProps} />
-			<title>{metadata.title}</title>
+			<title>{pageMetadata.title}</title>
 			<meta name="author" content={SITE_METADATA.author.name.full} />
-			<meta name="description" content={metadata.description} />
+			<meta name="description" content={pageMetadata.description} />
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 			{/* OpenGraph meta tags */}
-			<meta property="og:title" content={metadata.title} />
-			<meta property="og:description" content={metadata.description} />
+			<meta property="og:title" content={pageMetadata.title} />
+			<meta property="og:description" content={pageMetadata.description} />
 			<meta property="og:type" content="website" />
 			<meta property="og:url" content={pageUrl.toString()} />
 			<meta property="og:image" content={ogImageUrl.toString()} />
@@ -80,12 +82,12 @@ export function PageHead({
 
 			{/* Twitter meta tags */}
 			<meta name="twitter:card" content="summary_large_image" />
-			<meta name="twitter:title" content={metadata.title} />
+			<meta name="twitter:title" content={pageMetadata.title} />
 			<meta
 				name="twitter:creator"
 				content={SITE_METADATA.author.username.twitter}
 			/>
-			<meta name="twitter:description" content={metadata.description} />
+			<meta name="twitter:description" content={pageMetadata.description} />
 			<meta name="twitter:image" content={twitterImageUrl.toString()} />
 
 			<meta name="google" content="nositelinkssearchbox" />

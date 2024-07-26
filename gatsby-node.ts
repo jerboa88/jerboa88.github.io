@@ -10,8 +10,10 @@ import {
 } from './src/common/constants';
 import {
 	type AbsolutePathString,
+	type EmptyObject,
 	EntryPage,
 	type IndexPageContext,
+	type PageMetadata,
 	type ProjectPageContext,
 	type ResumePageContext,
 } from './src/common/types';
@@ -133,7 +135,10 @@ function sortByCreatedAt(a: Queries.GithubRepo, b: Queries.GithubRepo) {
 
 // Create the resume page
 function createResumePage(githubRepos: Queries.GithubRepo[]) {
+	const path = '/resume';
+	const pageMetadata: PageMetadata | EmptyObject = getPageMetadata(path) || {};
 	const context: ResumePageContext = {
+		pageMetadata,
 		githubRepos: getSubsetOfGithubRepos(
 			githubRepos,
 			EntryPage.Resume,
@@ -142,9 +147,9 @@ function createResumePage(githubRepos: Queries.GithubRepo[]) {
 	};
 
 	createPage({
-		path: '/resume',
+		path: path,
 		component: RESUME_PAGE_TEMPLATE,
-		socialImageComponent: INDEX_OG_IMAGE_TEMPLATE,
+		socialImageComponent: OTHER_OG_IMAGE_TEMPLATE,
 		context: context,
 	});
 }
@@ -256,7 +261,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 	// TODO: Re-enable this when project pages are implemented
 	// createProjectPages(githubRepos);
 	createIndexPage(githubRepos, authorBioHtml);
-	// TODO: Re-enable this when the resume page is implemented
 	createResumePage(githubRepos);
 	createRedirects();
 };

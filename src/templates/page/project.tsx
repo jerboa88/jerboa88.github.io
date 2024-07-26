@@ -3,7 +3,7 @@
 	--------------------------------------------------
 */
 
-import type { HeadProps } from 'gatsby';
+import type { HeadProps, PageProps } from 'gatsby';
 import { useRef } from 'react';
 import { getSiteMetadata } from '../../common/config-manager';
 import type {
@@ -20,9 +20,7 @@ import { DateRange } from '../../components/text/date-range';
 
 // Types
 
-interface Props {
-	pageContext: SocialImagesMetadataProp & ProjectPageContext;
-}
+type PageContext = ProjectPageContext & SocialImagesMetadataProp;
 
 // Constants
 
@@ -31,8 +29,7 @@ const SITE_METADATA = getSiteMetadata();
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function ProjectPageTemplate({
 	pageContext: { githubRepo },
-}: Props) {
-	// Dates are serialized when passed through page context, so we need to deserialize them
+}: PageProps<null, PageContext>) {
 	const updatedAt = new Date(githubRepo.updatedAt);
 
 	return (
@@ -75,7 +72,7 @@ export default function ProjectPageTemplate({
 export const Head = ({
 	location,
 	pageContext: { githubRepo, socialImagesMetadata },
-}: HeadProps & Props) => {
+}: HeadProps<null, PageContext>) => {
 	const pageTitle = `${githubRepo.name} | ${SITE_METADATA.shortTitle}`;
 	const metadata = {
 		title: pageTitle,
@@ -126,7 +123,7 @@ export const Head = ({
 	return (
 		<PageHead
 			path={location.pathname}
-			{...{ metadata, structuredData, socialImagesMetadata }}
+			{...{ pageMetadata: metadata, structuredData, socialImagesMetadata }}
 		/>
 	);
 };

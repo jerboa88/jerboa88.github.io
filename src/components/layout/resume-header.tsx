@@ -11,7 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { getSiteMetadata } from '../../common/config-manager';
 import { type CityAndStateString, TooltipPosition } from '../../common/types';
-import { removeProtocol } from '../../common/utils';
+import { getAbsoluteUrl, removeProtocol } from '../../common/utils';
 import { GhostButton } from '../input/ghost-button';
 import { GhostButtonLink } from '../links/ghost-button-link';
 import { Heading } from '../text/heading';
@@ -19,9 +19,8 @@ import { Heading } from '../text/heading';
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
-const CONTACT_URL = '/#contact';
-const PLACEHOLDER_PHONE = '(***) ***-****';
-const PLACEHOLDER_EMAIL = '*****@*****.com';
+const CONTACT_PATH = '/contact';
+const CONTACT_URL = removeProtocol(getAbsoluteUrl(CONTACT_PATH));
 const COMMON_GHOST_BUTTON_LINK_PROPS = {
 	tooltipPosition: TooltipPosition.Left,
 	className: '!p-0',
@@ -44,19 +43,21 @@ export function ResumeHeader() {
 				</span>
 			</Heading>
 			<ul>
+				{phone && (
+					<li>
+						<GhostButtonLink
+							to={phone ? `tel:${phone}` : CONTACT_PATH}
+							text={phone}
+							icon={faPhoneSquare}
+							tooltipText="Give me a call"
+							{...COMMON_GHOST_BUTTON_LINK_PROPS}
+						/>
+					</li>
+				)}
 				<li>
 					<GhostButtonLink
-						to={phone ? `tel:${phone}` : CONTACT_URL}
-						text={phone ?? PLACEHOLDER_PHONE}
-						icon={faPhoneSquare}
-						tooltipText="Give me a call"
-						{...COMMON_GHOST_BUTTON_LINK_PROPS}
-					/>
-				</li>
-				<li>
-					<GhostButtonLink
-						to={email ? `mailto:${email}` : CONTACT_URL}
-						text={email ?? PLACEHOLDER_EMAIL}
+						to={email ? `mailto:${email}` : CONTACT_PATH}
+						text={email ?? CONTACT_URL}
 						icon={faEnvelopeSquare}
 						tooltipText="Send me an email"
 						{...COMMON_GHOST_BUTTON_LINK_PROPS}

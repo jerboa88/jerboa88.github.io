@@ -7,7 +7,7 @@ import type { HeadProps, PageProps } from 'gatsby';
 import { useRef } from 'react';
 import { getSiteMetadata } from '../common/config-manager';
 import type {
-	PageMetadataProp,
+	NotFoundPageContext,
 	SocialImagesMetadataProp,
 } from '../common/types';
 import { getAbsoluteUrl } from '../common/utils';
@@ -18,9 +18,7 @@ import { PageHead } from '../components/seo/page-head';
 
 // Types
 
-interface PageContext {
-	pageContext: PageMetadataProp & SocialImagesMetadataProp;
-}
+type PageContext = NotFoundPageContext & SocialImagesMetadataProp;
 
 // Constants
 
@@ -29,7 +27,7 @@ const SITE_METADATA = getSiteMetadata();
 // biome-ignore lint/style/noDefaultExport: Pages must use default exports
 export default function NotFoundPage({
 	pageContext: { pageMetadata },
-}: PageContext & PageProps) {
+}: PageProps<null, PageContext>) {
 	// Cat ASCII art from https://emojicombos.com/cat
 	const sadCat = [
 		'         \uFF0F\uFF1E\u3000\u0020\u30D5',
@@ -77,7 +75,7 @@ export default function NotFoundPage({
 export const Head = ({
 	location,
 	pageContext: { pageMetadata, socialImagesMetadata },
-}: PageContext & HeadProps) => {
+}: HeadProps<null, PageContext>) => {
 	const pageTitle = `${pageMetadata.title} | ${SITE_METADATA.shortTitle}`;
 	const metadata = {
 		title: pageTitle,
@@ -94,7 +92,7 @@ export const Head = ({
 	return (
 		<PageHead
 			path={location.pathname}
-			{...{ metadata, structuredData, socialImagesMetadata }}
+			{...{ pageMetadata: metadata, structuredData, socialImagesMetadata }}
 		/>
 	);
 };
