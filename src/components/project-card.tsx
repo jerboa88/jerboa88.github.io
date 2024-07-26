@@ -5,6 +5,7 @@
 
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { PROJECTS_PATH } from '../common/constants';
 import { getClassNameProps } from '../common/utils';
 import { Card } from './card';
 import { GhostButton } from './input/ghost-button';
@@ -87,5 +88,9 @@ export function ProjectCard({ repo }: Props) {
 		return cardElement;
 	}
 
-	return <LinkWrapper to={repo.url}>{cardElement}</LinkWrapper>;
+	return (
+		<LinkWrapper to={`${PROJECTS_PATH}/${repo.slug}`} isInternal>
+			{cardElement}
+		</LinkWrapper>
+	);
 }
