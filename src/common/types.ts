@@ -355,18 +355,34 @@ export type GithubRepo = {
 
 // export type GithubRepo = Queries.GithubReposQuery;
 
-// Page context for the index page
+// Page context to add to the index page
 export type IndexPageContext = {
 	githubRepos: Queries.GithubRepo[];
 	authorBioHtml: string;
 };
 
-// Page context for project pages
+// Page context to add to project pages
 export type ProjectPageContext = {
 	githubRepo: Queries.GithubRepo;
 };
 
-// Page context for the resume page
-export type ResumePageContext = {
+// Page context to add to the resume page
+export type ResumePageContext = PageMetadataProp & {
 	githubRepos: Queries.GithubRepo[];
 };
+
+// Page context for the privacy policy page
+export type PrivacyPageContext = PageMetadataProp;
+
+// Page context for the 404 page
+export type NotFoundPageContext = PageMetadataProp;
+
+// Page context for the index social image page
+export type IndexSocialImagePageContext = IndexPageContext & ImageMetadataProp;
+
+// Page context for other social image pages
+export type OtherSocialImagePageContext = PageMetadataProp & ImageMetadataProp;
+
+// Page context for project social image pages
+export type ProjectSocialImagePageContext = ProjectPageContext &
+	ImageMetadataProp;
