@@ -7,6 +7,7 @@ import type { HeadProps, PageProps } from 'gatsby';
 import { graphql } from 'gatsby';
 import { useRef } from 'react';
 import { getSiteMetadata } from '../common/config-manager';
+import { JSON_LD_AUTHOR_PATH } from '../common/constants';
 import type {
 	PrivacyPageContext,
 	SocialImagesMetadataProp,
@@ -71,7 +72,7 @@ export const Head = ({
 			headline: pageMetadata.shortTitle,
 			description: pageMetadata.description,
 			author: {
-				'@id': '/author',
+				'@id': JSON_LD_AUTHOR_PATH,
 			},
 		},
 	};

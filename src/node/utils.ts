@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import type { Actions, Page } from 'gatsby';
 import { createImage } from 'gatsby-plugin-component-to-image';
 import { getSocialImageGenerationConfigForType } from '../common/config-manager';
-import { SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR } from '../common/constants';
+import { INDEX_PATH, SOCIAL_IMAGES_PATH } from '../common/constants';
 import { type AbsolutePathString, SocialImageType } from '../common/types';
 import { assertIsDefined, removeTrailingSlash } from '../common/utils';
 import { info } from './logger';
@@ -62,8 +62,9 @@ function createSocialImage(
 	type: SocialImageType,
 	{ path, component, context }: CreateSocialImagesOptions,
 ) {
-	const pagePath = join(SOCIAL_IMAGE_PAGES_DIR, type, path);
-	const imageFileName = path === '/' ? 'index' : removeTrailingSlash(path);
+	const pagePath = join(SOCIAL_IMAGES_PATH, type, path);
+	const imageFileName =
+		path === INDEX_PATH ? 'index' : removeTrailingSlash(path);
 	const imagePath = join('/', 'images', type, `${imageFileName}.webp`);
 	const { size } = getSocialImageGenerationConfigForType(type);
 	const socialImageMetadata = createImage({

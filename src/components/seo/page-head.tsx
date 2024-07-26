@@ -4,6 +4,7 @@
 */
 
 import { getSiteMetadata, getTheme } from '../../common/config-manager';
+import { JSON_LD_AUTHOR_PATH } from '../../common/constants';
 import {
 	type PageMetadataProp,
 	type PropsWithClassName,
@@ -102,7 +103,7 @@ export function PageHead({
 					...structuredData,
 					author: {
 						'@type': 'Person',
-						'@id': '/author',
+						'@id': JSON_LD_AUTHOR_PATH,
 						name: SITE_METADATA.author.name.full,
 						url: SITE_METADATA.siteUrl,
 						image: SITE_METADATA.author.imageUrl,

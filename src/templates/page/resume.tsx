@@ -8,10 +8,10 @@ import { useRef } from 'react';
 import {
 	getEducationRoles,
 	getEmploymentRoles,
-	getPageMetadata,
 	getSiteMetadata,
 	getVolunteeringRoles,
 } from '../../common/config-manager';
+import { JSON_LD_AUTHOR_PATH } from '../../common/constants';
 import {
 	type PageSection,
 	type ResumePageContext,
@@ -144,9 +144,8 @@ export default function ResumePageTemplate({
 
 export const Head = ({
 	location,
-	pageContext: { socialImagesMetadata },
+	pageContext: { pageMetadata, socialImagesMetadata },
 }: HeadProps<Queries.ResumePageQuery, PageContext>) => {
-	const pageMetadata = getPageMetadata('/resume');
 	const pageTitle = `${pageMetadata.title} | ${SITE_METADATA.shortTitle}`;
 	const metadata = {
 		title: pageTitle,
@@ -163,14 +162,14 @@ export const Head = ({
 			name: pageMetadata.shortTitle,
 			description: pageMetadata.description,
 			author: {
-				'@id': '/author',
+				'@id': JSON_LD_AUTHOR_PATH,
 			},
 			hasDigitalDocumentPermission: [
 				{
 					'@type': 'DigitalDocumentPermission',
 					permissionType: 'https://schema.org/WritePermission',
 					grantee: {
-						'@id': '/author',
+						'@id': JSON_LD_AUTHOR_PATH,
 					},
 				},
 				{

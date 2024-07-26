@@ -10,6 +10,7 @@ import {
 	faPhoneSquare,
 } from '@fortawesome/free-solid-svg-icons';
 import { getSiteMetadata } from '../../common/config-manager';
+import { CONTACT_PATH } from '../../common/constants';
 import { type CityAndStateString, TooltipPosition } from '../../common/types';
 import { getAbsoluteUrl, removeProtocol } from '../../common/utils';
 import { GhostButton } from '../input/ghost-button';
@@ -19,7 +20,6 @@ import { Heading } from '../text/heading';
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
-const CONTACT_PATH = '/contact';
 const CONTACT_URL = removeProtocol(getAbsoluteUrl(CONTACT_PATH));
 const COMMON_GHOST_BUTTON_LINK_PROPS = {
 	tooltipPosition: TooltipPosition.Left,

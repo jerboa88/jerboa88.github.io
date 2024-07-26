@@ -7,6 +7,7 @@ import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import type { HeadProps, PageProps } from 'gatsby';
 import { useCallback, useRef } from 'react';
 import { getSiteMetadata } from '../../common/config-manager';
+import { JSON_LD_AUTHOR_PATH } from '../../common/constants';
 import type {
 	ButtonElementRenderFunction,
 	ProjectPageContext,
@@ -104,7 +105,7 @@ export const Head = ({
 			name: githubRepo.name,
 			description: githubRepo.description,
 			author: {
-				'@id': '/author',
+				'@id': JSON_LD_AUTHOR_PATH,
 			},
 			url: getAbsoluteUrl(location.pathname).toString(),
 			image: githubRepo.openGraphImageUrl,
