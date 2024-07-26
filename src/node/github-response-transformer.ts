@@ -126,7 +126,7 @@ function parseReadmeType(
 		return null;
 	}
 
-	const typeMatches = /type-(\w+)-(\w+)/.exec(badgeImgUrl);
+	const typeMatches = /type-([\w.]+)-(\w+)/.exec(badgeImgUrl);
 
 	if (!typeMatches || typeMatches.length < 3) {
 		return null;
