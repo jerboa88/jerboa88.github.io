@@ -13,7 +13,7 @@ import type {
 	ProjectPageContext,
 	SocialImagesMetadataProp,
 } from '../../common/types';
-import { getAbsoluteUrl } from '../../common/utils';
+import { getAbsoluteUrl, toSentence } from '../../common/utils';
 import { PageLayout } from '../../components/layout/page-layout';
 import { Section } from '../../components/layout/section';
 import { GhostButtonLink } from '../../components/links/ghost-button-link';
@@ -56,7 +56,7 @@ export default function ProjectPageTemplate({
 				ref={useRef(null)}
 			>
 				<Article>
-					<p>{githubRepo.description}</p>
+					<p>{toSentence(githubRepo.description)}</p>
 				</Article>
 				{/* TODO: Re-enable this when code highlighting, relative image URLS, and custom styling is fixed */}
 				{/* {githubRepo.childMarkdownRemark?.html && (
