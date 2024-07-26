@@ -142,7 +142,7 @@ export function clamp(value: number, min: number, max: number) {
 export function toKebabCase(string: string) {
 	return string
 		.replace(/([a-z0-9])([A-Z])/g, '$1-$2')
-		.replace(/[\s_]+/g, '-')
+		.replace(/[\s_.]+/g, '-')
 		.toLowerCase();
 }
 
@@ -174,8 +174,8 @@ export function prettify(json: object | undefined | null) {
 }
 
 // Given a path, return the absolute URL
-export function getAbsoluteUrl(path: string) {
-	return new URL(path, SITE_METADATA.siteUrl);
+export function getAbsoluteUrl(path: string, base?: string) {
+	return new URL(path, base ?? SITE_METADATA.siteUrl);
 }
 
 // Get the MIME type of a file URL based on its extension
