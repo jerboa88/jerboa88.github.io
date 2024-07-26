@@ -8,7 +8,7 @@ import {
 	faArrowUpRightFromSquare,
 } from '@fortawesome/free-solid-svg-icons';
 import { useInView } from 'framer-motion';
-import type { HeadProps } from 'gatsby';
+import type { HeadProps, PageProps } from 'gatsby';
 import { Suspense, lazy, useCallback, useRef } from 'react';
 import {
 	getEmploymentRoles,
@@ -34,9 +34,7 @@ import { Timeline } from '../../components/timeline';
 
 // Types
 
-interface Props {
-	pageContext: SocialImagesMetadataProp & IndexPageContext;
-}
+type PageContext = IndexPageContext & SocialImagesMetadataProp;
 
 // Constants
 
@@ -52,7 +50,7 @@ const ContactForm = lazy(() =>
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function IndexPageTemplate({
 	pageContext: { githubRepos, authorBioHtml },
-}: Props) {
+}: PageProps<null, PageContext>) {
 	const inViewTriggerRef = useRef(null);
 	const expandTitle = useInView(inViewTriggerRef, USE_IN_VIEW_OPTIONS);
 	const sections = [
@@ -156,7 +154,7 @@ export default function IndexPageTemplate({
 export const Head = ({
 	location,
 	pageContext: { socialImagesMetadata },
-}: Props & HeadProps) => {
+}: HeadProps<null, PageContext>) => {
 	const metadata = {
 		title: SITE_METADATA.title,
 		shortTitle: SITE_METADATA.shortTitle,
@@ -176,7 +174,7 @@ export const Head = ({
 	return (
 		<PageHead
 			path={location.pathname}
-			{...{ metadata, structuredData, socialImagesMetadata }}
+			{...{ pageMetadata: metadata, structuredData, socialImagesMetadata }}
 		/>
 	);
 };

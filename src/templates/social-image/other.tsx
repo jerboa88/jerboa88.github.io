@@ -7,24 +7,17 @@ import type { PageProps } from 'gatsby';
 import { useCallback } from 'react';
 import type {
 	ButtonElementRenderFunction,
-	ImageMetadataProp,
-	PageMetadataProp,
+	OtherSocialImagePageContext,
 } from '../../common/types';
 import { Section } from '../../components/layout/section';
 import { SignatureGhostButton } from '../../components/seo/signature-ghost-button';
 import { SocialImage } from '../../components/seo/social-image';
 import { Article } from '../../components/text/article';
 
-// Types
-
-interface PageContext {
-	pageContext: PageMetadataProp & ImageMetadataProp;
-}
-
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function OtherSocialImageTemplate({
 	pageContext: { pageMetadata, imageMetadata },
-}: PageContext & PageProps) {
+}: PageProps<null, OtherSocialImagePageContext>) {
 	const renderButton = useCallback(
 		(({ className, tooltipPosition }) => (
 			<SignatureGhostButton

@@ -4,20 +4,16 @@
 */
 
 import type { PageProps } from 'gatsby';
-import type { ImageMetadataProp } from '../../common/types';
+import type { IndexSocialImagePageContext } from '../../common/types';
 import { GhostButton } from '../../components/input/ghost-button';
 import { HeroHeader } from '../../components/layout/hero-header';
 import { SignatureGhostButton } from '../../components/seo/signature-ghost-button';
 import { SocialImage } from '../../components/seo/social-image';
 
-interface PageContext {
-	pageContext: ImageMetadataProp;
-}
-
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function IndexSocialImageTemplate({
 	pageContext: { imageMetadata },
-}: PageContext & PageProps) {
+}: PageProps<null, IndexSocialImagePageContext>) {
 	return (
 		<SocialImage
 			size={imageMetadata.size}

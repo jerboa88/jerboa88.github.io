@@ -7,23 +7,17 @@ import type { PageProps } from 'gatsby';
 import { useCallback } from 'react';
 import type {
 	ButtonElementRenderFunction,
-	ImageMetadataProp,
+	ProjectSocialImagePageContext,
 } from '../../common/types';
 import { Section } from '../../components/layout/section';
 import { ProjectCard } from '../../components/project-card';
 import { SignatureGhostButton } from '../../components/seo/signature-ghost-button';
 import { SocialImage } from '../../components/seo/social-image';
 
-interface PageContext {
-	pageContext: ImageMetadataProp & {
-		repo: Queries.GithubRepo;
-	};
-}
-
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function ProjectSocialImageTemplate({
-	pageContext: { repo, imageMetadata },
-}: PageContext & PageProps) {
+	pageContext: { githubRepo, imageMetadata },
+}: PageProps<null, ProjectSocialImagePageContext>) {
 	const renderButton = useCallback(
 		(({ className, tooltipPosition }) => (
 			<SignatureGhostButton
@@ -42,7 +36,7 @@ export default function ProjectSocialImageTemplate({
 				renderButton={renderButton}
 				className="py-0 px-10"
 			>
-				<ProjectCard repo={repo} />
+				<ProjectCard repo={githubRepo} />
 			</Section>
 		</SocialImage>
 	);

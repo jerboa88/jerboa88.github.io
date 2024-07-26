@@ -28,20 +28,7 @@ import { Article } from '../../components/text/article';
 
 // Types
 
-type PageContext = SocialImagesMetadataProp & ResumePageContext;
-
-type Data = {
-	resumeSummary: {
-		childMarkdownRemark: {
-			html: string;
-		};
-	};
-	resumeHighlights: {
-		childMarkdownRemark: {
-			html: string;
-		};
-	};
-};
+type PageContext = ResumePageContext & SocialImagesMetadataProp;
 
 // Constants
 
@@ -54,7 +41,7 @@ const VOLUNTEERING_ROLES = limit(getVolunteeringRoles(), 1);
 export default function ResumePageTemplate({
 	data,
 	pageContext: { githubRepos },
-}: PageProps<Data, PageContext>) {
+}: PageProps<Queries.ResumePageQuery, PageContext>) {
 	const sections = [
 		{
 			title: 'Summary',
@@ -81,8 +68,8 @@ export default function ResumePageTemplate({
 			ref: useRef(null),
 		},
 	] as PageSection[];
-	const summaryHtml = data.resumeSummary.childMarkdownRemark.html;
-	const highlightsHtml = data.resumeHighlights.childMarkdownRemark.html;
+	const summaryHtml = data?.resumeSummary?.childMarkdownRemark?.html;
+	const highlightsHtml = data?.resumeHighlights?.childMarkdownRemark?.html;
 
 	return (
 		<ResumePageLayout>
@@ -92,10 +79,12 @@ export default function ResumePageTemplate({
 				dividerClassName="!pb-4"
 				responsive={false}
 			>
-				<Article
-					className="text-base-content prose-li:m-0"
-					html={summaryHtml}
-				/>
+				{summaryHtml && (
+					<Article
+						className="text-base-content prose-li:m-0"
+						html={summaryHtml}
+					/>
+				)}
 			</Section>
 			<Section
 				{...sections[1]}
@@ -103,10 +92,12 @@ export default function ResumePageTemplate({
 				dividerClassName="!pb-4"
 				responsive={false}
 			>
-				<Article
-					html={highlightsHtml}
-					className="text-base-content prose-li:m-0"
-				/>
+				{highlightsHtml && (
+					<Article
+						html={highlightsHtml}
+						className="text-base-content prose-li:m-0"
+					/>
+				)}
 			</Section>
 			<Section
 				{...sections[2]}
@@ -154,7 +145,7 @@ export default function ResumePageTemplate({
 export const Head = ({
 	location,
 	pageContext: { socialImagesMetadata },
-}: HeadProps<Data, PageContext>) => {
+}: HeadProps<Queries.ResumePageQuery, PageContext>) => {
 	const pageMetadata = getPageMetadata('/resume');
 	const pageTitle = `${pageMetadata.title} | ${SITE_METADATA.shortTitle}`;
 	const metadata = {
@@ -199,7 +190,7 @@ export const Head = ({
 			path={location.pathname}
 			theme={ThemeType.Light}
 			className="bg-base-100"
-			{...{ metadata, structuredData, socialImagesMetadata }}
+			{...{ pageMetadata: metadata, structuredData, socialImagesMetadata }}
 		/>
 	);
 };
