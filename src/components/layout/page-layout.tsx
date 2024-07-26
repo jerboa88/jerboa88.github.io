@@ -35,7 +35,7 @@ const ParticlesBackground = lazy(() =>
 
 export function PageLayout({
 	className,
-	expandTitle = false,
+	expandTitle,
 	sections = [],
 	children,
 }: Props) {

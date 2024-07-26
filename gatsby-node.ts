@@ -2,10 +2,15 @@ import { join, resolve } from 'node:path';
 import type { CreatePagesArgs, GatsbyNode } from 'gatsby';
 import { getPageMetadata, getSiteMetadata } from './src/common/config-manager';
 import {
+	ABOUT_PATH,
+	CONTACT_PATH,
+	EXPERIENCE_PATH,
+	INDEX_PATH,
 	PAGE_TEMPLATES_DIR,
-	PROJECTS_DIR,
-	PROJECTS_DIR_SHORT,
-	SOCIAL_IMAGES_DIR as SOCIAL_IMAGE_PAGES_DIR,
+	PROJECTS_PATH,
+	PROJECTS_PATH_SHORT,
+	RESUME_PATH,
+	SOCIAL_IMAGES_PATH,
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 } from './src/common/constants';
 import {
@@ -121,7 +126,7 @@ function createIndexPage(
 	};
 
 	createPage({
-		path: '/',
+		path: INDEX_PATH,
 		component: INDEX_PAGE_TEMPLATE,
 		socialImageComponent: INDEX_OG_IMAGE_TEMPLATE,
 		context: context,
@@ -135,8 +140,8 @@ function sortByCreatedAt(a: Queries.GithubRepo, b: Queries.GithubRepo) {
 
 // Create the resume page
 function createResumePage(githubRepos: Queries.GithubRepo[]) {
-	const path = '/resume';
-	const pageMetadata: PageMetadata | EmptyObject = getPageMetadata(path) || {};
+	const pageMetadata: PageMetadata | EmptyObject =
+		getPageMetadata(RESUME_PATH) || {};
 	const context: ResumePageContext = {
 		pageMetadata,
 		githubRepos: getSubsetOfGithubRepos(
@@ -147,7 +152,7 @@ function createResumePage(githubRepos: Queries.GithubRepo[]) {
 	};
 
 	createPage({
-		path: path,
+		path: RESUME_PATH,
 		component: RESUME_PAGE_TEMPLATE,
 		socialImageComponent: OTHER_OG_IMAGE_TEMPLATE,
 		context: context,
@@ -158,11 +163,11 @@ function createResumePage(githubRepos: Queries.GithubRepo[]) {
 function createProjectPages(githubRepos: Queries.GithubRepo[]) {
 	for (const githubRepo of githubRepos) {
 		const path: AbsolutePathString = join(
-			PROJECTS_DIR,
+			PROJECTS_PATH,
 			githubRepo.slug,
 		) as AbsolutePathString;
 		const shortPath: AbsolutePathString = join(
-			PROJECTS_DIR_SHORT,
+			PROJECTS_PATH_SHORT,
 			githubRepo.slug,
 		) as AbsolutePathString;
 		const context: ProjectPageContext = {
@@ -184,10 +189,10 @@ function createProjectPages(githubRepos: Queries.GithubRepo[]) {
 // Create client-side redirects
 function createRedirects() {
 	const redirects = [
-		['/about', '/#about'],
-		['/projects', '/#projects'],
-		['/experience', '/#experience'],
-		['/contact', '/#contact'],
+		[ABOUT_PATH, '/#about'],
+		[PROJECTS_PATH, '/#projects'],
+		[EXPERIENCE_PATH, '/#experience'],
+		[CONTACT_PATH, '/#contact'],
 	];
 
 	for (const [fromPath, toPath] of redirects) {
@@ -229,7 +234,7 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
 	}
 
 	// Skip social images
-	if (page.path.startsWith(SOCIAL_IMAGE_PAGES_DIR)) {
+	if (page.path.startsWith(SOCIAL_IMAGES_PATH)) {
 		return;
 	}
 
@@ -258,8 +263,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 	const githubRepos = await fetchGithubRepos(graphql);
 	const authorBioHtml = getAuthorBioHtml(githubRepos);
 
-	// TODO: Re-enable this when project pages are implemented
-	// createProjectPages(githubRepos);
+	createProjectPages(githubRepos);
 	createIndexPage(githubRepos, authorBioHtml);
 	createResumePage(githubRepos);
 	createRedirects();

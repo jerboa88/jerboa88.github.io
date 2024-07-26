@@ -5,6 +5,7 @@
 
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { getSiteMetadata } from '../../common/config-manager';
+import { PRIVACY_POLICY_PATH } from '../../common/constants';
 import { TooltipPosition } from '../../common/types';
 import { Divider } from '../divider';
 import { GhostButtonLink } from '../links/ghost-button-link';
@@ -27,7 +28,7 @@ export function Footer() {
 							tooltipPosition={TooltipPosition.Right}
 						/>
 						<GhostButtonLink
-							to="/privacy-policy"
+							to={PRIVACY_POLICY_PATH}
 							text="Privacy"
 							tooltipText="View the Privacy Policy"
 							tooltipPosition={TooltipPosition.Right}

@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { getSiteMetadata } from '../../common/config-manager';
 import { TITLE_LAYOUT_ID } from '../../common/constants';
 import type { PageSection } from '../../common/types';
-import { getClassNameProps } from '../../common/utils';
+import { getClassNameProps, isDefined } from '../../common/utils';
 import { Divider } from '../divider';
 import { Tabs } from '../tabs';
 import { Heading } from '../text/heading';
@@ -15,7 +15,7 @@ import { Heading } from '../text/heading';
 // Types
 
 interface Props {
-	expandTitle?: boolean;
+	expandTitle?: boolean | undefined;
 	sections: PageSection[];
 }
 
@@ -23,7 +23,7 @@ interface Props {
 
 const SITE_METADATA = getSiteMetadata();
 
-export function Header({ expandTitle = false, sections }: Props) {
+export function Header({ expandTitle, sections }: Props) {
 	const headerClassNameProps = getClassNameProps(
 		'fixed top-0 z-30 w-full transition',
 		!expandTitle && 'bg-glass backdrop-blur-md shadow-lg', // Transparent bg when title is expanded
@@ -36,13 +36,19 @@ export function Header({ expandTitle = false, sections }: Props) {
 		'transition-opacity',
 		expandTitle ? 'opacity-0' : 'opacity-100', // Hide divider when title is expanded
 	);
+	const layoutIdProp: { layoutId?: string } = {};
+
+	// If expandTitle is not specified, don't animate the title
+	if (isDefined(expandTitle)) {
+		layoutIdProp.layoutId = TITLE_LAYOUT_ID;
+	}
 
 	return (
 		<header {...headerClassNameProps}>
 			<div className="mix-blend-overlay">
 				<div {...containerClassNameProps}>
 					{!expandTitle && (
-						<motion.a href="/" layoutId={TITLE_LAYOUT_ID}>
+						<motion.a href="/" {...layoutIdProp}>
 							<Heading className="px-2 m-0 text-xl">
 								<span className="inline sm:hidden">
 									{SITE_METADATA.author.name.initial}

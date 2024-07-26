@@ -11,7 +11,7 @@ import {
 	getSocialImageGenerationConfigForType,
 	getTheme,
 } from './src/common/config-manager';
-import { SOCIAL_IMAGES_DIR } from './src/common/constants';
+import { INDEX_PATH, SOCIAL_IMAGES_PATH } from './src/common/constants';
 import { SocialImageType, ThemeType } from './src/common/types';
 import { getAbsoluteUrl } from './src/common/utils';
 import tailwindConfig from './tailwind.config';
@@ -71,7 +71,7 @@ const config: GatsbyConfig = {
 					changefreq: 'monthly',
 				}),
 				// Prevent temporary components rendered by gatsby-plugin-open-graph-images from being included in the sitemap
-				excludes: [`/${SOCIAL_IMAGES_DIR}/**/*`],
+				excludes: [`/${SOCIAL_IMAGES_PATH}/**/*`],
 			},
 		},
 		{
@@ -95,7 +95,7 @@ const config: GatsbyConfig = {
 				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
 				short_name: SITE_METADATA.shortTitle,
 				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
-				start_url: '/',
+				start_url: INDEX_PATH,
 				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
 				background_color: DARK_THEME['base-100'],
 				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin

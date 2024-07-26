@@ -3,22 +3,27 @@
 	-----------------------------
 */
 
+import {
+	NOT_FOUND_PATH,
+	PRIVACY_POLICY_PATH,
+	RESUME_PATH,
+} from '../../common/constants';
 import type { PagesMetadataConfig } from '../../common/types';
 
 export const pagesMetadataConfig: PagesMetadataConfig = {
-	'/privacy-policy': {
+	[PRIVACY_POLICY_PATH]: {
 		title: 'Privacy Policy',
 		shortTitle: 'Privacy',
 		description:
 			'This privacy notice describes how and why johng.io might collect, store, use, and/or share your information.',
 	},
-	'/resume': {
+	[RESUME_PATH]: {
 		title: 'Resume',
 		shortTitle: 'Resume',
 		description:
 			'Resume for John Goodliff, a software developer based in Edmonton, Alberta.',
 	},
-	'/404': {
+	[NOT_FOUND_PATH]: {
 		title: '404 - Page Not Found',
 		shortTitle: '404',
 		description: "Oof, there's nothing here.",

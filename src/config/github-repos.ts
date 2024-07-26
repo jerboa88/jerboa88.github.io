@@ -16,7 +16,7 @@ export const githubReposConfig: GithubReposConfig = {
 				resume: EntryVisibility.Hide,
 			},
 		},
-		'Compare-Form-Backends': {
+		'compare-form-backends': {
 			visibilityForPage: {
 				index: EntryVisibility.Show,
 			},
@@ -32,7 +32,7 @@ export const githubReposConfig: GithubReposConfig = {
 				resume: EntryVisibility.Hide,
 			},
 		},
-		'Game-Maps': {
+		'game-maps': {
 			visibilityForPage: {
 				resume: EntryVisibility.Hide,
 			},
@@ -48,7 +48,7 @@ export const githubReposConfig: GithubReposConfig = {
 				resume: EntryVisibility.Hide,
 			},
 		},
-		'Image-Signer': {
+		'image-signer': {
 			visibilityForPage: {
 				index: EntryVisibility.Hide,
 				resume: EntryVisibility.Hide,
@@ -60,19 +60,19 @@ export const githubReposConfig: GithubReposConfig = {
 				resume: EntryVisibility.Hide,
 			},
 		},
-		'jerboa88.github.io': {
+		'jerboa88-github-io': {
 			visibilityForPage: {
 				index: EntryVisibility.Hide,
 				resume: EntryVisibility.Hide,
 			},
 		},
-		'Make-me-laugh': {
+		'make-me-laugh': {
 			visibilityForPage: {
 				index: EntryVisibility.Hide,
 				resume: EntryVisibility.Hide,
 			},
 		},
-		OnMyWay: {
+		'on-my-way': {
 			visibilityForPage: {
 				index: EntryVisibility.Show,
 				resume: EntryVisibility.Pin,
