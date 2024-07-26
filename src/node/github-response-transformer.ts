@@ -17,7 +17,13 @@ import {
 	type GithubRepo,
 	type UrlString,
 } from '../common/types';
-import { isDefined, limit, toTitleCase } from '../common/utils';
+import {
+	getAbsoluteUrl,
+	isDefined,
+	limit,
+	toKebabCase,
+	toTitleCase,
+} from '../common/utils';
 import { group, groupEnd, info, panic, warn } from './logger';
 
 // Types
@@ -100,7 +106,7 @@ function parseReadmeLogoUrl(
 
 		const relativeLogoPath = `${owner}/${slug}/HEAD/${logoUrl}`;
 
-		return new URL(relativeLogoPath, GITHUB_CONTENT_BASE_URL).toString();
+		return getAbsoluteUrl(relativeLogoPath, GITHUB_CONTENT_BASE_URL).toString();
 	}
 
 	warn('README logo not found');
@@ -241,7 +247,7 @@ function excludeRepo(
 function transformGithubRepoNode(
 	githubRepoNode: Queries.GithubDataDataUserRepositoriesNodes,
 ): TransformRepoNodeReturnValue {
-	const slug = githubRepoNode.name;
+	const slug = toKebabCase(githubRepoNode.name);
 	const languages = transformLanguages(githubRepoNode?.languages);
 	const topics = transformTopics(githubRepoNode?.repositoryTopics);
 	const createdAt = new Date(githubRepoNode.createdAt);
