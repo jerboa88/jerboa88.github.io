@@ -12,13 +12,13 @@ interface Props extends PropsWithClassName {
 
 export function Pill({ className, text }: Props) {
 	const classNameProps = getClassNameProps(
-		'inline-block size-fit px-3 py-2 rounded-lg drop-shadow-sm shadow-emboss',
+		'inline-block size-fit px-4 py-3 rounded-lg drop-shadow-sm shadow-emboss z-20 text-sm font-button',
 		className,
 	);
 
 	return (
 		<div key={text} {...classNameProps}>
-			<span className="text-sm">{text}</span>
+			{text}
 		</div>
 	);
 }

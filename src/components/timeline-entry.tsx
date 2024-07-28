@@ -37,7 +37,7 @@ export function TimelineEntry({ role }: Props) {
 				<div className="p-10">
 					<div className="flex flex-row justify-between items-center mb-8">
 						<div className="flex flex-col">
-							<SubsectionHeading className="mt-0 mr-2 mb-4">
+							<SubsectionHeading className="mr-2 mb-4">
 								{role.title}
 							</SubsectionHeading>
 							<div className="flex flex-row items-center">
