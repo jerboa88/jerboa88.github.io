@@ -3,7 +3,6 @@
 	-------------------------------------------
 */
 
-import type { SentenceString } from '../common/types';
 import { toSentence } from '../common/utils';
 import { ResumeEntry } from './resume-entry';
 
@@ -15,13 +14,10 @@ export function ResumeProjectEntries({ githubRepos }: Props) {
 	return (
 		<div className="flex flex-col gap-4">
 			{githubRepos.map((githubRepo) => {
-				const descriptionSentences: SentenceString[] = [
-					toSentence(githubRepo.description),
-				];
-
-				if (githubRepo.commentary) {
-					descriptionSentences.push(toSentence(githubRepo.commentary));
-				}
+				const expositionSentence = githubRepo.exposition
+					? toSentence(githubRepo.exposition)
+					: null;
+				const descriptionSentence = toSentence(githubRepo.description);
 
 				return (
 					<ResumeEntry
@@ -30,7 +26,7 @@ export function ResumeProjectEntries({ githubRepos }: Props) {
 						titleUrl={githubRepo.url}
 						titleTooltip="View project on GitHub"
 						tagline={githubRepo.languages.join(', ')}
-						bullets={[descriptionSentences.join(' ') as SentenceString]}
+						bullets={[expositionSentence ?? descriptionSentence]}
 						endDate={new Date(githubRepo.createdAt)}
 					/>
 				);
