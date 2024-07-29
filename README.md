@@ -18,7 +18,7 @@
 		</a>
   </p>
 
-  <p class="projectDesc">
+  <p class="projectDesc" data-exposition="My personal/portfolio site. Made by hand using Gatsby, React, and Tailwind CSS, this static site fetches repository data from the GitHub GraphQL API to display a selection of my public repositories on the home page. This project afforded to me a great opportunity to learn more about TypeScript, React, and the GraphQL Data Layer.">
     My personal/portfolio site. Made by hand using Gatsby, React, Tailwind CSS, and daisyUI.
   </p>
 
