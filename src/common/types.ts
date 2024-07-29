@@ -324,10 +324,10 @@ export type GithubReposConfig = {
 
 // GitHub repo fields used to create a GithubRepo node
 export type GithubRepo = {
-	commentary: string | null;
 	createdAt: Date;
 	description: string;
 	descriptionHtml: string | null;
+	exposition: string | null;
 	forkCount: number;
 	homepageUrl: string | null;
 	isFork: boolean;

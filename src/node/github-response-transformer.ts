@@ -30,7 +30,7 @@ import { group, groupEnd, info, panic, warn } from './logger';
 
 type ParseReadmeDescriptionReturnValue = {
 	descriptionHtml: string | null;
-	commentary: string | null;
+	exposition: string | null;
 };
 
 type TransformReadmeReturnValue = ParseReadmeDescriptionReturnValue & {
@@ -68,26 +68,26 @@ function parseReadmeName(
 	return null;
 }
 
-// Extract a project's commentary and description from its README
+// Extract a project's exposition and description from its README
 function parseReadmeDescription(
 	fragment: DocumentFragment,
 ): ParseReadmeDescriptionReturnValue {
 	const descriptionElement = fragment.querySelector('.projectDesc');
 	const descriptionHtml = descriptionElement?.innerHTML?.trim() ?? null;
-	const commentary =
-		descriptionElement?.getAttribute('data-commentary')?.trim() ?? null;
+	const exposition =
+		descriptionElement?.getAttribute('data-exposition')?.trim() ?? null;
 
 	if (!isDefined(descriptionHtml)) {
 		warn('README description not found');
 	}
 
-	if (!isDefined(commentary)) {
-		warn('README commentary not found');
+	if (!isDefined(exposition)) {
+		warn('README exposition not found');
 	}
 
 	return {
 		descriptionHtml,
-		commentary,
+		exposition,
 	};
 }
 
@@ -147,19 +147,19 @@ function transformReadme(
 		return {
 			name: null,
 			descriptionHtml: null,
-			commentary: null,
+			exposition: null,
 			logoUrl: null,
 			type: null,
 		};
 	}
 
 	const fragment = JSDOM.fragment(readmeResponse.text);
-	const { descriptionHtml, commentary } = parseReadmeDescription(fragment);
+	const { descriptionHtml, exposition } = parseReadmeDescription(fragment);
 
 	return {
 		name: parseReadmeName(fragment),
 		descriptionHtml,
-		commentary,
+		exposition,
 		logoUrl: parseReadmeLogoUrl(slug, owner, fragment),
 		type: parseReadmeType(fragment),
 	};
@@ -271,7 +271,7 @@ function transformGithubRepoNode(
 	const description: string = githubRepoNode.description as string;
 
 	const githubRepo = {
-		commentary: readmeInfo.commentary,
+		exposition: readmeInfo.exposition,
 		createdAt: createdAt,
 		description: description,
 		descriptionHtml: readmeInfo.descriptionHtml,

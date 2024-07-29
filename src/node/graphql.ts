@@ -61,10 +61,10 @@ Define schema for custom GithubRepo nodes
 """
 type GithubRepo implements Node {
 	childMarkdownRemark: MarkdownRemark
-	commentary: String
 	createdAt: Date!
 	description: String!
 	descriptionHtml: String
+	exposition: String
 	forkCount: Int!
 	homepageUrl: String
 	isFork: Boolean!
@@ -91,10 +91,10 @@ query GithubRepos {
 			childMarkdownRemark {
 				html
 			}
-			commentary
 			createdAt
 			description
 			descriptionHtml
+			exposition
 			forkCount
 			homepageUrl
 			isFork
