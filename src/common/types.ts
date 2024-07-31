@@ -371,6 +371,9 @@ export type ResumePageContext = PageMetadataProp & {
 	githubRepos: Queries.GithubRepo[];
 };
 
+// Page context for the cover letter page
+export type CoverLetterPageContext = PageMetadataProp;
+
 // Page context for the privacy policy page
 export type PrivacyPageContext = PageMetadataProp;
 

@@ -11,7 +11,11 @@ import {
 	getSocialImageGenerationConfigForType,
 	getTheme,
 } from './src/common/config-manager';
-import { INDEX_PATH, SOCIAL_IMAGES_PATH } from './src/common/constants';
+import {
+	COVER_LETTER_PATH,
+	INDEX_PATH,
+	SOCIAL_IMAGES_PATH,
+} from './src/common/constants';
 import { SocialImageType, ThemeType } from './src/common/types';
 import { getAbsoluteUrl } from './src/common/utils';
 import tailwindConfig from './tailwind.config';
@@ -71,7 +75,7 @@ const config: GatsbyConfig = {
 					changefreq: 'monthly',
 				}),
 				// Prevent temporary components rendered by gatsby-plugin-open-graph-images from being included in the sitemap
-				excludes: [`/${SOCIAL_IMAGES_PATH}/**/*`],
+				excludes: [`/${SOCIAL_IMAGES_PATH}/**/*`, COVER_LETTER_PATH],
 			},
 		},
 		{
