@@ -1,5 +1,5 @@
 /*
-	Layout component that provides basic styles for the resume page
+	Layout component that provides basic styles for printable pages
 	---------------------------------------------------------------
 */
 
@@ -13,9 +13,11 @@ import { ResumeHeader } from './resume-header';
 
 // Types
 
-interface Props extends PropsWithClassName, PropsWithChildren {}
+interface Props extends PropsWithClassName, PropsWithChildren {
+	numOfPages: number;
+}
 
-export function ResumePageLayout({ className, children }: Props) {
+export function DocumentPageLayout({ className, numOfPages, children }: Props) {
 	const classNameProps = getClassNameProps(
 		'flex-col gap-4 p-[5%] print:p-0 justify-between items-center mx-auto text-base min-h-svh scroll-smooth selection:bg-primary selection:text-primary-content',
 		className,
@@ -28,7 +30,7 @@ export function ResumePageLayout({ className, children }: Props) {
 				<div {...classNameProps}>
 					<ResumeHeader />
 					{children}
-					<PageCounter numOfPages={2} />
+					<PageCounter numOfPages={numOfPages} />
 				</div>
 			</MotionConfig>
 		</StrictMode>

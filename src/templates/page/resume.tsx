@@ -19,7 +19,7 @@ import {
 	ThemeType,
 } from '../../common/types';
 import { getAbsoluteUrl, limit } from '../../common/utils';
-import { ResumePageLayout } from '../../components/layout/resume-page-layout';
+import { DocumentPageLayout } from '../../components/layout/document-page-layout';
 import { Section } from '../../components/layout/section';
 import { ResumeProjectEntries } from '../../components/resume-project-entries';
 import { ResumeRoleEntries } from '../../components/resume-role-entries';
@@ -60,11 +60,11 @@ export default function ResumePageTemplate({
 			ref: useRef(null),
 		},
 		{
-			title: 'Projects',
+			title: 'Volunteering',
 			ref: useRef(null),
 		},
 		{
-			title: 'Volunteering',
+			title: 'Projects',
 			ref: useRef(null),
 		},
 	] as PageSection[];
@@ -72,7 +72,7 @@ export default function ResumePageTemplate({
 	const highlightsHtml = data?.resumeHighlights?.childMarkdownRemark?.html;
 
 	return (
-		<ResumePageLayout>
+		<DocumentPageLayout numOfPages={2}>
 			<Section
 				{...sections[0]}
 				sectionHeaderClassName="text-primary"
@@ -121,7 +121,7 @@ export default function ResumePageTemplate({
 				dividerClassName="!pb-4"
 				responsive={false}
 			>
-				<ResumeProjectEntries githubRepos={githubRepos} />
+				<ResumeRoleEntries roles={VOLUNTEERING_ROLES} />
 			</Section>
 			<Section
 				{...sections[5]}
@@ -129,7 +129,7 @@ export default function ResumePageTemplate({
 				dividerClassName="!pb-4"
 				responsive={false}
 			>
-				<ResumeRoleEntries roles={VOLUNTEERING_ROLES} />
+				<ResumeProjectEntries githubRepos={githubRepos} />
 			</Section>
 			<Section
 				className="text-center font-bold"
@@ -138,7 +138,7 @@ export default function ResumePageTemplate({
 			>
 				<p className="text-base">References available upon request</p>
 			</Section>
-		</ResumePageLayout>
+		</DocumentPageLayout>
 	);
 }
 
@@ -194,7 +194,7 @@ export const Head = ({
 	);
 };
 
-export const pageQuery = graphql`
+export const resumePageQuery = graphql`
   query ResumePage {
 		resumeSummary: file(name: {eq: "resume-summary"}) {
 			childMarkdownRemark {
