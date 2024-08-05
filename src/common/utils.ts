@@ -139,11 +139,11 @@ export function clamp(value: number, min: number, max: number) {
 }
 
 // Convert a string to kebab case
-export function toKebabCase(string: string) {
+export function toKebabCase(string: string): Lowercase<string> {
 	return string
 		.replace(/([a-z0-9])([A-Z])/g, '$1-$2')
 		.replace(/[\s_.]+/g, '-')
-		.toLowerCase();
+		.toLowerCase() as Lowercase<string>;
 }
 
 // Capitalize the first letter of a word
@@ -204,6 +204,22 @@ export function removeProtocol(url: UrlString | URL) {
 // Return the first n elements of an array
 export function limit<T>(array: T[], limit: number): T[] {
 	return array.slice(0, limit);
+}
+
+/**
+ * Convert an array of objects into an object with a key-value pair
+ *
+ * @param array An array of objects
+ * @param key The key to use as the new object key
+ * @returns An array of objects where the key is the value of the specified key
+ */
+export function arrayToObject<T extends object, K extends keyof T>(
+	array: T[],
+	key: K,
+): Record<string, T> {
+	const keyValueMatrix = array.map((item) => [String(item[key]), item]);
+
+	return Object.fromEntries(keyValueMatrix);
 }
 
 // Return true if a value is defined
