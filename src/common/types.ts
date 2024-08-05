@@ -365,7 +365,7 @@ export type OtherProject = Overwrite<
 > & {
 	category: ProjectCategory.Other;
 	stargazerCount?: number;
-	url?: string;
+	url?: UrlString;
 };
 
 /**
@@ -385,7 +385,7 @@ type GithubRepoProjectConfig = ProjectVisibilityProp &
 /**
  * Config for a manually added project
  */
-export type OtherProjectConfig = ProjectVisibilityProp &
+export type OtherProjectConfig = Partial<ProjectVisibilityProp> &
 	Overwrite<
 		OtherProject,
 		{
