@@ -3,17 +3,24 @@
 	--------------------------------------------------
 */
 
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import type { HeadProps, PageProps } from 'gatsby';
 import { useCallback, useRef } from 'react';
 import { getSiteMetadata } from '../../common/config-manager';
-import { JSON_LD_AUTHOR_PATH } from '../../common/constants';
-import type {
-	ButtonElementRenderFunction,
-	ProjectPageContext,
-	SocialImagesMetadataProp,
+import { JSON_LD_AUTHOR_PATH, PROJECTS_PATH } from '../../common/constants';
+import {
+	type ButtonElementRenderFunction,
+	ProjectCategory,
+	type ProjectPageContext,
+	type SocialImagesMetadataProp,
 } from '../../common/types';
-import { getAbsoluteUrl, toSentence } from '../../common/utils';
+import {
+	getAbsoluteUrl,
+	isDefined,
+	removeUndefinedProps,
+	toSentence,
+} from '../../common/utils';
 import { PageLayout } from '../../components/layout/page-layout';
 import { Section } from '../../components/layout/section';
 import { GhostButtonLink } from '../../components/links/ghost-button-link';
@@ -28,21 +35,43 @@ type PageContext = ProjectPageContext & SocialImagesMetadataProp;
 
 const SITE_METADATA = getSiteMetadata();
 
+// Functions
+
+function getSectionButtonRenderFunction(
+	project: PageContext['project'],
+): ButtonElementRenderFunction {
+	const projectUrl = project.url;
+
+	if (!isDefined(projectUrl)) {
+		return () => <></>;
+	}
+
+	let buttonText = 'View project page';
+	let buttonIcon = faGlobe;
+
+	if (project.category === ProjectCategory.GithubRepo) {
+		buttonText = 'View source code on GitHub';
+		buttonIcon = faGithub;
+	}
+
+	return (remainingProps) => (
+		<GhostButtonLink
+			text={buttonText}
+			icon={buttonIcon}
+			to={projectUrl}
+			responsive
+			flip
+			{...remainingProps}
+		/>
+	);
+}
+
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function ProjectPageTemplate({
-	pageContext: { githubRepo },
+	pageContext: { project },
 }: PageProps<null, PageContext>) {
-	const githubButton = useCallback(
-		((remainingProps) => (
-			<GhostButtonLink
-				text="View project on GitHub"
-				icon={faArrowUpRightFromSquare}
-				to={githubRepo.url}
-				responsive
-				flip
-				{...remainingProps}
-			/>
-		)) as ButtonElementRenderFunction,
+	const renderSectionButton = useCallback(
+		getSectionButtonRenderFunction(project),
 		[],
 	);
 
@@ -51,16 +80,16 @@ export default function ProjectPageTemplate({
 			{/* Dummy element to force center alignment of section */}
 			<div />
 			<Section
-				title={githubRepo.name}
-				renderButton={githubButton}
+				title={project.name}
+				renderButton={renderSectionButton}
 				ref={useRef(null)}
 			>
 				<Article>
-					<p>{toSentence(githubRepo.description)}</p>
+					<p>{toSentence(project.description)}</p>
 				</Article>
 				{/* TODO: Re-enable this when code highlighting, relative image URLS, and custom styling is fixed */}
-				{/* {githubRepo.childMarkdownRemark?.html && (
-					<Article html={githubRepo.childMarkdownRemark.html} />
+				{/* {project.childMarkdownRemark?.html && (
+					<Article html={project.childMarkdownRemark.html} />
 				)} */}
 			</Section>
 		</PageLayout>
@@ -69,20 +98,30 @@ export default function ProjectPageTemplate({
 
 export const Head = ({
 	location,
-	pageContext: { githubRepo, socialImagesMetadata },
+	pageContext: { project, socialImagesMetadata },
 }: HeadProps<null, PageContext>) => {
-	const pageTitle = `${githubRepo.name} | ${SITE_METADATA.shortTitle}`;
+	const pageTitle = `${project.name} | ${SITE_METADATA.shortTitle}`;
 	const metadata = {
 		title: pageTitle,
-		shortTitle: githubRepo.name,
-		description: githubRepo.description,
+		shortTitle: project.name,
+		description: project.description,
 		path: location.pathname,
 	};
+
+	let githubRepoProjectProps = {};
+
+	if (project.category === ProjectCategory.GithubRepo) {
+		githubRepoProjectProps = removeUndefinedProps({
+			image: project.openGraphImageUrl,
+			// TODO: Add applicationCategory and operatingSystem properties
+			license: project.licenseInfo?.url,
+		});
+	}
 
 	const structuredData = {
 		'@type': 'WebPage',
 		name: pageTitle,
-		description: githubRepo.description,
+		description: project.description,
 		url: getAbsoluteUrl(location.pathname).toString(),
 		breadcrumb: {
 			'@type': 'BreadcrumbList',
@@ -91,30 +130,28 @@ export const Head = ({
 					'@type': 'ListItem',
 					position: 1,
 					name: 'Projects',
-					item: getAbsoluteUrl('#projects').toString(),
+					item: getAbsoluteUrl(PROJECTS_PATH).toString(),
 				},
 				{
 					'@type': 'ListItem',
 					position: 2,
-					name: githubRepo.name,
+					name: project.name,
 				},
 			],
 		},
 		mainEntity: {
 			'@type': 'SoftwareApplication',
-			name: githubRepo.name,
-			description: githubRepo.description,
+			name: project.name,
+			description: project.description,
 			author: {
 				'@id': JSON_LD_AUTHOR_PATH,
 			},
 			url: getAbsoluteUrl(location.pathname).toString(),
-			image: githubRepo.openGraphImageUrl,
-			// TODO: Add applicationCategory and operatingSystem properties
-			license: githubRepo.licenseInfo?.url,
 			offers: {
 				'@type': 'Offer',
 				price: 0,
 			},
+			...githubRepoProjectProps,
 		},
 	};
 

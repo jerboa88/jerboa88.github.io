@@ -85,7 +85,7 @@ export const Head = ({
 	);
 };
 
-export const pageQuery = graphql`
+export const privacyPolicyPageQuery = graphql`
   query PrivacyPolicyPage {
 		file(name: {eq: "privacy-policy"}) {
 			childMarkdownRemark {

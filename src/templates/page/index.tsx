@@ -49,7 +49,7 @@ const ContactForm = lazy(() =>
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function IndexPageTemplate({
-	pageContext: { githubRepos, authorBioHtml },
+	pageContext: { projects, authorBioHtml },
 }: PageProps<null, PageContext>) {
 	const inViewTriggerRef = useRef(null);
 	const expandTitle = useInView(inViewTriggerRef, USE_IN_VIEW_OPTIONS);
@@ -123,7 +123,7 @@ export default function IndexPageTemplate({
 				className="min-h-lvh"
 				{...sections[1]}
 			>
-				<ProjectCardGallery projects={githubRepos} />
+				<ProjectCardGallery projects={projects} />
 			</Section>
 			<Section
 				renderButton={experienceSectionButton}

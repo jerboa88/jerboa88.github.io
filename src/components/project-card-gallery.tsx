@@ -3,12 +3,12 @@
 	---------------------------
 */
 
-import type { PropsWithClassName } from '../common/types';
+import type { Project, PropsWithClassName } from '../common/types';
 import { getClassNameProps } from '../common/utils';
 import { ProjectCard } from '../components/project-card';
 
 interface Props extends PropsWithClassName {
-	projects: Queries.GithubRepo[];
+	projects: Project[];
 }
 
 export function ProjectCardGallery({ className, projects }: Props) {
@@ -19,8 +19,8 @@ export function ProjectCardGallery({ className, projects }: Props) {
 
 	return (
 		<div {...classNameProps}>
-			{projects.map((repo) => (
-				<ProjectCard key={repo.slug} repo={repo} />
+			{projects.map((project) => (
+				<ProjectCard key={project.slug} project={project} />
 			))}
 		</div>
 	);

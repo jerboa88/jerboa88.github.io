@@ -19,7 +19,7 @@ import {
 	ThemeType,
 } from '../../common/types';
 import { getAbsoluteUrl, limit } from '../../common/utils';
-import { ResumePageLayout } from '../../components/layout/resume-page-layout';
+import { DocumentPageLayout } from '../../components/layout/document-page-layout';
 import { Section } from '../../components/layout/section';
 import { ResumeProjectEntries } from '../../components/resume-project-entries';
 import { ResumeRoleEntries } from '../../components/resume-role-entries';
@@ -33,14 +33,14 @@ type PageContext = ResumePageContext & SocialImagesMetadataProp;
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
-const EMPLOYMENT_ROLES = limit(getEmploymentRoles(), 1);
+const EMPLOYMENT_ROLES = limit(getEmploymentRoles(), 2);
 const EDUCATION_ROLES = limit(getEducationRoles(), 1);
 const VOLUNTEERING_ROLES = limit(getVolunteeringRoles(), 1);
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function ResumePageTemplate({
 	data,
-	pageContext: { githubRepos },
+	pageContext: { projects },
 }: PageProps<Queries.ResumePageQuery, PageContext>) {
 	const sections = [
 		{
@@ -60,11 +60,11 @@ export default function ResumePageTemplate({
 			ref: useRef(null),
 		},
 		{
-			title: 'Projects',
+			title: 'Volunteering',
 			ref: useRef(null),
 		},
 		{
-			title: 'Volunteering',
+			title: 'Projects',
 			ref: useRef(null),
 		},
 	] as PageSection[];
@@ -72,7 +72,7 @@ export default function ResumePageTemplate({
 	const highlightsHtml = data?.resumeHighlights?.childMarkdownRemark?.html;
 
 	return (
-		<ResumePageLayout>
+		<DocumentPageLayout numOfPages={2}>
 			<Section
 				{...sections[0]}
 				sectionHeaderClassName="text-primary"
@@ -121,7 +121,7 @@ export default function ResumePageTemplate({
 				dividerClassName="!pb-4"
 				responsive={false}
 			>
-				<ResumeProjectEntries githubRepos={githubRepos} />
+				<ResumeRoleEntries roles={VOLUNTEERING_ROLES} />
 			</Section>
 			<Section
 				{...sections[5]}
@@ -129,7 +129,7 @@ export default function ResumePageTemplate({
 				dividerClassName="!pb-4"
 				responsive={false}
 			>
-				<ResumeRoleEntries roles={VOLUNTEERING_ROLES} />
+				<ResumeProjectEntries projects={projects} />
 			</Section>
 			<Section
 				className="text-center font-bold"
@@ -138,7 +138,7 @@ export default function ResumePageTemplate({
 			>
 				<p className="text-base">References available upon request</p>
 			</Section>
-		</ResumePageLayout>
+		</DocumentPageLayout>
 	);
 }
 
@@ -194,7 +194,7 @@ export const Head = ({
 	);
 };
 
-export const pageQuery = graphql`
+export const resumePageQuery = graphql`
   query ResumePage {
 		resumeSummary: file(name: {eq: "resume-summary"}) {
 			childMarkdownRemark {

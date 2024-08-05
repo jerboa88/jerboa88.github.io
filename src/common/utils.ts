@@ -7,6 +7,17 @@ import { panic } from '../node/logger';
 import { getSiteMetadata } from './config-manager';
 import type { PropsWithClassName, SentenceString, UrlString } from './types';
 
+// Types
+
+/**
+ * Returns the same type as the input object, but without any undefined/null properties
+ *
+ * @typeParam T - The object type
+ */
+type WithoutUndefined<T extends object> = {
+	[K in keyof T]: T[K] extends undefined | null ? never : T[K];
+};
+
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
@@ -139,11 +150,11 @@ export function clamp(value: number, min: number, max: number) {
 }
 
 // Convert a string to kebab case
-export function toKebabCase(string: string) {
+export function toKebabCase(string: string): Lowercase<string> {
 	return string
 		.replace(/([a-z0-9])([A-Z])/g, '$1-$2')
 		.replace(/[\s_.]+/g, '-')
-		.toLowerCase();
+		.toLowerCase() as Lowercase<string>;
 }
 
 // Capitalize the first letter of a word
@@ -206,6 +217,22 @@ export function limit<T>(array: T[], limit: number): T[] {
 	return array.slice(0, limit);
 }
 
+/**
+ * Convert an array of objects into an object with a key-value pair
+ *
+ * @param array An array of objects
+ * @param key The key to use as the new object key
+ * @returns An array of objects where the key is the value of the specified key
+ */
+export function arrayToObject<T extends object, K extends keyof T>(
+	array: T[],
+	key: K,
+): Record<string, T> {
+	const keyValueMatrix = array.map((item) => [String(item[key]), item]);
+
+	return Object.fromEntries(keyValueMatrix);
+}
+
 // Return true if a value is defined
 export function isDefined<T>(value: T): value is NonNullable<T> {
 	return value !== undefined && value !== null;
@@ -219,4 +246,29 @@ export function assertIsDefined<T>(
 	if (!isDefined(value)) {
 		panic(msg ?? 'Expected value to be defined, but it was not');
 	}
+}
+
+/**
+ * Throw an error if a value is of a type that should not be possible. This is used to check that all possible values of a discriminated union are handled.
+ *
+ * @param value The value to check
+ */
+export function assertUnreachable(value: never): never {
+	throw new Error(`Unreachable code reached with value: ${value}`);
+}
+
+/**
+ * Remove all undefined/null properties from an object
+ *
+ * @param obj The object to remove undefined/null properties from
+ * @returns The object without any undefined/null properties
+ */
+export function removeUndefinedProps<T extends Record<string, unknown>>(
+	obj: T,
+): WithoutUndefined<T> {
+	const definedEntries = Object.entries(obj).filter(
+		([_, value]) => !isDefined(value),
+	);
+
+	return Object.fromEntries(definedEntries) as WithoutUndefined<T>;
 }

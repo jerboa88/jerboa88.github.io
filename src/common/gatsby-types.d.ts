@@ -3241,6 +3241,11 @@ type StringQueryOperatorInput = {
   readonly regex: InputMaybe<Scalars['String']>;
 };
 
+type CoverLetterPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type CoverLetterPageQuery = { readonly file: { readonly childMarkdownRemark: { readonly html: string | null } | null } | null };
+
 type PrivacyPolicyPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 

@@ -4,6 +4,7 @@
 */
 
 import {
+	COVER_LETTER_PATH,
 	NOT_FOUND_PATH,
 	PRIVACY_POLICY_PATH,
 	RESUME_PATH,
@@ -22,6 +23,12 @@ export const pagesMetadataConfig: PagesMetadataConfig = {
 		shortTitle: 'Resume',
 		description:
 			'Resume for John Goodliff, a software developer based in Edmonton, Alberta.',
+	},
+	[COVER_LETTER_PATH]: {
+		title: 'Cover Letter',
+		shortTitle: 'Cover Letter',
+		description:
+			'Cover letter for John Goodliff, a software developer based in Edmonton, Alberta.',
 	},
 	[NOT_FOUND_PATH]: {
 		title: '404 - Page Not Found',
