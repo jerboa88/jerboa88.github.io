@@ -16,7 +16,7 @@ import { SocialImage } from '../../components/seo/social-image';
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function ProjectSocialImageTemplate({
-	pageContext: { githubRepo, imageMetadata },
+	pageContext: { project, imageMetadata },
 }: PageProps<null, ProjectSocialImagePageContext>) {
 	const renderButton = useCallback(
 		(({ className, tooltipPosition }) => (
@@ -36,7 +36,7 @@ export default function ProjectSocialImageTemplate({
 				renderButton={renderButton}
 				className="py-0 px-10"
 			>
-				<ProjectCard repo={githubRepo} />
+				<ProjectCard project={project} />
 			</Section>
 		</SocialImage>
 	);

@@ -40,7 +40,7 @@ const VOLUNTEERING_ROLES = limit(getVolunteeringRoles(), 1);
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function ResumePageTemplate({
 	data,
-	pageContext: { githubRepos },
+	pageContext: { projects },
 }: PageProps<Queries.ResumePageQuery, PageContext>) {
 	const sections = [
 		{
@@ -129,7 +129,7 @@ export default function ResumePageTemplate({
 				dividerClassName="!pb-4"
 				responsive={false}
 			>
-				<ResumeProjectEntries githubRepos={githubRepos} />
+				<ResumeProjectEntries projects={projects} />
 			</Section>
 			<Section
 				className="text-center font-bold"

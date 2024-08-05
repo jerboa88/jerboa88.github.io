@@ -3,31 +3,32 @@
 	-------------------------------------------
 */
 
+import type { Project } from '../common/types';
 import { toSentence } from '../common/utils';
 import { ResumeEntry } from './resume-entry';
 
 interface Props {
-	githubRepos: Queries.GithubRepo[];
+	projects: Project[];
 }
 
-export function ResumeProjectEntries({ githubRepos }: Props) {
+export function ResumeProjectEntries({ projects }: Props) {
 	return (
 		<div className="flex flex-col gap-4">
-			{githubRepos.map((githubRepo) => {
-				const expositionSentence = githubRepo.exposition
-					? toSentence(githubRepo.exposition)
+			{projects.map((project) => {
+				const expositionSentence = project.exposition
+					? toSentence(project.exposition)
 					: null;
-				const descriptionSentence = toSentence(githubRepo.description);
+				const descriptionSentence = toSentence(project.description);
 
 				return (
 					<ResumeEntry
-						key={githubRepo.slug}
-						title={githubRepo.name}
-						titleUrl={githubRepo.url}
+						key={project.slug}
+						title={project.name}
+						titleUrl={project.url}
 						titleTooltip="View project on GitHub"
-						tagline={githubRepo.languages.join(', ')}
+						tagline={project.languages.join(', ')}
 						bullets={[expositionSentence ?? descriptionSentence]}
-						endDate={new Date(githubRepo.createdAt)}
+						endDate={new Date(project.createdAt)}
 					/>
 				);
 			})}
