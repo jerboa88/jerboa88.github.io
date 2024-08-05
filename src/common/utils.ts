@@ -7,6 +7,17 @@ import { panic } from '../node/logger';
 import { getSiteMetadata } from './config-manager';
 import type { PropsWithClassName, SentenceString, UrlString } from './types';
 
+// Types
+
+/**
+ * Returns the same type as the input object, but without any undefined/null properties
+ *
+ * @typeParam T - The object type
+ */
+type WithoutUndefined<T extends object> = {
+	[K in keyof T]: T[K] extends undefined | null ? never : T[K];
+};
+
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
@@ -244,4 +255,20 @@ export function assertIsDefined<T>(
  */
 export function assertUnreachable(value: never): never {
 	throw new Error(`Unreachable code reached with value: ${value}`);
+}
+
+/**
+ * Remove all undefined/null properties from an object
+ *
+ * @param obj The object to remove undefined/null properties from
+ * @returns The object without any undefined/null properties
+ */
+export function removeUndefinedProps<T extends Record<string, unknown>>(
+	obj: T,
+): WithoutUndefined<T> {
+	const definedEntries = Object.entries(obj).filter(
+		([_, value]) => !isDefined(value),
+	);
+
+	return Object.fromEntries(definedEntries) as WithoutUndefined<T>;
 }
