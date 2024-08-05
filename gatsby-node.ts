@@ -1,6 +1,6 @@
 import { join, resolve } from 'node:path';
-import type { CreatePagesArgs, GatsbyNode } from 'gatsby';
-import { getPageMetadata, getSiteMetadata } from './src/common/config-manager';
+import type { GatsbyNode } from 'gatsby';
+import { getPageMetadata } from './src/common/config-manager';
 import {
 	ABOUT_PATH,
 	CONTACT_PATH,
@@ -19,16 +19,14 @@ import {
 	EntryPage,
 	type IndexPageContext,
 	type PageMetadata,
+	type Project,
 	type ProjectPageContext,
 	type ResumePageContext,
 } from './src/common/types';
-import { assertIsDefined, prettify } from './src/common/utils';
-import {
-	getSubsetOfGithubRepos,
-	transformGithubDataNode,
-} from './src/node/github-response-transformer';
-import { githubReposQuery, schema } from './src/node/graphql';
-import { info, panic, setReporter, warn } from './src/node/logger';
+import { transformGithubDataNode } from './src/node/github-data-node-transformer';
+import { schema } from './src/node/graphql';
+import { setReporter, warn } from './src/node/logger';
+import { getProjects, getSubsetOfProjects } from './src/node/projects-manager';
 import {
 	createPage,
 	createRedirect,
@@ -37,8 +35,6 @@ import {
 } from './src/node/utils';
 
 // Constants
-
-const SITE_METADATA = getSiteMetadata();
 
 const INDEX_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'index.tsx');
 const PROJECT_PAGE_TEMPLATE = resolve(PAGE_TEMPLATES_DIR, 'project.tsx');
@@ -57,71 +53,12 @@ const OTHER_OG_IMAGE_TEMPLATE = resolve(
 	'other.tsx',
 );
 
-// Types
-
-type GithubReposQueryData = {
-	allGithubRepo: {
-		nodes: Queries.GithubRepo[];
-	};
-};
-
 // Functions
 
-// Fetch pinned repos from a GitHub profile
-async function fetchGithubRepos(
-	graphql: CreatePagesArgs['graphql'],
-): Promise<Queries.GithubRepo[]> {
-	const response = await graphql<GithubReposQueryData, unknown>(
-		githubReposQuery,
-	);
-
-	if (response.errors) {
-		panic(
-			`Failed to fetch GitHub repos. Response:\n${prettify(response.errors)}`,
-		);
-	}
-
-	const githubRepos: Queries.GithubRepo[] | undefined =
-		response.data?.allGithubRepo.nodes;
-
-	assertIsDefined(
-		githubRepos,
-		`Failed to fetch GitHub repos. Response:\n${prettify(response)}`,
-	);
-
-	return githubRepos;
-}
-
-// Find the GitHub profile repo and extract the author bio HTML from it
-function getAuthorBioHtml(githubRepos: Queries.GithubRepo[]) {
-	const profileReadmeRepo = githubRepos.find(
-		(githubRepo) => githubRepo.slug === SITE_METADATA.author.username.github,
-	);
-
-	assertIsDefined(
-		profileReadmeRepo,
-		`Failed to find GitHub profile repo in list:\n${prettify(githubRepos.map((repo) => repo.slug))}`,
-	);
-
-	const authorBioHtml = profileReadmeRepo?.descriptionHtml;
-
-	assertIsDefined(
-		authorBioHtml,
-		`Failed to extract author bio HTML from GitHub profile repo:\n${prettify(profileReadmeRepo)}`,
-	);
-
-	info(`Extracted author bio HTML from GitHub profile repo:\n${authorBioHtml}`);
-
-	return authorBioHtml;
-}
-
 // Create the landing page
-function createIndexPage(
-	githubRepos: Queries.GithubRepo[],
-	authorBioHtml: string,
-) {
+function createIndexPage(projects: Project[], authorBioHtml: string) {
 	const context: IndexPageContext = {
-		githubRepos: getSubsetOfGithubRepos(githubRepos, EntryPage.Index),
+		projects: getSubsetOfProjects(projects, EntryPage.Index),
 		authorBioHtml,
 	};
 
@@ -134,21 +71,17 @@ function createIndexPage(
 }
 
 // Sort GitHub repos by creation date
-function sortByCreatedAt(a: Queries.GithubRepo, b: Queries.GithubRepo) {
+function sortByCreatedAt(a: Project, b: Project) {
 	return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
 }
 
 // Create the resume page
-function createResumePage(githubRepos: Queries.GithubRepo[]) {
+function createResumePage(projects: Project[]) {
 	const pageMetadata: PageMetadata | EmptyObject =
 		getPageMetadata(RESUME_PATH) || {};
 	const context: ResumePageContext = {
 		pageMetadata,
-		githubRepos: getSubsetOfGithubRepos(
-			githubRepos,
-			EntryPage.Resume,
-			sortByCreatedAt,
-		),
+		projects: getSubsetOfProjects(projects, EntryPage.Resume, sortByCreatedAt),
 	};
 
 	createPage({
@@ -160,18 +93,18 @@ function createResumePage(githubRepos: Queries.GithubRepo[]) {
 }
 
 // Create project pages
-function createProjectPages(githubRepos: Queries.GithubRepo[]) {
-	for (const githubRepo of githubRepos) {
+function createProjectPages(projects: Project[]) {
+	for (const project of projects) {
 		const path: AbsolutePathString = join(
 			PROJECTS_PATH,
-			githubRepo.slug,
+			project.slug,
 		) as AbsolutePathString;
 		const shortPath: AbsolutePathString = join(
 			PROJECTS_PATH_SHORT,
-			githubRepo.slug,
+			project.slug,
 		) as AbsolutePathString;
 		const context: ProjectPageContext = {
-			githubRepo,
+			project,
 		};
 
 		// Create project pages
@@ -260,11 +193,10 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
 
 // Manually create pages and generate the associated Open Graph images
 export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
-	const githubRepos = await fetchGithubRepos(graphql);
-	const authorBioHtml = getAuthorBioHtml(githubRepos);
+	const { projects, authorBioHtml } = await getProjects(graphql);
 
-	createProjectPages(githubRepos);
-	createIndexPage(githubRepos, authorBioHtml);
-	createResumePage(githubRepos);
+	createProjectPages(projects);
+	createIndexPage(projects, authorBioHtml);
+	createResumePage(projects);
 	createRedirects();
 };

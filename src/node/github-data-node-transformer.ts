@@ -5,28 +5,37 @@
 
 import type { Actions, NodePluginArgs } from 'gatsby';
 import { JSDOM } from 'jsdom';
-import {
-	getGithubRepoMaxForPage,
-	getGithubRepoVisibilityForPage,
-	getProjectTypeColor,
-	getSiteMetadata,
-} from '../common/config-manager';
-import {
-	type EntryPage,
-	EntryVisibility,
-	type GithubRepo,
-	type UrlString,
-} from '../common/types';
+import { getProjectTypeColor, getSiteMetadata } from '../common/config-manager';
+import type { BaseProject, UrlString } from '../common/types';
 import {
 	getAbsoluteUrl,
 	isDefined,
-	limit,
 	toKebabCase,
 	toTitleCase,
 } from '../common/utils';
 import { group, groupEnd, info, panic, warn } from './logger';
 
 // Types
+
+// Fields used to create a GithubRepo node
+type GithubRepoNodeProps = BaseProject & {
+	descriptionHtml: string | null;
+	forkCount: number;
+	homepageUrl: string | null;
+	isFork: boolean;
+	licenseInfo: {
+		name: string;
+		spdxId: string | null;
+		url: string | null;
+	} | null;
+	logoUrl: string | null;
+	openGraphImageUrl: string;
+	owner: string;
+	stargazerCount: number;
+	topics: string[];
+	url: string;
+	usesCustomOpenGraphImage: boolean;
+};
 
 type ParseReadmeDescriptionReturnValue = {
 	descriptionHtml: string | null;
@@ -40,7 +49,7 @@ type TransformReadmeReturnValue = ParseReadmeDescriptionReturnValue & {
 };
 
 type TransformRepoNodeReturnValue = {
-	githubRepo: GithubRepo | null;
+	githubRepo: GithubRepoNodeProps | null;
 	readmeText: string | undefined | null;
 };
 
@@ -363,70 +372,4 @@ export function transformGithubDataNode(
 	}
 
 	groupEnd();
-}
-
-/**
- * Get a subset of GitHub repos based on visibility and a maximum number of repos
- *
- * @param githubRepos A list of GitHub repos
- * @param page The page to get the subset for
- * @param sortFunction A optional function to sort the repos
- * @returns A filtered subset of GitHub repos
- */
-export function getSubsetOfGithubRepos(
-	githubRepos: Queries.GithubRepo[],
-	page: EntryPage,
-	sortFunction?: (a: Queries.GithubRepo, b: Queries.GithubRepo) => number,
-) {
-	const maxRepos = getGithubRepoMaxForPage(page);
-	const pinnedGithubRepos: Queries.GithubRepo[] = [];
-	const includedGithubRepos: Queries.GithubRepo[] = [];
-
-	for (const githubRepo of githubRepos) {
-		let visibility = getGithubRepoVisibilityForPage(page, githubRepo.slug);
-
-		if (!isDefined(visibility)) {
-			let defaultVisibility = EntryVisibility.Show;
-
-			// If the repo is a fork or a Markdown repo, hide it by default
-			if (githubRepo.isFork) {
-				warn(
-					`Hiding repo '${githubRepo.slug}' on ${page} page as it is a fork`,
-				);
-
-				defaultVisibility = EntryVisibility.Hide;
-			}
-
-			if (githubRepo.type.name === 'Markdown') {
-				warn(
-					`Hiding repo '${githubRepo.slug}' on ${page} page as it is a Markdown repo`,
-				);
-
-				defaultVisibility = EntryVisibility.Hide;
-			}
-
-			visibility = defaultVisibility;
-		}
-
-		if (visibility === EntryVisibility.Pin) {
-			pinnedGithubRepos.push(githubRepo);
-		} else if (visibility === EntryVisibility.Show) {
-			includedGithubRepos.push(githubRepo);
-		}
-	}
-
-	const filteredGithubRepos = limit(
-		[...pinnedGithubRepos, ...includedGithubRepos],
-		maxRepos,
-	);
-
-	if (isDefined(sortFunction)) {
-		filteredGithubRepos.sort(sortFunction);
-	}
-
-	info(
-		`Showing top ${maxRepos} repos on ${page} page out of ${pinnedGithubRepos.length} pinned repos and ${includedGithubRepos.length} included repos`,
-	);
-
-	return filteredGithubRepos;
 }
