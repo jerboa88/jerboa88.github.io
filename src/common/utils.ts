@@ -236,3 +236,12 @@ export function assertIsDefined<T>(
 		panic(msg ?? 'Expected value to be defined, but it was not');
 	}
 }
+
+/**
+ * Throw an error if a value is of a type that should not be possible. This is used to check that all possible values of a discriminated union are handled.
+ *
+ * @param value The value to check
+ */
+export function assertUnreachable(value: never): never {
+	throw new Error(`Unreachable code reached with value: ${value}`);
+}
