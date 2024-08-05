@@ -4,31 +4,34 @@
 */
 
 import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
-import type {
-	BgColorString,
-	EmploymentRole,
-	EntryPage,
-	EntryVisibility,
-	PageMetadata,
-	Role,
-	SentenceString,
-	SocialImageType,
-	SocialImagesGenerationConfig,
-	Theme,
-	ThemesConfig,
-	UrlString,
+import {
+	type BgColorString,
+	type EmploymentRole,
+	type EntryPage,
+	type EntryVisibility,
+	type OtherProject,
+	type PageMetadata,
+	ProjectCategory,
+	type ProjectConfig,
+	type Role,
+	type SentenceString,
+	type SocialImageType,
+	type SocialImagesGenerationConfig,
+	type Theme,
+	type ThemesConfig,
+	type UrlString,
 } from '../common/types';
 import { colorMappingsConfig } from '../config/color-mappings';
 import { externalServicesConfig } from '../config/external-services';
-import { githubReposConfig } from '../config/github-repos';
 import { pagesMetadataConfig } from '../config/metadata/pages';
 import { siteMetadataConfig } from '../config/metadata/site';
+import { projectsConfig } from '../config/projects';
 import { educationRolesConfig } from '../config/roles/education';
 import { employmentRolesConfig } from '../config/roles/employment';
 import { volunteeringRolesConfig } from '../config/roles/volunteering';
 import { socialImagesGenerationConfig } from '../config/social-images-generation';
 import { themesConfig } from '../config/themes';
-import { isDefined } from './utils';
+import { arrayToObject, isDefined } from './utils';
 
 // Types
 
@@ -71,6 +74,25 @@ type SiteMetadata = {
 		};
 	};
 };
+
+// Constants
+
+// TODO: Projects with the same slug can exist and will overwrite each other with this approach. Construct the map keys from both the slug and the owner instead
+const PROJECTS_MAP = arrayToObject(projectsConfig.projects, 'slug');
+
+const OTHER_PROJECTS: OtherProject[] = projectsConfig.projects
+	.filter((projectConfig) => projectConfig.category === ProjectCategory.Other)
+	.map((projectConfig) => ({
+		...projectConfig,
+		createdAt: new Date(projectConfig.createdAt),
+		updatedAt: new Date(projectConfig.updatedAt),
+		type: {
+			color: getProjectTypeColor(projectConfig.type),
+			name: projectConfig.type,
+		},
+	}));
+
+// Functions
 
 // Returns metadata for the site
 export function getSiteMetadata(): SiteMetadata {
@@ -156,17 +178,43 @@ export function getExternalServices() {
 	return externalServicesConfig;
 }
 
-// Returns the visibility of a GitHub repo for a given page
-export function getGithubRepoVisibilityForPage(
+// Returns the visibility of a project for a given page
+export function getProjectVisibilityForPage(
 	page: EntryPage,
 	slug: string,
+	owner?: string,
 ): EntryVisibility | undefined {
-	return githubReposConfig.slugs[slug]?.visibilityForPage[page];
+	const project: ProjectConfig | undefined = PROJECTS_MAP[slug];
+	if (!isDefined(project)) {
+		return undefined;
+	}
+
+	const visibility = project.visibility[page];
+
+	// If the project is a GitHub repo and the owner is defined, check if the owner matches
+	if (
+		project.category === ProjectCategory.GithubRepo &&
+		isDefined(PROJECTS_MAP.owner) &&
+		isDefined(owner)
+	) {
+		if (project.owner === owner) {
+			return visibility;
+		}
+
+		return undefined;
+	}
+
+	return visibility;
 }
 
-// Returns the maximum number of GitHub repos to show for a given page
-export function getGithubRepoMaxForPage(page: EntryPage): number {
-	return githubReposConfig.maxForPage[page];
+// Returns the maximum number of projects to show for a given page
+export function getMaxProjectsForPage(page: EntryPage): number {
+	return projectsConfig.maxForPage[page];
+}
+
+// Returns a list of manually added projects
+export function getOtherProjects(): OtherProject[] {
+	return OTHER_PROJECTS;
 }
 
 // Returns a list of employment roles with formatted date objects
