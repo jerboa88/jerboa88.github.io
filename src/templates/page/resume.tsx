@@ -33,7 +33,7 @@ type PageContext = ResumePageContext & SocialImagesMetadataProp;
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
-const EMPLOYMENT_ROLES = limit(getEmploymentRoles(), 1);
+const EMPLOYMENT_ROLES = limit(getEmploymentRoles(), 2);
 const EDUCATION_ROLES = limit(getEducationRoles(), 1);
 const VOLUNTEERING_ROLES = limit(getVolunteeringRoles(), 1);
 
