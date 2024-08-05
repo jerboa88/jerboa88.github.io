@@ -306,86 +306,184 @@ export type EmploymentRole = Overwrite<
 	}
 >;
 
-// Raw GitHub repos config
-export type GithubReposConfig = {
-	maxForPage: {
-		[EntryPage.Index]: number;
-		[EntryPage.Resume]: number;
-	};
-	slugs: {
-		[repoSlug: string]: {
-			visibilityForPage: {
-				[EntryPage.Index]?: EntryVisibility;
-				[EntryPage.Resume]?: EntryVisibility;
-			};
-		};
+/**
+ * An enumeration of possible project categories
+ *
+ * @enum {number}
+ */
+export enum ProjectCategory {
+	Other = 0,
+	GithubRepo = 1,
+}
+
+/**
+ * A visibility prop added to project configs
+ */
+type ProjectVisibilityProp = {
+	visibility: {
+		[EntryPage.Index]?: EntryVisibility;
+		[EntryPage.Resume]?: EntryVisibility;
 	};
 };
 
-// GitHub repo fields used to create a GithubRepo node
-export type GithubRepo = {
+/**
+ * A base project with common fields
+ *
+ * @param createdAt - The date the project was created
+ * @param description - A brief description of the project
+ * @param exposition - A longer description of the project, if available. This is used as the project description on the resume page
+ * @param languages - A list of programming languages used in the project
+ * @param name - The name of the project
+ * @param slug - The slug of the project
+ * @param type.color - The color of the project type
+ * @param type.name - The name of the project type (ex. "Website")
+ * @param updatedAt - The date the project was last updated
+ */
+export type BaseProject = {
 	createdAt: Date;
 	description: string;
-	descriptionHtml: string | null;
 	exposition: string | null;
-	forkCount: number;
-	homepageUrl: string | null;
-	isFork: boolean;
 	languages: string[];
-	licenseInfo: {
-		name: string;
-		spdxId: string | null;
-		url: string | null;
-	} | null;
-	logoUrl: string | null;
 	name: string;
-	openGraphImageUrl: string;
-	owner: string;
 	slug: string;
-	stargazerCount: number;
-	topics: string[];
 	type: {
 		color: string;
 		name: string | null;
 	};
 	updatedAt: Date;
-	url: string;
-	usesCustomOpenGraphImage: boolean;
 };
 
-// export type GithubRepo = Queries.GithubReposQuery;
+/**
+ * A manually added project
+ */
+export type OtherProject = Overwrite<
+	BaseProject,
+	{
+		description: SentenceString;
+		exposition: SentenceString;
+	}
+> & {
+	category: ProjectCategory.Other;
+	stargazerCount?: number;
+	url?: string;
+};
 
-// Page context to add to the index page
+/**
+ * A GitHub repo project
+ */
+export type GithubRepoProject = Queries.GithubRepo & {
+	category: ProjectCategory.GithubRepo;
+};
+
+/**
+ * Config for a GitHub repo project
+ */
+type GithubRepoProjectConfig = ProjectVisibilityProp &
+	Pick<GithubRepoProject, 'category' | 'slug'> &
+	Partial<Pick<GithubRepoProject, 'owner'>>;
+
+/**
+ * Config for a manually added project
+ */
+export type OtherProjectConfig = ProjectVisibilityProp &
+	Overwrite<
+		OtherProject,
+		{
+			createdAt: DateString;
+			description: SentenceString;
+			exposition: SentenceString;
+			type: string;
+			updatedAt: DateString;
+		}
+	>;
+
+/**
+ * Union of all project config types
+ */
+export type ProjectConfig = GithubRepoProjectConfig | OtherProjectConfig;
+
+/**
+ * Config for all projects
+ */
+export type ProjectsConfig = {
+	maxForPage: {
+		[EntryPage.Index]: number;
+		[EntryPage.Resume]: number;
+	};
+	projects: ProjectConfig[];
+};
+
+/**
+ * Union of all project types
+ */
+export type Project = GithubRepoProject | OtherProject;
+
+/**
+ * Base page context type that can be extended with additional properties. Page metadata is automatically added to pages of this type
+ *
+ * @typeParam T - Additional context properties
+ */
+type PageContext<T extends object = EmptyObject> = PageMetadataProp & T;
+
+/**
+ * Base page context type for social images pages that can be extended with additional properties. Image metadata is automatically added to pages of this type by gatsby-plugin-component-to-image
+ *
+ * @typeParam T - Additional context properties
+ */
+type SocialImagePageContext<T extends object = EmptyObject> =
+	ImageMetadataProp & T;
+
+/**
+ * Page context to add to the index page
+ */
 export type IndexPageContext = {
-	githubRepos: Queries.GithubRepo[];
+	projects: Project[];
 	authorBioHtml: string;
 };
 
-// Page context to add to project pages
+/**
+ * Page context to add to project pages
+ */
 export type ProjectPageContext = {
-	githubRepo: Queries.GithubRepo;
+	project: Project;
 };
 
-// Page context to add to the resume page
-export type ResumePageContext = PageMetadataProp & {
-	githubRepos: Queries.GithubRepo[];
-};
+/**
+ * Page context to add to the resume page
+ */
+export type ResumePageContext = PageContext<{
+	projects: Project[];
+}>;
 
-// Page context for the cover letter page
-export type CoverLetterPageContext = PageMetadataProp;
+/**
+ * Page context for the cover letter page
+ */
+export type CoverLetterPageContext = PageContext;
 
-// Page context for the privacy policy page
-export type PrivacyPageContext = PageMetadataProp;
+/**
+ * Page context for the privacy policy page
+ */
+export type PrivacyPageContext = PageContext;
 
-// Page context for the 404 page
-export type NotFoundPageContext = PageMetadataProp;
+/**
+ * Page context for the 404 page
+ */
+export type NotFoundPageContext = PageContext;
 
-// Page context for the index social image page
-export type IndexSocialImagePageContext = IndexPageContext & ImageMetadataProp;
+/**
+ * Page context for the index social image page
+ */
+export type IndexSocialImagePageContext =
+	SocialImagePageContext<IndexPageContext>;
 
-// Page context for other social image pages
-export type OtherSocialImagePageContext = PageMetadataProp & ImageMetadataProp;
+/**
+ * Page context for other social image pages
+ */
+export type OtherSocialImagePageContext =
+	SocialImagePageContext<PageMetadataProp>;
 
-// Page context for project social image pages
-export type ProjectSocialImagePageContext = ProjectPageContext &
-	ImageMetadataProp;
+/**
+ * Page context for project social image pages
+ */
+export type ProjectSocialImagePageContext =
+	SocialImagePageContext<ProjectPageContext>;
