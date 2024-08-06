@@ -181,29 +181,13 @@ export function getExternalServices() {
 export function getProjectVisibilityForPage(
 	page: EntryPage,
 	slug: string,
-	owner?: string,
 ): EntryVisibility | undefined {
 	const project: ProjectConfig | undefined = PROJECTS_MAP[slug];
 	if (!isDefined(project)) {
 		return undefined;
 	}
 
-	const visibility = project.visibility?.[page];
-
-	// If the project is a GitHub repo and the owner is defined, check if the owner matches
-	if (
-		project.category === ProjectCategory.GithubRepo &&
-		isDefined(PROJECTS_MAP.owner) &&
-		isDefined(owner)
-	) {
-		if (project.owner === owner) {
-			return visibility;
-		}
-
-		return undefined;
-	}
-
-	return visibility;
+	return project.visibility?.[page];
 }
 
 // Returns the maximum number of projects to show for a given page

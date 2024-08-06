@@ -57,11 +57,7 @@ function getVisibilityForGithubRepoProject(
 	page: EntryPage,
 	project: GithubRepoProject,
 ) {
-	const visibility = getProjectVisibilityForPage(
-		page,
-		project.slug,
-		project.owner,
-	);
+	const visibility = getProjectVisibilityForPage(page, project.slug);
 
 	if (isDefined(visibility)) {
 		return visibility;
