@@ -17,9 +17,9 @@ import {
 import {
 	AlertType,
 	type InputValidationOptions,
-	type PropsWithClassName,
 	TooltipPosition,
-} from '../../types/types';
+} from '../../types/components';
+import type { PropsWithClassName } from '../../types/components';
 import { GhostAlert } from '../ghost-alert';
 import { Checkbox } from './checkbox';
 import { MultilineTextInput } from './multiline-text-input';

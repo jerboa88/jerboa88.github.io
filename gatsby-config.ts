@@ -17,7 +17,7 @@ import {
 	SOCIAL_IMAGES_PATH,
 } from './src/common/constants';
 import { getAbsoluteUrl } from './src/common/utils';
-import { SocialImageType, ThemeType } from './src/types/types';
+import { SocialImageType, ThemeType } from './src/types/other';
 import tailwindConfig from './tailwind.config';
 
 const SITE_METADATA = getSiteMetadata();

@@ -5,7 +5,7 @@
 
 import { faSignature } from '@fortawesome/free-solid-svg-icons';
 import { getSiteMetadata } from '../../common/config-manager';
-import type { Button } from '../../types/types';
+import type { Button } from '../../types/components';
 import { GhostButton } from '../input/ghost-button';
 
 const BUTTON_PROPS = {

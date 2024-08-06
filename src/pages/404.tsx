@@ -11,10 +11,8 @@ import { PageLayout } from '../components/layout/page-layout';
 import { Section } from '../components/layout/section';
 import { SolidButtonLink } from '../components/links/solid-button-link';
 import { PageHead } from '../components/seo/page-head';
-import type {
-	NotFoundPageContext,
-	SocialImagesMetadataProp,
-} from '../types/types';
+import type { SocialImagesMetadataProp } from '../types/other';
+import type { NotFoundPageContext } from '../types/page-context';
 
 // Types
 

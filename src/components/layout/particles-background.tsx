@@ -11,7 +11,7 @@ import { useReducedMotion } from 'framer-motion';
 import { memo, useEffect, useState } from 'react';
 import { getTheme } from '../../common/config-manager';
 import { getClassNameProps } from '../../common/utils';
-import { ThemeType } from '../../types/types';
+import { ThemeType } from '../../types/other';
 
 // Constants
 

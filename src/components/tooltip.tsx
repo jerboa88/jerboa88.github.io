@@ -5,11 +5,12 @@
 
 import type { PropsWithChildren } from 'react';
 import { getClassNameProps } from '../common/utils';
-import { type PropsWithClassName, TooltipPosition } from '../types/types';
+import { TooltipPosition } from '../types/components';
+import type { PropsWithClassName } from '../types/components';
 
 // Types
 
-export interface Props extends PropsWithClassName, PropsWithChildren {
+interface Props extends PropsWithClassName, PropsWithChildren {
 	text: string | number;
 	position?: TooltipPosition;
 }

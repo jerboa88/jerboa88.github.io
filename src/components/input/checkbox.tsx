@@ -9,10 +9,10 @@ import type {
 	Input,
 	InputElementRenderFunction,
 	InputOptions,
-} from '../../types/types';
+} from '../../types/components';
 import { BaseInput } from './base-input';
 
-export interface Props extends Input {
+interface Props extends Input {
 	inputOptions?: {
 		defaultChecked?: boolean;
 	} & InputOptions;

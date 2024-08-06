@@ -9,24 +9,24 @@ import type {
 	Input,
 	InputElementRenderFunction,
 	InputOptions,
-} from '../../types/types';
+} from '../../types/components';
 import { BaseInput } from './base-input';
 
-export interface Props extends Input {
+// Types
+
+interface Props extends Input {
 	inputOptions?: {
 		type?: string;
 		placeholder?: string;
 	} & InputOptions;
 }
 
-const defaultInputOptions = {
-	type: 'text',
-};
-
 export function TextInput({
 	inputClassName,
 	name,
-	inputOptions = defaultInputOptions,
+	inputOptions = {
+		type: 'text',
+	},
 	errors,
 	...remainingProps
 }: Props) {

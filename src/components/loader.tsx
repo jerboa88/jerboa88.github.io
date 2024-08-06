@@ -4,7 +4,7 @@
 */
 
 import { getClassNameProps } from '../common/utils';
-import type { PropsWithClassName } from '../types/types';
+import type { PropsWithClassName } from '../types/components';
 
 export function Loader({ className }: PropsWithClassName) {
 	const classNameProps = getClassNameProps('size-full', className);

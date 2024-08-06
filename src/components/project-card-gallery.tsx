@@ -5,7 +5,8 @@
 
 import { getClassNameProps } from '../common/utils';
 import { ProjectCard } from '../components/project-card';
-import type { Project, PropsWithClassName } from '../types/types';
+import type { PropsWithClassName } from '../types/components';
+import type { Project } from '../types/projects';
 
 interface Props extends PropsWithClassName {
 	projects: Project[];

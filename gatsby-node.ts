@@ -23,16 +23,15 @@ import {
 	deletePage,
 	setGatsbyNodeHelpers,
 } from './src/node/utils';
-import {
-	type AbsolutePathString,
-	type EmptyObject,
-	EntryPage,
-	type IndexPageContext,
-	type PageMetadata,
-	type Project,
-	type ProjectPageContext,
-	type ResumePageContext,
-} from './src/types/types';
+import { EntryPage, type PageMetadata } from './src/types/other';
+import type {
+	IndexPageContext,
+	ProjectPageContext,
+	ResumePageContext,
+} from './src/types/page-context';
+import type { Project } from './src/types/projects';
+import type { AbsolutePathString } from './src/types/strings';
+import type { EmptyObject } from './src/types/utils';
 
 // Constants
 

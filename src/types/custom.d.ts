@@ -1,6 +1,5 @@
-/*
-	Custom Type Definitions for TypeScript imports
-	----------------------------------------------
-*/
+/**
+ * Custom type definitions for TypeScript imports
+ */
 
 declare module '*.css';

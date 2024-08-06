@@ -27,10 +27,10 @@ import { Article } from '../../components/text/article';
 import { Timeline } from '../../components/timeline';
 import type {
 	ButtonElementRenderFunction,
-	IndexPageContext,
 	PageSection,
-	SocialImagesMetadataProp,
-} from '../../types/types';
+} from '../../types/components';
+import type { SocialImagesMetadataProp } from '../../types/other';
+import type { IndexPageContext } from '../../types/page-context';
 
 // Types
 

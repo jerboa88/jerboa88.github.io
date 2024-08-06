@@ -6,7 +6,7 @@
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { getSiteMetadata } from '../../common/config-manager';
 import { PRIVACY_POLICY_PATH } from '../../common/constants';
-import { TooltipPosition } from '../../types/types';
+import { TooltipPosition } from '../../types/components';
 import { Divider } from '../divider';
 import { GhostButtonLink } from '../links/ghost-button-link';
 

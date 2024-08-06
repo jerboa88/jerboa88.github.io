@@ -9,10 +9,8 @@ import { Section } from '../../components/layout/section';
 import { SignatureGhostButton } from '../../components/seo/signature-ghost-button';
 import { SocialImage } from '../../components/seo/social-image';
 import { Article } from '../../components/text/article';
-import type {
-	ButtonElementRenderFunction,
-	OtherSocialImagePageContext,
-} from '../../types/types';
+import type { ButtonElementRenderFunction } from '../../types/components';
+import type { OtherSocialImagePageContext } from '../../types/page-context';
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function OtherSocialImageTemplate({

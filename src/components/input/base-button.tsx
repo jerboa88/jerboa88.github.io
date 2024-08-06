@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FADE_IN_ANIMATION_PROPS } from '../../common/constants';
 import { getClassNameProps } from '../../common/utils';
-import type { Button } from '../../types/types';
+import type { Button } from '../../types/components';
 import { Tooltip } from '../tooltip';
 
 export function BaseButton({

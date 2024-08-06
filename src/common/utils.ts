@@ -4,11 +4,8 @@
 */
 
 import { panic } from '../node/logger';
-import type {
-	PropsWithClassName,
-	SentenceString,
-	UrlString,
-} from '../types/types';
+import type { PropsWithClassName } from '../types/components';
+import type { SentenceString, UrlString } from '../types/strings';
 import { getSiteMetadata } from './config-manager';
 
 // Types
@@ -101,7 +98,7 @@ const STATUS_CODE_MESSAGE_MAP = {
 
 // Check if the window object exists
 // This will return false if the method is called from a server-side environment
-export function doesWindowExist(): boolean {
+function doesWindowExist(): boolean {
 	return typeof window !== 'undefined';
 }
 

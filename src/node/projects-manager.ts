@@ -17,14 +17,13 @@ import {
 	limit,
 	prettify,
 } from '../common/utils';
+import { type EntryPage, EntryVisibility } from '../types/other';
 import {
-	type EntryPage,
-	EntryVisibility,
 	type GithubRepoProject,
 	type OtherProject,
 	type Project,
 	ProjectCategory,
-} from '../types/types';
+} from '../types/projects';
 import { githubReposQuery } from './graphql';
 import { info, panic, warn } from './logger';
 

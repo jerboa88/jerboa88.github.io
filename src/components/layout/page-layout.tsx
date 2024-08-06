@@ -7,7 +7,8 @@ import { MotionConfig } from 'framer-motion';
 import { type PropsWithChildren, StrictMode, lazy } from 'react';
 import { SPRING_TRANSITION_PROPS } from '../../common/constants';
 import { getClassNameProps } from '../../common/utils';
-import type { PageSection, PropsWithClassName } from '../../types/types';
+import type { PageSection } from '../../types/components';
+import type { PropsWithClassName } from '../../types/components';
 import { Footer } from './footer';
 import { Header } from './header';
 

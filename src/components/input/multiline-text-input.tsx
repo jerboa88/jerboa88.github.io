@@ -9,7 +9,7 @@ import type {
 	Input,
 	InputElementRenderFunction,
 	InputOptions,
-} from '../../types/types';
+} from '../../types/components';
 import { BaseInput } from './base-input';
 
 interface Props extends Input {

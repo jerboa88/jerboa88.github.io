@@ -4,7 +4,7 @@
 */
 
 import { toSentence } from '../common/utils';
-import type { Project } from '../types/types';
+import type { Project } from '../types/projects';
 import { ResumeEntry } from './resume-entry';
 
 interface Props {

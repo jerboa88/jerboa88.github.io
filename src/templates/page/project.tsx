@@ -20,12 +20,10 @@ import { Section } from '../../components/layout/section';
 import { GhostButtonLink } from '../../components/links/ghost-button-link';
 import { PageHead } from '../../components/seo/page-head';
 import { Article } from '../../components/text/article';
-import {
-	type ButtonElementRenderFunction,
-	ProjectCategory,
-	type ProjectPageContext,
-	type SocialImagesMetadataProp,
-} from '../../types/types';
+import type { ButtonElementRenderFunction } from '../../types/components';
+import type { SocialImagesMetadataProp } from '../../types/other';
+import type { ProjectPageContext } from '../../types/page-context';
+import { ProjectCategory } from '../../types/projects';
 
 // Types
 

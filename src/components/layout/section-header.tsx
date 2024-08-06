@@ -7,9 +7,9 @@ import type { PropsWithChildren } from 'react';
 import { getClassNameProps } from '../../common/utils';
 import {
 	type ButtonElementRenderFunction,
-	type PropsWithClassName,
 	TooltipPosition,
-} from '../../types/types';
+} from '../../types/components';
+import type { PropsWithClassName } from '../../types/components';
 import { SectionHeading } from '../text/section-heading';
 
 interface Props extends PropsWithClassName, PropsWithChildren {

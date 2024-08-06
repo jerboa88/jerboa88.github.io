@@ -3,11 +3,8 @@
 	-----------------------------------------------
 */
 
-import {
-	EntryVisibility,
-	ProjectCategory,
-	type ProjectsConfig,
-} from '../types/types';
+import { EntryVisibility } from '../types/other';
+import { ProjectCategory, type ProjectsConfig } from '../types/projects';
 
 export const projectsConfig: ProjectsConfig = {
 	maxForPage: {

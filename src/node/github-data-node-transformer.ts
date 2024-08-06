@@ -12,7 +12,8 @@ import {
 	toKebabCase,
 	toTitleCase,
 } from '../common/utils';
-import type { BaseProject, UrlString } from '../types/types';
+import type { BaseProject } from '../types/projects';
+import type { UrlString } from '../types/strings';
 import { group, groupEnd, info, panic, warn } from './logger';
 
 // Types

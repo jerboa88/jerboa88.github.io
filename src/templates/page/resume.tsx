@@ -19,12 +19,9 @@ import { ResumeProjectEntries } from '../../components/resume-project-entries';
 import { ResumeRoleEntries } from '../../components/resume-role-entries';
 import { PageHead } from '../../components/seo/page-head';
 import { Article } from '../../components/text/article';
-import {
-	type PageSection,
-	type ResumePageContext,
-	type SocialImagesMetadataProp,
-	ThemeType,
-} from '../../types/types';
+import type { PageSection } from '../../types/components';
+import { type SocialImagesMetadataProp, ThemeType } from '../../types/other';
+import type { ResumePageContext } from '../../types/page-context';
 
 // Types
 

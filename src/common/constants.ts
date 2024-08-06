@@ -3,7 +3,7 @@
 	--------------------------------------------------
 */
 
-import type { AbsolutePathString, WorkingPathString } from '../types/types';
+import type { AbsolutePathString, WorkingPathString } from '../types/strings';
 
 // Constants
 

@@ -3,12 +3,12 @@
 	-----------------------------------------------
 */
 
-import {
-	type CityAndStateString,
-	type SentenceString,
-	TooltipPosition,
-	type UrlString,
-} from '../types/types';
+import { TooltipPosition } from '../types/components';
+import type {
+	CityAndStateString,
+	SentenceString,
+	UrlString,
+} from '../types/strings';
 import { LinkWrapper } from './links/link-wrapper';
 import { Article } from './text/article';
 import { DateRange } from './text/date-range';

@@ -9,10 +9,8 @@ import { Section } from '../../components/layout/section';
 import { ProjectCard } from '../../components/project-card';
 import { SignatureGhostButton } from '../../components/seo/signature-ghost-button';
 import { SocialImage } from '../../components/seo/social-image';
-import type {
-	ButtonElementRenderFunction,
-	ProjectSocialImagePageContext,
-} from '../../types/types';
+import type { ButtonElementRenderFunction } from '../../types/components';
+import type { ProjectSocialImagePageContext } from '../../types/page-context';
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function ProjectSocialImageTemplate({

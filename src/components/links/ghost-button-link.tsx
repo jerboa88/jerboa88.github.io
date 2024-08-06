@@ -3,7 +3,7 @@
 	------------------------------------------------
 */
 
-import type { Button, Link } from '../../types/types';
+import type { Button, Link } from '../../types/components';
 import { GhostButton } from '../input/ghost-button';
 import { LinkWrapper } from './link-wrapper';
 

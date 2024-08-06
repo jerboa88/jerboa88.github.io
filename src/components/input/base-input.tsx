@@ -11,9 +11,11 @@ import {
 	AlertType,
 	type InputElementRenderFunction,
 	type InputValidationOptions,
-	type PropsWithClassName,
-	type PropsWithLayoutAnimations,
-} from '../../types/types';
+} from '../../types/components';
+import type {
+	PropsWithClassName,
+	PropsWithLayoutAnimations,
+} from '../../types/components';
 import { GhostAlert } from '../ghost-alert';
 
 interface BaseInput extends PropsWithClassName, PropsWithLayoutAnimations {

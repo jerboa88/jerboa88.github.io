@@ -10,13 +10,13 @@ import {
 	getClassNameProps,
 	getMimeType,
 } from '../../common/utils';
+import type { PropsWithClassName } from '../../types/components';
 import {
 	type PageMetadataProp,
-	type PropsWithClassName,
 	SocialImageType,
 	type SocialImagesMetadataProp,
 	ThemeType,
-} from '../../types/types';
+} from '../../types/other';
 
 // Types
 

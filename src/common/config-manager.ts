@@ -14,23 +14,26 @@ import { employmentRolesConfig } from '../config/roles/employment';
 import { volunteeringRolesConfig } from '../config/roles/volunteering';
 import { socialImagesGenerationConfig } from '../config/social-images-generation';
 import { themesConfig } from '../config/themes';
+import type {
+	EntryPage,
+	EntryVisibility,
+	PageMetadata,
+	SocialImageType,
+	SocialImagesGenerationConfig,
+	Theme,
+	ThemesConfig,
+} from '../types/other';
 import {
-	type BgColorString,
-	type EmploymentRole,
-	type EntryPage,
-	type EntryVisibility,
 	type OtherProject,
-	type PageMetadata,
 	ProjectCategory,
 	type ProjectConfig,
-	type Role,
-	type SentenceString,
-	type SocialImageType,
-	type SocialImagesGenerationConfig,
-	type Theme,
-	type ThemesConfig,
-	type UrlString,
-} from '../types/types';
+} from '../types/projects';
+import type { EmploymentRole, Role } from '../types/roles';
+import type {
+	BgColorString,
+	SentenceString,
+	UrlString,
+} from '../types/strings';
 import { arrayToObject, isDefined } from './utils';
 
 // Types

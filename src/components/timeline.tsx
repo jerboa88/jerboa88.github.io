@@ -4,7 +4,7 @@
 */
 
 import { getClassNameProps } from '../common/utils';
-import type { Role } from '../types/types';
+import type { Role } from '../types/roles';
 import { TimelineEntry } from './timeline-entry';
 
 interface Props {

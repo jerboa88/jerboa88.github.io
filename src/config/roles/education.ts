@@ -3,7 +3,7 @@
 	-----------------
 */
 
-import type { RoleConfig } from '../../types/types';
+import type { RoleConfig } from '../../types/roles';
 
 export const educationRolesConfig: RoleConfig[] = [
 	{

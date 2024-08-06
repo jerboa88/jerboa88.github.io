@@ -14,10 +14,8 @@ import { Section } from '../components/layout/section';
 import { SolidButtonLink } from '../components/links/solid-button-link';
 import { PageHead } from '../components/seo/page-head';
 import { Article } from '../components/text/article';
-import type {
-	PrivacyPageContext,
-	SocialImagesMetadataProp,
-} from '../types/types';
+import type { SocialImagesMetadataProp } from '../types/other';
+import type { PrivacyPageContext } from '../types/page-context';
 
 // Types
 

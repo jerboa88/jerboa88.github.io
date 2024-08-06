@@ -7,11 +7,8 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faGlobe, faStar } from '@fortawesome/free-solid-svg-icons';
 import { PROJECTS_PATH } from '../common/constants';
 import { assertUnreachable, getClassNameProps } from '../common/utils';
-import {
-	type Project,
-	ProjectCategory,
-	type PropsWithClassName,
-} from '../types/types';
+import type { PropsWithClassName } from '../types/components';
+import { type Project, ProjectCategory } from '../types/projects';
 import { Card } from './card';
 import { GhostButton } from './input/ghost-button';
 import { LinkWrapper } from './links/link-wrapper';

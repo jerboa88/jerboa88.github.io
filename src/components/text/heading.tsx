@@ -5,7 +5,7 @@
 
 import type { PropsWithChildren } from 'react';
 import { getClassNameProps } from '../../common/utils';
-import type { PropsWithClassName } from '../../types/types';
+import type { PropsWithClassName } from '../../types/components';
 
 interface Props extends PropsWithClassName, PropsWithChildren {}
 
