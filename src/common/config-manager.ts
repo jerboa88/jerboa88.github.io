@@ -77,7 +77,6 @@ type SiteMetadata = {
 
 // Constants
 
-// TODO: Projects with the same slug can exist and will overwrite each other with this approach. Construct the map keys from both the slug and the owner instead
 const PROJECTS_MAP = arrayToObject(projectsConfig.projects, 'slug');
 
 const OTHER_PROJECTS: OtherProject[] = projectsConfig.projects
@@ -189,7 +188,7 @@ export function getProjectVisibilityForPage(
 		return undefined;
 	}
 
-	const visibility = project.visibility[page];
+	const visibility = project.visibility?.[page];
 
 	// If the project is a GitHub repo and the owner is defined, check if the owner matches
 	if (
