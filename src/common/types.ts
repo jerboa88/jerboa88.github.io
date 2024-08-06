@@ -379,8 +379,7 @@ export type GithubRepoProject = Queries.GithubRepo & {
  * Config for a GitHub repo project
  */
 type GithubRepoProjectConfig = ProjectVisibilityProp &
-	Pick<GithubRepoProject, 'category' | 'slug'> &
-	Partial<Pick<GithubRepoProject, 'owner'>>;
+	Pick<GithubRepoProject, 'category' | 'slug'>;
 
 /**
  * Config for a manually added project

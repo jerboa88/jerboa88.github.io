@@ -256,7 +256,13 @@ function excludeRepo(
 function transformGithubRepoNode(
 	githubRepoNode: Queries.GithubDataDataUserRepositoriesNodes,
 ): TransformRepoNodeReturnValue {
-	const slug = toKebabCase(githubRepoNode.name);
+	let slug: string = toKebabCase(githubRepoNode.name);
+
+	// If the repo is not owned by the author, include the owner in the slug to avoid naming conflicts
+	if (githubRepoNode.owner.login !== SITE_METADATA.author.username.github) {
+		slug = `${githubRepoNode.owner.login}/${slug}`;
+	}
+
 	const languages = transformLanguages(githubRepoNode?.languages);
 	const topics = transformTopics(githubRepoNode?.repositoryTopics);
 	const createdAt = new Date(githubRepoNode.createdAt);
