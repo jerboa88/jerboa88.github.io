@@ -32,6 +32,7 @@ export function Footer() {
 							text="Privacy"
 							tooltipText="View the Privacy Policy"
 							tooltipPosition={TooltipPosition.Right}
+							rel="privacy-policy"
 							isInternal
 						/>
 					</nav>

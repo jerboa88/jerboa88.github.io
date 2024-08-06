@@ -101,7 +101,6 @@ export const projectsConfig: ProjectsConfig = {
 		{
 			category: ProjectCategory.GithubRepo,
 			slug: 'on-my-way',
-			owner: 'jerboa88',
 			visibility: {
 				index: EntryVisibility.Show,
 				resume: EntryVisibility.Pin,
@@ -109,8 +108,7 @@ export const projectsConfig: ProjectsConfig = {
 		},
 		{
 			category: ProjectCategory.GithubRepo,
-			slug: 'on-my-way',
-			owner: 'CMPUT301W20T24-H03',
+			slug: 'CMPUT301W20T24-H03/on-my-way',
 			visibility: {
 				index: EntryVisibility.Hide,
 				resume: EntryVisibility.Hide,
