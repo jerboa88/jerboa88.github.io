@@ -4,8 +4,8 @@
 */
 
 import type { PropsWithChildren } from 'react';
-import { type PropsWithClassName, TooltipPosition } from '../common/types';
 import { getClassNameProps } from '../common/utils';
+import { type PropsWithClassName, TooltipPosition } from '../types/types';
 
 // Types
 

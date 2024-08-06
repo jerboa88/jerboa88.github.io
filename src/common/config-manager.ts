@@ -4,6 +4,16 @@
 */
 
 import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
+import { colorMappingsConfig } from '../config/color-mappings';
+import { externalServicesConfig } from '../config/external-services';
+import { pagesMetadataConfig } from '../config/metadata/pages';
+import { siteMetadataConfig } from '../config/metadata/site';
+import { projectsConfig } from '../config/projects';
+import { educationRolesConfig } from '../config/roles/education';
+import { employmentRolesConfig } from '../config/roles/employment';
+import { volunteeringRolesConfig } from '../config/roles/volunteering';
+import { socialImagesGenerationConfig } from '../config/social-images-generation';
+import { themesConfig } from '../config/themes';
 import {
 	type BgColorString,
 	type EmploymentRole,
@@ -20,17 +30,7 @@ import {
 	type Theme,
 	type ThemesConfig,
 	type UrlString,
-} from '../common/types';
-import { colorMappingsConfig } from '../config/color-mappings';
-import { externalServicesConfig } from '../config/external-services';
-import { pagesMetadataConfig } from '../config/metadata/pages';
-import { siteMetadataConfig } from '../config/metadata/site';
-import { projectsConfig } from '../config/projects';
-import { educationRolesConfig } from '../config/roles/education';
-import { employmentRolesConfig } from '../config/roles/employment';
-import { volunteeringRolesConfig } from '../config/roles/volunteering';
-import { socialImagesGenerationConfig } from '../config/social-images-generation';
-import { themesConfig } from '../config/themes';
+} from '../types/types';
 import { arrayToObject, isDefined } from './utils';
 
 // Types

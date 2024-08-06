@@ -4,12 +4,12 @@
 */
 
 import { useCallback } from 'react';
+import { getClassNameProps } from '../../common/utils';
 import type {
 	Input,
 	InputElementRenderFunction,
 	InputOptions,
-} from '../../common/types';
-import { getClassNameProps } from '../../common/utils';
+} from '../../types/types';
 import { BaseInput } from './base-input';
 
 export interface Props extends Input {

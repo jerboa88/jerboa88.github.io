@@ -3,7 +3,7 @@
 	-------------
 */
 
-import type { SiteMetadataConfig } from '../../common/types';
+import type { SiteMetadataConfig } from '../../types/types';
 
 export const siteMetadataConfig: SiteMetadataConfig = {
 	iconPath: 'images/icon.svg',

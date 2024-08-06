@@ -11,8 +11,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { getSiteMetadata } from '../../common/config-manager';
 import { CONTACT_PATH } from '../../common/constants';
-import { type CityAndStateString, TooltipPosition } from '../../common/types';
 import { getAbsoluteUrl, removeProtocol } from '../../common/utils';
+import { type CityAndStateString, TooltipPosition } from '../../types/types';
 import { GhostButton } from '../input/ghost-button';
 import { GhostButtonLink } from '../links/ghost-button-link';
 import { Heading } from '../text/heading';

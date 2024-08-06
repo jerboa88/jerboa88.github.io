@@ -4,8 +4,12 @@
 */
 
 import { panic } from '../node/logger';
+import type {
+	PropsWithClassName,
+	SentenceString,
+	UrlString,
+} from '../types/types';
 import { getSiteMetadata } from './config-manager';
-import type { PropsWithClassName, SentenceString, UrlString } from './types';
 
 // Types
 

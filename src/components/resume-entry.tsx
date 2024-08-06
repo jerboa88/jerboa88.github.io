@@ -8,7 +8,7 @@ import {
 	type SentenceString,
 	TooltipPosition,
 	type UrlString,
-} from '../common/types';
+} from '../types/types';
 import { LinkWrapper } from './links/link-wrapper';
 import { Article } from './text/article';
 import { DateRange } from './text/date-range';

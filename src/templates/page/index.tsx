@@ -15,12 +15,6 @@ import {
 	getSiteMetadata,
 } from '../../common/config-manager';
 import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
-import type {
-	ButtonElementRenderFunction,
-	IndexPageContext,
-	PageSection,
-	SocialImagesMetadataProp,
-} from '../../common/types';
 import { limit, toKebabCase } from '../../common/utils';
 import { HeroHeader } from '../../components/layout/hero-header';
 import { PageLayout } from '../../components/layout/page-layout';
@@ -31,6 +25,12 @@ import { ProjectCardGallery } from '../../components/project-card-gallery';
 import { PageHead } from '../../components/seo/page-head';
 import { Article } from '../../components/text/article';
 import { Timeline } from '../../components/timeline';
+import type {
+	ButtonElementRenderFunction,
+	IndexPageContext,
+	PageSection,
+	SocialImagesMetadataProp,
+} from '../../types/types';
 
 // Types
 

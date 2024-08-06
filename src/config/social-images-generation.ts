@@ -6,7 +6,7 @@
 import {
 	SocialImageType,
 	type SocialImagesGenerationConfig,
-} from '../common/types';
+} from '../types/types';
 
 export const socialImagesGenerationConfig: SocialImagesGenerationConfig = {
 	defaults: {

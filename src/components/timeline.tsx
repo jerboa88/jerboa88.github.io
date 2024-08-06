@@ -3,8 +3,8 @@
 	------------------------
 */
 
-import type { Role } from '../common/types';
 import { getClassNameProps } from '../common/utils';
+import type { Role } from '../types/types';
 import { TimelineEntry } from './timeline-entry';
 
 interface Props {

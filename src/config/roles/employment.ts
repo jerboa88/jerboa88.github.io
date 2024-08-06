@@ -3,7 +3,7 @@
 	------------------
 */
 
-import type { EmploymentRoleConfig } from '../../common/types';
+import type { EmploymentRoleConfig } from '../../types/types';
 
 export const employmentRolesConfig: EmploymentRoleConfig[] = [
 	{

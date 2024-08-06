@@ -6,13 +6,13 @@
 import type { Actions, NodePluginArgs } from 'gatsby';
 import { JSDOM } from 'jsdom';
 import { getProjectTypeColor, getSiteMetadata } from '../common/config-manager';
-import type { BaseProject, UrlString } from '../common/types';
 import {
 	getAbsoluteUrl,
 	isDefined,
 	toKebabCase,
 	toTitleCase,
 } from '../common/utils';
+import type { BaseProject, UrlString } from '../types/types';
 import { group, groupEnd, info, panic, warn } from './logger';
 
 // Types

@@ -3,7 +3,7 @@
 	----------------------------------------
 */
 
-import type { Role } from '../common/types';
+import type { Role } from '../types/types';
 import { ResumeEntry } from './resume-entry';
 
 interface Props {

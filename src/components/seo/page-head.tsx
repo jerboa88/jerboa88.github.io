@@ -6,17 +6,17 @@
 import { getSiteMetadata, getTheme } from '../../common/config-manager';
 import { JSON_LD_AUTHOR_PATH } from '../../common/constants';
 import {
+	getAbsoluteUrl,
+	getClassNameProps,
+	getMimeType,
+} from '../../common/utils';
+import {
 	type PageMetadataProp,
 	type PropsWithClassName,
 	SocialImageType,
 	type SocialImagesMetadataProp,
 	ThemeType,
-} from '../../common/types';
-import {
-	getAbsoluteUrl,
-	getClassNameProps,
-	getMimeType,
-} from '../../common/utils';
+} from '../../types/types';
 
 // Types
 

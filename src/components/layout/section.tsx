@@ -4,11 +4,11 @@
 */
 
 import { type ForwardedRef, type PropsWithChildren, forwardRef } from 'react';
+import { getClassNameProps, toKebabCase } from '../../common/utils';
 import type {
 	ButtonElementRenderFunction,
 	PropsWithClassName,
-} from '../../common/types';
-import { getClassNameProps, toKebabCase } from '../../common/utils';
+} from '../../types/types';
 import { Divider } from '../divider';
 import { SectionHeader } from './section-header';
 

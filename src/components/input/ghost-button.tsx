@@ -3,8 +3,8 @@
 	-------------------------------------------
 */
 
-import type { Button } from '../../common/types';
 import { getClassNameProps } from '../../common/utils';
+import type { Button } from '../../types/types';
 import { BaseButton } from './base-button';
 
 export function GhostButton({

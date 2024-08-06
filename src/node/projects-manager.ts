@@ -11,20 +11,20 @@ import {
 	getSiteMetadata,
 } from '../common/config-manager';
 import {
-	type EntryPage,
-	EntryVisibility,
-	type GithubRepoProject,
-	type OtherProject,
-	type Project,
-	ProjectCategory,
-} from '../common/types';
-import {
 	assertIsDefined,
 	assertUnreachable,
 	isDefined,
 	limit,
 	prettify,
 } from '../common/utils';
+import {
+	type EntryPage,
+	EntryVisibility,
+	type GithubRepoProject,
+	type OtherProject,
+	type Project,
+	ProjectCategory,
+} from '../types/types';
 import { githubReposQuery } from './graphql';
 import { info, panic, warn } from './logger';
 

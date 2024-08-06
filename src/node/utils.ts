@@ -7,8 +7,8 @@ import type { Actions, Page } from 'gatsby';
 import { createImage } from 'gatsby-plugin-component-to-image';
 import { getSocialImageGenerationConfigForType } from '../common/config-manager';
 import { INDEX_PATH, SOCIAL_IMAGES_PATH } from '../common/constants';
-import { type AbsolutePathString, SocialImageType } from '../common/types';
 import { assertIsDefined, removeTrailingSlash } from '../common/utils';
+import { type AbsolutePathString, SocialImageType } from '../types/types';
 import { info } from './logger';
 
 // Runtime variables

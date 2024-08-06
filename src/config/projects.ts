@@ -7,7 +7,7 @@ import {
 	EntryVisibility,
 	ProjectCategory,
 	type ProjectsConfig,
-} from '../common/types';
+} from '../types/types';
 
 export const projectsConfig: ProjectsConfig = {
 	maxForPage: {

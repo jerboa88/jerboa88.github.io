@@ -12,8 +12,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FADE_IN_ANIMATION_PROPS } from '../common/constants';
-import { AlertType, type PropsWithClassName } from '../common/types';
 import { getClassNameProps } from '../common/utils';
+import { AlertType, type PropsWithClassName } from '../types/types';
 
 // Types
 
