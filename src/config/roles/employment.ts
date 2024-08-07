@@ -1,11 +1,11 @@
 /*
-	Employment history
-	------------------
+	History of employment roles
+	---------------------------
 */
 
-import type { EmploymentRoleConfig } from '../../types/roles';
+import type { EmploymentRole, RolesConfig } from '../../types/roles';
 
-export const employmentRolesConfig: EmploymentRoleConfig[] = [
+export const employmentRolesConfig: RolesConfig<EmploymentRole> = [
 	{
 		type: 'internship',
 		title: 'Systems Analyst',

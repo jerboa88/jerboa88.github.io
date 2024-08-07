@@ -11,14 +11,8 @@ import type {
 import type { Overwrite } from './utils';
 
 /**
- * An enumeration of possible employment role types
- */
-type EmploymentRoleTypes = 'internship' | 'summer job';
-
-/**
- * Config object used to define roles
+ * A base role with common fields
  *
- * @param type - The type of role (ex. "internship")
  * @param title - The title of the role
  * @param company - The name of the company
  * @param companyUrl - The URL of the company's website
@@ -27,44 +21,52 @@ type EmploymentRoleTypes = 'internship' | 'summer job';
  * @param location - The location of the role
  * @param bullets - A list of bullet points describing the role
  */
-export type RoleConfig = {
-	type?: string;
+export type BaseRole = {
 	title: Capitalize<string>;
 	company: Capitalize<string>;
 	companyUrl: UrlString;
-	startDate: DateString;
-	endDate: DateString;
+	startDate: Date;
+	endDate: Date;
 	location: CityAndStateString;
 	bullets: SentenceString[];
 };
 
 /**
- * Role object used to represent academic and volunteer positions
- */
-export type Role = Overwrite<
-	RoleConfig,
-	{
-		startDate: Date;
-		endDate: Date;
-	}
->;
-
-/**
- * Config object used to define employment roles
- */
-export type EmploymentRoleConfig = Overwrite<
-	RoleConfig,
-	{
-		type?: EmploymentRoleTypes;
-	}
->;
-
-/**
- * Role object used to represent employment roles
+ * Employment role type
+ *
+ * @param type - The type of employment (ex. "internship")
  */
 export type EmploymentRole = Overwrite<
-	Role,
-	{
-		type?: EmploymentRoleTypes;
-	}
+	BaseRole,
+	{ type?: 'internship' | 'summer job' }
 >;
+
+/**
+ * Education role type
+ *
+ * @param type - The type of education (ex. "post-secondary")
+ */
+export type EducationRole = Overwrite<
+	BaseRole,
+	{ type?: 'post-secondary' | 'high school' }
+>;
+
+/**
+ * Volunteering role type
+ */
+export type VolunteeringRole = BaseRole;
+
+/**
+ * Union of all role types
+ */
+export type Role = EmploymentRole | EducationRole | VolunteeringRole;
+
+/**
+ * Config object used to define roles
+ *
+ * @typeParam T - The role type. If not provided, defaults to {@link Role}
+ */
+export type RolesConfig<T extends Role = Role> = Overwrite<
+	T,
+	{ startDate: DateString; endDate: DateString }
+>[];

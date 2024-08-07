@@ -23,7 +23,7 @@ export function ResumeRoleEntries({ roles }: Props) {
 						title={title}
 						tagline={role.company}
 						taglineUrl={role.companyUrl}
-						taglineTooltip="View company website"
+						taglineTooltip="View organization website"
 						bullets={role.bullets}
 						startDate={role.startDate}
 						endDate={role.endDate}

@@ -28,7 +28,13 @@ import {
 	ProjectCategory,
 	type ProjectConfig,
 } from '../types/projects';
-import type { EmploymentRole, Role } from '../types/roles';
+import type {
+	EducationRole,
+	EmploymentRole,
+	Role,
+	RolesConfig,
+	VolunteeringRole,
+} from '../types/roles';
 import type {
 	BgColorString,
 	SentenceString,
@@ -203,37 +209,58 @@ export function getOtherProjects(): OtherProject[] {
 	return OTHER_PROJECTS;
 }
 
-// Returns a list of employment roles with formatted date objects
+/**
+ * Returns a list of roles with formatted date objects
+ *
+ * @typeParam T - The type of role
+ * @typeParam U - The corresponding type of the roles config object
+ * @param rolesConfig A roles config object
+ * @returns A list of roles with formatted date objects
+ */
+function getRoles<T extends Role, U extends RolesConfig<T>>(
+	rolesConfig: U,
+): T[] {
+	return rolesConfig
+		.map(
+			(roleConfig: U[number]) =>
+				({
+					title: roleConfig.title,
+					company: roleConfig.company,
+					companyUrl: roleConfig.companyUrl,
+					startDate: new Date(roleConfig.startDate),
+					endDate: new Date(roleConfig.endDate),
+					location: roleConfig.location,
+					bullets: roleConfig.bullets,
+				}) as T,
+		)
+		.sort((a: T, b: T) => b.endDate.getTime() - a.endDate.getTime());
+}
+
+/**
+ * Get a list of employment roles
+ *
+ * @returns A list of employment roles
+ */
 export function getEmploymentRoles(): EmploymentRole[] {
-	return employmentRolesConfig
-		.map((role) => ({
-			...role,
-			startDate: new Date(role.startDate),
-			endDate: new Date(role.endDate),
-		}))
-		.sort((a, b) => b.endDate.getTime() - a.endDate.getTime());
+	return getRoles(employmentRolesConfig);
 }
 
-// Returns a list of education roles with formatted date objects
-export function getEducationRoles(): Role[] {
-	return educationRolesConfig
-		.map((role) => ({
-			...role,
-			startDate: new Date(role.startDate),
-			endDate: new Date(role.endDate),
-		}))
-		.sort((a, b) => b.endDate.getTime() - a.endDate.getTime());
+/**
+ * Get a list of education roles
+ *
+ * @returns A list of education roles
+ */
+export function getEducationRoles(): EducationRole[] {
+	return getRoles(educationRolesConfig);
 }
 
-// Returns a list of volunteering roles with formatted date objects
-export function getVolunteeringRoles(): Role[] {
-	return volunteeringRolesConfig
-		.map((role) => ({
-			...role,
-			startDate: new Date(role.startDate),
-			endDate: new Date(role.endDate),
-		}))
-		.sort((a, b) => b.endDate.getTime() - a.endDate.getTime());
+/**
+ * Get a list of volunteering roles
+ *
+ * @returns A list of volunteering roles
+ */
+export function getVolunteeringRoles(): VolunteeringRole[] {
+	return getRoles(volunteeringRolesConfig);
 }
 
 // Returns a daisyUI theme given its name

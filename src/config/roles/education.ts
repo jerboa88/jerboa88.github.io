@@ -1,11 +1,11 @@
 /*
-	Education history
-	-----------------
+	History of education roles
+	--------------------------
 */
 
-import type { RoleConfig } from '../../types/roles';
+import type { EducationRole, RolesConfig } from '../../types/roles';
 
-export const educationRolesConfig: RoleConfig[] = [
+export const educationRolesConfig: RolesConfig<EducationRole> = [
 	{
 		title: 'BSc Specialization in Computing Science',
 		company: 'University of Alberta',

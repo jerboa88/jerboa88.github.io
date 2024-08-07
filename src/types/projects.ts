@@ -76,6 +76,11 @@ export type GithubRepoProject = Queries.GithubRepo & {
 };
 
 /**
+ * Union of all project types
+ */
+export type Project = GithubRepoProject | OtherProject;
+
+/**
  * Config for a GitHub repo project
  */
 type GithubRepoProjectConfig = ProjectVisibilityProp &
@@ -111,8 +116,3 @@ export type ProjectsConfig = {
 	};
 	projects: ProjectConfig[];
 };
-
-/**
- * Union of all project types
- */
-export type Project = GithubRepoProject | OtherProject;
