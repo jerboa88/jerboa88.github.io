@@ -11,20 +11,19 @@ import {
 	getSiteMetadata,
 } from '../common/config-manager';
 import {
-	type EntryPage,
-	EntryVisibility,
-	type GithubRepoProject,
-	type OtherProject,
-	type Project,
-	ProjectCategory,
-} from '../common/types';
-import {
 	assertIsDefined,
 	assertUnreachable,
 	isDefined,
 	limit,
 	prettify,
 } from '../common/utils';
+import { type EntryPage, EntryVisibility } from '../types/other';
+import {
+	type GithubRepoProject,
+	type OtherProject,
+	type Project,
+	ProjectCategory,
+} from '../types/projects';
 import { githubReposQuery } from './graphql';
 import { info, panic, warn } from './logger';
 
@@ -57,11 +56,7 @@ function getVisibilityForGithubRepoProject(
 	page: EntryPage,
 	project: GithubRepoProject,
 ) {
-	const visibility = getProjectVisibilityForPage(
-		page,
-		project.slug,
-		project.owner,
-	);
+	const visibility = getProjectVisibilityForPage(page, project.slug);
 
 	if (isDefined(visibility)) {
 		return visibility;

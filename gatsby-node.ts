@@ -13,16 +13,6 @@ import {
 	SOCIAL_IMAGES_PATH,
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 } from './src/common/constants';
-import {
-	type AbsolutePathString,
-	type EmptyObject,
-	EntryPage,
-	type IndexPageContext,
-	type PageMetadata,
-	type Project,
-	type ProjectPageContext,
-	type ResumePageContext,
-} from './src/common/types';
 import { transformGithubDataNode } from './src/node/github-data-node-transformer';
 import { schema } from './src/node/graphql';
 import { setReporter, warn } from './src/node/logger';
@@ -33,6 +23,15 @@ import {
 	deletePage,
 	setGatsbyNodeHelpers,
 } from './src/node/utils';
+import { EntryPage, type PageMetadata } from './src/types/other';
+import type {
+	IndexPageContext,
+	ProjectPageContext,
+	ResumePageContext,
+} from './src/types/page-context';
+import type { Project } from './src/types/projects';
+import type { AbsolutePathString } from './src/types/strings';
+import type { EmptyObject } from './src/types/utils';
 
 // Constants
 

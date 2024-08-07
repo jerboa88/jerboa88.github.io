@@ -4,11 +4,11 @@
 */
 
 import type { PageProps } from 'gatsby';
-import type { IndexSocialImagePageContext } from '../../common/types';
 import { GhostButton } from '../../components/input/ghost-button';
 import { HeroHeader } from '../../components/layout/hero-header';
 import { SignatureGhostButton } from '../../components/seo/signature-ghost-button';
 import { SocialImage } from '../../components/seo/social-image';
+import type { IndexSocialImagePageContext } from '../../types/page-context';
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function IndexSocialImageTemplate({

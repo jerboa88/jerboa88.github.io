@@ -3,8 +3,9 @@
 	------------------------
 */
 
-import type { Link, PropsWithClassName } from '../../common/types';
 import { getClassNameProps } from '../../common/utils';
+import type { Link } from '../../types/components';
+import type { PropsWithClassName } from '../../types/components';
 import { LinkWrapper } from './link-wrapper';
 
 interface Props extends PropsWithClassName, Link {

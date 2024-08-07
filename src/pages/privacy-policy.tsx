@@ -8,16 +8,14 @@ import { graphql } from 'gatsby';
 import { useRef } from 'react';
 import { getSiteMetadata } from '../common/config-manager';
 import { JSON_LD_AUTHOR_PATH } from '../common/constants';
-import type {
-	PrivacyPageContext,
-	SocialImagesMetadataProp,
-} from '../common/types';
 import { getAbsoluteUrl } from '../common/utils';
 import { PageLayout } from '../components/layout/page-layout';
 import { Section } from '../components/layout/section';
 import { SolidButtonLink } from '../components/links/solid-button-link';
 import { PageHead } from '../components/seo/page-head';
 import { Article } from '../components/text/article';
+import type { SocialImagesMetadataProp } from '../types/other';
+import type { PrivacyPageContext } from '../types/page-context';
 
 // Types
 

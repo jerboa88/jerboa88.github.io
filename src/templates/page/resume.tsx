@@ -12,12 +12,6 @@ import {
 	getVolunteeringRoles,
 } from '../../common/config-manager';
 import { JSON_LD_AUTHOR_PATH } from '../../common/constants';
-import {
-	type PageSection,
-	type ResumePageContext,
-	type SocialImagesMetadataProp,
-	ThemeType,
-} from '../../common/types';
 import { getAbsoluteUrl, limit } from '../../common/utils';
 import { DocumentPageLayout } from '../../components/layout/document-page-layout';
 import { Section } from '../../components/layout/section';
@@ -25,6 +19,9 @@ import { ResumeProjectEntries } from '../../components/resume-project-entries';
 import { ResumeRoleEntries } from '../../components/resume-role-entries';
 import { PageHead } from '../../components/seo/page-head';
 import { Article } from '../../components/text/article';
+import type { PageSection } from '../../types/components';
+import { type SocialImagesMetadataProp, ThemeType } from '../../types/other';
+import type { ResumePageContext } from '../../types/page-context';
 
 // Types
 

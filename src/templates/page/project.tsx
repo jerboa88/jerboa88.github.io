@@ -10,12 +10,6 @@ import { useCallback, useRef } from 'react';
 import { getSiteMetadata } from '../../common/config-manager';
 import { JSON_LD_AUTHOR_PATH, PROJECTS_PATH } from '../../common/constants';
 import {
-	type ButtonElementRenderFunction,
-	ProjectCategory,
-	type ProjectPageContext,
-	type SocialImagesMetadataProp,
-} from '../../common/types';
-import {
 	getAbsoluteUrl,
 	isDefined,
 	removeUndefinedProps,
@@ -26,6 +20,10 @@ import { Section } from '../../components/layout/section';
 import { GhostButtonLink } from '../../components/links/ghost-button-link';
 import { PageHead } from '../../components/seo/page-head';
 import { Article } from '../../components/text/article';
+import type { ButtonElementRenderFunction } from '../../types/components';
+import type { SocialImagesMetadataProp } from '../../types/other';
+import type { ProjectPageContext } from '../../types/page-context';
+import { ProjectCategory } from '../../types/projects';
 
 // Types
 

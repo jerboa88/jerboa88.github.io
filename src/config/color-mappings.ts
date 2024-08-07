@@ -3,7 +3,7 @@
 	---------------------------------------------------
 */
 
-import type { ColorMappingsConfig } from '../common/types';
+import type { ColorMappingsConfig } from '../types/other';
 
 export const colorMappingsConfig: ColorMappingsConfig = {
 	default: 'bg-rose-600',

@@ -9,7 +9,7 @@ import {
 	PRIVACY_POLICY_PATH,
 	RESUME_PATH,
 } from '../../common/constants';
-import type { PagesMetadataConfig } from '../../common/types';
+import type { PagesMetadataConfig } from '../../types/other';
 
 export const pagesMetadataConfig: PagesMetadataConfig = {
 	[PRIVACY_POLICY_PATH]: {

@@ -4,23 +4,6 @@
 */
 
 import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
-import {
-	type BgColorString,
-	type EmploymentRole,
-	type EntryPage,
-	type EntryVisibility,
-	type OtherProject,
-	type PageMetadata,
-	ProjectCategory,
-	type ProjectConfig,
-	type Role,
-	type SentenceString,
-	type SocialImageType,
-	type SocialImagesGenerationConfig,
-	type Theme,
-	type ThemesConfig,
-	type UrlString,
-} from '../common/types';
 import { colorMappingsConfig } from '../config/color-mappings';
 import { externalServicesConfig } from '../config/external-services';
 import { pagesMetadataConfig } from '../config/metadata/pages';
@@ -31,6 +14,32 @@ import { employmentRolesConfig } from '../config/roles/employment';
 import { volunteeringRolesConfig } from '../config/roles/volunteering';
 import { socialImagesGenerationConfig } from '../config/social-images-generation';
 import { themesConfig } from '../config/themes';
+import type {
+	EntryPage,
+	EntryVisibility,
+	PageMetadata,
+	SocialImageType,
+	SocialImagesGenerationConfig,
+	Theme,
+	ThemesConfig,
+} from '../types/other';
+import {
+	type OtherProject,
+	ProjectCategory,
+	type ProjectConfig,
+} from '../types/projects';
+import type {
+	EducationRole,
+	EmploymentRole,
+	Role,
+	RolesConfig,
+	VolunteeringRole,
+} from '../types/roles';
+import type {
+	BgColorString,
+	SentenceString,
+	UrlString,
+} from '../types/strings';
 import { arrayToObject, isDefined } from './utils';
 
 // Types
@@ -181,29 +190,13 @@ export function getExternalServices() {
 export function getProjectVisibilityForPage(
 	page: EntryPage,
 	slug: string,
-	owner?: string,
 ): EntryVisibility | undefined {
 	const project: ProjectConfig | undefined = PROJECTS_MAP[slug];
 	if (!isDefined(project)) {
 		return undefined;
 	}
 
-	const visibility = project.visibility?.[page];
-
-	// If the project is a GitHub repo and the owner is defined, check if the owner matches
-	if (
-		project.category === ProjectCategory.GithubRepo &&
-		isDefined(PROJECTS_MAP.owner) &&
-		isDefined(owner)
-	) {
-		if (project.owner === owner) {
-			return visibility;
-		}
-
-		return undefined;
-	}
-
-	return visibility;
+	return project.visibility?.[page];
 }
 
 // Returns the maximum number of projects to show for a given page
@@ -216,37 +209,58 @@ export function getOtherProjects(): OtherProject[] {
 	return OTHER_PROJECTS;
 }
 
-// Returns a list of employment roles with formatted date objects
+/**
+ * Returns a list of roles with formatted date objects
+ *
+ * @typeParam T - The type of role
+ * @typeParam U - The corresponding type of the roles config object
+ * @param rolesConfig A roles config object
+ * @returns A list of roles with formatted date objects
+ */
+function getRoles<T extends Role, U extends RolesConfig<T>>(
+	rolesConfig: U,
+): T[] {
+	return rolesConfig
+		.map(
+			(roleConfig: U[number]) =>
+				({
+					title: roleConfig.title,
+					company: roleConfig.company,
+					companyUrl: roleConfig.companyUrl,
+					startDate: new Date(roleConfig.startDate),
+					endDate: new Date(roleConfig.endDate),
+					location: roleConfig.location,
+					bullets: roleConfig.bullets,
+				}) as T,
+		)
+		.sort((a: T, b: T) => b.endDate.getTime() - a.endDate.getTime());
+}
+
+/**
+ * Get a list of employment roles
+ *
+ * @returns A list of employment roles
+ */
 export function getEmploymentRoles(): EmploymentRole[] {
-	return employmentRolesConfig
-		.map((role) => ({
-			...role,
-			startDate: new Date(role.startDate),
-			endDate: new Date(role.endDate),
-		}))
-		.sort((a, b) => b.endDate.getTime() - a.endDate.getTime());
+	return getRoles(employmentRolesConfig);
 }
 
-// Returns a list of education roles with formatted date objects
-export function getEducationRoles(): Role[] {
-	return educationRolesConfig
-		.map((role) => ({
-			...role,
-			startDate: new Date(role.startDate),
-			endDate: new Date(role.endDate),
-		}))
-		.sort((a, b) => b.endDate.getTime() - a.endDate.getTime());
+/**
+ * Get a list of education roles
+ *
+ * @returns A list of education roles
+ */
+export function getEducationRoles(): EducationRole[] {
+	return getRoles(educationRolesConfig);
 }
 
-// Returns a list of volunteering roles with formatted date objects
-export function getVolunteeringRoles(): Role[] {
-	return volunteeringRolesConfig
-		.map((role) => ({
-			...role,
-			startDate: new Date(role.startDate),
-			endDate: new Date(role.endDate),
-		}))
-		.sort((a, b) => b.endDate.getTime() - a.endDate.getTime());
+/**
+ * Get a list of volunteering roles
+ *
+ * @returns A list of volunteering roles
+ */
+export function getVolunteeringRoles(): VolunteeringRole[] {
+	return getRoles(volunteeringRolesConfig);
 }
 
 // Returns a daisyUI theme given its name

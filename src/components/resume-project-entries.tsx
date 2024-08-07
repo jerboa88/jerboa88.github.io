@@ -3,8 +3,8 @@
 	-------------------------------------------
 */
 
-import type { Project } from '../common/types';
 import { toSentence } from '../common/utils';
+import type { Project } from '../types/projects';
 import { ResumeEntry } from './resume-entry';
 
 interface Props {

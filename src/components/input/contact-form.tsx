@@ -10,16 +10,16 @@ import { useEffect, useState } from 'react';
 import { type SubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { getExternalServices } from '../../common/config-manager';
 import {
-	AlertType,
-	type InputValidationOptions,
-	type PropsWithClassName,
-	TooltipPosition,
-} from '../../common/types';
-import {
 	getClassNameProps,
 	getOrDefault,
 	getStatusCodeDescription,
 } from '../../common/utils';
+import {
+	AlertType,
+	type InputValidationOptions,
+	TooltipPosition,
+} from '../../types/components';
+import type { PropsWithClassName } from '../../types/components';
 import { GhostAlert } from '../ghost-alert';
 import { Checkbox } from './checkbox';
 import { MultilineTextInput } from './multiline-text-input';

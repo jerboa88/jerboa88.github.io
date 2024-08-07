@@ -10,8 +10,8 @@ import { loadSquareShape } from '@tsparticles/shape-square';
 import { useReducedMotion } from 'framer-motion';
 import { memo, useEffect, useState } from 'react';
 import { getTheme } from '../../common/config-manager';
-import { ThemeType } from '../../common/types';
 import { getClassNameProps } from '../../common/utils';
+import { ThemeType } from '../../types/other';
 
 // Constants
 

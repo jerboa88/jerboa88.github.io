@@ -6,16 +6,13 @@
 import { type HeadProps, type PageProps, graphql } from 'gatsby';
 import { getSiteMetadata } from '../common/config-manager';
 import { JSON_LD_AUTHOR_PATH } from '../common/constants';
-import {
-	type CoverLetterPageContext,
-	type SocialImagesMetadataProp,
-	ThemeType,
-} from '../common/types';
 import { getAbsoluteUrl } from '../common/utils';
 import { DocumentPageLayout } from '../components/layout/document-page-layout';
 import { Section } from '../components/layout/section';
 import { PageHead } from '../components/seo/page-head';
 import { Article } from '../components/text/article';
+import { type SocialImagesMetadataProp, ThemeType } from '../types/other';
+import type { CoverLetterPageContext } from '../types/page-context';
 
 // Types
 

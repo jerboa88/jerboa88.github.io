@@ -16,8 +16,8 @@ import {
 	INDEX_PATH,
 	SOCIAL_IMAGES_PATH,
 } from './src/common/constants';
-import { SocialImageType, ThemeType } from './src/common/types';
 import { getAbsoluteUrl } from './src/common/utils';
+import { SocialImageType, ThemeType } from './src/types/other';
 import tailwindConfig from './tailwind.config';
 
 const SITE_METADATA = getSiteMetadata();
@@ -37,7 +37,7 @@ const config: GatsbyConfig = {
 	jsxRuntime: 'automatic',
 	trailingSlash: 'never',
 	graphqlTypegen: {
-		typesOutputPath: 'src/common/gatsby-types.d.ts',
+		typesOutputPath: 'src/types/gatsby-types.d.ts',
 	},
 	plugins: [
 		'gatsby-plugin-fontawesome',

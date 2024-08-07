@@ -4,15 +4,15 @@
 */
 
 import { useCallback } from 'react';
+import { getClassNameProps } from '../../common/utils';
 import type {
 	Input,
 	InputElementRenderFunction,
 	InputOptions,
-} from '../../common/types';
-import { getClassNameProps } from '../../common/utils';
+} from '../../types/components';
 import { BaseInput } from './base-input';
 
-export interface Props extends Input {
+interface Props extends Input {
 	inputOptions?: {
 		defaultChecked?: boolean;
 	} & InputOptions;

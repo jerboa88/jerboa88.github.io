@@ -1,11 +1,11 @@
 /*
-	Volunteering history
-	--------------------
+	History of volunteering roles
+	-----------------------------
 */
 
-import type { RoleConfig } from '../../common/types';
+import type { RolesConfig, VolunteeringRole } from '../../types/roles';
 
-export const volunteeringRolesConfig: RoleConfig[] = [
+export const volunteeringRolesConfig: RolesConfig<VolunteeringRole> = [
 	{
 		title: 'Event Assistant, Office Volunteer',
 		company: 'International Student Services, U of A',

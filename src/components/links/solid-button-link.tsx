@@ -3,7 +3,7 @@
 	----------------------------------------------
 */
 
-import type { Button, Link } from '../../common/types';
+import type { Button, Link } from '../../types/components';
 import { SolidButton } from '../input/solid-button';
 import { LinkWrapper } from './link-wrapper';
 
