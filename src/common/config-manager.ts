@@ -56,10 +56,6 @@ type SiteMetadata = {
 	sourceUrl: UrlString;
 	author: {
 		name: {
-			first: Capitalize<string>;
-			last: Capitalize<string>;
-			initial: Capitalize<string>;
-			short: Capitalize<string>;
 			full: Capitalize<string>;
 		};
 		jobTitle: Capitalize<string>;
@@ -122,11 +118,6 @@ export function getSiteMetadata(): SiteMetadata {
 		sourceUrl: config.sourceUrl,
 		author: {
 			name: {
-				first: config.author.name.first,
-				last: config.author.name.last,
-				initial: config.author.name.first[0] as typeof config.author.name.first,
-				short:
-					`${config.author.name.first} ${config.author.name.last[0]}` as typeof config.author.name.first,
 				full: authorFullName,
 			},
 			jobTitle: config.author.jobTitle,

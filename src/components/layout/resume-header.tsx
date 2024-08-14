@@ -37,7 +37,7 @@ export function ResumeHeader() {
 	const phone = SITE_METADATA.author.phone;
 	const email = SITE_METADATA.author.email;
 	const location: CityAndStateString = `${SITE_METADATA.author.location.city}, ${SITE_METADATA.author.location.state}`;
-	console.warn(getStartIndexOfLastWord(SITE_METADATA.author.name.full));
+
 	return (
 		<header className="flex flex-col gap-8 sm:flex-row justify-between items-center w-full">
 			<Heading className="text-5xl text-primary text-right">
