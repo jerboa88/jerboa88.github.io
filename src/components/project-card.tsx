@@ -95,8 +95,8 @@ export function ProjectCard({ project }: Props) {
 						<span className="text-wrap">{project.description}</span>
 					</div>
 				</div>
-				<div className="flex flex-row justify-between items-center pr-2 w-full">
-					<div className="flex flex-row gap-2 justify-start items-center">
+				<div className="flex flex-row justify-between items-center gap-2 pr-2 w-full">
+					<div className="flex flex-row gap-2 justify-start items-center flex-wrap">
 						{project.languages.map((language) => (
 							<Pill
 								key={language}
