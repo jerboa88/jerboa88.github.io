@@ -180,6 +180,16 @@ export function toSentence(string: string): SentenceString {
 	return `${capitalizedString}.`;
 }
 
+/**
+ * Get the index of the start of the last word in a string
+ *
+ * @param string The string to search
+ * @returns The index of the start of the last word in the string
+ */
+export function getStartIndexOfLastWord(string: string) {
+	return string.indexOf(' ', -1) + 2;
+}
+
 // Return a JSON string with human-readable formatting
 export function prettify(json: object | undefined | null) {
 	return JSON.stringify(json, null, 2);
