@@ -27,6 +27,17 @@ export interface PropsWithLayoutAnimations {
 }
 
 /**
+ * An enumeration of possible Tailwind CSS breakpoints
+ */
+export enum Breakpoint {
+	Default = 0,
+	Sm = 1,
+	Md = 2,
+	Lg = 3,
+	Xl = 4,
+}
+
+/**
  * A page section with a title and a reference to the section element
  */
 export interface PageSection {
