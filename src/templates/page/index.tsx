@@ -15,7 +15,8 @@ import {
 	getSiteMetadata,
 } from '../../common/config-manager';
 import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
-import { limit, toKebabCase } from '../../common/utils';
+import { limit } from '../../common/utils/other';
+import { toKebabCase } from '../../common/utils/strings';
 import { HeroHeader } from '../../components/layout/hero-header';
 import { PageLayout } from '../../components/layout/page-layout';
 import { Section } from '../../components/layout/section';

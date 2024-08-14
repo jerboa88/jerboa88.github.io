@@ -3,7 +3,7 @@
 	------------------------
 */
 
-import { getClassNameProps } from '../common/utils';
+import { getClassNameProps } from '../common/utils/other';
 import type { Role } from '../types/roles';
 import { TimelineEntry } from './timeline-entry';
 

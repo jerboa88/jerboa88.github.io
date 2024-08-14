@@ -8,7 +8,7 @@ import { graphql } from 'gatsby';
 import { useRef } from 'react';
 import { getSiteMetadata } from '../common/config-manager';
 import { JSON_LD_AUTHOR_PATH } from '../common/constants';
-import { getAbsoluteUrl } from '../common/utils';
+import { getAbsoluteUrl } from '../common/utils/urls';
 import { PageLayout } from '../components/layout/page-layout';
 import { Section } from '../components/layout/section';
 import { SolidButtonLink } from '../components/links/solid-button-link';

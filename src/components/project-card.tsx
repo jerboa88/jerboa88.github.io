@@ -6,7 +6,7 @@
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faGlobe, faStar } from '@fortawesome/free-solid-svg-icons';
 import { PROJECTS_PATH } from '../common/constants';
-import { assertUnreachable, getClassNameProps } from '../common/utils';
+import { assertUnreachable, getClassNameProps } from '../common/utils/other';
 import type { PropsWithClassName } from '../types/components';
 import { type Project, ProjectCategory } from '../types/projects';
 import { Card } from './card';

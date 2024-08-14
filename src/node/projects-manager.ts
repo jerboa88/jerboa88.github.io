@@ -15,8 +15,8 @@ import {
 	assertUnreachable,
 	isDefined,
 	limit,
-	prettify,
-} from '../common/utils';
+} from '../common/utils/other';
+import { prettify } from '../common/utils/strings';
 import { type EntryPage, EntryVisibility } from '../types/other';
 import {
 	type GithubRepoProject,

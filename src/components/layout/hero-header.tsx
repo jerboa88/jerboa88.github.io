@@ -6,7 +6,7 @@
 import { motion } from 'framer-motion';
 import { getSiteMetadata } from '../../common/config-manager';
 import { TITLE_LAYOUT_ID } from '../../common/constants';
-import { getStartIndexOfLastWord } from '../../common/utils';
+import { getStartIndexOfLastWord } from '../../common/utils/strings';
 import { Heading } from '../../components/text/heading';
 import { Breakpoint } from '../../types/components';
 import { ResponsiveText } from '../text/responsive-text';

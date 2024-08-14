@@ -6,11 +6,8 @@
 import { motion } from 'framer-motion';
 import { getSiteMetadata } from '../../common/config-manager';
 import { TITLE_LAYOUT_ID } from '../../common/constants';
-import {
-	getClassNameProps,
-	getStartIndexOfLastWord,
-	isDefined,
-} from '../../common/utils';
+import { getClassNameProps, isDefined } from '../../common/utils/other';
+import { getStartIndexOfLastWord } from '../../common/utils/strings';
 import { Breakpoint, type PageSection } from '../../types/components';
 import { Divider } from '../divider';
 import { Tabs } from '../tabs';

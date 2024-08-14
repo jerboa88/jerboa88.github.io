@@ -40,7 +40,7 @@ import type {
 	SentenceString,
 	UrlString,
 } from '../types/strings';
-import { arrayToObject, isDefined } from './utils';
+import { arrayToObject, isDefined } from './utils/other';
 
 // Types
 

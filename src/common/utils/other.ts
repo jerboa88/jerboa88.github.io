@@ -3,10 +3,9 @@
 	---------------------------------------------------------
 */
 
-import { panic } from '../node/logger';
-import type { PropsWithClassName } from '../types/components';
-import type { SentenceString, UrlString } from '../types/strings';
-import { getSiteMetadata } from './config-manager';
+import { panic } from '../../node/logger';
+import type { PropsWithClassName } from '../../types/components';
+import { getSiteMetadata } from '../config-manager';
 
 // Types
 
@@ -21,9 +20,9 @@ type WithoutUndefined<T extends object> = {
 
 // Constants
 
-const SITE_METADATA = getSiteMetadata();
+export const SITE_METADATA = getSiteMetadata();
 
-const MIME_TYPE_MAP = {
+export const MIME_TYPE_MAP = {
 	apng: 'image/apng',
 	avif: 'image/avif',
 	gif: 'image/gif',
@@ -96,13 +95,37 @@ const STATUS_CODE_MESSAGE_MAP = {
 
 // Functions
 
+// Return true if a value is defined
+export function isDefined<T>(value: T): value is NonNullable<T> {
+	return value !== undefined && value !== null;
+}
+
+// Throw an error if a value is not defined
+export function assertIsDefined<T>(
+	value: T,
+	msg?: string,
+): asserts value is NonNullable<T> {
+	if (!isDefined(value)) {
+		panic(msg ?? 'Expected value to be defined, but it was not');
+	}
+}
+
+/**
+ * Throw an error if a value is of a type that should not be possible. This is used to check that all possible values of a discriminated union are handled.
+ *
+ * @param value The value to check
+ */
+export function assertUnreachable(value: never): never {
+	throw new Error(`Unreachable code reached with value: ${value}`);
+}
+
 // Check if the window object exists
 // This will return false if the method is called from a server-side environment
 function doesWindowExist(): boolean {
 	return typeof window !== 'undefined';
 }
 
-// CHeck if the device supports hover interactions or if it is a touch-only device
+// Check if the device supports hover interactions or if it is a touch-only device
 export function doesDeviceSupportHover() {
 	return doesWindowExist() && window.matchMedia('(pointer: fine)').matches;
 }
@@ -150,79 +173,6 @@ export function clamp(value: number, min: number, max: number) {
 	return Math.min(Math.max(value, min), max);
 }
 
-// Convert a string to kebab case
-export function toKebabCase(string: string): Lowercase<string> {
-	return string
-		.replace(/([a-z0-9])([A-Z])/g, '$1-$2')
-		.replace(/[\s_.]+/g, '-')
-		.toLowerCase() as Lowercase<string>;
-}
-
-// Capitalize the first letter of a word
-function capitalizeWord(word: string): Capitalize<string> {
-	return `${word[0].toUpperCase()}${word.substring(1)}` as Capitalize<string>;
-}
-
-// Convert a string to title case
-export function toTitleCase(string: string) {
-	return string.split(/[-_ ]/).map(capitalizeWord).join(' ');
-}
-
-// Take a string and return it formatted as a proper sentence if it is not already (ie. capitalized and punctuated)
-export function toSentence(string: string): SentenceString {
-	const capitalizedString = capitalizeWord(string);
-
-	// If string ends with period, comma, exclamation point, question mark, or ellipsis, return as is
-	if (capitalizedString.match(/[\.,!?\u2026]$/)) {
-		return capitalizedString as SentenceString;
-	}
-
-	return `${capitalizedString}.`;
-}
-
-/**
- * Get the index of the start of the last word in a string
- *
- * @param string The string to search
- * @returns The index of the start of the last word in the string
- */
-export function getStartIndexOfLastWord(string: string) {
-	return string.indexOf(' ', -1) + 2;
-}
-
-// Return a JSON string with human-readable formatting
-export function prettify(json: object | undefined | null) {
-	return JSON.stringify(json, null, 2);
-}
-
-// Given a path, return the absolute URL
-export function getAbsoluteUrl(path: string, base?: string) {
-	return new URL(path, base ?? SITE_METADATA.siteUrl);
-}
-
-// Get the MIME type of a file URL based on its extension
-export function getMimeType(fileUrl: URL) {
-	const extension = fileUrl.pathname.split('.').pop();
-
-	if (extension === undefined) {
-		throw new Error('File extension not found in URL');
-	}
-
-	return getOrDefault(MIME_TYPE_MAP, extension) as string;
-}
-
-// Remove a trailing slash from a path if it exists
-export function removeTrailingSlash(path: string) {
-	return path.endsWith('/') ? path.slice(0, -1) : path;
-}
-
-// Remove the protocol from a URL
-export function removeProtocol(url: UrlString | URL) {
-	const urlString = url instanceof URL ? url.toString() : url;
-
-	return urlString.replace(/.*?:\/\//g, '');
-}
-
 // Return the first n elements of an array
 export function limit<T>(array: T[], limit: number): T[] {
 	return array.slice(0, limit);
@@ -242,30 +192,6 @@ export function arrayToObject<T extends object, K extends keyof T>(
 	const keyValueMatrix = array.map((item) => [String(item[key]), item]);
 
 	return Object.fromEntries(keyValueMatrix);
-}
-
-// Return true if a value is defined
-export function isDefined<T>(value: T): value is NonNullable<T> {
-	return value !== undefined && value !== null;
-}
-
-// Throw an error if a value is not defined
-export function assertIsDefined<T>(
-	value: T,
-	msg?: string,
-): asserts value is NonNullable<T> {
-	if (!isDefined(value)) {
-		panic(msg ?? 'Expected value to be defined, but it was not');
-	}
-}
-
-/**
- * Throw an error if a value is of a type that should not be possible. This is used to check that all possible values of a discriminated union are handled.
- *
- * @param value The value to check
- */
-export function assertUnreachable(value: never): never {
-	throw new Error(`Unreachable code reached with value: ${value}`);
 }
 
 /**

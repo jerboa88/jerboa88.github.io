@@ -6,12 +6,9 @@
 import type { Actions, NodePluginArgs } from 'gatsby';
 import { JSDOM } from 'jsdom';
 import { getProjectTypeColor, getSiteMetadata } from '../common/config-manager';
-import {
-	getAbsoluteUrl,
-	isDefined,
-	toKebabCase,
-	toTitleCase,
-} from '../common/utils';
+import { isDefined } from '../common/utils/other';
+import { toKebabCase, toTitleCase } from '../common/utils/strings';
+import { getAbsoluteUrl } from '../common/utils/urls';
 import type { BaseProject } from '../types/projects';
 import type { UrlString } from '../types/strings';
 import { group, groupEnd, info, panic, warn } from './logger';

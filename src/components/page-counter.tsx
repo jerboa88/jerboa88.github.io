@@ -3,7 +3,7 @@
 	---------------------------------------------------------------------
 */
 
-import { getClassNameProps } from '../common/utils';
+import { getClassNameProps } from '../common/utils/other';
 import type { PropsWithClassName } from '../types/components';
 
 // Types

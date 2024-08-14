@@ -5,11 +5,8 @@
 
 import { getSiteMetadata, getTheme } from '../../common/config-manager';
 import { JSON_LD_AUTHOR_PATH } from '../../common/constants';
-import {
-	getAbsoluteUrl,
-	getClassNameProps,
-	getMimeType,
-} from '../../common/utils';
+import { getClassNameProps } from '../../common/utils/other';
+import { getAbsoluteUrl, getMimeType } from '../../common/utils/urls';
 import type { PropsWithClassName } from '../../types/components';
 import {
 	type PageMetadataProp,

@@ -3,7 +3,7 @@
 	------------------------
 */
 
-import { getClassNameProps } from '../../common/utils';
+import { getClassNameProps } from '../../common/utils/other';
 import type { Link } from '../../types/components';
 import type { PropsWithClassName } from '../../types/components';
 import { LinkWrapper } from './link-wrapper';

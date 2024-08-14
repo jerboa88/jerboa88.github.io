@@ -3,7 +3,7 @@
 	-------------------------------------------
 */
 
-import { toSentence } from '../common/utils';
+import { toSentence } from '../common/utils/strings';
 import type { Project } from '../types/projects';
 import { ResumeEntry } from './resume-entry';
 

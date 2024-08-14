@@ -4,7 +4,7 @@
 */
 
 import { useCallback } from 'react';
-import { getClassNameProps } from '../../common/utils';
+import { getClassNameProps } from '../../common/utils/other';
 import type {
 	Input,
 	InputElementRenderFunction,
