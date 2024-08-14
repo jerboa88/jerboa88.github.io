@@ -16,7 +16,7 @@ import {
 	isDefined,
 	limit,
 } from '../common/utils/other';
-import { prettify } from '../common/utils/strings';
+import { prettify } from '../common/utils/other';
 import { type EntryPage, EntryVisibility } from '../types/other';
 import {
 	type GithubRepoProject,
