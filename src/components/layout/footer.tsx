@@ -17,7 +17,7 @@ const SITE_METADATA = getSiteMetadata();
 export function Footer() {
 	return (
 		<footer className="z-30 w-full shadow-lg backdrop-blur-md bg-glass">
-			<div className="mix-blend-overlay">
+			<div className="mix-blend-overlay" data-nosnippet>
 				<Divider />
 				<div className="flex flex-row justify-between items-center p-4 pb-4">
 					<nav className="flex flex-row justify-center tabs font-button">

@@ -47,7 +47,7 @@ export function Header({ expandTitle, sections }: Props) {
 
 	return (
 		<header {...headerClassNameProps}>
-			<div className="mix-blend-overlay">
+			<div className="mix-blend-overlay" data-nosnippet>
 				<div {...containerClassNameProps}>
 					{!expandTitle && (
 						<motion.a href="/" {...layoutIdProp}>
