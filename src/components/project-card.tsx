@@ -6,7 +6,7 @@
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faGlobe, faStar } from '@fortawesome/free-solid-svg-icons';
 import { PROJECTS_PATH } from '../common/constants';
-import { assertUnreachable, getClassNameProps } from '../common/utils';
+import { assertUnreachable, getClassNameProps } from '../common/utils/other';
 import type { PropsWithClassName } from '../types/components';
 import { type Project, ProjectCategory } from '../types/projects';
 import { Card } from './card';
@@ -95,8 +95,8 @@ export function ProjectCard({ project }: Props) {
 						<span className="text-wrap">{project.description}</span>
 					</div>
 				</div>
-				<div className="flex flex-row justify-between items-center pr-2 w-full">
-					<div className="flex flex-row gap-2 justify-start items-center">
+				<div className="flex flex-row justify-between items-center gap-2 pr-2 w-full">
+					<div className="flex flex-row gap-2 justify-start items-center flex-wrap">
 						{project.languages.map((language) => (
 							<Pill
 								key={language}

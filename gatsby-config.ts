@@ -16,7 +16,7 @@ import {
 	INDEX_PATH,
 	SOCIAL_IMAGES_PATH,
 } from './src/common/constants';
-import { getAbsoluteUrl } from './src/common/utils';
+import { getAbsoluteUrl } from './src/common/utils/urls';
 import { SocialImageType, ThemeType } from './src/types/other';
 import tailwindConfig from './tailwind.config';
 

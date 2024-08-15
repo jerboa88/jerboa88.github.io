@@ -5,7 +5,7 @@
 
 import domPurify from 'isomorphic-dompurify';
 import type { PropsWithChildren } from 'react';
-import { getClassNameProps } from '../../common/utils';
+import { getClassNameProps } from '../../common/utils/other';
 import type { PropsWithClassName } from '../../types/components';
 
 interface Props extends PropsWithClassName, PropsWithChildren {

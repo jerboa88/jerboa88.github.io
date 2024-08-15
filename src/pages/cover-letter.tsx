@@ -6,7 +6,7 @@
 import { type HeadProps, type PageProps, graphql } from 'gatsby';
 import { getSiteMetadata } from '../common/config-manager';
 import { JSON_LD_AUTHOR_PATH } from '../common/constants';
-import { getAbsoluteUrl } from '../common/utils';
+import { getAbsoluteUrl } from '../common/utils/urls';
 import { DocumentPageLayout } from '../components/layout/document-page-layout';
 import { Section } from '../components/layout/section';
 import { PageHead } from '../components/seo/page-head';

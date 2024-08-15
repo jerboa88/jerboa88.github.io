@@ -6,7 +6,10 @@
 import { motion } from 'framer-motion';
 import { getSiteMetadata } from '../../common/config-manager';
 import { TITLE_LAYOUT_ID } from '../../common/constants';
+import { getStartIndexOfLastWord } from '../../common/utils/strings';
 import { Heading } from '../../components/text/heading';
+import { Breakpoint } from '../../types/components';
+import { ResponsiveText } from '../text/responsive-text';
 
 // Types
 
@@ -21,11 +24,16 @@ const SITE_METADATA = getSiteMetadata();
 export function HeroHeader({ expandTitle = false }: Props) {
 	const titleElement = (
 		<Heading className="m-4 text-6xl">
-			<span className="inline md:hidden drop-shadow-emboss">
-				{SITE_METADATA.author.name.short}
-			</span>
-			<span className="hidden md:inline drop-shadow-emboss">
-				{SITE_METADATA.author.name.full}
+			<span className="drop-shadow-emboss">
+				<ResponsiveText
+					text={SITE_METADATA.author.name.full}
+					breakpoints={{
+						[Breakpoint.Default]: getStartIndexOfLastWord(
+							SITE_METADATA.author.name.full,
+						),
+						[Breakpoint.Md]: undefined,
+					}}
+				/>
 			</span>
 		</Heading>
 	);

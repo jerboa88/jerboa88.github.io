@@ -9,12 +9,9 @@ import type { HeadProps, PageProps } from 'gatsby';
 import { useCallback, useRef } from 'react';
 import { getSiteMetadata } from '../../common/config-manager';
 import { JSON_LD_AUTHOR_PATH, PROJECTS_PATH } from '../../common/constants';
-import {
-	getAbsoluteUrl,
-	isDefined,
-	removeUndefinedProps,
-	toSentence,
-} from '../../common/utils';
+import { isDefined, removeUndefinedProps } from '../../common/utils/other';
+import { toSentence } from '../../common/utils/strings';
+import { getAbsoluteUrl } from '../../common/utils/urls';
 import { PageLayout } from '../../components/layout/page-layout';
 import { Section } from '../../components/layout/section';
 import { GhostButtonLink } from '../../components/links/ghost-button-link';

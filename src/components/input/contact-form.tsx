@@ -13,7 +13,7 @@ import {
 	getClassNameProps,
 	getOrDefault,
 	getStatusCodeDescription,
-} from '../../common/utils';
+} from '../../common/utils/other';
 import {
 	AlertType,
 	type InputValidationOptions,

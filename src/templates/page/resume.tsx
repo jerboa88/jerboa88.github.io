@@ -12,7 +12,8 @@ import {
 	getVolunteeringRoles,
 } from '../../common/config-manager';
 import { JSON_LD_AUTHOR_PATH } from '../../common/constants';
-import { getAbsoluteUrl, limit } from '../../common/utils';
+import { limit } from '../../common/utils/other';
+import { getAbsoluteUrl } from '../../common/utils/urls';
 import { DocumentPageLayout } from '../../components/layout/document-page-layout';
 import { Section } from '../../components/layout/section';
 import { ResumeProjectEntries } from '../../components/resume-project-entries';

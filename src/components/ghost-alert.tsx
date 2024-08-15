@@ -12,7 +12,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FADE_IN_ANIMATION_PROPS } from '../common/constants';
-import { getClassNameProps } from '../common/utils';
+import { getClassNameProps } from '../common/utils/other';
 import { AlertType } from '../types/components';
 import type { PropsWithClassName } from '../types/components';
 

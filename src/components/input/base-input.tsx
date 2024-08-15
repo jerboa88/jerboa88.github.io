@@ -6,7 +6,7 @@
 
 import { motion } from 'framer-motion';
 import type { FieldErrors, UseFormRegister } from 'react-hook-form';
-import { getClassNameProps, getOrDefault } from '../../common/utils';
+import { getClassNameProps, getOrDefault } from '../../common/utils/other';
 import {
 	AlertType,
 	type InputElementRenderFunction,

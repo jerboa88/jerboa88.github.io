@@ -3,7 +3,7 @@
 	---------------------------
 */
 
-import { getClassNameProps } from '../common/utils';
+import { getClassNameProps } from '../common/utils/other';
 import { ProjectCard } from '../components/project-card';
 import type { PropsWithClassName } from '../types/components';
 import type { Project } from '../types/projects';

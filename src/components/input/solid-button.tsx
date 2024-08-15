@@ -3,7 +3,7 @@
 	-----------------------------------------
 */
 
-import { getClassNameProps } from '../../common/utils';
+import { getClassNameProps } from '../../common/utils/other';
 import type { Button } from '../../types/components';
 import { Card } from '../card';
 import { BaseButton } from './base-button';

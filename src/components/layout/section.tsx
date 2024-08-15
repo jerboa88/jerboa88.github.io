@@ -4,7 +4,8 @@
 */
 
 import { type ForwardedRef, type PropsWithChildren, forwardRef } from 'react';
-import { getClassNameProps, toKebabCase } from '../../common/utils';
+import { getClassNameProps } from '../../common/utils/other';
+import { toKebabCase } from '../../common/utils/strings';
 import type { ButtonElementRenderFunction } from '../../types/components';
 import type { PropsWithClassName } from '../../types/components';
 import { Divider } from '../divider';
