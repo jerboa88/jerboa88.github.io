@@ -4570,7 +4570,7 @@ const RAW_RUNTIME_STATE =
           ["@parcel/watcher-win32-x64", "npm:2.4.0"],\
           ["detect-libc", "npm:1.0.3"],\
           ["is-glob", "npm:4.0.3"],\
-          ["micromatch", "npm:4.0.5"],\
+          ["micromatch", "npm:4.0.8"],\
           ["node-addon-api", "npm:7.0.0"],\
           ["node-gyp", "npm:10.0.1"]\
         ],\
@@ -10161,7 +10161,7 @@ const RAW_RUNTIME_STATE =
           ["arrify", "npm:2.0.1"],\
           ["eslint", "npm:7.32.0"],\
           ["jest-worker", "npm:27.5.1"],\
-          ["micromatch", "npm:4.0.5"],\
+          ["micromatch", "npm:4.0.8"],\
           ["normalize-path", "npm:3.0.0"],\
           ["schema-utils", "npm:3.3.0"],\
           ["webpack", "virtual:98f2822660c2e48d20118003efc2ae8171817243ad54e331c42f8f85c4bf805d745a06df61f4e3b495b763da8b077cf95f10a6e976d34bd274fa3ba5ff948ae5#npm:5.94.0"]\
@@ -10463,7 +10463,7 @@ const RAW_RUNTIME_STATE =
           ["@nodelib/fs.walk", "npm:1.2.8"],\
           ["glob-parent", "npm:5.1.2"],\
           ["merge2", "npm:1.4.1"],\
-          ["micromatch", "npm:4.0.5"]\
+          ["micromatch", "npm:4.0.8"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -11174,7 +11174,7 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.17.21"],\
           ["meant", "npm:1.0.3"],\
           ["memoizee", "npm:0.4.15"],\
-          ["micromatch", "npm:4.0.5"],\
+          ["micromatch", "npm:4.0.8"],\
           ["mime", "npm:3.0.0"],\
           ["mini-css-extract-plugin", "virtual:98f2822660c2e48d20118003efc2ae8171817243ad54e331c42f8f85c4bf805d745a06df61f4e3b495b763da8b077cf95f10a6e976d34bd274fa3ba5ff948ae5#npm:1.6.2"],\
           ["mitt", "npm:1.2.0"],\
@@ -11379,7 +11379,7 @@ const RAW_RUNTIME_STATE =
           ["gatsby-core-utils", "npm:4.13.1"],\
           ["glob", "npm:7.2.3"],\
           ["lodash", "npm:4.17.21"],\
-          ["micromatch", "npm:4.0.5"]\
+          ["micromatch", "npm:4.0.8"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -15174,10 +15174,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["micromatch", [\
-      ["npm:4.0.5", {\
-        "packageLocation": "./.yarn/cache/micromatch-npm-4.0.5-cfab5d7669-a749888789.zip/node_modules/micromatch/",\
+      ["npm:4.0.8", {\
+        "packageLocation": "./.yarn/cache/micromatch-npm-4.0.8-c9570e4aca-6bf2a01672.zip/node_modules/micromatch/",\
         "packageDependencies": [\
-          ["micromatch", "npm:4.0.5"],\
+          ["micromatch", "npm:4.0.8"],\
           ["braces", "npm:3.0.3"],\
           ["picomatch", "npm:2.3.1"]\
         ],\
@@ -20074,7 +20074,7 @@ const RAW_RUNTIME_STATE =
           ["is-glob", "npm:4.0.3"],\
           ["jiti", "npm:1.21.0"],\
           ["lilconfig", "npm:2.1.0"],\
-          ["micromatch", "npm:4.0.5"],\
+          ["micromatch", "npm:4.0.8"],\
           ["normalize-path", "npm:3.0.0"],\
           ["object-hash", "npm:3.0.0"],\
           ["picocolors", "npm:1.0.0"],\
