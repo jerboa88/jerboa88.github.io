@@ -15,10 +15,11 @@ export const employmentRolesConfig: RolesConfig<EmploymentRole> = [
 		startDate: '2020-05-01',
 		endDate: '2021-08-31',
 		bullets: [
-			'Developed and tested NexLynk DMS, a full-stack enterprise application for plasma donation management.',
-			'Collaborated with QA, documentation, and testing teams to ensure tickets were completed on time, in accordance with relevant SOPs, and following Agile processes.',
-			'Performed RCA on issues in production using limited customer-provided information.',
-			'Researched major dependency updates and new technologies in order to improve the build process and product functionality.',
+			"Developed, documented, and tested NexLynk DMS, a full-stack enterprise application for plasma donation management. Wrote extensive documentation about the product's development lifecycle, which was added to the company's internal wiki and used as a reference for colleagues and external teams.",
+			'Collaborated with QA, documentation, and testing teams to ensure tickets were completed on time, in accordance with relevant SOPs, and following Agile processes. Communicated effectively with remote team members across multiple timezones. Onboarded two new interns, helping them become familiar with the development process and application codebase.',
+			'Performed detailed code reviews, providing feedback to team members to ensure code quality and adherence to coding standards. Won a company-wide bug bounty for discovering a number of user-facing issues.',
+			'Researched major dependency updates and new technologies in order to improve the build process and product functionality. For example, comparing various database migration tools and building a POC to demonstrate the benefits of automated migration over using manual scripts. This tool was later integrated into the build process to reduce the dependence on field technicians for minor product updates.',
+			'Performed RCA of issues in production using limited customer-provided information. For example, computing the expected size of a database based on estimated data entry rates to alleviate data storage concerns and fixing intermittent bugs by reviewing logs and database records from customer environments.',
 		],
 	},
 	{
@@ -30,10 +31,8 @@ export const employmentRolesConfig: RolesConfig<EmploymentRole> = [
 		startDate: '2019-07-01',
 		endDate: '2019-08-01',
 		bullets: [
-			'Collaborated with 1 to 3 crew members to complete up to 10 flight turnarounds a day on a strict updating schedule.',
+			'Collaborated with 1 to 3 crew members to complete up to 10 flight turnarounds a day on a strict updating schedule, monitoring actively changing flight arrival/departure times to ensure no delays were taken.',
 			'Facilitated unloading/loading of airplanes with limited manpower, tight deadlines, and in adverse weather conditions.',
-			'Adapted to irregular workloads and staffing shortages to complete jobs in accordance with the flight schedule, working overtime when necessary.',
-			'Monitored actively changing flight arrival/departure times to ensure no delays were taken.',
 		],
 	},
 	{
