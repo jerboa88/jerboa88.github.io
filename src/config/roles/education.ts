@@ -15,6 +15,7 @@ export const educationRolesConfig: RolesConfig<EducationRole> = [
 		endDate: '2023-11-21',
 		bullets: [
 			'Completed my BSc Specialization in Software Practice with Distinction.',
+			"Achieved Dean's Honor Roll recognition for academic excellence in 2022-2023.",
 		],
 	},
 	{
