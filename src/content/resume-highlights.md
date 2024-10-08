@@ -1,5 +1,5 @@
-- **Creative Powerhouse:** Passionate about designing, creating, and sharing new things. Over 20 public projects on GitHub with a combined 60+ stars.
-- **Polyglot Programmer:** Experienced with a variety of programming languages and tools including React, TypeScript, CSS, Python, C/C++, Java, and SQL.
-- **Team Player:** Comfortable working both autonomously and as part of a team. Contributed to various projects following Agile methodologies and collaborated effectively as part of cross-functional teams.
-- **Problem Solver:** Capable of working with tight time constraints, limited human resources, and in challenging conditions as per previous work experience.
-- **Lifelong Learner:** Self-motivated, creative, and excited to learn more tools and technologies in the future!
+- **Creative Powerhouse:** Passionate about designing, building, and sharing new things. Author of over 20 public projects on GitHub with a combined 60+ stars. Detail-oriented and committed to writing high-quality, maintainable code along with supporting documentation and tests.
+- **Polyglot Programmer:** Experienced with a variety of programming languages including JavaScript/TypeScript, C/C++, CSS, Python, Java, and SQL. Familiar with popular tools and technologies like React.js, Node.js, Git, and Docker.
+- **Team Player:** Contributed to various projects following Agile methodologies and collaborated effectively as part of cross-functional teams. Previously responsible for mentoring new interns.
+- **Remote Ready:** Comfortable working both autonomously and as part of a team. Excellent verbal and written communication skills, with previous experience interfacing with a distributed, remote team.
+- **Lifelong Learner:** Self-motivated, creative, and excited to learn more tools and technologies in the future. Willing to learn from others and use my knowledge to help colleagues in order to achieve common goals!
