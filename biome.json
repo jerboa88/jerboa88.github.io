@@ -28,7 +28,8 @@
 				"noImplicitBoolean": "off"
 			},
 			"suspicious": {
-				"noReactSpecificProps": "off"
+				"noReactSpecificProps": "off",
+				"noConsole": "off"
 			}
 		}
 	},
