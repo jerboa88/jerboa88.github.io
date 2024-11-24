@@ -5,16 +5,16 @@
 
 import { MotionConfig } from 'framer-motion';
 import { type PropsWithChildren, StrictMode } from 'react';
-import { SPRING_TRANSITION_PROPS } from '../../common/constants';
-import { getClassNameProps } from '../../common/utils/other';
-import type { PropsWithClassName } from '../../types/components';
-import { PageCounter } from '../page-counter';
-import { ResumeHeader } from './resume-header';
+import { SPRING_TRANSITION_PROPS } from '../../common/constants.ts';
+import { getClassNameProps } from '../../common/utils/other.ts';
+import type { PropsWithClassName } from '../../types/components.ts';
+import { PageCounter } from '../page-counter.tsx';
+import { ResumeHeader } from './resume-header.tsx';
 
 // Types
 
 interface Props extends PropsWithClassName, PropsWithChildren {
-	numOfPages: number;
+	numOfPages?: number;
 }
 
 export function DocumentPageLayout({ className, numOfPages, children }: Props) {
@@ -30,7 +30,7 @@ export function DocumentPageLayout({ className, numOfPages, children }: Props) {
 				<div {...classNameProps}>
 					<ResumeHeader />
 					{children}
-					<PageCounter numOfPages={numOfPages} />
+					{numOfPages && <PageCounter numOfPages={numOfPages} />}
 				</div>
 			</MotionConfig>
 		</StrictMode>
