@@ -2,8 +2,8 @@
  * Assorted utility functions
  */
 
-import { panic } from '../../node/logger';
-import type { PropsWithClassName } from '../../types/components';
+import { panic } from '../../node/logger.ts';
+import type { PropsWithClassName } from '../../types/components.ts';
 
 // Types
 
@@ -220,6 +220,20 @@ export function clamp(value: number, min: number, max: number) {
  */
 export function limit<T>(array: T[], limit: number): T[] {
 	return array.slice(0, limit);
+}
+
+/**
+ * Returns true if the substring is found in any of the strings in the array
+ *
+ * @param array - An array of strings to search through
+ * @param substring - The substring to search for
+ * @returns True if the substring is found in any of the strings in the array
+ */
+export function isSubStringInArray(
+	array: string[],
+	substring: string,
+): boolean {
+	return array.some((item) => item.includes(substring));
 }
 
 /**
