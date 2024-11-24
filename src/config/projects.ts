@@ -3,13 +3,13 @@
 	-----------------------------------------------
 */
 
-import { EntryVisibility } from '../types/other';
-import { ProjectCategory, type ProjectsConfig } from '../types/projects';
+import { EntryVisibility } from '../types/other.ts';
+import { ProjectCategory, type ProjectsConfig } from '../types/projects.ts';
 
 export const projectsConfig: ProjectsConfig = {
 	maxForPage: {
 		index: 10,
-		resume: 6,
+		resume: 3,
 	},
 	projects: [
 		{
