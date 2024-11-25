@@ -3,7 +3,7 @@
 	---------------------------
 */
 
-import type { EmploymentRole, RolesConfig } from '../../types/roles';
+import type { EmploymentRole, RolesConfig } from '../../types/roles.ts';
 
 export const employmentRolesConfig: RolesConfig<EmploymentRole> = [
 	{
@@ -26,7 +26,7 @@ export const employmentRolesConfig: RolesConfig<EmploymentRole> = [
 		type: 'summer job',
 		title: 'Ramp Agent',
 		company: 'Airport Terminal Services',
-		companyUrl: 'https://www.universalhandling.com/',
+		companyUrl: 'https://www.atsstl.com/',
 		location: 'Edmonton, AB',
 		startDate: '2019-07-01',
 		endDate: '2019-08-01',
