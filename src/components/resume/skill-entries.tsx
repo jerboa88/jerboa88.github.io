@@ -3,7 +3,7 @@
 	-----------------------------------------
 */
 
-import type { SkillsConfig } from '../../types/skills.ts';
+import type { SkillsConfig } from '../../types/content/skills.ts';
 import { ResumeSummaryEntry } from './summary-entry.tsx';
 
 interface Props {

@@ -3,9 +3,9 @@
 	------------------------
 */
 
-import { getClassNameProps } from '../common/utils/other';
-import type { Role } from '../types/roles';
-import { TimelineEntry } from './timeline-entry';
+import { getClassNameProps } from '../common/utils/other.ts';
+import type { Role } from '../types/content/roles.ts';
+import { TimelineEntry } from './timeline-entry.tsx';
 
 interface Props {
 	roles: Role[];

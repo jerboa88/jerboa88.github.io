@@ -2,9 +2,9 @@
  * Type definitions for page context objects
  */
 
-import type { ImageMetadataProp, PageMetadataProp } from './other';
-import type { Project } from './projects';
-import type { EmptyObject } from './utils';
+import type { Project } from './content/projects.ts';
+import type { ImageMetadataProp, PageMetadataProp } from './other.ts';
+import type { EmptyObject } from './utils.ts';
 
 /**
  * Base page context type that can be extended with additional properties. Page metadata is automatically added to pages of this type

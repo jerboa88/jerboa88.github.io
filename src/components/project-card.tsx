@@ -8,7 +8,7 @@ import { faGlobe, faStar } from '@fortawesome/free-solid-svg-icons';
 import { PROJECTS_PATH } from '../common/constants.ts';
 import { assertUnreachable, getClassNameProps } from '../common/utils/other.ts';
 import type { PropsWithClassName } from '../types/components.ts';
-import { type Project, ProjectCategory } from '../types/projects.ts';
+import { type Project, ProjectCategory } from '../types/content/projects.ts';
 import { Card } from './card.tsx';
 import { GhostButton } from './input/ghost-button.tsx';
 import { LinkWrapper } from './links/link-wrapper.tsx';

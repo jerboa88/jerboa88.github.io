@@ -7,8 +7,17 @@ import type {
 	DateString,
 	SentenceString,
 	UrlString,
-} from './strings';
-import type { Overwrite } from './utils';
+} from '../strings.ts';
+import type { Overwrite } from '../utils.ts';
+
+/**
+ * An enumeration of possible role types
+ */
+export enum RoleType {
+	Employment = 'employment',
+	Education = 'education',
+	Volunteering = 'volunteering',
+}
 
 /**
  * A base role with common fields

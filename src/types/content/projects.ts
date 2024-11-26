@@ -2,9 +2,9 @@
  * Type definitions for projects and project configs
  */
 
-import { EntryPage, type EntryVisibility } from './other';
-import type { DateString, SentenceString, UrlString } from './strings';
-import type { Overwrite } from './utils';
+import type { DateString, SentenceString, UrlString } from '../strings.ts';
+import type { Overwrite } from '../utils.ts';
+import { EntryPage, type EntryVisibility } from './content.ts';
 
 /**
  * An enumeration of possible project categories

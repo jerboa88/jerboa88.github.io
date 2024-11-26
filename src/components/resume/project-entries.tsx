@@ -4,7 +4,7 @@
 */
 
 import { toSentence } from '../../common/utils/strings.ts';
-import type { Project } from '../../types/projects.ts';
+import type { Project } from '../../types/content/projects.ts';
 import { ResumeDetailEntry } from './detail-entry.tsx';
 
 interface Props {

@@ -4,43 +4,42 @@
 */
 
 import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
-import { colorMappingsConfig } from '../config/color-mappings';
-import { externalServicesConfig } from '../config/external-services';
-import { pagesMetadataConfig } from '../config/metadata/pages';
-import { siteMetadataConfig } from '../config/metadata/site';
-import { projectsConfig } from '../config/projects';
-import { educationRolesConfig } from '../config/roles/education';
-import { employmentRolesConfig } from '../config/roles/employment';
-import { volunteeringRolesConfig } from '../config/roles/volunteering';
-import { socialImagesGenerationConfig } from '../config/social-images-generation';
-import { themesConfig } from '../config/themes';
-import type {
-	EntryPage,
-	EntryVisibility,
-	PageMetadata,
-	SocialImageType,
-	SocialImagesGenerationConfig,
-	Theme,
-	ThemesConfig,
-} from '../types/other';
+import { colorMappingsConfig } from '../config/color-mappings.ts';
+import { externalServicesConfig } from '../config/external-services.ts';
+import { pagesMetadataConfig } from '../config/metadata/pages.ts';
+import { siteMetadataConfig } from '../config/metadata/site.ts';
+import { projectsConfig } from '../config/projects.ts';
+import { educationRolesConfig } from '../config/roles/education.ts';
+import { employmentRolesConfig } from '../config/roles/employment.ts';
+import { volunteeringRolesConfig } from '../config/roles/volunteering.ts';
+import { socialImagesGenerationConfig } from '../config/social-images-generation.ts';
+import { themesConfig } from '../config/themes.ts';
+import type { EntryPage, EntryVisibility } from '../types/content/content.ts';
 import {
 	type OtherProject,
 	ProjectCategory,
 	type ProjectConfig,
-} from '../types/projects';
+} from '../types/content/projects.ts';
 import type {
 	EducationRole,
 	EmploymentRole,
 	Role,
 	RolesConfig,
 	VolunteeringRole,
-} from '../types/roles';
+} from '../types/content/roles.ts';
+import type {
+	PageMetadata,
+	SocialImageType,
+	SocialImagesGenerationConfig,
+	Theme,
+	ThemesConfig,
+} from '../types/other.ts';
 import type {
 	BgColorString,
 	SentenceString,
 	UrlString,
-} from '../types/strings';
-import { arrayToObject, isDefined } from './utils/other';
+} from '../types/strings.ts';
+import { arrayToObject, isDefined } from './utils/other.ts';
 
 // Types
 

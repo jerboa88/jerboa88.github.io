@@ -6,7 +6,11 @@ import type {
 	DefaultOptions,
 	JobOptions,
 } from 'gatsby-plugin-component-to-image/lib/types';
-import type { AbsolutePathString, BgColorString, UrlString } from './strings';
+import type {
+	AbsolutePathString,
+	BgColorString,
+	UrlString,
+} from './strings.ts';
 
 /**
  * Config object used to define external services
@@ -159,21 +163,4 @@ export interface ColorMappingsConfig {
 	default: BgColorString;
 	projectType: ColorMappings;
 	roleType: ColorMappings;
-}
-
-/**
- * An enumeration of possible visibility states for entries
- */
-export enum EntryVisibility {
-	Pin = 0,
-	Show = 1,
-	Hide = 2,
-}
-
-/**
- * An enumeration of possible page types where entries can be displayed
- */
-export enum EntryPage {
-	Index = 'index',
-	Resume = 'resume',
 }

@@ -3,7 +3,7 @@
 	----------------------------------------
 */
 
-import type { Role } from '../../types/roles.ts';
+import type { Role } from '../../types/content/roles.ts';
 import { ResumeDetailEntry } from './detail-entry.tsx';
 
 interface Props {

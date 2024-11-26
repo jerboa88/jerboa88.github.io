@@ -9,23 +9,23 @@ import {
 	getOtherProjects,
 	getProjectVisibilityForPage,
 	getSiteMetadata,
-} from '../common/config-manager';
+} from '../common/config-manager.ts';
 import {
 	assertIsDefined,
 	assertUnreachable,
 	isDefined,
 	limit,
-} from '../common/utils/other';
-import { prettify } from '../common/utils/other';
-import { type EntryPage, EntryVisibility } from '../types/other';
+} from '../common/utils/other.ts';
+import { prettify } from '../common/utils/other.ts';
+import { type EntryPage, EntryVisibility } from '../types/content/content.ts';
 import {
 	type GithubRepoProject,
 	type OtherProject,
 	type Project,
 	ProjectCategory,
-} from '../types/projects';
-import { githubReposQuery } from './graphql';
-import { info, panic, warn } from './logger';
+} from '../types/content/projects.ts';
+import { githubReposQuery } from './graphql.ts';
+import { info, panic, warn } from './logger.ts';
 
 // Constants
 

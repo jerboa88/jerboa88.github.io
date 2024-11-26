@@ -18,9 +18,9 @@ import { GhostButtonLink } from '../../components/links/ghost-button-link.tsx';
 import { PageHead } from '../../components/seo/page-head.tsx';
 import { Article } from '../../components/text/article.tsx';
 import type { ButtonElementRenderFunction } from '../../types/components.ts';
+import { ProjectCategory } from '../../types/content/projects.ts';
 import type { SocialImagesMetadataProp } from '../../types/other.ts';
 import type { ProjectPageContext } from '../../types/page-context.ts';
-import { ProjectCategory } from '../../types/projects.ts';
 
 // Types
 

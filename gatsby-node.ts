@@ -1,6 +1,6 @@
 import { join, resolve } from 'node:path';
 import type { GatsbyNode } from 'gatsby';
-import { getPageMetadata } from './src/common/config-manager';
+import { getPageMetadata } from './src/common/config-manager.ts';
 import {
 	ABOUT_PATH,
 	CONTACT_PATH,
@@ -12,26 +12,29 @@ import {
 	RESUME_PATH,
 	SOCIAL_IMAGES_PATH,
 	SOCIAL_IMAGE_TEMPLATES_DIR,
-} from './src/common/constants';
-import { transformGithubDataNode } from './src/node/github-data-node-transformer';
-import { schema } from './src/node/graphql';
-import { setReporter, warn } from './src/node/logger';
-import { getProjects, getSubsetOfProjects } from './src/node/projects-manager';
+} from './src/common/constants.ts';
+import { transformGithubDataNode } from './src/node/github-data-node-transformer.ts';
+import { schema } from './src/node/graphql.ts';
+import { setReporter, warn } from './src/node/logger.ts';
+import {
+	getProjects,
+	getSubsetOfProjects,
+} from './src/node/projects-manager.ts';
 import {
 	createPage,
 	createRedirect,
 	deletePage,
 	setGatsbyNodeHelpers,
-} from './src/node/utils';
-import { EntryPage, type PageMetadata } from './src/types/other';
+} from './src/node/utils.ts';
+import type { Project } from './src/types/content/projects.ts';
+import { EntryPage, type PageMetadata } from './src/types/other.ts';
 import type {
 	IndexPageContext,
 	ProjectPageContext,
 	ResumePageContext,
-} from './src/types/page-context';
-import type { Project } from './src/types/projects';
-import type { AbsolutePathString } from './src/types/strings';
-import type { EmptyObject } from './src/types/utils';
+} from './src/types/page-context.ts';
+import type { AbsolutePathString } from './src/types/strings.ts';
+import type { EmptyObject } from './src/types/utils.ts';
 
 // Constants
 
