@@ -26,8 +26,9 @@ import {
 	deletePage,
 	setGatsbyNodeHelpers,
 } from './src/node/utils.ts';
+import { EntryPage } from './src/types/content/content.ts';
 import type { Project } from './src/types/content/projects.ts';
-import { EntryPage, type PageMetadata } from './src/types/other.ts';
+import type { PageMetadata } from './src/types/other.ts';
 import type {
 	IndexPageContext,
 	ProjectPageContext,

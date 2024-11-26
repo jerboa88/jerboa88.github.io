@@ -5,10 +5,10 @@
 
 import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import { colorMappingsConfig } from '../config/color-mappings.ts';
+import { projectsConfig } from '../config/content/projects.ts';
 import { externalServicesConfig } from '../config/external-services.ts';
 import { pagesMetadataConfig } from '../config/metadata/pages.ts';
 import { siteMetadataConfig } from '../config/metadata/site.ts';
-import { projectsConfig } from '../config/projects.ts';
 import { educationRolesConfig } from '../config/roles/education.ts';
 import { employmentRolesConfig } from '../config/roles/employment.ts';
 import { volunteeringRolesConfig } from '../config/roles/volunteering.ts';
