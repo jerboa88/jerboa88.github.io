@@ -7,20 +7,20 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import type { HeadProps, PageProps } from 'gatsby';
 import { useCallback, useRef } from 'react';
-import { getSiteMetadata } from '../../common/config-manager';
-import { JSON_LD_AUTHOR_PATH, PROJECTS_PATH } from '../../common/constants';
-import { isDefined, removeUndefinedProps } from '../../common/utils/other';
-import { toSentence } from '../../common/utils/strings';
-import { getAbsoluteUrl } from '../../common/utils/urls';
-import { PageLayout } from '../../components/layout/page-layout';
-import { Section } from '../../components/layout/section';
-import { GhostButtonLink } from '../../components/links/ghost-button-link';
-import { PageHead } from '../../components/seo/page-head';
-import { Article } from '../../components/text/article';
-import type { ButtonElementRenderFunction } from '../../types/components';
-import type { SocialImagesMetadataProp } from '../../types/other';
-import type { ProjectPageContext } from '../../types/page-context';
-import { ProjectCategory } from '../../types/projects';
+import { getSiteMetadata } from '../../common/config-manager.ts';
+import { JSON_LD_AUTHOR_PATH, PROJECTS_PATH } from '../../common/constants.ts';
+import { isDefined, removeUndefinedProps } from '../../common/utils/other.ts';
+import { toSentence } from '../../common/utils/strings.ts';
+import { getAbsoluteUrl } from '../../common/utils/urls.ts';
+import { PageLayout } from '../../components/layout/page-layout.tsx';
+import { Section } from '../../components/layout/section.tsx';
+import { GhostButtonLink } from '../../components/links/ghost-button-link.tsx';
+import { PageHead } from '../../components/seo/page-head.tsx';
+import { Article } from '../../components/text/article.tsx';
+import type { ButtonElementRenderFunction } from '../../types/components.ts';
+import type { SocialImagesMetadataProp } from '../../types/other.ts';
+import type { ProjectPageContext } from '../../types/page-context.ts';
+import { ProjectCategory } from '../../types/projects.ts';
 
 // Types
 
@@ -38,7 +38,7 @@ function getSectionButtonRenderFunction(
 	const projectUrl = project.url;
 
 	if (!isDefined(projectUrl)) {
-		return () => <></>;
+		return () => null;
 	}
 
 	let buttonText = 'View project page';

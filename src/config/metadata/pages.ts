@@ -8,8 +8,8 @@ import {
 	NOT_FOUND_PATH,
 	PRIVACY_POLICY_PATH,
 	RESUME_PATH,
-} from '../../common/constants';
-import type { PagesMetadataConfig } from '../../types/other';
+} from '../../common/constants.ts';
+import type { PagesMetadataConfig } from '../../types/other.ts';
 
 export const pagesMetadataConfig: PagesMetadataConfig = {
 	[PRIVACY_POLICY_PATH]: {
