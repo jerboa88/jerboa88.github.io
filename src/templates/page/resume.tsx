@@ -10,19 +10,19 @@ import {
 	getEmploymentRoles,
 	getSiteMetadata,
 	getVolunteeringRoles,
-} from '../../common/config-manager';
-import { JSON_LD_AUTHOR_PATH } from '../../common/constants';
-import { limit } from '../../common/utils/other';
-import { getAbsoluteUrl } from '../../common/utils/urls';
-import { DocumentPageLayout } from '../../components/layout/document-page-layout';
-import { Section } from '../../components/layout/section';
-import { ResumeProjectEntries } from '../../components/resume-project-entries';
-import { ResumeRoleEntries } from '../../components/resume-role-entries';
-import { PageHead } from '../../components/seo/page-head';
-import { Article } from '../../components/text/article';
-import type { PageSection } from '../../types/components';
-import { type SocialImagesMetadataProp, ThemeType } from '../../types/other';
-import type { ResumePageContext } from '../../types/page-context';
+} from '../../common/config-manager.ts';
+import { JSON_LD_AUTHOR_PATH } from '../../common/constants.ts';
+import { limit } from '../../common/utils/other.ts';
+import { getAbsoluteUrl } from '../../common/utils/urls.ts';
+import { DocumentPageLayout } from '../../components/layout/document-page-layout.tsx';
+import { Section } from '../../components/layout/section.tsx';
+import { ResumeProjectEntries } from '../../components/resume/project-entries.tsx';
+import { ResumeRoleEntries } from '../../components/resume/role-entries.tsx';
+import { PageHead } from '../../components/seo/page-head.tsx';
+import { Article } from '../../components/text/article.tsx';
+import type { PageSection } from '../../types/components.ts';
+import { type SocialImagesMetadataProp, ThemeType } from '../../types/other.ts';
+import type { ResumePageContext } from '../../types/page-context.ts';
 
 // Types
 

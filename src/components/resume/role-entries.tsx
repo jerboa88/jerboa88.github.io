@@ -3,8 +3,8 @@
 	----------------------------------------
 */
 
-import type { Role } from '../types/roles';
-import { ResumeEntry } from './resume-entry';
+import type { Role } from '../../types/roles.ts';
+import { ResumeDetailEntry } from './detail-entry.tsx';
 
 interface Props {
 	roles: Role[];
@@ -18,7 +18,7 @@ export function ResumeRoleEntries({ roles }: Props) {
 					`${role.title} ${role?.type ? `(${role.type})` : ''}` as typeof role.title;
 
 				return (
-					<ResumeEntry
+					<ResumeDetailEntry
 						key={role.title}
 						title={title}
 						tagline={role.company}

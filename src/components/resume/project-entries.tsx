@@ -3,9 +3,9 @@
 	-------------------------------------------
 */
 
-import { toSentence } from '../common/utils/strings';
-import type { Project } from '../types/projects';
-import { ResumeEntry } from './resume-entry';
+import { toSentence } from '../../common/utils/strings.ts';
+import type { Project } from '../../types/projects.ts';
+import { ResumeDetailEntry } from './detail-entry.tsx';
 
 interface Props {
 	projects: Project[];
@@ -21,7 +21,7 @@ export function ResumeProjectEntries({ projects }: Props) {
 				const descriptionSentence = toSentence(project.description);
 
 				return (
-					<ResumeEntry
+					<ResumeDetailEntry
 						key={project.slug}
 						title={project.name}
 						titleUrl={project.url}

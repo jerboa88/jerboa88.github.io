@@ -3,16 +3,16 @@
 	-----------------------------------------------
 */
 
-import { TooltipPosition } from '../types/components';
+import { TooltipPosition } from '../../types/components.ts';
 import type {
 	CityAndStateString,
 	SentenceString,
 	UrlString,
-} from '../types/strings';
-import { LinkWrapper } from './links/link-wrapper';
-import { Article } from './text/article';
-import { DateRange } from './text/date-range';
-import { Tooltip } from './tooltip';
+} from '../../types/strings.ts';
+import { LinkWrapper } from '../links/link-wrapper.tsx';
+import { Article } from '../text/article.tsx';
+import { DateRange } from '../text/date-range.tsx';
+import { Tooltip } from '../tooltip.tsx';
 
 interface Props {
 	title: Capitalize<string>;
@@ -27,7 +27,7 @@ interface Props {
 	location?: CityAndStateString;
 }
 
-export function ResumeEntry({
+export function ResumeDetailEntry({
 	title,
 	titleUrl,
 	titleTooltip,
