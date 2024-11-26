@@ -3,7 +3,14 @@
  */
 
 import type { AbsolutePathString } from '../strings.ts';
+import { RoleType } from './roles.ts';
 import { SkillType } from './skills.ts';
+
+export enum ContentType {
+	Roles = 'roles',
+	Skills = 'skills',
+	Projects = 'projects',
+}
 
 /**
  * An enumeration of possible visibility states for entries
@@ -36,20 +43,18 @@ type PagesContentEntryConfig = {
  * Config object used to define page content for a single page
  */
 export interface PageContentConfig {
-	// TODO: Create ContentType enum for this
-	roles: {
-		// TODO: Create RoleType enum for this
-		employment: PagesContentEntryConfig;
-		education: PagesContentEntryConfig;
-		volunteering: PagesContentEntryConfig;
+	[ContentType.Roles]: {
+		[RoleType.Employment]: PagesContentEntryConfig;
+		[RoleType.Education]: PagesContentEntryConfig;
+		[RoleType.Volunteering]: PagesContentEntryConfig;
 	};
-	skills: {
+	[ContentType.Skills]: {
 		[SkillType.Languages]: PagesContentEntryConfig;
 		[SkillType.Technologies]: PagesContentEntryConfig;
 		[SkillType.Tools]: PagesContentEntryConfig;
 		[SkillType.Topics]: PagesContentEntryConfig;
 	};
-	projects: PagesContentEntryConfig;
+	[ContentType.Projects]: PagesContentEntryConfig;
 }
 
 /**
