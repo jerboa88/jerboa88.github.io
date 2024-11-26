@@ -5,6 +5,7 @@
 
 import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import { colorMappingsConfig } from '../config/color-mappings.ts';
+import { pagesContentConfig } from '../config/content/pages.ts';
 import { projectsConfig } from '../config/content/projects.ts';
 import { externalServicesConfig } from '../config/external-services.ts';
 import { pagesMetadataConfig } from '../config/metadata/pages.ts';
@@ -14,6 +15,7 @@ import { employmentRolesConfig } from '../config/roles/employment.ts';
 import { volunteeringRolesConfig } from '../config/roles/volunteering.ts';
 import { socialImagesGenerationConfig } from '../config/social-images-generation.ts';
 import { themesConfig } from '../config/themes.ts';
+import type { PageContentConfig } from '../types/content/content.ts';
 import type { EntryPage, EntryVisibility } from '../types/content/content.ts';
 import {
 	type OtherProject,
@@ -149,6 +151,18 @@ export function getPageMetadata(pagePath: string): PageMetadata {
 
 	if (!config) {
 		console.warn(`Page metadata for ${pagePath} not found`);
+	}
+
+	return config;
+}
+
+// Returns the content config for a given page
+export function getPageContentConfig(pagePath: string): PageContentConfig {
+	const config =
+		pagesContentConfig[pagePath as keyof typeof pagesContentConfig];
+
+	if (!config) {
+		console.warn(`Page content config for ${pagePath} not found`);
 	}
 
 	return config;
