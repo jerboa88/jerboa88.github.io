@@ -1,6 +1,6 @@
 /*
-	Pill widget
-	-----------
+	Tag widget
+	----------
 */
 
 import { getClassNameProps } from '../common/utils/other.ts';
@@ -10,15 +10,15 @@ interface Props extends PropsWithClassName {
 	text: string;
 }
 
-export function Pill({ className, text }: Props) {
+export function Tag({ className, text }: Props) {
 	const classNameProps = getClassNameProps(
-		'inline-block size-fit px-4 py-3 rounded-lg drop-shadow-sm shadow-emboss z-20 text-sm font-button',
+		'kbd kbd-sm px-1.5 py-0.5 rounded-md font-button text-sm z-20',
 		className,
 	);
 
 	return (
-		<div key={text} {...classNameProps}>
+		<span key={text} {...classNameProps}>
 			{text}
-		</div>
+		</span>
 	);
 }
