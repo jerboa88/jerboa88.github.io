@@ -15,7 +15,7 @@ export enum SkillType {
 /**
  * A type representing a skill
  */
-type Skill = Capitalize<string>;
+export type Skill = Capitalize<string>;
 
 /**
  * Config object used to define skills

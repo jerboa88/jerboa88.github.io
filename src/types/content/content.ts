@@ -32,7 +32,7 @@ export enum EntryPage {
 /**
  * Config object used to define a single content entry
  */
-type PagesContentEntryConfig = {
+export type PageContentEntryConfig = {
 	limit?: number;
 	[EntryVisibility.Pin]?: string[];
 	[EntryVisibility.Show]?: string[];
@@ -44,17 +44,17 @@ type PagesContentEntryConfig = {
  */
 export interface PageContentConfig {
 	[ContentType.Roles]: {
-		[RoleType.Employment]: PagesContentEntryConfig;
-		[RoleType.Education]: PagesContentEntryConfig;
-		[RoleType.Volunteering]: PagesContentEntryConfig;
+		[RoleType.Employment]: PageContentEntryConfig;
+		[RoleType.Education]: PageContentEntryConfig;
+		[RoleType.Volunteering]: PageContentEntryConfig;
 	};
 	[ContentType.Skills]: {
-		[SkillType.Languages]: PagesContentEntryConfig;
-		[SkillType.Technologies]: PagesContentEntryConfig;
-		[SkillType.Tools]: PagesContentEntryConfig;
-		[SkillType.Topics]: PagesContentEntryConfig;
+		[SkillType.Languages]: PageContentEntryConfig;
+		[SkillType.Technologies]: PageContentEntryConfig;
+		[SkillType.Tools]: PageContentEntryConfig;
+		[SkillType.Topics]: PageContentEntryConfig;
 	};
-	[ContentType.Projects]: PagesContentEntryConfig;
+	[ContentType.Projects]: PageContentEntryConfig;
 }
 
 /**
