@@ -223,17 +223,17 @@ export function limit<T>(array: T[], limit: number): T[] {
 }
 
 /**
- * Returns true if the substring is found in any of the strings in the array
+ * Returns the index of the first string in the array that includes the substring. Returns -1 if no match is found.
  *
  * @param array - An array of strings to search through
  * @param substring - The substring to search for
- * @returns True if the substring is found in any of the strings in the array
+ * @returns The index of the first match, or -1 if no match is found
  */
-export function isSubStringInArray(
+export function findIndexOfSubstringInArray(
 	array: string[],
 	substring: string,
-): boolean {
-	return array.some((item) => item.includes(substring));
+): number {
+	return array.findIndex((item) => item.includes(substring));
 }
 
 /**

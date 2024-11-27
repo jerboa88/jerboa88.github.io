@@ -10,7 +10,7 @@ import {
 } from '../types/content/content.ts';
 import { type Skill, SkillType } from '../types/content/skills.ts';
 import { getPageContentConfig } from './config-manager.ts';
-import { isSubStringInArray, limit } from './utils/other.ts';
+import { findIndexOfSubstringInArray, limit } from './utils/other.ts';
 
 /**
  * Given a config object for a single content entry, returns the max amount of items to display. If the limit is not specified, returns the maximum safe integer.
@@ -40,14 +40,17 @@ function getSetOfMatchingSkills(
 	const set: Set<Skill> = new Set();
 
 	for (const pageSkillName of pageSkillsOfType) {
-		if (isSubStringInArray(allSkillsOfType, pageSkillName)) {
-			// TODO: Add skill from allSkillsOfType instead of pageSkillName
-			set.add(pageSkillName);
+		const matchIndex = findIndexOfSubstringInArray(
+			allSkillsOfType,
+			pageSkillName,
+		);
 
+		if (matchIndex === -1) {
+			console.warn(`Configured skill "${pageSkillName}" not found`);
 			continue;
 		}
 
-		console.warn(`Configured skill "${pageSkillName}" not found`);
+		set.add(allSkillsOfType[matchIndex]);
 	}
 
 	return set;
