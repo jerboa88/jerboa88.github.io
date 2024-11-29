@@ -7,8 +7,10 @@ import { type HeadProps, type PageProps, graphql } from 'gatsby';
 import { useRef } from 'react';
 import { getSiteMetadata } from '../../common/config-manager.ts';
 import { JSON_LD_AUTHOR_PATH, RESUME_PATH } from '../../common/constants.ts';
-import { getSkillsForPage } from '../../common/content-manager.ts';
-import { limit } from '../../common/utils/other.ts';
+import {
+	getRolesForPage,
+	getSkillsForPage,
+} from '../../common/content-manager.ts';
 import { getAbsoluteUrl } from '../../common/utils/urls.ts';
 import { DocumentPageLayout } from '../../components/layout/document-page-layout.tsx';
 import { Section } from '../../components/layout/section.tsx';
@@ -16,6 +18,7 @@ import { ResumeProjectEntries } from '../../components/resume/project-entries.ts
 import { ResumeRoleEntries } from '../../components/resume/role-entries.tsx';
 import { ResumeSkillEntries } from '../../components/resume/skill-entries.tsx';
 import { PageHead } from '../../components/seo/page-head.tsx';
+import { Article } from '../../components/text/article.tsx';
 import type { PageSection } from '../../types/components.ts';
 import { type SocialImagesMetadataProp, ThemeType } from '../../types/other.ts';
 import type { ResumePageContext } from '../../types/page-context.ts';
@@ -27,9 +30,7 @@ type PageContext = ResumePageContext & SocialImagesMetadataProp;
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
-const EMPLOYMENT_ROLES = limit(getEmploymentRoles(), 2);
-const EDUCATION_ROLES = limit(getEducationRoles(), 1);
-const VOLUNTEERING_ROLES = limit(getVolunteeringRoles(), 1);
+const ROLES = getRolesForPage(RESUME_PATH);
 const SKILLS = getSkillsForPage(RESUME_PATH);
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
@@ -104,7 +105,7 @@ export default function ResumePageTemplate({
 				dividerClassName="!pb-4"
 				responsive={false}
 			>
-				<ResumeRoleEntries roles={EMPLOYMENT_ROLES} />
+				<ResumeRoleEntries roles={ROLES.employment} />
 			</Section>
 			<Section
 				{...sections[3]}
@@ -112,7 +113,7 @@ export default function ResumePageTemplate({
 				dividerClassName="!pb-4"
 				responsive={false}
 			>
-				<ResumeRoleEntries roles={EDUCATION_ROLES} />
+				<ResumeRoleEntries roles={ROLES.education} />
 			</Section>
 			<Section
 				{...sections[4]}
@@ -120,7 +121,7 @@ export default function ResumePageTemplate({
 				dividerClassName="!pb-4"
 				responsive={false}
 			>
-				<ResumeRoleEntries roles={VOLUNTEERING_ROLES} />
+				<ResumeRoleEntries roles={ROLES.volunteering} />
 			</Section>
 			<Section
 				{...sections[5]}

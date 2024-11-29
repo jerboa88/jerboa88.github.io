@@ -71,11 +71,20 @@ export type VolunteeringRole = BaseRole;
 export type Role = EmploymentRole | EducationRole | VolunteeringRole;
 
 /**
- * Config object used to define roles
+ * Config object used to define a single role
  *
  * @typeParam T - The role type. If not provided, defaults to {@link Role}
  */
-export type RolesConfig<T extends Role = Role> = Overwrite<
+export type RoleConfig<T extends Role = Role> = Overwrite<
 	T,
 	{ startDate: DateString; endDate: DateString }
->[];
+>;
+
+/**
+ * Config object used to define roles
+ */
+export type RolesConfig = {
+	[RoleType.Employment]: RoleConfig<EmploymentRole>[];
+	[RoleType.Education]: RoleConfig<EducationRole>[];
+	[RoleType.Volunteering]: RoleConfig<VolunteeringRole>[];
+};

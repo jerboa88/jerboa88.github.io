@@ -10,12 +10,9 @@ import {
 import { useInView } from 'framer-motion';
 import type { HeadProps, PageProps } from 'gatsby';
 import { Suspense, lazy, useCallback, useRef } from 'react';
-import {
-	getEmploymentRoles,
-	getSiteMetadata,
-} from '../../common/config-manager.ts';
-import { USE_IN_VIEW_OPTIONS } from '../../common/constants.ts';
-import { limit } from '../../common/utils/other.ts';
+import { getSiteMetadata } from '../../common/config-manager.ts';
+import { INDEX_PATH, USE_IN_VIEW_OPTIONS } from '../../common/constants.ts';
+import { getRolesForPage } from '../../common/content-manager.ts';
 import { toKebabCase } from '../../common/utils/strings.ts';
 import { HeroHeader } from '../../components/layout/hero-header.tsx';
 import { PageLayout } from '../../components/layout/page-layout.tsx';
@@ -40,7 +37,7 @@ type PageContext = IndexPageContext & SocialImagesMetadataProp;
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
-const EMPLOYMENT_ROLES = limit(getEmploymentRoles(), 2);
+const EMPLOYMENT_ROLES = getRolesForPage(INDEX_PATH).employment;
 
 const ContactForm = lazy(() =>
 	import('../../components/input/contact-form.tsx').then((module) => ({
