@@ -77,7 +77,7 @@ export default function ResumePageTemplate({
 	const highlightsHtml = data?.resumeHighlights?.childMarkdownRemark?.html;
 
 	return (
-		<DocumentPageLayout numOfPages={2}>
+		<DocumentPageLayout>
 			{summaryHtml && (
 				<Section {...sectionProps.summary} {...COMMON_SECTION_PROPS}>
 					<Article
