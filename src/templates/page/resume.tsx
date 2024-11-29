@@ -19,7 +19,6 @@ import { ResumeRoleEntries } from '../../components/resume/role-entries.tsx';
 import { ResumeSkillEntries } from '../../components/resume/skill-entries.tsx';
 import { PageHead } from '../../components/seo/page-head.tsx';
 import { Article } from '../../components/text/article.tsx';
-import type { PageSection } from '../../types/components.ts';
 import { type SocialImagesMetadataProp, ThemeType } from '../../types/other.ts';
 import type { ResumePageContext } from '../../types/page-context.ts';
 
@@ -29,6 +28,11 @@ type PageContext = ResumePageContext & SocialImagesMetadataProp;
 
 // Constants
 
+const COMMON_SECTION_PROPS = {
+	sectionHeaderClassName: 'text-primary',
+	dividerClassName: '!pb-4',
+	responsive: false,
+};
 const SITE_METADATA = getSiteMetadata();
 const ROLES = getRolesForPage(RESUME_PATH);
 const SKILLS = getSkillsForPage(RESUME_PATH);
@@ -38,107 +42,83 @@ export default function ResumePageTemplate({
 	data,
 	pageContext: { projects },
 }: PageProps<Queries.ResumePageQuery, PageContext>) {
-	const sections = [
-		{
+	const sectionProps = {
+		summary: {
 			title: 'Summary',
 			ref: useRef(null),
 		},
-		{
+		highlights: {
 			title: 'Highlights',
 			ref: useRef(null),
 		},
-		{
+		employment: {
 			title: 'Employment',
 			ref: useRef(null),
 		},
-		{
+		education: {
 			title: 'Education',
 			ref: useRef(null),
 		},
-		{
+		volunteering: {
 			title: 'Volunteering',
 			ref: useRef(null),
 		},
-		{
+		skills: {
 			title: 'Skills',
 			ref: useRef(null),
 		},
-		{
+		projects: {
 			title: 'Projects',
 			ref: useRef(null),
 		},
-	] as PageSection[];
+	};
+
 	const summaryHtml = data?.resumeSummary?.childMarkdownRemark?.html;
 	const highlightsHtml = data?.resumeHighlights?.childMarkdownRemark?.html;
 
 	return (
 		<DocumentPageLayout numOfPages={2}>
-			<Section
-				{...sections[0]}
-				sectionHeaderClassName="text-primary"
-				dividerClassName="!pb-4"
-				responsive={false}
-			>
-				{summaryHtml && (
+			{summaryHtml && (
+				<Section {...sectionProps.summary} {...COMMON_SECTION_PROPS}>
 					<Article
 						className="text-base-content prose-li:m-0"
 						html={summaryHtml}
 					/>
-				)}
-			</Section>
-			<Section
-				{...sections[1]}
-				sectionHeaderClassName="text-primary"
-				dividerClassName="!pb-4"
-				responsive={false}
-			>
-				{highlightsHtml && (
+				</Section>
+			)}
+			{highlightsHtml && (
+				<Section {...sectionProps.highlights} {...COMMON_SECTION_PROPS}>
 					<Article
 						html={highlightsHtml}
 						className="text-base-content prose-li:m-0"
 					/>
-				)}
-			</Section>
-			<Section
-				{...sections[2]}
-				sectionHeaderClassName="text-primary"
-				dividerClassName="!pb-4"
-				responsive={false}
-			>
-				<ResumeRoleEntries roles={ROLES.employment} />
-			</Section>
-			<Section
-				{...sections[3]}
-				sectionHeaderClassName="text-primary"
-				dividerClassName="!pb-4"
-				responsive={false}
-			>
-				<ResumeRoleEntries roles={ROLES.education} />
-			</Section>
-			<Section
-				{...sections[4]}
-				sectionHeaderClassName="text-primary"
-				dividerClassName="!pb-4"
-				responsive={false}
-			>
-				<ResumeRoleEntries roles={ROLES.volunteering} />
-			</Section>
-			<Section
-				{...sections[5]}
-				sectionHeaderClassName="text-primary"
-				dividerClassName="!pb-4"
-				responsive={false}
-			>
-				<ResumeSkillEntries skills={SKILLS} />
-			</Section>
-			<Section
-				{...sections[6]}
-				sectionHeaderClassName="text-primary"
-				dividerClassName="!pb-4"
-				responsive={false}
-			>
-				<ResumeProjectEntries projects={projects} />
-			</Section>
+				</Section>
+			)}
+			{ROLES.employment.length > 0 && (
+				<Section {...sectionProps.employment} {...COMMON_SECTION_PROPS}>
+					<ResumeRoleEntries roles={ROLES.employment} />
+				</Section>
+			)}
+			{ROLES.education.length > 0 && (
+				<Section {...sectionProps.education} {...COMMON_SECTION_PROPS}>
+					<ResumeRoleEntries roles={ROLES.education} />
+				</Section>
+			)}
+			{ROLES.volunteering.length > 0 && (
+				<Section {...sectionProps.volunteering} {...COMMON_SECTION_PROPS}>
+					<ResumeRoleEntries roles={ROLES.volunteering} />
+				</Section>
+			)}
+			{Object.values(SKILLS).some((skillList) => skillList.length > 0) && (
+				<Section {...sectionProps.skills} {...COMMON_SECTION_PROPS}>
+					<ResumeSkillEntries skills={SKILLS} />
+				</Section>
+			)}
+			{projects && (
+				<Section {...sectionProps.projects} {...COMMON_SECTION_PROPS}>
+					<ResumeProjectEntries projects={projects} />
+				</Section>
+			)}
 		</DocumentPageLayout>
 	);
 }
