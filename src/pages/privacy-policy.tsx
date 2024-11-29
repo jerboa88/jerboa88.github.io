@@ -6,16 +6,16 @@
 import type { HeadProps, PageProps } from 'gatsby';
 import { graphql } from 'gatsby';
 import { useRef } from 'react';
-import { getSiteMetadata } from '../common/config-manager';
-import { JSON_LD_AUTHOR_PATH } from '../common/constants';
-import { getAbsoluteUrl } from '../common/utils/urls';
-import { PageLayout } from '../components/layout/page-layout';
-import { Section } from '../components/layout/section';
-import { SolidButtonLink } from '../components/links/solid-button-link';
-import { PageHead } from '../components/seo/page-head';
-import { Article } from '../components/text/article';
-import type { SocialImagesMetadataProp } from '../types/other';
-import type { PrivacyPageContext } from '../types/page-context';
+import { getSiteMetadata } from '../common/config-manager.ts';
+import { JSON_LD_AUTHOR_PATH } from '../common/constants.ts';
+import { getAbsoluteUrl } from '../common/utils/urls.ts';
+import { PageLayout } from '../components/layout/page-layout.tsx';
+import { Section } from '../components/layout/section.tsx';
+import { SolidButtonLink } from '../components/links/solid-button-link.tsx';
+import { PageHead } from '../components/seo/page-head.tsx';
+import { Article } from '../components/text/article.tsx';
+import type { SocialImagesMetadataProp } from '../types/other.ts';
+import type { PrivacyPageContext } from '../types/page-context.ts';
 
 // Types
 
@@ -31,6 +31,7 @@ export default function PrivacyPolicyPage({
 	pageContext: { pageMetadata },
 }: PageProps<Queries.PrivacyPolicyPageQuery, PageContext>) {
 	const articleHtml = data?.file?.childMarkdownRemark?.html;
+	const sectionRef = useRef<HTMLElement>(null);
 
 	return (
 		<PageLayout>
@@ -38,7 +39,7 @@ export default function PrivacyPolicyPage({
 			<div />
 			<Section
 				title={pageMetadata.title}
-				ref={useRef(null)}
+				ref={sectionRef}
 				className="items-center"
 			>
 				<div className="flex flex-col gap-8 items-center">

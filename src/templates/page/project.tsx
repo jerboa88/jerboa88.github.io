@@ -69,6 +69,7 @@ export default function ProjectPageTemplate({
 		getSectionButtonRenderFunction(project),
 		[],
 	);
+	const sectionRef = useRef<HTMLDivElement>(null);
 
 	return (
 		<PageLayout>
@@ -77,7 +78,7 @@ export default function ProjectPageTemplate({
 			<Section
 				title={project.name}
 				renderButton={renderSectionButton}
-				ref={useRef(null)}
+				ref={sectionRef}
 			>
 				<Article>
 					<p>{toSentence(project.description)}</p>
