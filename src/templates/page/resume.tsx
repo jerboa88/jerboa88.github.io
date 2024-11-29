@@ -139,13 +139,6 @@ export default function ResumePageTemplate({
 			>
 				<ResumeProjectEntries projects={projects} />
 			</Section>
-			<Section
-				className="text-center font-bold"
-				dividerClassName="!pb-4"
-				responsive={false}
-			>
-				<p className="text-base">References available upon request</p>
-			</Section>
 		</DocumentPageLayout>
 	);
 }
