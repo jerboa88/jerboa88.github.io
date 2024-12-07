@@ -26,7 +26,7 @@ export function ResumeProjectEntries({ projects }: Props) {
 						title={project.name}
 						titleUrl={project.url}
 						titleTooltip="View project on GitHub"
-						tagline={project.languages.join(', ')}
+						tags={project.languages}
 						bullets={[expositionSentence ?? descriptionSentence]}
 						endDate={new Date(project.createdAt)}
 					/>

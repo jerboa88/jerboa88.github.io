@@ -21,9 +21,9 @@ export function ResumeRoleEntries({ roles }: Props) {
 					<ResumeDetailEntry
 						key={role.title}
 						title={title}
-						tagline={role.company}
-						taglineUrl={role.companyUrl}
-						taglineTooltip="View organization website"
+						tags={role.company}
+						tagsUrl={role.companyUrl}
+						tagsTooltip="View organization website"
 						bullets={role.bullets}
 						startDate={role.startDate}
 						endDate={role.endDate}

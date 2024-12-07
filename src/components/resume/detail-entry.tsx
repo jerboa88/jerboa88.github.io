@@ -10,6 +10,7 @@ import type {
 	UrlString,
 } from '../../types/strings.ts';
 import { LinkWrapper } from '../links/link-wrapper.tsx';
+import { Tags } from '../tags.tsx';
 import { Article } from '../text/article.tsx';
 import { DateRange } from '../text/date-range.tsx';
 import { Tooltip } from '../tooltip.tsx';
@@ -18,22 +19,52 @@ interface Props {
 	title: Capitalize<string>;
 	titleUrl?: UrlString;
 	titleTooltip?: Capitalize<string>;
-	tagline: Capitalize<string>;
-	taglineUrl?: UrlString;
-	taglineTooltip?: Capitalize<string>;
+	tags: Capitalize<string> | Capitalize<string>[];
+	tagsUrl?: UrlString;
+	tagsTooltip?: Capitalize<string>;
 	bullets: SentenceString[];
 	startDate?: Date;
 	endDate?: Date;
 	location?: CityAndStateString;
 }
 
+/**
+ * Renders a list of tags or a tagline with an optional link
+ *
+ * @param tags A single tag or an array of tags
+ * @param tagsUrl A URL to link the tagline to
+ * @param tagsTooltip A tooltip to display when hovering over the tagline
+ * @returns A JSX element containing the tagline or tags
+ */
+function getTaglineElement(
+	tags: Capitalize<string> | Capitalize<string>[],
+	tagsUrl?: UrlString,
+	tagsTooltip?: Capitalize<string>,
+) {
+	if (Array.isArray(tags)) {
+		return <Tags titles={tags} />;
+	}
+
+	if (tagsUrl) {
+		return (
+			<Tooltip text={tagsTooltip ?? tagsUrl} position={TooltipPosition.Right}>
+				<LinkWrapper to={tagsUrl}>
+					<span className="text-base italic">{tags}</span>
+				</LinkWrapper>
+			</Tooltip>
+		);
+	}
+
+	return <span className="text-base italic">{tags}</span>;
+}
+
 export function ResumeDetailEntry({
 	title,
 	titleUrl,
 	titleTooltip,
-	tagline,
-	taglineUrl,
-	taglineTooltip,
+	tags,
+	tagsUrl,
+	tagsTooltip,
 	bullets,
 	startDate,
 	endDate,
@@ -48,18 +79,7 @@ export function ResumeDetailEntry({
 	) : (
 		<span className="font-bold text-balance">{title}</span>
 	);
-	const taglineElement = taglineUrl ? (
-		<Tooltip
-			text={taglineTooltip ?? taglineUrl}
-			position={TooltipPosition.Right}
-		>
-			<LinkWrapper to={taglineUrl}>
-				<span className="text-base italic">{tagline}</span>
-			</LinkWrapper>
-		</Tooltip>
-	) : (
-		<span className="text-base italic">{tagline}</span>
-	);
+	const taglineElement = getTaglineElement(tags, tagsUrl, tagsTooltip);
 
 	return (
 		<div className="flex flex-row justify-between items-start gap-4 break-inside-avoid-page">

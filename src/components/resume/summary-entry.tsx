@@ -16,7 +16,7 @@ export function ResumeSummaryEntry({ title, items }: Props) {
 	}
 
 	return (
-		<div className="flex flex-row justify-start items-center gap-2 flex-wrap break-inside-avoid-page">
+		<div className="flex flex-row justify-start items-center gap-4 flex-wrap break-inside-avoid-page">
 			<span className="font-bold capitalize">{title}:</span>
 			<Tags titles={items} />
 		</div>
