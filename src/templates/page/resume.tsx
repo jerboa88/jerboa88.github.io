@@ -30,7 +30,8 @@ type PageContext = ResumePageContext & SocialImagesMetadataProp;
 
 const COMMON_SECTION_PROPS = {
 	sectionHeaderClassName: 'text-primary',
-	dividerClassName: '!pb-4',
+	sectionHeadingClassName: '!py-2',
+	dividerClassName: '!pb-2',
 	responsive: false,
 };
 const SITE_METADATA = getSiteMetadata();
