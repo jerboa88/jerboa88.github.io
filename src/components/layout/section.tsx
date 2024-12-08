@@ -4,15 +4,16 @@
 */
 
 import { type ForwardedRef, type PropsWithChildren, forwardRef } from 'react';
-import { getClassNameProps } from '../../common/utils/other';
-import { toKebabCase } from '../../common/utils/strings';
-import type { ButtonElementRenderFunction } from '../../types/components';
-import type { PropsWithClassName } from '../../types/components';
-import { Divider } from '../divider';
-import { SectionHeader } from './section-header';
+import { getClassNameProps } from '../../common/utils/other.ts';
+import { toKebabCase } from '../../common/utils/strings.ts';
+import type { ButtonElementRenderFunction } from '../../types/components.ts';
+import type { PropsWithClassName } from '../../types/components.ts';
+import { Divider } from '../divider.tsx';
+import { SectionHeader } from './section-header.tsx';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
 	sectionHeaderClassName?: string;
+	sectionHeadingClassName?: string;
 	dividerClassName?: string;
 	title?: string;
 	renderButton?: ButtonElementRenderFunction;
@@ -24,6 +25,7 @@ export const Section = forwardRef(
 		{
 			className,
 			sectionHeaderClassName,
+			sectionHeadingClassName,
 			dividerClassName,
 			title,
 			renderButton,
@@ -37,10 +39,13 @@ export const Section = forwardRef(
 			responsive ? 'w-10/12 lg:w-9/12 xl:w-8/12 max-w-5xl' : 'w-full', // Adjust width based on screen size
 			className,
 		);
-		const sectionHeaderClassNameProps = getClassNameProps(
-			responsive && 'pt-10', // Add padding to account for floating page header
-			sectionHeaderClassName,
-		);
+		const sectionHeaderClassNameProps = {
+			...getClassNameProps(
+				responsive && 'pt-10', // Add padding to account for floating page header
+				sectionHeaderClassName,
+			),
+			headingClassName: sectionHeadingClassName,
+		};
 		const dividerClassNameProps = getClassNameProps('pb-8', dividerClassName);
 
 		const sectionId = title ? toKebabCase(title) : 'top';
