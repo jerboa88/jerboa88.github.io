@@ -71,10 +71,10 @@ export const pagesContentConfig: PagesContentConfig = {
 		},
 		[ContentType.Skills]: {
 			[SkillType.Languages]: {
-				limit: 5,
+				limit: 10,
 			},
 			[SkillType.Technologies]: {
-				limit: 5,
+				limit: 10,
 			},
 			[SkillType.Tools]: {
 				limit: 0,
