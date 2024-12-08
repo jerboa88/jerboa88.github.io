@@ -12,7 +12,7 @@ import {
 export const projectsConfig: ProjectsConfig = {
 	maxForPage: {
 		index: 10,
-		resume: 3,
+		resume: 4,
 	},
 	projects: [
 		{
