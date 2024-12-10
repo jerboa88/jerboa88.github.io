@@ -46,9 +46,9 @@ export function TimelineEntry({ role }: Props) {
 							</div>
 						</div>
 					</div>
-					<ul className="list-[circle] m-4">
+					<ul className="m-4">
 						{role.bullets.map((bullet) => (
-							<li key={bullet} className="my-2">
+							<li key={bullet} className="list-rounded-square my-2">
 								{bullet}
 							</li>
 						))}

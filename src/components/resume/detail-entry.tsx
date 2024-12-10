@@ -91,7 +91,9 @@ export function ResumeDetailEntry({
 				<Article className="prose-li:m-0">
 					<ul>
 						{bullets.map((bullet) => (
-							<li key={bullet}>{bullet}</li>
+							<li key={bullet} className="list-rounded-square">
+								{bullet}
+							</li>
 						))}
 					</ul>
 				</Article>

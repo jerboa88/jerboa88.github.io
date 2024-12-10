@@ -94,6 +94,19 @@
 		@apply text-base;
 	}
 
+	/* Add a custom rounded square list style type */
+	.list-rounded-square {
+		@apply list-none;
+		@apply before:inline-block;
+		@apply before:align-middle;
+		@apply before:mr-4;
+		@apply before:mb-0.5;
+		@apply before:rounded-sm;
+		@apply before:size-1.5;
+		@apply before:bg-base-content;
+		@apply before:opacity-50;
+	}
+
 	/* Override disabled button styles since DaisyUI insists on making disabled buttons gray */
 	.btn-primary[disabled],
 	.btn-secondary[disabled],
