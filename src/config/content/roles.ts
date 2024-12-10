@@ -16,11 +16,12 @@ export const rolesConfig: RolesConfig = {
 			startDate: '2020-05-01',
 			endDate: '2021-08-31',
 			bullets: [
-				"Developed, documented, and tested NexLynk DMS, a full-stack enterprise application for plasma donation management. Wrote extensive documentation about the product's development lifecycle, which was added to the company's internal wiki and used as a reference for colleagues and external teams.",
-				'Collaborated with QA, documentation, and testing teams to ensure tickets were completed on time, in accordance with relevant SOPs, and following Agile processes. Communicated effectively with remote team members across multiple timezones. Onboarded two new interns, helping them become familiar with the development process and application codebase.',
-				'Performed detailed code reviews, providing feedback to team members to ensure code quality and adherence to coding standards. Won a company-wide bug bounty for discovering a number of user-facing issues.',
-				'Researched major dependency updates and new technologies in order to improve the build process and product functionality. For example, comparing various database migration tools and building a POC to demonstrate the benefits of automated migration over using manual scripts. This tool was later integrated into the build process to reduce the dependence on field technicians for minor product updates.',
-				'Performed RCA of issues in production using limited customer-provided information. For example, computing the expected size of a database based on estimated data entry rates to alleviate data storage concerns and fixing intermittent bugs by reviewing logs and database records from customer environments.',
+				'Developed, documented, and tested NexLynk DMS, a full-stack enterprise application for plasma donation management.',
+				'Collaborated with QA, documentation, and testing teams across timezones to ensure tickets were completed on time, in accordance with relevant SOPs, and following Agile processes.',
+				"Wrote extensive documentation about the product's development lifecycle, which was added to the company's internal wiki and used as a reference for colleagues and external teams.",
+				'Compared various DB migration tools and built a POC to demonstrate the benefits of automated migration over using manual scripts, which was later integrated into the build process to reduce the reliance on field technicians for product updates.',
+				'Enhanced product quality by performing thorough code reviews to uphold coding standards and identifying critical user-facing issues, earning a company-wide bug bounty.',
+				'Onboarded two new interns, helping them become familiar with the development process and application codebase.',
 			],
 		},
 		{
