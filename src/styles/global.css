@@ -97,8 +97,10 @@
 	/* Add a custom rounded square list style type */
 	.list-rounded-square {
 		@apply list-none;
+		@apply before:ml-[1.4rem];
 		@apply before:inline-block;
 		@apply before:align-middle;
+		@apply before:ml-[-1.4rem];
 		@apply before:mr-4;
 		@apply before:mb-0.5;
 		@apply before:rounded-sm;
