@@ -12,12 +12,12 @@ import {
 	useTransform,
 } from 'framer-motion';
 import type { PropsWithChildren } from 'react';
-import { SPRING_TRANSITION_PROPS } from '../common/constants';
+import { SPRING_TRANSITION_PROPS } from '../config/constants.ts';
 import {
 	clamp,
 	doesDeviceSupportHover,
 	getClassNameProps,
-} from '../common/utils/other';
+} from '../utils/other.ts';
 
 // Types
 

@@ -3,10 +3,10 @@
 	-----------------------------------------
 */
 
-import { getClassNameProps } from '../../common/utils/other';
-import type { Button } from '../../types/components';
-import { Card } from '../card';
-import { BaseButton } from './base-button';
+import type { Button } from '../../types/components.ts';
+import { getClassNameProps } from '../../utils/other.ts';
+import { Card } from '../card.tsx';
+import { BaseButton } from './base-button.tsx';
 
 // Types
 

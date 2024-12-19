@@ -3,8 +3,8 @@
 	-----------
 */
 
-import { getClassNameProps } from '../common/utils/other.ts';
 import type { PropsWithClassName } from '../types/components.ts';
+import { getClassNameProps } from '../utils/other.ts';
 
 interface Props extends PropsWithClassName {
 	text: string;

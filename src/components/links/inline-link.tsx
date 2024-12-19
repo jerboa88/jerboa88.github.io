@@ -3,10 +3,10 @@
 	------------------------
 */
 
-import { getClassNameProps } from '../../common/utils/other';
-import type { Link } from '../../types/components';
-import type { PropsWithClassName } from '../../types/components';
-import { LinkWrapper } from './link-wrapper';
+import type { Link } from '../../types/components.ts';
+import type { PropsWithClassName } from '../../types/components.ts';
+import { getClassNameProps } from '../../utils/other.ts';
+import { LinkWrapper } from './link-wrapper.tsx';
 
 interface Props extends PropsWithClassName, Link {
 	text: string;

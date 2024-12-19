@@ -8,23 +8,23 @@ import { faCircleNotch, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { LayoutGroup, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { type SubmitHandler, useForm, useFormState } from 'react-hook-form';
-import { getExternalServices } from '../../common/config-manager';
-import {
-	getClassNameProps,
-	getOrDefault,
-	getStatusCodeDescription,
-} from '../../common/utils/other';
+import { getExternalServices } from '../../managers/config.ts';
 import {
 	AlertType,
 	type InputValidationOptions,
 	TooltipPosition,
-} from '../../types/components';
-import type { PropsWithClassName } from '../../types/components';
-import { GhostAlert } from '../ghost-alert';
-import { Checkbox } from './checkbox';
-import { MultilineTextInput } from './multiline-text-input';
-import { SolidButton } from './solid-button';
-import { TextInput } from './text-input';
+} from '../../types/components.ts';
+import type { PropsWithClassName } from '../../types/components.ts';
+import {
+	getClassNameProps,
+	getOrDefault,
+	getStatusCodeDescription,
+} from '../../utils/other.ts';
+import { GhostAlert } from '../ghost-alert.tsx';
+import { Checkbox } from './checkbox.tsx';
+import { MultilineTextInput } from './multiline-text-input.tsx';
+import { SolidButton } from './solid-button.tsx';
+import { TextInput } from './text-input.tsx';
 
 // Types
 

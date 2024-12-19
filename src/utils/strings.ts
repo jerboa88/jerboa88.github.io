@@ -2,7 +2,7 @@
  * Utility functions for working with strings
  */
 
-import type { SentenceString } from '../../types/strings';
+import type { SentenceString } from '../types/strings.ts';
 
 /**
  * Convert a string to kebab-case

@@ -11,10 +11,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FADE_IN_ANIMATION_PROPS } from '../common/constants';
-import { getClassNameProps } from '../common/utils/other';
-import { AlertType } from '../types/components';
-import type { PropsWithClassName } from '../types/components';
+import { FADE_IN_ANIMATION_PROPS } from '../config/constants.ts';
+import { AlertType } from '../types/components.ts';
+import type { PropsWithClassName } from '../types/components.ts';
+import { getClassNameProps } from '../utils/other.ts';
 
 // Types
 

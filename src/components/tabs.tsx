@@ -4,11 +4,11 @@
 */
 
 import { motion, useInView } from 'framer-motion';
-import { USE_IN_VIEW_OPTIONS } from '../common/constants';
-import { getClassNameProps } from '../common/utils/other';
-import { toKebabCase } from '../common/utils/strings';
-import { type PageSection, TooltipPosition } from '../types/components';
-import { GhostButtonLink } from './links/ghost-button-link';
+import { USE_IN_VIEW_OPTIONS } from '../config/constants.ts';
+import { type PageSection, TooltipPosition } from '../types/components.ts';
+import { getClassNameProps } from '../utils/other.ts';
+import { toKebabCase } from '../utils/strings.ts';
+import { GhostButtonLink } from './links/ghost-button-link.tsx';
 
 interface Props {
 	sections: PageSection[];

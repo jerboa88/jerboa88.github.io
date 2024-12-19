@@ -6,16 +6,16 @@
 import type { HeadProps, PageProps } from 'gatsby';
 import { graphql } from 'gatsby';
 import { useRef } from 'react';
-import { getSiteMetadata } from '../common/config-manager.ts';
-import { JSON_LD_AUTHOR_PATH } from '../common/constants.ts';
-import { getAbsoluteUrl } from '../common/utils/urls.ts';
 import { PageLayout } from '../components/layout/page-layout.tsx';
 import { Section } from '../components/layout/section.tsx';
 import { SolidButtonLink } from '../components/links/solid-button-link.tsx';
 import { PageHead } from '../components/seo/page-head.tsx';
 import { Article } from '../components/text/article.tsx';
+import { JSON_LD_AUTHOR_PATH } from '../config/constants.ts';
+import { getSiteMetadata } from '../managers/config.ts';
 import type { SocialImagesMetadataProp } from '../types/other.ts';
 import type { PrivacyPageContext } from '../types/page-context.ts';
+import { getAbsoluteUrl } from '../utils/urls.ts';
 
 // Types
 

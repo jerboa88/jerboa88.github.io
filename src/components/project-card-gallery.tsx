@@ -3,10 +3,10 @@
 	---------------------------
 */
 
-import { getClassNameProps } from '../common/utils/other.ts';
 import { ProjectCard } from '../components/project-card.tsx';
 import type { PropsWithClassName } from '../types/components.ts';
 import type { Project } from '../types/content/projects.ts';
+import { getClassNameProps } from '../utils/other.ts';
 
 interface Props extends PropsWithClassName {
 	projects: Project[];

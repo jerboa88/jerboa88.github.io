@@ -7,20 +7,20 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import type { HeadProps, PageProps } from 'gatsby';
 import { useCallback, useRef } from 'react';
-import { getSiteMetadata } from '../../common/config-manager.ts';
-import { JSON_LD_AUTHOR_PATH, PROJECTS_PATH } from '../../common/constants.ts';
-import { isDefined, removeUndefinedProps } from '../../common/utils/other.ts';
-import { toSentence } from '../../common/utils/strings.ts';
-import { getAbsoluteUrl } from '../../common/utils/urls.ts';
 import { PageLayout } from '../../components/layout/page-layout.tsx';
 import { Section } from '../../components/layout/section.tsx';
 import { GhostButtonLink } from '../../components/links/ghost-button-link.tsx';
 import { PageHead } from '../../components/seo/page-head.tsx';
 import { Article } from '../../components/text/article.tsx';
-import type { ButtonElementRenderFunction } from '../../types/components.ts';
+import { JSON_LD_AUTHOR_PATH, PROJECTS_PATH } from '../../config/constants.ts';
+import { getSiteMetadata } from '../../managers/config.ts';
+import type { ButtonElementRenderFn } from '../../types/components.ts';
 import { ProjectCategory } from '../../types/content/projects.ts';
 import type { SocialImagesMetadataProp } from '../../types/other.ts';
 import type { ProjectPageContext } from '../../types/page-context.ts';
+import { isDefined, removeUndefinedProps } from '../../utils/other.ts';
+import { toSentence } from '../../utils/strings.ts';
+import { getAbsoluteUrl } from '../../utils/urls.ts';
 
 // Types
 
@@ -32,9 +32,9 @@ const SITE_METADATA = getSiteMetadata();
 
 // Functions
 
-function getSectionButtonRenderFunction(
+function getSectionButtonRenderFn(
 	project: PageContext['project'],
-): ButtonElementRenderFunction {
+): ButtonElementRenderFn {
 	const projectUrl = project.url;
 
 	if (!isDefined(projectUrl)) {
@@ -66,7 +66,7 @@ export default function ProjectPageTemplate({
 	pageContext: { project },
 }: PageProps<null, PageContext>) {
 	const renderSectionButton = useCallback(
-		getSectionButtonRenderFunction(project),
+		getSectionButtonRenderFn(project),
 		[],
 	);
 	const sectionRef = useRef<HTMLDivElement>(null);

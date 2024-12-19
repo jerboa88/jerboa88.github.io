@@ -3,17 +3,17 @@
 	----------------------------------------------------
 */
 
-import { getSiteMetadata, getTheme } from '../../common/config-manager';
-import { JSON_LD_AUTHOR_PATH } from '../../common/constants';
-import { getClassNameProps } from '../../common/utils/other';
-import { getAbsoluteUrl, getMimeType } from '../../common/utils/urls';
-import type { PropsWithClassName } from '../../types/components';
+import { JSON_LD_AUTHOR_PATH } from '../../config/constants.ts';
+import { getSiteMetadata, getTheme } from '../../managers/config.ts';
+import type { PropsWithClassName } from '../../types/components.ts';
 import {
 	type PageMetadataProp,
 	SocialImageType,
 	type SocialImagesMetadataProp,
 	ThemeType,
-} from '../../types/other';
+} from '../../types/other.ts';
+import { getClassNameProps } from '../../utils/other.ts';
+import { getAbsoluteUrl, getMimeType } from '../../utils/urls.ts';
 
 // Types
 

@@ -3,7 +3,10 @@
 	--------------------------------------------------
 */
 
-import type { AbsolutePathString, WorkingPathString } from '../types/strings';
+import type {
+	AbsolutePathString,
+	WorkingPathString,
+} from '../types/strings.ts';
 
 // Constants
 

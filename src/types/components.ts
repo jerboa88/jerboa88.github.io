@@ -94,7 +94,7 @@ export interface Button extends PropsWithClassName, PropsWithLayoutAnimations {
 /**
  * A function that renders a button element
  */
-export type ButtonElementRenderFunction = ({
+export type ButtonElementRenderFn = ({
 	className,
 	tooltipPosition,
 }: {
@@ -125,7 +125,7 @@ export interface InputOptions {
 /**
  * A function that renders an input element
  */
-export type InputElementRenderFunction = (
+export type InputElementRenderFn = (
 	props: UseFormRegisterReturn<string>,
 ) => React.JSX.Element;
 

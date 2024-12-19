@@ -3,13 +3,13 @@
 	-----------------------------
 */
 
+import type { PagesMetadataConfig } from '../../types/other.ts';
 import {
 	COVER_LETTER_PATH,
 	NOT_FOUND_PATH,
 	PRIVACY_POLICY_PATH,
 	RESUME_PATH,
-} from '../../common/constants.ts';
-import type { PagesMetadataConfig } from '../../types/other.ts';
+} from '../constants.ts';
 
 export const pagesMetadataConfig: PagesMetadataConfig = {
 	[PRIVACY_POLICY_PATH]: {

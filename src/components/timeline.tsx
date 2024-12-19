@@ -3,8 +3,8 @@
 	------------------------
 */
 
-import { getClassNameProps } from '../common/utils/other.ts';
 import type { Role } from '../types/content/roles.ts';
+import { getClassNameProps } from '../utils/other.ts';
 import { TimelineEntry } from './timeline-entry.tsx';
 
 interface Props {

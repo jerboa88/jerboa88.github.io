@@ -4,15 +4,15 @@
 */
 
 import { motion } from 'framer-motion';
-import { getSiteMetadata } from '../../common/config-manager';
-import { TITLE_LAYOUT_ID } from '../../common/constants';
-import { getClassNameProps, isDefined } from '../../common/utils/other';
-import { getStartIndexOfLastWord } from '../../common/utils/strings';
-import { Breakpoint, type PageSection } from '../../types/components';
-import { Divider } from '../divider';
-import { Tabs } from '../tabs';
-import { Heading } from '../text/heading';
-import { ResponsiveText } from '../text/responsive-text';
+import { TITLE_LAYOUT_ID } from '../../config/constants.ts';
+import { getSiteMetadata } from '../../managers/config.ts';
+import { Breakpoint, type PageSection } from '../../types/components.ts';
+import { getClassNameProps, isDefined } from '../../utils/other.ts';
+import { getStartIndexOfLastWord } from '../../utils/strings.ts';
+import { Divider } from '../divider.tsx';
+import { Tabs } from '../tabs.tsx';
+import { Heading } from '../text/heading.tsx';
+import { ResponsiveText } from '../text/responsive-text.tsx';
 
 // Types
 

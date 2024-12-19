@@ -5,8 +5,8 @@
 
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
-import { getTheme } from './src/common/config-manager';
-import { ThemeType } from './src/types/other';
+import { getTheme } from './src/managers/config.ts';
+import { ThemeType } from './src/types/other.ts';
 
 // biome-ignore lint/style/noDefaultExport: Default export is required by Tailwind CSS
 export default {

@@ -5,15 +5,12 @@
 
 import type { Actions, NodePluginArgs } from 'gatsby';
 import { JSDOM } from 'jsdom';
-import {
-	getProjectTypeColor,
-	getSiteMetadata,
-} from '../common/config-manager.ts';
-import { isDefined } from '../common/utils/other.ts';
-import { toKebabCase, toTitleCase } from '../common/utils/strings.ts';
-import { getAbsoluteUrl } from '../common/utils/urls.ts';
+import { getProjectTypeColor, getSiteMetadata } from '../managers/config.ts';
 import type { BaseProject } from '../types/content/projects.ts';
 import type { UrlString } from '../types/strings.ts';
+import { isDefined } from '../utils/other.ts';
+import { toKebabCase, toTitleCase } from '../utils/strings.ts';
+import { getAbsoluteUrl } from '../utils/urls.ts';
 import { group, groupEnd, info, panic, warn } from './logger.ts';
 
 // Types

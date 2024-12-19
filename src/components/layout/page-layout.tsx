@@ -5,12 +5,12 @@
 
 import { MotionConfig } from 'framer-motion';
 import { type PropsWithChildren, StrictMode, lazy } from 'react';
-import { SPRING_TRANSITION_PROPS } from '../../common/constants';
-import { getClassNameProps } from '../../common/utils/other';
-import type { PageSection } from '../../types/components';
-import type { PropsWithClassName } from '../../types/components';
-import { Footer } from './footer';
-import { Header } from './header';
+import { SPRING_TRANSITION_PROPS } from '../../config/constants.ts';
+import type { PageSection } from '../../types/components.ts';
+import type { PropsWithClassName } from '../../types/components.ts';
+import { getClassNameProps } from '../../utils/other.ts';
+import { Footer } from './footer.tsx';
+import { Header } from './header.tsx';
 
 // Types
 

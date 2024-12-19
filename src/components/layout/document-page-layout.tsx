@@ -5,9 +5,9 @@
 
 import { MotionConfig } from 'framer-motion';
 import { type PropsWithChildren, StrictMode } from 'react';
-import { SPRING_TRANSITION_PROPS } from '../../common/constants.ts';
-import { getClassNameProps } from '../../common/utils/other.ts';
+import { SPRING_TRANSITION_PROPS } from '../../config/constants.ts';
 import type { PropsWithClassName } from '../../types/components.ts';
+import { getClassNameProps } from '../../utils/other.ts';
 import { PageCounter } from '../page-counter.tsx';
 import { ResumeHeader } from './resume-header.tsx';
 

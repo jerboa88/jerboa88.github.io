@@ -5,13 +5,6 @@
 
 import { type HeadProps, type PageProps, graphql } from 'gatsby';
 import { useRef } from 'react';
-import { getSiteMetadata } from '../../common/config-manager.ts';
-import { JSON_LD_AUTHOR_PATH, RESUME_PATH } from '../../common/constants.ts';
-import {
-	getRolesForPage,
-	getSkillsForPage,
-} from '../../common/content-manager.ts';
-import { getAbsoluteUrl } from '../../common/utils/urls.ts';
 import { DocumentPageLayout } from '../../components/layout/document-page-layout.tsx';
 import { Section } from '../../components/layout/section.tsx';
 import { ResumeProjectEntries } from '../../components/resume/project-entries.tsx';
@@ -19,8 +12,13 @@ import { ResumeRoleEntries } from '../../components/resume/role-entries.tsx';
 import { ResumeSkillEntries } from '../../components/resume/skill-entries.tsx';
 import { PageHead } from '../../components/seo/page-head.tsx';
 import { Article } from '../../components/text/article.tsx';
+import { JSON_LD_AUTHOR_PATH, RESUME_PATH } from '../../config/constants.ts';
+import { getSiteMetadata } from '../../managers/config.ts';
+import { getRolesForPage } from '../../managers/content/roles.ts';
+import { getSkillsForPage } from '../../managers/content/skills.ts';
 import { type SocialImagesMetadataProp, ThemeType } from '../../types/other.ts';
 import type { ResumePageContext } from '../../types/page-context.ts';
+import { getAbsoluteUrl } from '../../utils/urls.ts';
 
 // Types
 

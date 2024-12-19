@@ -5,13 +5,13 @@
 import { join } from 'node:path';
 import type { Actions, Page } from 'gatsby';
 import { createImage } from 'gatsby-plugin-component-to-image';
-import { getSocialImageGenerationConfigForType } from '../common/config-manager';
-import { INDEX_PATH, SOCIAL_IMAGES_PATH } from '../common/constants';
-import { assertIsDefined } from '../common/utils/other';
-import { removeTrailingSlash } from '../common/utils/urls';
-import { SocialImageType } from '../types/other';
-import type { AbsolutePathString } from '../types/strings';
-import { info } from './logger';
+import { INDEX_PATH, SOCIAL_IMAGES_PATH } from '../config/constants.ts';
+import { getSocialImageGenerationConfigForType } from '../managers/config.ts';
+import { SocialImageType } from '../types/other.ts';
+import type { AbsolutePathString } from '../types/strings.ts';
+import { assertIsDefined } from '../utils/other.ts';
+import { removeTrailingSlash } from '../utils/urls.ts';
+import { info } from './logger.ts';
 
 // Runtime variables
 

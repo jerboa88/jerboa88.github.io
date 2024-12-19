@@ -9,9 +9,9 @@ import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSquareShape } from '@tsparticles/shape-square';
 import { useReducedMotion } from 'framer-motion';
 import { memo, useEffect, useState } from 'react';
-import { getTheme } from '../../common/config-manager';
-import { getClassNameProps } from '../../common/utils/other';
-import { ThemeType } from '../../types/other';
+import { getTheme } from '../../managers/config.ts';
+import { ThemeType } from '../../types/other.ts';
+import { getClassNameProps } from '../../utils/other.ts';
 
 // Constants
 

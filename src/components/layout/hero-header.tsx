@@ -4,12 +4,12 @@
 */
 
 import { motion } from 'framer-motion';
-import { getSiteMetadata } from '../../common/config-manager';
-import { TITLE_LAYOUT_ID } from '../../common/constants';
-import { getStartIndexOfLastWord } from '../../common/utils/strings';
-import { Heading } from '../../components/text/heading';
-import { Breakpoint } from '../../types/components';
-import { ResponsiveText } from '../text/responsive-text';
+import { Heading } from '../../components/text/heading.tsx';
+import { TITLE_LAYOUT_ID } from '../../config/constants.ts';
+import { getSiteMetadata } from '../../managers/config.ts';
+import { Breakpoint } from '../../types/components.ts';
+import { getStartIndexOfLastWord } from '../../utils/strings.ts';
+import { ResponsiveText } from '../text/responsive-text.tsx';
 
 // Types
 

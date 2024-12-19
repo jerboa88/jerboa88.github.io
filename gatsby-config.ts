@@ -6,18 +6,18 @@
 import dotenv from 'dotenv';
 import type { GatsbyConfig } from 'gatsby';
 import {
+	COVER_LETTER_PATH,
+	INDEX_PATH,
+	SOCIAL_IMAGES_PATH,
+} from './src/config/constants.ts';
+import {
 	getSiteMetadata,
 	getSocialImageGenerationConfigDefaults,
 	getSocialImageGenerationConfigForType,
 	getTheme,
-} from './src/common/config-manager';
-import {
-	COVER_LETTER_PATH,
-	INDEX_PATH,
-	SOCIAL_IMAGES_PATH,
-} from './src/common/constants';
-import { getAbsoluteUrl } from './src/common/utils/urls';
-import { SocialImageType, ThemeType } from './src/types/other';
+} from './src/managers/config.ts';
+import { SocialImageType, ThemeType } from './src/types/other.ts';
+import { getAbsoluteUrl } from './src/utils/urls.ts';
 import tailwindConfig from './tailwind.config';
 
 const SITE_METADATA = getSiteMetadata();

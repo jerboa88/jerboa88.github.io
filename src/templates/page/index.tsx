@@ -10,10 +10,6 @@ import {
 import { useInView } from 'framer-motion';
 import type { HeadProps, PageProps } from 'gatsby';
 import { Suspense, lazy, useCallback, useRef } from 'react';
-import { getSiteMetadata } from '../../common/config-manager.ts';
-import { INDEX_PATH, USE_IN_VIEW_OPTIONS } from '../../common/constants.ts';
-import { getRolesForPage } from '../../common/content-manager.ts';
-import { toKebabCase } from '../../common/utils/strings.ts';
 import { HeroHeader } from '../../components/layout/hero-header.tsx';
 import { PageLayout } from '../../components/layout/page-layout.tsx';
 import { Section } from '../../components/layout/section.tsx';
@@ -23,12 +19,16 @@ import { ProjectCardGallery } from '../../components/project-card-gallery.tsx';
 import { PageHead } from '../../components/seo/page-head.tsx';
 import { Article } from '../../components/text/article.tsx';
 import { Timeline } from '../../components/timeline.tsx';
+import { INDEX_PATH, USE_IN_VIEW_OPTIONS } from '../../config/constants.ts';
+import { getSiteMetadata } from '../../managers/config.ts';
+import { getRolesForPage } from '../../managers/content/roles.ts';
 import type {
-	ButtonElementRenderFunction,
+	ButtonElementRenderFn,
 	PageSection,
 } from '../../types/components.ts';
 import type { SocialImagesMetadataProp } from '../../types/other.ts';
 import type { IndexPageContext } from '../../types/page-context.ts';
+import { toKebabCase } from '../../utils/strings.ts';
 
 // Types
 
@@ -80,7 +80,7 @@ export default function IndexPageTemplate({
 				flip
 				{...remainingProps}
 			/>
-		)) as ButtonElementRenderFunction,
+		)) as ButtonElementRenderFn,
 		[],
 	);
 
@@ -94,7 +94,7 @@ export default function IndexPageTemplate({
 				flip
 				{...remainingProps}
 			/>
-		)) as ButtonElementRenderFunction,
+		)) as ButtonElementRenderFn,
 		[],
 	);
 

@@ -6,23 +6,23 @@
 
 import { motion } from 'framer-motion';
 import type { FieldErrors, UseFormRegister } from 'react-hook-form';
-import { getClassNameProps, getOrDefault } from '../../common/utils/other';
 import {
 	AlertType,
-	type InputElementRenderFunction,
+	type InputElementRenderFn,
 	type InputValidationOptions,
-} from '../../types/components';
+} from '../../types/components.ts';
 import type {
 	PropsWithClassName,
 	PropsWithLayoutAnimations,
-} from '../../types/components';
-import { GhostAlert } from '../ghost-alert';
+} from '../../types/components.ts';
+import { getClassNameProps, getOrDefault } from '../../utils/other.ts';
+import { GhostAlert } from '../ghost-alert.tsx';
 
 interface BaseInput extends PropsWithClassName, PropsWithLayoutAnimations {
 	labelClassName?: string;
 	name: string;
 	label?: string;
-	renderInput: InputElementRenderFunction;
+	renderInput: InputElementRenderFn;
 	register: UseFormRegister<any>;
 	errors: FieldErrors<any>;
 	validationOptions?: InputValidationOptions;

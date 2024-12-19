@@ -4,13 +4,13 @@
 */
 
 import { useCallback } from 'react';
-import { getClassNameProps } from '../../common/utils/other';
 import type {
 	Input,
-	InputElementRenderFunction,
+	InputElementRenderFn,
 	InputOptions,
-} from '../../types/components';
-import { BaseInput } from './base-input';
+} from '../../types/components.ts';
+import { getClassNameProps } from '../../utils/other.ts';
+import { BaseInput } from './base-input.tsx';
 
 // Types
 
@@ -41,7 +41,7 @@ export function TextInput({
 	const renderInput = useCallback(
 		((registerObj) => (
 			<input {...{ ...classNameProps, ...registerObj, ...inputOptions }} />
-		)) as InputElementRenderFunction,
+		)) as InputElementRenderFn,
 		[],
 	);
 

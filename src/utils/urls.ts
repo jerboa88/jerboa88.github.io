@@ -2,9 +2,9 @@
  * Utility functions for working with URLs
  */
 
-import type { UrlString } from '../../types/strings';
-import { getSiteMetadata } from '../config-manager';
-import { getOrDefault } from './other';
+import { getSiteMetadata } from '../managers/config.ts';
+import type { UrlString } from '../types/strings.ts';
+import { getOrDefault } from './other.ts';
 
 // Constants
 

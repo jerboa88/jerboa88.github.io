@@ -4,10 +4,10 @@
 */
 
 import { type ForwardedRef, type PropsWithChildren, forwardRef } from 'react';
-import { getClassNameProps } from '../../common/utils/other.ts';
-import { toKebabCase } from '../../common/utils/strings.ts';
-import type { ButtonElementRenderFunction } from '../../types/components.ts';
+import type { ButtonElementRenderFn } from '../../types/components.ts';
 import type { PropsWithClassName } from '../../types/components.ts';
+import { getClassNameProps } from '../../utils/other.ts';
+import { toKebabCase } from '../../utils/strings.ts';
 import { Divider } from '../divider.tsx';
 import { SectionHeader } from './section-header.tsx';
 
@@ -16,7 +16,7 @@ interface Props extends PropsWithClassName, PropsWithChildren {
 	sectionHeadingClassName?: string;
 	dividerClassName?: string;
 	title?: string;
-	renderButton?: ButtonElementRenderFunction;
+	renderButton?: ButtonElementRenderFn;
 	responsive?: boolean;
 }
 

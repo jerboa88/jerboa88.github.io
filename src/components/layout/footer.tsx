@@ -4,11 +4,11 @@
 */
 
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { getSiteMetadata } from '../../common/config-manager';
-import { PRIVACY_POLICY_PATH } from '../../common/constants';
-import { TooltipPosition } from '../../types/components';
-import { Divider } from '../divider';
-import { GhostButtonLink } from '../links/ghost-button-link';
+import { PRIVACY_POLICY_PATH } from '../../config/constants.ts';
+import { getSiteMetadata } from '../../managers/config.ts';
+import { TooltipPosition } from '../../types/components.ts';
+import { Divider } from '../divider.tsx';
+import { GhostButtonLink } from '../links/ghost-button-link.tsx';
 
 // Constants
 

@@ -4,8 +4,8 @@
 */
 
 import type { PropsWithChildren } from 'react';
-import { getClassNameProps } from '../../common/utils/other';
-import type { PropsWithClassName } from '../../types/components';
+import type { PropsWithClassName } from '../../types/components.ts';
+import { getClassNameProps } from '../../utils/other.ts';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
 	size: {

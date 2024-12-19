@@ -4,18 +4,18 @@
 */
 
 import type { PropsWithChildren } from 'react';
-import { getClassNameProps } from '../../common/utils/other.ts';
 import {
-	type ButtonElementRenderFunction,
+	type ButtonElementRenderFn,
 	TooltipPosition,
 } from '../../types/components.ts';
 import type { PropsWithClassName } from '../../types/components.ts';
+import { getClassNameProps } from '../../utils/other.ts';
 import { SectionHeading } from '../text/section-heading.tsx';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
 	headingClassName?: string;
 	title: string;
-	renderButton?: ButtonElementRenderFunction | undefined;
+	renderButton?: ButtonElementRenderFn | undefined;
 }
 
 export function SectionHeader({
