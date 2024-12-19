@@ -31,7 +31,7 @@ import type {
 	SentenceString,
 	UrlString,
 } from '../types/strings.ts';
-import { arrayToObject, isDefined } from './utils/other.ts';
+import { arrayToObject, isDefined } from '../utils/other.ts';
 
 // Types
 
