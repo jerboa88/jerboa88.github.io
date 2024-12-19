@@ -164,3 +164,19 @@ export interface ColorMappingsConfig {
 	projectType: ColorMappings;
 	roleType: ColorMappings;
 }
+
+/**
+ * A function that sorts two values of the same type
+ *
+ * @typeParam T - The type of the values to sort
+ * @returns A negative number if a should be sorted before b, a positive number if a should be sorted after b, or 0 if they are equal
+ */
+export type SortFn<T> = (a: T, b: T) => number;
+
+/**
+ * A function that filters a value of a certain type
+ *
+ * @typeParam T - The type of the value to filter
+ * @returns True if the value should be included, false otherwise
+ */
+export type FilterFn<T> = (value: T) => boolean;
