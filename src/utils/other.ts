@@ -2,10 +2,14 @@
  * Assorted utility functions
  */
 
-import { panic } from '../../node/logger.ts';
-import type { PropsWithClassName } from '../../types/components.ts';
+import { panic } from '../node/logger.ts';
+import type { PropsWithClassName } from '../types/components.ts';
 
 // Types
+
+type StringifyReplacerFn<T, U> =
+	| ((this: unknown, key: string, value: T) => U)
+	| undefined;
 
 /**
  * Returns the same type as the input object, but without any undefined/null properties
@@ -190,13 +194,34 @@ export function getClassNameProps(
 }
 
 /**
+ * When used in JSON.stringify, this function will replace any Set instances with an Array
+ *
+ * @typeParam T The type of the input value
+ * @param value The value of the property being stringified
+ * @returns The value to use in the stringified JSON
+ */
+function stringifyReplaceSetWithArray<T>(value: T) {
+	return value instanceof Set ? Array.from<T>(value) : value;
+}
+
+/**
  * Return a JSON string with human-readable formatting
  *
- * @param json - The JSON object to prettify
+ * @param obj - The JSON object to prettify
+ * @param replacerFn - A function to call for each element being stringified
  * @returns The prettified JSON string
  */
-export function prettify(json: object | undefined | null) {
-	return JSON.stringify(json, null, 2);
+export function prettify<T = unknown>(
+	obj: object | undefined | null,
+	replacerFn?: StringifyReplacerFn<T | T[], unknown>,
+) {
+	const compoundReplacerFn = (_key: string, value: T) => {
+		const newValue = stringifyReplaceSetWithArray(value);
+
+		return replacerFn ? replacerFn?.(_key, newValue) : newValue;
+	};
+
+	return JSON.stringify(obj, compoundReplacerFn, 2);
 }
 
 /**
