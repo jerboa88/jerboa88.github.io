@@ -292,3 +292,13 @@ export function removeUndefinedProps<T extends Record<string, unknown>>(
 
 	return Object.fromEntries(definedEntries) as WithoutUndefined<T>;
 }
+
+/**
+ * Get the keys of an object.
+ *
+ * @param obj The object to get the keys of.
+ * @returns An array of the keys of the object.
+ */
+export function keysOf<T extends object>(obj: T): (keyof T)[] {
+	return Object.keys(obj) as (keyof T)[];
+}
