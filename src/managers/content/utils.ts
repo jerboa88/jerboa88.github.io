@@ -6,6 +6,7 @@ import {
 import type { FilterFn, SortFn } from '../../types/other.ts';
 import {
 	findIndexOfSubstringInArray,
+	keysOf,
 	limit,
 	prettify,
 } from '../../utils/other.ts';
@@ -93,9 +94,7 @@ function filterEntriesUsingConfig<T>(
 		[EntryVisibility.Show]: new Set<T>(),
 		[EntryVisibility.Hide]: new Set<T>(),
 	};
-	const visibilityTypes: EntryVisibility[] = Object.keys(
-		entrySetsMap,
-	) as (keyof typeof entrySetsMap)[];
+	const visibilityTypes = keysOf(entrySetsMap);
 
 	for (const visibilityType of visibilityTypes) {
 		const pageEntryIds = pageContentEntryConfig[visibilityType];
