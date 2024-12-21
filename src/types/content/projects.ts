@@ -4,8 +4,8 @@
 
 import type { DateString, SentenceString, UrlString } from '../strings.ts';
 import type { Overwrite } from '../utils.ts';
-import { EntryPage, type EntryVisibility } from './content.ts';
 
+// TODO: Rename to ProjectType?
 /**
  * An enumeration of possible project categories
  *
@@ -15,16 +15,6 @@ export enum ProjectCategory {
 	Other = 0,
 	GithubRepo = 1,
 }
-
-/**
- * A visibility config prop added to project configs
- */
-type ProjectVisibilityProp = {
-	visibility: {
-		[EntryPage.Index]?: EntryVisibility;
-		[EntryPage.Resume]?: EntryVisibility;
-	};
-};
 
 /**
  * A base project with common fields
@@ -81,38 +71,22 @@ export type GithubRepoProject = Queries.GithubRepo & {
 export type Project = GithubRepoProject | OtherProject;
 
 /**
- * Config for a GitHub repo project
- */
-type GithubRepoProjectConfig = ProjectVisibilityProp &
-	Pick<GithubRepoProject, 'category' | 'slug'>;
-
-/**
  * Config for a manually added project
  */
-type OtherProjectConfig = Partial<ProjectVisibilityProp> &
-	Overwrite<
-		OtherProject,
-		{
-			createdAt: DateString;
-			description: SentenceString;
-			exposition: SentenceString;
-			type: string;
-			updatedAt: DateString;
-		}
-	>;
+type OtherProjectConfig = Overwrite<
+	Omit<OtherProject, 'category'>,
+	{
+		createdAt: DateString;
+		description: SentenceString;
+		exposition: SentenceString;
+		type: string;
+		updatedAt: DateString;
+	}
+>;
 
 /**
- * Union of all project config types
- */
-export type ProjectConfig = GithubRepoProjectConfig | OtherProjectConfig;
-
-/**
- * Config for all projects
+ * Config for manually added projects
  */
 export type ProjectsConfig = {
-	maxForPage: {
-		[EntryPage.Index]: number;
-		[EntryPage.Resume]: number;
-	};
-	projects: ProjectConfig[];
+	[ProjectCategory.Other]: OtherProjectConfig[];
 };
