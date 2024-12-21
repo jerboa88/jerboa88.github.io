@@ -3,7 +3,7 @@ import {
 	EntryVisibility,
 	type PageContentEntryConfig,
 } from '../../types/content/content.ts';
-import type { FilterFn, SortFn } from '../../types/other.ts';
+import type { FilterFn } from '../../types/other.ts';
 import {
 	findIndexOfSubstringInArray,
 	keysOf,
@@ -155,9 +155,8 @@ function filterEntriesUsingFns<T>(
  * @param allEntries The list of all entries.
  * @param pageContentEntryConfig The page content entry config object.
  * @param getEntryIdFn A function that returns the entry ID for a given entry.
- * @param entrySortFn A function that sorts entries.
- * @param entryShowFilterFn A function that filters entries to be shown.
- * @param entryHideFilterFn A function that filters entries to be hidden.
+ * @param showFilterFn A function that filters entries to be shown.
+ * @param hideFilterFn A function that filters entries to be hidden.
  * @returns The filtered and transformed list of entries.
  */
 export function filterEntries<T>(
@@ -165,11 +164,11 @@ export function filterEntries<T>(
 	allEntries: T[],
 	pageContentEntryConfig: PageContentEntryConfig<T>,
 	getEntryIdFn: (entry: T) => string,
-	entrySortFn?: SortFn<T>,
-	entryShowFilterFn?: FilterFn<T>,
-	entryHideFilterFn?: FilterFn<T>,
+	showFilterFn?: FilterFn<T>,
+	hideFilterFn?: FilterFn<T>,
 ) {
-	const allSortedEntries = allEntries.sort(entrySortFn);
+	const sortFn = pageContentEntryConfig?.sortFn;
+	const allSortedEntries = allEntries.sort(sortFn);
 
 	// If config isn't provided, return all entries
 	if (!pageContentEntryConfig) {
@@ -185,8 +184,8 @@ export function filterEntries<T>(
 		),
 		filtered: filterEntriesUsingFns(
 			allSortedEntries,
-			entryShowFilterFn,
-			entryHideFilterFn,
+			showFilterFn,
+			hideFilterFn,
 		),
 	};
 	// Stringify the entry sets map for debug logging
@@ -218,5 +217,5 @@ export function filterEntries<T>(
 	);
 
 	// Sort the final list
-	return filteredEntries.sort(entrySortFn);
+	return filteredEntries.sort(sortFn);
 }
