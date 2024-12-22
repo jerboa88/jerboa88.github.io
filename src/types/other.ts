@@ -38,7 +38,7 @@ export interface SiteMetadataConfig {
 		username: {
 			linkedin: string;
 			github: string;
-			twitter: string;
+			x: string;
 		};
 		location: {
 			city: Capitalize<string>;
@@ -76,7 +76,7 @@ export interface PagesMetadataConfig {
  */
 export enum SocialImageType {
 	OpenGraph = 'og',
-	Twitter = 'twitter',
+	X = 'x',
 }
 
 /**
@@ -86,7 +86,7 @@ export interface SocialImagesGenerationConfig {
 	defaults: Partial<DefaultOptions>;
 	types: {
 		[SocialImageType.OpenGraph]: Partial<JobOptions>;
-		[SocialImageType.Twitter]: Partial<JobOptions>;
+		[SocialImageType.X]: Partial<JobOptions>;
 	};
 }
 
@@ -96,7 +96,7 @@ export interface SocialImagesGenerationConfig {
 export interface SocialImagesMetadataProp {
 	socialImagesMetadata: {
 		[SocialImageType.OpenGraph]: JobOptions;
-		[SocialImageType.Twitter]: JobOptions;
+		[SocialImageType.X]: JobOptions;
 	};
 }
 

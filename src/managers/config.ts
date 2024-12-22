@@ -49,12 +49,12 @@ type SiteMetadata = {
 		email: string | undefined;
 		username: {
 			github: string;
-			twitter: string;
+			x: string;
 		};
 		url: {
 			linkedin: UrlString;
 			github: UrlString;
-			twitter: UrlString;
+			x: UrlString;
 		};
 		location: {
 			city: Capitalize<string>;
@@ -95,12 +95,12 @@ export function getSiteMetadata(): SiteMetadata {
 			email: process.env.AUTHOR_EMAIL,
 			username: {
 				github: config.author.username.github,
-				twitter: config.author.username.twitter,
+				x: config.author.username.x,
 			},
 			url: {
 				linkedin: `https://linkedin.com/in/${config.author.username.linkedin}`,
 				github: `https://github.com/${config.author.username.github}`,
-				twitter: `https://twitter.com/${config.author.username.twitter}`,
+				x: `https://x.com/${config.author.username.x}`,
 			},
 			location: {
 				city: config.author.location.city,

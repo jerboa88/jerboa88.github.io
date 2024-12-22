@@ -90,10 +90,7 @@ function createSocialImages(options: CreateSocialImagesOptions) {
 			SocialImageType.OpenGraph,
 			options,
 		),
-		[SocialImageType.Twitter]: createSocialImage(
-			SocialImageType.Twitter,
-			options,
-		),
+		[SocialImageType.X]: createSocialImage(SocialImageType.X, options),
 	};
 }
 

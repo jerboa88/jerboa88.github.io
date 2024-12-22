@@ -3,7 +3,7 @@
 	-------------
 */
 
-import type { SiteMetadataConfig } from '../../types/other';
+import type { SiteMetadataConfig } from '../../types/other.ts';
 
 export const siteMetadataConfig: SiteMetadataConfig = {
 	iconPath: 'images/icon.svg',
@@ -21,7 +21,7 @@ export const siteMetadataConfig: SiteMetadataConfig = {
 		username: {
 			linkedin: 'johngoodliff',
 			github: 'jerboa88',
-			twitter: 'jerboa88',
+			x: 'jerboa88',
 		},
 		location: {
 			city: 'Edmonton',

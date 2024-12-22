@@ -45,8 +45,8 @@ export function PageHead({
 	const ogImageUrl = getAbsoluteUrl(
 		socialImagesMetadata[SocialImageType.OpenGraph].imagePath,
 	);
-	const twitterImageUrl = getAbsoluteUrl(
-		socialImagesMetadata[SocialImageType.Twitter].imagePath,
+	const xImageUrl = getAbsoluteUrl(
+		socialImagesMetadata[SocialImageType.X].imagePath,
 	);
 
 	return (
@@ -81,12 +81,9 @@ export function PageHead({
 			{/* Twitter meta tags */}
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:title" content={pageMetadata.title} />
-			<meta
-				name="twitter:creator"
-				content={SITE_METADATA.author.username.twitter}
-			/>
+			<meta name="twitter:creator" content={SITE_METADATA.author.username.x} />
 			<meta name="twitter:description" content={pageMetadata.description} />
-			<meta name="twitter:image" content={twitterImageUrl.toString()} />
+			<meta name="twitter:image" content={xImageUrl.toString()} />
 
 			<meta name="google" content="nositelinkssearchbox" />
 			{THEME.primary && <meta name="theme-color" content={THEME.primary} />}
@@ -109,7 +106,7 @@ export function PageHead({
 						sameAs: [
 							SITE_METADATA.author.url.linkedin,
 							SITE_METADATA.author.url.github,
-							SITE_METADATA.author.url.twitter,
+							SITE_METADATA.author.url.x,
 						],
 						address: {
 							'@type': 'PostalAddress',

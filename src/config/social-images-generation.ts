@@ -6,7 +6,7 @@
 import {
 	SocialImageType,
 	type SocialImagesGenerationConfig,
-} from '../types/other';
+} from '../types/other.ts';
 
 export const socialImagesGenerationConfig: SocialImagesGenerationConfig = {
 	defaults: {
@@ -21,7 +21,7 @@ export const socialImagesGenerationConfig: SocialImagesGenerationConfig = {
 				height: 1260,
 			},
 		},
-		[SocialImageType.Twitter]: {
+		[SocialImageType.X]: {
 			size: {
 				width: 2400,
 				height: 1200,

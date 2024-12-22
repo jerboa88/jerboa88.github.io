@@ -3119,45 +3119,45 @@ type SiteSiteMetadataAuthorSortInput = {
 type SiteSiteMetadataAuthorUrl = {
   readonly github: Maybe<Scalars['String']>;
   readonly linkedin: Maybe<Scalars['String']>;
-  readonly twitter: Maybe<Scalars['String']>;
+  readonly x: Maybe<Scalars['String']>;
 };
 
 type SiteSiteMetadataAuthorUrlFieldSelector = {
   readonly github: InputMaybe<FieldSelectorEnum>;
   readonly linkedin: InputMaybe<FieldSelectorEnum>;
-  readonly twitter: InputMaybe<FieldSelectorEnum>;
+  readonly x: InputMaybe<FieldSelectorEnum>;
 };
 
 type SiteSiteMetadataAuthorUrlFilterInput = {
   readonly github: InputMaybe<StringQueryOperatorInput>;
   readonly linkedin: InputMaybe<StringQueryOperatorInput>;
-  readonly twitter: InputMaybe<StringQueryOperatorInput>;
+  readonly x: InputMaybe<StringQueryOperatorInput>;
 };
 
 type SiteSiteMetadataAuthorUrlSortInput = {
   readonly github: InputMaybe<SortOrderEnum>;
   readonly linkedin: InputMaybe<SortOrderEnum>;
-  readonly twitter: InputMaybe<SortOrderEnum>;
+  readonly x: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSiteMetadataAuthorUsername = {
   readonly github: Maybe<Scalars['String']>;
-  readonly twitter: Maybe<Scalars['String']>;
+  readonly x: Maybe<Scalars['String']>;
 };
 
 type SiteSiteMetadataAuthorUsernameFieldSelector = {
   readonly github: InputMaybe<FieldSelectorEnum>;
-  readonly twitter: InputMaybe<FieldSelectorEnum>;
+  readonly x: InputMaybe<FieldSelectorEnum>;
 };
 
 type SiteSiteMetadataAuthorUsernameFilterInput = {
   readonly github: InputMaybe<StringQueryOperatorInput>;
-  readonly twitter: InputMaybe<StringQueryOperatorInput>;
+  readonly x: InputMaybe<StringQueryOperatorInput>;
 };
 
 type SiteSiteMetadataAuthorUsernameSortInput = {
   readonly github: InputMaybe<SortOrderEnum>;
-  readonly twitter: InputMaybe<SortOrderEnum>;
+  readonly x: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSiteMetadataFieldSelector = {
