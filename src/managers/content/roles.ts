@@ -27,18 +27,17 @@ type RoleSubsets = {
 // Functions
 
 /**
- * Converts a role config object to a role object.
+ * Build a role object from a role config object.
  *
  * @remarks
  *
  * This is necessary because the role config object uses strings for dates, while the role object uses Date objects.
  *
  * @typeParam T - The type of role.
- * @typeParam U - The corresponding type of role config.
  * @param roleConfig The role config object.
  * @returns The role object.
  */
-function convertRoleConfigToRole<T extends Role>(roleConfig: RoleConfig<T>): T {
+function buildRole<T extends Role>(roleConfig: RoleConfig<T>): T {
 	return {
 		title: roleConfig.title,
 		company: roleConfig.company,
@@ -80,7 +79,7 @@ export function getRolesForPage(pagePath: string) {
 	for (const roleType of roleTypes) {
 		roleSubsets[roleType] = filterEntries(
 			pagePath,
-			rolesConfig[roleType].map(convertRoleConfigToRole),
+			rolesConfig[roleType].map(buildRole),
 			pageRolesConfig[roleType],
 			getRoleId,
 		);
