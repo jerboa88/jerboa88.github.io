@@ -1,6 +1,5 @@
 import { join, resolve } from 'node:path';
-import type { GatsbyNode } from 'gatsby';
-import { getPageMetadata } from './src/common/config-manager.ts';
+import type { CreatePagesArgs, GatsbyNode } from 'gatsby';
 import {
 	ABOUT_PATH,
 	CONTACT_PATH,
@@ -12,22 +11,21 @@ import {
 	RESUME_PATH,
 	SOCIAL_IMAGES_PATH,
 	SOCIAL_IMAGE_TEMPLATES_DIR,
-} from './src/common/constants.ts';
+} from './src/config/constants.ts';
+import { getPageMetadata } from './src/managers/config.ts';
+import {
+	getAuthorBioHtml,
+	getProjectsForPage,
+} from './src/managers/content/projects.ts';
 import { transformGithubDataNode } from './src/node/github-data-node-transformer.ts';
 import { schema } from './src/node/graphql.ts';
 import { setReporter, warn } from './src/node/logger.ts';
-import {
-	getProjects,
-	getSubsetOfProjects,
-} from './src/node/projects-manager.ts';
 import {
 	createPage,
 	createRedirect,
 	deletePage,
 	setGatsbyNodeHelpers,
 } from './src/node/utils.ts';
-import { EntryPage } from './src/types/content/content.ts';
-import type { Project } from './src/types/content/projects.ts';
 import type { PageMetadata } from './src/types/other.ts';
 import type {
 	IndexPageContext,
@@ -59,9 +57,11 @@ const OTHER_OG_IMAGE_TEMPLATE = resolve(
 // Functions
 
 // Create the landing page
-function createIndexPage(projects: Project[], authorBioHtml: string) {
+async function createIndexPage(graphql: CreatePagesArgs['graphql']) {
+	const projects = await getProjectsForPage(graphql, INDEX_PATH);
+	const authorBioHtml = await getAuthorBioHtml(graphql);
 	const context: IndexPageContext = {
-		projects: getSubsetOfProjects(projects, EntryPage.Index),
+		projects,
 		authorBioHtml,
 	};
 
@@ -73,18 +73,14 @@ function createIndexPage(projects: Project[], authorBioHtml: string) {
 	});
 }
 
-// Sort GitHub repos by creation date
-function sortByCreatedAt(a: Project, b: Project) {
-	return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-}
-
 // Create the resume page
-function createResumePage(projects: Project[]) {
+async function createResumePage(graphql: CreatePagesArgs['graphql']) {
+	const projects = await getProjectsForPage(graphql, RESUME_PATH);
 	const pageMetadata: PageMetadata | EmptyObject =
 		getPageMetadata(RESUME_PATH) || {};
 	const context: ResumePageContext = {
 		pageMetadata,
-		projects: getSubsetOfProjects(projects, EntryPage.Resume, sortByCreatedAt),
+		projects,
 	};
 
 	createPage({
@@ -96,7 +92,9 @@ function createResumePage(projects: Project[]) {
 }
 
 // Create project pages
-function createProjectPages(projects: Project[]) {
+async function createProjectPages(graphql: CreatePagesArgs['graphql']) {
+	const projects = await getProjectsForPage(graphql, PROJECTS_PATH);
+
 	for (const project of projects) {
 		const path: AbsolutePathString = join(
 			PROJECTS_PATH,
@@ -196,10 +194,8 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
 
 // Manually create pages and generate the associated Open Graph images
 export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
-	const { projects, authorBioHtml } = await getProjects(graphql);
-
-	createProjectPages(projects);
-	createIndexPage(projects, authorBioHtml);
-	createResumePage(projects);
+	await createProjectPages(graphql);
+	await createIndexPage(graphql);
+	await createResumePage(graphql);
 	createRedirects();
 };
