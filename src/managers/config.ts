@@ -5,20 +5,13 @@
 
 import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import { colorMappingsConfig } from '../config/color-mappings.ts';
-import { pagesContentConfig } from '../config/content/pages.ts';
-import { projectsConfig } from '../config/content/projects.ts';
+import { PAGES_CONTENT_CONFIG } from '../config/content/pages.ts';
 import { externalServicesConfig } from '../config/external-services.ts';
 import { pagesMetadataConfig } from '../config/metadata/pages.ts';
 import { siteMetadataConfig } from '../config/metadata/site.ts';
 import { socialImagesGenerationConfig } from '../config/social-images-generation.ts';
 import { themesConfig } from '../config/themes.ts';
 import type { PageContentConfig } from '../types/content/content.ts';
-import type { EntryPage, EntryVisibility } from '../types/content/content.ts';
-import {
-	type OtherProject,
-	ProjectCategory,
-	type ProjectConfig,
-} from '../types/content/projects.ts';
 import type {
 	PageMetadata,
 	SocialImageType,
@@ -31,7 +24,7 @@ import type {
 	SentenceString,
 	UrlString,
 } from '../types/strings.ts';
-import { arrayToObject, isDefined } from '../utils/other.ts';
+import { isDefined } from '../utils/other.ts';
 
 // Types
 
@@ -70,22 +63,6 @@ type SiteMetadata = {
 		};
 	};
 };
-
-// Constants
-
-const PROJECTS_MAP = arrayToObject(projectsConfig.projects, 'slug');
-
-const OTHER_PROJECTS: OtherProject[] = projectsConfig.projects
-	.filter((projectConfig) => projectConfig.category === ProjectCategory.Other)
-	.map((projectConfig) => ({
-		...projectConfig,
-		createdAt: new Date(projectConfig.createdAt),
-		updatedAt: new Date(projectConfig.updatedAt),
-		type: {
-			color: getProjectTypeColor(projectConfig.type),
-			name: projectConfig.type,
-		},
-	}));
 
 // Functions
 
@@ -149,7 +126,7 @@ export function getPageMetadata(pagePath: string): PageMetadata {
 // Returns the content config for a given page
 export function getPageContentConfig(pagePath: string): PageContentConfig {
 	const config =
-		pagesContentConfig[pagePath as keyof typeof pagesContentConfig];
+		PAGES_CONTENT_CONFIG[pagePath as keyof typeof PAGES_CONTENT_CONFIG];
 
 	if (!config) {
 		console.warn(`Page content config for ${pagePath} not found`);
@@ -178,29 +155,6 @@ export function getSocialImageGenerationConfigForType(
 
 export function getExternalServices() {
 	return externalServicesConfig;
-}
-
-// Returns the visibility of a project for a given page
-export function getProjectVisibilityForPage(
-	page: EntryPage,
-	slug: string,
-): EntryVisibility | undefined {
-	const project: ProjectConfig | undefined = PROJECTS_MAP[slug];
-	if (!isDefined(project)) {
-		return undefined;
-	}
-
-	return project.visibility?.[page];
-}
-
-// Returns the maximum number of projects to show for a given page
-export function getMaxProjectsForPage(page: EntryPage): number {
-	return projectsConfig.maxForPage[page];
-}
-
-// Returns a list of manually added projects
-export function getOtherProjects(): OtherProject[] {
-	return OTHER_PROJECTS;
 }
 
 // Returns a daisyUI theme given its name

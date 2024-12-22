@@ -255,7 +255,7 @@ export function limit<T>(array: T[], limit: number): T[] {
  * @returns The index of the first match, or -1 if no match is found
  */
 export function findIndexOfSubstringInArray(
-	array: string[],
+	array: readonly string[],
 	substring: string,
 ): number {
 	return array.findIndex((item) => item.includes(substring));
