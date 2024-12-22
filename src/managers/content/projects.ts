@@ -1,35 +1,41 @@
 /*
-	Functions to fetch and manage projects
-	--------------------------------------
+	A collection of functions to manage and transform projects shown on pages
+	-------------------------------------------------------------------------
 */
 
 import type { CreatePagesArgs } from 'gatsby';
+import { PROJECTS_CONFIG } from '../../config/content/projects.ts';
+import { githubReposQuery } from '../../node/graphql.ts';
+import { info, panic } from '../../node/logger.ts';
 import {
-	getMaxProjectsForPage,
-	getOtherProjects,
-	getProjectVisibilityForPage,
-	getSiteMetadata,
-} from '../common/config-manager.ts';
-import {
-	assertIsDefined,
-	assertUnreachable,
-	isDefined,
-	limit,
-} from '../common/utils/other.ts';
-import { prettify } from '../common/utils/other.ts';
-import { type EntryPage, EntryVisibility } from '../types/content/content.ts';
+	type ContentType,
+	EntryVisibility,
+	type PageContentConfig,
+} from '../../types/content/content.ts';
 import {
 	type GithubRepoProject,
 	type OtherProject,
+	type OtherProjectConfig,
 	type Project,
 	ProjectCategory,
-} from '../types/content/projects.ts';
-import { githubReposQuery } from './graphql.ts';
-import { info, panic, warn } from './logger.ts';
+} from '../../types/content/projects.ts';
+import { SkillType } from '../../types/content/skills.ts';
+import { findIndexOfSubstringInArray } from '../../utils/other.ts';
+import { assertIsDefined } from '../../utils/other.ts';
+import { prettify } from '../../utils/other.ts';
+import { getPageContentConfig, getProjectTypeColor } from '../config.ts';
+import { getSiteMetadata } from '../config.ts';
+import { filterEntries } from './utils.ts';
 
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
+
+// Runtime vars
+
+let cachedGithubRepoProjects: GithubRepoProject[] = [];
+let cachedOtherProjects: OtherProject[] = [];
+let cachedAuthorBioHtml: string | undefined;
 
 // Types
 
@@ -42,135 +48,56 @@ type GithubReposQueryData = {
 // Functions
 
 /**
- * Get the visibility of a GitHub repo project on a specific page
+ * Build a GitHub repo project from a GithubRepo GraphQL node.
  *
- * @remarks
- *
- * This function contains additional logic to hide forked and Markdown repos. If the visibility is not defined, it will default to showing the repo.
- *
- * @param page The page to get the visibility for
- * @param project The project to get the visibility for
- * @returns The visibility of the project on the specified page
+ * @param githubRepoNode A GithubRepo GraphQL node.
+ * @returns A GithubRepoProject object.
  */
-function getVisibilityForGithubRepoProject(
-	page: EntryPage,
-	project: GithubRepoProject,
-) {
-	const visibility = getProjectVisibilityForPage(page, project.slug);
-
-	if (isDefined(visibility)) {
-		return visibility;
-	}
-
-	if (project.isFork) {
-		warn(
-			`Hiding project '${project.slug}' on ${page} page as it is a forked repo`,
-		);
-
-		return EntryVisibility.Hide;
-	}
-
-	if (project.type.name === 'Markdown') {
-		warn(
-			`Hiding project '${project.slug}' on ${page} page as it is a Markdown repo`,
-		);
-
-		return EntryVisibility.Hide;
-	}
-
-	return EntryVisibility.Show;
+function buildGithubRepoProject(
+	githubRepoNode: Queries.GithubRepo,
+): GithubRepoProject {
+	return {
+		...githubRepoNode,
+		category: ProjectCategory.GithubRepo,
+	};
 }
 
 /**
- * Get the visibility of a manually added project on a specific page
+ * Build an other project from an other project config object.
  *
- * @remarks
- *
- * If the visibility is not defined, it will default to showing the project.
- *
- * @param page The page to get the visibility for
- * @param project The project to get the visibility for
- * @returns The visibility of the project on the specified page
+ * @param projectConfig An OtherProjectConfig object.
+ * @returns An OtherProject object.
  */
-function getVisibilityForOtherProject(page: EntryPage, project: OtherProject) {
-	const visibility = getProjectVisibilityForPage(page, project.slug);
-
-	if (isDefined(visibility)) {
-		return visibility;
-	}
-
-	return EntryVisibility.Show;
+function buildOtherProject(projectConfig: OtherProjectConfig): OtherProject {
+	return {
+		...projectConfig,
+		category: ProjectCategory.Other,
+		createdAt: new Date(projectConfig.createdAt),
+		updatedAt: new Date(projectConfig.updatedAt),
+		type: {
+			color: getProjectTypeColor(projectConfig.type),
+			name: projectConfig.type,
+		},
+	};
 }
 
 /**
- * Get a subset of GitHub repos based on visibility and a maximum number of repos
- *
- * @param projects A list of projects
- * @param page The page to get the subset for
- * @param sortFunction A optional function to sort the repos
- * @returns A filtered subset of GitHub repos
- */
-export function getSubsetOfProjects(
-	projects: Project[],
-	page: EntryPage,
-	sortFunction?: (a: Project, b: Project) => number,
-) {
-	const maxProjects = getMaxProjectsForPage(page);
-	const pinnedProjects: Project[] = [];
-	const includedProjects: Project[] = [];
-
-	for (const project of projects) {
-		let visibility: EntryVisibility;
-
-		switch (project.category) {
-			case ProjectCategory.GithubRepo:
-				visibility = getVisibilityForGithubRepoProject(page, project);
-
-				break;
-			case ProjectCategory.Other:
-				visibility = getVisibilityForOtherProject(page, project);
-
-				break;
-			default:
-				assertUnreachable(project);
-		}
-
-		if (visibility === EntryVisibility.Pin) {
-			pinnedProjects.push(project);
-		} else if (visibility === EntryVisibility.Show) {
-			includedProjects.push(project);
-		}
-	}
-
-	const filteredGithubRepos = limit(
-		[...pinnedProjects, ...includedProjects],
-		maxProjects,
-	);
-
-	if (isDefined(sortFunction)) {
-		filteredGithubRepos.sort(sortFunction);
-	}
-
-	info(
-		`Showing top ${maxProjects} repos on ${page} page out of ${pinnedProjects.length} pinned repos and ${includedProjects.length} included repos`,
-	);
-
-	return filteredGithubRepos;
-}
-
-/**
- * Fetch a list of GitHub repo projects
+ * Fetch a list of GitHub repo projects from the Gatsby GraphQL API.
  *
  * @remarks
  *
- * Perform a query to fetch GithubRepo nodes, validate the response, and return a list of GithubRepoProject objects
+ * Perform a query to fetch GithubRepo nodes, validate the response, and return a list of GithubRepoProject objects.
  *
- * @param graphql The Gatsby GraphQL function
- * @returns A list of GithubRepoProject objects
+ * @param graphql The Gatsby GraphQL function.
+ * @returns A list of GithubRepoProject objects.
  */
-async function getGithubRepoProjects(
+async function fetchGithubRepoProjects(
 	graphql: CreatePagesArgs['graphql'],
 ): Promise<GithubRepoProject[]> {
+	if (cachedGithubRepoProjects.length > 0) {
+		return cachedGithubRepoProjects;
+	}
+
 	const response = await graphql<GithubReposQueryData>(githubReposQuery);
 
 	if (response.errors) {
@@ -187,21 +114,84 @@ async function getGithubRepoProjects(
 		`Failed to fetch GitHub repos. Response:\n${prettify(response)}`,
 	);
 
-	return githubRepoNodes.map((repoNode) => ({
-		...repoNode,
-		category: ProjectCategory.GithubRepo,
-	}));
+	cachedGithubRepoProjects = githubRepoNodes.map(buildGithubRepoProject);
+
+	return cachedGithubRepoProjects;
 }
 
 /**
- * Find the GitHub profile repo in a list of GithubRepoProjects and extract the author bio HTML from it
+ * Fetch a list of other projects from the projects config.
  *
- * @param githubRepos A list of GithubRepoProjects
- * @returns The author bio HTML
+ * @returns A list of OtherProject objects.
  */
-function getAuthorBioHtml(githubRepos: GithubRepoProject[]) {
+function fetchOtherProjects(): OtherProject[] {
+	if (cachedOtherProjects.length > 0) {
+		return cachedOtherProjects;
+	}
+
+	cachedOtherProjects =
+		PROJECTS_CONFIG[ProjectCategory.Other].map(buildOtherProject);
+
+	return cachedOtherProjects;
+}
+
+/**
+ * A filter function for hiding projects.
+ *
+ * @param project The project to filter.
+ * @returns True if the project should be hidden, false otherwise.
+ */
+function doHideProject(project: Project) {
+	return project.type.name === 'Markdown' || project?.isFork;
+}
+
+/**
+ * A filter function for showing projects.
+ *
+ * @param pageSkillsConfig The skills config for the page.
+ * @param project The project to filter.
+ * @returns True if the project should be shown, false otherwise.
+ */
+function doShowProject(
+	pageSkillsConfig: PageContentConfig[ContentType.Skills],
+	project: Project,
+) {
+	const pageLanguagesConfig = pageSkillsConfig[SkillType.Languages];
+	const pinnedLanguages = pageLanguagesConfig?.[EntryVisibility.Pin];
+
+	if (!pinnedLanguages) {
+		return false;
+	}
+
+	// If any of the project's languages are pinned, show the project
+	for (const pinnedLanguage of pinnedLanguages) {
+		const matchIndex = findIndexOfSubstringInArray(
+			project.languages,
+			pinnedLanguage,
+		);
+
+		if (matchIndex > 0) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * Find the GitHub profile repo in a list of GithubRepoProjects and extract the author bio HTML from it.
+ *
+ * @param graphql The Gatsby GraphQL function.
+ * @returns A string containing the author bio HTML.
+ */
+export async function getAuthorBioHtml(graphql: CreatePagesArgs['graphql']) {
+	if (cachedAuthorBioHtml) {
+		return cachedAuthorBioHtml;
+	}
+
+	const githubRepos = await fetchGithubRepoProjects(graphql);
 	const profileReadmeRepo = githubRepos.find(
-		(githubRepo) => githubRepo.slug === SITE_METADATA.author.username.github,
+		({ slug }) => slug === SITE_METADATA.author.username.github,
 	);
 
 	assertIsDefined(
@@ -218,22 +208,37 @@ function getAuthorBioHtml(githubRepos: GithubRepoProject[]) {
 
 	info(`Extracted author bio HTML from GitHub profile repo:\n${authorBioHtml}`);
 
+	cachedAuthorBioHtml = authorBioHtml;
+
 	return authorBioHtml;
 }
 
 /**
- * Get a list of projects
+ * Given a page path, returns the computed list of projects for that page.
  *
- * @param graphql The Gatsby GraphQL function
- * @returns A list of projects and the author bio HTML
+ * @param graphql The Gatsby GraphQL function.
+ * @param pagePath The path of the page.
+ * @returns An array of projects.
  */
-export async function getProjects(graphql: CreatePagesArgs['graphql']) {
-	const repoProjects = await getGithubRepoProjects(graphql);
-	const otherProjects = getOtherProjects();
-	const authorBioHtml = getAuthorBioHtml(repoProjects);
+export async function getProjectsForPage(
+	graphql: CreatePagesArgs['graphql'],
+	pagePath: string,
+) {
+	const pageContentConfig = getPageContentConfig(pagePath);
+	const pageProjectsConfig = pageContentConfig?.projects;
+	const pageSkillsConfig = pageContentConfig?.skills;
+	const allProjects: Project[] = [
+		...(await fetchGithubRepoProjects(graphql)),
+		...fetchOtherProjects(),
+	];
+	const projectsSubset = filterEntries(
+		pagePath,
+		allProjects,
+		pageProjectsConfig,
+		(project) => project.slug,
+		(project) => doShowProject(pageSkillsConfig, project),
+		doHideProject,
+	);
 
-	return {
-		projects: [...repoProjects, ...otherProjects],
-		authorBioHtml,
-	};
+	return projectsSubset;
 }

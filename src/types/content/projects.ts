@@ -73,7 +73,7 @@ export type Project = GithubRepoProject | OtherProject;
 /**
  * Config for a manually added project
  */
-type OtherProjectConfig = Overwrite<
+export type OtherProjectConfig = Overwrite<
 	Omit<OtherProject, 'category'>,
 	{
 		createdAt: DateString;
