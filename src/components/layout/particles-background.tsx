@@ -10,6 +10,7 @@ import { loadSquareShape } from '@tsparticles/shape-square';
 import { useReducedMotion } from 'framer-motion';
 import { memo, useEffect, useState } from 'react';
 import { getTheme } from '../../managers/config.ts';
+import { info } from '../../node/logger.ts';
 import { ThemeType } from '../../types/other.ts';
 import { getClassNameProps } from '../../utils/other.ts';
 
@@ -77,7 +78,7 @@ function UnmemoizedParticlesBackground() {
 		}).then(() => {
 			setInit(true);
 
-			console.debug('tsParticles engine has been loaded');
+			info('tsParticles engine has been loaded');
 		});
 	});
 

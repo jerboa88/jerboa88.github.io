@@ -9,6 +9,7 @@ import { LayoutGroup, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { type SubmitHandler, useForm, useFormState } from 'react-hook-form';
 import { getExternalServices } from '../../managers/config.ts';
+import { error, info } from '../../node/logger.ts';
 import {
 	AlertType,
 	type InputValidationOptions,
@@ -147,13 +148,13 @@ function getValidationOptions(
 
 // Compute the Botpoison solution. Returns a promise that resolves with the solution string
 async function computeBotPoisonSolution() {
-	console.debug('Computing Botpoison solution...');
+	info('Computing Botpoison solution...');
 
 	return new Promise<string>((resolve, reject) => {
 		botpoison
 			.challenge()
 			.then(({ solution }) => {
-				console.debug('Botpoison solution found');
+				info('Botpoison solution found');
 
 				resolve(solution);
 			})
@@ -191,20 +192,20 @@ export function ContactForm({ className }: PropsWithClassName) {
 	const handleSubmissionError = (errorMsg: string) => {
 		setFormState(FormState.Error);
 
-		console.error(`Something went wrong during form submission. ${errorMsg}`);
+		error(`Something went wrong during form submission. ${errorMsg}`);
 	};
 
 	const onSubmit: SubmitHandler<ContactFormFields> = async (formData) => {
 		setFormState(FormState.Busy);
 
-		console.debug('Waiting for Botpoison solution...');
+		info('Waiting for Botpoison solution...');
 
 		const requestBody = JSON.stringify({
 			_botpoison: await botpoisonSolution,
 			...formData,
 		});
 
-		console.debug('Submitting form with data:', requestBody);
+		info(`Submitting form with data: ${requestBody}`);
 
 		fetch(EXTERNAL_SERVICES.contactFormPostUrl, {
 			method: 'POST',

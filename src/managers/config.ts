@@ -11,6 +11,7 @@ import { pagesMetadataConfig } from '../config/metadata/pages.ts';
 import { siteMetadataConfig } from '../config/metadata/site.ts';
 import { socialImagesGenerationConfig } from '../config/social-images-generation.ts';
 import { themesConfig } from '../config/themes.ts';
+import { warn } from '../node/logger.ts';
 import type { PageContentConfig } from '../types/content/content.ts';
 import type {
 	PageMetadata,
@@ -117,7 +118,7 @@ export function getPageMetadata(pagePath: string): PageMetadata {
 		pagesMetadataConfig[pagePath as keyof typeof pagesMetadataConfig];
 
 	if (!config) {
-		console.warn(`Page metadata for ${pagePath} not found`);
+		warn(`Page metadata for ${pagePath} not found`);
 	}
 
 	return config;
@@ -129,7 +130,7 @@ export function getPageContentConfig(pagePath: string): PageContentConfig {
 		PAGES_CONTENT_CONFIG[pagePath as keyof typeof PAGES_CONTENT_CONFIG];
 
 	if (!config) {
-		console.warn(`Page content config for ${pagePath} not found`);
+		warn(`Page content config for ${pagePath} not found`);
 	}
 
 	return config;
@@ -147,7 +148,7 @@ export function getSocialImageGenerationConfigForType(
 	const config = socialImagesGenerationConfig.types[type];
 
 	if (!config) {
-		console.warn(`Social image generation config for '${type}' not found`);
+		warn(`Social image generation config for '${type}' not found`);
 	}
 
 	return config;
@@ -180,7 +181,7 @@ export function getProjectTypeColor(
 			return colorMap[key as keyof typeof colorMap];
 		}
 
-		console.warn(`Color for project type '${projectType}' not found`);
+		warn(`Color for project type '${projectType}' not found`);
 	}
 
 	return colorMappingsConfig.default;
@@ -198,7 +199,7 @@ export function getRoleTypeColor(
 			return colorMap[key as keyof typeof colorMap];
 		}
 
-		console.warn(`Color for role type '${roleType}' not found`);
+		warn(`Color for role type '${roleType}' not found`);
 	}
 
 	return colorMappingsConfig.default;
