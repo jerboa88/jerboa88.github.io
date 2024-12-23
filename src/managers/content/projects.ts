@@ -146,24 +146,23 @@ function doHideProject(project: Project) {
 }
 
 /**
- * A filter function for showing projects.
+ * A filter function for pinning projects.
  *
- * @param pageSkillsConfig The skills config for the page.
+ * @param pageLanguagesConfig The languages config for the page.
  * @param project The project to filter.
- * @returns True if the project should be shown, false otherwise.
+ * @returns True if the project should be pinned, false otherwise.
  */
-function doShowProject(
-	pageSkillsConfig: PageContentConfig[ContentType.Skills],
+function doPinProject(
+	pageLanguagesConfig: PageContentConfig[ContentType.Skills][SkillType.Languages],
 	project: Project,
 ) {
-	const pageLanguagesConfig = pageSkillsConfig[SkillType.Languages];
 	const pinnedLanguages = pageLanguagesConfig?.[EntryVisibility.Pin];
 
 	if (!pinnedLanguages) {
 		return false;
 	}
 
-	// If any of the project's languages are pinned, show the project
+	// If any of the project's languages are pinned, also pin the project
 	for (const pinnedLanguage of pinnedLanguages) {
 		const matchIndex = findIndexOfSubstringInArray(
 			project.languages,
@@ -226,7 +225,7 @@ export async function getProjectsForPage(
 ) {
 	const pageContentConfig = getPageContentConfig(pagePath);
 	const pageProjectsConfig = pageContentConfig?.projects;
-	const pageSkillsConfig = pageContentConfig?.skills;
+	const pageLanguagesConfig = pageContentConfig?.skills[SkillType.Languages];
 	const allProjects: Project[] = [
 		...(await fetchGithubRepoProjects(graphql)),
 		...fetchOtherProjects(),
@@ -236,7 +235,8 @@ export async function getProjectsForPage(
 		allProjects,
 		pageProjectsConfig,
 		(project) => project.slug,
-		(project) => doShowProject(pageSkillsConfig, project),
+		(project) => doPinProject(pageLanguagesConfig, project),
+		undefined,
 		doHideProject,
 	);
 

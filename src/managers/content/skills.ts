@@ -34,7 +34,7 @@ export function getSkillsForPage(pagePath: string) {
 		skillSubsets[skillType] = filterEntries<Skill>(
 			pagePath,
 			skillsConfig[skillType],
-			pageSkillsConfig[skillType] ?? {},
+			pageSkillsConfig[skillType],
 			(skill: Skill) => skill,
 		);
 	}
