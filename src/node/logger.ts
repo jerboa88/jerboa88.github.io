@@ -103,7 +103,7 @@ export function panic(msg: string): never {
  * @remarks
  *
  * This function increases the indent level for all messages printed within the group.
- * Use {@link groupEnd} to end the group.
+ * Use {@link endLogGroup} to end the group.
  *
  * @example
  * group();
@@ -115,7 +115,7 @@ export function panic(msg: string): never {
  * groupEnd();
  * info('This message is not indented');
  */
-export function group() {
+export function startLogGroup() {
 	indentLevel++;
 
 	setIndentString();
@@ -127,7 +127,7 @@ export function group() {
  * @remarks
  *
  * This function decreases the indent level for all messages printed within the group.
- * Use {@link group} to start a group.
+ * Use {@link startLogGroup} to start a group.
  *
  * @example
  * group();
@@ -139,7 +139,7 @@ export function group() {
  * groupEnd();
  * info('This message is not indented');
  */
-export function groupEnd() {
+export function endLogGroup() {
 	indentLevel = Math.max(0, indentLevel - 1);
 
 	setIndentString();

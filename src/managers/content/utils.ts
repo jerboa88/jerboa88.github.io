@@ -1,4 +1,4 @@
-import { group, groupEnd, info } from '../../node/logger.ts';
+import { endLogGroup, info, startLogGroup } from '../../node/logger.ts';
 import {
 	EntryVisibility,
 	type PageContentEntryConfig,
@@ -70,7 +70,7 @@ export function filterEntries<T>(
 	const shownEntriesSet = new Set<T>();
 
 	info(`Filtering entries for page ${pagePath}...`);
-	group();
+	startLogGroup();
 
 	for (const entry of allSortedEntries) {
 		const entryId = getEntryId(entry);
@@ -96,7 +96,7 @@ export function filterEntries<T>(
 		}
 	}
 
-	groupEnd();
+	endLogGroup();
 
 	const filteredEntries = limit(
 		[...pinnedEntriesSet, ...shownEntriesSet],

@@ -11,7 +11,7 @@ import type { UrlString } from '../types/strings.ts';
 import { isDefined } from '../utils/other.ts';
 import { toKebabCase, toTitleCase } from '../utils/strings.ts';
 import { getAbsoluteUrl } from '../utils/urls.ts';
-import { group, groupEnd, info, panic, warn } from './logger.ts';
+import { endLogGroup, info, panic, startLogGroup, warn } from './logger.ts';
 
 // Types
 
@@ -360,7 +360,7 @@ export function transformGithubDataNode(
 		}
 
 		info(`Transforming GithubRepo node for '${githubRepoNode.name}'...`);
-		group();
+		startLogGroup();
 
 		const { githubRepo, readmeText } = transformGithubRepoNode(githubRepoNode);
 
@@ -372,8 +372,6 @@ export function transformGithubDataNode(
 			createContentDigest,
 		);
 
-		groupEnd();
+		endLogGroup();
 	}
-
-	groupEnd();
 }
