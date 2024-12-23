@@ -268,33 +268,33 @@ export function findIndexOfSubstringInArray(
  * @param keyOrFn - The key to use as the new object key, or a function that returns the key
  * @returns An object with keys generated from items in the input array, along with the corresponding values from the input array
  */
-export function arrayToMap<T extends object, K extends keyof T>(
-	array: T[],
-	key: K,
-): Map<string, T>;
+// export function arrayToMap<T extends object, K extends keyof T>(
+// 	array: T[],
+// 	key: K,
+// ): Map<string, T>;
 
-export function arrayToMap<T, K extends (item: T) => string>(
-	array: T[],
-	fn: K,
-): Map<string, T>;
+// export function arrayToMap<T, K extends (item: T) => string>(
+// 	array: T[],
+// 	fn: K,
+// ): Map<string, T>;
 
-export function arrayToMap<T, K extends keyof T | ((item: T) => string)>(
-	array: T[],
-	keyOrFn: K,
-): Map<string, T> {
-	let keyValueMatrix: [string, T][];
+// export function arrayToMap<T, K extends keyof T | ((item: T) => string)>(
+// 	array: T[],
+// 	keyOrFn: K,
+// ): Map<string, T> {
+// 	let keyValueMatrix: [string, T][];
 
-	if (keyOrFn instanceof Function) {
-		keyValueMatrix = array.map((item) => [keyOrFn(item), item]);
-	} else {
-		keyValueMatrix = array.map((item) => [
-			String(item[keyOrFn as keyof T]),
-			item,
-		]);
-	}
+// 	if (keyOrFn instanceof Function) {
+// 		keyValueMatrix = array.map((item) => [keyOrFn(item), item]);
+// 	} else {
+// 		keyValueMatrix = array.map((item) => [
+// 			String(item[keyOrFn as keyof T]),
+// 			item,
+// 		]);
+// 	}
 
-	return new Map(keyValueMatrix);
-}
+// 	return new Map(keyValueMatrix);
+// }
 
 /**
  * Remove all undefined/null properties from an object
