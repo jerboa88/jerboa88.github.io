@@ -8,7 +8,7 @@ import { RoleType, type RolesConfig } from '../../types/content/roles.ts';
 export const ROLES_CONFIG: RolesConfig = {
 	[RoleType.Employment]: [
 		{
-			type: 'internship',
+			category: 'internship',
 			title: 'Systems Analyst',
 			company: 'Haemonetics Corporation',
 			companyUrl: 'https://www.haemonetics.com/',
@@ -25,7 +25,7 @@ export const ROLES_CONFIG: RolesConfig = {
 			],
 		},
 		{
-			type: 'summer job',
+			category: 'seasonal',
 			title: 'Ramp Agent',
 			company: 'Airport Terminal Services',
 			companyUrl: 'https://www.atsstl.com/',
@@ -38,7 +38,7 @@ export const ROLES_CONFIG: RolesConfig = {
 			],
 		},
 		{
-			type: 'summer job',
+			category: 'seasonal',
 			title: 'General Production Laborer',
 			company: 'Universal Handling Equipment Ltd.',
 			companyUrl: 'https://www.universalhandling.com/',
@@ -54,7 +54,7 @@ export const ROLES_CONFIG: RolesConfig = {
 			],
 		},
 		{
-			type: 'summer job',
+			category: 'seasonal',
 			title: 'General Production Laborer',
 			company: 'Universal Handling Equipment Ltd.',
 			companyUrl: 'https://www.universalhandling.com/',
@@ -70,7 +70,7 @@ export const ROLES_CONFIG: RolesConfig = {
 			],
 		},
 		{
-			type: 'summer job',
+			category: 'seasonal',
 			title: 'Afternoon Paper Carrier',
 			company: 'Red Deer Advocate',
 			companyUrl: 'https://www.reddeeradvocate.com/',
@@ -84,7 +84,7 @@ export const ROLES_CONFIG: RolesConfig = {
 			],
 		},
 		{
-			type: 'summer job',
+			category: 'seasonal',
 			title: 'Shop Assistant',
 			company: 'Universal Handling Equipment Ltd.',
 			companyUrl: 'https://www.universalhandling.com/',

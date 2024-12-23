@@ -15,7 +15,7 @@ export function ResumeRoleEntries({ roles }: Props) {
 		<div className="flex flex-col gap-4">
 			{roles.map((role) => {
 				const title =
-					`${role.title} ${role?.type ? `(${role.type})` : ''}` as typeof role.title;
+					`${role.title} ${role?.category ? `(${role.category})` : ''}` as typeof role.title;
 
 				return (
 					<ResumeDetailEntry

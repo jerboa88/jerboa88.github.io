@@ -5,12 +5,9 @@
 
 import { ROLES_CONFIG } from '../../config/content/roles.ts';
 import {
-	type EducationRole,
-	type EmploymentRole,
 	type Role,
 	type RoleConfig,
 	RoleType,
-	type VolunteeringRole,
 } from '../../types/content/roles.ts';
 import { keysOf } from '../../utils/other.ts';
 import { getPageContentConfig } from '../config.ts';
@@ -19,9 +16,9 @@ import { filterEntries } from './utils.ts';
 // Types
 
 type RoleSubsets = {
-	[RoleType.Employment]: EmploymentRole[];
-	[RoleType.Education]: EducationRole[];
-	[RoleType.Volunteering]: VolunteeringRole[];
+	[RoleType.Employment]: Role[];
+	[RoleType.Education]: Role[];
+	[RoleType.Volunteering]: Role[];
 };
 
 // Functions

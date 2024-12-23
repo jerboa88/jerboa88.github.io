@@ -18,7 +18,7 @@ interface Props {
 }
 
 export function TimelineEntry({ role }: Props) {
-	const roleTypeColor = getRoleTypeColor(role.type);
+	const roleTypeColor = getRoleTypeColor(role.category);
 	const pillClassNameProps = getClassNameProps('capitalize', roleTypeColor);
 
 	return (
@@ -28,7 +28,9 @@ export function TimelineEntry({ role }: Props) {
 					<DateRange startDate={role.startDate} endDate={role.endDate} />
 					<span className="text-sm">{role.location}</span>
 				</div>
-				{role?.type && <Pill text={role.type} {...pillClassNameProps} />}
+				{role?.category && (
+					<Pill text={role.category} {...pillClassNameProps} />
+				)}
 			</div>
 			<div className="timeline-middle">
 				<FontAwesomeIcon icon={faCircleCheck} />

@@ -17,20 +17,20 @@ export enum RoleType {
 	Employment = 'employment',
 	Education = 'education',
 	Volunteering = 'volunteering',
-}
-
-/**
+} /**
  * A base role with common fields
  *
- * @param title - The title of the role
- * @param company - The name of the company
- * @param companyUrl - The URL of the company's website
- * @param startDate - The start date of the role
- * @param endDate - The end date of the role
- * @param location - The location of the role
- * @param bullets - A list of bullet points describing the role
+ * @param category A string describing the category of the role (ex. 'internship', 'seasonal', etc.).
+ * @param title The title of the role.
+ * @param company The name of the company.
+ * @param companyUrl The URL of the company's .website.
+ * @param startDate The start date of the role.
+ * @param endDate The end date of the role.
+ * @param location The location of the role.
+ * @param bullets A list of bullet points describing the role.
  */
-export type BaseRole = {
+export type Role = {
+	category?: 'seasonal' | 'internship' | 'secondary' | 'post-secondary';
 	title: Capitalize<string>;
 	company: Capitalize<string>;
 	companyUrl: UrlString;
@@ -41,41 +41,11 @@ export type BaseRole = {
 };
 
 /**
- * Employment role type
- *
- * @param type - The type of employment (ex. "internship")
- */
-export type EmploymentRole = Overwrite<
-	BaseRole,
-	{ type?: 'internship' | 'summer job' }
->;
-
-/**
- * Education role type
- *
- * @param type - The type of education (ex. "post-secondary")
- */
-export type EducationRole = Overwrite<
-	BaseRole,
-	{ type?: 'post-secondary' | 'high school' }
->;
-
-/**
- * Volunteering role type
- */
-export type VolunteeringRole = BaseRole;
-
-/**
- * Union of all role types
- */
-export type Role = EmploymentRole | EducationRole | VolunteeringRole;
-
-/**
  * Config object used to define a single role
  *
- * @typeParam T - The role type. If not provided, defaults to {@link Role}
+ * @typeParam T The role type.
  */
-export type RoleConfig<T extends Role = Role> = Overwrite<
+export type RoleConfig<T extends Role> = Overwrite<
 	T,
 	{ startDate: DateString; endDate: DateString }
 >;
@@ -84,7 +54,7 @@ export type RoleConfig<T extends Role = Role> = Overwrite<
  * Config object used to define roles
  */
 export type RolesConfig = {
-	[RoleType.Employment]: RoleConfig<EmploymentRole>[];
-	[RoleType.Education]: RoleConfig<EducationRole>[];
-	[RoleType.Volunteering]: RoleConfig<VolunteeringRole>[];
+	[RoleType.Employment]: RoleConfig<Role>[];
+	[RoleType.Education]: RoleConfig<Role>[];
+	[RoleType.Volunteering]: RoleConfig<Role>[];
 };
