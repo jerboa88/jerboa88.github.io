@@ -49,6 +49,8 @@ interface ContactFormFields {
 
 // Constants
 
+const EMAIL_REGEX =
+	/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i;
 const ALERT_DURATION_MS = 5000;
 
 const ALERT_PROPS = {
@@ -133,8 +135,7 @@ function getValidationOptions(
 		},
 		email: {
 			maxLength: 50,
-			pattern:
-				/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i,
+			pattern: EMAIL_REGEX,
 			required: true,
 			disabled: formState === FormState.Busy,
 		},

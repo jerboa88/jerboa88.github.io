@@ -3,9 +3,9 @@
 	------------------------------------------------
 */
 
-import type { Button, Link } from '../../types/components';
-import { GhostButton } from '../input/ghost-button';
-import { LinkWrapper } from './link-wrapper';
+import type { Button, Link } from '../../types/components.ts';
+import { GhostButton } from '../input/ghost-button.tsx';
+import { LinkWrapper } from './link-wrapper.tsx';
 
 interface Props extends Button, Link {}
 

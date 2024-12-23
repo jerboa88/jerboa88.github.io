@@ -17,19 +17,18 @@ export function PageCounter({ className, numOfPages }: Props) {
 		'absolute top-0 right-0 hidden print:block',
 		className,
 	);
+	const pagesArray = new Array(numOfPages);
 
 	return (
 		<div {...classNameProps}>
-			{Array(numOfPages)
-				.fill(0)
-				.map((_, index) => (
-					// biome-ignore lint/suspicious/noArrayIndexKey: This is a static list
-					<div key={index} className="h-screen break-after-page flex items-end">
-						<span>
-							Page {index + 1} of {numOfPages}
-						</span>
-					</div>
-				))}
+			{pagesArray.map((_, index) => (
+				// biome-ignore lint/suspicious/noArrayIndexKey: This is a static list
+				<div key={index} className="h-screen break-after-page flex items-end">
+					<span>
+						Page {index + 1} of {numOfPages}
+					</span>
+				</div>
+			))}
 		</div>
 	);
 }

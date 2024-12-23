@@ -96,6 +96,10 @@
 		// "skipLibCheck": true /* Skip type checking all .d.ts files. */
 	},
 	"include": [
+		"**/*.ts",
+		"**/*.tsx",
+		"**/**/*.ts",
+		"**/**/*.tsx",
 		"./src/**/*",
 		"./gatsby-node.ts",
 		"./gatsby-config.ts",

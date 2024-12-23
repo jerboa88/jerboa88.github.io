@@ -3,9 +3,9 @@
 	----------------------------------------------
 */
 
-import type { Button, Link } from '../../types/components';
-import { SolidButton } from '../input/solid-button';
-import { LinkWrapper } from './link-wrapper';
+import type { Button, Link } from '../../types/components.ts';
+import { SolidButton } from '../input/solid-button.tsx';
+import { LinkWrapper } from './link-wrapper.tsx';
 
 interface Props extends Button, Link {}
 

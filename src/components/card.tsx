@@ -142,13 +142,13 @@ export function Card({
 
 	let handleMouseMove:
 		| ((event: React.MouseEvent<HTMLDivElement>) => void)
-		| undefined = undefined;
+		| undefined;
 	let handleMouseEnter:
 		| ((event: React.MouseEvent<HTMLDivElement>) => void)
-		| undefined = undefined;
+		| undefined;
 	let handleMouseLeave:
 		| ((event: React.MouseEvent<HTMLDivElement>) => void)
-		| undefined = undefined;
+		| undefined;
 
 	// Set the mouse Z position to the min value when the mouse is pressed down
 	const handleMouseDown = () => {

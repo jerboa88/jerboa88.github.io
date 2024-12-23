@@ -15,9 +15,9 @@ import { info } from './logger.ts';
 
 // Runtime variables
 
-let gatsbyCreatePage: Actions['createPage'] | undefined = undefined;
-let gatsbyDeletePage: Actions['deletePage'] | undefined = undefined;
-let gatsbyCreateRedirect: Actions['createRedirect'] | undefined = undefined;
+let gatsbyCreatePage: Actions['createPage'] | undefined;
+let gatsbyDeletePage: Actions['deletePage'] | undefined;
+let gatsbyCreateRedirect: Actions['createRedirect'] | undefined;
 
 // Types
 

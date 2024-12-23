@@ -29,7 +29,7 @@
 		"build": "yarn gatsby build",
 		"serve": "yarn gatsby serve -H 0.0.0.0",
 		"clean": "yarn gatsby clean",
-		"typecheck": "yarn tsc --noEmit",
+		"typecheck": "yarn tsc --noEmit --skipLibCheck",
 		"lint": "yarn biome lint --write",
 		"format": "yarn biome format --write"
 	},

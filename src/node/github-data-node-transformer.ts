@@ -55,6 +55,7 @@ type TransformRepoNodeReturnValue = {
 
 const SITE_METADATA = getSiteMetadata();
 const GITHUB_CONTENT_BASE_URL: UrlString = 'https://raw.githubusercontent.com';
+const PROJECT_TYPE_REGEX = /type-([\w.]+)-(\w+)/;
 
 // Extract a project's name from its README
 function parseReadmeName(
@@ -133,7 +134,7 @@ function parseReadmeType(
 		return null;
 	}
 
-	const typeMatches = /type-([\w.]+)-(\w+)/.exec(badgeImgUrl);
+	const typeMatches = PROJECT_TYPE_REGEX.exec(badgeImgUrl);
 
 	if (!typeMatches || typeMatches.length < 3) {
 		return null;

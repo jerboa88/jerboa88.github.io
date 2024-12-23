@@ -29,7 +29,7 @@ const BG_GRADIENT_PROPS = {
 };
 
 const ParticlesBackground = lazy(() =>
-	import('./particles-background').then((module) => ({
+	import('./particles-background.tsx').then((module) => ({
 		default: module.ParticlesBackground,
 	})),
 );
