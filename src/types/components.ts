@@ -94,13 +94,10 @@ export interface Button extends PropsWithClassName, PropsWithLayoutAnimations {
 /**
  * A function that renders a button element
  */
-export type ButtonElementRenderFn = ({
-	className,
-	tooltipPosition,
-}: {
+export type ButtonElementRenderFn = React.FunctionComponent<{
 	className: string;
 	tooltipPosition: TooltipPosition;
-}) => React.JSX.Element;
+}>;
 
 /**
  * Options to pass to {@link https://github.com/react-hook-form/react-hook-form | react-hook-form} for performing input validation
@@ -125,9 +122,9 @@ export interface InputOptions {
 /**
  * A function that renders an input element
  */
-export type InputElementRenderFn = (
-	props: UseFormRegisterReturn<string>,
-) => React.JSX.Element;
+export type InputElementRenderFn = React.FunctionComponent<{
+	props: UseFormRegisterReturn<string>;
+}>;
 
 /**
  * A reusable interface for inputs
