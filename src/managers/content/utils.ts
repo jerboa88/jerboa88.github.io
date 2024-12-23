@@ -41,7 +41,7 @@ export function getPageEntriesLimit<T>(
  */
 export function filterEntries<T>(
 	pagePath: string,
-	allEntries: T[],
+	allEntries: readonly T[],
 	pageContentEntryConfig: PageContentEntryConfig<T>,
 	getEntryId: (entry: T) => string,
 	doPinEntry?: FilterFn<T>,

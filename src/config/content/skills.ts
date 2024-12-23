@@ -5,7 +5,7 @@
 
 import { SkillType, type SkillsConfig } from '../../types/content/skills.ts';
 
-export const skillsConfig: SkillsConfig = {
+export const SKILLS_CONFIG: SkillsConfig = {
 	[SkillType.Languages]: [
 		'Bash',
 		'C/C++',
@@ -70,4 +70,4 @@ export const skillsConfig: SkillsConfig = {
 		'OOP',
 		'Unit Testing',
 	],
-};
+} as const;

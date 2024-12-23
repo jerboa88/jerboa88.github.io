@@ -4,13 +4,13 @@
 */
 
 import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
-import { colorMappingsConfig } from '../config/color-mappings.ts';
+import { COLOR_MAPPINGS_CONFIG } from '../config/color-mappings.ts';
 import { PAGES_CONTENT_CONFIG } from '../config/content/pages.ts';
-import { externalServicesConfig } from '../config/external-services.ts';
-import { pagesMetadataConfig } from '../config/metadata/pages.ts';
-import { siteMetadataConfig } from '../config/metadata/site.ts';
-import { socialImagesGenerationConfig } from '../config/social-images-generation.ts';
-import { themesConfig } from '../config/themes.ts';
+import { EXTERNAL_SERVICES_CONFIG } from '../config/external-services.ts';
+import { PAGES_METADATA_CONFIG } from '../config/metadata/pages.ts';
+import { SITE_METADATA_CONFIG } from '../config/metadata/site.ts';
+import { SOCIAL_IMAGES_GENERATION_CONFIG } from '../config/social-images-generation.ts';
+import { THEMES_CONFIG } from '../config/themes.ts';
 import { warn } from '../node/logger.ts';
 import type { PageContentConfig } from '../types/content/content.ts';
 import type {
@@ -69,7 +69,7 @@ type SiteMetadata = {
 
 // Returns metadata for the site
 export function getSiteMetadata(): SiteMetadata {
-	const config = siteMetadataConfig;
+	const config = SITE_METADATA_CONFIG;
 	const authorFullName: Capitalize<string> =
 		`${config.author.name.first} ${config.author.name.last}` as typeof config.author.name.first;
 
@@ -115,7 +115,7 @@ export function getSiteMetadata(): SiteMetadata {
 // Returns the metadata for a given page
 export function getPageMetadata(pagePath: string): PageMetadata {
 	const config =
-		pagesMetadataConfig[pagePath as keyof typeof pagesMetadataConfig];
+		PAGES_METADATA_CONFIG[pagePath as keyof typeof PAGES_METADATA_CONFIG];
 
 	if (!config) {
 		warn(`Page metadata for ${pagePath} not found`);
@@ -138,14 +138,14 @@ export function getPageContentConfig(pagePath: string): PageContentConfig {
 
 // Returns the social image generation config for a given type
 export function getSocialImageGenerationConfigDefaults(): SocialImagesGenerationConfig['defaults'] {
-	return socialImagesGenerationConfig.defaults;
+	return SOCIAL_IMAGES_GENERATION_CONFIG.defaults;
 }
 
 // Returns the social image generation config for a given type
 export function getSocialImageGenerationConfigForType(
 	type: SocialImageType,
 ): Partial<JobOptions> {
-	const config = socialImagesGenerationConfig.types[type];
+	const config = SOCIAL_IMAGES_GENERATION_CONFIG.types[type];
 
 	if (!config) {
 		warn(`Social image generation config for '${type}' not found`);
@@ -155,12 +155,12 @@ export function getSocialImageGenerationConfigForType(
 }
 
 export function getExternalServices() {
-	return externalServicesConfig;
+	return EXTERNAL_SERVICES_CONFIG;
 }
 
 // Returns a daisyUI theme given its name
 export function getTheme(themeName: keyof ThemesConfig): Theme {
-	const config = themesConfig[themeName];
+	const config = THEMES_CONFIG[themeName];
 
 	if (!config) {
 		throw new Error(`Theme '${themeName}' not found`);
@@ -173,7 +173,7 @@ export function getTheme(themeName: keyof ThemesConfig): Theme {
 export function getProjectTypeColor(
 	projectType: string | undefined | null,
 ): BgColorString | '' {
-	const colorMap = colorMappingsConfig.projectType;
+	const colorMap = COLOR_MAPPINGS_CONFIG.projectType;
 	const key = projectType?.toLowerCase();
 
 	if (isDefined(key)) {
@@ -184,14 +184,14 @@ export function getProjectTypeColor(
 		warn(`Color for project type '${projectType}' not found`);
 	}
 
-	return colorMappingsConfig.default;
+	return COLOR_MAPPINGS_CONFIG.default;
 }
 
 // Returns the color for a given role type
 export function getRoleTypeColor(
 	roleType: string | undefined | null,
 ): BgColorString | '' {
-	const colorMap = colorMappingsConfig.roleType;
+	const colorMap = COLOR_MAPPINGS_CONFIG.roleType;
 	const key = roleType?.toLowerCase();
 
 	if (isDefined(key)) {
@@ -202,5 +202,5 @@ export function getRoleTypeColor(
 		warn(`Color for role type '${roleType}' not found`);
 	}
 
-	return colorMappingsConfig.default;
+	return COLOR_MAPPINGS_CONFIG.default;
 }

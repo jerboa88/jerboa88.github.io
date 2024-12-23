@@ -3,7 +3,7 @@
 	----------------------------------------------------------------------
 */
 
-import { rolesConfig } from '../../config/content/roles.ts';
+import { ROLES_CONFIG } from '../../config/content/roles.ts';
 import {
 	type EducationRole,
 	type EmploymentRole,
@@ -79,7 +79,7 @@ export function getRolesForPage(pagePath: string) {
 	for (const roleType of roleTypes) {
 		roleSubsets[roleType] = filterEntries(
 			pagePath,
-			rolesConfig[roleType].map(buildRole),
+			ROLES_CONFIG[roleType].map(buildRole),
 			pageRolesConfig[roleType],
 			getRoleId,
 		);

@@ -3,7 +3,7 @@
 	-----------------------------------------------------------------------
 */
 
-import { skillsConfig } from '../../config/content/skills.ts';
+import { SKILLS_CONFIG } from '../../config/content/skills.ts';
 import {
 	type Skill,
 	SkillType,
@@ -33,7 +33,7 @@ export function getSkillsForPage(pagePath: string) {
 	for (const skillType of skillTypes) {
 		skillSubsets[skillType] = filterEntries<Skill>(
 			pagePath,
-			skillsConfig[skillType],
+			SKILLS_CONFIG[skillType],
 			pageSkillsConfig[skillType],
 			(skill: Skill) => skill,
 		);

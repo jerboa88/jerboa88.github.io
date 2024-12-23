@@ -3,9 +3,9 @@
 	---------------------------------------------------
 */
 
-import type { ColorMappingsConfig } from '../types/other';
+import type { ColorMappingsConfig } from '../types/other.ts';
 
-export const colorMappingsConfig: ColorMappingsConfig = {
+export const COLOR_MAPPINGS_CONFIG: ColorMappingsConfig = {
 	default: 'bg-rose-600',
 	projectType: {
 		'android app': 'bg-lime-600',
@@ -26,4 +26,4 @@ export const colorMappingsConfig: ColorMappingsConfig = {
 		internship: 'bg-rose-600',
 		'summer job': 'bg-rose-600',
 	},
-};
+} as const;

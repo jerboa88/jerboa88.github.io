@@ -11,7 +11,7 @@ import {
 	RESUME_PATH,
 } from '../constants.ts';
 
-export const pagesMetadataConfig: PagesMetadataConfig = {
+export const PAGES_METADATA_CONFIG: PagesMetadataConfig = {
 	[PRIVACY_POLICY_PATH]: {
 		title: 'Privacy Policy',
 		shortTitle: 'Privacy',
@@ -35,4 +35,4 @@ export const pagesMetadataConfig: PagesMetadataConfig = {
 		shortTitle: '404',
 		description: "Oof, there's nothing here.",
 	},
-};
+} as const;

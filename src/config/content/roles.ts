@@ -5,7 +5,7 @@
 
 import { RoleType, type RolesConfig } from '../../types/content/roles.ts';
 
-export const rolesConfig: RolesConfig = {
+export const ROLES_CONFIG: RolesConfig = {
 	[RoleType.Employment]: [
 		{
 			type: 'internship',
@@ -136,4 +136,4 @@ export const rolesConfig: RolesConfig = {
 			],
 		},
 	],
-};
+} as const;
