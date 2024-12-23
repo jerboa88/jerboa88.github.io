@@ -6,7 +6,6 @@
 import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import { COLOR_MAPPINGS_CONFIG } from '../config/color-mappings.ts';
 import { PAGES_CONTENT_CONFIG } from '../config/content/pages.ts';
-import { EXTERNAL_SERVICES_CONFIG } from '../config/external-services.ts';
 import { PAGES_METADATA_CONFIG } from '../config/metadata/pages.ts';
 import { SITE_METADATA_CONFIG } from '../config/metadata/site.ts';
 import { SOCIAL_IMAGES_GENERATION_CONFIG } from '../config/social-images-generation.ts';
@@ -152,10 +151,6 @@ export function getSocialImageGenerationConfigForType(
 	}
 
 	return config;
-}
-
-export function getExternalServices() {
-	return EXTERNAL_SERVICES_CONFIG;
 }
 
 // Returns a daisyUI theme given its name

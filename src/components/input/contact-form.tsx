@@ -8,7 +8,10 @@ import { faCircleNotch, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { LayoutGroup, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { type SubmitHandler, useForm, useFormState } from 'react-hook-form';
-import { getExternalServices } from '../../managers/config.ts';
+import {
+	BOTPOISON_PUBLIC_KEY,
+	CONTACT_FORM_POST_URL,
+} from '../../config/constants.ts';
 import { error, info } from '../../node/logger.ts';
 import {
 	AlertType,
@@ -115,10 +118,8 @@ const INPUT_PROPS = {
 	},
 } as const;
 
-const EXTERNAL_SERVICES = getExternalServices();
-
 const botpoison = new Botpoison({
-	publicKey: EXTERNAL_SERVICES.botpoisonPublicKey,
+	publicKey: BOTPOISON_PUBLIC_KEY,
 });
 
 function getValidationOptions(
@@ -207,7 +208,7 @@ export function ContactForm({ className }: PropsWithClassName) {
 
 		info(`Submitting form with data: ${requestBody}`);
 
-		fetch(EXTERNAL_SERVICES.contactFormPostUrl, {
+		fetch(CONTACT_FORM_POST_URL, {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json',

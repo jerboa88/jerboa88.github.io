@@ -13,14 +13,6 @@ import type {
 } from './strings.ts';
 
 /**
- * Config object used to define external services
- */
-export interface ExternalServicesConfig {
-	botpoisonPublicKey: `pk_${string}`;
-	contactFormPostUrl: UrlString;
-}
-
-/**
  * Config object used to define site metadata
  */
 export interface SiteMetadataConfig {

@@ -5,6 +5,7 @@
 
 import type {
 	AbsolutePathString,
+	UrlString,
 	WorkingPathString,
 } from '../types/strings.ts';
 
@@ -43,6 +44,11 @@ export const JSON_LD_AUTHOR_PATH: AbsolutePathString = '/author';
 
 // ID used to group together elements for the title animation
 export const TITLE_LAYOUT_ID = 'title-layout' as const;
+
+export const BOTPOISON_PUBLIC_KEY =
+	'pk_eca5c4ea-ccb4-46da-beb0-15c581b6980e' as const;
+export const CONTACT_FORM_POST_URL: UrlString =
+	'https://submit-form.com/re6Xbd2gs' as const;
 
 // Options for the useInView hook. Margin is used to offset the height of the navbar
 export const USE_IN_VIEW_OPTIONS = {
