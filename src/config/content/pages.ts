@@ -11,7 +11,7 @@ import { SkillType } from '../../types/content/skills.ts';
 import { RESUME_PATH } from '../constants.ts';
 import { INDEX_PATH } from '../constants.ts';
 
-const roleSortFn = (a: Role, b: Role) =>
+const startDateSortFn = (a: Role, b: Role) =>
 	new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
 const stargazerCountSortFn = (a: Project, b: Project) =>
 	(b.stargazerCount ?? 0) - (a.stargazerCount ?? 0);
@@ -24,15 +24,15 @@ export const PAGES_CONTENT_CONFIG: PagesContentConfig = {
 			[RoleType.Employment]: {
 				limit: 2,
 				// TODO: Allow this to be configured on parent object
-				sortFn: roleSortFn,
+				sortFn: startDateSortFn,
 			},
 			[RoleType.Education]: {
 				limit: 0,
-				sortFn: roleSortFn,
+				sortFn: startDateSortFn,
 			},
 			[RoleType.Volunteering]: {
 				limit: 0,
-				sortFn: roleSortFn,
+				sortFn: startDateSortFn,
 			},
 		},
 		[ContentType.Skills]: {
@@ -70,15 +70,15 @@ export const PAGES_CONTENT_CONFIG: PagesContentConfig = {
 			employment: {
 				limit: 2,
 				// TODO: Allow this to be configured on parent object
-				sortFn: roleSortFn,
+				sortFn: startDateSortFn,
 			},
 			education: {
 				limit: 1,
-				sortFn: roleSortFn,
+				sortFn: startDateSortFn,
 			},
 			volunteering: {
 				limit: 0,
-				sortFn: roleSortFn,
+				sortFn: startDateSortFn,
 			},
 		},
 		[ContentType.Skills]: {
