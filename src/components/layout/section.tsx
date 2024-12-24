@@ -44,7 +44,9 @@ export const Section = forwardRef(
 				responsive && 'pt-10', // Add padding to account for floating page header
 				sectionHeaderClassName,
 			),
-			headingClassName: sectionHeadingClassName,
+			...(sectionHeadingClassName
+				? { headingClassName: sectionHeadingClassName }
+				: {}),
 		};
 		const dividerClassNameProps = getClassNameProps('pb-8', dividerClassName);
 

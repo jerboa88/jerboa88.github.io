@@ -28,6 +28,7 @@ export function SectionHeader({
 		'w-full flex flex-row justify-between items-baseline',
 		className,
 	);
+	const headingClassNameProps = getClassNameProps(headingClassName);
 	const buttonElement = renderButton
 		? renderButton({
 				className: 'self-baseline',
@@ -37,7 +38,7 @@ export function SectionHeader({
 
 	return (
 		<div {...classNameProps}>
-			<SectionHeading className={headingClassName}>{title}</SectionHeading>
+			<SectionHeading {...headingClassNameProps}>{title}</SectionHeading>
 			{buttonElement}
 		</div>
 	);

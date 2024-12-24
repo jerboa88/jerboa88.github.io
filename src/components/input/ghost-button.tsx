@@ -17,6 +17,11 @@ export function GhostButton({
 		!disabled && 'interactive-text', // Enable hover effect only when button is not disabled
 		className,
 	);
+	const disabledProp = disabled ? { disabled } : {};
 
-	return <BaseButton {...{ disabled, ...classNameProps, ...remainingProps }} />;
+	return (
+		<BaseButton
+			{...{ ...disabledProp, ...classNameProps, ...remainingProps }}
+		/>
+	);
 }

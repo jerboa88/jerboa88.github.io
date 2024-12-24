@@ -41,13 +41,25 @@ export function BaseButton({
 		responsive && icon && 'max-lg:hidden', // Responsive styles
 		textClassName,
 	);
+	const tooltipClassNameProps = getClassNameProps(tooltipClassName);
+	const layoutProp = layout ? { layout } : {};
+	const layoutRootProp = layoutRoot ? { layoutRoot } : {};
+	const tooltipPositionProp = tooltipPosition
+		? { position: tooltipPosition }
+		: {};
 
-	const computedButtonLabel = tooltipText ?? text;
+	const computedButtonLabel = tooltipText ?? String(text);
 
 	const buttonElement = (
 		<motion.button
 			aria-label={computedButtonLabel}
-			{...{ type, disabled, layout, layoutRoot, ...buttonClassNameProps }}
+			{...{
+				type,
+				disabled,
+				...layoutProp,
+				...layoutRootProp,
+				...buttonClassNameProps,
+			}}
 		>
 			<AnimatePresence mode="popLayout" initial={false}>
 				{icon && (
@@ -76,8 +88,8 @@ export function BaseButton({
 	return !disabled && computedButtonLabel ? (
 		<Tooltip
 			text={computedButtonLabel}
-			position={tooltipPosition}
-			className={tooltipClassName}
+			{...tooltipPositionProp}
+			{...tooltipClassNameProps}
 		>
 			{buttonElement}
 		</Tooltip>

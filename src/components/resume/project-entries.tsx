@@ -15,6 +15,7 @@ export function ResumeProjectEntries({ projects }: Props) {
 	return (
 		<div className="flex flex-col gap-4">
 			{projects.map((project) => {
+				const titleUrlProp = project.url ? { titleUrl: project.url } : {};
 				const expositionSentence = project.exposition
 					? toSentence(project.exposition)
 					: null;
@@ -24,11 +25,11 @@ export function ResumeProjectEntries({ projects }: Props) {
 					<ResumeDetailEntry
 						key={project.slug}
 						title={project.name}
-						titleUrl={project.url}
 						titleTooltip="View project on GitHub"
 						tags={project.languages}
 						bullets={[expositionSentence ?? descriptionSentence]}
 						endDate={new Date(project.createdAt)}
+						{...titleUrlProp}
 					/>
 				);
 			})}

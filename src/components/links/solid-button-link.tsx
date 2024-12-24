@@ -15,8 +15,11 @@ export function SolidButtonLink({
 	rel,
 	...remainingProps
 }: Props) {
+	const isInternalProp = isInternal ? { isInternal } : {};
+	const relProp = rel ? { rel } : {};
+
 	return (
-		<LinkWrapper to={to} isInternal={isInternal} rel={rel}>
+		<LinkWrapper to={to} {...isInternalProp} {...relProp}>
 			<SolidButton {...remainingProps} />
 		</LinkWrapper>
 	);

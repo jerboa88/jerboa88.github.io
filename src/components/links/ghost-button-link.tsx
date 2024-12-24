@@ -15,8 +15,11 @@ export function GhostButtonLink({
 	rel,
 	...remainingProps
 }: Props) {
+	const isInternalProp = isInternal ? { isInternal } : {};
+	const relProp = rel ? { rel } : {};
+
 	return (
-		<LinkWrapper to={to} isInternal={isInternal} rel={rel} className="contents">
+		<LinkWrapper to={to} className="contents" {...isInternalProp} {...relProp}>
 			<GhostButton {...remainingProps} />
 		</LinkWrapper>
 	);

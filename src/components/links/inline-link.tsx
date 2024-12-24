@@ -17,9 +17,19 @@ export function InlineLink({ className, text, to, isInternal, rel }: Props) {
 		'pb-0.5 font-semibold transition-colors border-b-[1px] border-primary hover:border-secondary',
 		className,
 	);
+	const isInternalProp = isInternal ? { isInternal } : {};
+	const relProp = rel ? { rel } : {};
 
 	return (
-		<LinkWrapper {...{ text, to, isInternal, rel, ...classNameProps }}>
+		<LinkWrapper
+			{...{
+				text,
+				to,
+				...isInternalProp,
+				...relProp,
+				...classNameProps,
+			}}
+		>
 			{text}
 		</LinkWrapper>
 	);

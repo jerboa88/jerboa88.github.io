@@ -39,6 +39,9 @@ export function Header({ expandTitle, sections }: Props) {
 		expandTitle ? 'opacity-0' : 'opacity-100', // Hide divider when title is expanded
 	);
 	const layoutIdProp: { layoutId?: string } = {};
+	const tabsHideIndicatorProp = expandTitle
+		? { hideIndicator: expandTitle }
+		: {};
 
 	// If expandTitle is not specified, don't animate the title
 	if (isDefined(expandTitle)) {
@@ -65,7 +68,7 @@ export function Header({ expandTitle, sections }: Props) {
 							</Heading>
 						</motion.a>
 					)}
-					<Tabs sections={sections} hideIndicator={expandTitle} />
+					<Tabs sections={sections} {...tabsHideIndicatorProp} />
 				</div>
 				<Divider {...dividerClassNameProps} />
 			</div>

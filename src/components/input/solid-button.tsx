@@ -21,15 +21,21 @@ export function SolidButton({
 	...remainingProps
 }: SolidButton) {
 	const classNameProps = getClassNameProps('px-4 py-3 sm:px-8', className);
+	const cardOuterClassNameProp = cardClassName
+		? { outerClassName: cardClassName }
+		: {};
+	const disabledProp = disabled ? { disabled } : {};
 
 	return (
 		<Card
-			outerClassName={cardClassName}
 			middleClassName="rounded-lg"
 			innerClassName="rounded-lg"
-			disabled={disabled}
+			{...cardOuterClassNameProp}
+			{...disabledProp}
 		>
-			<BaseButton {...{ disabled, ...classNameProps, ...remainingProps }} />
+			<BaseButton
+				{...{ ...disabledProp, ...classNameProps, ...remainingProps }}
+			/>
 		</Card>
 	);
 }

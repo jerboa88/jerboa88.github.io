@@ -126,7 +126,7 @@ const botpoison = new Botpoison({
 
 function getValidationOptions(
 	formState: FormState,
-): Partial<Record<keyof ContactFormFields, InputValidationOptions>> {
+): Record<keyof Omit<ContactFormFields, '_gotcha'>, InputValidationOptions> {
 	return {
 		name: {
 			maxLength: 50,

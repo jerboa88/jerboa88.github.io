@@ -45,6 +45,8 @@ export function BaseInput({
 		'justify-start label label-text',
 		labelClassName,
 	);
+	const layoutProp = layout ? { layout } : {};
+	const layoutRootProp = layoutRoot ? { layoutRoot } : {};
 	const errorMessages = {
 		required: 'This field is required',
 		minLength: `This field must be at least ${validationOptions?.minLength} characters long`,
@@ -59,7 +61,9 @@ export function BaseInput({
 	const inputElement = renderInput(register(name, validationOptions));
 
 	return (
-		<motion.label {...{ layout, layoutRoot, ...labelClassNameProps }}>
+		<motion.label
+			{...{ ...layoutProp, ...layoutRootProp, ...labelClassNameProps }}
+		>
 			<span {...spanClassNameProps}>{label}</span>
 			<div className="backdrop-blur bg-glass">{inputElement}</div>
 			<GhostAlert
