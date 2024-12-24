@@ -6,6 +6,8 @@ import type {
 	DefaultOptions,
 	JobOptions,
 } from 'gatsby-plugin-component-to-image/lib/types';
+import type { ProjectCategory } from './content/projects.ts';
+import type { RoleCategory } from './content/roles.ts';
 import type {
 	AbsolutePathString,
 	BgColorString,
@@ -142,19 +144,12 @@ export interface ThemesConfig {
 }
 
 /**
- * Color mappings for project and role types
- */
-interface ColorMappings {
-	[type: string]: BgColorString;
-}
-
-/**
  * Config object used to define color mappings
  */
 export interface ColorMappingsConfig {
 	default: BgColorString;
-	projectType: ColorMappings;
-	roleType: ColorMappings;
+	projectCategory: Record<ProjectCategory, BgColorString>;
+	roleCategory: Record<RoleCategory, BgColorString>;
 }
 
 /**

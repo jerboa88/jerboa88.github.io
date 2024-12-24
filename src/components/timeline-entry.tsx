@@ -5,7 +5,7 @@
 
 import { faBuilding, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getRoleTypeColor } from '../managers/config.ts';
+import { getRoleCategoryColor } from '../managers/config.ts';
 import type { Role } from '../types/content/roles.ts';
 import { getClassNameProps } from '../utils/other.ts';
 import { Card } from './card.tsx';
@@ -18,7 +18,7 @@ interface Props {
 }
 
 export function TimelineEntry({ role }: Props) {
-	const roleTypeColor = getRoleTypeColor(role.category);
+	const roleTypeColor = getRoleCategoryColor(role.category);
 	const pillClassNameProps = getClassNameProps('capitalize', roleTypeColor);
 
 	return (

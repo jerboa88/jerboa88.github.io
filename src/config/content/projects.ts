@@ -4,12 +4,12 @@
 */
 
 import {
-	ProjectCategory,
+	ProjectType,
 	type ProjectsConfig,
 } from '../../types/content/projects.ts';
 
 export const PROJECTS_CONFIG: ProjectsConfig = {
-	[ProjectCategory.Other]: [
+	[ProjectType.Other]: [
 		{
 			slug: 'pathfinder-v2',
 			name: 'Pathfinder v2',

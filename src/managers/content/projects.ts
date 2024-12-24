@@ -17,13 +17,13 @@ import {
 	type OtherProject,
 	type OtherProjectConfig,
 	type Project,
-	ProjectCategory,
+	ProjectType,
 } from '../../types/content/projects.ts';
 import { SkillType } from '../../types/content/skills.ts';
 import { findIndexOfSubstringInArray } from '../../utils/other.ts';
 import { assertIsDefined } from '../../utils/other.ts';
 import { prettify } from '../../utils/other.ts';
-import { getPageContentConfig, getProjectTypeColor } from '../config.ts';
+import { getPageContentConfig, getProjectCategoryColor } from '../config.ts';
 import { getSiteMetadata } from '../config.ts';
 import { filterEntries } from './utils.ts';
 
@@ -58,7 +58,7 @@ function buildGithubRepoProject(
 ): GithubRepoProject {
 	return {
 		...githubRepoNode,
-		category: ProjectCategory.GithubRepo,
+		type: ProjectType.GithubRepo,
 	};
 }
 
@@ -71,12 +71,12 @@ function buildGithubRepoProject(
 function buildOtherProject(projectConfig: OtherProjectConfig): OtherProject {
 	return {
 		...projectConfig,
-		category: ProjectCategory.Other,
+		type: ProjectType.Other,
 		createdAt: new Date(projectConfig.createdAt),
 		updatedAt: new Date(projectConfig.updatedAt),
-		type: {
-			color: getProjectTypeColor(projectConfig.type),
-			name: projectConfig.type,
+		category: {
+			color: getProjectCategoryColor(projectConfig.category),
+			name: projectConfig.category,
 		},
 	};
 }
@@ -130,7 +130,7 @@ function fetchOtherProjects(): OtherProject[] {
 	}
 
 	cachedOtherProjects =
-		PROJECTS_CONFIG[ProjectCategory.Other].map(buildOtherProject);
+		PROJECTS_CONFIG[ProjectType.Other].map(buildOtherProject);
 
 	return cachedOtherProjects;
 }
@@ -142,7 +142,7 @@ function fetchOtherProjects(): OtherProject[] {
  * @returns True if the project should be hidden, false otherwise.
  */
 function doHideProject(project: Project) {
-	return project.type.name === 'Markdown' || project?.isFork;
+	return project.category.name === 'Markdown' || project?.isFork;
 }
 
 /**

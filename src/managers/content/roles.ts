@@ -34,8 +34,9 @@ type RoleSubsets = {
  * @param roleConfig The role config object.
  * @returns The role object.
  */
-function buildRole<T extends Role>(roleConfig: RoleConfig<T>): T {
+function buildRole(roleConfig: RoleConfig): Role {
 	return {
+		...(roleConfig.category && { category: roleConfig.category }),
 		title: roleConfig.title,
 		company: roleConfig.company,
 		companyUrl: roleConfig.companyUrl,
@@ -43,7 +44,7 @@ function buildRole<T extends Role>(roleConfig: RoleConfig<T>): T {
 		endDate: new Date(roleConfig.endDate),
 		location: roleConfig.location,
 		bullets: roleConfig.bullets,
-	} as T;
+	};
 }
 
 /**
@@ -52,7 +53,7 @@ function buildRole<T extends Role>(roleConfig: RoleConfig<T>): T {
  * @param role The role.
  * @returns A string representing the role ID.
  */
-function getRoleId<T extends Role>(role: T) {
+function getRoleId(role: Role) {
 	return `${role.startDate.toISOString().slice(0, 10)}`;
 }
 

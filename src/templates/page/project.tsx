@@ -15,7 +15,7 @@ import { Article } from '../../components/text/article.tsx';
 import { JSON_LD_AUTHOR_PATH, PROJECTS_PATH } from '../../config/constants.ts';
 import { getSiteMetadata } from '../../managers/config.ts';
 import type { ButtonElementRenderFn } from '../../types/components.ts';
-import { ProjectCategory } from '../../types/content/projects.ts';
+import { ProjectType } from '../../types/content/projects.ts';
 import type { SocialImagesMetadataProp } from '../../types/other.ts';
 import type { ProjectPageContext } from '../../types/page-context.ts';
 import { isDefined, removeUndefinedProps } from '../../utils/other.ts';
@@ -44,7 +44,7 @@ function getSectionButtonRenderFn(
 	let buttonText = 'View project page';
 	let buttonIcon = faGlobe;
 
-	if (project.category === ProjectCategory.GithubRepo) {
+	if (project.type === ProjectType.GithubRepo) {
 		buttonText = 'View source code on GitHub';
 		buttonIcon = faGithub;
 	}
@@ -106,7 +106,7 @@ export const Head = ({
 
 	let githubRepoProjectProps = {};
 
-	if (project.category === ProjectCategory.GithubRepo) {
+	if (project.type === ProjectType.GithubRepo) {
 		githubRepoProjectProps = removeUndefinedProps({
 			image: project.openGraphImageUrl,
 			// TODO: Add applicationCategory and operatingSystem properties

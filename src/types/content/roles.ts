@@ -17,7 +17,14 @@ export enum RoleType {
 	Employment = 'employment',
 	Education = 'education',
 	Volunteering = 'volunteering',
-} /**
+}
+
+/**
+ * Possible role categories
+ */
+export type RoleCategory = 'seasonal' | 'internship';
+
+/**
  * A base role with common fields
  *
  * @param category A string describing the category of the role (ex. 'internship', 'seasonal', etc.).
@@ -30,7 +37,7 @@ export enum RoleType {
  * @param bullets A list of bullet points describing the role.
  */
 export type Role = {
-	category?: 'seasonal' | 'internship' | 'secondary' | 'post-secondary';
+	category?: RoleCategory;
 	title: Capitalize<string>;
 	company: Capitalize<string>;
 	companyUrl: UrlString;
@@ -45,8 +52,8 @@ export type Role = {
  *
  * @typeParam T The role type.
  */
-export type RoleConfig<T extends Role> = Overwrite<
-	T,
+export type RoleConfig = Overwrite<
+	Role,
 	{ startDate: DateString; endDate: DateString }
 >;
 
@@ -54,7 +61,7 @@ export type RoleConfig<T extends Role> = Overwrite<
  * Config object used to define roles
  */
 export type RolesConfig = {
-	[RoleType.Employment]: RoleConfig<Role>[];
-	[RoleType.Education]: RoleConfig<Role>[];
-	[RoleType.Volunteering]: RoleConfig<Role>[];
+	[RoleType.Employment]: RoleConfig[];
+	[RoleType.Education]: RoleConfig[];
+	[RoleType.Volunteering]: RoleConfig[];
 };

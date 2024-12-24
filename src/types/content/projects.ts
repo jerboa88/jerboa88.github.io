@@ -5,16 +5,33 @@
 import type { DateString, SentenceString, UrlString } from '../strings.ts';
 import type { Overwrite } from '../utils.ts';
 
-// TODO: Rename to ProjectType?
 /**
- * An enumeration of possible project categories
+ * An enumeration of possible project types
  *
  * @enum {number}
  */
-export enum ProjectCategory {
+export enum ProjectType {
 	Other = 0,
 	GithubRepo = 1,
 }
+
+/**
+ * Possible project categories
+ */
+export type ProjectCategory =
+	| 'android app'
+	| 'cli app'
+	| 'docker container'
+	| 'extension'
+	| 'gatsby plugin'
+	| 'gimp plugin'
+	| 'js library'
+	| 'markdown'
+	| 'node.js module'
+	| 'other'
+	| 'web app'
+	| 'web interface'
+	| 'website';
 
 /**
  * A base project with common fields
@@ -25,8 +42,8 @@ export enum ProjectCategory {
  * @param languages - A list of programming languages used in the project
  * @param name - The name of the project
  * @param slug - The slug of the project
- * @param type.color - The color of the project type
- * @param type.name - The name of the project type (ex. "Website")
+ * @param category.color - The color of the project category
+ * @param category.name - The name of the project category (ex. 'Website', 'CLI App', etc.)
  * @param updatedAt - The date the project was last updated
  */
 export type BaseProject = {
@@ -36,7 +53,7 @@ export type BaseProject = {
 	languages: string[];
 	name: string;
 	slug: string;
-	type: {
+	category: {
 		color: string;
 		name: string | null;
 	};
@@ -53,7 +70,7 @@ export type OtherProject = Overwrite<
 		exposition: SentenceString;
 	}
 > & {
-	category: ProjectCategory.Other;
+	type: ProjectType.Other;
 	stargazerCount?: number;
 	url?: UrlString;
 };
@@ -62,7 +79,7 @@ export type OtherProject = Overwrite<
  * A GitHub repo project
  */
 export type GithubRepoProject = Queries.GithubRepo & {
-	category: ProjectCategory.GithubRepo;
+	type: ProjectType.GithubRepo;
 };
 
 /**
@@ -74,12 +91,12 @@ export type Project = GithubRepoProject | OtherProject;
  * Config for a manually added project
  */
 export type OtherProjectConfig = Overwrite<
-	Omit<OtherProject, 'category'>,
+	Omit<OtherProject, 'type'>,
 	{
 		createdAt: DateString;
 		description: SentenceString;
 		exposition: SentenceString;
-		type: string;
+		category: string;
 		updatedAt: DateString;
 	}
 >;
@@ -88,5 +105,5 @@ export type OtherProjectConfig = Overwrite<
  * Config for manually added projects
  */
 export type ProjectsConfig = {
-	[ProjectCategory.Other]: OtherProjectConfig[];
+	[ProjectType.Other]: OtherProjectConfig[];
 };

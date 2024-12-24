@@ -164,37 +164,37 @@ export function getTheme(themeName: keyof ThemesConfig): Theme {
 	return config;
 }
 
-// Returns the color for a given project type
-export function getProjectTypeColor(
-	projectType: string | undefined | null,
+// Returns the color for a given project category
+export function getProjectCategoryColor(
+	projectCategory: string | undefined | null,
 ): BgColorString | '' {
-	const colorMap = COLOR_MAPPINGS_CONFIG.projectType;
-	const key = projectType?.toLowerCase();
+	const colorMap = COLOR_MAPPINGS_CONFIG.projectCategory;
+	const key = projectCategory?.toLowerCase();
 
 	if (isDefined(key)) {
 		if (key in colorMap) {
 			return colorMap[key as keyof typeof colorMap];
 		}
 
-		warn(`Color for project type '${projectType}' not found`);
+		warn(`Color for project category '${projectCategory}' not found`);
 	}
 
 	return COLOR_MAPPINGS_CONFIG.default;
 }
 
-// Returns the color for a given role type
-export function getRoleTypeColor(
-	roleType: string | undefined | null,
+// Returns the color for a given role category
+export function getRoleCategoryColor(
+	roleCategory: string | undefined | null,
 ): BgColorString | '' {
-	const colorMap = COLOR_MAPPINGS_CONFIG.roleType;
-	const key = roleType?.toLowerCase();
+	const colorMap = COLOR_MAPPINGS_CONFIG.roleCategory;
+	const key = roleCategory?.toLowerCase();
 
 	if (isDefined(key)) {
 		if (key in colorMap) {
 			return colorMap[key as keyof typeof colorMap];
 		}
 
-		warn(`Color for role type '${roleType}' not found`);
+		warn(`Color for role category '${roleCategory}' not found`);
 	}
 
 	return COLOR_MAPPINGS_CONFIG.default;
