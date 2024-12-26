@@ -82,3 +82,17 @@ export function removeProtocol(url: UrlString | URL) {
 
 	return urlString.replace(/.*?:\/\//g, '');
 }
+
+/**
+ * Throw an error if the string is not a URL string. Otherwise, return the string.
+ *
+ * @param str A string that may or may not be a URL string.
+ * @returns The string if it is a URL string.
+ */
+export function assertIsUrlString(str: string): UrlString {
+	if (!str.startsWith('https://')) {
+		throw new Error(`URL '${str}' must start with 'https://'`);
+	}
+
+	return str as UrlString;
+}
