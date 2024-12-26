@@ -24,7 +24,7 @@ function UnmemoizedParticlesBackground() {
 	const [init, setInit] = useState(false);
 
 	const classNameProps = getClassNameProps(
-		'fixed top-0 left-0 size-full mix-blend-overlay transition-opacity ease-out duration-[2s]',
+		'fixed h-lvh w-lvh mix-blend-overlay transition-opacity ease-out duration-[2s]',
 		init ? 'opacity-100' : 'opacity-0', // Hide until loaded
 	);
 	const tsParticlesConfig: RecursivePartial<IOptions> = {
