@@ -4,6 +4,7 @@
 
 import { panic } from '../node/logger.ts';
 import type { PropsWithClassName } from '../types/components.ts';
+import type { EmptyObject } from '../types/utils.ts';
 
 // Types
 
@@ -320,4 +321,55 @@ export function removeUndefinedProps<T extends Record<string, unknown>>(
  */
 export function keysOf<T extends object>(obj: T): (keyof T)[] {
 	return Object.keys(obj) as (keyof T)[];
+}
+
+/**
+ * If the property of an object is defined, apply the given function to it and return an object with that property.
+ *
+ * @typeParam T - The type of the object.
+ * @typeParam K - The type of the key.
+ * @typeParam R - The type of the return value.
+ * @param obj - The object to get the property from.
+ * @param key - The key of the property to get.
+ * @param fn - A function to apply to the property.
+ * @returns An object with the property with the function applied if it is defined, otherwise an empty object.
+ */
+export function objectFrom<T extends object, K extends keyof T, R>(
+	obj: T,
+	key: K,
+	fn: (property: NonNullable<T[K]>) => R,
+): { [P in K]: R } | EmptyObject;
+
+/**
+ * If the property of an object is defined, return an object with that property.
+ *
+ * @typeParam T - The type of the object.
+ * @typeParam K - The type of the key.
+ * @param obj - The object to get the property from.
+ * @param key - The key of the property to get.
+ * @returns An object with the property if it is defined, otherwise an empty object.
+ */
+export function objectFrom<T extends object, K extends keyof T>(
+	obj: T,
+	key: K,
+): { [P in K]: T[K] } | EmptyObject;
+
+export function objectFrom<T extends object, K extends keyof T, R>(
+	obj: T,
+	key: K,
+	fn?: (property: NonNullable<T[K]>) => R,
+): { [P in K]: R | T[K] } | EmptyObject {
+	if (key in obj && isDefined(obj[key])) {
+		if (isDefined(fn)) {
+			return {
+				[key]: fn(obj[key] as NonNullable<T[K]>),
+			} as { [P in K]: R };
+		}
+
+		return {
+			[key]: obj[key],
+		} as { [P in K]: T[K] };
+	}
+
+	return {};
 }
