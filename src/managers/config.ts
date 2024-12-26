@@ -141,9 +141,7 @@ export function getSocialImageGenerationConfigDefaults(): SocialImagesGeneration
 }
 
 // Returns the social image generation config for a given type
-export function getSocialImageGenerationConfigForType(
-	type: SocialImageType,
-): Partial<JobOptions> {
+export function getSocialImageGenerationConfigForType(type: SocialImageType) {
 	const config = SOCIAL_IMAGES_GENERATION_CONFIG.types[type];
 
 	if (!config) {

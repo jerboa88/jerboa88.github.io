@@ -79,8 +79,10 @@ export enum SocialImageType {
 export interface SocialImagesGenerationConfig {
 	defaults: Partial<DefaultOptions>;
 	types: {
-		[SocialImageType.OpenGraph]: Partial<JobOptions>;
-		[SocialImageType.X]: Partial<JobOptions>;
+		[SocialImageType.OpenGraph]: Pick<JobOptions, 'size'> &
+			Partial<Omit<JobOptions, 'size'>>;
+		[SocialImageType.X]: Pick<JobOptions, 'size'> &
+			Partial<Omit<JobOptions, 'size'>>;
 	};
 }
 

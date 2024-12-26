@@ -17,7 +17,6 @@ import { Tooltip } from '../tooltip.tsx';
 
 interface Props {
 	title: string;
-	title: Capitalize<string>;
 	titleUrl?: UrlString;
 	titleTooltip?: Capitalize<string>;
 	tags: string | readonly string[];
