@@ -78,7 +78,14 @@ export type OtherProject = Overwrite<
 /**
  * A GitHub repo project
  */
-export type GithubRepoProject = Queries.GithubRepo & {
+export type GithubRepoProject = Overwrite<
+	Queries.GithubRepo,
+	{
+		description: SentenceString;
+		exposition?: SentenceString;
+		url: UrlString;
+	}
+> & {
 	type: ProjectType.GithubRepo;
 };
 
@@ -93,10 +100,10 @@ export type Project = GithubRepoProject | OtherProject;
 export type OtherProjectConfig = Overwrite<
 	Omit<OtherProject, 'type'>,
 	{
+		category: string;
 		createdAt: DateString;
 		description: SentenceString;
 		exposition: SentenceString;
-		category: string;
 		updatedAt: DateString;
 	}
 >;

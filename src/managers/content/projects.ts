@@ -20,9 +20,11 @@ import {
 	ProjectType,
 } from '../../types/content/projects.ts';
 import { SkillType } from '../../types/content/skills.ts';
-import { findIndexOfSubstringInArray } from '../../utils/other.ts';
+import { findIndexOfSubstringInArray, objectFrom } from '../../utils/other.ts';
 import { assertIsDefined } from '../../utils/other.ts';
 import { prettify } from '../../utils/other.ts';
+import { toSentence } from '../../utils/strings.ts';
+import { assertIsUrlString } from '../../utils/urls.ts';
 import { getPageContentConfig, getProjectCategoryColor } from '../config.ts';
 import { getSiteMetadata } from '../config.ts';
 import { filterEntries } from './utils.ts';
@@ -48,16 +50,22 @@ type GithubReposQueryData = {
 // Functions
 
 /**
- * Build a GitHub repo project from a GithubRepo GraphQL node.
+ * Build a GitHub repo project from a {@link Queries.GithubRepo | GithubRepo} GraphQL node.
  *
- * @param githubRepoNode A GithubRepo GraphQL node.
- * @returns A GithubRepoProject object.
+ * @param githubRepoNode A {@link Queries.GithubRepo | GithubRepo} GraphQL node.
+ * @returns A {@link GithubRepoProject} object.
  */
 function buildGithubRepoProject(
 	githubRepoNode: Queries.GithubRepo,
 ): GithubRepoProject {
+	// Prevent exposition from being included in the result
+	const { exposition, ...remainingProps } = githubRepoNode;
+
 	return {
-		...githubRepoNode,
+		...remainingProps,
+		...objectFrom(githubRepoNode, 'exposition', toSentence),
+		description: toSentence(githubRepoNode.description),
+		url: assertIsUrlString(githubRepoNode.url),
 		type: ProjectType.GithubRepo,
 	};
 }
@@ -65,8 +73,8 @@ function buildGithubRepoProject(
 /**
  * Build an other project from an other project config object.
  *
- * @param projectConfig An OtherProjectConfig object.
- * @returns An OtherProject object.
+ * @param projectConfig An {@link OtherProjectConfig} object.
+ * @returns An {@link OtherProject} object.
  */
 function buildOtherProject(projectConfig: OtherProjectConfig): OtherProject {
 	return {
@@ -142,7 +150,10 @@ function fetchOtherProjects(): OtherProject[] {
  * @returns True if the project should be hidden, false otherwise.
  */
 function doHideProject(project: Project) {
-	return project.category.name === 'Markdown' || project?.isFork;
+	return (
+		project.category.name === 'Markdown' ||
+		(project.type === ProjectType.GithubRepo && project.isFork)
+	);
 }
 
 /**

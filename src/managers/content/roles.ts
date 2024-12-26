@@ -9,7 +9,7 @@ import {
 	type RoleConfig,
 	RoleType,
 } from '../../types/content/roles.ts';
-import { keysOf } from '../../utils/other.ts';
+import { keysOf, objectFrom } from '../../utils/other.ts';
 import { getPageContentConfig } from '../config.ts';
 import { filterEntries } from './utils.ts';
 
@@ -36,7 +36,7 @@ type RoleSubsets = {
  */
 function buildRole(roleConfig: RoleConfig): Role {
 	return {
-		...(roleConfig.category && { category: roleConfig.category }),
+		...objectFrom(roleConfig, 'category'),
 		title: roleConfig.title,
 		company: roleConfig.company,
 		companyUrl: roleConfig.companyUrl,
