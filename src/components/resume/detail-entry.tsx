@@ -16,10 +16,11 @@ import { DateRange } from '../text/date-range.tsx';
 import { Tooltip } from '../tooltip.tsx';
 
 interface Props {
+	title: string;
 	title: Capitalize<string>;
 	titleUrl?: UrlString;
 	titleTooltip?: Capitalize<string>;
-	tags: Capitalize<string> | Capitalize<string>[];
+	tags: string | readonly string[];
 	tagsUrl?: UrlString;
 	tagsTooltip?: Capitalize<string>;
 	bullets: SentenceString[];
@@ -37,9 +38,9 @@ interface Props {
  * @returns A JSX element containing the tagline or tags
  */
 function getTaglineElement(
-	tags: Capitalize<string> | Capitalize<string>[],
-	tagsUrl?: UrlString,
-	tagsTooltip?: Capitalize<string>,
+	tags: Props['tags'],
+	tagsUrl?: Props['tagsUrl'],
+	tagsTooltip?: Props['tagsTooltip'],
 ) {
 	if (Array.isArray(tags)) {
 		return <Tags titles={tags} />;
