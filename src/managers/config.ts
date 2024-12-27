@@ -3,7 +3,6 @@
 	----------------------------------------------
 */
 
-import type { JobOptions } from 'gatsby-plugin-component-to-image/lib/types';
 import { COLOR_MAPPINGS_CONFIG } from '../config/color-mappings.ts';
 import { PAGES_CONTENT_CONFIG } from '../config/content/pages.ts';
 import { PAGES_METADATA_CONFIG } from '../config/metadata/pages.ts';

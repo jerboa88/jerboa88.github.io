@@ -5,6 +5,7 @@
 
 import {
 	type AnimationProps,
+	type Spring,
 	motion,
 	useMotionTemplate,
 	useReducedMotion,
@@ -49,8 +50,8 @@ const HOVER_PROPS = {
 
 // Remove the restDelta and restSpeed properties from a Framer Motion transition object
 function getTransitionWithoutRestProps(
-	transition: AnimationProps['transition'],
-) {
+	transition: Spring,
+): AnimationProps['transition'] {
 	const { restDelta, restSpeed, ...transitionWithoutRestProps } = transition;
 
 	return transitionWithoutRestProps;
