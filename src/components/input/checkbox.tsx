@@ -4,6 +4,7 @@
 */
 
 import { useCallback } from 'react';
+import type { FieldValues } from 'react-hook-form';
 import type {
 	Input,
 	InputElementRenderFn,
@@ -12,19 +13,19 @@ import type {
 import { getClassNameProps } from '../../utils/other.ts';
 import { BaseInput } from './base-input.tsx';
 
-interface Props extends Input {
+interface Props<T extends FieldValues> extends Input<T> {
 	inputOptions?: {
 		defaultChecked?: boolean;
 	} & InputOptions;
 }
 
-export function Checkbox({
+export function Checkbox<T extends FieldValues>({
 	inputClassName,
 	name,
 	inputOptions,
 	errors,
 	...remainingProps
-}: Props) {
+}: Props<T>) {
 	const classNameProps = getClassNameProps('checkbox', inputClassName);
 
 	// A function for rendering the input element
@@ -33,6 +34,7 @@ export function Checkbox({
 		((registerObj) => (
 			<input
 				type="checkbox"
+				id={registerObj.name}
 				{...{ ...classNameProps, ...registerObj, ...inputOptions }}
 			/>
 		)) as InputElementRenderFn,

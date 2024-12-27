@@ -5,30 +5,31 @@
 */
 
 import { motion } from 'framer-motion';
-import type { FieldErrors, UseFormRegister } from 'react-hook-form';
+import type { FieldValues } from 'react-hook-form';
 import {
 	AlertType,
 	type InputElementRenderFn,
-	type InputValidationOptions,
 } from '../../types/components.ts';
 import type {
+	Input,
 	PropsWithClassName,
 	PropsWithLayoutAnimations,
 } from '../../types/components.ts';
-import { getClassNameProps, getOrDefault } from '../../utils/other.ts';
+import {
+	getClassNameProps,
+	getOrDefault,
+	isDefined,
+} from '../../utils/other.ts';
 import { GhostAlert } from '../ghost-alert.tsx';
 
-interface BaseInput extends PropsWithClassName, PropsWithLayoutAnimations {
-	labelClassName?: string;
-	name: string;
-	label?: string;
+interface Props<T extends FieldValues>
+	extends PropsWithClassName,
+		PropsWithLayoutAnimations,
+		Omit<Input<T>, 'inputClassName'> {
 	renderInput: InputElementRenderFn;
-	register: UseFormRegister<any>;
-	errors: FieldErrors<any>;
-	validationOptions?: InputValidationOptions;
 }
 
-export function BaseInput({
+export function BaseInput<T extends FieldValues>({
 	className,
 	labelClassName,
 	name,
@@ -39,14 +40,17 @@ export function BaseInput({
 	validationOptions,
 	layout,
 	layoutRoot,
-}: BaseInput) {
-	const labelClassNameProps = getClassNameProps('z-20 form-control', className);
-	const spanClassNameProps = getClassNameProps(
+}: Props<T>) {
+	const containerClassNameProps = getClassNameProps(
+		'z-20 form-control',
+		className,
+	);
+	const labelClassNameProps = getClassNameProps(
 		'justify-start label label-text',
 		labelClassName,
 	);
-	const layoutProp = layout ? { layout } : {};
-	const layoutRootProp = layoutRoot ? { layoutRoot } : {};
+	const layoutProp = isDefined(layout) ? { layout } : {};
+	const layoutRootProp = isDefined(layoutRoot) ? { layoutRoot } : {};
 	const errorMessages = {
 		required: 'This field is required',
 		minLength: `This field must be at least ${validationOptions?.minLength} characters long`,
@@ -55,16 +59,18 @@ export function BaseInput({
 	};
 	const errorMsg = getOrDefault(
 		errorMessages,
-		errors[name]?.type,
+		errors[name]?.type as keyof typeof errorMessages,
 		'This field is invalid',
 	);
 	const inputElement = renderInput(register(name, validationOptions));
 
 	return (
-		<motion.label
-			{...{ ...layoutProp, ...layoutRootProp, ...labelClassNameProps }}
+		<motion.div
+			{...{ ...layoutProp, ...layoutRootProp, ...containerClassNameProps }}
 		>
-			<span {...spanClassNameProps}>{label}</span>
+			<label htmlFor={name} {...labelClassNameProps}>
+				{label}
+			</label>
 			<div className="backdrop-blur bg-glass">{inputElement}</div>
 			<GhostAlert
 				type={AlertType.Error}
@@ -72,6 +78,6 @@ export function BaseInput({
 				className="mt-4"
 				show={!!errors[name]}
 			/>
-		</motion.label>
+		</motion.div>
 	);
 }

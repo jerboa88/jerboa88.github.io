@@ -4,6 +4,7 @@
 */
 
 import { useCallback } from 'react';
+import type { FieldValues } from 'react-hook-form';
 import type {
 	Input,
 	InputElementRenderFn,
@@ -12,7 +13,7 @@ import type {
 import { getClassNameProps } from '../../utils/other.ts';
 import { BaseInput } from './base-input.tsx';
 
-interface Props extends Input {
+interface Props<T extends FieldValues> extends Input<T> {
 	inputOptions?: {
 		rows?: number;
 		placeholder?: string;
@@ -23,13 +24,13 @@ const defaultInputOptions = {
 	rows: 3,
 };
 
-export function MultilineTextInput({
+export function MultilineTextInput<T extends FieldValues>({
 	inputClassName,
 	name,
 	inputOptions = defaultInputOptions,
 	errors,
 	...remainingProps
-}: Props) {
+}: Props<T>) {
 	const classNameProps = getClassNameProps(
 		'textarea border-2 border-base-content/5 w-full mix-blend-overlay bg-transparent text-base shadow-md align-top',
 		!!errors[name] && 'textarea-error',
@@ -40,7 +41,10 @@ export function MultilineTextInput({
 	// This will be passed to the base input component and called from there
 	const renderInput = useCallback(
 		((registerObj) => (
-			<textarea {...{ ...classNameProps, ...registerObj, ...inputOptions }} />
+			<textarea
+				id={registerObj.name}
+				{...{ ...classNameProps, ...registerObj, ...inputOptions }}
+			/>
 		)) as InputElementRenderFn,
 		[],
 	);

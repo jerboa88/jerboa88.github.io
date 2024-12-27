@@ -7,6 +7,8 @@ import type { LayoutProps } from 'framer-motion';
 import type { RefObject } from 'react';
 import type {
 	FieldErrors,
+	FieldValues,
+	Path,
 	UseFormRegister,
 	UseFormRegisterReturn,
 } from 'react-hook-form';
@@ -122,19 +124,21 @@ export interface InputOptions {
 /**
  * A function that renders an input element
  */
-export type InputElementRenderFn = React.FunctionComponent<{
-	props: UseFormRegisterReturn<string>;
-}>;
+export type InputElementRenderFn = React.FunctionComponent<
+	UseFormRegisterReturn<string>
+>;
 
 /**
  * A reusable interface for inputs
  */
-export interface Input extends PropsWithClassName, PropsWithLayoutAnimations {
+export interface Input<T extends FieldValues>
+	extends PropsWithClassName,
+		PropsWithLayoutAnimations {
 	labelClassName?: string;
 	inputClassName?: string;
-	name: string;
+	name: Path<T>;
 	label?: string;
-	register: UseFormRegister<any>;
-	errors: FieldErrors<any>;
+	register: UseFormRegister<T>;
+	errors: FieldErrors<T>;
 	validationOptions?: InputValidationOptions;
 }
