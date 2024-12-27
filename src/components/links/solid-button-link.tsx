@@ -4,6 +4,7 @@
 */
 
 import type { Button, Link } from '../../types/components.ts';
+import { isDefined } from '../../utils/other.ts';
 import { SolidButton } from '../input/solid-button.tsx';
 import { LinkWrapper } from './link-wrapper.tsx';
 
@@ -15,8 +16,8 @@ export function SolidButtonLink({
 	rel,
 	...remainingProps
 }: Props) {
-	const isInternalProp = isInternal ? { isInternal } : {};
-	const relProp = rel ? { rel } : {};
+	const isInternalProp = isDefined(isInternal) ? { isInternal } : {};
+	const relProp = isDefined(rel) ? { rel } : {};
 
 	return (
 		<LinkWrapper to={to} {...isInternalProp} {...relProp}>

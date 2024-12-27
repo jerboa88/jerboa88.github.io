@@ -4,6 +4,7 @@
 */
 
 import type { Button, Link } from '../../types/components.ts';
+import { isDefined } from '../../utils/other.ts';
 import { GhostButton } from '../input/ghost-button.tsx';
 import { LinkWrapper } from './link-wrapper.tsx';
 
@@ -15,8 +16,8 @@ export function GhostButtonLink({
 	rel,
 	...remainingProps
 }: Props) {
-	const isInternalProp = isInternal ? { isInternal } : {};
-	const relProp = rel ? { rel } : {};
+	const isInternalProp = isDefined(isInternal) ? { isInternal } : {};
+	const relProp = isDefined(rel) ? { rel } : {};
 
 	return (
 		<LinkWrapper to={to} className="contents" {...isInternalProp} {...relProp}>

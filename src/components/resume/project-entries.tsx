@@ -4,6 +4,7 @@
 */
 
 import type { Project } from '../../types/content/projects.ts';
+import { isDefined } from '../../utils/other.ts';
 import { toSentence } from '../../utils/strings.ts';
 import { ResumeDetailEntry } from './detail-entry.tsx';
 
@@ -15,7 +16,9 @@ export function ResumeProjectEntries({ projects }: Props) {
 	return (
 		<div className="flex flex-col gap-4">
 			{projects.map((project) => {
-				const titleUrlProp = project.url ? { titleUrl: project.url } : {};
+				const titleUrlProp = isDefined(project.url)
+					? { titleUrl: project.url }
+					: {};
 				const expositionSentence = project.exposition
 					? toSentence(project.exposition)
 					: null;

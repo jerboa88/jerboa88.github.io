@@ -4,7 +4,7 @@
 */
 
 import type { Button } from '../../types/components.ts';
-import { getClassNameProps } from '../../utils/other.ts';
+import { getClassNameProps, isDefined } from '../../utils/other.ts';
 import { BaseButton } from './base-button.tsx';
 
 export function GhostButton({
@@ -17,7 +17,7 @@ export function GhostButton({
 		!disabled && 'interactive-text', // Enable hover effect only when button is not disabled
 		className,
 	);
-	const disabledProp = disabled ? { disabled } : {};
+	const disabledProp = isDefined(disabled) ? { disabled } : {};
 
 	return (
 		<BaseButton

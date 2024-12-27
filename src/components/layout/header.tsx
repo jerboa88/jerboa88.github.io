@@ -39,7 +39,7 @@ export function Header({ expandTitle, sections }: Props) {
 		expandTitle ? 'opacity-0' : 'opacity-100', // Hide divider when title is expanded
 	);
 	const layoutIdProp: { layoutId?: string } = {};
-	const tabsHideIndicatorProp = expandTitle
+	const tabsHideIndicatorProp = isDefined(expandTitle)
 		? { hideIndicator: expandTitle }
 		: {};
 

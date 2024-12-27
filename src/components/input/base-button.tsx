@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FADE_IN_ANIMATION_PROPS } from '../../config/constants.ts';
 import type { Button } from '../../types/components.ts';
-import { getClassNameProps } from '../../utils/other.ts';
+import { getClassNameProps, isDefined } from '../../utils/other.ts';
 import { Tooltip } from '../tooltip.tsx';
 
 export function BaseButton({
@@ -42,9 +42,9 @@ export function BaseButton({
 		textClassName,
 	);
 	const tooltipClassNameProps = getClassNameProps(tooltipClassName);
-	const layoutProp = layout ? { layout } : {};
-	const layoutRootProp = layoutRoot ? { layoutRoot } : {};
-	const tooltipPositionProp = tooltipPosition
+	const layoutProp = isDefined(layout) ? { layout } : {};
+	const layoutRootProp = isDefined(layoutRoot) ? { layoutRoot } : {};
+	const tooltipPositionProp = isDefined(tooltipPosition)
 		? { position: tooltipPosition }
 		: {};
 

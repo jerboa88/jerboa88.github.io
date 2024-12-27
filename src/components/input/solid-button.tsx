@@ -4,7 +4,7 @@
 */
 
 import type { Button } from '../../types/components.ts';
-import { getClassNameProps } from '../../utils/other.ts';
+import { getClassNameProps, isDefined } from '../../utils/other.ts';
 import { Card } from '../card.tsx';
 import { BaseButton } from './base-button.tsx';
 
@@ -21,10 +21,10 @@ export function SolidButton({
 	...remainingProps
 }: SolidButton) {
 	const classNameProps = getClassNameProps('px-4 py-3 sm:px-8', className);
-	const cardOuterClassNameProp = cardClassName
+	const cardOuterClassNameProp = isDefined(cardClassName)
 		? { outerClassName: cardClassName }
 		: {};
-	const disabledProp = disabled ? { disabled } : {};
+	const disabledProp = isDefined(disabled) ? { disabled } : {};
 
 	return (
 		<Card
