@@ -150,11 +150,11 @@ export function doesDeviceSupportHover() {
  */
 export function getOrDefault<T extends object, K extends keyof T, D>(
 	obj: T,
-	key: K | number | string | undefined,
+	key: string | number | symbol,
 	defaultValue?: D,
 ): T[K] | D {
-	if (key === undefined || !(key in obj)) {
-		if (defaultValue === undefined) {
+	if (!(isDefined(key) && key in obj)) {
+		if (!isDefined(defaultValue)) {
 			throw new Error(
 				`Key '${String(key)}' not found in object and no default value provided.`,
 			);

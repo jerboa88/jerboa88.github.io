@@ -4,7 +4,7 @@
 
 import { getSiteMetadata } from '../managers/config.ts';
 import type { UrlString } from '../types/strings.ts';
-import { getOrDefault } from './other.ts';
+import { getOrDefault, isDefined } from './other.ts';
 
 // Constants
 
@@ -51,7 +51,7 @@ export function getAbsoluteUrl(path: string, base?: string) {
 export function getMimeType(fileUrl: URL) {
 	const extension = fileUrl.pathname.split('.').pop();
 
-	if (extension === undefined) {
+	if (!isDefined(extension)) {
 		throw new Error('File extension not found in URL');
 	}
 
