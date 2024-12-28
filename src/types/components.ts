@@ -3,10 +3,12 @@
  */
 
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import type { LayoutProps } from 'framer-motion';
+import type { LayoutProps } from 'motion/react';
 import type { RefObject } from 'react';
 import type {
 	FieldErrors,
+	FieldValues,
+	Path,
 	UseFormRegister,
 	UseFormRegisterReturn,
 } from 'react-hook-form';
@@ -19,7 +21,7 @@ export interface PropsWithClassName {
 }
 
 /**
- * Props for components that accept optional layout animations using Framer Motion
+ * Props for components that accept optional layout animations using Motion
  */
 export interface PropsWithLayoutAnimations {
 	layout?: LayoutProps['layout'];
@@ -94,13 +96,10 @@ export interface Button extends PropsWithClassName, PropsWithLayoutAnimations {
 /**
  * A function that renders a button element
  */
-export type ButtonElementRenderFunction = ({
-	className,
-	tooltipPosition,
-}: {
+export type ButtonElementRenderFn = React.FunctionComponent<{
 	className: string;
 	tooltipPosition: TooltipPosition;
-}) => React.JSX.Element;
+}>;
 
 /**
  * Options to pass to {@link https://github.com/react-hook-form/react-hook-form | react-hook-form} for performing input validation
@@ -125,19 +124,21 @@ export interface InputOptions {
 /**
  * A function that renders an input element
  */
-export type InputElementRenderFunction = (
-	props: UseFormRegisterReturn<string>,
-) => React.JSX.Element;
+export type InputElementRenderFn = React.FunctionComponent<
+	UseFormRegisterReturn<string>
+>;
 
 /**
  * A reusable interface for inputs
  */
-export interface Input extends PropsWithClassName, PropsWithLayoutAnimations {
+export interface Input<T extends FieldValues>
+	extends PropsWithClassName,
+		PropsWithLayoutAnimations {
 	labelClassName?: string;
 	inputClassName?: string;
-	name: string;
+	name: Path<T>;
 	label?: string;
-	register: UseFormRegister<any>;
-	errors: FieldErrors<any>;
+	register: UseFormRegister<T>;
+	errors: FieldErrors<T>;
 	validationOptions?: InputValidationOptions;
 }

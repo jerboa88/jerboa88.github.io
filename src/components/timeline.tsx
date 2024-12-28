@@ -3,9 +3,9 @@
 	------------------------
 */
 
-import { getClassNameProps } from '../common/utils/other';
-import type { Role } from '../types/roles';
-import { TimelineEntry } from './timeline-entry';
+import type { Role } from '../types/content/roles.ts';
+import { getClassNameProps } from '../utils/other.ts';
+import { TimelineEntry } from './timeline-entry.tsx';
 
 interface Props {
 	roles: Role[];
@@ -24,15 +24,13 @@ const HR_ELEMENT = (
 export function Timeline({ roles }: Props) {
 	return (
 		<ul className="timeline timeline-vertical timeline-snap-icon max-lg:timeline-compact">
-			{roles.map((role) => {
-				return (
-					<li key={`${role.startDate}-${role.company}`} className="group">
-						{HR_ELEMENT}
-						<TimelineEntry role={role} />
-						{HR_ELEMENT}
-					</li>
-				);
-			})}
+			{roles.map((role) => (
+				<li key={`${role.startDate}-${role.company}`} className="group">
+					{HR_ELEMENT}
+					<TimelineEntry role={role} />
+					{HR_ELEMENT}
+				</li>
+			))}
 		</ul>
 	);
 }

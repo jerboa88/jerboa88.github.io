@@ -1377,6 +1377,7 @@ type GithubDataSortInput = {
 
 /** Define schema for custom GithubRepo nodes */
 type GithubRepo = Node & {
+  readonly category: ProjectCategory;
   /** Returns the first child node of type MarkdownRemark or null if there are no children of given type on this node */
   readonly childMarkdownRemark: Maybe<MarkdownRemark>;
   readonly children: ReadonlyArray<Node>;
@@ -1401,7 +1402,6 @@ type GithubRepo = Node & {
   readonly slug: Scalars['String'];
   readonly stargazerCount: Scalars['Int'];
   readonly topics: ReadonlyArray<Scalars['String']>;
-  readonly type: ProjectType;
   readonly updatedAt: Scalars['Date'];
   readonly url: Scalars['String'];
   readonly usesCustomOpenGraphImage: Scalars['Boolean'];
@@ -1453,6 +1453,7 @@ type GithubRepoEdge = {
 };
 
 type GithubRepoFieldSelector = {
+  readonly category: InputMaybe<ProjectCategoryFieldSelector>;
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkFieldSelector>;
   readonly children: InputMaybe<NodeFieldSelector>;
   readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkFieldSelector>;
@@ -1475,13 +1476,13 @@ type GithubRepoFieldSelector = {
   readonly slug: InputMaybe<FieldSelectorEnum>;
   readonly stargazerCount: InputMaybe<FieldSelectorEnum>;
   readonly topics: InputMaybe<FieldSelectorEnum>;
-  readonly type: InputMaybe<ProjectTypeFieldSelector>;
   readonly updatedAt: InputMaybe<FieldSelectorEnum>;
   readonly url: InputMaybe<FieldSelectorEnum>;
   readonly usesCustomOpenGraphImage: InputMaybe<FieldSelectorEnum>;
 };
 
 type GithubRepoFilterInput = {
+  readonly category: InputMaybe<ProjectCategoryFilterInput>;
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkFilterInput>;
   readonly children: InputMaybe<NodeFilterListInput>;
   readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkFilterListInput>;
@@ -1504,7 +1505,6 @@ type GithubRepoFilterInput = {
   readonly slug: InputMaybe<StringQueryOperatorInput>;
   readonly stargazerCount: InputMaybe<IntQueryOperatorInput>;
   readonly topics: InputMaybe<StringQueryOperatorInput>;
-  readonly type: InputMaybe<ProjectTypeFilterInput>;
   readonly updatedAt: InputMaybe<DateQueryOperatorInput>;
   readonly url: InputMaybe<StringQueryOperatorInput>;
   readonly usesCustomOpenGraphImage: InputMaybe<BooleanQueryOperatorInput>;
@@ -1552,6 +1552,7 @@ type GithubRepoGroupConnection_sumArgs = {
 };
 
 type GithubRepoSortInput = {
+  readonly category: InputMaybe<ProjectCategorySortInput>;
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkSortInput>;
   readonly children: InputMaybe<NodeSortInput>;
   readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkSortInput>;
@@ -1574,7 +1575,6 @@ type GithubRepoSortInput = {
   readonly slug: InputMaybe<SortOrderEnum>;
   readonly stargazerCount: InputMaybe<SortOrderEnum>;
   readonly topics: InputMaybe<SortOrderEnum>;
-  readonly type: InputMaybe<ProjectTypeSortInput>;
   readonly updatedAt: InputMaybe<SortOrderEnum>;
   readonly url: InputMaybe<SortOrderEnum>;
   readonly usesCustomOpenGraphImage: InputMaybe<SortOrderEnum>;
@@ -1960,22 +1960,22 @@ type PageInfo = {
   readonly totalCount: Scalars['Int'];
 };
 
-type ProjectType = {
+type ProjectCategory = {
   readonly color: Scalars['String'];
   readonly name: Maybe<Scalars['String']>;
 };
 
-type ProjectTypeFieldSelector = {
+type ProjectCategoryFieldSelector = {
   readonly color: InputMaybe<FieldSelectorEnum>;
   readonly name: InputMaybe<FieldSelectorEnum>;
 };
 
-type ProjectTypeFilterInput = {
+type ProjectCategoryFilterInput = {
   readonly color: InputMaybe<StringQueryOperatorInput>;
   readonly name: InputMaybe<StringQueryOperatorInput>;
 };
 
-type ProjectTypeSortInput = {
+type ProjectCategorySortInput = {
   readonly color: InputMaybe<SortOrderEnum>;
   readonly name: InputMaybe<SortOrderEnum>;
 };
@@ -2178,6 +2178,7 @@ type Query_githubDataArgs = {
 
 
 type Query_githubRepoArgs = {
+  category: InputMaybe<ProjectCategoryFilterInput>;
   childMarkdownRemark: InputMaybe<MarkdownRemarkFilterInput>;
   children: InputMaybe<NodeFilterListInput>;
   childrenMarkdownRemark: InputMaybe<MarkdownRemarkFilterListInput>;
@@ -2200,7 +2201,6 @@ type Query_githubRepoArgs = {
   slug: InputMaybe<StringQueryOperatorInput>;
   stargazerCount: InputMaybe<IntQueryOperatorInput>;
   topics: InputMaybe<StringQueryOperatorInput>;
-  type: InputMaybe<ProjectTypeFilterInput>;
   updatedAt: InputMaybe<DateQueryOperatorInput>;
   url: InputMaybe<StringQueryOperatorInput>;
   usesCustomOpenGraphImage: InputMaybe<BooleanQueryOperatorInput>;
@@ -3119,45 +3119,45 @@ type SiteSiteMetadataAuthorSortInput = {
 type SiteSiteMetadataAuthorUrl = {
   readonly github: Maybe<Scalars['String']>;
   readonly linkedin: Maybe<Scalars['String']>;
-  readonly twitter: Maybe<Scalars['String']>;
+  readonly x: Maybe<Scalars['String']>;
 };
 
 type SiteSiteMetadataAuthorUrlFieldSelector = {
   readonly github: InputMaybe<FieldSelectorEnum>;
   readonly linkedin: InputMaybe<FieldSelectorEnum>;
-  readonly twitter: InputMaybe<FieldSelectorEnum>;
+  readonly x: InputMaybe<FieldSelectorEnum>;
 };
 
 type SiteSiteMetadataAuthorUrlFilterInput = {
   readonly github: InputMaybe<StringQueryOperatorInput>;
   readonly linkedin: InputMaybe<StringQueryOperatorInput>;
-  readonly twitter: InputMaybe<StringQueryOperatorInput>;
+  readonly x: InputMaybe<StringQueryOperatorInput>;
 };
 
 type SiteSiteMetadataAuthorUrlSortInput = {
   readonly github: InputMaybe<SortOrderEnum>;
   readonly linkedin: InputMaybe<SortOrderEnum>;
-  readonly twitter: InputMaybe<SortOrderEnum>;
+  readonly x: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSiteMetadataAuthorUsername = {
   readonly github: Maybe<Scalars['String']>;
-  readonly twitter: Maybe<Scalars['String']>;
+  readonly x: Maybe<Scalars['String']>;
 };
 
 type SiteSiteMetadataAuthorUsernameFieldSelector = {
   readonly github: InputMaybe<FieldSelectorEnum>;
-  readonly twitter: InputMaybe<FieldSelectorEnum>;
+  readonly x: InputMaybe<FieldSelectorEnum>;
 };
 
 type SiteSiteMetadataAuthorUsernameFilterInput = {
   readonly github: InputMaybe<StringQueryOperatorInput>;
-  readonly twitter: InputMaybe<StringQueryOperatorInput>;
+  readonly x: InputMaybe<StringQueryOperatorInput>;
 };
 
 type SiteSiteMetadataAuthorUsernameSortInput = {
   readonly github: InputMaybe<SortOrderEnum>;
-  readonly twitter: InputMaybe<SortOrderEnum>;
+  readonly x: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSiteMetadataFieldSelector = {

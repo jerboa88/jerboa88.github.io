@@ -11,7 +11,7 @@ const TAB_SIZE = 2;
 
 // Runtime vars
 
-let reporter: Reporter | undefined = undefined;
+let reporter: Reporter | undefined;
 let indentLevel = 0;
 let indentString = '';
 
@@ -54,11 +54,7 @@ export function setReporter(newReporter: Reporter) {
  * info('This is an informational message');
  */
 export function info(msg: string) {
-	if (!reporter) {
-		throw new Error('Reporter is not set');
-	}
-
-	reporter.info(`${indentString}${msg}`);
+	(reporter ?? console).info(`${indentString}${msg}`);
 }
 
 /**
@@ -69,11 +65,7 @@ export function info(msg: string) {
  * warn('This is a warning message');
  */
 export function warn(msg: string) {
-	if (!reporter) {
-		throw new Error('Reporter is not set');
-	}
-
-	reporter.warn(`${indentString}${msg}`);
+	(reporter ?? console).warn(`${indentString}${msg}`);
 }
 
 /**
@@ -84,27 +76,7 @@ export function warn(msg: string) {
  * error('This is an error message');
  */
 export function error(msg: string) {
-	if (!reporter) {
-		throw new Error('Reporter is not set');
-	}
-
-	reporter.error(`${indentString}${msg}`);
-}
-
-/**
- * Print an error message and exit the program immediately if running in a build context
- *
- * @param msg A message to print before exiting
- * @throws An error to stop execution if running in a build context
- * @example
- * panicOnBuild('This is an error message');
- */
-export function panicOnBuild(msg: string) {
-	if (!reporter) {
-		throw new Error('Reporter is not set');
-	}
-
-	reporter.panicOnBuild('', new Error(`${indentString}${msg}`));
+	(reporter ?? console).error(`${indentString}${msg}`);
 }
 
 /**
@@ -116,13 +88,13 @@ export function panicOnBuild(msg: string) {
  * panic('This is an error message');
  */
 export function panic(msg: string): never {
-	if (!reporter) {
-		throw new Error('Reporter is not set');
+	const error = new Error(`${indentString}${msg}`);
+
+	if (reporter) {
+		reporter.panic('', error);
 	}
 
-	reporter.panic('', new Error(`${indentString}${msg}`));
-
-	throw new Error('Unreachable');
+	throw error;
 }
 
 /**
@@ -131,7 +103,7 @@ export function panic(msg: string): never {
  * @remarks
  *
  * This function increases the indent level for all messages printed within the group.
- * Use {@link groupEnd} to end the group.
+ * Use {@link endLogGroup} to end the group.
  *
  * @example
  * group();
@@ -143,7 +115,7 @@ export function panic(msg: string): never {
  * groupEnd();
  * info('This message is not indented');
  */
-export function group() {
+export function startLogGroup() {
 	indentLevel++;
 
 	setIndentString();
@@ -155,7 +127,7 @@ export function group() {
  * @remarks
  *
  * This function decreases the indent level for all messages printed within the group.
- * Use {@link group} to start a group.
+ * Use {@link startLogGroup} to start a group.
  *
  * @example
  * group();
@@ -167,7 +139,7 @@ export function group() {
  * groupEnd();
  * info('This message is not indented');
  */
-export function groupEnd() {
+export function endLogGroup() {
 	indentLevel = Math.max(0, indentLevel - 1);
 
 	setIndentString();

@@ -5,19 +5,20 @@
 
 import {
 	type AnimationProps,
+	type Spring,
 	motion,
 	useMotionTemplate,
 	useReducedMotion,
 	useSpring,
 	useTransform,
-} from 'framer-motion';
+} from 'motion/react';
 import type { PropsWithChildren } from 'react';
-import { SPRING_TRANSITION_PROPS } from '../common/constants';
+import { SPRING_TRANSITION_PROPS } from '../config/constants.ts';
 import {
 	clamp,
 	doesDeviceSupportHover,
 	getClassNameProps,
-} from '../common/utils/other';
+} from '../utils/other.ts';
 
 // Types
 
@@ -47,10 +48,10 @@ const HOVER_PROPS = {
 	transition: getTransitionWithoutRestProps(SPRING_TRANSITION_PROPS.transition),
 };
 
-// Remove the restDelta and restSpeed properties from a Framer Motion transition object
+// Remove the restDelta and restSpeed properties from a Motion transition object
 function getTransitionWithoutRestProps(
-	transition: AnimationProps['transition'],
-) {
+	transition: Spring,
+): AnimationProps['transition'] {
 	const { restDelta, restSpeed, ...transitionWithoutRestProps } = transition;
 
 	return transitionWithoutRestProps;
@@ -142,13 +143,13 @@ export function Card({
 
 	let handleMouseMove:
 		| ((event: React.MouseEvent<HTMLDivElement>) => void)
-		| undefined = undefined;
+		| undefined;
 	let handleMouseEnter:
 		| ((event: React.MouseEvent<HTMLDivElement>) => void)
-		| undefined = undefined;
+		| undefined;
 	let handleMouseLeave:
 		| ((event: React.MouseEvent<HTMLDivElement>) => void)
-		| undefined = undefined;
+		| undefined;
 
 	// Set the mouse Z position to the min value when the mouse is pressed down
 	const handleMouseDown = () => {

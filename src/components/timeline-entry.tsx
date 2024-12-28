@@ -5,20 +5,20 @@
 
 import { faBuilding, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getRoleTypeColor } from '../common/config-manager';
-import { getClassNameProps } from '../common/utils/other';
-import type { Role } from '../types/roles';
-import { Card } from './card';
-import { Pill } from './pill';
-import { DateRange } from './text/date-range';
-import { SubsectionHeading } from './text/subsection-heading';
+import { getRoleCategoryColor } from '../managers/config.ts';
+import type { Role } from '../types/content/roles.ts';
+import { getClassNameProps } from '../utils/other.ts';
+import { Card } from './card.tsx';
+import { Pill } from './pill.tsx';
+import { DateRange } from './text/date-range.tsx';
+import { SubsectionHeading } from './text/subsection-heading.tsx';
 
 interface Props {
 	role: Role;
 }
 
 export function TimelineEntry({ role }: Props) {
-	const roleTypeColor = getRoleTypeColor(role.type);
+	const roleTypeColor = getRoleCategoryColor(role.category);
 	const pillClassNameProps = getClassNameProps('capitalize', roleTypeColor);
 
 	return (
@@ -28,7 +28,9 @@ export function TimelineEntry({ role }: Props) {
 					<DateRange startDate={role.startDate} endDate={role.endDate} />
 					<span className="text-sm">{role.location}</span>
 				</div>
-				{role?.type && <Pill text={role.type} {...pillClassNameProps} />}
+				{role?.category && (
+					<Pill text={role.category} {...pillClassNameProps} />
+				)}
 			</div>
 			<div className="timeline-middle">
 				<FontAwesomeIcon icon={faCircleCheck} />
@@ -46,9 +48,9 @@ export function TimelineEntry({ role }: Props) {
 							</div>
 						</div>
 					</div>
-					<ul className="list-[circle] m-4">
+					<ul className="m-4">
 						{role.bullets.map((bullet) => (
-							<li key={bullet} className="my-2">
+							<li key={bullet} className="list-rounded-square my-2">
 								{bullet}
 							</li>
 						))}

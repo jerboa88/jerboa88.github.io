@@ -2,9 +2,9 @@
  * Utility functions for working with URLs
  */
 
-import type { UrlString } from '../../types/strings';
-import { getSiteMetadata } from '../config-manager';
-import { getOrDefault } from './other';
+import { getSiteMetadata } from '../managers/config.ts';
+import type { UrlString } from '../types/strings.ts';
+import { getOrDefault, isDefined } from './other.ts';
 
 // Constants
 
@@ -51,7 +51,7 @@ export function getAbsoluteUrl(path: string, base?: string) {
 export function getMimeType(fileUrl: URL) {
 	const extension = fileUrl.pathname.split('.').pop();
 
-	if (extension === undefined) {
+	if (!isDefined(extension)) {
 		throw new Error('File extension not found in URL');
 	}
 
@@ -81,4 +81,18 @@ export function removeProtocol(url: UrlString | URL) {
 	const urlString = url instanceof URL ? url.toString() : url;
 
 	return urlString.replace(/.*?:\/\//g, '');
+}
+
+/**
+ * Throw an error if the string is not a URL string. Otherwise, return the string.
+ *
+ * @param str A string that may or may not be a URL string.
+ * @returns The string if it is a URL string.
+ */
+export function assertIsUrlString(str: string): UrlString {
+	if (!str.startsWith('https://')) {
+		throw new Error(`URL '${str}' must start with 'https://'`);
+	}
+
+	return str as UrlString;
 }

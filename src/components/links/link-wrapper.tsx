@@ -5,9 +5,9 @@
 
 import { Link as GatsbyLink } from 'gatsby';
 import type { PropsWithChildren } from 'react';
-import { getClassNameProps } from '../../common/utils/other';
-import type { Link } from '../../types/components';
-import type { PropsWithClassName } from '../../types/components';
+import type { Link } from '../../types/components.ts';
+import type { PropsWithClassName } from '../../types/components.ts';
+import { getClassNameProps } from '../../utils/other.ts';
 
 interface Props extends Link, PropsWithClassName, PropsWithChildren {}
 

@@ -4,15 +4,15 @@
 */
 
 import { type HeadProps, type PageProps, graphql } from 'gatsby';
-import { getSiteMetadata } from '../common/config-manager';
-import { JSON_LD_AUTHOR_PATH } from '../common/constants';
-import { getAbsoluteUrl } from '../common/utils/urls';
-import { DocumentPageLayout } from '../components/layout/document-page-layout';
-import { Section } from '../components/layout/section';
-import { PageHead } from '../components/seo/page-head';
-import { Article } from '../components/text/article';
-import { type SocialImagesMetadataProp, ThemeType } from '../types/other';
-import type { CoverLetterPageContext } from '../types/page-context';
+import { DocumentPageLayout } from '../components/layout/document-page-layout.tsx';
+import { Section } from '../components/layout/section.tsx';
+import { PageHead } from '../components/seo/page-head.tsx';
+import { Article } from '../components/text/article.tsx';
+import { JSON_LD_AUTHOR_PATH } from '../config/constants.ts';
+import { getSiteMetadata } from '../managers/config.ts';
+import { type SocialImagesMetadataProp, ThemeType } from '../types/other.ts';
+import type { CoverLetterPageContext } from '../types/page-context.ts';
+import { getAbsoluteUrl } from '../utils/urls.ts';
 
 // Types
 

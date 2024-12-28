@@ -5,11 +5,11 @@
 */
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AnimatePresence, motion } from 'framer-motion';
-import { FADE_IN_ANIMATION_PROPS } from '../../common/constants';
-import { getClassNameProps } from '../../common/utils/other';
-import type { Button } from '../../types/components';
-import { Tooltip } from '../tooltip';
+import { AnimatePresence, motion } from 'motion/react';
+import { FADE_IN_ANIMATION_PROPS } from '../../config/constants.ts';
+import type { Button } from '../../types/components.ts';
+import { getClassNameProps, isDefined } from '../../utils/other.ts';
+import { Tooltip } from '../tooltip.tsx';
 
 export function BaseButton({
 	className,
@@ -41,13 +41,25 @@ export function BaseButton({
 		responsive && icon && 'max-lg:hidden', // Responsive styles
 		textClassName,
 	);
+	const tooltipClassNameProps = getClassNameProps(tooltipClassName);
+	const layoutProp = isDefined(layout) ? { layout } : {};
+	const layoutRootProp = isDefined(layoutRoot) ? { layoutRoot } : {};
+	const tooltipPositionProp = isDefined(tooltipPosition)
+		? { position: tooltipPosition }
+		: {};
 
-	const computedButtonLabel = tooltipText ?? text;
+	const computedButtonLabel = tooltipText ?? String(text);
 
 	const buttonElement = (
 		<motion.button
 			aria-label={computedButtonLabel}
-			{...{ type, disabled, layout, layoutRoot, ...buttonClassNameProps }}
+			{...{
+				type,
+				disabled,
+				...layoutProp,
+				...layoutRootProp,
+				...buttonClassNameProps,
+			}}
 		>
 			<AnimatePresence mode="popLayout" initial={false}>
 				{icon && (
@@ -76,8 +88,8 @@ export function BaseButton({
 	return !disabled && computedButtonLabel ? (
 		<Tooltip
 			text={computedButtonLabel}
-			position={tooltipPosition}
-			className={tooltipClassName}
+			{...tooltipPositionProp}
+			{...tooltipClassNameProps}
 		>
 			{buttonElement}
 		</Tooltip>

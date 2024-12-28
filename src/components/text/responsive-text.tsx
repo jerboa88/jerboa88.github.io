@@ -2,7 +2,8 @@
  * A responsive text component that displays different substrings depending on the screen width
  */
 
-import { Breakpoint } from '../../types/components';
+import { Breakpoint } from '../../types/components.ts';
+import { keysOf } from '../../utils/other.ts';
 
 // Types
 
@@ -31,7 +32,7 @@ const BREAKPOINT_CLASS_NAME_MAP = {
 
 export function ResponsiveText({ text, breakpoints }: Props) {
 	const spanElements: React.JSX.Element[] = [];
-	const breakpointKeys: Breakpoint[] = Object.keys(breakpoints).map(Number);
+	const breakpointKeys = keysOf(breakpoints);
 
 	for (let i = 0; i < breakpointKeys.length; i++) {
 		const previousBreakpoint = breakpointKeys[i - 1];

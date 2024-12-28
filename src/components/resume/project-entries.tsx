@@ -3,9 +3,10 @@
 	-------------------------------------------
 */
 
-import { toSentence } from '../common/utils/strings';
-import type { Project } from '../types/projects';
-import { ResumeEntry } from './resume-entry';
+import type { Project } from '../../types/content/projects.ts';
+import { isDefined } from '../../utils/other.ts';
+import { toSentence } from '../../utils/strings.ts';
+import { ResumeDetailEntry } from './detail-entry.tsx';
 
 interface Props {
 	projects: Project[];
@@ -15,20 +16,23 @@ export function ResumeProjectEntries({ projects }: Props) {
 	return (
 		<div className="flex flex-col gap-4">
 			{projects.map((project) => {
+				const titleUrlProp = isDefined(project.url)
+					? { titleUrl: project.url }
+					: {};
 				const expositionSentence = project.exposition
 					? toSentence(project.exposition)
 					: null;
 				const descriptionSentence = toSentence(project.description);
 
 				return (
-					<ResumeEntry
+					<ResumeDetailEntry
 						key={project.slug}
 						title={project.name}
-						titleUrl={project.url}
 						titleTooltip="View project on GitHub"
-						tagline={project.languages.join(', ')}
+						tags={project.languages}
 						bullets={[expositionSentence ?? descriptionSentence]}
 						endDate={new Date(project.createdAt)}
+						{...titleUrlProp}
 					/>
 				);
 			})}

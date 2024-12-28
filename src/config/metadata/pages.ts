@@ -3,15 +3,15 @@
 	-----------------------------
 */
 
+import type { PagesMetadataConfig } from '../../types/other.ts';
 import {
 	COVER_LETTER_PATH,
 	NOT_FOUND_PATH,
 	PRIVACY_POLICY_PATH,
 	RESUME_PATH,
-} from '../../common/constants';
-import type { PagesMetadataConfig } from '../../types/other';
+} from '../constants.ts';
 
-export const pagesMetadataConfig: PagesMetadataConfig = {
+export const PAGES_METADATA_CONFIG: PagesMetadataConfig = {
 	[PRIVACY_POLICY_PATH]: {
 		title: 'Privacy Policy',
 		shortTitle: 'Privacy',
@@ -35,4 +35,4 @@ export const pagesMetadataConfig: PagesMetadataConfig = {
 		shortTitle: '404',
 		description: "Oof, there's nothing here.",
 	},
-};
+} as const;

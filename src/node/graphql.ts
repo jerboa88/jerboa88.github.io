@@ -33,7 +33,7 @@ type GithubDataDataUserRepositoriesNodesRepositoryTopics {
 	nodes: [GithubDataDataUserRepositoriesNodesRepositoryTopicsNodes]
 }
 
-type ProjectType {
+type ProjectCategory {
 	color: String!
 	name: String
 }
@@ -77,7 +77,7 @@ type GithubRepo implements Node {
 	slug: String!
 	stargazerCount: Int!
 	topics: [String!]!
-	type: ProjectType!
+	category: ProjectCategory!
 	updatedAt: Date!
 	url: String!
 	usesCustomOpenGraphImage: Boolean!
@@ -111,7 +111,7 @@ query GithubRepos {
 			slug
 			stargazerCount
 			topics
-			type {
+			category {
 				color
 				name
 			}

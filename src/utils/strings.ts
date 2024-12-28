@@ -2,7 +2,14 @@
  * Utility functions for working with strings
  */
 
-import type { SentenceString } from '../../types/strings';
+import type { SentenceString } from '../types/strings.ts';
+
+// Constants
+
+const SENTENCE_REGEX = /[\.,!?\u2026]$/;
+const WORD_SEPARATOR_REGEX = /[-_ ]/;
+
+// Functions
 
 /**
  * Convert a string to kebab-case
@@ -40,7 +47,7 @@ function capitalizeWord(word: string): Capitalize<string> {
  * toTitleCase('hello-world') // Hello World
  */
 export function toTitleCase(string: string) {
-	return string.split(/[-_ ]/).map(capitalizeWord).join(' ');
+	return string.split(WORD_SEPARATOR_REGEX).map(capitalizeWord).join(' ');
 }
 
 /**
@@ -55,7 +62,7 @@ export function toSentence(string: string): SentenceString {
 	const capitalizedString = capitalizeWord(string);
 
 	// If string ends with period, comma, exclamation point, question mark, or ellipsis, return as is
-	if (capitalizedString.match(/[\.,!?\u2026]$/)) {
+	if (capitalizedString.match(SENTENCE_REGEX)) {
 		return capitalizedString as SentenceString;
 	}
 

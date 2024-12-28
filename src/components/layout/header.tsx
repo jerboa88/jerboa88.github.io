@@ -3,16 +3,16 @@
 	---------------------------------
 */
 
-import { motion } from 'framer-motion';
-import { getSiteMetadata } from '../../common/config-manager';
-import { TITLE_LAYOUT_ID } from '../../common/constants';
-import { getClassNameProps, isDefined } from '../../common/utils/other';
-import { getStartIndexOfLastWord } from '../../common/utils/strings';
-import { Breakpoint, type PageSection } from '../../types/components';
-import { Divider } from '../divider';
-import { Tabs } from '../tabs';
-import { Heading } from '../text/heading';
-import { ResponsiveText } from '../text/responsive-text';
+import { motion } from 'motion/react';
+import { TITLE_LAYOUT_ID } from '../../config/constants.ts';
+import { getSiteMetadata } from '../../managers/config.ts';
+import { Breakpoint, type PageSection } from '../../types/components.ts';
+import { getClassNameProps, isDefined } from '../../utils/other.ts';
+import { getStartIndexOfLastWord } from '../../utils/strings.ts';
+import { Divider } from '../divider.tsx';
+import { Tabs } from '../tabs.tsx';
+import { Heading } from '../text/heading.tsx';
+import { ResponsiveText } from '../text/responsive-text.tsx';
 
 // Types
 
@@ -39,6 +39,9 @@ export function Header({ expandTitle, sections }: Props) {
 		expandTitle ? 'opacity-0' : 'opacity-100', // Hide divider when title is expanded
 	);
 	const layoutIdProp: { layoutId?: string } = {};
+	const tabsHideIndicatorProp = isDefined(expandTitle)
+		? { hideIndicator: expandTitle }
+		: {};
 
 	// If expandTitle is not specified, don't animate the title
 	if (isDefined(expandTitle)) {
@@ -65,7 +68,7 @@ export function Header({ expandTitle, sections }: Props) {
 							</Heading>
 						</motion.a>
 					)}
-					<Tabs sections={sections} hideIndicator={expandTitle} />
+					<Tabs sections={sections} {...tabsHideIndicatorProp} />
 				</div>
 				<Divider {...dividerClassNameProps} />
 			</div>

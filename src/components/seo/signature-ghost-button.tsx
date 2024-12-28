@@ -4,9 +4,9 @@
 */
 
 import { faSignature } from '@fortawesome/free-solid-svg-icons';
-import { getSiteMetadata } from '../../common/config-manager';
-import type { Button } from '../../types/components';
-import { GhostButton } from '../input/ghost-button';
+import { getSiteMetadata } from '../../managers/config.ts';
+import type { Button } from '../../types/components.ts';
+import { GhostButton } from '../input/ghost-button.tsx';
 
 const BUTTON_PROPS = {
 	text: new URL(getSiteMetadata().siteUrl).hostname,

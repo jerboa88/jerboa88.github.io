@@ -3,9 +3,10 @@
 	----------------------------------------------
 */
 
-import type { Button, Link } from '../../types/components';
-import { SolidButton } from '../input/solid-button';
-import { LinkWrapper } from './link-wrapper';
+import type { Button, Link } from '../../types/components.ts';
+import { isDefined } from '../../utils/other.ts';
+import { SolidButton } from '../input/solid-button.tsx';
+import { LinkWrapper } from './link-wrapper.tsx';
 
 interface Props extends Button, Link {}
 
@@ -15,8 +16,11 @@ export function SolidButtonLink({
 	rel,
 	...remainingProps
 }: Props) {
+	const isInternalProp = isDefined(isInternal) ? { isInternal } : {};
+	const relProp = isDefined(rel) ? { rel } : {};
+
 	return (
-		<LinkWrapper to={to} isInternal={isInternal} rel={rel}>
+		<LinkWrapper to={to} {...isInternalProp} {...relProp}>
 			<SolidButton {...remainingProps} />
 		</LinkWrapper>
 	);

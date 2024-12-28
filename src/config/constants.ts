@@ -3,7 +3,11 @@
 	--------------------------------------------------
 */
 
-import type { AbsolutePathString, WorkingPathString } from '../types/strings';
+import type {
+	AbsolutePathString,
+	UrlString,
+	WorkingPathString,
+} from '../types/strings.ts';
 
 // Constants
 
@@ -41,20 +45,25 @@ export const JSON_LD_AUTHOR_PATH: AbsolutePathString = '/author';
 // ID used to group together elements for the title animation
 export const TITLE_LAYOUT_ID = 'title-layout' as const;
 
+export const BOTPOISON_PUBLIC_KEY =
+	'pk_eca5c4ea-ccb4-46da-beb0-15c581b6980e' as const;
+export const CONTACT_FORM_POST_URL: UrlString =
+	'https://submit-form.com/re6Xbd2gs' as const;
+
 // Options for the useInView hook. Margin is used to offset the height of the navbar
 export const USE_IN_VIEW_OPTIONS = {
 	amount: 0,
 	margin: '-68px',
 } as const;
 
-// Props for enabling a fade-in animation for a Framer Motion component
+// Props for enabling a fade-in animation for a Motion component
 export const FADE_IN_ANIMATION_PROPS = {
 	initial: FADE_TRANSITION_VARIANTS.hidden,
 	animate: FADE_TRANSITION_VARIANTS.show,
 	exit: FADE_TRANSITION_VARIANTS.hidden,
 } as const;
 
-// Props for setting a spring transition on a Framer Motion component
+// Props for setting a spring transition on a Motion component
 export const SPRING_TRANSITION_PROPS = {
 	transition: {
 		type: 'spring',

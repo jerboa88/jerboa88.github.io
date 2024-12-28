@@ -3,9 +3,9 @@
 	-------------------------------------------
 */
 
-import { getClassNameProps } from '../../common/utils/other';
-import type { Button } from '../../types/components';
-import { BaseButton } from './base-button';
+import type { Button } from '../../types/components.ts';
+import { getClassNameProps, isDefined } from '../../utils/other.ts';
+import { BaseButton } from './base-button.tsx';
 
 export function GhostButton({
 	className,
@@ -17,6 +17,11 @@ export function GhostButton({
 		!disabled && 'interactive-text', // Enable hover effect only when button is not disabled
 		className,
 	);
+	const disabledProp = isDefined(disabled) ? { disabled } : {};
 
-	return <BaseButton {...{ disabled, ...classNameProps, ...remainingProps }} />;
+	return (
+		<BaseButton
+			{...{ ...disabledProp, ...classNameProps, ...remainingProps }}
+		/>
+	);
 }

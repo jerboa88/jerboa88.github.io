@@ -5,26 +5,30 @@
 
 import Botpoison from '@botpoison/browser';
 import { faCircleNotch, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { LayoutGroup, motion } from 'framer-motion';
+import { LayoutGroup, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { type SubmitHandler, useForm, useFormState } from 'react-hook-form';
-import { getExternalServices } from '../../common/config-manager';
 import {
-	getClassNameProps,
-	getOrDefault,
-	getStatusCodeDescription,
-} from '../../common/utils/other';
+	BOTPOISON_PUBLIC_KEY,
+	CONTACT_FORM_POST_URL,
+} from '../../config/constants.ts';
+import { error, info } from '../../node/logger.ts';
 import {
 	AlertType,
 	type InputValidationOptions,
 	TooltipPosition,
-} from '../../types/components';
-import type { PropsWithClassName } from '../../types/components';
-import { GhostAlert } from '../ghost-alert';
-import { Checkbox } from './checkbox';
-import { MultilineTextInput } from './multiline-text-input';
-import { SolidButton } from './solid-button';
-import { TextInput } from './text-input';
+} from '../../types/components.ts';
+import type { PropsWithClassName } from '../../types/components.ts';
+import {
+	getClassNameProps,
+	getOrDefault,
+	getStatusCodeDescription,
+} from '../../utils/other.ts';
+import { GhostAlert } from '../ghost-alert.tsx';
+import { Checkbox } from './checkbox.tsx';
+import { MultilineTextInput } from './multiline-text-input.tsx';
+import { SolidButton } from './solid-button.tsx';
+import { TextInput } from './text-input.tsx';
 
 // Types
 
@@ -45,6 +49,8 @@ interface ContactFormFields {
 
 // Constants
 
+const EMAIL_REGEX =
+	/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i;
 const ALERT_DURATION_MS = 5000;
 
 const ALERT_PROPS = {
@@ -114,15 +120,13 @@ const INPUT_PROPS = {
 	},
 } as const;
 
-const EXTERNAL_SERVICES = getExternalServices();
-
 const botpoison = new Botpoison({
-	publicKey: EXTERNAL_SERVICES.botpoisonPublicKey,
+	publicKey: BOTPOISON_PUBLIC_KEY,
 });
 
 function getValidationOptions(
 	formState: FormState,
-): Partial<Record<keyof ContactFormFields, InputValidationOptions>> {
+): Record<keyof Omit<ContactFormFields, '_gotcha'>, InputValidationOptions> {
 	return {
 		name: {
 			maxLength: 50,
@@ -131,8 +135,7 @@ function getValidationOptions(
 		},
 		email: {
 			maxLength: 50,
-			pattern:
-				/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i,
+			pattern: EMAIL_REGEX,
 			required: true,
 			disabled: formState === FormState.Busy,
 		},
@@ -147,13 +150,13 @@ function getValidationOptions(
 
 // Compute the Botpoison solution. Returns a promise that resolves with the solution string
 async function computeBotPoisonSolution() {
-	console.debug('Computing Botpoison solution...');
+	info('Computing Botpoison solution...');
 
 	return new Promise<string>((resolve, reject) => {
 		botpoison
 			.challenge()
 			.then(({ solution }) => {
-				console.debug('Botpoison solution found');
+				info('Botpoison solution found');
 
 				resolve(solution);
 			})
@@ -191,22 +194,22 @@ export function ContactForm({ className }: PropsWithClassName) {
 	const handleSubmissionError = (errorMsg: string) => {
 		setFormState(FormState.Error);
 
-		console.error(`Something went wrong during form submission. ${errorMsg}`);
+		error(`Something went wrong during form submission. ${errorMsg}`);
 	};
 
 	const onSubmit: SubmitHandler<ContactFormFields> = async (formData) => {
 		setFormState(FormState.Busy);
 
-		console.debug('Waiting for Botpoison solution...');
+		info('Waiting for Botpoison solution...');
 
 		const requestBody = JSON.stringify({
 			_botpoison: await botpoisonSolution,
 			...formData,
 		});
 
-		console.debug('Submitting form with data:', requestBody);
+		info(`Submitting form with data: ${requestBody}`);
 
-		fetch(EXTERNAL_SERVICES.contactFormPostUrl, {
+		fetch(CONTACT_FORM_POST_URL, {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json',

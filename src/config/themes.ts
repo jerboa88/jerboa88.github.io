@@ -3,9 +3,9 @@
 	---------------------------
 */
 
-import { ThemeType, type ThemesConfig } from '../types/other';
+import { ThemeType, type ThemesConfig } from '../types/other.ts';
 
-export const themesConfig: ThemesConfig = {
+export const THEMES_CONFIG: ThemesConfig = {
 	[ThemeType.Light]: {
 		primary: '#0F766E', // TW Teal 700
 		secondary: '#E11D48', // TW Rose 600
@@ -36,4 +36,4 @@ export const themesConfig: ThemesConfig = {
 		'base-content': '#FFF', // Pure white
 		'neutral-content': '#E5E5E5', // TW Neutral 200
 	},
-};
+} as const;

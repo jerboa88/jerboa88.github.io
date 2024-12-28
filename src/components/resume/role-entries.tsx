@@ -3,8 +3,8 @@
 	----------------------------------------
 */
 
-import type { Role } from '../types/roles';
-import { ResumeEntry } from './resume-entry';
+import type { Role } from '../../types/content/roles.ts';
+import { ResumeDetailEntry } from './detail-entry.tsx';
 
 interface Props {
 	roles: Role[];
@@ -15,15 +15,15 @@ export function ResumeRoleEntries({ roles }: Props) {
 		<div className="flex flex-col gap-4">
 			{roles.map((role) => {
 				const title =
-					`${role.title} ${role?.type ? `(${role.type})` : ''}` as typeof role.title;
+					`${role.title} ${role?.category ? `(${role.category})` : ''}` as typeof role.title;
 
 				return (
-					<ResumeEntry
+					<ResumeDetailEntry
 						key={role.title}
 						title={title}
-						tagline={role.company}
-						taglineUrl={role.companyUrl}
-						taglineTooltip="View organization website"
+						tags={role.company}
+						tagsUrl={role.companyUrl}
+						tagsTooltip="View organization website"
 						bullets={role.bullets}
 						startDate={role.startDate}
 						endDate={role.endDate}

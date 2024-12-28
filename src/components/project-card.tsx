@@ -5,15 +5,15 @@
 
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faGlobe, faStar } from '@fortawesome/free-solid-svg-icons';
-import { PROJECTS_PATH } from '../common/constants';
-import { assertUnreachable, getClassNameProps } from '../common/utils/other';
-import type { PropsWithClassName } from '../types/components';
-import { type Project, ProjectCategory } from '../types/projects';
-import { Card } from './card';
-import { GhostButton } from './input/ghost-button';
-import { LinkWrapper } from './links/link-wrapper';
-import { Pill } from './pill';
-import { SubsectionHeading } from './text/subsection-heading';
+import { PROJECTS_PATH } from '../config/constants.ts';
+import type { PropsWithClassName } from '../types/components.ts';
+import { type Project, ProjectType } from '../types/content/projects.ts';
+import { assertUnreachable, getClassNameProps } from '../utils/other.ts';
+import { Card } from './card.tsx';
+import { GhostButton } from './input/ghost-button.tsx';
+import { LinkWrapper } from './links/link-wrapper.tsx';
+import { Pill } from './pill.tsx';
+import { SubsectionHeading } from './text/subsection-heading.tsx';
 
 // Types
 
@@ -33,11 +33,11 @@ function getViewSourceButton(
 	classNameProps: PropsWithClassName,
 ) {
 	if (!project.url) {
-		return <></>;
+		return null;
 	}
 
-	switch (project.category) {
-		case ProjectCategory.GithubRepo:
+	switch (project.type) {
+		case ProjectType.GithubRepo:
 			return (
 				<GhostButton
 					icon={faGithub}
@@ -47,7 +47,7 @@ function getViewSourceButton(
 				/>
 			);
 
-		case ProjectCategory.Other:
+		case ProjectType.Other:
 			return (
 				<GhostButton
 					icon={faGlobe}
@@ -82,8 +82,8 @@ export function ProjectCard({ project }: Props) {
 			<div className="flex flex-col justify-between items-start p-6 align-middle size-full text-ellipsis group">
 				<div className="flex flex-row justify-between items-center pr-2 w-full">
 					<Pill
-						text={project.type.name ?? 'Unknown'}
-						className={project.type.color}
+						text={project.category.name ?? 'Unknown'}
+						className={project.category.color}
 					/>
 					{viewSourceButton}
 				</div>

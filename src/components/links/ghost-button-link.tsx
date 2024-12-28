@@ -3,9 +3,10 @@
 	------------------------------------------------
 */
 
-import type { Button, Link } from '../../types/components';
-import { GhostButton } from '../input/ghost-button';
-import { LinkWrapper } from './link-wrapper';
+import type { Button, Link } from '../../types/components.ts';
+import { isDefined } from '../../utils/other.ts';
+import { GhostButton } from '../input/ghost-button.tsx';
+import { LinkWrapper } from './link-wrapper.tsx';
 
 interface Props extends Button, Link {}
 
@@ -15,8 +16,11 @@ export function GhostButtonLink({
 	rel,
 	...remainingProps
 }: Props) {
+	const isInternalProp = isDefined(isInternal) ? { isInternal } : {};
+	const relProp = isDefined(rel) ? { rel } : {};
+
 	return (
-		<LinkWrapper to={to} isInternal={isInternal} rel={rel} className="contents">
+		<LinkWrapper to={to} className="contents" {...isInternalProp} {...relProp}>
 			<GhostButton {...remainingProps} />
 		</LinkWrapper>
 	);

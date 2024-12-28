@@ -6,15 +6,13 @@ import type {
 	DefaultOptions,
 	JobOptions,
 } from 'gatsby-plugin-component-to-image/lib/types';
-import type { AbsolutePathString, BgColorString, UrlString } from './strings';
-
-/**
- * Config object used to define external services
- */
-export interface ExternalServicesConfig {
-	botpoisonPublicKey: `pk_${string}`;
-	contactFormPostUrl: UrlString;
-}
+import type { ProjectCategory } from './content/projects.ts';
+import type { RoleCategory } from './content/roles.ts';
+import type {
+	AbsolutePathString,
+	BgColorString,
+	UrlString,
+} from './strings.ts';
 
 /**
  * Config object used to define site metadata
@@ -34,7 +32,7 @@ export interface SiteMetadataConfig {
 		username: {
 			linkedin: string;
 			github: string;
-			twitter: string;
+			x: string;
 		};
 		location: {
 			city: Capitalize<string>;
@@ -72,7 +70,7 @@ export interface PagesMetadataConfig {
  */
 export enum SocialImageType {
 	OpenGraph = 'og',
-	Twitter = 'twitter',
+	X = 'x',
 }
 
 /**
@@ -81,8 +79,10 @@ export enum SocialImageType {
 export interface SocialImagesGenerationConfig {
 	defaults: Partial<DefaultOptions>;
 	types: {
-		[SocialImageType.OpenGraph]: Partial<JobOptions>;
-		[SocialImageType.Twitter]: Partial<JobOptions>;
+		[SocialImageType.OpenGraph]: Pick<JobOptions, 'size'> &
+			Partial<Omit<JobOptions, 'size'>>;
+		[SocialImageType.X]: Pick<JobOptions, 'size'> &
+			Partial<Omit<JobOptions, 'size'>>;
 	};
 }
 
@@ -92,7 +92,7 @@ export interface SocialImagesGenerationConfig {
 export interface SocialImagesMetadataProp {
 	socialImagesMetadata: {
 		[SocialImageType.OpenGraph]: JobOptions;
-		[SocialImageType.Twitter]: JobOptions;
+		[SocialImageType.X]: JobOptions;
 	};
 }
 
@@ -114,28 +114,28 @@ export enum ThemeType {
 /**
  * Colors for a single theme
  */
-export type Theme = Partial<{
+export type Theme = {
 	primary: string;
-	'primary-content': string;
 	secondary: string;
-	'secondary-content': string;
 	accent: string;
-	'accent-content': string;
 	neutral: string;
-	'neutral-content': string;
+	info: string;
+	success: string;
+	warning: string;
+	error: string;
 	'base-100': string;
 	'base-200': string;
 	'base-300': string;
 	'base-content': string;
-	info: string;
-	'info-content': string;
-	success: string;
-	'success-content': string;
-	warning: string;
-	'warning-content': string;
-	error: string;
-	'error-content': string;
-}>;
+	'primary-content'?: string;
+	'secondary-content'?: string;
+	'accent-content'?: string;
+	'neutral-content': string;
+	'info-content'?: string;
+	'success-content'?: string;
+	'warning-content'?: string;
+	'error-content'?: string;
+};
 
 /**
  * Config object used to define themes
@@ -146,34 +146,26 @@ export interface ThemesConfig {
 }
 
 /**
- * Color mappings for project and role types
- */
-interface ColorMappings {
-	[type: string]: BgColorString;
-}
-
-/**
  * Config object used to define color mappings
  */
 export interface ColorMappingsConfig {
 	default: BgColorString;
-	projectType: ColorMappings;
-	roleType: ColorMappings;
+	projectCategory: Record<ProjectCategory, BgColorString>;
+	roleCategory: Record<RoleCategory, BgColorString>;
 }
 
 /**
- * An enumeration of possible visibility states for entries
+ * A function that sorts two values of the same type
+ *
+ * @typeParam T - The type of the values to sort
+ * @returns A negative number if a should be sorted before b, a positive number if a should be sorted after b, or 0 if they are equal
  */
-export enum EntryVisibility {
-	Pin = 0,
-	Show = 1,
-	Hide = 2,
-}
+export type SortFn<T> = (a: T, b: T) => number;
 
 /**
- * An enumeration of possible page types where entries can be displayed
+ * A function that filters a value of a certain type
+ *
+ * @typeParam T - The type of the value to filter
+ * @returns True if the value should be included, false otherwise
  */
-export enum EntryPage {
-	Index = 'index',
-	Resume = 'resume',
-}
+export type FilterFn<T> = (value: T) => boolean;

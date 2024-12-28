@@ -7,11 +7,12 @@ import { loadBasic } from '@tsparticles/basic';
 import type { IOptions, RecursivePartial } from '@tsparticles/engine';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSquareShape } from '@tsparticles/shape-square';
-import { useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from 'motion/react';
 import { memo, useEffect, useState } from 'react';
-import { getTheme } from '../../common/config-manager';
-import { getClassNameProps } from '../../common/utils/other';
-import { ThemeType } from '../../types/other';
+import { getTheme } from '../../managers/config.ts';
+import { info } from '../../node/logger.ts';
+import { ThemeType } from '../../types/other.ts';
+import { getClassNameProps } from '../../utils/other.ts';
 
 // Constants
 
@@ -23,7 +24,7 @@ function UnmemoizedParticlesBackground() {
 	const [init, setInit] = useState(false);
 
 	const classNameProps = getClassNameProps(
-		'fixed top-0 left-0 size-full mix-blend-overlay transition-opacity ease-out duration-[2s]',
+		'fixed h-lvh w-lvh mix-blend-overlay transition-opacity ease-out duration-[2s]',
 		init ? 'opacity-100' : 'opacity-0', // Hide until loaded
 	);
 	const tsParticlesConfig: RecursivePartial<IOptions> = {
@@ -77,7 +78,7 @@ function UnmemoizedParticlesBackground() {
 		}).then(() => {
 			setInit(true);
 
-			console.debug('tsParticles engine has been loaded');
+			info('tsParticles engine has been loaded');
 		});
 	});
 

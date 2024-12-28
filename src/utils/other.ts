@@ -2,10 +2,15 @@
  * Assorted utility functions
  */
 
-import { panic } from '../../node/logger';
-import type { PropsWithClassName } from '../../types/components';
+import { panic } from '../node/logger.ts';
+import type { PropsWithClassName } from '../types/components.ts';
+import type { EmptyObject } from '../types/utils.ts';
 
 // Types
+
+type StringifyReplacerFn<T, U> =
+	| ((this: unknown, key: string, value: T) => U)
+	| undefined;
 
 /**
  * Returns the same type as the input object, but without any undefined/null properties
@@ -145,11 +150,11 @@ export function doesDeviceSupportHover() {
  */
 export function getOrDefault<T extends object, K extends keyof T, D>(
 	obj: T,
-	key: K | number | string | undefined,
+	key: string | number | symbol,
 	defaultValue?: D,
 ): T[K] | D {
-	if (key === undefined || !(key in obj)) {
-		if (defaultValue === undefined) {
+	if (!(isDefined(key) && key in obj)) {
+		if (!isDefined(defaultValue)) {
 			throw new Error(
 				`Key '${String(key)}' not found in object and no default value provided.`,
 			);
@@ -190,13 +195,34 @@ export function getClassNameProps(
 }
 
 /**
+ * When used in JSON.stringify, this function will replace any Set instances with an Array
+ *
+ * @typeParam T The type of the input value
+ * @param value The value of the property being stringified
+ * @returns The value to use in the stringified JSON
+ */
+function stringifyReplaceSetWithArray<T>(value: T) {
+	return value instanceof Set ? Array.from<T>(value) : value;
+}
+
+/**
  * Return a JSON string with human-readable formatting
  *
- * @param json - The JSON object to prettify
+ * @param obj - The JSON object to prettify
+ * @param replacerFn - A function to call for each element being stringified
  * @returns The prettified JSON string
  */
-export function prettify(json: object | undefined | null) {
-	return JSON.stringify(json, null, 2);
+export function prettify<T = unknown>(
+	obj: object | undefined | null,
+	replacerFn?: StringifyReplacerFn<T | T[], unknown>,
+) {
+	const compoundReplacerFn = (_key: string, value: T) => {
+		const newValue = stringifyReplaceSetWithArray(value);
+
+		return replacerFn ? replacerFn?.(_key, newValue) : newValue;
+	};
+
+	return JSON.stringify(obj, compoundReplacerFn, 2);
 }
 
 /**
@@ -223,20 +249,53 @@ export function limit<T>(array: T[], limit: number): T[] {
 }
 
 /**
+ * Returns the index of the first string in the array that includes the substring. Returns -1 if no match is found.
+ *
+ * @param array - An array of strings to search through
+ * @param substring - The substring to search for
+ * @returns The index of the first match, or -1 if no match is found
+ */
+export function findIndexOfSubstringInArray(
+	array: readonly string[],
+	substring: string,
+): number {
+	return array.findIndex((item) => item.includes(substring));
+}
+
+/**
  * Convert an array of objects into an object with a key-value pair
  *
  * @param array - An array of objects
- * @param key - The key to use as the new object key
+ * @param keyOrFn - The key to use as the new object key, or a function that returns the key
  * @returns An object with keys generated from items in the input array, along with the corresponding values from the input array
  */
-export function arrayToObject<T extends object, K extends keyof T>(
-	array: T[],
-	key: K,
-): Record<string, T> {
-	const keyValueMatrix = array.map((item) => [String(item[key]), item]);
+// export function arrayToMap<T extends object, K extends keyof T>(
+// 	array: T[],
+// 	key: K,
+// ): Map<string, T>;
 
-	return Object.fromEntries(keyValueMatrix);
-}
+// export function arrayToMap<T, K extends (item: T) => string>(
+// 	array: T[],
+// 	fn: K,
+// ): Map<string, T>;
+
+// export function arrayToMap<T, K extends keyof T | ((item: T) => string)>(
+// 	array: T[],
+// 	keyOrFn: K,
+// ): Map<string, T> {
+// 	let keyValueMatrix: [string, T][];
+
+// 	if (keyOrFn instanceof Function) {
+// 		keyValueMatrix = array.map((item) => [keyOrFn(item), item]);
+// 	} else {
+// 		keyValueMatrix = array.map((item) => [
+// 			String(item[keyOrFn as keyof T]),
+// 			item,
+// 		]);
+// 	}
+
+// 	return new Map(keyValueMatrix);
+// }
 
 /**
  * Remove all undefined/null properties from an object
@@ -252,4 +311,65 @@ export function removeUndefinedProps<T extends Record<string, unknown>>(
 	);
 
 	return Object.fromEntries(definedEntries) as WithoutUndefined<T>;
+}
+
+/**
+ * Get the keys of an object.
+ *
+ * @param obj The object to get the keys of.
+ * @returns An array of the keys of the object.
+ */
+export function keysOf<T extends object>(obj: T): (keyof T)[] {
+	return Object.keys(obj) as (keyof T)[];
+}
+
+/**
+ * If the property of an object is defined, apply the given function to it and return an object with that property.
+ *
+ * @typeParam T - The type of the object.
+ * @typeParam K - The type of the key.
+ * @typeParam R - The type of the return value.
+ * @param obj - The object to get the property from.
+ * @param key - The key of the property to get.
+ * @param fn - A function to apply to the property.
+ * @returns An object with the property with the function applied if it is defined, otherwise an empty object.
+ */
+export function objectFrom<T extends object, K extends keyof T, R>(
+	obj: T,
+	key: K,
+	fn: (property: NonNullable<T[K]>) => R,
+): { [P in K]: R } | EmptyObject;
+
+/**
+ * If the property of an object is defined, return an object with that property.
+ *
+ * @typeParam T - The type of the object.
+ * @typeParam K - The type of the key.
+ * @param obj - The object to get the property from.
+ * @param key - The key of the property to get.
+ * @returns An object with the property if it is defined, otherwise an empty object.
+ */
+export function objectFrom<T extends object, K extends keyof T>(
+	obj: T,
+	key: K,
+): { [P in K]: T[K] } | EmptyObject;
+
+export function objectFrom<T extends object, K extends keyof T, R>(
+	obj: T,
+	key: K,
+	fn?: (property: NonNullable<T[K]>) => R,
+): { [P in K]: R | T[K] } | EmptyObject {
+	if (key in obj && isDefined(obj[key])) {
+		if (isDefined(fn)) {
+			return {
+				[key]: fn(obj[key] as NonNullable<T[K]>),
+			} as { [P in K]: R };
+		}
+
+		return {
+			[key]: obj[key],
+		} as { [P in K]: T[K] };
+	}
+
+	return {};
 }

@@ -3,14 +3,14 @@
 	--------------------------------------------------------------
 */
 
-import { MotionConfig } from 'framer-motion';
+import { MotionConfig } from 'motion/react';
 import { type PropsWithChildren, StrictMode, lazy } from 'react';
-import { SPRING_TRANSITION_PROPS } from '../../common/constants';
-import { getClassNameProps } from '../../common/utils/other';
-import type { PageSection } from '../../types/components';
-import type { PropsWithClassName } from '../../types/components';
-import { Footer } from './footer';
-import { Header } from './header';
+import { SPRING_TRANSITION_PROPS } from '../../config/constants.ts';
+import type { PageSection } from '../../types/components.ts';
+import type { PropsWithClassName } from '../../types/components.ts';
+import { getClassNameProps } from '../../utils/other.ts';
+import { Footer } from './footer.tsx';
+import { Header } from './header.tsx';
 
 // Types
 
@@ -29,7 +29,7 @@ const BG_GRADIENT_PROPS = {
 };
 
 const ParticlesBackground = lazy(() =>
-	import('./particles-background').then((module) => ({
+	import('./particles-background.tsx').then((module) => ({
 		default: module.ParticlesBackground,
 	})),
 );

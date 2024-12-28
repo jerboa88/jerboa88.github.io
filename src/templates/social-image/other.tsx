@@ -5,12 +5,12 @@
 
 import type { PageProps } from 'gatsby';
 import { useCallback } from 'react';
-import { Section } from '../../components/layout/section';
-import { SignatureGhostButton } from '../../components/seo/signature-ghost-button';
-import { SocialImage } from '../../components/seo/social-image';
-import { Article } from '../../components/text/article';
-import type { ButtonElementRenderFunction } from '../../types/components';
-import type { OtherSocialImagePageContext } from '../../types/page-context';
+import { Section } from '../../components/layout/section.tsx';
+import { SignatureGhostButton } from '../../components/seo/signature-ghost-button.tsx';
+import { SocialImage } from '../../components/seo/social-image.tsx';
+import { Article } from '../../components/text/article.tsx';
+import type { ButtonElementRenderFn } from '../../types/components.ts';
+import type { OtherSocialImagePageContext } from '../../types/page-context.ts';
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function OtherSocialImageTemplate({
@@ -22,7 +22,7 @@ export default function OtherSocialImageTemplate({
 				className={className}
 				tooltipPosition={tooltipPosition}
 			/>
-		)) as ButtonElementRenderFunction,
+		)) as ButtonElementRenderFn,
 		[],
 	);
 
@@ -43,4 +43,4 @@ export default function OtherSocialImageTemplate({
 }
 
 // biome-ignore lint/performance/noBarrelFile: We need to export the Head component for Gatsby to recognize it
-export { SocialImageHead as Head } from '../../components/seo/social-image-head';
+export { SocialImageHead as Head } from '../../components/seo/social-image-head.tsx';

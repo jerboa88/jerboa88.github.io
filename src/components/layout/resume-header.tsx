@@ -9,16 +9,16 @@ import {
 	faLocationArrow,
 	faPhoneSquare,
 } from '@fortawesome/free-solid-svg-icons';
-import { getSiteMetadata } from '../../common/config-manager';
-import { CONTACT_PATH } from '../../common/constants';
-import { getStartIndexOfLastWord } from '../../common/utils/strings';
-import { getAbsoluteUrl, removeProtocol } from '../../common/utils/urls';
-import { Breakpoint, TooltipPosition } from '../../types/components';
-import type { CityAndStateString } from '../../types/strings';
-import { GhostButton } from '../input/ghost-button';
-import { GhostButtonLink } from '../links/ghost-button-link';
-import { Heading } from '../text/heading';
-import { ResponsiveText } from '../text/responsive-text';
+import { CONTACT_PATH } from '../../config/constants.ts';
+import { getSiteMetadata } from '../../managers/config.ts';
+import { Breakpoint, TooltipPosition } from '../../types/components.ts';
+import type { CityAndStateString } from '../../types/strings.ts';
+import { getStartIndexOfLastWord } from '../../utils/strings.ts';
+import { getAbsoluteUrl, removeProtocol } from '../../utils/urls.ts';
+import { GhostButton } from '../input/ghost-button.tsx';
+import { GhostButtonLink } from '../links/ghost-button-link.tsx';
+import { Heading } from '../text/heading.tsx';
+import { ResponsiveText } from '../text/responsive-text.tsx';
 
 // Constants
 

@@ -5,14 +5,14 @@
 
 import type { HeadProps, PageProps } from 'gatsby';
 import { useRef } from 'react';
-import { getSiteMetadata } from '../common/config-manager';
-import { getAbsoluteUrl } from '../common/utils/urls';
-import { PageLayout } from '../components/layout/page-layout';
-import { Section } from '../components/layout/section';
-import { SolidButtonLink } from '../components/links/solid-button-link';
-import { PageHead } from '../components/seo/page-head';
-import type { SocialImagesMetadataProp } from '../types/other';
-import type { NotFoundPageContext } from '../types/page-context';
+import { PageLayout } from '../components/layout/page-layout.tsx';
+import { Section } from '../components/layout/section.tsx';
+import { SolidButtonLink } from '../components/links/solid-button-link.tsx';
+import { PageHead } from '../components/seo/page-head.tsx';
+import { getSiteMetadata } from '../managers/config.ts';
+import type { SocialImagesMetadataProp } from '../types/other.ts';
+import type { NotFoundPageContext } from '../types/page-context.ts';
+import { getAbsoluteUrl } from '../utils/urls.ts';
 
 // Types
 
@@ -38,6 +38,7 @@ export default function NotFoundPage({
 		'\u0028\uFFE3\u30FD\uFF3F\u005F\u30FD\u005F\u0029\u005F\u005F\u0029',
 		'\uFF3C\u4E8C\u0029',
 	].join('\n');
+	const sectionRef = useRef<HTMLElement>(null);
 
 	return (
 		<PageLayout>
@@ -45,7 +46,7 @@ export default function NotFoundPage({
 			<div />
 			<Section
 				title={pageMetadata.shortTitle}
-				ref={useRef(null)}
+				ref={sectionRef}
 				className="items-center"
 			>
 				<div className="flex flex-col gap-8 items-center">

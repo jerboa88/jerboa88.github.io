@@ -5,13 +5,16 @@
 
 import type { Actions, NodePluginArgs } from 'gatsby';
 import { JSDOM } from 'jsdom';
-import { getProjectTypeColor, getSiteMetadata } from '../common/config-manager';
-import { isDefined } from '../common/utils/other';
-import { toKebabCase, toTitleCase } from '../common/utils/strings';
-import { getAbsoluteUrl } from '../common/utils/urls';
-import type { BaseProject } from '../types/projects';
-import type { UrlString } from '../types/strings';
-import { group, groupEnd, info, panic, warn } from './logger';
+import {
+	getProjectCategoryColor,
+	getSiteMetadata,
+} from '../managers/config.ts';
+import type { BaseProject } from '../types/content/projects.ts';
+import type { UrlString } from '../types/strings.ts';
+import { isDefined } from '../utils/other.ts';
+import { toKebabCase, toTitleCase } from '../utils/strings.ts';
+import { getAbsoluteUrl } from '../utils/urls.ts';
+import { endLogGroup, info, panic, startLogGroup, warn } from './logger.ts';
 
 // Types
 
@@ -43,7 +46,7 @@ type ParseReadmeDescriptionReturnValue = {
 type TransformReadmeReturnValue = ParseReadmeDescriptionReturnValue & {
 	name: string | null;
 	logoUrl: string | null;
-	type: string | null;
+	category: string | null;
 };
 
 type TransformRepoNodeReturnValue = {
@@ -55,6 +58,7 @@ type TransformRepoNodeReturnValue = {
 
 const SITE_METADATA = getSiteMetadata();
 const GITHUB_CONTENT_BASE_URL: UrlString = 'https://raw.githubusercontent.com';
+const PROJECT_CATEGORY_REGEX = /type-([\w.]+)-(\w+)/;
 
 // Extract a project's name from its README
 function parseReadmeName(
@@ -121,10 +125,10 @@ function parseReadmeLogoUrl(
 	return null;
 }
 
-// Extract a project's type from its README
-function parseReadmeType(
+// Extract a project's category from its README
+function parseReadmeCategory(
 	fragment: DocumentFragment,
-): TransformReadmeReturnValue['type'] {
+): TransformReadmeReturnValue['category'] {
 	const badgeImgUrl = fragment
 		.querySelector('.projectBadges > img[alt="Project type"]')
 		?.getAttribute('src');
@@ -133,16 +137,16 @@ function parseReadmeType(
 		return null;
 	}
 
-	const typeMatches = /type-([\w.]+)-(\w+)/.exec(badgeImgUrl);
+	const categoryMatches = PROJECT_CATEGORY_REGEX.exec(badgeImgUrl);
 
-	if (!typeMatches || typeMatches.length < 3) {
+	if (!categoryMatches || categoryMatches.length < 3) {
 		return null;
 	}
 
-	return toTitleCase(typeMatches[1]);
+	return toTitleCase(categoryMatches[1]);
 }
 
-// Parse a project's README to extract its name, description, and type
+// Parse a project's README to extract its name, description, and category
 function transformReadme(
 	slug: string,
 	owner: string,
@@ -156,7 +160,7 @@ function transformReadme(
 			descriptionHtml: null,
 			exposition: null,
 			logoUrl: null,
-			type: null,
+			category: null,
 		};
 	}
 
@@ -168,7 +172,7 @@ function transformReadme(
 		descriptionHtml,
 		exposition,
 		logoUrl: parseReadmeLogoUrl(slug, owner, fragment),
-		type: parseReadmeType(fragment),
+		category: parseReadmeCategory(fragment),
 	};
 }
 
@@ -235,13 +239,13 @@ function excludeRepo(
 		return true;
 	}
 
-	// Skip repos with unknown types, unless it's the author's profile repo
+	// Skip repos with unknown categories, unless it's the author's profile repo
 	if (
-		!isDefined(readmeInfo.type) &&
+		!isDefined(readmeInfo.category) &&
 		slug !== SITE_METADATA.author.username.github
 	) {
 		warn(
-			'README project type badge not found. Please add a project type badge to the README',
+			'README project category badge not found. Please add a project category badge to the README',
 		);
 
 		return true;
@@ -283,7 +287,7 @@ function transformGithubRepoNode(
 	// If description is null, it will be caught by excludeRepo
 	const description: string = githubRepoNode.description as string;
 
-	const githubRepo = {
+	const githubRepo: GithubRepoNodeProps = {
 		exposition: readmeInfo.exposition,
 		createdAt: createdAt,
 		description: description,
@@ -300,9 +304,9 @@ function transformGithubRepoNode(
 		slug,
 		stargazerCount: githubRepoNode.stargazerCount,
 		topics,
-		type: {
-			color: getProjectTypeColor(readmeInfo.type),
-			name: readmeInfo.type,
+		category: {
+			color: getProjectCategoryColor(readmeInfo.category),
+			name: readmeInfo.category,
 		},
 		updatedAt,
 		url: githubRepoNode.url,
@@ -360,7 +364,7 @@ export function transformGithubDataNode(
 		}
 
 		info(`Transforming GithubRepo node for '${githubRepoNode.name}'...`);
-		group();
+		startLogGroup();
 
 		const { githubRepo, readmeText } = transformGithubRepoNode(githubRepoNode);
 
@@ -372,8 +376,6 @@ export function transformGithubDataNode(
 			createContentDigest,
 		);
 
-		groupEnd();
+		endLogGroup();
 	}
-
-	groupEnd();
 }

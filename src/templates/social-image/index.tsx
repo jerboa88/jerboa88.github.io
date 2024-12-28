@@ -4,11 +4,11 @@
 */
 
 import type { PageProps } from 'gatsby';
-import { GhostButton } from '../../components/input/ghost-button';
-import { HeroHeader } from '../../components/layout/hero-header';
-import { SignatureGhostButton } from '../../components/seo/signature-ghost-button';
-import { SocialImage } from '../../components/seo/social-image';
-import type { IndexSocialImagePageContext } from '../../types/page-context';
+import { GhostButton } from '../../components/input/ghost-button.tsx';
+import { HeroHeader } from '../../components/layout/hero-header.tsx';
+import { SignatureGhostButton } from '../../components/seo/signature-ghost-button.tsx';
+import { SocialImage } from '../../components/seo/social-image.tsx';
+import type { IndexSocialImagePageContext } from '../../types/page-context.ts';
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function IndexSocialImageTemplate({
@@ -30,4 +30,4 @@ export default function IndexSocialImageTemplate({
 }
 
 // biome-ignore lint/performance/noBarrelFile: We need to export the Head component for Gatsby to recognize it
-export { SocialImageHead as Head } from '../../components/seo/social-image-head';
+export { SocialImageHead as Head } from '../../components/seo/social-image-head.tsx';

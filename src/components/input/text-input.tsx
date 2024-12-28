@@ -4,24 +4,25 @@
 */
 
 import { useCallback } from 'react';
-import { getClassNameProps } from '../../common/utils/other';
+import type { FieldValues } from 'react-hook-form';
 import type {
 	Input,
-	InputElementRenderFunction,
+	InputElementRenderFn,
 	InputOptions,
-} from '../../types/components';
-import { BaseInput } from './base-input';
+} from '../../types/components.ts';
+import { getClassNameProps } from '../../utils/other.ts';
+import { BaseInput } from './base-input.tsx';
 
 // Types
 
-interface Props extends Input {
+interface Props<T extends FieldValues> extends Input<T> {
 	inputOptions?: {
 		type?: string;
 		placeholder?: string;
 	} & InputOptions;
 }
 
-export function TextInput({
+export function TextInput<T extends FieldValues>({
 	inputClassName,
 	name,
 	inputOptions = {
@@ -29,7 +30,7 @@ export function TextInput({
 	},
 	errors,
 	...remainingProps
-}: Props) {
+}: Props<T>) {
 	const classNameProps = getClassNameProps(
 		'input border-2 border-base-content/5 w-full mix-blend-overlay bg-transparent shadow-md',
 		!!errors[name] && 'input-error',
@@ -40,8 +41,11 @@ export function TextInput({
 	// This will be passed to the base input component and called from there
 	const renderInput = useCallback(
 		((registerObj) => (
-			<input {...{ ...classNameProps, ...registerObj, ...inputOptions }} />
-		)) as InputElementRenderFunction,
+			<input
+				id={registerObj.name}
+				{...{ ...classNameProps, ...registerObj, ...inputOptions }}
+			/>
+		)) as InputElementRenderFn,
 		[],
 	);
 

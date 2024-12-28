@@ -4,37 +4,42 @@
 */
 
 import type { PropsWithChildren } from 'react';
-import { getClassNameProps } from '../../common/utils/other';
 import {
-	type ButtonElementRenderFunction,
+	type ButtonElementRenderFn,
 	TooltipPosition,
-} from '../../types/components';
-import type { PropsWithClassName } from '../../types/components';
-import { SectionHeading } from '../text/section-heading';
+} from '../../types/components.ts';
+import type { PropsWithClassName } from '../../types/components.ts';
+import { getClassNameProps } from '../../utils/other.ts';
+import { SectionHeading } from '../text/section-heading.tsx';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
+	headingClassName?: string;
 	title: string;
-	renderButton?: ButtonElementRenderFunction | undefined;
+	renderButton?: ButtonElementRenderFn | undefined;
 }
 
-export function SectionHeader({ className, title, renderButton }: Props) {
+export function SectionHeader({
+	className,
+	headingClassName,
+	title,
+	renderButton,
+}: Props) {
 	const classNameProps = getClassNameProps(
 		'w-full flex flex-row justify-between items-baseline',
 		className,
 	);
+	const headingClassNameProps = getClassNameProps(headingClassName);
 	const buttonElement = renderButton
 		? renderButton({
 				className: 'self-baseline',
 				tooltipPosition: TooltipPosition.Left,
 			})
-		: undefined;
+		: null;
 
 	return (
-		<>
-			<div {...classNameProps}>
-				<SectionHeading>{title}</SectionHeading>
-				{buttonElement}
-			</div>
-		</>
+		<div {...classNameProps}>
+			<SectionHeading {...headingClassNameProps}>{title}</SectionHeading>
+			{buttonElement}
+		</div>
 	);
 }

@@ -7,31 +7,28 @@ import {
 	faAngleDown,
 	faArrowUpRightFromSquare,
 } from '@fortawesome/free-solid-svg-icons';
-import { useInView } from 'framer-motion';
 import type { HeadProps, PageProps } from 'gatsby';
+import { useInView } from 'motion/react';
 import { Suspense, lazy, useCallback, useRef } from 'react';
-import {
-	getEmploymentRoles,
-	getSiteMetadata,
-} from '../../common/config-manager';
-import { USE_IN_VIEW_OPTIONS } from '../../common/constants';
-import { limit } from '../../common/utils/other';
-import { toKebabCase } from '../../common/utils/strings';
-import { HeroHeader } from '../../components/layout/hero-header';
-import { PageLayout } from '../../components/layout/page-layout';
-import { Section } from '../../components/layout/section';
-import { GhostButtonLink } from '../../components/links/ghost-button-link';
-import { Loader } from '../../components/loader';
-import { ProjectCardGallery } from '../../components/project-card-gallery';
-import { PageHead } from '../../components/seo/page-head';
-import { Article } from '../../components/text/article';
-import { Timeline } from '../../components/timeline';
+import { HeroHeader } from '../../components/layout/hero-header.tsx';
+import { PageLayout } from '../../components/layout/page-layout.tsx';
+import { Section } from '../../components/layout/section.tsx';
+import { GhostButtonLink } from '../../components/links/ghost-button-link.tsx';
+import { Loader } from '../../components/loader.tsx';
+import { ProjectCardGallery } from '../../components/project-card-gallery.tsx';
+import { PageHead } from '../../components/seo/page-head.tsx';
+import { Article } from '../../components/text/article.tsx';
+import { Timeline } from '../../components/timeline.tsx';
+import { INDEX_PATH, USE_IN_VIEW_OPTIONS } from '../../config/constants.ts';
+import { getSiteMetadata } from '../../managers/config.ts';
+import { getRolesForPage } from '../../managers/content/roles.ts';
 import type {
-	ButtonElementRenderFunction,
+	ButtonElementRenderFn,
 	PageSection,
-} from '../../types/components';
-import type { SocialImagesMetadataProp } from '../../types/other';
-import type { IndexPageContext } from '../../types/page-context';
+} from '../../types/components.ts';
+import type { SocialImagesMetadataProp } from '../../types/other.ts';
+import type { IndexPageContext } from '../../types/page-context.ts';
+import { toKebabCase } from '../../utils/strings.ts';
 
 // Types
 
@@ -40,10 +37,10 @@ type PageContext = IndexPageContext & SocialImagesMetadataProp;
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
-const EMPLOYMENT_ROLES = limit(getEmploymentRoles(), 2);
+const EMPLOYMENT_ROLES = getRolesForPage(INDEX_PATH).employment;
 
 const ContactForm = lazy(() =>
-	import('../../components/input/contact-form').then((module) => ({
+	import('../../components/input/contact-form.tsx').then((module) => ({
 		default: module.ContactForm,
 	})),
 );
@@ -83,7 +80,7 @@ export default function IndexPageTemplate({
 				flip
 				{...remainingProps}
 			/>
-		)) as ButtonElementRenderFunction,
+		)) as ButtonElementRenderFn,
 		[],
 	);
 
@@ -97,7 +94,7 @@ export default function IndexPageTemplate({
 				flip
 				{...remainingProps}
 			/>
-		)) as ButtonElementRenderFunction,
+		)) as ButtonElementRenderFn,
 		[],
 	);
 

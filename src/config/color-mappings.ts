@@ -3,11 +3,11 @@
 	---------------------------------------------------
 */
 
-import type { ColorMappingsConfig } from '../types/other';
+import type { ColorMappingsConfig } from '../types/other.ts';
 
-export const colorMappingsConfig: ColorMappingsConfig = {
+export const COLOR_MAPPINGS_CONFIG: ColorMappingsConfig = {
 	default: 'bg-rose-600',
-	projectType: {
+	projectCategory: {
 		'android app': 'bg-lime-600',
 		'cli app': 'bg-red-600',
 		'docker container': 'bg-blue-600',
@@ -22,8 +22,8 @@ export const colorMappingsConfig: ColorMappingsConfig = {
 		'web interface': 'bg-sky-600',
 		website: 'bg-sky-600',
 	},
-	roleType: {
+	roleCategory: {
 		internship: 'bg-rose-600',
-		'summer job': 'bg-rose-600',
+		seasonal: 'bg-rose-600',
 	},
-};
+} as const;
