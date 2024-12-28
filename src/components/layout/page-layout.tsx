@@ -3,7 +3,7 @@
 	--------------------------------------------------------------
 */
 
-import { MotionConfig } from 'framer-motion';
+import { MotionConfig } from 'motion/react';
 import { type PropsWithChildren, StrictMode, lazy } from 'react';
 import { SPRING_TRANSITION_PROPS } from '../../config/constants.ts';
 import type { PageSection } from '../../types/components.ts';

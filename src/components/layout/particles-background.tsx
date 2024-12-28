@@ -7,7 +7,7 @@ import { loadBasic } from '@tsparticles/basic';
 import type { IOptions, RecursivePartial } from '@tsparticles/engine';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSquareShape } from '@tsparticles/shape-square';
-import { useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from 'motion/react';
 import { memo, useEffect, useState } from 'react';
 import { getTheme } from '../../managers/config.ts';
 import { info } from '../../node/logger.ts';

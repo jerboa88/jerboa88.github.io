@@ -4,7 +4,7 @@
 	----------------------------------------------------------------------------------
 */
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import type { FieldValues } from 'react-hook-form';
 import {
 	AlertType,

@@ -5,7 +5,7 @@
 */
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { FADE_IN_ANIMATION_PROPS } from '../../config/constants.ts';
 import type { Button } from '../../types/components.ts';
 import { getClassNameProps, isDefined } from '../../utils/other.ts';

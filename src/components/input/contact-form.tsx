@@ -5,7 +5,7 @@
 
 import Botpoison from '@botpoison/browser';
 import { faCircleNotch, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { LayoutGroup, motion } from 'framer-motion';
+import { LayoutGroup, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { type SubmitHandler, useForm, useFormState } from 'react-hook-form';
 import {

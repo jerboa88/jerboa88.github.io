@@ -56,14 +56,14 @@ export const USE_IN_VIEW_OPTIONS = {
 	margin: '-68px',
 } as const;
 
-// Props for enabling a fade-in animation for a Framer Motion component
+// Props for enabling a fade-in animation for a Motion component
 export const FADE_IN_ANIMATION_PROPS = {
 	initial: FADE_TRANSITION_VARIANTS.hidden,
 	animate: FADE_TRANSITION_VARIANTS.show,
 	exit: FADE_TRANSITION_VARIANTS.hidden,
 } as const;
 
-// Props for setting a spring transition on a Framer Motion component
+// Props for setting a spring transition on a Motion component
 export const SPRING_TRANSITION_PROPS = {
 	transition: {
 		type: 'spring',

@@ -10,7 +10,7 @@ import {
 	faTriangleExclamation,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { FADE_IN_ANIMATION_PROPS } from '../config/constants.ts';
 import { AlertType } from '../types/components.ts';
 import type { PropsWithClassName } from '../types/components.ts';

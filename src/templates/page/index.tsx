@@ -7,8 +7,8 @@ import {
 	faAngleDown,
 	faArrowUpRightFromSquare,
 } from '@fortawesome/free-solid-svg-icons';
-import { useInView } from 'framer-motion';
 import type { HeadProps, PageProps } from 'gatsby';
+import { useInView } from 'motion/react';
 import { Suspense, lazy, useCallback, useRef } from 'react';
 import { HeroHeader } from '../../components/layout/hero-header.tsx';
 import { PageLayout } from '../../components/layout/page-layout.tsx';

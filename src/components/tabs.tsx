@@ -3,7 +3,7 @@
 	----------------------------------------------
 */
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView } from 'motion/react';
 import { USE_IN_VIEW_OPTIONS } from '../config/constants.ts';
 import { type PageSection, TooltipPosition } from '../types/components.ts';
 import { getClassNameProps } from '../utils/other.ts';

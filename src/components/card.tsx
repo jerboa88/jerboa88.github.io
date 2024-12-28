@@ -11,7 +11,7 @@ import {
 	useReducedMotion,
 	useSpring,
 	useTransform,
-} from 'framer-motion';
+} from 'motion/react';
 import type { PropsWithChildren } from 'react';
 import { SPRING_TRANSITION_PROPS } from '../config/constants.ts';
 import {
@@ -48,7 +48,7 @@ const HOVER_PROPS = {
 	transition: getTransitionWithoutRestProps(SPRING_TRANSITION_PROPS.transition),
 };
 
-// Remove the restDelta and restSpeed properties from a Framer Motion transition object
+// Remove the restDelta and restSpeed properties from a Motion transition object
 function getTransitionWithoutRestProps(
 	transition: Spring,
 ): AnimationProps['transition'] {

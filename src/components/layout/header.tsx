@@ -3,7 +3,7 @@
 	---------------------------------
 */
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { TITLE_LAYOUT_ID } from '../../config/constants.ts';
 import { getSiteMetadata } from '../../managers/config.ts';
 import { Breakpoint, type PageSection } from '../../types/components.ts';
