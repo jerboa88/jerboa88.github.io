@@ -70,7 +70,6 @@ export function BaseButton({
 		</AnimatePresence>
 	);
 	const commonButtonProps = {
-		'aria-label': computedButtonLabel,
 		...layoutProp,
 		...layoutRootProp,
 		...buttonClassNameProps,
@@ -78,7 +77,12 @@ export function BaseButton({
 	const buttonElement = isNotInteractive ? (
 		<motion.div {...commonButtonProps}>{buttonContentsElement}</motion.div>
 	) : (
-		<motion.button type={type} disabled={disabled} {...commonButtonProps}>
+		<motion.button
+			aria-label={computedButtonLabel}
+			type={type}
+			disabled={disabled}
+			{...commonButtonProps}
+		>
 			{buttonContentsElement}
 		</motion.button>
 	);
