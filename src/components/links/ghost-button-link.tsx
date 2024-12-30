@@ -8,7 +8,7 @@ import { isDefined } from '../../utils/other.ts';
 import { GhostButton } from '../input/ghost-button.tsx';
 import { LinkWrapper } from './link-wrapper.tsx';
 
-interface Props extends Button, Link {}
+type Props = Link & Omit<Button, 'isNotInteractive'>;
 
 export function GhostButtonLink({
 	to,
@@ -21,7 +21,7 @@ export function GhostButtonLink({
 
 	return (
 		<LinkWrapper to={to} className="contents" {...isInternalProp} {...relProp}>
-			<GhostButton {...remainingProps} />
+			<GhostButton {...remainingProps} isNotInteractive />
 		</LinkWrapper>
 	);
 }

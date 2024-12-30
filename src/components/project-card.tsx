@@ -40,6 +40,7 @@ function getViewSourceButton(
 		case ProjectType.GithubRepo:
 			return (
 				<GhostButton
+					isNotInteractive
 					icon={faGithub}
 					tooltipText={`View ${project.name} on GitHub`}
 					{...classNameProps}
@@ -50,6 +51,7 @@ function getViewSourceButton(
 		case ProjectType.Other:
 			return (
 				<GhostButton
+					isNotInteractive
 					icon={faGlobe}
 					tooltipText={'View project page'}
 					{...classNameProps}
@@ -107,6 +109,7 @@ export function ProjectCard({ project }: Props) {
 					</div>
 					{!!project.stargazerCount && (
 						<GhostButton
+							isNotInteractive
 							icon={faStar}
 							text={project.stargazerCount}
 							className="!p-0"
