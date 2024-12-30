@@ -83,6 +83,7 @@ export interface Button extends PropsWithClassName, PropsWithLayoutAnimations {
 	iconClassName?: string;
 	textClassName?: string;
 	tooltipClassName?: string;
+	isNotInteractive?: boolean;
 	type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
 	icon?: IconDefinition;
 	text?: string | number;

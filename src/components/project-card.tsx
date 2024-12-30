@@ -40,6 +40,7 @@ function getViewSourceButton(
 		case ProjectType.GithubRepo:
 			return (
 				<GhostButton
+					isNotInteractive
 					icon={faGithub}
 					tooltipText={`View ${project.name} on GitHub`}
 					{...classNameProps}
@@ -50,6 +51,7 @@ function getViewSourceButton(
 		case ProjectType.Other:
 			return (
 				<GhostButton
+					isNotInteractive
 					icon={faGlobe}
 					tooltipText={'View project page'}
 					{...classNameProps}
@@ -75,59 +77,59 @@ export function ProjectCard({ project }: Props) {
 		project,
 		viewSourceClassNameProps,
 	);
-
 	// Double negation is used for stargazerCount because 0 is evaluated as true for some reason
-	const cardElement = (
-		<Card outerClassName="size-full">
-			<div className="flex flex-col justify-between items-start p-6 align-middle size-full text-ellipsis group">
-				<div className="flex flex-row justify-between items-center pr-2 w-full">
-					<Pill
-						text={project.category.name ?? 'Unknown'}
-						className={project.category.color}
-					/>
-					{viewSourceButton}
-				</div>
-				<div className="flex flex-row justify-center w-full">
-					<div className="flex flex-col justify-center gap-4 p-10 h-full rounded-2xl z-16 text-wrap">
-						<SubsectionHeading className="font-semibold">
-							{project.name}
-						</SubsectionHeading>
-						<span className="text-wrap">{project.description}</span>
-					</div>
-				</div>
-				<div className="flex flex-row justify-between items-center gap-2 pr-2 w-full">
-					<div className="flex flex-row gap-2 justify-start items-center flex-wrap">
-						{project.languages.map((language) => (
-							<Pill
-								key={language}
-								text={language}
-								{...languagePillClassNameProps}
-							/>
-						))}
-					</div>
-					{!!project.stargazerCount && (
-						<GhostButton
-							icon={faStar}
-							text={project.stargazerCount}
-							className="!p-0"
-							iconClassName="text-xl"
-							textClassName="font-bold"
-							tooltipText="Number of stars"
-							disabled
-						/>
-					)}
+	const cardContentsElement = (
+		<div className="flex flex-col justify-between items-start p-6 align-middle size-full text-ellipsis group">
+			<div className="flex flex-row justify-between items-center pr-2 w-full">
+				<Pill
+					text={project.category.name ?? 'Unknown'}
+					className={project.category.color}
+				/>
+				{viewSourceButton}
+			</div>
+			<div className="flex flex-row justify-center w-full">
+				<div className="flex flex-col justify-center gap-4 p-10 h-full rounded-2xl z-16 text-wrap">
+					<SubsectionHeading className="font-semibold">
+						{project.name}
+					</SubsectionHeading>
+					<span className="text-wrap">{project.description}</span>
 				</div>
 			</div>
-		</Card>
+			<div className="flex flex-row justify-between items-center gap-2 pr-2 w-full">
+				<div className="flex flex-row gap-2 justify-start items-center flex-wrap">
+					{project.languages.map((language) => (
+						<Pill
+							key={language}
+							text={language}
+							{...languagePillClassNameProps}
+						/>
+					))}
+				</div>
+				{!!project.stargazerCount && (
+					<GhostButton
+						isNotInteractive
+						icon={faStar}
+						text={project.stargazerCount}
+						className="!p-0"
+						iconClassName="text-xl"
+						textClassName="font-bold"
+						tooltipText="Number of stars"
+						disabled
+					/>
+				)}
+			</div>
+		</div>
 	);
 
-	if (!project.url) {
-		return cardElement;
+	if (project.url) {
+		return (
+			<Card outerClassName="size-full">
+				<LinkWrapper to={`${PROJECTS_PATH}/${project.slug}`} isInternal>
+					{cardContentsElement}
+				</LinkWrapper>
+			</Card>
+		);
 	}
 
-	return (
-		<LinkWrapper to={`${PROJECTS_PATH}/${project.slug}`} isInternal>
-			{cardElement}
-		</LinkWrapper>
-	);
+	return <Card outerClassName="size-full">{cardContentsElement}</Card>;
 }

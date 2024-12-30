@@ -16,6 +16,7 @@ export function BaseButton({
 	iconClassName,
 	textClassName,
 	tooltipClassName,
+	isNotInteractive,
 	type = 'button',
 	icon,
 	text,
@@ -49,39 +50,40 @@ export function BaseButton({
 		: {};
 
 	const computedButtonLabel = tooltipText ?? String(text);
-
-	const buttonElement = (
+	const buttonContentsElement = (
+		<AnimatePresence mode="popLayout" initial={false}>
+			{icon && (
+				<motion.span key="icon" layout="position" {...FADE_IN_ANIMATION_PROPS}>
+					<FontAwesomeIcon icon={icon} {...iconClassNameProps} />
+				</motion.span>
+			)}
+			{text && (
+				<motion.span
+					key="text"
+					layout="position"
+					{...FADE_IN_ANIMATION_PROPS}
+					{...textClassNameProps}
+				>
+					{text}
+				</motion.span>
+			)}
+		</AnimatePresence>
+	);
+	const commonButtonProps = {
+		...layoutProp,
+		...layoutRootProp,
+		...buttonClassNameProps,
+	};
+	const buttonElement = isNotInteractive ? (
+		<motion.div {...commonButtonProps}>{buttonContentsElement}</motion.div>
+	) : (
 		<motion.button
 			aria-label={computedButtonLabel}
-			{...{
-				type,
-				disabled,
-				...layoutProp,
-				...layoutRootProp,
-				...buttonClassNameProps,
-			}}
+			type={type}
+			disabled={disabled}
+			{...commonButtonProps}
 		>
-			<AnimatePresence mode="popLayout" initial={false}>
-				{icon && (
-					<motion.span
-						key="icon"
-						layout="position"
-						{...FADE_IN_ANIMATION_PROPS}
-					>
-						<FontAwesomeIcon icon={icon} {...iconClassNameProps} />
-					</motion.span>
-				)}
-				{text && (
-					<motion.span
-						key="text"
-						layout="position"
-						{...FADE_IN_ANIMATION_PROPS}
-						{...textClassNameProps}
-					>
-						{text}
-					</motion.span>
-				)}
-			</AnimatePresence>
+			{buttonContentsElement}
 		</motion.button>
 	);
 

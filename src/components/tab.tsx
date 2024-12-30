@@ -20,18 +20,14 @@ export function Tab({ title, isActive }: Props) {
 		() => getClassNameProps('tab !py-0', isActive && 'tab-active'),
 		[isActive],
 	);
-	const indicatorElement = useMemo(
-		() =>
-			isActive ? (
-				<motion.div
-					key={title}
-					className="w-4 h-1 rounded-full bg-primary shadow-emboss"
-					layoutId="active-tab-indicator"
-				/>
-			) : (
-				<div key={title} className="w-4 h-1 bg-transparent rounded-full" />
-			),
-		[isActive, title],
+	const indicatorElement = isActive ? (
+		<motion.div
+			key={title}
+			className="w-4 h-1 rounded-full bg-primary shadow-emboss"
+			layoutId="active-tab-indicator"
+		/>
+	) : (
+		<div key={title} className="w-4 h-1 bg-transparent rounded-full" />
 	);
 
 	return (

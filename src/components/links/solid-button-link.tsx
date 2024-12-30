@@ -8,7 +8,7 @@ import { isDefined } from '../../utils/other.ts';
 import { SolidButton } from '../input/solid-button.tsx';
 import { LinkWrapper } from './link-wrapper.tsx';
 
-interface Props extends Button, Link {}
+type Props = Link & Omit<Button, 'isNotInteractive'>;
 
 export function SolidButtonLink({
 	to,
@@ -21,7 +21,7 @@ export function SolidButtonLink({
 
 	return (
 		<LinkWrapper to={to} {...isInternalProp} {...relProp}>
-			<SolidButton {...remainingProps} />
+			<SolidButton {...remainingProps} isNotInteractive />
 		</LinkWrapper>
 	);
 }

@@ -209,12 +209,12 @@ export function Card({
 			{...outerEventHandlerProps}
 		>
 			<motion.div
-				tabIndex={-1}
 				{...{
 					...middleStyleProps,
 					...middleHoverProps,
 					...middleClassNameProps,
 				}}
+				tabIndex={-1}
 			>
 				<div {...innerClassNameProps}>{children}</div>
 			</motion.div>
