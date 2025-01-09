@@ -4,9 +4,8 @@
 */
 
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faGlobe, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faCodeFork, faGlobe, faStar } from '@fortawesome/free-solid-svg-icons';
 import { PROJECTS_PATH } from '../config/constants.ts';
-import type { PropsWithClassName } from '../types/components.ts';
 import { type Project, ProjectType } from '../types/content/projects.ts';
 import { assertUnreachable, getClassNameProps } from '../utils/other.ts';
 import { Card } from './card.tsx';
@@ -28,13 +27,15 @@ const SHOW_ON_CARD_HOVER_STYLES =
 
 // Functions
 
-function getViewSourceButton(
-	project: Project,
-	classNameProps: PropsWithClassName,
-) {
+function ViewSourceButton({ project }: Props) {
 	if (!project.url) {
 		return null;
 	}
+
+	const classNameProps = getClassNameProps(
+		'!p-0 m-0',
+		SHOW_ON_CARD_HOVER_STYLES,
+	);
 
 	switch (project.type) {
 		case ProjectType.GithubRepo:
@@ -64,20 +65,59 @@ function getViewSourceButton(
 	}
 }
 
+function LanguagePills({ languages }: Pick<Project, 'languages'>) {
+	const classNameProps = getClassNameProps('border', SHOW_ON_CARD_HOVER_STYLES);
+
+	return (
+		<div className="flex flex-row gap-2 justify-start items-center flex-wrap">
+			{languages.map((language) => (
+				<Pill key={language} text={language} {...classNameProps} />
+			))}
+		</div>
+	);
+}
+
+function StargazerCountBadge({ project }: Props) {
+	// Hide if undefined or 0 stars
+	if (!project.stargazerCount) {
+		return null;
+	}
+
+	return (
+		<GhostButton
+			isNotInteractive
+			icon={faStar}
+			text={project.stargazerCount}
+			className="!p-0"
+			iconClassName="text-xl"
+			textClassName="font-bold"
+			tooltipText="Number of stars"
+			disabled
+		/>
+	);
+}
+
+function ForkCountBadge({ project }: Props) {
+	// Hide if undefined or 0 forks
+	if (!('forkCount' in project) || project.forkCount === 0) {
+		return null;
+	}
+
+	return (
+		<GhostButton
+			isNotInteractive
+			icon={faCodeFork}
+			text={project.forkCount}
+			className={`!p-0 ${SHOW_ON_CARD_HOVER_STYLES}`}
+			iconClassName="text-xl"
+			textClassName="font-bold"
+			tooltipText="Number of forks"
+			disabled
+		/>
+	);
+}
+
 export function ProjectCard({ project }: Props) {
-	const viewSourceClassNameProps = getClassNameProps(
-		'!p-0 m-0',
-		SHOW_ON_CARD_HOVER_STYLES,
-	);
-	const languagePillClassNameProps = getClassNameProps(
-		'border',
-		SHOW_ON_CARD_HOVER_STYLES,
-	);
-	const viewSourceButton = getViewSourceButton(
-		project,
-		viewSourceClassNameProps,
-	);
-	// Double negation is used for stargazerCount because 0 is evaluated as true for some reason
 	const cardContentsElement = (
 		<div className="flex flex-col justify-between items-start p-6 align-middle size-full text-ellipsis group">
 			<div className="flex flex-row justify-between items-center pr-2 w-full">
@@ -85,7 +125,7 @@ export function ProjectCard({ project }: Props) {
 					text={project.category.name ?? 'Unknown'}
 					className={project.category.color}
 				/>
-				{viewSourceButton}
+				<ViewSourceButton project={project} />
 			</div>
 			<div className="flex flex-row justify-center w-full">
 				<div className="flex flex-col justify-center gap-4 p-10 h-full rounded-2xl z-16 text-wrap">
@@ -96,27 +136,11 @@ export function ProjectCard({ project }: Props) {
 				</div>
 			</div>
 			<div className="flex flex-row justify-between items-center gap-2 pr-2 w-full">
-				<div className="flex flex-row gap-2 justify-start items-center flex-wrap">
-					{project.languages.map((language) => (
-						<Pill
-							key={language}
-							text={language}
-							{...languagePillClassNameProps}
-						/>
-					))}
+				<LanguagePills languages={project.languages} />
+				<div className="flex flex-row gap-6 justify-start items-center flex-wrap">
+					<ForkCountBadge project={project} />
+					<StargazerCountBadge project={project} />
 				</div>
-				{!!project.stargazerCount && (
-					<GhostButton
-						isNotInteractive
-						icon={faStar}
-						text={project.stargazerCount}
-						className="!p-0"
-						iconClassName="text-xl"
-						textClassName="font-bold"
-						tooltipText="Number of stars"
-						disabled
-					/>
-				)}
 			</div>
 		</div>
 	);
