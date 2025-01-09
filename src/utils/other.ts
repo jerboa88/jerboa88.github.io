@@ -183,14 +183,42 @@ export function getStatusCodeDescription(statusCode: number): string {
 /**
  * Combine multiple class names into a single string
  *
+ * @param baseClassName - The base class name
+ * @param classNames - The class names to combine
+ * @returns An object containing the combined class name string
+ */
+export function getClassNameProps(
+	baseClassName: string,
+	...classNames: (string | false | undefined)[]
+): Required<PropsWithClassName>;
+
+/**
+ * Combine multiple class names into a single string
+ *
+ * @param classNames - The class names to combine
+ * @returns An object containing the combined class name string, or an empty object if no class names are provided
+ */
+export function getClassNameProps(
+	...classNames: (string | false | undefined)[]
+): PropsWithClassName;
+
+/**
+ * Combine multiple class names into a single string
+ *
  * @param classNames - The class names to combine
  * @returns An object containing the combined class name string
  */
 export function getClassNameProps(
 	...classNames: (string | false | undefined)[]
-): PropsWithClassName {
+): EmptyObject | Required<PropsWithClassName> {
+	const filteredClassNames = classNames.filter((className) => className);
+
+	if (filteredClassNames.length === 0) {
+		return {};
+	}
+
 	return {
-		className: classNames.filter((className) => className).join(' '),
+		className: filteredClassNames.join(' '),
 	};
 }
 
