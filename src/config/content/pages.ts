@@ -96,9 +96,9 @@ export const PAGES_CONTENT_CONFIG: PagesContentConfig = {
 			},
 		},
 		[ContentType.Projects]: {
-			limit: 3,
+			limit: 4,
 			sortFn: createdAtSortFn,
-			[EntryVisibility.Pin]: ['on-my-way'],
+			[EntryVisibility.Pin]: [],
 			[EntryVisibility.Show]: [],
 			[EntryVisibility.Hide]: [
 				'168421',
@@ -107,6 +107,7 @@ export const PAGES_CONTENT_CONFIG: PagesContentConfig = {
 				'dotfiles',
 				'game-maps',
 				'image-signer',
+				'internal-domain-name-calculator-for-true-charts-apps',
 				'jerboa88-github-io',
 				'jerboa88',
 				'rtg-for-outlook',
