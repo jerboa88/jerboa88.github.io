@@ -71,6 +71,21 @@ export function getSiteMetadata(): SiteMetadata {
 	const authorFullName: Capitalize<string> =
 		`${config.author.name.first} ${config.author.name.last}` as typeof config.author.name.first;
 
+	const authorPhone = process.env.AUTHOR_PHONE;
+	const authorEmail = process.env.AUTHOR_EMAIL;
+
+	if (!isDefined(authorPhone)) {
+		warn(
+			'Missing AUTHOR_PHONE environment variable. This info will not be included on the resume',
+		);
+	}
+
+	if (!isDefined(authorEmail)) {
+		warn(
+			'Missing AUTHOR_EMAIL environment variable. This info will not be included on the resume',
+		);
+	}
+
 	return {
 		shortTitle: authorFullName,
 		title:
@@ -90,8 +105,8 @@ export function getSiteMetadata(): SiteMetadata {
 			jobTitle: config.author.jobTitle,
 			alumniOf: config.author.alumniOf,
 			imageUrl: config.author.imageUrl,
-			phone: process.env.AUTHOR_PHONE,
-			email: process.env.AUTHOR_EMAIL,
+			phone: authorPhone,
+			email: authorEmail,
 			username: {
 				github: config.author.username.github,
 				x: config.author.username.x,
