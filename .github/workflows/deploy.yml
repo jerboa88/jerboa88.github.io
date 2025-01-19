@@ -27,8 +27,8 @@ defaults:
 
 jobs:
   build:
-		# Puppeteer doesn't work on 24.04 yet due to new AppArmor policies that prevent Chromium from running.
-		# See https://github.com/puppeteer/puppeteer/issues/12818 and https://issues.chromium.org/issues/373753919
+    # Puppeteer doesn't work on 24.04 yet due to new AppArmor policies that prevent Chromium from running.
+    # See https://github.com/puppeteer/puppeteer/issues/12818 and https://issues.chromium.org/issues/373753919
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
