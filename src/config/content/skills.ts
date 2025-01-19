@@ -13,7 +13,6 @@ export const SKILLS_CONFIG: SkillsConfig = {
 		'HTML',
 		'Java',
 		'JavaScript/TypeScript',
-		'Kotlin',
 		'Lua',
 		'Python',
 		'R',
@@ -23,6 +22,7 @@ export const SKILLS_CONFIG: SkillsConfig = {
 		// Uncommon
 		'Bash',
 		'Datalog',
+		'Kotlin',
 		'Liquid Template Language',
 		'Lisp',
 		'MIPS Assembly',

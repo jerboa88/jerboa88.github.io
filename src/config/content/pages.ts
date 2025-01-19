@@ -84,12 +84,30 @@ export const PAGES_CONTENT_CONFIG: PagesContentConfig = {
 		[ContentType.Skills]: {
 			[SkillType.Languages]: {
 				limit: 10,
+				[EntryVisibility.Hide]: [
+					'Bash',
+					'Datalog',
+					'Kotlin',
+					'Liquid Template Language',
+					'Lisp',
+					'MIPS Assembly',
+					'Nix',
+				],
 			},
 			[SkillType.Technologies]: {
 				limit: 10,
+				[EntryVisibility.Hide]: [
+					'CUDA',
+					'Electron',
+					'Gulp',
+					'Jekyll',
+					'NumPy',
+					'Regular Expressions',
+				],
 			},
 			[SkillType.Tools]: {
 				limit: 0,
+				[EntryVisibility.Hide]: ['Blender', 'GIMP', 'Inkscape', 'Slack'],
 			},
 			[SkillType.Topics]: {
 				limit: 0,
@@ -103,6 +121,7 @@ export const PAGES_CONTENT_CONFIG: PagesContentConfig = {
 			[EntryVisibility.Hide]: [
 				'168421',
 				'CMPUT301W20T24-H03/on-my-way',
+				'cringe-craft',
 				'custom-url-shortener',
 				'dotfiles',
 				'game-maps',
@@ -111,7 +130,9 @@ export const PAGES_CONTENT_CONFIG: PagesContentConfig = {
 				'jerboa88-github-io',
 				'jerboa88',
 				'rtg-for-outlook',
+				'shared-file-finder-for-google-drive',
 				'tinyi18n',
+				'watch-history-exporter-for-amazon-prime-video',
 			],
 		},
 	},
