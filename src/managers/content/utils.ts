@@ -83,8 +83,12 @@ export function filterEntries<T>(
 
 			info(`📌 Pinned '${entryId}'`);
 		} else if (
-			// If NOT (hiddenByConfig OR hiddenByFn) OR shownByFn OR shownByConfig
-			!(pageHiddenEntryIds.has(entryId) || doHideEntry?.(entry)) ||
+			// If NOT (showPinnedOnly OR hiddenByConfig OR hiddenByFn) OR shownByFn OR shownByConfig
+			!(
+				pageContentEntryConfig.showPinnedOnly ||
+				pageHiddenEntryIds.has(entryId) ||
+				doHideEntry?.(entry)
+			) ||
 			doShowEntry?.(entry) ||
 			pageShownEntryIds.has(entryId)
 		) {

@@ -32,6 +32,7 @@ export enum EntryVisibility {
  *
  * @param limit The maximum number of entries to display.
  * @param sortFn A function used to sort the entries.
+ * @param showPinnedOnly Whether to only show pinned entries.
  * @param [EntryVisibility.Pin] A list of IDs of entries to pin.
  * @param [EntryVisibility.Show] A list of IDs of entries to show.
  * @param [EntryVisibility.Hide] A list of IDs of entries to hide.
@@ -39,6 +40,7 @@ export enum EntryVisibility {
 export type PageContentEntryConfig<T> = {
 	limit?: number;
 	sortFn?: SortFn<T>;
+	showPinnedOnly?: boolean;
 	[EntryVisibility.Pin]?: string[];
 	[EntryVisibility.Show]?: string[];
 	[EntryVisibility.Hide]?: string[];
