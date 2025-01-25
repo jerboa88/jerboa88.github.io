@@ -6,7 +6,13 @@ import type { SortFn } from '../other.ts';
 import type { AbsolutePathString } from '../strings.ts';
 import type { Project } from './projects.ts';
 import { type Role, RoleType } from './roles.ts';
-import { type Skill, SkillType } from './skills.ts';
+import {
+	type LanguageSkill,
+	SkillType,
+	type TechnologySkill,
+	type ToolSkill,
+	type TopicSkill,
+} from './skills.ts';
 
 export enum ContentType {
 	Roles = 'roles',
@@ -30,6 +36,8 @@ export enum EntryVisibility {
 /**
  * Config object used to define a single content entry
  *
+ * @typeParam T The type of the entry.
+ * @typeParam K The type of the entry's ID.
  * @param limit The maximum number of entries to display.
  * @param sortFn A function used to sort the entries.
  * @param showPinnedOnly Whether to only show pinned entries.
@@ -37,13 +45,13 @@ export enum EntryVisibility {
  * @param [EntryVisibility.Show] A list of IDs of entries to show.
  * @param [EntryVisibility.Hide] A list of IDs of entries to hide.
  */
-export type PageContentEntryConfig<T> = {
+export type PageContentEntryConfig<T, K extends string = string> = {
 	limit?: number;
 	sortFn?: SortFn<T>;
 	showPinnedOnly?: boolean;
-	[EntryVisibility.Pin]?: string[];
-	[EntryVisibility.Show]?: string[];
-	[EntryVisibility.Hide]?: string[];
+	[EntryVisibility.Pin]?: K[];
+	[EntryVisibility.Show]?: K[];
+	[EntryVisibility.Hide]?: K[];
 };
 
 /**
@@ -56,10 +64,13 @@ export interface PageContentConfig {
 		[RoleType.Volunteering]: PageContentEntryConfig<Role>;
 	};
 	[ContentType.Skills]: {
-		[SkillType.Languages]: PageContentEntryConfig<Skill>;
-		[SkillType.Technologies]: PageContentEntryConfig<Skill>;
-		[SkillType.Tools]: PageContentEntryConfig<Skill>;
-		[SkillType.Topics]: PageContentEntryConfig<Skill>;
+		[SkillType.Languages]: PageContentEntryConfig<LanguageSkill, LanguageSkill>;
+		[SkillType.Technologies]: PageContentEntryConfig<
+			TechnologySkill,
+			TechnologySkill
+		>;
+		[SkillType.Tools]: PageContentEntryConfig<ToolSkill, ToolSkill>;
+		[SkillType.Topics]: PageContentEntryConfig<TopicSkill, TopicSkill>;
 	};
 	[ContentType.Projects]: PageContentEntryConfig<Project>;
 }

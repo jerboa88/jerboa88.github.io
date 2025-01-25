@@ -13,9 +13,89 @@ export enum SkillType {
 }
 
 /**
+ * A union of string literals representing all language skills
+ */
+export type LanguageSkill =
+	| 'Bash'
+	| 'C/C++'
+	| 'CSS'
+	| 'Datalog'
+	| 'HTML'
+	| 'Java'
+	| 'JavaScript/TypeScript'
+	| 'Kotlin'
+	| 'Liquid Template Language'
+	| 'Lisp'
+	| 'Lua'
+	| 'MIPS Assembly'
+	| 'Nix'
+	| 'Python'
+	| 'R'
+	| 'SASS/SCSS'
+	| 'SQL'
+	| 'VBA';
+
+/**
+ * A union of string literals representing all technology skills
+ */
+export type TechnologySkill =
+	| 'CUDA'
+	| 'Django'
+	| 'Docker'
+	| 'Electron'
+	| 'FastAPI'
+	| 'GatsbyJS'
+	| 'Firebase'
+	| 'Git'
+	| 'Gulp'
+	| 'JSP'
+	| 'Jekyll'
+	| 'Jest'
+	| 'JUnit'
+	| 'Kubernetes'
+	| 'Linux'
+	| 'Next.js'
+	| 'Node.js'
+	| 'NumPy'
+	| 'Oracle DB'
+	| 'PostgreSQL'
+	| 'Puppeteer'
+	| 'React'
+	| 'Regular Expressions'
+	| 'Spring Framework'
+	| 'SQLite'
+	| 'Tailwind CSS'
+	| 'Vue'
+	| 'Webpack';
+
+/**
+ * A union of string literals representing all tool skills
+ */
+export type ToolSkill =
+	| 'Android Studio'
+	| 'Blender'
+	| 'GIMP'
+	| 'GitHub'
+	| 'Inkscape'
+	| 'Jira'
+	| 'Slack'
+	| 'Visual Studio Code'
+	| 'Visual Studio';
+
+/**
+ * A union of string literals representing all topic skills
+ */
+export type TopicSkill =
+	| 'Agile Methodologies'
+	| 'Code Review'
+	| 'Communication'
+	| 'OOP'
+	| 'Unit Testing';
+
+/**
  * A type representing a skill
  */
-export type Skill = Capitalize<string>;
+export type Skill = LanguageSkill | TechnologySkill | ToolSkill | TopicSkill;
 
 /**
  * Config object used to define skills
@@ -26,8 +106,8 @@ export type Skill = Capitalize<string>;
  * @param topics - A list of topics
  */
 export type SkillsConfig = {
-	[SkillType.Languages]: Skill[];
-	[SkillType.Technologies]: Skill[];
-	[SkillType.Tools]: Skill[];
-	[SkillType.Topics]: Skill[];
+	[SkillType.Languages]: readonly LanguageSkill[];
+	[SkillType.Technologies]: readonly TechnologySkill[];
+	[SkillType.Tools]: readonly ToolSkill[];
+	[SkillType.Topics]: readonly TopicSkill[];
 };
