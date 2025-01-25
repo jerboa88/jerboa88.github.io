@@ -40,11 +40,11 @@ export const SKILLS_CONFIG: SkillsConfig = {
 		'Next.js',
 		'Node.js',
 		'PostgreSQL',
-		'React.js',
+		'React',
 		'Spring Framework',
 		'SQLite',
 		'Tailwind CSS',
-		'Vue.js',
+		'Vue',
 		'Webpack',
 		// Uncommon
 		'CUDA',
