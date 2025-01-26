@@ -84,6 +84,7 @@ export const PAGES_CONTENT_CONFIG: PagesContentConfig = {
 		[ContentType.Skills]: {
 			[SkillType.Languages]: {
 				limit: 10,
+				showPinnedOnly: true,
 				[EntryVisibility.Hide]: [
 					'Bash',
 					'Datalog',
@@ -96,6 +97,7 @@ export const PAGES_CONTENT_CONFIG: PagesContentConfig = {
 			},
 			[SkillType.Technologies]: {
 				limit: 10,
+				showPinnedOnly: true,
 				[EntryVisibility.Hide]: [
 					'CUDA',
 					'Electron',
@@ -121,7 +123,7 @@ export const PAGES_CONTENT_CONFIG: PagesContentConfig = {
 			},
 		},
 		[ContentType.Projects]: {
-			limit: 4,
+			limit: 3,
 			sortFn: createdAtSortFn,
 			[EntryVisibility.Pin]: [],
 			[EntryVisibility.Show]: [],
