@@ -63,11 +63,11 @@ export default function ResumePageTemplate({
 			ref: useRef(null),
 		},
 		skills: {
-			title: 'Skills',
+			title: 'Relevant Skills',
 			ref: useRef(null),
 		},
 		projects: {
-			title: 'Projects',
+			title: 'Relevant Projects',
 			ref: useRef(null),
 		},
 	};
