@@ -19,6 +19,9 @@ export function ResumeProjectEntries({ projects }: Props) {
 				const titleUrlProp = isDefined(project.url)
 					? { titleUrl: project.url }
 					: {};
+				const subtitleProp = isDefined(project.category.name)
+					? { subtitle: project.category.name }
+					: {};
 				const expositionSentence = project.exposition
 					? toSentence(project.exposition)
 					: null;
@@ -33,6 +36,7 @@ export function ResumeProjectEntries({ projects }: Props) {
 						bullets={[expositionSentence ?? descriptionSentence]}
 						endDate={new Date(project.createdAt)}
 						{...titleUrlProp}
+						{...subtitleProp}
 					/>
 				);
 			})}
