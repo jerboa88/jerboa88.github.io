@@ -22,12 +22,15 @@ export enum RoleType {
 /**
  * Possible role categories
  */
-export type RoleCategory = 'seasonal' | 'internship';
+export enum RoleCategory {
+	Internship = 'Internship',
+	SeasonalJob = 'Seasonal Job',
+}
 
 /**
  * A base role with common fields
  *
- * @param category A string describing the category of the role (ex. 'internship', 'seasonal', etc.).
+ * @param category A string describing the category of the role (ex. 'Internship', 'Seasonal Job', etc.).
  * @param title The title of the role.
  * @param company The name of the company.
  * @param companyUrl The URL of the company's .website.

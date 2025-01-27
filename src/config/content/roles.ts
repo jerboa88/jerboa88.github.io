@@ -3,12 +3,16 @@
 	----------------
 */
 
-import { RoleType, type RolesConfig } from '../../types/content/roles.ts';
+import {
+	RoleCategory,
+	RoleType,
+	type RolesConfig,
+} from '../../types/content/roles.ts';
 
 export const ROLES_CONFIG: RolesConfig = {
 	[RoleType.Employment]: [
 		{
-			category: 'internship',
+			category: RoleCategory.Internship,
 			title: 'Systems Analyst',
 			company: 'Haemonetics Corporation',
 			companyUrl: 'https://www.haemonetics.com/',
@@ -25,7 +29,7 @@ export const ROLES_CONFIG: RolesConfig = {
 			],
 		},
 		{
-			category: 'seasonal',
+			category: RoleCategory.SeasonalJob,
 			title: 'Ramp Agent',
 			company: 'Airport Terminal Services',
 			companyUrl: 'https://www.atsstl.com/',
@@ -38,7 +42,7 @@ export const ROLES_CONFIG: RolesConfig = {
 			],
 		},
 		{
-			category: 'seasonal',
+			category: RoleCategory.SeasonalJob,
 			title: 'General Production Laborer',
 			company: 'Universal Handling Equipment Ltd.',
 			companyUrl: 'https://www.universalhandling.com/',
@@ -54,7 +58,7 @@ export const ROLES_CONFIG: RolesConfig = {
 			],
 		},
 		{
-			category: 'seasonal',
+			category: RoleCategory.SeasonalJob,
 			title: 'General Production Laborer',
 			company: 'Universal Handling Equipment Ltd.',
 			companyUrl: 'https://www.universalhandling.com/',
@@ -70,7 +74,7 @@ export const ROLES_CONFIG: RolesConfig = {
 			],
 		},
 		{
-			category: 'seasonal',
+			category: RoleCategory.SeasonalJob,
 			title: 'Afternoon Paper Carrier',
 			company: 'Red Deer Advocate',
 			companyUrl: 'https://www.reddeeradvocate.com/',
@@ -84,7 +88,7 @@ export const ROLES_CONFIG: RolesConfig = {
 			],
 		},
 		{
-			category: 'seasonal',
+			category: RoleCategory.SeasonalJob,
 			title: 'Shop Assistant',
 			company: 'Universal Handling Equipment Ltd.',
 			companyUrl: 'https://www.universalhandling.com/',

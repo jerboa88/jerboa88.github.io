@@ -3,6 +3,7 @@
 	---------------------------------------------------
 */
 
+import { RoleCategory } from '../types/content/roles.ts';
 import type { ColorMappingsConfig } from '../types/other.ts';
 
 export const COLOR_MAPPINGS_CONFIG: ColorMappingsConfig = {
@@ -23,7 +24,7 @@ export const COLOR_MAPPINGS_CONFIG: ColorMappingsConfig = {
 		website: 'bg-sky-600',
 	},
 	roleCategory: {
-		internship: 'bg-rose-600',
-		seasonal: 'bg-rose-600',
+		[RoleCategory.Internship]: 'bg-rose-600',
+		[RoleCategory.SeasonalJob]: 'bg-rose-600',
 	},
 } as const;
