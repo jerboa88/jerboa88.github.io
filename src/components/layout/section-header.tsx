@@ -9,13 +9,14 @@ import {
 	TooltipPosition,
 } from '../../types/components.ts';
 import type { PropsWithClassName } from '../../types/components.ts';
+import type { Maybe } from '../../types/utils.ts';
 import { getClassNameProps } from '../../utils/other.ts';
 import { SectionHeading } from '../text/section-heading.tsx';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
 	headingClassName?: string;
 	title: string;
-	renderButton?: ButtonElementRenderFn | undefined;
+	renderButton?: Maybe<ButtonElementRenderFn>;
 }
 
 export function SectionHeader({

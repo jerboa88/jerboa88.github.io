@@ -7,7 +7,7 @@ import { Tags } from '../tags.tsx';
 
 interface Props {
 	title: string;
-	items: Capitalize<string>[];
+	items: readonly string[];
 }
 
 export function ResumeSummaryEntry({ title, items }: Props) {

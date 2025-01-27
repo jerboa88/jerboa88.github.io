@@ -14,6 +14,7 @@ import {
 } from 'motion/react';
 import type { PropsWithChildren } from 'react';
 import { SPRING_TRANSITION_PROPS } from '../config/constants.ts';
+import type { Maybe } from '../types/utils.ts';
 import {
 	clamp,
 	doesDeviceSupportHover,
@@ -141,15 +142,13 @@ export function Card({
 
 	// Event handlers
 
-	let handleMouseMove:
-		| ((event: React.MouseEvent<HTMLDivElement>) => void)
-		| undefined;
-	let handleMouseEnter:
-		| ((event: React.MouseEvent<HTMLDivElement>) => void)
-		| undefined;
-	let handleMouseLeave:
-		| ((event: React.MouseEvent<HTMLDivElement>) => void)
-		| undefined;
+	let handleMouseMove: Maybe<(event: React.MouseEvent<HTMLDivElement>) => void>;
+	let handleMouseEnter: Maybe<
+		(event: React.MouseEvent<HTMLDivElement>) => void
+	>;
+	let handleMouseLeave: Maybe<
+		(event: React.MouseEvent<HTMLDivElement>) => void
+	>;
 
 	// Set the mouse Z position to the min value when the mouse is pressed down
 	const handleMouseDown = () => {

@@ -23,6 +23,7 @@ import type {
 	SentenceString,
 	UrlString,
 } from '../types/strings.ts';
+import type { Maybe } from '../types/utils.ts';
 import { isDefined } from '../utils/other.ts';
 
 // Types
@@ -44,8 +45,8 @@ type SiteMetadata = {
 		jobTitle: Capitalize<string>;
 		alumniOf: Capitalize<string>;
 		imageUrl: UrlString;
-		phone: string | undefined;
-		email: string | undefined;
+		phone: Maybe<string>;
+		email: Maybe<string>;
 		username: {
 			github: string;
 			x: string;
@@ -178,10 +179,10 @@ export function getTheme(themeName: keyof ThemesConfig): Theme {
 
 // Returns the color for a given project category
 export function getProjectCategoryColor(
-	projectCategory: string | undefined | null,
+	projectCategory: Maybe<string> | null,
 ): BgColorString | '' {
 	const colorMap = COLOR_MAPPINGS_CONFIG.projectCategory;
-	const key = projectCategory?.toLowerCase();
+	const key = projectCategory;
 
 	if (isDefined(key)) {
 		if (key in colorMap) {
@@ -196,10 +197,10 @@ export function getProjectCategoryColor(
 
 // Returns the color for a given role category
 export function getRoleCategoryColor(
-	roleCategory: string | undefined | null,
+	roleCategory: Maybe<string> | null,
 ): BgColorString | '' {
 	const colorMap = COLOR_MAPPINGS_CONFIG.roleCategory;
-	const key = roleCategory?.toLowerCase();
+	const key = roleCategory;
 
 	if (isDefined(key)) {
 		if (key in colorMap) {

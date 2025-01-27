@@ -7,6 +7,7 @@ import { motion } from 'motion/react';
 import { TITLE_LAYOUT_ID } from '../../config/constants.ts';
 import { getSiteMetadata } from '../../managers/config.ts';
 import { Breakpoint, type PageSection } from '../../types/components.ts';
+import type { Maybe } from '../../types/utils.ts';
 import { getClassNameProps, isDefined } from '../../utils/other.ts';
 import { getStartIndexOfLastWord } from '../../utils/strings.ts';
 import { Divider } from '../divider.tsx';
@@ -17,7 +18,7 @@ import { ResponsiveText } from '../text/responsive-text.tsx';
 // Types
 
 interface Props {
-	expandTitle?: boolean | undefined;
+	expandTitle?: Maybe<boolean>;
 	sections: PageSection[];
 }
 

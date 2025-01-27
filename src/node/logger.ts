@@ -4,6 +4,7 @@
  */
 
 import type { Reporter } from 'gatsby';
+import type { Maybe } from '../types/utils.ts';
 
 // Constants
 
@@ -11,7 +12,7 @@ const TAB_SIZE = 2;
 
 // Runtime vars
 
-let reporter: Reporter | undefined;
+let reporter: Maybe<Reporter>;
 let indentLevel = 0;
 let indentString = '';
 

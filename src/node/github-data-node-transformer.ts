@@ -11,6 +11,7 @@ import {
 } from '../managers/config.ts';
 import type { BaseProject } from '../types/content/projects.ts';
 import type { UrlString } from '../types/strings.ts';
+import type { Maybe } from '../types/utils.ts';
 import { isDefined } from '../utils/other.ts';
 import { toKebabCase, toTitleCase } from '../utils/strings.ts';
 import { getAbsoluteUrl } from '../utils/urls.ts';
@@ -51,7 +52,7 @@ type TransformReadmeReturnValue = ParseReadmeDescriptionReturnValue & {
 
 type TransformRepoNodeReturnValue = {
 	githubRepo: GithubRepoNodeProps | null;
-	readmeText: string | undefined | null;
+	readmeText: Maybe<string> | null;
 };
 
 // Constants

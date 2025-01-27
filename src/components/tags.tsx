@@ -7,7 +7,7 @@ import type { PropsWithClassName } from '../types/components.ts';
 import { Tag } from './tag.tsx';
 
 interface Props extends PropsWithClassName {
-	titles: string[];
+	titles: readonly string[];
 }
 
 export function Tags({ titles }: Props) {

@@ -20,6 +20,7 @@ import {
 	ProjectType,
 } from '../../types/content/projects.ts';
 import { SkillType } from '../../types/content/skills.ts';
+import type { Maybe } from '../../types/utils.ts';
 import { findIndexOfSubstringInArray, objectFrom } from '../../utils/other.ts';
 import { assertIsDefined } from '../../utils/other.ts';
 import { prettify } from '../../utils/other.ts';
@@ -37,7 +38,7 @@ const SITE_METADATA = getSiteMetadata();
 
 let cachedGithubRepoProjects: GithubRepoProject[] = [];
 let cachedOtherProjects: OtherProject[] = [];
-let cachedAuthorBioHtml: string | undefined;
+let cachedAuthorBioHtml: Maybe<string>;
 
 // Types
 
@@ -114,7 +115,7 @@ async function fetchGithubRepoProjects(
 		);
 	}
 
-	const githubRepoNodes: Queries.GithubRepo[] | undefined =
+	const githubRepoNodes: Maybe<Queries.GithubRepo[]> =
 		response.data?.allGithubRepo.nodes;
 
 	assertIsDefined(

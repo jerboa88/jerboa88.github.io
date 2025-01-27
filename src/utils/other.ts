@@ -4,13 +4,13 @@
 
 import { panic } from '../node/logger.ts';
 import type { PropsWithClassName } from '../types/components.ts';
-import type { EmptyObject } from '../types/utils.ts';
+import type { EmptyObject, Maybe } from '../types/utils.ts';
 
 // Types
 
-type StringifyReplacerFn<T, U> =
-	| ((this: unknown, key: string, value: T) => U)
-	| undefined;
+type StringifyReplacerFn<T, U> = Maybe<
+	(this: unknown, key: string, value: T) => U
+>;
 
 /**
  * Returns the same type as the input object, but without any undefined/null properties
@@ -189,7 +189,7 @@ export function getStatusCodeDescription(statusCode: number): string {
  */
 export function getClassNameProps(
 	baseClassName: string,
-	...classNames: (string | false | undefined)[]
+	...classNames: Maybe<string | false>[]
 ): Required<PropsWithClassName>;
 
 /**
@@ -199,7 +199,7 @@ export function getClassNameProps(
  * @returns An object containing the combined class name string, or an empty object if no class names are provided
  */
 export function getClassNameProps(
-	...classNames: (string | false | undefined)[]
+	...classNames: Maybe<string | false>[]
 ): PropsWithClassName;
 
 /**
@@ -209,7 +209,7 @@ export function getClassNameProps(
  * @returns An object containing the combined class name string
  */
 export function getClassNameProps(
-	...classNames: (string | false | undefined)[]
+	...classNames: Maybe<string | false>[]
 ): EmptyObject | Required<PropsWithClassName> {
 	const filteredClassNames = classNames.filter((className) => className);
 
@@ -241,7 +241,7 @@ function stringifyReplaceSetWithArray<T>(value: T) {
  * @returns The prettified JSON string
  */
 export function prettify<T = unknown>(
-	obj: object | undefined | null,
+	obj: Maybe<object> | null,
 	replacerFn?: StringifyReplacerFn<T | T[], unknown>,
 ) {
 	const compoundReplacerFn = (_key: string, value: T) => {

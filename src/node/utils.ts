@@ -9,15 +9,16 @@ import { INDEX_PATH, SOCIAL_IMAGES_PATH } from '../config/constants.ts';
 import { getSocialImageGenerationConfigForType } from '../managers/config.ts';
 import { SocialImageType } from '../types/other.ts';
 import type { AbsolutePathString } from '../types/strings.ts';
+import type { Maybe } from '../types/utils.ts';
 import { assertIsDefined } from '../utils/other.ts';
 import { removeTrailingSlash } from '../utils/urls.ts';
 import { info } from './logger.ts';
 
 // Runtime variables
 
-let gatsbyCreatePage: Actions['createPage'] | undefined;
-let gatsbyDeletePage: Actions['deletePage'] | undefined;
-let gatsbyCreateRedirect: Actions['createRedirect'] | undefined;
+let gatsbyCreatePage: Maybe<Actions['createPage']>;
+let gatsbyDeletePage: Maybe<Actions['deletePage']>;
+let gatsbyCreateRedirect: Maybe<Actions['createRedirect']>;
 
 // Types
 
