@@ -3,6 +3,7 @@
  */
 
 import { Breakpoint } from '../../types/components.ts';
+import type { Maybe } from '../../types/utils.ts';
 import { keysOf } from '../../utils/other.ts';
 
 // Types
@@ -11,10 +12,10 @@ interface Props {
 	text: string;
 	breakpoints: {
 		[Breakpoint.Default]: number;
-		[Breakpoint.Sm]?: number | undefined;
-		[Breakpoint.Md]?: number | undefined;
-		[Breakpoint.Lg]?: number | undefined;
-		[Breakpoint.Xl]?: number | undefined;
+		[Breakpoint.Sm]?: Maybe<number>;
+		[Breakpoint.Md]?: Maybe<number>;
+		[Breakpoint.Lg]?: Maybe<number>;
+		[Breakpoint.Xl]?: Maybe<number>;
 	};
 }
 

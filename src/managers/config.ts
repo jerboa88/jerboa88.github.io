@@ -23,7 +23,7 @@ import type {
 	SentenceString,
 	UrlString,
 } from '../types/strings.ts';
-import type { Maybe } from '../types/utils.ts';
+import type { Maybe, Nullable } from '../types/utils.ts';
 import { isDefined } from '../utils/other.ts';
 
 // Types
@@ -179,7 +179,7 @@ export function getTheme(themeName: keyof ThemesConfig): Theme {
 
 // Returns the color for a given project category
 export function getProjectCategoryColor(
-	projectCategory: Maybe<string> | null,
+	projectCategory: Maybe<Nullable<string>>,
 ): BgColorString | '' {
 	const colorMap = COLOR_MAPPINGS_CONFIG.projectCategory;
 	const key = projectCategory;
@@ -197,7 +197,7 @@ export function getProjectCategoryColor(
 
 // Returns the color for a given role category
 export function getRoleCategoryColor(
-	roleCategory: Maybe<string> | null,
+	roleCategory: Maybe<Nullable<string>>,
 ): BgColorString | '' {
 	const colorMap = COLOR_MAPPINGS_CONFIG.roleCategory;
 	const key = roleCategory;

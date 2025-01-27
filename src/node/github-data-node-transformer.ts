@@ -11,7 +11,7 @@ import {
 } from '../managers/config.ts';
 import type { BaseProject } from '../types/content/projects.ts';
 import type { UrlString } from '../types/strings.ts';
-import type { Maybe } from '../types/utils.ts';
+import type { Maybe, Nullable } from '../types/utils.ts';
 import { isDefined } from '../utils/other.ts';
 import { toKebabCase, toTitleCase } from '../utils/strings.ts';
 import { getAbsoluteUrl } from '../utils/urls.ts';
@@ -21,16 +21,16 @@ import { endLogGroup, info, panic, startLogGroup, warn } from './logger.ts';
 
 // Fields used to create a GithubRepo node
 type GithubRepoNodeProps = BaseProject & {
-	descriptionHtml: string | null;
+	descriptionHtml: Nullable<string>;
 	forkCount: number;
-	homepageUrl: string | null;
+	homepageUrl: Nullable<string>;
 	isFork: boolean;
-	licenseInfo: {
+	licenseInfo: Nullable<{
 		name: string;
-		spdxId: string | null;
-		url: string | null;
-	} | null;
-	logoUrl: string | null;
+		spdxId: Nullable<string>;
+		url: Nullable<string>;
+	}>;
+	logoUrl: Nullable<string>;
 	openGraphImageUrl: string;
 	owner: string;
 	stargazerCount: number;
@@ -40,19 +40,19 @@ type GithubRepoNodeProps = BaseProject & {
 };
 
 type ParseReadmeDescriptionReturnValue = {
-	descriptionHtml: string | null;
-	exposition: string | null;
+	descriptionHtml: Nullable<string>;
+	exposition: Nullable<string>;
 };
 
 type TransformReadmeReturnValue = ParseReadmeDescriptionReturnValue & {
-	name: string | null;
-	logoUrl: string | null;
-	category: string | null;
+	name: Nullable<string>;
+	logoUrl: Nullable<string>;
+	category: Nullable<string>;
 };
 
 type TransformRepoNodeReturnValue = {
-	githubRepo: GithubRepoNodeProps | null;
-	readmeText: Maybe<string> | null;
+	githubRepo: Nullable<GithubRepoNodeProps>;
+	readmeText: Maybe<Nullable<string>>;
 };
 
 // Constants

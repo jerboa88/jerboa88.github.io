@@ -4,7 +4,7 @@
 
 import { panic } from '../node/logger.ts';
 import type { PropsWithClassName } from '../types/components.ts';
-import type { EmptyObject, Maybe } from '../types/utils.ts';
+import type { EmptyObject, Maybe, Nullable } from '../types/utils.ts';
 
 // Types
 
@@ -241,7 +241,7 @@ function stringifyReplaceSetWithArray<T>(value: T) {
  * @returns The prettified JSON string
  */
 export function prettify<T = unknown>(
-	obj: Maybe<object> | null,
+	obj: Maybe<Nullable<object>>,
 	replacerFn?: StringifyReplacerFn<T | T[], unknown>,
 ) {
 	const compoundReplacerFn = (_key: string, value: T) => {

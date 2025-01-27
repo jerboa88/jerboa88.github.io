@@ -4,11 +4,12 @@
 */
 
 import type { PropsWithClassName } from '../../types/components.ts';
+import type { Maybe } from '../../types/utils.ts';
 import { getClassNameProps } from '../../utils/other.ts';
 
 interface Props extends PropsWithClassName {
-	startDate?: Date | undefined;
-	endDate?: Date | undefined;
+	startDate?: Maybe<Date>;
+	endDate?: Maybe<Date>;
 }
 
 export function DateRange({ className, startDate, endDate }: Props) {
