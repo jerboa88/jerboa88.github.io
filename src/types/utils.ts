@@ -23,3 +23,11 @@ export type Overwrite<T, U extends object> = Omit<T, keyof U> & U;
  * @returns A new type that is either T or undefined
  */
 export type Maybe<T> = T | undefined;
+
+/**
+ * Allow a type to be null
+ *
+ * @typeParam T - The base type
+ * @returns A new type that is either T or null
+ */
+export type Nullable<T> = T | null;
