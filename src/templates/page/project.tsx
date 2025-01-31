@@ -103,6 +103,7 @@ export const Head = ({
 		description: project.description,
 		path: location.pathname,
 	};
+	const computedStargazerCount = project.stargazerCount ?? 0;
 
 	let githubRepoProjectProps = {};
 
@@ -143,6 +144,13 @@ export const Head = ({
 				'@id': JSON_LD_AUTHOR_PATH,
 			},
 			url: getAbsoluteUrl(location.pathname).toString(),
+			aggregateRating: {
+				'@type': 'AggregateRating',
+				bestRating: 1,
+				worstRating: 1,
+				ratingValue: 1,
+				ratingCount: computedStargazerCount,
+			},
 			offers: {
 				'@type': 'Offer',
 				price: 0,
