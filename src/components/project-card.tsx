@@ -8,7 +8,7 @@ import { faCodeFork, faGlobe, faStar } from '@fortawesome/free-solid-svg-icons';
 import { PROJECTS_PATH } from '../config/constants.ts';
 import { type Project, ProjectType } from '../types/content/projects.ts';
 import { assertUnreachable, getClassNameProps } from '../utils/other.ts';
-import { toFormattedNumber } from '../utils/strings.ts';
+import { toReadableNumber } from '../utils/strings.ts';
 import { Card } from './card.tsx';
 import { GhostButton } from './input/ghost-button.tsx';
 import { LinkWrapper } from './links/link-wrapper.tsx';
@@ -88,7 +88,7 @@ function StargazerCountBadge({ project }: Props) {
 		<GhostButton
 			isNotInteractive
 			icon={faStar}
-			text={toFormattedNumber(project.stargazerCount)}
+			text={toReadableNumber(project.stargazerCount)}
 			className="!p-0"
 			iconClassName="text-xl"
 			textClassName="font-bold"
@@ -108,7 +108,7 @@ function ForkCountBadge({ project }: Props) {
 		<GhostButton
 			isNotInteractive
 			icon={faCodeFork}
-			text={toFormattedNumber(project.forkCount)}
+			text={toReadableNumber(project.forkCount)}
 			className={`!p-0 ${SHOW_ON_CARD_HOVER_STYLES}`}
 			iconClassName="text-xl"
 			textClassName="font-bold"
