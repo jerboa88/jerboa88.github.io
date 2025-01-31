@@ -277,6 +277,22 @@ export function limit<T>(array: T[], limit: number): T[] {
 }
 
 /**
+ * Round a number down to a specified precision
+ *
+ * @param number The number to round down
+ * @param precision The number of decimal places to round to (default: 0)
+ * @returns The rounded number
+ * @example
+ * roundDown(1.23) // 1
+ * roundDown(1.23, 1) // 1.2
+ */
+export function roundDown(number: number, precision = 0) {
+	const factor = 10 ** precision;
+
+	return Math.floor(number * factor) / factor;
+}
+
+/**
  * Returns the index of the first string in the array that includes the substring. Returns -1 if no match is found.
  *
  * @param array - An array of strings to search through
