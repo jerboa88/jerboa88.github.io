@@ -15,11 +15,8 @@ import {
 import type { PropsWithChildren } from 'react';
 import { SPRING_TRANSITION_PROPS } from '../config/constants.ts';
 import type { Maybe } from '../types/utils.ts';
-import {
-	clamp,
-	doesDeviceSupportHover,
-	getClassNameProps,
-} from '../utils/other.ts';
+import { clamp } from '../utils/numbers.ts';
+import { doesDeviceSupportHover, getClassNameProps } from '../utils/other.ts';
 
 // Types
 

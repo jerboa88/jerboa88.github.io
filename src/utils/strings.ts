@@ -3,7 +3,7 @@
  */
 
 import type { SentenceString } from '../types/strings.ts';
-import { roundDown } from './other.ts';
+import { roundDown } from './numbers.ts';
 
 // Constants
 
