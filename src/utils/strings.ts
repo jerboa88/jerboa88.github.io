@@ -3,6 +3,7 @@
  */
 
 import type { SentenceString } from '../types/strings.ts';
+import { roundDown } from './numbers.ts';
 
 // Constants
 
@@ -67,6 +68,26 @@ export function toSentence(string: string): SentenceString {
 	}
 
 	return `${capitalizedString}.`;
+}
+
+/**
+ * Take a number and return it formatted as a string with a 'k' suffix if it is greater than 1000
+ *
+ * @param number The number to format
+ * @returns The number formatted as a string with a 'k' suffix if it is greater than 1000
+ * @example
+ * toReadableNumber(123) // 123
+ * toReadableNumber(1234) // 1.2k
+ * toReadableNumber(12345) // 12k
+ */
+export function toReadableNumber(number: number) {
+	if (number < 1000) {
+		return number.toString();
+	}
+
+	const decimalPlaces = number < 10000 ? 1 : 0;
+
+	return `${roundDown(number / 1000, decimalPlaces)}k`;
 }
 
 /**
