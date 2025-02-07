@@ -172,6 +172,48 @@ function parseReadmeCategory(
 	return toTitleCase(categoryMatches[1]);
 }
 
+/**
+ * Extract a project's metadata from its README
+ *
+ * @remarks
+ *
+ * Metadata is stored in the README as reference-style links with the key being the link label and the value being the link destination. The key must be prefixed with `meta:`, e.g. `[meta:key]: # (value)`.
+ *
+ * @param readmeText - The Markdown text of the README file
+ * @param key - The metadata key to extract
+ * @param allowMultipleValues - Whether to extract multiple values from the metadata key as an array
+ * @returns An array of values if `allowMultipleValues` is `true`, otherwise a single value, or `null` if the metadata key is not found
+ */
+function parseReadmeMetadata(
+	readmeText: string,
+	key: keyof typeof METADATA_REGEX,
+	allowMultipleValues: true,
+): string[];
+function parseReadmeMetadata(
+	readmeText: string,
+	key: keyof typeof METADATA_REGEX,
+	allowMultipleValues?: false,
+): Nullable<string>;
+function parseReadmeMetadata(
+	readmeText: string,
+	key: keyof typeof METADATA_REGEX,
+	allowMultipleValues = false,
+): string[] | Nullable<string> {
+	const matches = METADATA_REGEX[key].exec(readmeText);
+
+	if (!isDefined(matches) || matches.length < 2) {
+		warn(`README ${key} not found`);
+
+		return allowMultipleValues ? [] : null;
+	}
+
+	if (allowMultipleValues) {
+		return matches[1].split(',').map((item) => item.trim());
+	}
+
+	return matches[1].trim();
+}
+
 // Parse a project's README to extract its name, description, and category
 function transformReadme(
 	slug: string,
