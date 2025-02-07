@@ -350,53 +350,48 @@ function buildSlug(name: string, ownerUsername: string) {
 function transformGithubRepoNode(
 	githubRepoNode: Queries.GithubDataDataUserRepositoriesNodes,
 ): TransformRepoNodeReturnValue {
-	const slug = buildSlug(githubRepoNode.name, githubRepoNode.owner.login);
-	const languages = transformLanguages(githubRepoNode?.languages);
-	const topics = transformTopics(githubRepoNode?.repositoryTopics);
-	const createdAt = new Date(githubRepoNode.createdAt);
-	const updatedAt = new Date(githubRepoNode.updatedAt);
-	const readmeInfo = transformReadme(
-		slug,
-		githubRepoNode.owner.login,
-		githubRepoNode.readme,
-	);
-	// Use the name from the README if it exists as it's more likely to be formatted correctly
-	const name = readmeInfo.name || toTitleCase(githubRepoNode.name);
+	const {
+		name: repoName,
+		owner: { login: repoOwnerUsername },
+		repositoryTopics: repoTags,
+		createdAt: repoCreatedAt,
+		updatedAt: repoUpdatedAt,
+		readme: repoReadme,
+		description: repoDescription,
+		languages: repoLanguages,
+		...remainingRepoProps
+	} = githubRepoNode;
+	const slug = buildSlug(repoName, repoOwnerUsername);
+	const {
+		name: readmeName,
+		category: readmeCategory,
+		languages: readmeLanguages,
+		...remainingReadmeProps
+	} = transformReadme(slug, repoOwnerUsername, repoReadme);
 
-	if (doExcludeRepo(slug, githubRepoNode.description, readmeInfo.category)) {
+	if (doExcludeRepo(slug, repoDescription, readmeCategory)) {
 		return {
 			githubRepo: null,
 			readmeText: null,
 		};
 	}
 
-	// If description is null, it will be caught by excludeRepo
-	const description: string = githubRepoNode.description as string;
-
 	const githubRepo: GithubRepoNodeProps = {
-		exposition: readmeInfo.exposition,
-		createdAt: createdAt,
-		description: description,
-		descriptionHtml: readmeInfo.descriptionHtml,
-		forkCount: githubRepoNode.forkCount,
-		homepageUrl: githubRepoNode.homepageUrl,
-		isFork: githubRepoNode.isFork,
-		languages: languages,
-		logoUrl: readmeInfo.logoUrl,
-		licenseInfo: githubRepoNode.licenseInfo,
-		name,
-		openGraphImageUrl: githubRepoNode.openGraphImageUrl,
-		owner: githubRepoNode.owner.login,
+		...remainingRepoProps,
+		...remainingReadmeProps,
+		createdAt: repoCreatedAt,
+		description: repoDescription,
+		languages: transformLanguages(repoLanguages),
+		tags: transformTopics(repoTags),
+		// Use the name from the README if it exists as it's more likely to be formatted correctly
+		name: readmeName || toTitleCase(repoName),
 		slug,
-		stargazerCount: githubRepoNode.stargazerCount,
-		topics,
+		updatedAt: repoUpdatedAt,
+		owner: repoOwnerUsername,
 		category: {
-			color: getProjectCategoryColor(readmeInfo.category),
-			name: readmeInfo.category,
+			color: getProjectCategoryColor(readmeCategory),
+			name: readmeCategory,
 		},
-		updatedAt,
-		url: githubRepoNode.url,
-		usesCustomOpenGraphImage: githubRepoNode.usesCustomOpenGraphImage,
 	};
 
 	return {
