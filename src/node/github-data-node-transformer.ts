@@ -61,7 +61,6 @@ type TransformRepoNodeReturnValue = {
 
 const SITE_METADATA = getSiteMetadata();
 const GITHUB_CONTENT_BASE_URL: UrlString = 'https://raw.githubusercontent.com';
-const PROJECT_CATEGORY_REGEX = /type-([\w.]+)-(\w+)/;
 const METADATA_REGEX = {
 	exposition: buildMetadataRegex('exposition'),
 	category: buildMetadataRegex('category'),
@@ -151,27 +150,6 @@ function parseReadmeLogoUrl(
 	return null;
 }
 
-// Extract a project's category from its README
-function parseReadmeCategory(
-	fragment: DocumentFragment,
-): TransformReadmeReturnValue['category'] {
-	const badgeImgUrl = fragment
-		.querySelector('.projectBadges > img[alt="Project type"]')
-		?.getAttribute('src');
-
-	if (!isDefined(badgeImgUrl)) {
-		return null;
-	}
-
-	const categoryMatches = PROJECT_CATEGORY_REGEX.exec(badgeImgUrl);
-
-	if (!categoryMatches || categoryMatches.length < 3) {
-		return null;
-	}
-
-	return toTitleCase(categoryMatches[1]);
-}
-
 /**
  * Extract a project's metadata from its README
  *
@@ -214,33 +192,54 @@ function parseReadmeMetadata(
 	return matches[1].trim();
 }
 
-// Parse a project's README to extract its name, description, and category
+// Parse a project's README to extract its name, description, and other metadata
 function transformReadme(
 	slug: string,
 	owner: string,
 	readmeResponse: Queries.GithubDataDataUserRepositoriesNodes['readme'],
 ): TransformReadmeReturnValue {
-	if (!isDefined(readmeResponse?.text)) {
+	const readmeText = readmeResponse?.text;
+
+	if (!isDefined(readmeText)) {
 		warn('README not found');
 
 		return {
 			name: null,
 			descriptionHtml: null,
-			exposition: null,
 			logoUrl: null,
+			exposition: null,
 			category: null,
+			languages: [],
+			technologies: [],
+			tools: [],
+			topics: [],
+			schemaType: null,
+			schemaApplicationCategory: null,
+			schemaOperatingSystem: null,
 		};
 	}
 
-	const fragment = JSDOM.fragment(readmeResponse.text);
-	const { descriptionHtml, exposition } = parseReadmeDescription(fragment);
+	const fragment = JSDOM.fragment(readmeText);
 
 	return {
 		name: parseReadmeName(fragment),
-		descriptionHtml,
-		exposition,
+		descriptionHtml: parseReadmeDescription(fragment).descriptionHtml,
 		logoUrl: parseReadmeLogoUrl(slug, owner, fragment),
-		category: parseReadmeCategory(fragment),
+		exposition: parseReadmeMetadata(readmeText, 'exposition'),
+		category: parseReadmeMetadata(readmeText, 'category'),
+		languages: parseReadmeMetadata(readmeText, 'languages', true),
+		technologies: parseReadmeMetadata(readmeText, 'technologies', true),
+		tools: parseReadmeMetadata(readmeText, 'tools', true),
+		topics: parseReadmeMetadata(readmeText, 'topics', true),
+		schemaType: parseReadmeMetadata(readmeText, 'schemaType'),
+		schemaApplicationCategory: parseReadmeMetadata(
+			readmeText,
+			'schemaApplicationCategory',
+		),
+		schemaOperatingSystem: parseReadmeMetadata(
+			readmeText,
+			'schemaOperatingSystem',
+		),
 	};
 }
 
