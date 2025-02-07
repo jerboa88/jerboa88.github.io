@@ -33,6 +33,37 @@ export type ProjectCategory =
 	| 'web interface'
 	| 'website';
 
+export enum SchemaType {
+	Mobile = 'MobileApplication',
+	Software = 'SoftwareApplication',
+	Web = 'WebApplication',
+}
+
+export enum SchemaApplicationCategory {
+	Browser = 'BrowserApplication',
+	Business = 'BusinessApplication',
+	Communication = 'CommunicationApplication',
+	Design = 'DesignApplication',
+	DesktopEnhancement = 'DesktopEnhancementApplication',
+	Developer = 'DeveloperApplication',
+	Driver = 'DriverApplication',
+	Educational = 'EducationalApplication',
+	Entertainment = 'EntertainmentApplication',
+	Finance = 'FinanceApplication',
+	Game = 'GameApplication',
+	Health = 'HealthApplication',
+	Home = 'HomeApplication',
+	Lifestyle = 'LifestyleApplication',
+	Multimedia = 'MultimediaApplication',
+	Reference = 'ReferenceApplication',
+	Security = 'SecurityApplication',
+	Shopping = 'ShoppingApplication',
+	SocialNetworking = 'SocialNetworkingApplication',
+	Sports = 'SportsApplication',
+	Travel = 'TravelApplication',
+	Utilities = 'UtilitiesApplication',
+}
+
 /**
  * A base project with common fields
  *
