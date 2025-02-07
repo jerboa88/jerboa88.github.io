@@ -265,8 +265,17 @@ function transformLanguages(
 	return Array.from(languages).sort();
 }
 
-// Transform the topics object into a simple array of strings
-function transformTopics(
+/**
+ * Transform the topics (tags) object into a simple array of strings
+ *
+ * @remarks
+ *
+ * GitHub calls this field `topics`, but we rename it to `tags` to prevent confusion with the `topics` field extracted from project READMEs.
+ *
+ * @param topicsResponse The topics object from the GitHub API.
+ * @returns A sorted array of strings representing the topics.
+ */
+function transformTags(
 	topicsResponse: Queries.GithubDataDataUserRepositoriesNodes['repositoryTopics'],
 ): string[] {
 	const nodes = topicsResponse?.nodes;
@@ -387,7 +396,7 @@ function transformGithubRepoNode(
 		createdAt: repoCreatedAt,
 		description: repoDescription,
 		languages: transformLanguages(repoLanguages, readmeLanguages),
-		tags: transformTopics(repoTags),
+		tags: transformTags(repoTags),
 		// Use the name from the README if it exists as it's more likely to be formatted correctly
 		name: readmeName || toTitleCase(repoName),
 		slug,
