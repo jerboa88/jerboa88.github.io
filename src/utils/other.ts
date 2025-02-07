@@ -13,15 +13,6 @@ type StringifyReplacerFn<T, U> = Maybe<
 >;
 
 /**
- * Returns the same type as the input object, but without any undefined/null properties
- *
- * @typeParam T - The object type
- */
-type WithoutUndefined<T extends object> = {
-	[K in keyof T]: T[K] extends undefined | null ? never : T[K];
-};
-
-/**
  * Returns an empty object type if the input value is undefined or null, otherwise returns an object with the input key and non-null value
  *
  * @typeParam K - The type of the object's key
@@ -332,22 +323,6 @@ export function findIndexOfSubstringInArray(
 // }
 
 /**
- * Remove all undefined/null properties from an object
- *
- * @param obj - The object to remove undefined/null properties from
- * @returns The object without any undefined/null properties
- */
-export function removeUndefinedProps<T extends Record<string, unknown>>(
-	obj: T,
-): WithoutUndefined<T> {
-	const definedEntries = Object.entries(obj).filter(
-		([_, value]) => !isDefined(value),
-	);
-
-	return Object.fromEntries(definedEntries) as WithoutUndefined<T>;
-}
-
-/**
  * Get the keys of an object.
  *
  * @param obj The object to get the keys of.
@@ -355,57 +330,6 @@ export function removeUndefinedProps<T extends Record<string, unknown>>(
  */
 export function keysOf<T extends object>(obj: T): (keyof T)[] {
 	return Object.keys(obj) as (keyof T)[];
-}
-
-/**
- * If the property of an object is defined, apply the given function to it and return an object with that property.
- *
- * @typeParam T - The type of the object.
- * @typeParam K - The type of the key.
- * @typeParam R - The type of the return value.
- * @param obj - The object to get the property from.
- * @param key - The key of the property to get.
- * @param fn - A function to apply to the property.
- * @returns An object with the property with the function applied if it is defined, otherwise an empty object.
- */
-export function objectFrom<T extends object, K extends keyof T, R>(
-	obj: T,
-	key: K,
-	fn: (property: NonNullable<T[K]>) => R,
-): { [P in K]: R } | EmptyObject;
-
-/**
- * If the property of an object is defined, return an object with that property.
- *
- * @typeParam T - The type of the object.
- * @typeParam K - The type of the key.
- * @param obj - The object to get the property from.
- * @param key - The key of the property to get.
- * @returns An object with the property if it is defined, otherwise an empty object.
- */
-export function objectFrom<T extends object, K extends keyof T>(
-	obj: T,
-	key: K,
-): { [P in K]: T[K] } | EmptyObject;
-
-export function objectFrom<T extends object, K extends keyof T, R>(
-	obj: T,
-	key: K,
-	fn?: (property: NonNullable<T[K]>) => R,
-): { [P in K]: R | T[K] } | EmptyObject {
-	if (key in obj && isDefined(obj[key])) {
-		if (isDefined(fn)) {
-			return {
-				[key]: fn(obj[key] as NonNullable<T[K]>),
-			} as { [P in K]: R };
-		}
-
-		return {
-			[key]: obj[key],
-		} as { [P in K]: T[K] };
-	}
-
-	return {};
 }
 
 /**
