@@ -250,28 +250,42 @@ function transformTopics(
 	return topics.sort();
 }
 
-// Return true if the repo should be included in the list of repos
-function excludeRepo(
+/**
+ * A filter function for a GitHub repo project. Returns true if the repo should be excluded from the list of repos
+ *
+ * @param slug The slug of the repo on GitHub
+ * @param description The description of the repo on GitHub
+ * @param category The category of the repo
+ * @returns True if the repo should be excluded from the list of repos, false otherwise
+ */
+function doExcludeRepo(
 	slug: string,
-	githubRepoNode: Queries.GithubDataDataUserRepositoriesNodes,
-	readmeInfo: TransformReadmeReturnValue,
-) {
+	description: string,
+	category: string,
+): description is string;
+function doExcludeRepo(
+	slug: string,
+	description: Nullable<string>,
+	category: Nullable<string>,
+): description is null;
+function doExcludeRepo(
+	slug: string,
+	description: Nullable<string>,
+	category: Nullable<string>,
+): boolean {
 	// Skip repos with missing descriptions as these are hard to work with
-	if (!isDefined(githubRepoNode.description)) {
+	if (!isDefined(description)) {
 		warn(
-			'Description not found. Please add a description to the repo on GitHub',
+			'description not found, but it is required. Please add one to the GitHub repo',
 		);
 
 		return true;
 	}
 
 	// Skip repos with unknown categories, unless it's the author's profile repo
-	if (
-		!isDefined(readmeInfo.category) &&
-		slug !== SITE_METADATA.author.username.github
-	) {
+	if (!isDefined(category) && slug !== SITE_METADATA.author.username.github) {
 		warn(
-			'README project category badge not found. Please add a project category badge to the README',
+			'README category not found, but it is required. Please add one to the README',
 		);
 
 		return true;
@@ -281,7 +295,7 @@ function excludeRepo(
 }
 
 /**
- * Build a slug for the repo. If the repo is not owned by the author, include the owner in the slug to avoid naming conflicts.
+ * Build a unique slug for the repo
  *
  * @param name The name of the repo on GitHub
  * @param ownerUsername The username of the owner of the repo on GitHub
@@ -315,7 +329,7 @@ function transformGithubRepoNode(
 	// Use the name from the README if it exists as it's more likely to be formatted correctly
 	const name = readmeInfo.name || toTitleCase(githubRepoNode.name);
 
-	if (excludeRepo(slug, githubRepoNode, readmeInfo)) {
+	if (doExcludeRepo(slug, githubRepoNode.description, readmeInfo.category)) {
 		return {
 			githubRepo: null,
 			readmeText: null,
