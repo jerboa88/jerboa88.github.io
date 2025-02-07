@@ -30,11 +30,6 @@ type GithubRepoNodeProps = Omit<
 	| 'parent'
 >;
 
-type ParseReadmeDescriptionReturnValue = {
-	descriptionHtml: Nullable<string>;
-	exposition: Nullable<string>;
-};
-
 // Return values for the transformReadme function
 type TransformReadmeReturnValue = {
 	name: Nullable<string>;
@@ -107,24 +102,15 @@ function parseReadmeName(
 // Extract a project's exposition and description from its README
 function parseReadmeDescription(
 	fragment: DocumentFragment,
-): ParseReadmeDescriptionReturnValue {
-	const descriptionElement = fragment.querySelector('.projectDesc');
-	const descriptionHtml = descriptionElement?.innerHTML?.trim() ?? null;
-	const exposition =
-		descriptionElement?.getAttribute('data-exposition')?.trim() ?? null;
+): TransformReadmeReturnValue['descriptionHtml'] {
+	const descriptionHtml =
+		fragment.querySelector('.projectDesc')?.innerHTML?.trim() ?? null;
 
 	if (!isDefined(descriptionHtml)) {
 		warn('README description not found');
 	}
 
-	if (!isDefined(exposition)) {
-		warn('README exposition not found');
-	}
-
-	return {
-		descriptionHtml,
-		exposition,
-	};
+	return descriptionHtml;
 }
 
 // Extract a project's logo URL from its README
@@ -192,7 +178,14 @@ function parseReadmeMetadata(
 	return matches[1].trim();
 }
 
-// Parse a project's README to extract its name, description, and other metadata
+/**
+ * Parse a project's README to extract its name, description, and other metadata
+ *
+ * @param slug - The repository slug (e.g. `my-repo`)
+ * @param owner - The repository owner (e.g. `my-username`)
+ * @param readmeResponse - The response from the GitHub GraphQL API for the repository's README
+ * @returns An object containing the parsed README data
+ */
 function transformReadme(
 	slug: string,
 	owner: string,
@@ -223,7 +216,7 @@ function transformReadme(
 
 	return {
 		name: parseReadmeName(fragment),
-		descriptionHtml: parseReadmeDescription(fragment).descriptionHtml,
+		descriptionHtml: parseReadmeDescription(fragment),
 		logoUrl: parseReadmeLogoUrl(slug, owner, fragment),
 		exposition: parseReadmeMetadata(readmeText, 'exposition'),
 		category: parseReadmeMetadata(readmeText, 'category'),
