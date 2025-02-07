@@ -62,6 +62,29 @@ type TransformRepoNodeReturnValue = {
 const SITE_METADATA = getSiteMetadata();
 const GITHUB_CONTENT_BASE_URL: UrlString = 'https://raw.githubusercontent.com';
 const PROJECT_CATEGORY_REGEX = /type-([\w.]+)-(\w+)/;
+const METADATA_REGEX = {
+	exposition: buildMetadataRegex('exposition'),
+	category: buildMetadataRegex('category'),
+	languages: buildMetadataRegex('languages'),
+	technologies: buildMetadataRegex('technologies'),
+	tools: buildMetadataRegex('tools'),
+	topics: buildMetadataRegex('topics'),
+	schemaType: buildMetadataRegex('schema:type'),
+	schemaApplicationCategory: buildMetadataRegex('schema:applicationCategory'),
+	schemaOperatingSystem: buildMetadataRegex('schema:operatingSystem'),
+} as const;
+
+// Functions
+
+/**
+ * Given a key, build a regex to extract the corresponding metadata entry from a README
+ *
+ * @param key - The key to extract
+ * @returns A regex to extract the corresponding metadata entry from a README
+ */
+function buildMetadataRegex(key: string) {
+	return new RegExp(`\\[meta:${key}\\]: ? # ? \\(([a-zA-Z0-9.,+# ]*?)\\)`);
+}
 
 // Extract a project's name from its README
 function parseReadmeName(
@@ -331,7 +354,7 @@ function createGithubRepoNode(
 	createContentDigest: NodePluginArgs['createContentDigest'],
 ) {
 	if (!isDefined(githubRepo)) {
-		info('🚫 Skipping repo node creation...');
+		warn('🚫 Skipping repo node creation...');
 
 		return;
 	}
