@@ -15,10 +15,10 @@ import { Article } from '../../components/text/article.tsx';
 import { JSON_LD_AUTHOR_PATH, PROJECTS_PATH } from '../../config/constants.ts';
 import { getSiteMetadata } from '../../managers/config.ts';
 import type { ButtonElementRenderFn } from '../../types/components.ts';
-import { ProjectType } from '../../types/content/projects.ts';
+import { ProjectType, SchemaType } from '../../types/content/projects.ts';
 import type { SocialImagesMetadataProp } from '../../types/other.ts';
 import type { ProjectPageContext } from '../../types/page-context.ts';
-import { isDefined, removeUndefinedProps } from '../../utils/other.ts';
+import { ifDefined, isDefined } from '../../utils/other.ts';
 import { toSentence } from '../../utils/strings.ts';
 import { getAbsoluteUrl } from '../../utils/urls.ts';
 
@@ -104,17 +104,6 @@ export const Head = ({
 		path: location.pathname,
 	};
 	const computedStargazerCount = project.stargazerCount ?? 0;
-
-	let githubRepoProjectProps = {};
-
-	if (project.type === ProjectType.GithubRepo) {
-		githubRepoProjectProps = removeUndefinedProps({
-			image: project.openGraphImageUrl,
-			// TODO: Add applicationCategory and operatingSystem properties
-			license: project.licenseInfo?.url,
-		});
-	}
-
 	const structuredData = {
 		'@type': 'WebPage',
 		name: pageTitle,
@@ -137,7 +126,13 @@ export const Head = ({
 			],
 		},
 		mainEntity: {
-			'@type': 'SoftwareApplication',
+			'@type': project.schemaType ?? SchemaType.Software,
+			...ifDefined({ applicationCategory: project.schemaApplicationCategory }),
+			...ifDefined({ operatingSystem: project.schemaOperatingSystem }),
+			...(project.type === ProjectType.GithubRepo && {
+				image: project.openGraphImageUrl,
+				...ifDefined({ license: project.licenseInfo?.url }),
+			}),
 			name: project.name,
 			description: project.description,
 			author: {
@@ -155,7 +150,6 @@ export const Head = ({
 				'@type': 'Offer',
 				price: 0,
 			},
-			...githubRepoProjectProps,
 		},
 	};
 
