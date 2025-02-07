@@ -236,28 +236,33 @@ function transformReadme(
 	};
 }
 
-// Transform the languages object into a simple array of strings
+/**
+ * Transform the languages object into a simple array of strings and add any additional languages passed in.
+ *
+ * @param languagesResponse The languages object from the GitHub API.
+ * @param additionalLanguages Any additional languages to add to the list.
+ * @returns A sorted array of strings representing the languages.
+ */
 function transformLanguages(
 	languagesResponse: Queries.GithubDataDataUserRepositoriesNodes['languages'],
+	additionalLanguages: string[],
 ): string[] {
 	const nodes = languagesResponse?.nodes;
-	const languages: string[] = [];
+	const languages = new Set(additionalLanguages);
 
-	if (!isDefined(nodes)) {
-		warn('languages.nodes is undefined');
-
-		return languages;
-	}
-
-	for (const node of nodes) {
-		if (isDefined(node?.name)) {
-			languages.push(node.name);
-		} else {
-			warn('languages.nodes[].name is undefined');
+	if (isDefined(nodes)) {
+		for (const node of nodes) {
+			if (isDefined(node?.name)) {
+				languages.add(node.name);
+			} else {
+				warn('languages.nodes[].name is undefined');
+			}
 		}
+	} else {
+		warn('languages.nodes is undefined');
 	}
 
-	return languages.sort();
+	return Array.from(languages).sort();
 }
 
 // Transform the topics object into a simple array of strings
@@ -381,7 +386,7 @@ function transformGithubRepoNode(
 		...remainingReadmeProps,
 		createdAt: repoCreatedAt,
 		description: repoDescription,
-		languages: transformLanguages(repoLanguages),
+		languages: transformLanguages(repoLanguages, readmeLanguages),
 		tags: transformTopics(repoTags),
 		// Use the name from the README if it exists as it's more likely to be formatted correctly
 		name: readmeName || toTitleCase(repoName),
