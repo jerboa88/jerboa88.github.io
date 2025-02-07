@@ -9,7 +9,6 @@ import {
 	getProjectCategoryColor,
 	getSiteMetadata,
 } from '../managers/config.ts';
-import type { BaseProject } from '../types/content/projects.ts';
 import type { UrlString } from '../types/strings.ts';
 import type { Maybe, Nullable } from '../types/utils.ts';
 import { isDefined } from '../utils/other.ts';
@@ -20,36 +19,39 @@ import { endLogGroup, info, panic, startLogGroup, warn } from './logger.ts';
 // Types
 
 // Fields used to create a GithubRepo node
-type GithubRepoNodeProps = BaseProject & {
-	descriptionHtml: Nullable<string>;
-	forkCount: number;
-	homepageUrl: Nullable<string>;
-	isFork: boolean;
-	licenseInfo: Nullable<{
-		name: string;
-		spdxId: Nullable<string>;
-		url: Nullable<string>;
-	}>;
-	logoUrl: Nullable<string>;
-	openGraphImageUrl: string;
-	owner: string;
-	stargazerCount: number;
-	topics: string[];
-	url: string;
-	usesCustomOpenGraphImage: boolean;
-};
+type GithubRepoNodeProps = Omit<
+	Queries.GithubRepo,
+	| keyof Queries.Node
+	| 'childMarkdownRemark'
+	| 'childrenMarkdownRemark'
+	| 'children'
+	| 'id'
+	| 'internal'
+	| 'parent'
+>;
 
 type ParseReadmeDescriptionReturnValue = {
 	descriptionHtml: Nullable<string>;
 	exposition: Nullable<string>;
 };
 
-type TransformReadmeReturnValue = ParseReadmeDescriptionReturnValue & {
+// Return values for the transformReadme function
+type TransformReadmeReturnValue = {
 	name: Nullable<string>;
+	descriptionHtml: Nullable<string>;
 	logoUrl: Nullable<string>;
+	exposition: Nullable<string>;
 	category: Nullable<string>;
+	languages: string[];
+	technologies: string[];
+	tools: string[];
+	topics: string[];
+	schemaType: Nullable<string>;
+	schemaApplicationCategory: Nullable<string>;
+	schemaOperatingSystem: Nullable<string>;
 };
 
+// Return values for the transformRepoNode function
 type TransformRepoNodeReturnValue = {
 	githubRepo: Nullable<GithubRepoNodeProps>;
 	readmeText: Maybe<Nullable<string>>;

@@ -3,7 +3,7 @@
  */
 
 import type { DateString, SentenceString, UrlString } from '../strings.ts';
-import type { Overwrite } from '../utils.ts';
+import type { Nullable, Overwrite } from '../utils.ts';
 
 /**
  * An enumeration of possible project types
@@ -67,58 +67,72 @@ export enum SchemaApplicationCategory {
 /**
  * A base project with common fields
  *
+ * @remarks
+ *
+ * `createdAt` and `updatedAt` are stored as strings instead of Date objects because they are automatically serialized by Gatsby when passed to programmatically generated pages.
+ *
+ * @typeParam T - The type of project
  * @param createdAt - The date the project was created
  * @param description - A brief description of the project
- * @param exposition - A longer description of the project, if available. This is used as the project description on the resume page
- * @param languages - A list of programming languages used in the project
- * @param name - The name of the project
- * @param slug - The slug of the project
- * @param category.color - The color of the project category
- * @param category.name - The name of the project category (ex. 'Website', 'CLI App', etc.)
+ * @param schemaApplicationCategory - The schema.org application category of the project
+ * @param schemaOperatingSystem - The schema.org operating system of the project
+ * @param schemaType - The schema.org type of the project
+ * @param type - The type of project
  * @param updatedAt - The date the project was last updated
  */
-export type BaseProject = {
-	createdAt: Date;
-	description: string;
-	exposition: string | null;
-	languages: string[];
-	name: string;
-	slug: string;
-	category: {
-		color: string;
-		name: string | null;
-	};
-	updatedAt: Date;
+export type BaseProject<T extends ProjectType> = {
+	createdAt: DateString;
+	description: SentenceString;
+	schemaApplicationCategory?: SchemaApplicationCategory;
+	schemaOperatingSystem?: string;
+	schemaType?: SchemaType;
+	type: T;
+	updatedAt: DateString;
 };
 
 /**
  * A manually added project
+ *
+ * @param category.color - The color of the project category
+ * @param category.name - The name of the project category (ex. 'Website', 'CLI App', etc.)
+ * @param exposition - A longer description of the project, if available. This is used as the project description on the resume page
+ * @param languages - A list of programming languages used in the project
+ * @param name - The name of the project
+ * @param slug - The slug of the project
+ * @param stargazerCount - The number of stars the project has
+ * @param type - The type of project (Other)
+ * @param url - The URL of the project
  */
-export type OtherProject = Overwrite<
-	BaseProject,
-	{
-		description: SentenceString;
-		exposition: SentenceString;
-	}
-> & {
-	type: ProjectType.Other;
+export type OtherProject = BaseProject<ProjectType.Other> & {
+	category: {
+		color: string;
+		name: Nullable<string>;
+	};
+	exposition: SentenceString;
+	languages: string[];
+	name: string;
+	slug: string;
 	stargazerCount?: number;
 	url?: UrlString;
 };
 
 /**
  * A GitHub repo project
+ *
+ * @remarks
+ *
+ * This is based on the GitHubRepo type from the GitHub GraphQL API, with various fields overwritten for better specificity when mapping GraphQL types to TypeScript types
+ *
+ * @param exposition - A longer description of the project, if available. This is used as the project description on the resume page
+ * @param url - The URL of the project
  */
 export type GithubRepoProject = Overwrite<
 	Queries.GithubRepo,
-	{
-		description: SentenceString;
+	BaseProject<ProjectType.GithubRepo> & {
 		exposition?: SentenceString;
 		url: UrlString;
 	}
-> & {
-	type: ProjectType.GithubRepo;
-};
+>;
 
 /**
  * Union of all project types
@@ -132,10 +146,6 @@ export type OtherProjectConfig = Overwrite<
 	Omit<OtherProject, 'type'>,
 	{
 		category: string;
-		createdAt: DateString;
-		description: SentenceString;
-		exposition: SentenceString;
-		updatedAt: DateString;
 	}
 >;
 
