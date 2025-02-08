@@ -3,7 +3,7 @@
  */
 
 import type { DateString, SentenceString, UrlString } from '../strings.ts';
-import type { Overwrite } from '../utils.ts';
+import type { Nullable, Overwrite } from '../utils.ts';
 
 /**
  * An enumeration of possible project types
@@ -18,20 +18,17 @@ export enum ProjectType {
 /**
  * Possible project categories
  */
-export type ProjectCategory =
-	| 'android app'
-	| 'cli app'
-	| 'docker container'
-	| 'extension'
-	| 'gatsby plugin'
-	| 'gimp plugin'
-	| 'js library'
-	| 'markdown'
-	| 'node.js module'
-	| 'other'
-	| 'web app'
-	| 'web interface'
-	| 'website';
+export enum ProjectCategory {
+	App = 'App',
+	Container = 'Container',
+	Document = 'Document',
+	Extension = 'Extension',
+	Library = 'Library',
+	Other = 'Other',
+	Plugin = 'Plugin',
+	Script = 'Script',
+	Website = 'Website',
+}
 
 /**
  * A base project with common fields
@@ -49,13 +46,13 @@ export type ProjectCategory =
 export type BaseProject = {
 	createdAt: Date;
 	description: string;
-	exposition: string | null;
+	exposition: Nullable<string>;
 	languages: string[];
 	name: string;
 	slug: string;
 	category: {
 		color: string;
-		name: string | null;
+		name: Nullable<string>;
 	};
 	updatedAt: Date;
 };

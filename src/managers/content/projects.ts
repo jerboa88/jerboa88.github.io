@@ -17,6 +17,7 @@ import {
 	type OtherProject,
 	type OtherProjectConfig,
 	type Project,
+	ProjectCategory,
 	ProjectType,
 } from '../../types/content/projects.ts';
 import { SkillType } from '../../types/content/skills.ts';
@@ -152,7 +153,7 @@ function fetchOtherProjects(): OtherProject[] {
  */
 function doHideProject(project: Project) {
 	return (
-		project.category.name === 'Markdown' ||
+		project.category.name === ProjectCategory.Document ||
 		(project.type === ProjectType.GithubRepo && project.isFork)
 	);
 }
