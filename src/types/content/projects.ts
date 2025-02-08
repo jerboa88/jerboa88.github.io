@@ -18,20 +18,17 @@ export enum ProjectType {
 /**
  * Possible project categories
  */
-export type ProjectCategory =
-	| 'android app'
-	| 'cli app'
-	| 'docker container'
-	| 'extension'
-	| 'gatsby plugin'
-	| 'gimp plugin'
-	| 'js library'
-	| 'markdown'
-	| 'node.js module'
-	| 'other'
-	| 'web app'
-	| 'web interface'
-	| 'website';
+export enum ProjectCategory {
+	App = 'App',
+	Container = 'Container',
+	Document = 'Document',
+	Extension = 'Extension',
+	Library = 'Library',
+	Other = 'Other',
+	Plugin = 'Plugin',
+	Script = 'Script',
+	Website = 'Website',
+}
 
 export enum SchemaType {
 	Mobile = 'MobileApplication',

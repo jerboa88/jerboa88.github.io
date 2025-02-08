@@ -17,6 +17,7 @@ import {
 	type OtherProject,
 	type OtherProjectConfig,
 	type Project,
+	ProjectCategory,
 	ProjectType,
 	SchemaApplicationCategory,
 	SchemaType,
@@ -186,7 +187,7 @@ function fetchOtherProjects(): OtherProject[] {
  */
 function doHideProject(project: Project) {
 	return (
-		project.category.name === 'Markdown' ||
+		project.category.name === ProjectCategory.Document ||
 		(project.type === ProjectType.GithubRepo && project.isFork)
 	);
 }
