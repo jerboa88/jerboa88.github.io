@@ -18,6 +18,19 @@ import { endLogGroup, info, panic, startLogGroup, warn } from './logger.ts';
 
 // Types
 
+// Keys used to store metadata in project READMEs
+enum MetadataKey {
+	Exposition = 'exposition',
+	Category = 'category',
+	Languages = 'languages',
+	Technologies = 'technologies',
+	Tools = 'tools',
+	Topics = 'topics',
+	SchemaType = 'schemaType',
+	SchemaApplicationCategory = 'schemaApplicationCategory',
+	SchemaOperatingSystem = 'schemaOperatingSystem',
+}
+
 // Fields used to create a GithubRepo node
 type GithubRepoNodeProps = Omit<
 	Queries.GithubRepo,
@@ -57,15 +70,19 @@ type TransformRepoNodeReturnValue = {
 const SITE_METADATA = getSiteMetadata();
 const GITHUB_CONTENT_BASE_URL: UrlString = 'https://raw.githubusercontent.com';
 const METADATA_REGEX = {
-	exposition: buildMetadataRegex('exposition'),
-	category: buildMetadataRegex('category'),
-	languages: buildMetadataRegex('languages'),
-	technologies: buildMetadataRegex('technologies'),
-	tools: buildMetadataRegex('tools'),
-	topics: buildMetadataRegex('topics'),
-	schemaType: buildMetadataRegex('schema:type'),
-	schemaApplicationCategory: buildMetadataRegex('schema:applicationCategory'),
-	schemaOperatingSystem: buildMetadataRegex('schema:operatingSystem'),
+	[MetadataKey.Exposition]: buildMetadataRegex(MetadataKey.Exposition),
+	[MetadataKey.Category]: buildMetadataRegex(MetadataKey.Category),
+	[MetadataKey.Languages]: buildMetadataRegex(MetadataKey.Languages),
+	[MetadataKey.Technologies]: buildMetadataRegex(MetadataKey.Technologies),
+	[MetadataKey.Tools]: buildMetadataRegex(MetadataKey.Tools),
+	[MetadataKey.Topics]: buildMetadataRegex(MetadataKey.Topics),
+	[MetadataKey.SchemaType]: buildMetadataRegex(MetadataKey.SchemaType),
+	[MetadataKey.SchemaApplicationCategory]: buildMetadataRegex(
+		MetadataKey.SchemaApplicationCategory,
+	),
+	[MetadataKey.SchemaOperatingSystem]: buildMetadataRegex(
+		MetadataKey.SchemaOperatingSystem,
+	),
 } as const;
 
 // Functions
@@ -194,7 +211,9 @@ function transformReadme(
 	const readmeText = readmeResponse?.text;
 
 	if (!isDefined(readmeText)) {
-		warn('README not found');
+		warn(
+			'README not found, but it is required. Please add one to the GitHub repo',
+		);
 
 		return {
 			name: null,
@@ -218,20 +237,24 @@ function transformReadme(
 		name: parseReadmeName(fragment),
 		descriptionHtml: parseReadmeDescription(fragment),
 		logoUrl: parseReadmeLogoUrl(slug, owner, fragment),
-		exposition: parseReadmeMetadata(readmeText, 'exposition'),
-		category: parseReadmeMetadata(readmeText, 'category'),
-		languages: parseReadmeMetadata(readmeText, 'languages', true),
-		technologies: parseReadmeMetadata(readmeText, 'technologies', true),
-		tools: parseReadmeMetadata(readmeText, 'tools', true),
-		topics: parseReadmeMetadata(readmeText, 'topics', true),
-		schemaType: parseReadmeMetadata(readmeText, 'schemaType'),
+		exposition: parseReadmeMetadata(readmeText, MetadataKey.Exposition),
+		category: parseReadmeMetadata(readmeText, MetadataKey.Category),
+		languages: parseReadmeMetadata(readmeText, MetadataKey.Languages, true),
+		technologies: parseReadmeMetadata(
+			readmeText,
+			MetadataKey.Technologies,
+			true,
+		),
+		tools: parseReadmeMetadata(readmeText, MetadataKey.Tools, true),
+		topics: parseReadmeMetadata(readmeText, MetadataKey.Topics, true),
+		schemaType: parseReadmeMetadata(readmeText, MetadataKey.SchemaType),
 		schemaApplicationCategory: parseReadmeMetadata(
 			readmeText,
-			'schemaApplicationCategory',
+			MetadataKey.SchemaApplicationCategory,
 		),
 		schemaOperatingSystem: parseReadmeMetadata(
 			readmeText,
-			'schemaOperatingSystem',
+			MetadataKey.SchemaOperatingSystem,
 		),
 	};
 }
