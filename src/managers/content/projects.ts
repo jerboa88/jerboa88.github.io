@@ -71,6 +71,7 @@ function buildGithubRepoProject(
 		createdAt,
 		description,
 		exposition: nodeExposition,
+		category,
 		schemaApplicationCategory: nodeSchemaApplicationCategory,
 		schemaOperatingSystem,
 		schemaType: nodeSchemaType,
@@ -79,9 +80,11 @@ function buildGithubRepoProject(
 		...remainingProps
 	} = githubRepoNode;
 
-	// TODO: Assert category is of type ProjectCategory
-
 	const exposition = callIfDefined(toSentence, nodeExposition);
+	const categoryName = callIfDefined(
+		(value: string) => toEnum(ProjectCategory, value),
+		category.name,
+	);
 	const schemaType = callIfDefined(
 		(value: string) => toEnum(SchemaType, value),
 		nodeSchemaType,
@@ -97,6 +100,10 @@ function buildGithubRepoProject(
 		...ifDefined({ schemaType }),
 		...ifDefined({ schemaApplicationCategory }),
 		...ifDefined({ schemaOperatingSystem }),
+		category: {
+			color: category.color,
+			...ifDefined({ name: categoryName }),
+		},
 		createdAt: assertIsDateString(createdAt),
 		updatedAt: assertIsDateString(updatedAt),
 		description: toSentence(description),
