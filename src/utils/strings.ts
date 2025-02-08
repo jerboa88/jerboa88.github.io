@@ -2,7 +2,7 @@
  * Utility functions for working with strings
  */
 
-import type { SentenceString } from '../types/strings.ts';
+import type { DateString, SentenceString } from '../types/strings.ts';
 import { roundDown } from './numbers.ts';
 
 // Constants
@@ -88,6 +88,30 @@ export function toReadableNumber(number: number) {
 	const decimalPlaces = number < 10000 ? 1 : 0;
 
 	return `${roundDown(number / 1000, decimalPlaces)}k`;
+}
+
+/**
+ * Assert that a string is a valid date string
+ *
+ * @remarks
+ *
+ * This function does not necessarily mean that the string matches the DateString template literal, but it does mean that it is a valid date string. This is okay because:
+ * - manually configured date fields will already use the DateString template literal
+ * - for ingested date fields, we do not care about the exact format of the date string, only that it can be parsed into a Date object
+ *
+ * @param string The string to assert is a valid date string
+ * @returns The string as a DateString
+ * @throws TypeError if the string is not a valid date string
+ * @example
+ * assertIsDateString('2021-01-01') // '2021-01-01'
+ * assertIsDateString('not a date') // throws Error("Date 'not a date' is invalid")
+ */
+export function assertIsDateString(string: string): DateString {
+	if (Number.isNaN(Date.parse(string))) {
+		throw new TypeError(`Date '${string}' is invalid'`);
+	}
+
+	return string as DateString;
 }
 
 /**

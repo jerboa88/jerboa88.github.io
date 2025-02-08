@@ -9,7 +9,6 @@ import {
 	getProjectCategoryColor,
 	getSiteMetadata,
 } from '../managers/config.ts';
-import type { BaseProject } from '../types/content/projects.ts';
 import type { UrlString } from '../types/strings.ts';
 import type { Maybe, Nullable } from '../types/utils.ts';
 import { isDefined } from '../utils/other.ts';
@@ -20,36 +19,34 @@ import { endLogGroup, info, panic, startLogGroup, warn } from './logger.ts';
 // Types
 
 // Fields used to create a GithubRepo node
-type GithubRepoNodeProps = BaseProject & {
-	descriptionHtml: Nullable<string>;
-	forkCount: number;
-	homepageUrl: Nullable<string>;
-	isFork: boolean;
-	licenseInfo: Nullable<{
-		name: string;
-		spdxId: Nullable<string>;
-		url: Nullable<string>;
-	}>;
-	logoUrl: Nullable<string>;
-	openGraphImageUrl: string;
-	owner: string;
-	stargazerCount: number;
-	topics: string[];
-	url: string;
-	usesCustomOpenGraphImage: boolean;
-};
+type GithubRepoNodeProps = Omit<
+	Queries.GithubRepo,
+	| keyof Queries.Node
+	| 'childMarkdownRemark'
+	| 'childrenMarkdownRemark'
+	| 'children'
+	| 'id'
+	| 'internal'
+	| 'parent'
+>;
 
-type ParseReadmeDescriptionReturnValue = {
-	descriptionHtml: Nullable<string>;
-	exposition: Nullable<string>;
-};
-
-type TransformReadmeReturnValue = ParseReadmeDescriptionReturnValue & {
+// Return values for the transformReadme function
+type TransformReadmeReturnValue = {
 	name: Nullable<string>;
+	descriptionHtml: Nullable<string>;
 	logoUrl: Nullable<string>;
+	exposition: Nullable<string>;
 	category: Nullable<string>;
+	languages: string[];
+	technologies: string[];
+	tools: string[];
+	topics: string[];
+	schemaType: Nullable<string>;
+	schemaApplicationCategory: Nullable<string>;
+	schemaOperatingSystem: Nullable<string>;
 };
 
+// Return values for the transformRepoNode function
 type TransformRepoNodeReturnValue = {
 	githubRepo: Nullable<GithubRepoNodeProps>;
 	readmeText: Maybe<Nullable<string>>;
@@ -59,7 +56,29 @@ type TransformRepoNodeReturnValue = {
 
 const SITE_METADATA = getSiteMetadata();
 const GITHUB_CONTENT_BASE_URL: UrlString = 'https://raw.githubusercontent.com';
-const PROJECT_CATEGORY_REGEX = /type-([\w.]+)-(\w+)/;
+const METADATA_REGEX = {
+	exposition: buildMetadataRegex('exposition'),
+	category: buildMetadataRegex('category'),
+	languages: buildMetadataRegex('languages'),
+	technologies: buildMetadataRegex('technologies'),
+	tools: buildMetadataRegex('tools'),
+	topics: buildMetadataRegex('topics'),
+	schemaType: buildMetadataRegex('schema:type'),
+	schemaApplicationCategory: buildMetadataRegex('schema:applicationCategory'),
+	schemaOperatingSystem: buildMetadataRegex('schema:operatingSystem'),
+} as const;
+
+// Functions
+
+/**
+ * Given a key, build a regex to extract the corresponding metadata entry from a README
+ *
+ * @param key - The key to extract
+ * @returns A regex to extract the corresponding metadata entry from a README
+ */
+function buildMetadataRegex(key: string) {
+	return new RegExp(`\\[meta:${key}\\]: ? # ? \\(([a-zA-Z0-9.,+# ]*?)\\)`);
+}
 
 // Extract a project's name from its README
 function parseReadmeName(
@@ -83,24 +102,15 @@ function parseReadmeName(
 // Extract a project's exposition and description from its README
 function parseReadmeDescription(
 	fragment: DocumentFragment,
-): ParseReadmeDescriptionReturnValue {
-	const descriptionElement = fragment.querySelector('.projectDesc');
-	const descriptionHtml = descriptionElement?.innerHTML?.trim() ?? null;
-	const exposition =
-		descriptionElement?.getAttribute('data-exposition')?.trim() ?? null;
+): TransformReadmeReturnValue['descriptionHtml'] {
+	const descriptionHtml =
+		fragment.querySelector('.projectDesc')?.innerHTML?.trim() ?? null;
 
 	if (!isDefined(descriptionHtml)) {
 		warn('README description not found');
 	}
 
-	if (!isDefined(exposition)) {
-		warn('README exposition not found');
-	}
-
-	return {
-		descriptionHtml,
-		exposition,
-	};
+	return descriptionHtml;
 }
 
 // Extract a project's logo URL from its README
@@ -126,83 +136,146 @@ function parseReadmeLogoUrl(
 	return null;
 }
 
-// Extract a project's category from its README
-function parseReadmeCategory(
-	fragment: DocumentFragment,
-): TransformReadmeReturnValue['category'] {
-	const badgeImgUrl = fragment
-		.querySelector('.projectBadges > img[alt="Project type"]')
-		?.getAttribute('src');
+/**
+ * Extract a project's metadata from its README
+ *
+ * @remarks
+ *
+ * Metadata is stored in the README as reference-style links with the key being the link label and the value being the link destination. The key must be prefixed with `meta:`, e.g. `[meta:key]: # (value)`.
+ *
+ * @param readmeText - The Markdown text of the README file
+ * @param key - The metadata key to extract
+ * @param allowMultipleValues - Whether to extract multiple values from the metadata key as an array
+ * @returns An array of values if `allowMultipleValues` is `true`, otherwise a single value, or `null` if the metadata key is not found
+ */
+function parseReadmeMetadata(
+	readmeText: string,
+	key: keyof typeof METADATA_REGEX,
+	allowMultipleValues: true,
+): string[];
+function parseReadmeMetadata(
+	readmeText: string,
+	key: keyof typeof METADATA_REGEX,
+	allowMultipleValues?: false,
+): Nullable<string>;
+function parseReadmeMetadata(
+	readmeText: string,
+	key: keyof typeof METADATA_REGEX,
+	allowMultipleValues = false,
+): string[] | Nullable<string> {
+	const matches = METADATA_REGEX[key].exec(readmeText);
 
-	if (!isDefined(badgeImgUrl)) {
-		return null;
+	if (!isDefined(matches) || matches.length < 2) {
+		warn(`README ${key} not found`);
+
+		return allowMultipleValues ? [] : null;
 	}
 
-	const categoryMatches = PROJECT_CATEGORY_REGEX.exec(badgeImgUrl);
-
-	if (!categoryMatches || categoryMatches.length < 3) {
-		return null;
+	if (allowMultipleValues) {
+		return matches[1].split(',').map((item) => item.trim());
 	}
 
-	return toTitleCase(categoryMatches[1]);
+	return matches[1].trim();
 }
 
-// Parse a project's README to extract its name, description, and category
+/**
+ * Parse a project's README to extract its name, description, and other metadata
+ *
+ * @param slug - The repository slug (e.g. `my-repo`)
+ * @param owner - The repository owner (e.g. `my-username`)
+ * @param readmeResponse - The response from the GitHub GraphQL API for the repository's README
+ * @returns An object containing the parsed README data
+ */
 function transformReadme(
 	slug: string,
 	owner: string,
 	readmeResponse: Queries.GithubDataDataUserRepositoriesNodes['readme'],
 ): TransformReadmeReturnValue {
-	if (!isDefined(readmeResponse?.text)) {
+	const readmeText = readmeResponse?.text;
+
+	if (!isDefined(readmeText)) {
 		warn('README not found');
 
 		return {
 			name: null,
 			descriptionHtml: null,
-			exposition: null,
 			logoUrl: null,
+			exposition: null,
 			category: null,
+			languages: [],
+			technologies: [],
+			tools: [],
+			topics: [],
+			schemaType: null,
+			schemaApplicationCategory: null,
+			schemaOperatingSystem: null,
 		};
 	}
 
-	const fragment = JSDOM.fragment(readmeResponse.text);
-	const { descriptionHtml, exposition } = parseReadmeDescription(fragment);
+	const fragment = JSDOM.fragment(readmeText);
 
 	return {
 		name: parseReadmeName(fragment),
-		descriptionHtml,
-		exposition,
+		descriptionHtml: parseReadmeDescription(fragment),
 		logoUrl: parseReadmeLogoUrl(slug, owner, fragment),
-		category: parseReadmeCategory(fragment),
+		exposition: parseReadmeMetadata(readmeText, 'exposition'),
+		category: parseReadmeMetadata(readmeText, 'category'),
+		languages: parseReadmeMetadata(readmeText, 'languages', true),
+		technologies: parseReadmeMetadata(readmeText, 'technologies', true),
+		tools: parseReadmeMetadata(readmeText, 'tools', true),
+		topics: parseReadmeMetadata(readmeText, 'topics', true),
+		schemaType: parseReadmeMetadata(readmeText, 'schemaType'),
+		schemaApplicationCategory: parseReadmeMetadata(
+			readmeText,
+			'schemaApplicationCategory',
+		),
+		schemaOperatingSystem: parseReadmeMetadata(
+			readmeText,
+			'schemaOperatingSystem',
+		),
 	};
 }
 
-// Transform the languages object into a simple array of strings
+/**
+ * Transform the languages object into a simple array of strings and add any additional languages passed in.
+ *
+ * @param languagesResponse The languages object from the GitHub API.
+ * @param additionalLanguages Any additional languages to add to the list.
+ * @returns A sorted array of strings representing the languages.
+ */
 function transformLanguages(
 	languagesResponse: Queries.GithubDataDataUserRepositoriesNodes['languages'],
+	additionalLanguages: string[],
 ): string[] {
 	const nodes = languagesResponse?.nodes;
-	const languages: string[] = [];
+	const languages = new Set(additionalLanguages);
 
-	if (!isDefined(nodes)) {
-		warn('languages.nodes is undefined');
-
-		return languages;
-	}
-
-	for (const node of nodes) {
-		if (isDefined(node?.name)) {
-			languages.push(node.name);
-		} else {
-			warn('languages.nodes[].name is undefined');
+	if (isDefined(nodes)) {
+		for (const node of nodes) {
+			if (isDefined(node?.name)) {
+				languages.add(node.name);
+			} else {
+				warn('languages.nodes[].name is undefined');
+			}
 		}
+	} else {
+		warn('languages.nodes is undefined');
 	}
 
-	return languages.sort();
+	return Array.from(languages).sort();
 }
 
-// Transform the topics object into a simple array of strings
-function transformTopics(
+/**
+ * Transform the topics (tags) object into a simple array of strings
+ *
+ * @remarks
+ *
+ * GitHub calls this field `topics`, but we rename it to `tags` to prevent confusion with the `topics` field extracted from project READMEs.
+ *
+ * @param topicsResponse The topics object from the GitHub API.
+ * @returns A sorted array of strings representing the topics.
+ */
+function transformTags(
 	topicsResponse: Queries.GithubDataDataUserRepositoriesNodes['repositoryTopics'],
 ): string[] {
 	const nodes = topicsResponse?.nodes;
@@ -225,28 +298,42 @@ function transformTopics(
 	return topics.sort();
 }
 
-// Return true if the repo should be included in the list of repos
-function excludeRepo(
+/**
+ * A filter function for a GitHub repo project. Returns true if the repo should be excluded from the list of repos
+ *
+ * @param slug The slug of the repo on GitHub
+ * @param description The description of the repo on GitHub
+ * @param category The category of the repo
+ * @returns True if the repo should be excluded from the list of repos, false otherwise
+ */
+function doExcludeRepo(
 	slug: string,
-	githubRepoNode: Queries.GithubDataDataUserRepositoriesNodes,
-	readmeInfo: TransformReadmeReturnValue,
-) {
+	description: string,
+	category: string,
+): description is string;
+function doExcludeRepo(
+	slug: string,
+	description: Nullable<string>,
+	category: Nullable<string>,
+): description is null;
+function doExcludeRepo(
+	slug: string,
+	description: Nullable<string>,
+	category: Nullable<string>,
+): boolean {
 	// Skip repos with missing descriptions as these are hard to work with
-	if (!isDefined(githubRepoNode.description)) {
+	if (!isDefined(description)) {
 		warn(
-			'Description not found. Please add a description to the repo on GitHub',
+			'description not found, but it is required. Please add one to the GitHub repo',
 		);
 
 		return true;
 	}
 
 	// Skip repos with unknown categories, unless it's the author's profile repo
-	if (
-		!isDefined(readmeInfo.category) &&
-		slug !== SITE_METADATA.author.username.github
-	) {
+	if (!isDefined(category) && slug !== SITE_METADATA.author.username.github) {
 		warn(
-			'README project category badge not found. Please add a project category badge to the README',
+			'README category not found, but it is required. Please add one to the README',
 		);
 
 		return true;
@@ -255,63 +342,70 @@ function excludeRepo(
 	return false;
 }
 
+/**
+ * Build a unique slug for the repo
+ *
+ * @param name The name of the repo on GitHub
+ * @param ownerUsername The username of the owner of the repo on GitHub
+ * @returns A unique slug for the repo
+ */
+function buildSlug(name: string, ownerUsername: string) {
+	const defaultSlug = toKebabCase(name);
+
+	// If the repo is not owned by the author, include the owner in the slug to avoid naming conflicts
+	if (ownerUsername !== SITE_METADATA.author.username.github) {
+		return `${ownerUsername}/${defaultSlug}`;
+	}
+
+	return defaultSlug;
+}
+
 // Transform the repo object into a format we can use
 function transformGithubRepoNode(
 	githubRepoNode: Queries.GithubDataDataUserRepositoriesNodes,
 ): TransformRepoNodeReturnValue {
-	let slug: string = toKebabCase(githubRepoNode.name);
+	const {
+		name: repoName,
+		owner: { login: repoOwnerUsername },
+		repositoryTopics: repoTags,
+		createdAt: repoCreatedAt,
+		updatedAt: repoUpdatedAt,
+		readme: repoReadme,
+		description: repoDescription,
+		languages: repoLanguages,
+		...remainingRepoProps
+	} = githubRepoNode;
+	const slug = buildSlug(repoName, repoOwnerUsername);
+	const {
+		name: readmeName,
+		category: readmeCategory,
+		languages: readmeLanguages,
+		...remainingReadmeProps
+	} = transformReadme(slug, repoOwnerUsername, repoReadme);
 
-	// If the repo is not owned by the author, include the owner in the slug to avoid naming conflicts
-	if (githubRepoNode.owner.login !== SITE_METADATA.author.username.github) {
-		slug = `${githubRepoNode.owner.login}/${slug}`;
-	}
-
-	const languages = transformLanguages(githubRepoNode?.languages);
-	const topics = transformTopics(githubRepoNode?.repositoryTopics);
-	const createdAt = new Date(githubRepoNode.createdAt);
-	const updatedAt = new Date(githubRepoNode.updatedAt);
-	const readmeInfo = transformReadme(
-		slug,
-		githubRepoNode.owner.login,
-		githubRepoNode.readme,
-	);
-	// Use the name from the README if it exists as it's more likely to be formatted correctly
-	const name = readmeInfo.name || toTitleCase(githubRepoNode.name);
-
-	if (excludeRepo(slug, githubRepoNode, readmeInfo)) {
+	if (doExcludeRepo(slug, repoDescription, readmeCategory)) {
 		return {
 			githubRepo: null,
 			readmeText: null,
 		};
 	}
 
-	// If description is null, it will be caught by excludeRepo
-	const description: string = githubRepoNode.description as string;
-
 	const githubRepo: GithubRepoNodeProps = {
-		exposition: readmeInfo.exposition,
-		createdAt: createdAt,
-		description: description,
-		descriptionHtml: readmeInfo.descriptionHtml,
-		forkCount: githubRepoNode.forkCount,
-		homepageUrl: githubRepoNode.homepageUrl,
-		isFork: githubRepoNode.isFork,
-		languages: languages,
-		logoUrl: readmeInfo.logoUrl,
-		licenseInfo: githubRepoNode.licenseInfo,
-		name,
-		openGraphImageUrl: githubRepoNode.openGraphImageUrl,
-		owner: githubRepoNode.owner.login,
+		...remainingRepoProps,
+		...remainingReadmeProps,
+		createdAt: repoCreatedAt,
+		description: repoDescription,
+		languages: transformLanguages(repoLanguages, readmeLanguages),
+		tags: transformTags(repoTags),
+		// Use the name from the README if it exists as it's more likely to be formatted correctly
+		name: readmeName || toTitleCase(repoName),
 		slug,
-		stargazerCount: githubRepoNode.stargazerCount,
-		topics,
+		updatedAt: repoUpdatedAt,
+		owner: repoOwnerUsername,
 		category: {
-			color: getProjectCategoryColor(readmeInfo.category),
-			name: readmeInfo.category,
+			color: getProjectCategoryColor(readmeCategory),
+			name: readmeCategory,
 		},
-		updatedAt,
-		url: githubRepoNode.url,
-		usesCustomOpenGraphImage: githubRepoNode.usesCustomOpenGraphImage,
 	};
 
 	return {
@@ -329,7 +423,7 @@ function createGithubRepoNode(
 	createContentDigest: NodePluginArgs['createContentDigest'],
 ) {
 	if (!isDefined(githubRepo)) {
-		info('🚫 Skipping repo node creation...');
+		warn('🚫 Skipping repo node creation...');
 
 		return;
 	}

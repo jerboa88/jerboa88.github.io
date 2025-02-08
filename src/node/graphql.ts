@@ -60,27 +60,38 @@ type GithubDataDataUserRepositoriesNodes {
 Define schema for custom GithubRepo nodes
 """
 type GithubRepo implements Node {
+	# Computed fields
 	childMarkdownRemark: MarkdownRemark
+	languages: [String!]!
+	name: String!
+	owner: String!
+	slug: String!
+	tags: [String!]!
+	category: ProjectCategory!
+
+	# Fields directly from GitHub API
 	createdAt: Date!
 	description: String!
-	descriptionHtml: String
-	exposition: String
 	forkCount: Int!
 	homepageUrl: String
 	isFork: Boolean!
-	languages: [String!]!
-	logoUrl: String
 	licenseInfo: GithubDataDataUserRepositoriesNodesLicenseInfo
-	name: String!
 	openGraphImageUrl: String!
-	owner: String!
-	slug: String!
 	stargazerCount: Int!
-	topics: [String!]!
-	category: ProjectCategory!
 	updatedAt: Date!
 	url: String!
 	usesCustomOpenGraphImage: Boolean!
+
+	# Fields directly from README
+	descriptionHtml: String
+	logoUrl: String
+	exposition: String
+	technologies: [String!]!
+	tools: [String!]!
+	topics: [String!]!
+	schemaType: String
+	schemaApplicationCategory: String
+	schemaOperatingSystem: String
 }
 `;
 
@@ -88,6 +99,10 @@ export const githubReposQuery = `
 query GithubRepos {
 	allGithubRepo {
 		nodes {
+			category {
+				color
+				name
+			}
 			childMarkdownRemark {
 				html
 			}
@@ -108,13 +123,15 @@ query GithubRepos {
 			name
 			openGraphImageUrl
 			owner
+			schemaApplicationCategory
+			schemaOperatingSystem
+			schemaType
 			slug
 			stargazerCount
+			tags
+			technologies
+			tools
 			topics
-			category {
-				color
-				name
-			}
 			updatedAt
 			url
 			usesCustomOpenGraphImage
