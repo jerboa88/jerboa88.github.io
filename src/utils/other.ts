@@ -13,13 +13,22 @@ type StringifyReplacerFn<T, U> = Maybe<
 >;
 
 /**
- * Returns the same type as the input object, but without any undefined/null properties
+ * Returns an empty object type if the input value is undefined or null, otherwise returns an object with the input key and non-null value
  *
- * @typeParam T - The object type
+ * @typeParam K - The type of the object's key
+ * @typeParam V - The type of the object's value
  */
-type WithoutUndefined<T extends object> = {
-	[K in keyof T]: T[K] extends undefined | null ? never : T[K];
-};
+type IfDefinedResult<K extends string, V> = V extends null | undefined
+	? EmptyObject
+	: { [P in K]: NonNullable<V> };
+
+/**
+ * Returns undefined if the input argument is undefined or null, otherwise returns the return type of the function
+ *
+ * @typeParam A - The input argument type
+ * @typeParam R - The return type
+ */
+type CallIfDefinedResult<A, R> = A extends null | undefined ? undefined : R;
 
 // Constants
 
@@ -314,22 +323,6 @@ export function findIndexOfSubstringInArray(
 // }
 
 /**
- * Remove all undefined/null properties from an object
- *
- * @param obj - The object to remove undefined/null properties from
- * @returns The object without any undefined/null properties
- */
-export function removeUndefinedProps<T extends Record<string, unknown>>(
-	obj: T,
-): WithoutUndefined<T> {
-	const definedEntries = Object.entries(obj).filter(
-		([_, value]) => !isDefined(value),
-	);
-
-	return Object.fromEntries(definedEntries) as WithoutUndefined<T>;
-}
-
-/**
  * Get the keys of an object.
  *
  * @param obj The object to get the keys of.
@@ -340,52 +333,92 @@ export function keysOf<T extends object>(obj: T): (keyof T)[] {
 }
 
 /**
- * If the property of an object is defined, apply the given function to it and return an object with that property.
+ * Returns the input object if its value is defined, otherwise an empty object. This is useful for conditional spreads.
  *
- * @typeParam T - The type of the object.
  * @typeParam K - The type of the key.
- * @typeParam R - The type of the return value.
- * @param obj - The object to get the property from.
- * @param key - The key of the property to get.
- * @param fn - A function to apply to the property.
- * @returns An object with the property with the function applied if it is defined, otherwise an empty object.
- */
-export function objectFrom<T extends object, K extends keyof T, R>(
-	obj: T,
-	key: K,
-	fn: (property: NonNullable<T[K]>) => R,
-): { [P in K]: R } | EmptyObject;
-
-/**
- * If the property of an object is defined, return an object with that property.
- *
- * @typeParam T - The type of the object.
- * @typeParam K - The type of the key.
- * @param obj - The object to get the property from.
- * @param key - The key of the property to get.
+ * @typeParam V - The type of the value.
+ * @param obj - An object with a single property.
  * @returns An object with the property if it is defined, otherwise an empty object.
+ * @example
+ * ifDefined({ foo: 'bar' }) // { foo: 'bar' }
+ * ifDefined({ foo: undefined }) // {}
  */
-export function objectFrom<T extends object, K extends keyof T>(
-	obj: T,
-	key: K,
-): { [P in K]: T[K] } | EmptyObject;
+export function ifDefined<K extends string, V>(
+	obj: { [P in K]: V },
+): IfDefinedResult<K, V> {
+	const key = Object.keys(obj)[0] as K;
+	const value = obj[key] as V;
 
-export function objectFrom<T extends object, K extends keyof T, R>(
-	obj: T,
-	key: K,
-	fn?: (property: NonNullable<T[K]>) => R,
-): { [P in K]: R | T[K] } | EmptyObject {
-	if (key in obj && isDefined(obj[key])) {
-		if (isDefined(fn)) {
-			return {
-				[key]: fn(obj[key] as NonNullable<T[K]>),
-			} as { [P in K]: R };
-		}
-
-		return {
-			[key]: obj[key],
-		} as { [P in K]: T[K] };
+	if (isDefined(value)) {
+		return obj as IfDefinedResult<K, V>;
 	}
 
-	return {};
+	return {} as IfDefinedResult<K, V>;
+}
+
+/**
+ * Calls the function if the argument is defined, otherwise returns undefined. This is useful for conditional function calls.
+ *
+ * @param fn - The function to call.
+ * @param arg - The argument to pass to the function.
+ * @returns The result of the function call if the argument is defined, otherwise undefined.
+ * @example
+ * callIfDefined((x) => x * 2, 3) // 6
+ * callIfDefined((x) => x * 2, undefined) // undefined
+ */
+export function callIfDefined<A, R, V extends A | null | undefined>(
+	fn: (arg: A) => R,
+	arg: V,
+): CallIfDefinedResult<V, R> {
+	if (isDefined(arg)) {
+		return fn(arg) as CallIfDefinedResult<V, R>;
+	}
+
+	return undefined as CallIfDefinedResult<V, R>;
+}
+
+/**
+ * Returns true if the value is in an enum and false otherwise.
+ *
+ * @typeParam V - The type of the enum values. Must be a string or number.
+ * @typeParam T - The type of the enum object. Must be a record with string keys and values of type V.
+ * @param enumObj A TypeScript enum object.
+ * @param value The value to check.
+ * @returns True if the value is in the enum, false otherwise.
+ * @example
+ * enum Foo {
+ * 	BAR = 'bar',
+ * 	BAZ = 'baz',
+ * }
+ * isInEnum(Foo, 'bar') // true
+ * isInEnum(Foo, 'qux') // false
+ */
+function isInEnum<V extends string | number, T extends Record<string, V>>(
+	enumObj: T,
+	value: V,
+): value is T[keyof T] {
+	return Object.values(enumObj).includes(value);
+}
+
+/**
+ * Returns the enum value if it is in the enum, otherwise returns null.
+ *
+ * @typeParam V - The type of the enum values. Must be a string or number.
+ * @typeParam T - The type of the enum object. Must be a record with string keys and values of type V.
+ * @param enumObj A TypeScript enum object.
+ * @param value The value to check.
+ * @returns The enum value if it is in the enum, otherwise undefined.
+ * @example
+ * enum Foo {
+ * 	BAR = 'bar',
+ * 	BAZ = 'baz',
+ * }
+ * toEnum(Foo, 'bar') // Foo.BAR
+ * toEnum(Foo, 'qux') // undefined
+ */
+export function toEnum<V extends string | number, T extends Record<string, V>>(
+	enumObj: T,
+	value: V,
+): T[keyof T] | undefined {
+	return isInEnum(enumObj, value) ? (value as T[keyof T]) : undefined;
 }

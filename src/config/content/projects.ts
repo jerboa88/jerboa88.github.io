@@ -4,8 +4,11 @@
 */
 
 import {
+	ProjectCategory,
 	ProjectType,
 	type ProjectsConfig,
+	SchemaApplicationCategory,
+	SchemaType,
 } from '../../types/content/projects.ts';
 
 export const PROJECTS_CONFIG: ProjectsConfig = {
@@ -17,8 +20,14 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 				'A web application designed to assist young individuals in discovering and pursuing potential career pathways.',
 			exposition:
 				'A web application designed to assist young individuals in discovering and pursuing potential career pathways. Created as part of a class project with 5 other team members, this React-based web app was written with Django on the backend and Next.js on the frontend.',
-			category: 'Web App',
+			category: ProjectCategory.App,
+			schemaType: SchemaType.Web,
+			schemaApplicationCategory: SchemaApplicationCategory.Educational,
+			schemaOperatingSystem: 'All',
 			languages: ['CSS', 'JavaScript', 'Python'],
+			technologies: ['React', 'Django', 'Next.js', 'OpenStack'],
+			tools: [],
+			topics: [],
 			createdAt: '2023-01-17',
 			updatedAt: '2023-04-10',
 			url: 'https://cmput401.ca/projects/1a890021-cf4c-48d6-93c0-666ca1125373',
@@ -30,8 +39,14 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 				'A command line implementation of a ride sharing app written for a class project.',
 			exposition:
 				'A command line implementation of a ride sharing app written for a class project. Collaborated with teammates to integrate a command line interface with a SQL database via the SQLite library in Python.',
-			category: 'CLI App',
+			category: ProjectCategory.App,
+			schemaType: SchemaType.Software,
+			schemaApplicationCategory: SchemaApplicationCategory.Travel,
+			schemaOperatingSystem: 'All',
 			languages: ['Python', 'SQL'],
+			technologies: ['SQLite'],
+			tools: [],
+			topics: [],
 			createdAt: '2018-11-01',
 			updatedAt: '2018-12-01',
 		},
@@ -42,8 +57,14 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 				'An Excel add-in that generates forecasts using Triple Exponential Smoothing (TES).',
 			exposition:
 				'A decision support system that generates forecasts of time-series data using triple exponential smoothing. Created as part of a class project with 3 other team members, this Excel add-in was written using Visual Basic for Applications (VBA) and the Solver library.',
-			category: 'Excel Add-in',
+			category: ProjectCategory.Plugin,
+			schemaType: SchemaType.Software,
+			schemaApplicationCategory: SchemaApplicationCategory.Business,
+			schemaOperatingSystem: 'Windows',
 			languages: ['VBA'],
+			technologies: [],
+			tools: ['Excel'],
+			topics: [],
 			createdAt: '2022-11-11',
 			updatedAt: '2022-12-11',
 		},

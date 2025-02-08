@@ -91,7 +91,7 @@ export function removeProtocol(url: UrlString | URL) {
  */
 export function assertIsUrlString(str: string): UrlString {
 	if (!str.startsWith('https://')) {
-		throw new Error(`URL '${str}' must start with 'https://'`);
+		throw new TypeError(`URL '${str}' must start with 'https://'`);
 	}
 
 	return str as UrlString;

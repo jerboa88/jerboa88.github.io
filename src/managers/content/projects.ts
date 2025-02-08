@@ -17,14 +17,22 @@ import {
 	type OtherProject,
 	type OtherProjectConfig,
 	type Project,
+	ProjectCategory,
 	ProjectType,
+	SchemaApplicationCategory,
+	SchemaType,
 } from '../../types/content/projects.ts';
 import { SkillType } from '../../types/content/skills.ts';
 import type { Maybe } from '../../types/utils.ts';
-import { findIndexOfSubstringInArray, objectFrom } from '../../utils/other.ts';
+import {
+	callIfDefined,
+	findIndexOfSubstringInArray,
+	ifDefined,
+	toEnum,
+} from '../../utils/other.ts';
 import { assertIsDefined } from '../../utils/other.ts';
 import { prettify } from '../../utils/other.ts';
-import { toSentence } from '../../utils/strings.ts';
+import { assertIsDateString, toSentence } from '../../utils/strings.ts';
 import { assertIsUrlString } from '../../utils/urls.ts';
 import { getPageContentConfig, getProjectCategoryColor } from '../config.ts';
 import { getSiteMetadata } from '../config.ts';
@@ -59,14 +67,47 @@ type GithubReposQueryData = {
 function buildGithubRepoProject(
 	githubRepoNode: Queries.GithubRepo,
 ): GithubRepoProject {
-	// Prevent exposition from being included in the result
-	const { exposition, ...remainingProps } = githubRepoNode;
+	const {
+		createdAt,
+		description,
+		exposition: nodeExposition,
+		category,
+		schemaApplicationCategory: nodeSchemaApplicationCategory,
+		schemaOperatingSystem,
+		schemaType: nodeSchemaType,
+		updatedAt,
+		url,
+		...remainingProps
+	} = githubRepoNode;
+
+	const exposition = callIfDefined(toSentence, nodeExposition);
+	const categoryName = callIfDefined(
+		(value: string) => toEnum(ProjectCategory, value),
+		category.name,
+	);
+	const schemaType = callIfDefined(
+		(value: string) => toEnum(SchemaType, value),
+		nodeSchemaType,
+	);
+	const schemaApplicationCategory = callIfDefined(
+		(value: string) => toEnum(SchemaApplicationCategory, value),
+		nodeSchemaApplicationCategory,
+	);
 
 	return {
 		...remainingProps,
-		...objectFrom(githubRepoNode, 'exposition', toSentence),
-		description: toSentence(githubRepoNode.description),
-		url: assertIsUrlString(githubRepoNode.url),
+		...ifDefined({ exposition }),
+		...ifDefined({ schemaType }),
+		...ifDefined({ schemaApplicationCategory }),
+		...ifDefined({ schemaOperatingSystem }),
+		category: {
+			color: category.color,
+			...ifDefined({ name: categoryName }),
+		},
+		createdAt: assertIsDateString(createdAt),
+		updatedAt: assertIsDateString(updatedAt),
+		description: toSentence(description),
+		url: assertIsUrlString(url),
 		type: ProjectType.GithubRepo,
 	};
 }
@@ -77,15 +118,16 @@ function buildGithubRepoProject(
  * @param projectConfig An {@link OtherProjectConfig} object.
  * @returns An {@link OtherProject} object.
  */
-function buildOtherProject(projectConfig: OtherProjectConfig): OtherProject {
+function buildOtherProject({
+	category,
+	...remainingProps
+}: OtherProjectConfig): OtherProject {
 	return {
-		...projectConfig,
+		...remainingProps,
 		type: ProjectType.Other,
-		createdAt: new Date(projectConfig.createdAt),
-		updatedAt: new Date(projectConfig.updatedAt),
 		category: {
-			color: getProjectCategoryColor(projectConfig.category),
-			name: projectConfig.category,
+			color: getProjectCategoryColor(category),
+			name: category,
 		},
 	};
 }
@@ -152,7 +194,7 @@ function fetchOtherProjects(): OtherProject[] {
  */
 function doHideProject(project: Project) {
 	return (
-		project.category.name === 'Markdown' ||
+		project.category.name === ProjectCategory.Document ||
 		(project.type === ProjectType.GithubRepo && project.isFork)
 	);
 }
