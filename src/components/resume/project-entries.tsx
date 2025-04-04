@@ -22,8 +22,8 @@ export function ResumeProjectEntries({ projects }: Props) {
 				const subtitleProp = isDefined(project.category.name)
 					? { subtitle: project.category.name }
 					: {};
-				const expositionSentence = project.exposition
-					? toSentence(project.exposition)
+				const backgroundSentence = project.background
+					? toSentence(project.background)
 					: null;
 				const descriptionSentence = toSentence(project.description);
 
@@ -33,7 +33,7 @@ export function ResumeProjectEntries({ projects }: Props) {
 						title={project.name}
 						titleTooltip="View project on GitHub"
 						tags={project.languages}
-						bullets={[expositionSentence ?? descriptionSentence]}
+						bullets={[backgroundSentence ?? descriptionSentence]}
 						endDate={new Date(project.createdAt)}
 						{...titleUrlProp}
 						{...subtitleProp}

@@ -69,16 +69,16 @@ export enum SchemaApplicationCategory {
  * The fields here must be primitives because they are automatically serialized by Gatsby when passed as props to programmatically generated pages. Making any of these fields an object will break type safety and cause runtime errors.
  *
  * @typeParam T - The type of project
+ * @param background - A longer description of the project
  * @param category.color - The color of the project category
  * @param category.name - The name of the project category (ex. 'Website', 'App', etc.)
  * @param createdAt - The date the project was created
  * @param description - A brief description of the project
- * @param exposition - A longer description of the project,
  * @param languages - A list of programming languages used in the project
  * @param name - The name of the project
- * @param schemaApplicationCategory - The schema.org application category of the project
- * @param schemaOperatingSystem - The schema.org operating system of the project
- * @param schemaType - The schema.org type of the project
+ * @param schema.applicationCategory - The schema.org application category of the project
+ * @param schema.operatingSystem - The schema.org operating system of the project
+ * @param schema.type - The schema.org type of the project
  * @param slug - The slug of the project
  * @param stargazerCount - The number of stars the project has
  * @param technologies - A list of technologies used in the project
@@ -89,18 +89,20 @@ export enum SchemaApplicationCategory {
  * @param url - The URL of the project
  */
 export type BaseProject<T extends ProjectType> = {
+	background?: SentenceString;
 	category: {
 		color: string;
 		name?: ProjectCategory;
 	};
 	createdAt: DateString;
 	description: SentenceString;
-	exposition?: SentenceString;
 	languages: readonly string[];
 	name: string;
-	schemaApplicationCategory?: SchemaApplicationCategory;
-	schemaOperatingSystem?: string;
-	schemaType?: SchemaType;
+	schema?: {
+		applicationCategory?: SchemaApplicationCategory;
+		operatingSystem?: string;
+		type?: SchemaType;
+	};
 	slug: string;
 	stargazerCount?: number;
 	technologies: readonly string[];
@@ -121,7 +123,7 @@ export type BaseProject<T extends ProjectType> = {
 export type OtherProject = Overwrite<
 	BaseProject<ProjectType.Other>,
 	{
-		exposition: SentenceString;
+		background: SentenceString;
 	}
 >;
 

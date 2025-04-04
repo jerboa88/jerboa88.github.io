@@ -4,6 +4,7 @@
 */
 
 import type { CreatePagesArgs } from 'gatsby';
+import { PROJECT_METADATA_PATH } from '../../config/constants.ts';
 import { PROJECTS_CONFIG } from '../../config/content/projects.ts';
 import { githubReposQuery } from '../../node/graphql.ts';
 import { info, panic } from '../../node/logger.ts';
@@ -46,7 +47,7 @@ const SITE_METADATA = getSiteMetadata();
 
 let cachedGithubRepoProjects: GithubRepoProject[] = [];
 let cachedOtherProjects: OtherProject[] = [];
-let cachedAuthorBioHtml: Maybe<string>;
+let cachedAuthorBio: Maybe<string>;
 
 // Types
 
@@ -70,36 +71,36 @@ function buildGithubRepoProject(
 	const {
 		createdAt,
 		description,
-		exposition: nodeExposition,
+		background: nodeBackground,
 		category,
-		schemaApplicationCategory: nodeSchemaApplicationCategory,
-		schemaOperatingSystem,
-		schemaType: nodeSchemaType,
+		schema,
 		updatedAt,
 		url,
 		...remainingProps
 	} = githubRepoNode;
 
-	const exposition = callIfDefined(toSentence, nodeExposition);
+	const background = callIfDefined(toSentence, nodeBackground);
 	const categoryName = callIfDefined(
 		(value: string) => toEnum(ProjectCategory, value),
 		category.name,
 	);
-	const schemaType = callIfDefined(
+	const type = callIfDefined(
 		(value: string) => toEnum(SchemaType, value),
-		nodeSchemaType,
+		schema?.type,
 	);
-	const schemaApplicationCategory = callIfDefined(
+	const applicationCategory = callIfDefined(
 		(value: string) => toEnum(SchemaApplicationCategory, value),
-		nodeSchemaApplicationCategory,
+		schema?.applicationCategory,
 	);
 
 	return {
 		...remainingProps,
-		...ifDefined({ exposition }),
-		...ifDefined({ schemaType }),
-		...ifDefined({ schemaApplicationCategory }),
-		...ifDefined({ schemaOperatingSystem }),
+		...ifDefined({ background }),
+		schema: {
+			...ifDefined({ type }),
+			...ifDefined({ applicationCategory }),
+			...ifDefined({ operatingSystem: schema?.operatingSystem }),
+		},
 		category: {
 			color: category.color,
 			...ifDefined({ name: categoryName }),

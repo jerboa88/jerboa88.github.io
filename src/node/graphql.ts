@@ -38,6 +38,12 @@ type ProjectCategory {
 	name: String
 }
 
+type Schema {
+	type: String
+	applicationCategory: String
+	operatingSystem: String
+}
+
 """
 Define required fields from the GitHub GraphQL API schema
 """
@@ -68,6 +74,7 @@ type GithubRepo implements Node {
 	slug: String!
 	tags: [String!]!
 	category: ProjectCategory!
+	logoUrl: String
 
 	# Fields directly from GitHub API
 	createdAt: Date!
@@ -84,14 +91,11 @@ type GithubRepo implements Node {
 
 	# Fields directly from README
 	descriptionHtml: String
-	logoUrl: String
-	exposition: String
+	background: String
+	schema: Schema!
 	technologies: [String!]!
 	tools: [String!]!
 	topics: [String!]!
-	schemaType: String
-	schemaApplicationCategory: String
-	schemaOperatingSystem: String
 }
 `;
 
@@ -99,6 +103,7 @@ export const githubReposQuery = `
 query GithubRepos {
 	allGithubRepo {
 		nodes {
+			background
 			category {
 				color
 				name
@@ -109,7 +114,6 @@ query GithubRepos {
 			createdAt
 			description
 			descriptionHtml
-			exposition
 			forkCount
 			homepageUrl
 			isFork
@@ -123,9 +127,11 @@ query GithubRepos {
 			name
 			openGraphImageUrl
 			owner
-			schemaApplicationCategory
-			schemaOperatingSystem
-			schemaType
+			schema {
+				applicationCategory
+				operatingSystem
+				type
+			}
 			slug
 			stargazerCount
 			tags

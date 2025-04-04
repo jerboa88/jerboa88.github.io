@@ -18,12 +18,14 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 			name: 'Pathfinder v2',
 			description:
 				'A web application designed to assist young individuals in discovering and pursuing potential career pathways.',
-			exposition:
+			background:
 				'A web application designed to assist young individuals in discovering and pursuing potential career pathways. Created as part of a class project with 5 other team members, this React-based web app was written with Django on the backend and Next.js on the frontend.',
 			category: ProjectCategory.App,
-			schemaType: SchemaType.Web,
-			schemaApplicationCategory: SchemaApplicationCategory.Educational,
-			schemaOperatingSystem: 'All',
+			schema: {
+				type: SchemaType.Web,
+				applicationCategory: SchemaApplicationCategory.Educational,
+				operatingSystem: 'Any',
+			},
 			languages: ['CSS', 'JavaScript', 'Python'],
 			technologies: ['React', 'Django', 'Next.js', 'OpenStack'],
 			tools: [],
@@ -37,12 +39,14 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 			name: 'Ridify',
 			description:
 				'A command line implementation of a ride sharing app written for a class project.',
-			exposition:
+			background:
 				'A command line implementation of a ride sharing app written for a class project. Collaborated with teammates to integrate a command line interface with a SQL database via the SQLite library in Python.',
 			category: ProjectCategory.App,
-			schemaType: SchemaType.Software,
-			schemaApplicationCategory: SchemaApplicationCategory.Travel,
-			schemaOperatingSystem: 'All',
+			schema: {
+				type: SchemaType.Software,
+				applicationCategory: SchemaApplicationCategory.Travel,
+				operatingSystem: 'Any',
+			},
 			languages: ['Python', 'SQL'],
 			technologies: ['SQLite'],
 			tools: [],
@@ -55,12 +59,14 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 			name: 'TES Forecaster Add-in',
 			description:
 				'An Excel add-in that generates forecasts using Triple Exponential Smoothing (TES).',
-			exposition:
+			background:
 				'A decision support system that generates forecasts of time-series data using triple exponential smoothing. Created as part of a class project with 3 other team members, this Excel add-in was written using Visual Basic for Applications (VBA) and the Solver library.',
 			category: ProjectCategory.Plugin,
-			schemaType: SchemaType.Software,
-			schemaApplicationCategory: SchemaApplicationCategory.Business,
-			schemaOperatingSystem: 'Windows',
+			schema: {
+				type: SchemaType.Software,
+				applicationCategory: SchemaApplicationCategory.Business,
+				operatingSystem: 'Windows',
+			},
 			languages: ['VBA'],
 			technologies: [],
 			tools: ['Excel'],
