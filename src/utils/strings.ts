@@ -36,7 +36,11 @@ export function toKebabCase(string: string): Lowercase<string> {
  * capitalizeWord('hello') // Hello
  */
 function capitalizeWord(word: string): Capitalize<string> {
-	return `${word[0].toUpperCase()}${word.substring(1)}` as Capitalize<string>;
+	if (word === '') {
+		return word as Capitalize<string>;
+	}
+
+	return `${(word[0] as string).toUpperCase()}${word.substring(1)}` as Capitalize<string>;
 }
 
 /**
