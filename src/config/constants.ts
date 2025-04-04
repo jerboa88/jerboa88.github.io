@@ -22,12 +22,12 @@ const FADE_TRANSITION_VARIANTS = {
 	},
 } as const;
 
-// Directories
+// Directory/file paths
 export const PAGE_TEMPLATES_DIR: WorkingPathString = './src/templates/page';
 export const SOCIAL_IMAGE_TEMPLATES_DIR: WorkingPathString =
 	'./src/templates/social-image';
 
-// Paths
+// Page paths
 export const INDEX_PATH: AbsolutePathString = '/';
 export const ABOUT_PATH: AbsolutePathString = '/about';
 export const EXPERIENCE_PATH: AbsolutePathString = '/experience';
@@ -40,7 +40,7 @@ export const PRIVACY_POLICY_PATH: AbsolutePathString = '/privacy-policy';
 export const NOT_FOUND_PATH: AbsolutePathString = '/404';
 export const SOCIAL_IMAGES_PATH: AbsolutePathString =
 	'/__generatedSocialImages';
-export const JSON_LD_AUTHOR_PATH: AbsolutePathString = '/author';
+export const AUTHOR_SCHEMA_PATH: AbsolutePathString = '/schema/author.json';
 
 // ID used to group together elements for the title animation
 export const TITLE_LAYOUT_ID = 'title-layout' as const;

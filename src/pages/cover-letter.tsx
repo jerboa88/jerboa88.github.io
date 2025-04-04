@@ -8,7 +8,7 @@ import { DocumentPageLayout } from '../components/layout/document-page-layout.ts
 import { Section } from '../components/layout/section.tsx';
 import { PageHead } from '../components/seo/page-head.tsx';
 import { Article } from '../components/text/article.tsx';
-import { JSON_LD_AUTHOR_PATH } from '../config/constants.ts';
+import { AUTHOR_SCHEMA_PATH } from '../config/constants.ts';
 import { getSiteMetadata } from '../managers/config.ts';
 import { type SocialImagesMetadataProp, ThemeType } from '../types/other.ts';
 import type { CoverLetterPageContext } from '../types/page-context.ts';
@@ -62,14 +62,14 @@ export const Head = ({
 			name: pageMetadata.shortTitle,
 			description: pageMetadata.description,
 			author: {
-				'@id': JSON_LD_AUTHOR_PATH,
+				'@id': AUTHOR_SCHEMA_PATH,
 			},
 			hasDigitalDocumentPermission: [
 				{
 					'@type': 'DigitalDocumentPermission',
 					permissionType: 'https://schema.org/WritePermission',
 					grantee: {
-						'@id': JSON_LD_AUTHOR_PATH,
+						'@id': AUTHOR_SCHEMA_PATH,
 					},
 				},
 				{

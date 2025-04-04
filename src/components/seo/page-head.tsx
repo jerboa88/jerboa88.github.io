@@ -3,7 +3,7 @@
 	----------------------------------------------------
 */
 
-import { JSON_LD_AUTHOR_PATH } from '../../config/constants.ts';
+import { AUTHOR_SCHEMA_PATH } from '../../config/constants.ts';
 import { getSiteMetadata, getTheme } from '../../managers/config.ts';
 import type { PropsWithClassName } from '../../types/components.ts';
 import {
@@ -97,7 +97,7 @@ export function PageHead({
 					...structuredData,
 					author: {
 						'@type': 'Person',
-						'@id': JSON_LD_AUTHOR_PATH,
+						'@id': AUTHOR_SCHEMA_PATH,
 						name: SITE_METADATA.author.name.full,
 						url: SITE_METADATA.siteUrl,
 						image: SITE_METADATA.author.imageUrl,

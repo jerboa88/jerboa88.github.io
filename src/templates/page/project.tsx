@@ -12,7 +12,7 @@ import { Section } from '../../components/layout/section.tsx';
 import { GhostButtonLink } from '../../components/links/ghost-button-link.tsx';
 import { PageHead } from '../../components/seo/page-head.tsx';
 import { Article } from '../../components/text/article.tsx';
-import { JSON_LD_AUTHOR_PATH, PROJECTS_PATH } from '../../config/constants.ts';
+import { AUTHOR_SCHEMA_PATH, PROJECTS_PATH } from '../../config/constants.ts';
 import { getSiteMetadata } from '../../managers/config.ts';
 import type { ButtonElementRenderFn } from '../../types/components.ts';
 import { ProjectType, SchemaType } from '../../types/content/projects.ts';
@@ -136,7 +136,7 @@ export const Head = ({
 			name: project.name,
 			description: project.description,
 			author: {
-				'@id': JSON_LD_AUTHOR_PATH,
+				'@id': AUTHOR_SCHEMA_PATH,
 			},
 			url: getAbsoluteUrl(location.pathname).toString(),
 			...(computedStargazerCount > 0 && {
