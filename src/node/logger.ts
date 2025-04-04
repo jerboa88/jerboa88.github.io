@@ -6,6 +6,12 @@
 import type { Reporter } from 'gatsby';
 import type { Maybe } from '../types/utils.ts';
 
+// Types
+
+export enum ErrorCodes {
+	Default = 'default',
+}
+
 // Constants
 
 const TAB_SIZE = 2;
@@ -45,6 +51,15 @@ function setIndentString() {
  */
 export function setReporter(newReporter: Reporter) {
 	reporter = newReporter;
+
+	reporter.setErrorMap({
+		[ErrorCodes.Default]: {
+			text: (context) => context.sourceMessage,
+			level: 'ERROR',
+			type: 'PLUGIN',
+			category: 'USER',
+		},
+	});
 }
 
 /**
@@ -105,7 +120,11 @@ export function panic(msgOrError: string | Error): never {
 			: new Error(`${indentString}${msgOrError}`);
 
 	if (reporter) {
-		reporter.panic(error);
+		reporter.panic({
+			id: ErrorCodes.Default,
+			context: { sourceMessage: error.message },
+			error,
+		});
 	}
 
 	throw error;
