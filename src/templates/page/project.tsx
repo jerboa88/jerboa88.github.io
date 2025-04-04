@@ -18,6 +18,7 @@ import type { ButtonElementRenderFn } from '../../types/components.ts';
 import { ProjectType, SchemaType } from '../../types/content/projects.ts';
 import type { SocialImagesMetadataProp } from '../../types/other.ts';
 import type { ProjectPageContext } from '../../types/page-context.ts';
+import type { Maybe } from '../../types/utils.ts';
 import { ifDefined, isDefined } from '../../utils/other.ts';
 import { toSentence } from '../../utils/strings.ts';
 import { getAbsoluteUrl } from '../../utils/urls.ts';
@@ -59,6 +60,20 @@ function getSectionButtonRenderFn(
 			{...remainingProps}
 		/>
 	);
+}
+
+/**
+ * Append "Application" to the given value if it is defined
+ *
+ * @param value - The value to append "Application" to.
+ * @returns The given value with "Application" appended, or undefined if the given value is undefined.
+ */
+function buildAppSchemaValue(value: Maybe<string>) {
+	if (isDefined(value)) {
+		return `${value}Application`;
+	}
+
+	return undefined;
 }
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
@@ -127,8 +142,14 @@ export const Head = ({
 		},
 		mainEntity: {
 			'@type': project.schemaType ?? SchemaType.Software,
-			...ifDefined({ applicationCategory: project.schemaApplicationCategory }),
-			...ifDefined({ operatingSystem: project.schemaOperatingSystem }),
+			...ifDefined({
+				applicationCategory: buildAppSchemaValue(
+					project.schemaApplicationCategory,
+				),
+			}),
+			...ifDefined({
+				operatingSystem: buildAppSchemaValue(project.schemaOperatingSystem),
+			}),
 			...(project.type === ProjectType.GithubRepo && {
 				image: project.openGraphImageUrl,
 				...ifDefined({ license: project.licenseInfo?.url }),
