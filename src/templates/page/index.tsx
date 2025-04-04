@@ -22,10 +22,7 @@ import { Timeline } from '../../components/timeline.tsx';
 import { INDEX_PATH, USE_IN_VIEW_OPTIONS } from '../../config/constants.ts';
 import { getSiteMetadata } from '../../managers/config.ts';
 import { getRolesForPage } from '../../managers/content/roles.ts';
-import type {
-	ButtonElementRenderFn,
-	PageSection,
-} from '../../types/components.ts';
+import type { ButtonElementRenderFn } from '../../types/components.ts';
 import type { SocialImagesMetadataProp } from '../../types/other.ts';
 import type { IndexPageContext } from '../../types/page-context.ts';
 import { toKebabCase } from '../../utils/strings.ts';
@@ -68,7 +65,7 @@ export default function IndexPageTemplate({
 			title: 'Contact',
 			ref: useRef(null),
 		},
-	] as PageSection[];
+	] as const;
 
 	const projectsSectionButton = useCallback(
 		((remainingProps) => (

@@ -16,7 +16,7 @@ import { Header } from './header.tsx';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
 	expandTitle?: boolean;
-	sections?: PageSection[];
+	sections?: readonly PageSection[];
 }
 
 // Constants
