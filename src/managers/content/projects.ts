@@ -233,38 +233,40 @@ function doPinProject(
 }
 
 /**
- * Find the GitHub profile repo in a list of GithubRepoProjects and extract the author bio HTML from it.
+ * Find the GitHub profile repo in a list of GithubRepoProjects and extract the author bio from it.
  *
  * @param graphql The Gatsby GraphQL function.
- * @returns A string containing the author bio HTML.
+ * @returns A string containing the author bio.
  */
-export async function getAuthorBioHtml(graphql: CreatePagesArgs['graphql']) {
-	if (cachedAuthorBioHtml) {
-		return cachedAuthorBioHtml;
+export async function getAuthorBio(graphql: CreatePagesArgs['graphql']) {
+	if (cachedAuthorBio) {
+		return cachedAuthorBio;
 	}
 
-	const githubRepos = await fetchGithubRepoProjects(graphql);
-	const profileReadmeRepo = githubRepos.find(
+	const githubRepoProjects = await fetchGithubRepoProjects(graphql);
+	const profileRepo = githubRepoProjects.find(
 		({ slug }) => slug === SITE_METADATA.author.username.github,
 	);
 
 	assertIsDefined(
-		profileReadmeRepo,
-		`Failed to find GitHub profile repo in list:\n${prettify(githubRepos.map((repo) => repo.slug))}`,
+		profileRepo,
+		`Failed to find GitHub profile repo in list:\n${prettify(githubRepoProjects.map((repo) => repo.slug))}`,
 	);
 
-	const authorBioHtml = profileReadmeRepo?.descriptionHtml;
+	const authorBio = profileRepo.background;
 
 	assertIsDefined(
-		authorBioHtml,
-		`Failed to extract author bio HTML from GitHub profile repo:\n${prettify(profileReadmeRepo)}`,
+		authorBio,
+		`Failed to extract author bio from GitHub profile repo. background not found, but it is required. Please add one to ${PROJECT_METADATA_PATH}: ${prettify(profileRepo)}`,
 	);
 
-	info(`Extracted author bio HTML from GitHub profile repo:\n${authorBioHtml}`);
+	info(
+		`Found author bio in GitHub profile repo: '${authorBio.slice(0, 64)}'...`,
+	);
 
-	cachedAuthorBioHtml = authorBioHtml;
+	cachedAuthorBio = authorBio;
 
-	return authorBioHtml;
+	return authorBio;
 }
 
 /**

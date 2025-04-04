@@ -44,8 +44,10 @@ const ContactForm = lazy(() =>
 
 // biome-ignore lint/style/noDefaultExport: Templates must use default exports
 export default function IndexPageTemplate({
-	pageContext: { projects, authorBioHtml },
+	pageContext: { projects, authorBio },
 }: PageProps<null, PageContext>) {
+	const authorBioHtml = `<p>${authorBio.replaceAll('\n', '<br/>')}</p>`;
+
 	const inViewTriggerRef = useRef(null);
 	const expandTitle = useInView(inViewTriggerRef, USE_IN_VIEW_OPTIONS);
 	const sections = [
