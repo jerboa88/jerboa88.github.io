@@ -166,10 +166,3 @@ This project is licensed under the MIT License. See [LICENSE] for details. This 
 [Tailwind CSS]: https://tailwindcss.com/
 [TypeScript]: https://www.typescriptlang.org/
 [Yarn 4]: https://yarnpkg.com/
-
-[meta:exposition]: # (My personal/portfolio site. Made by hand using Gatsby, React, and Tailwind CSS, this static site fetches repository data from the GitHub GraphQL API to display a selection of my public repositories on the home page. This project was a great opportunity to learn more about TypeScript, React, and the GraphQL Data Layer.)
-[meta:category]: # (Website)
-[meta:technologies]: # (Gatsby, React, Tailwind CSS, daisyUI)
-[meta:schemaType]: # (WebApplication)
-[meta:schemaApplicationCategory]: # (DeveloperApplication)
-[meta:schemaOperatingSystem]: # (All)
