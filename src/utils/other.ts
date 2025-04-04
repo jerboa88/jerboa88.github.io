@@ -259,7 +259,7 @@ export function prettify<T = unknown>(
 		return replacerFn ? replacerFn?.(_key, newValue) : newValue;
 	};
 
-	return JSON.stringify(obj, compoundReplacerFn, 2);
+	return JSON.stringify(obj, compoundReplacerFn, '\t');
 }
 
 /**
