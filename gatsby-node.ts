@@ -1,5 +1,7 @@
+import { writeFile as writeFileAsync } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import type { CreatePagesArgs, GatsbyNode } from 'gatsby';
+import { zodToJsonSchema } from 'zod-to-json-schema';
 import {
 	ABOUT_PATH,
 	CONTACT_PATH,
@@ -8,6 +10,8 @@ import {
 	PAGE_TEMPLATES_DIR,
 	PROJECTS_PATH,
 	PROJECTS_PATH_SHORT,
+	PROJECT_METADATA_SCHEMA,
+	PROJECT_METADATA_SCHEMA_FILE,
 	RESUME_PATH,
 	SOCIAL_IMAGES_PATH,
 	SOCIAL_IMAGE_TEMPLATES_DIR,
@@ -21,6 +25,7 @@ import { transformGithubDataNode } from './src/node/github-data-node-transformer
 import { schema } from './src/node/graphql.ts';
 import { setReporter, warn } from './src/node/logger.ts';
 import {
+	createDirs,
 	createPage,
 	createRedirect,
 	deletePage,
@@ -34,6 +39,7 @@ import type {
 } from './src/types/page-context.ts';
 import type { AbsolutePathString } from './src/types/strings.ts';
 import type { EmptyObject } from './src/types/utils.ts';
+import { prettify } from './src/utils/other.ts';
 
 // Constants
 
@@ -142,6 +148,18 @@ async function createRedirects() {
 	await Promise.all(promises);
 }
 
+// Create project metadata schema for validating project metadata files
+async function createProjectMetadataSchema() {
+	const jsonSchema = zodToJsonSchema(PROJECT_METADATA_SCHEMA, {
+		name: 'Project Metadata',
+		nameStrategy: 'title',
+		target: 'jsonSchema2019-09',
+	});
+
+	await createDirs(PROJECT_METADATA_SCHEMA_FILE);
+	await writeFileAsync(PROJECT_METADATA_SCHEMA_FILE, prettify(jsonSchema));
+}
+
 // Save Gatsby Node API Helpers for later use
 export const onPluginInit: GatsbyNode['onPluginInit'] = ({
 	reporter,
@@ -206,6 +224,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 		createProjectPages(graphql),
 		createIndexPage(graphql),
 		createResumePage(graphql),
+		createProjectMetadataSchema(),
 		createRedirects(),
 	]);
 };
