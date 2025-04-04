@@ -58,11 +58,14 @@ const OTHER_OG_IMAGE_TEMPLATE = resolve(
 
 // Create the landing page
 async function createIndexPage(graphql: CreatePagesArgs['graphql']) {
-	const projects = await getProjectsForPage(graphql, INDEX_PATH);
-	const authorBioHtml = await getAuthorBioHtml(graphql);
+	const [projects, authorBio] = await Promise.all([
+		getProjectsForPage(graphql, INDEX_PATH),
+		getAuthorBioHtml(graphql),
+	]);
+
 	const context: IndexPageContext = {
 		projects,
-		authorBioHtml,
+		authorBio,
 	};
 
 	createPage({
@@ -94,8 +97,7 @@ async function createResumePage(graphql: CreatePagesArgs['graphql']) {
 // Create project pages
 async function createProjectPages(graphql: CreatePagesArgs['graphql']) {
 	const projects = await getProjectsForPage(graphql, PROJECTS_PATH);
-
-	for (const project of projects) {
+	const promises = projects.map(async (project) => {
 		const path: AbsolutePathString = join(
 			PROJECTS_PATH,
 			project.slug,
@@ -117,7 +119,9 @@ async function createProjectPages(graphql: CreatePagesArgs['graphql']) {
 		});
 
 		await createRedirect(shortPath, path);
-	}
+	});
+
+	await Promise.all(promises);
 }
 
 // Create client-side redirects
@@ -198,8 +202,10 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
 
 // Manually create pages and generate the associated Open Graph images
 export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
-	await createProjectPages(graphql);
-	await createIndexPage(graphql);
-	await createResumePage(graphql);
-	await createRedirects();
+	await Promise.all([
+		createProjectPages(graphql),
+		createIndexPage(graphql),
+		createResumePage(graphql),
+		createRedirects(),
+	]);
 };
