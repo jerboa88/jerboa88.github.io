@@ -172,16 +172,22 @@ export function deletePage(page: Page) {
  * @example
  * createRedirect('/old-path', '/new-path');
  */
-export function createRedirect(fromPath: string, toPath: string) {
-	assertIsDefined(
-		gatsbyCreateRedirect,
-		'Expected gatsbyCreateRedirect to be defined, but it was not',
-	);
+export async function createRedirect(fromPath: string, toPath: string) {
+	return new Promise((resolve) => {
+		info(`Creating redirect from ${fromPath} to ${toPath}`);
 
-	gatsbyCreateRedirect({
-		fromPath: fromPath,
-		toPath: toPath,
-		isPermanent: true,
+		assertIsDefined(
+			gatsbyCreateRedirect,
+			'Expected gatsbyCreateRedirect to be defined, but it was not',
+		);
+
+		gatsbyCreateRedirect({
+			fromPath,
+			toPath,
+			isPermanent: true,
+		});
+
+		resolve(undefined);
 	});
 }
 

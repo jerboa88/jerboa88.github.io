@@ -116,22 +116,26 @@ async function createProjectPages(graphql: CreatePagesArgs['graphql']) {
 			context,
 		});
 
-		createRedirect(shortPath, path);
+		await createRedirect(shortPath, path);
 	}
 }
 
 // Create client-side redirects
-function createRedirects() {
-	const redirects = [
+async function createRedirects() {
+	const redirectsMatrix: [
+		fromPath: AbsolutePathString,
+		toPath: AbsolutePathString,
+	][] = [
 		[ABOUT_PATH, '/#about'],
 		[PROJECTS_PATH, '/#projects'],
 		[EXPERIENCE_PATH, '/#experience'],
 		[CONTACT_PATH, '/#contact'],
 	];
+	const promises = redirectsMatrix.map(([fromPath, toPath]) =>
+		createRedirect(fromPath, toPath),
+	);
 
-	for (const [fromPath, toPath] of redirects) {
-		createRedirect(fromPath, toPath);
-	}
+	await Promise.all(promises);
 }
 
 // Save Gatsby Node API Helpers for later use
@@ -197,5 +201,5 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 	await createProjectPages(graphql);
 	await createIndexPage(graphql);
 	await createResumePage(graphql);
-	createRedirects();
+	await createRedirects();
 };
