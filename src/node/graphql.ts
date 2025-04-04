@@ -89,8 +89,7 @@ type GithubRepo implements Node {
 	url: String!
 	usesCustomOpenGraphImage: Boolean!
 
-	# Fields directly from README
-	descriptionHtml: String
+	# Fields directly from project metadata file
 	background: String
 	schema: Schema!
 	technologies: [String!]!
@@ -113,7 +112,6 @@ query GithubRepos {
 			}
 			createdAt
 			description
-			descriptionHtml
 			forkCount
 			homepageUrl
 			isFork
