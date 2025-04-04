@@ -1,6 +1,7 @@
 import { writeFile as writeFileAsync } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import type { CreatePagesArgs, GatsbyNode } from 'gatsby';
+import resolveConfig from 'tailwindcss/resolveConfig';
 import { zodToJsonSchema } from 'zod-to-json-schema';
 import {
 	ABOUT_PATH,
@@ -16,30 +17,41 @@ import {
 	SOCIAL_IMAGES_PATH,
 	SOCIAL_IMAGE_TEMPLATES_DIR,
 } from './src/config/constants.ts';
-import { getPageMetadata } from './src/managers/config.ts';
 import {
-	getAuthorBioHtml,
+	getPageMetadata,
+	getProjectCategoryColor,
+} from './src/managers/config.ts';
+import {
+	getAuthorBio,
 	getProjectsForPage,
 } from './src/managers/content/projects.ts';
 import { transformGithubDataNode } from './src/node/github-data-node-transformer.ts';
 import { schema } from './src/node/graphql.ts';
-import { setReporter, warn } from './src/node/logger.ts';
+import { panic, setReporter, warn } from './src/node/logger.ts';
 import {
 	createDirs,
 	createPage,
 	createRedirect,
 	deletePage,
+	fetchAndSaveImage,
 	setGatsbyNodeHelpers,
 } from './src/node/utils.ts';
+import { ProjectCategory } from './src/types/content/projects.ts';
 import type { PageMetadata } from './src/types/other.ts';
 import type {
 	IndexPageContext,
 	ProjectPageContext,
 	ResumePageContext,
 } from './src/types/page-context.ts';
-import type { AbsolutePathString } from './src/types/strings.ts';
+import type {
+	AbsolutePathString,
+	DirPathString,
+	UrlString,
+	WorkingPathString,
+} from './src/types/strings.ts';
 import type { EmptyObject } from './src/types/utils.ts';
-import { prettify } from './src/utils/other.ts';
+import { isDefined, prettify } from './src/utils/other.ts';
+import tailwindConfig from './tailwind.config.ts';
 
 // Constants
 
@@ -66,7 +78,7 @@ const OTHER_OG_IMAGE_TEMPLATE = resolve(
 async function createIndexPage(graphql: CreatePagesArgs['graphql']) {
 	const [projects, authorBio] = await Promise.all([
 		getProjectsForPage(graphql, INDEX_PATH),
-		getAuthorBioHtml(graphql),
+		getAuthorBio(graphql),
 	]);
 
 	const context: IndexPageContext = {
@@ -148,6 +160,38 @@ async function createRedirects() {
 	await Promise.all(promises);
 }
 
+// Create project category badges for use in READMEs
+async function createProjectCategoryBadges() {
+	const badgesBaseUrl: UrlString = 'https://img.shields.io/badge' as const;
+	const badgesDir: WorkingPathString & DirPathString =
+		'./public/badges/category/' as const;
+	const { colors } = resolveConfig(tailwindConfig).theme;
+
+	await createDirs(badgesDir);
+
+	const promises = Object.values(ProjectCategory).map(async (category) => {
+		const cssColor = getProjectCategoryColor(category);
+		const [_, colorName, colorShade] = cssColor.split('-');
+
+		if (!(isDefined(colorName) && isDefined(colorShade))) {
+			panic(`CSS color '${cssColor}' is not in the expected format`);
+		}
+
+		const hexColor = colors[colorName]?.[colorShade];
+
+		if (!isDefined(hexColor)) {
+			panic(`CSS color '${cssColor}' is not a valid theme color`);
+		}
+
+		const badgeUrl = `${badgesBaseUrl}/category-${category}-${hexColor.slice(1)}`;
+		const badgeFilePath = join(badgesDir, `${category}.svg`);
+
+		await fetchAndSaveImage(badgeUrl, badgeFilePath);
+	});
+
+	await Promise.all(promises);
+}
+
 // Create project metadata schema for validating project metadata files
 async function createProjectMetadataSchema() {
 	const jsonSchema = zodToJsonSchema(PROJECT_METADATA_SCHEMA, {
@@ -225,6 +269,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
 		createIndexPage(graphql),
 		createResumePage(graphql),
 		createProjectMetadataSchema(),
+		createProjectCategoryBadges(),
 		createRedirects(),
 	]);
 };
