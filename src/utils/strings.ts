@@ -2,12 +2,12 @@
  * Utility functions for working with strings
  */
 
+import { SENTENCE_REGEX } from '../config/constants.ts';
 import type { DateString, SentenceString } from '../types/strings.ts';
 import { roundDown } from './numbers.ts';
 
 // Constants
 
-const SENTENCE_REGEX = /[\.,!?\u2026]$/;
 const WORD_SEPARATOR_REGEX = /[-_ ]/;
 
 // Functions

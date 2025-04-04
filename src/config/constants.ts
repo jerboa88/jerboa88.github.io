@@ -3,6 +3,12 @@
 	--------------------------------------------------
 */
 
+import { z } from 'zod';
+import {
+	ProjectCategory,
+	SchemaApplicationCategory,
+	SchemaType,
+} from '../types/content/projects.ts';
 import type {
 	AbsolutePathString,
 	UrlString,
@@ -26,6 +32,8 @@ const FADE_TRANSITION_VARIANTS = {
 export const PAGE_TEMPLATES_DIR: WorkingPathString = './src/templates/page';
 export const SOCIAL_IMAGE_TEMPLATES_DIR: WorkingPathString =
 	'./src/templates/social-image';
+export const PROJECT_METADATA_SCHEMA_FILE: WorkingPathString =
+	'./public/schema/project-metadata.json';
 
 // Page paths
 export const INDEX_PATH: AbsolutePathString = '/';
@@ -73,3 +81,86 @@ export const SPRING_TRANSITION_PROPS = {
 		restDelta: 0.08,
 	},
 } as const;
+
+export const SENTENCE_REGEX = /[\.!?…]$/;
+
+export const PROJECT_METADATA_SCHEMA = z
+	.object({
+		name: z
+			.string()
+			.min(1)
+			.max(128)
+			.describe('A human-readable name for the project'),
+		background: z
+			.string()
+			.min(1)
+			.max(1024)
+			.regex(
+				SENTENCE_REGEX,
+				'Invalid sentence. Expected the string to end with a period, comma, exclamation mark, or ellipsis',
+			)
+			.optional()
+			.describe(
+				"A detailed description of the project for use on resumes. This may include the project's purpose, the motivation behind it, team members, and technologies used",
+			),
+		logoPath: z
+			.string()
+			.min(1)
+			.max(128)
+			.optional()
+			.describe("A path to the project's logo"),
+		category: z
+			.nativeEnum(ProjectCategory)
+			.describe('The general type of the project'),
+		languages: z
+			.array(z.string().min(1).max(128))
+			.nonempty()
+			.optional()
+			.describe('A list of languages used in the project')
+			.transform((value) => value ?? []),
+		technologies: z
+			.array(z.string().min(1).max(128))
+			.nonempty()
+			.optional()
+			.describe('A list of technologies used in the project')
+			.transform((value) => value ?? []),
+		tools: z
+			.array(z.string().min(1).max(128))
+			.nonempty()
+			.optional()
+			.describe('A list of tools used in the project')
+			.transform((value) => value ?? []),
+		topics: z
+			.array(z.string().min(1).max(128))
+			.nonempty()
+			.optional()
+			.describe('A list of topics for the project')
+			.transform((value) => value ?? []),
+		schema: z
+			.object({
+				type: z
+					.nativeEnum(SchemaType)
+					.describe(
+						'The type of software application that the project is, as defined by Google',
+					),
+				applicationCategory: z
+					.nativeEnum(SchemaApplicationCategory)
+					.describe(
+						'The category of the software application that the project belongs to, as defined by Google',
+					),
+				operatingSystem: z
+					.string()
+					.min(1)
+					.describe(
+						'The operating system(s) that the project is compatible with, as defined by Google',
+					),
+			})
+			.strict()
+			.partial()
+			.optional()
+			.describe(
+				'Passthrough schema.org properties used to construct structured data for the project',
+			)
+			.transform((value) => value ?? {}),
+	})
+	.describe('Metadata for a project');
