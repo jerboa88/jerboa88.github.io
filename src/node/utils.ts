@@ -2,7 +2,8 @@
  * Utility functions for use in Gatsby Node API functions
  */
 
-import { join } from 'node:path';
+import { mkdir as mkdirAsync } from 'node:fs/promises';
+import { dirname, join, sep } from 'node:path';
 import type { Actions, Page } from 'gatsby';
 import { createImage } from 'gatsby-plugin-component-to-image';
 import { INDEX_PATH, SOCIAL_IMAGES_PATH } from '../config/constants.ts';
@@ -53,6 +54,21 @@ export function setGatsbyNodeHelpers(
 	gatsbyCreatePage = createPage;
 	gatsbyDeletePage = deletePage;
 	gatsbyCreateRedirect = createRedirect;
+}
+
+/**
+ * Recursively create directories for a given path
+ *
+ * @param path The path to create directories for. If the path ends with a slash, it will be treated as a directory. Otherwise, it will be treated as a file.
+ * @returns A promise that resolves when the directories have been created
+ * @example
+ * await createDirs('/path/to/dir/file.txt'); // Creates /path/to/dir/
+ * await createDirs('another/path/to/dir/'); // Creates /another/path/to/dir/
+ */
+export async function createDirs(path: string) {
+	const dirName = path.endsWith(sep) ? path : dirname(path);
+
+	await mkdirAsync(dirName, { recursive: true });
 }
 
 /** Generate a single social image for a page
@@ -138,6 +154,8 @@ export function createPage({
  * deletePage(page);
 */
 export function deletePage(page: Page) {
+	info(`Deleting page at ${page.path}`);
+
 	assertIsDefined(
 		gatsbyDeletePage,
 		'Expected gatsbyDeletePage to be defined, but it was not',
