@@ -2,6 +2,7 @@
  * Utility functions for use in Gatsby Node API functions
  */
 
+import { createWriteStream } from 'node:fs';
 import { mkdir as mkdirAsync } from 'node:fs/promises';
 import { dirname, join, sep } from 'node:path';
 import type { Actions, Page } from 'gatsby';
@@ -13,7 +14,7 @@ import type { AbsolutePathString } from '../types/strings.ts';
 import type { Maybe } from '../types/utils.ts';
 import { assertIsDefined } from '../utils/other.ts';
 import { removeTrailingSlash } from '../utils/urls.ts';
-import { info } from './logger.ts';
+import { info, panic } from './logger.ts';
 
 // Runtime variables
 
@@ -182,4 +183,37 @@ export function createRedirect(fromPath: string, toPath: string) {
 		toPath: toPath,
 		isPermanent: true,
 	});
+}
+
+/**
+ * Fetch an image from a URL and save it to a file
+ *
+ * @param imageUrl The URL of the image to fetch
+ * @param outputPath The path to save the image to
+ * @example
+ * await fetchAndSaveImage('https://example.com/image.png', './public/image.png');
+ */
+export async function fetchAndSaveImage(
+	imageUrl: string,
+	outputPath: string,
+): Promise<void> {
+	info(`Saving image from ${imageUrl} to ${outputPath}`);
+
+	try {
+		const response = await fetch(imageUrl);
+
+		if (!response.ok) {
+			panic(
+				`Failed to fetch image: ${response.status} - ${response.statusText}`,
+			);
+		}
+
+		const arrayBuffer = response.arrayBuffer();
+		const writeStream = createWriteStream(outputPath);
+
+		writeStream.write(Buffer.from(await arrayBuffer));
+		writeStream.end();
+	} catch (error) {
+		panic(`Error fetching and saving image: ${error}`);
+	}
 }
