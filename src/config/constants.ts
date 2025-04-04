@@ -11,6 +11,7 @@ import {
 } from '../types/content/projects.ts';
 import type {
 	AbsolutePathString,
+	FilePathString,
 	UrlString,
 	WorkingPathString,
 } from '../types/strings.ts';
@@ -32,7 +33,7 @@ const FADE_TRANSITION_VARIANTS = {
 export const PAGE_TEMPLATES_DIR: WorkingPathString = './src/templates/page';
 export const SOCIAL_IMAGE_TEMPLATES_DIR: WorkingPathString =
 	'./src/templates/social-image';
-export const PROJECT_METADATA_SCHEMA_FILE: WorkingPathString =
+export const PROJECT_METADATA_SCHEMA_FILE: WorkingPathString & FilePathString =
 	'./public/schema/project-metadata.json';
 
 // Page paths
@@ -48,7 +49,13 @@ export const PRIVACY_POLICY_PATH: AbsolutePathString = '/privacy-policy';
 export const NOT_FOUND_PATH: AbsolutePathString = '/404';
 export const SOCIAL_IMAGES_PATH: AbsolutePathString =
 	'/__generatedSocialImages';
-export const AUTHOR_SCHEMA_PATH: AbsolutePathString = '/schema/author.json';
+export const AUTHOR_SCHEMA_PATH: AbsolutePathString & FilePathString =
+	'/schema/author.json';
+
+// GitHub repo paths (relative to the repo root)
+// These are relative to the repo root. Paths cannot start with a dot or slash
+export const PROJECT_METADATA_PATH: FilePathString = 'project-metadata.json';
+export const PROJECT_README_PATH: FilePathString = 'README.md';
 
 // ID used to group together elements for the title animation
 export const TITLE_LAYOUT_ID = 'title-layout' as const;
