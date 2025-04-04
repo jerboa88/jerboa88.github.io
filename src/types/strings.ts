@@ -59,18 +59,32 @@ type DayDigits =
 export type BgColorString = `bg-${string}`;
 
 /**
- * Absolute path string
+ * A path relative to the root of the project or domain (ie. a path prefixed with '/')
  *
  * @example '/path/to/file'
  */
 export type AbsolutePathString = `/${string}`;
 
 /**
- * Working path string
+ * A path relative to the current working directory (ie. a path prefixed with './')
  *
  * @example './path/to/file'
  */
 export type WorkingPathString = `./${string}`;
+
+/**
+ * A path representing a directory (ie. a path suffixed with '/')
+ *
+ * @example './path/to/dir/'
+ */
+export type DirPathString = `${string}/`;
+
+/**
+ * A path representing a file (ie. a path suffixed with '.*')
+ *
+ * @example './path/to/file.txt'
+ */
+export type FilePathString = `${string}.${string}`;
 
 /**
  * HTTPS URL string
