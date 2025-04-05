@@ -80,13 +80,12 @@ async function createIndexPage(graphql: CreatePagesArgs['graphql']) {
 		getProjectsForPage(graphql, INDEX_PATH),
 		getAuthorBio(graphql),
 	]);
-
 	const context: IndexPageContext = {
 		projects,
 		authorBio,
 	};
 
-	createPage({
+	return createPage({
 		path: INDEX_PATH,
 		component: INDEX_PAGE_TEMPLATE,
 		socialImageComponent: INDEX_OG_IMAGE_TEMPLATE,
@@ -104,7 +103,7 @@ async function createResumePage(graphql: CreatePagesArgs['graphql']) {
 		projects,
 	};
 
-	createPage({
+	return createPage({
 		path: RESUME_PATH,
 		component: RESUME_PAGE_TEMPLATE,
 		socialImageComponent: OTHER_OG_IMAGE_TEMPLATE,
@@ -127,19 +126,19 @@ async function createProjectPages(graphql: CreatePagesArgs['graphql']) {
 		const context: ProjectPageContext = {
 			project,
 		};
-
 		// Create project pages
-		createPage({
+		const createPagePromise = createPage({
 			path,
 			component: PROJECT_PAGE_TEMPLATE,
 			socialImageComponent: PROJECT_OG_IMAGE_TEMPLATE,
 			context,
 		});
+		const createRedirectPromise = createRedirect(shortPath, path);
 
-		await createRedirect(shortPath, path);
+		await Promise.all([createPagePromise, createRedirectPromise]);
 	});
 
-	await Promise.all(promises);
+	return Promise.all(promises);
 }
 
 // Create client-side redirects
@@ -157,7 +156,7 @@ async function createRedirects() {
 		createRedirect(fromPath, toPath),
 	);
 
-	await Promise.all(promises);
+	return Promise.all(promises);
 }
 
 // Create project category badges for use in READMEs
@@ -189,7 +188,7 @@ async function createProjectCategoryBadges() {
 		await fetchAndSaveImage(badgeUrl, badgeFilePath);
 	});
 
-	await Promise.all(promises);
+	return Promise.all(promises);
 }
 
 // Create project metadata schema for validating project metadata files
@@ -201,7 +200,8 @@ async function createProjectMetadataSchema() {
 	});
 
 	await createDirs(PROJECT_METADATA_SCHEMA_FILE);
-	await writeFileAsync(PROJECT_METADATA_SCHEMA_FILE, prettify(jsonSchema));
+
+	return writeFileAsync(PROJECT_METADATA_SCHEMA_FILE, prettify(jsonSchema));
 }
 
 // Save Gatsby Node API Helpers for later use
@@ -232,7 +232,7 @@ export const onCreateNode: GatsbyNode<Queries.GithubData>['onCreateNode'] = ({
 };
 
 // Add metadata to automatically generated pages and generate the associated Open Graph images
-export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
+export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page }) => {
 	if (!page.path) {
 		return;
 	}
@@ -251,7 +251,7 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = ({ page }) => {
 	}
 
 	deletePage(page);
-	createPage({
+	await createPage({
 		...page,
 		path: page.path as AbsolutePathString,
 		socialImageComponent: OTHER_OG_IMAGE_TEMPLATE,

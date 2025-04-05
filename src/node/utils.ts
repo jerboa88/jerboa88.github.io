@@ -119,32 +119,36 @@ function createSocialImages(options: CreateSocialImagesOptions) {
  * @param socialImageComponent The component to use for the social images
  * @param context The context to pass to the page
  */
-export function createPage({
+export async function createPage({
 	path,
 	component,
 	socialImageComponent,
 	context,
 }: CreatePageOptions) {
-	info(`Creating page at ${path}`);
+	return new Promise((resolve) => {
+		info(`Creating page at ${path}`);
 
-	assertIsDefined(
-		gatsbyCreatePage,
-		'Expected gatsbyCreatePage to be defined, but it was not',
-	);
+		assertIsDefined(
+			gatsbyCreatePage,
+			'Expected gatsbyCreatePage to be defined, but it was not',
+		);
 
-	const socialImagesMetadata = createSocialImages({
-		path: path,
-		component: socialImageComponent,
-		context: context,
-	});
+		const socialImagesMetadata = createSocialImages({
+			path: path,
+			component: socialImageComponent,
+			context: context,
+		});
 
-	gatsbyCreatePage({
-		path: path,
-		component: component,
-		context: {
-			...context,
-			socialImagesMetadata: socialImagesMetadata,
-		},
+		gatsbyCreatePage({
+			path: path,
+			component: component,
+			context: {
+				...context,
+				socialImagesMetadata: socialImagesMetadata,
+			},
+		});
+
+		resolve(undefined);
 	});
 }
 
