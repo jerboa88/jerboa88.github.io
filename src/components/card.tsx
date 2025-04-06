@@ -181,7 +181,7 @@ export function Card({
 	};
 	const outerClassNameProps = getClassNameProps(outerClassName);
 	const middleClassNameProps = getClassNameProps(
-		'size-full shadow-md !bg-clip-content rounded-2xl backdrop-blur-md',
+		'size-full shadow-md !bg-clip-content rounded-2xl backdrop-blur-sm',
 		middleClassName,
 	);
 	const middleStyleProps = {

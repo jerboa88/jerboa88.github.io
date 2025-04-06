@@ -29,6 +29,9 @@ function UnmemoizedParticlesBackground() {
 	);
 	const tsParticlesConfig: RecursivePartial<IOptions> = {
 		fpsLimit: 30,
+		smooth: false,
+		pauseOnBlur: true,
+		pauseOnOutsideViewport: true,
 		detectRetina: true,
 		particles: {
 			color: {
@@ -73,14 +76,13 @@ function UnmemoizedParticlesBackground() {
 
 	useEffect(() => {
 		initParticlesEngine(async (engine) => {
-			await loadBasic(engine);
-			await loadSquareShape(engine);
-		}).then(() => {
+			await Promise.all([loadBasic(engine), loadSquareShape(engine)]);
+
 			setInit(true);
 
 			info('tsParticles engine has been loaded');
 		});
-	});
+	}, []);
 
 	return <Particles options={tsParticlesConfig} {...classNameProps} />;
 }
