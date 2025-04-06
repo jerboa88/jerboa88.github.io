@@ -776,6 +776,7 @@ type GithubDataDataUserRepositoriesNodes = {
   readonly name: Scalars['String'];
   readonly openGraphImageUrl: Scalars['String'];
   readonly owner: GithubDataDataUserRepositoriesNodesOwner;
+  readonly projectMetadata: Maybe<GithubDataDataUserRepositoriesNodesProjectMetadata>;
   readonly readme: Maybe<GithubDataDataUserRepositoriesNodesReadme>;
   readonly repositoryTopics: GithubDataDataUserRepositoriesNodesRepositoryTopics;
   readonly stargazerCount: Scalars['Int'];
@@ -795,6 +796,7 @@ type GithubDataDataUserRepositoriesNodesFieldSelector = {
   readonly name: InputMaybe<FieldSelectorEnum>;
   readonly openGraphImageUrl: InputMaybe<FieldSelectorEnum>;
   readonly owner: InputMaybe<GithubDataDataUserRepositoriesNodesOwnerFieldSelector>;
+  readonly projectMetadata: InputMaybe<GithubDataDataUserRepositoriesNodesProjectMetadataFieldSelector>;
   readonly readme: InputMaybe<GithubDataDataUserRepositoriesNodesReadmeFieldSelector>;
   readonly repositoryTopics: InputMaybe<GithubDataDataUserRepositoriesNodesRepositoryTopicsFieldSelector>;
   readonly stargazerCount: InputMaybe<FieldSelectorEnum>;
@@ -814,6 +816,7 @@ type GithubDataDataUserRepositoriesNodesFilterInput = {
   readonly name: InputMaybe<StringQueryOperatorInput>;
   readonly openGraphImageUrl: InputMaybe<StringQueryOperatorInput>;
   readonly owner: InputMaybe<GithubDataDataUserRepositoriesNodesOwnerFilterInput>;
+  readonly projectMetadata: InputMaybe<GithubDataDataUserRepositoriesNodesProjectMetadataFilterInput>;
   readonly readme: InputMaybe<GithubDataDataUserRepositoriesNodesReadmeFilterInput>;
   readonly repositoryTopics: InputMaybe<GithubDataDataUserRepositoriesNodesRepositoryTopicsFilterInput>;
   readonly stargazerCount: InputMaybe<IntQueryOperatorInput>;
@@ -902,6 +905,22 @@ type GithubDataDataUserRepositoriesNodesOwnerSortInput = {
   readonly login: InputMaybe<SortOrderEnum>;
 };
 
+type GithubDataDataUserRepositoriesNodesProjectMetadata = {
+  readonly text: Maybe<Scalars['String']>;
+};
+
+type GithubDataDataUserRepositoriesNodesProjectMetadataFieldSelector = {
+  readonly text: InputMaybe<FieldSelectorEnum>;
+};
+
+type GithubDataDataUserRepositoriesNodesProjectMetadataFilterInput = {
+  readonly text: InputMaybe<StringQueryOperatorInput>;
+};
+
+type GithubDataDataUserRepositoriesNodesProjectMetadataSortInput = {
+  readonly text: InputMaybe<SortOrderEnum>;
+};
+
 type GithubDataDataUserRepositoriesNodesReadme = {
   readonly text: Maybe<Scalars['String']>;
 };
@@ -981,6 +1000,7 @@ type GithubDataDataUserRepositoriesNodesSortInput = {
   readonly name: InputMaybe<SortOrderEnum>;
   readonly openGraphImageUrl: InputMaybe<SortOrderEnum>;
   readonly owner: InputMaybe<GithubDataDataUserRepositoriesNodesOwnerSortInput>;
+  readonly projectMetadata: InputMaybe<GithubDataDataUserRepositoriesNodesProjectMetadataSortInput>;
   readonly readme: InputMaybe<GithubDataDataUserRepositoriesNodesReadmeSortInput>;
   readonly repositoryTopics: InputMaybe<GithubDataDataUserRepositoriesNodesRepositoryTopicsSortInput>;
   readonly stargazerCount: InputMaybe<SortOrderEnum>;
@@ -1117,6 +1137,7 @@ type GithubDataRawResultDataUserRepositoriesNodes = {
   readonly name: Maybe<Scalars['String']>;
   readonly openGraphImageUrl: Maybe<Scalars['String']>;
   readonly owner: Maybe<GithubDataRawResultDataUserRepositoriesNodesOwner>;
+  readonly projectMetadata: Maybe<GithubDataRawResultDataUserRepositoriesNodesProjectMetadata>;
   readonly readme: Maybe<GithubDataRawResultDataUserRepositoriesNodesReadme>;
   readonly repositoryTopics: Maybe<GithubDataRawResultDataUserRepositoriesNodesRepositoryTopics>;
   readonly stargazerCount: Maybe<Scalars['Int']>;
@@ -1152,6 +1173,7 @@ type GithubDataRawResultDataUserRepositoriesNodesFieldSelector = {
   readonly name: InputMaybe<FieldSelectorEnum>;
   readonly openGraphImageUrl: InputMaybe<FieldSelectorEnum>;
   readonly owner: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesOwnerFieldSelector>;
+  readonly projectMetadata: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesProjectMetadataFieldSelector>;
   readonly readme: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesReadmeFieldSelector>;
   readonly repositoryTopics: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesRepositoryTopicsFieldSelector>;
   readonly stargazerCount: InputMaybe<FieldSelectorEnum>;
@@ -1171,6 +1193,7 @@ type GithubDataRawResultDataUserRepositoriesNodesFilterInput = {
   readonly name: InputMaybe<StringQueryOperatorInput>;
   readonly openGraphImageUrl: InputMaybe<StringQueryOperatorInput>;
   readonly owner: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesOwnerFilterInput>;
+  readonly projectMetadata: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesProjectMetadataFilterInput>;
   readonly readme: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesReadmeFilterInput>;
   readonly repositoryTopics: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesRepositoryTopicsFilterInput>;
   readonly stargazerCount: InputMaybe<IntQueryOperatorInput>;
@@ -1259,6 +1282,22 @@ type GithubDataRawResultDataUserRepositoriesNodesOwnerSortInput = {
   readonly login: InputMaybe<SortOrderEnum>;
 };
 
+type GithubDataRawResultDataUserRepositoriesNodesProjectMetadata = {
+  readonly text: Maybe<Scalars['String']>;
+};
+
+type GithubDataRawResultDataUserRepositoriesNodesProjectMetadataFieldSelector = {
+  readonly text: InputMaybe<FieldSelectorEnum>;
+};
+
+type GithubDataRawResultDataUserRepositoriesNodesProjectMetadataFilterInput = {
+  readonly text: InputMaybe<StringQueryOperatorInput>;
+};
+
+type GithubDataRawResultDataUserRepositoriesNodesProjectMetadataSortInput = {
+  readonly text: InputMaybe<SortOrderEnum>;
+};
+
 type GithubDataRawResultDataUserRepositoriesNodesReadme = {
   readonly text: Maybe<Scalars['String']>;
 };
@@ -1338,6 +1377,7 @@ type GithubDataRawResultDataUserRepositoriesNodesSortInput = {
   readonly name: InputMaybe<SortOrderEnum>;
   readonly openGraphImageUrl: InputMaybe<SortOrderEnum>;
   readonly owner: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesOwnerSortInput>;
+  readonly projectMetadata: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesProjectMetadataSortInput>;
   readonly readme: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesReadmeSortInput>;
   readonly repositoryTopics: InputMaybe<GithubDataRawResultDataUserRepositoriesNodesRepositoryTopicsSortInput>;
   readonly stargazerCount: InputMaybe<SortOrderEnum>;
@@ -1377,6 +1417,7 @@ type GithubDataSortInput = {
 
 /** Define schema for custom GithubRepo nodes */
 type GithubRepo = Node & {
+  readonly background: Maybe<Scalars['String']>;
   readonly category: ProjectCategory;
   /** Returns the first child node of type MarkdownRemark or null if there are no children of given type on this node */
   readonly childMarkdownRemark: Maybe<MarkdownRemark>;
@@ -1385,8 +1426,6 @@ type GithubRepo = Node & {
   readonly childrenMarkdownRemark: Maybe<ReadonlyArray<Maybe<MarkdownRemark>>>;
   readonly createdAt: Scalars['Date'];
   readonly description: Scalars['String'];
-  readonly descriptionHtml: Maybe<Scalars['String']>;
-  readonly exposition: Maybe<Scalars['String']>;
   readonly forkCount: Scalars['Int'];
   readonly homepageUrl: Maybe<Scalars['String']>;
   readonly id: Scalars['ID'];
@@ -1399,8 +1438,12 @@ type GithubRepo = Node & {
   readonly openGraphImageUrl: Scalars['String'];
   readonly owner: Scalars['String'];
   readonly parent: Maybe<Node>;
+  readonly schema: Schema;
   readonly slug: Scalars['String'];
   readonly stargazerCount: Scalars['Int'];
+  readonly tags: ReadonlyArray<Scalars['String']>;
+  readonly technologies: ReadonlyArray<Scalars['String']>;
+  readonly tools: ReadonlyArray<Scalars['String']>;
   readonly topics: ReadonlyArray<Scalars['String']>;
   readonly updatedAt: Scalars['Date'];
   readonly url: Scalars['String'];
@@ -1453,14 +1496,13 @@ type GithubRepoEdge = {
 };
 
 type GithubRepoFieldSelector = {
+  readonly background: InputMaybe<FieldSelectorEnum>;
   readonly category: InputMaybe<ProjectCategoryFieldSelector>;
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkFieldSelector>;
   readonly children: InputMaybe<NodeFieldSelector>;
   readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkFieldSelector>;
   readonly createdAt: InputMaybe<FieldSelectorEnum>;
   readonly description: InputMaybe<FieldSelectorEnum>;
-  readonly descriptionHtml: InputMaybe<FieldSelectorEnum>;
-  readonly exposition: InputMaybe<FieldSelectorEnum>;
   readonly forkCount: InputMaybe<FieldSelectorEnum>;
   readonly homepageUrl: InputMaybe<FieldSelectorEnum>;
   readonly id: InputMaybe<FieldSelectorEnum>;
@@ -1473,8 +1515,12 @@ type GithubRepoFieldSelector = {
   readonly openGraphImageUrl: InputMaybe<FieldSelectorEnum>;
   readonly owner: InputMaybe<FieldSelectorEnum>;
   readonly parent: InputMaybe<NodeFieldSelector>;
+  readonly schema: InputMaybe<SchemaFieldSelector>;
   readonly slug: InputMaybe<FieldSelectorEnum>;
   readonly stargazerCount: InputMaybe<FieldSelectorEnum>;
+  readonly tags: InputMaybe<FieldSelectorEnum>;
+  readonly technologies: InputMaybe<FieldSelectorEnum>;
+  readonly tools: InputMaybe<FieldSelectorEnum>;
   readonly topics: InputMaybe<FieldSelectorEnum>;
   readonly updatedAt: InputMaybe<FieldSelectorEnum>;
   readonly url: InputMaybe<FieldSelectorEnum>;
@@ -1482,14 +1528,13 @@ type GithubRepoFieldSelector = {
 };
 
 type GithubRepoFilterInput = {
+  readonly background: InputMaybe<StringQueryOperatorInput>;
   readonly category: InputMaybe<ProjectCategoryFilterInput>;
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkFilterInput>;
   readonly children: InputMaybe<NodeFilterListInput>;
   readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkFilterListInput>;
   readonly createdAt: InputMaybe<DateQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
-  readonly descriptionHtml: InputMaybe<StringQueryOperatorInput>;
-  readonly exposition: InputMaybe<StringQueryOperatorInput>;
   readonly forkCount: InputMaybe<IntQueryOperatorInput>;
   readonly homepageUrl: InputMaybe<StringQueryOperatorInput>;
   readonly id: InputMaybe<StringQueryOperatorInput>;
@@ -1502,8 +1547,12 @@ type GithubRepoFilterInput = {
   readonly openGraphImageUrl: InputMaybe<StringQueryOperatorInput>;
   readonly owner: InputMaybe<StringQueryOperatorInput>;
   readonly parent: InputMaybe<NodeFilterInput>;
+  readonly schema: InputMaybe<SchemaFilterInput>;
   readonly slug: InputMaybe<StringQueryOperatorInput>;
   readonly stargazerCount: InputMaybe<IntQueryOperatorInput>;
+  readonly tags: InputMaybe<StringQueryOperatorInput>;
+  readonly technologies: InputMaybe<StringQueryOperatorInput>;
+  readonly tools: InputMaybe<StringQueryOperatorInput>;
   readonly topics: InputMaybe<StringQueryOperatorInput>;
   readonly updatedAt: InputMaybe<DateQueryOperatorInput>;
   readonly url: InputMaybe<StringQueryOperatorInput>;
@@ -1552,14 +1601,13 @@ type GithubRepoGroupConnection_sumArgs = {
 };
 
 type GithubRepoSortInput = {
+  readonly background: InputMaybe<SortOrderEnum>;
   readonly category: InputMaybe<ProjectCategorySortInput>;
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkSortInput>;
   readonly children: InputMaybe<NodeSortInput>;
   readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkSortInput>;
   readonly createdAt: InputMaybe<SortOrderEnum>;
   readonly description: InputMaybe<SortOrderEnum>;
-  readonly descriptionHtml: InputMaybe<SortOrderEnum>;
-  readonly exposition: InputMaybe<SortOrderEnum>;
   readonly forkCount: InputMaybe<SortOrderEnum>;
   readonly homepageUrl: InputMaybe<SortOrderEnum>;
   readonly id: InputMaybe<SortOrderEnum>;
@@ -1572,8 +1620,12 @@ type GithubRepoSortInput = {
   readonly openGraphImageUrl: InputMaybe<SortOrderEnum>;
   readonly owner: InputMaybe<SortOrderEnum>;
   readonly parent: InputMaybe<NodeSortInput>;
+  readonly schema: InputMaybe<SchemaSortInput>;
   readonly slug: InputMaybe<SortOrderEnum>;
   readonly stargazerCount: InputMaybe<SortOrderEnum>;
+  readonly tags: InputMaybe<SortOrderEnum>;
+  readonly technologies: InputMaybe<SortOrderEnum>;
+  readonly tools: InputMaybe<SortOrderEnum>;
   readonly topics: InputMaybe<SortOrderEnum>;
   readonly updatedAt: InputMaybe<SortOrderEnum>;
   readonly url: InputMaybe<SortOrderEnum>;
@@ -2178,14 +2230,13 @@ type Query_githubDataArgs = {
 
 
 type Query_githubRepoArgs = {
+  background: InputMaybe<StringQueryOperatorInput>;
   category: InputMaybe<ProjectCategoryFilterInput>;
   childMarkdownRemark: InputMaybe<MarkdownRemarkFilterInput>;
   children: InputMaybe<NodeFilterListInput>;
   childrenMarkdownRemark: InputMaybe<MarkdownRemarkFilterListInput>;
   createdAt: InputMaybe<DateQueryOperatorInput>;
   description: InputMaybe<StringQueryOperatorInput>;
-  descriptionHtml: InputMaybe<StringQueryOperatorInput>;
-  exposition: InputMaybe<StringQueryOperatorInput>;
   forkCount: InputMaybe<IntQueryOperatorInput>;
   homepageUrl: InputMaybe<StringQueryOperatorInput>;
   id: InputMaybe<StringQueryOperatorInput>;
@@ -2198,8 +2249,12 @@ type Query_githubRepoArgs = {
   openGraphImageUrl: InputMaybe<StringQueryOperatorInput>;
   owner: InputMaybe<StringQueryOperatorInput>;
   parent: InputMaybe<NodeFilterInput>;
+  schema: InputMaybe<SchemaFilterInput>;
   slug: InputMaybe<StringQueryOperatorInput>;
   stargazerCount: InputMaybe<IntQueryOperatorInput>;
+  tags: InputMaybe<StringQueryOperatorInput>;
+  technologies: InputMaybe<StringQueryOperatorInput>;
+  tools: InputMaybe<StringQueryOperatorInput>;
   topics: InputMaybe<StringQueryOperatorInput>;
   updatedAt: InputMaybe<DateQueryOperatorInput>;
   url: InputMaybe<StringQueryOperatorInput>;
@@ -2296,6 +2351,30 @@ type Query_sitePluginArgs = {
   resolve: InputMaybe<StringQueryOperatorInput>;
   ssrAPIs: InputMaybe<StringQueryOperatorInput>;
   version: InputMaybe<StringQueryOperatorInput>;
+};
+
+type Schema = {
+  readonly applicationCategory: Maybe<Scalars['String']>;
+  readonly operatingSystem: Maybe<Scalars['String']>;
+  readonly type: Maybe<Scalars['String']>;
+};
+
+type SchemaFieldSelector = {
+  readonly applicationCategory: InputMaybe<FieldSelectorEnum>;
+  readonly operatingSystem: InputMaybe<FieldSelectorEnum>;
+  readonly type: InputMaybe<FieldSelectorEnum>;
+};
+
+type SchemaFilterInput = {
+  readonly applicationCategory: InputMaybe<StringQueryOperatorInput>;
+  readonly operatingSystem: InputMaybe<StringQueryOperatorInput>;
+  readonly type: InputMaybe<StringQueryOperatorInput>;
+};
+
+type SchemaSortInput = {
+  readonly applicationCategory: InputMaybe<SortOrderEnum>;
+  readonly operatingSystem: InputMaybe<SortOrderEnum>;
+  readonly type: InputMaybe<SortOrderEnum>;
 };
 
 type Site = Node & {

@@ -19,7 +19,7 @@ import { ResponsiveText } from '../text/responsive-text.tsx';
 
 interface Props {
 	expandTitle?: Maybe<boolean>;
-	sections: PageSection[];
+	sections: readonly PageSection[];
 }
 
 // Constants

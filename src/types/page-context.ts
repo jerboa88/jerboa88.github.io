@@ -26,7 +26,7 @@ type SocialImagePageContext<T extends object = EmptyObject> =
  */
 export type IndexPageContext = {
 	projects: Project[];
-	authorBioHtml: string;
+	authorBio: string;
 };
 
 /**

@@ -11,7 +11,7 @@ import { Section } from '../components/layout/section.tsx';
 import { SolidButtonLink } from '../components/links/solid-button-link.tsx';
 import { PageHead } from '../components/seo/page-head.tsx';
 import { Article } from '../components/text/article.tsx';
-import { JSON_LD_AUTHOR_PATH } from '../config/constants.ts';
+import { AUTHOR_SCHEMA_PATH } from '../config/constants.ts';
 import { getSiteMetadata } from '../managers/config.ts';
 import type { SocialImagesMetadataProp } from '../types/other.ts';
 import type { PrivacyPageContext } from '../types/page-context.ts';
@@ -71,7 +71,7 @@ export const Head = ({
 			headline: pageMetadata.shortTitle,
 			description: pageMetadata.description,
 			author: {
-				'@id': JSON_LD_AUTHOR_PATH,
+				'@id': AUTHOR_SCHEMA_PATH,
 			},
 		},
 	};

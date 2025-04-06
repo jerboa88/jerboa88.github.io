@@ -69,7 +69,10 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:18.3.1"],\
           ["react-hook-form", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:7.54.2"],\
           ["tailwindcss", "npm:3.4.17"],\
-          ["typescript", "patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"]\
+          ["typescript", "patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"],\
+          ["zod", "npm:3.24.2"],\
+          ["zod-to-json-schema", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.24.5"],\
+          ["zod-validation-error", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.4.0"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -14410,7 +14413,10 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:18.3.1"],\
           ["react-hook-form", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:7.54.2"],\
           ["tailwindcss", "npm:3.4.17"],\
-          ["typescript", "patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"]\
+          ["typescript", "patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"],\
+          ["zod", "npm:3.24.2"],\
+          ["zod-to-json-schema", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.24.5"],\
+          ["zod-validation-error", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.4.0"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -22772,6 +22778,57 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/zod-npm-3.22.4-2bccbc41b4-73622ca36a.zip/node_modules/zod/",\
         "packageDependencies": [\
           ["zod", "npm:3.22.4"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:3.24.2", {\
+        "packageLocation": "./.yarn/cache/zod-npm-3.24.2-ab80dc0969-604c62a8cf.zip/node_modules/zod/",\
+        "packageDependencies": [\
+          ["zod", "npm:3.24.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["zod-to-json-schema", [\
+      ["npm:3.24.5", {\
+        "packageLocation": "./.yarn/cache/zod-to-json-schema-npm-3.24.5-3484801266-1af291b4c4.zip/node_modules/zod-to-json-schema/",\
+        "packageDependencies": [\
+          ["zod-to-json-schema", "npm:3.24.5"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.24.5", {\
+        "packageLocation": "./.yarn/__virtual__/zod-to-json-schema-virtual-63c2fa4314/0/cache/zod-to-json-schema-npm-3.24.5-3484801266-1af291b4c4.zip/node_modules/zod-to-json-schema/",\
+        "packageDependencies": [\
+          ["zod-to-json-schema", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.24.5"],\
+          ["@types/zod", null],\
+          ["zod", "npm:3.24.2"]\
+        ],\
+        "packagePeers": [\
+          "@types/zod",\
+          "zod"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["zod-validation-error", [\
+      ["npm:3.4.0", {\
+        "packageLocation": "./.yarn/cache/zod-validation-error-npm-3.4.0-1c97ee8445-b98b1bbba1.zip/node_modules/zod-validation-error/",\
+        "packageDependencies": [\
+          ["zod-validation-error", "npm:3.4.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.4.0", {\
+        "packageLocation": "./.yarn/__virtual__/zod-validation-error-virtual-09de1ff88a/0/cache/zod-validation-error-npm-3.4.0-1c97ee8445-b98b1bbba1.zip/node_modules/zod-validation-error/",\
+        "packageDependencies": [\
+          ["zod-validation-error", "virtual:14350ed45911d0f670f748a7e6e550b9df9c9bb806b430b1edbcdc0fc58fcd01213ff7fb61f3390a5a685b9e2736cddb37fc916afa1aee1d085827b411f49609#npm:3.4.0"],\
+          ["@types/zod", null],\
+          ["zod", "npm:3.24.2"]\
+        ],\
+        "packagePeers": [\
+          "@types/zod",\
+          "zod"\
         ],\
         "linkType": "HARD"\
       }]\

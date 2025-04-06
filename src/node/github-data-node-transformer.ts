@@ -4,15 +4,22 @@
 */
 
 import type { Actions, NodePluginArgs } from 'gatsby';
-import { JSDOM } from 'jsdom';
+import { fromError } from 'zod-validation-error';
+import {
+	PROJECT_METADATA_PATH,
+	PROJECT_METADATA_SCHEMA,
+} from '../config/constants.ts';
 import {
 	getProjectCategoryColor,
 	getSiteMetadata,
 } from '../managers/config.ts';
-import type { BaseProject } from '../types/content/projects.ts';
+import type {
+	SchemaApplicationCategory,
+	SchemaType,
+} from '../types/content/projects.ts';
 import type { UrlString } from '../types/strings.ts';
 import type { Maybe, Nullable } from '../types/utils.ts';
-import { isDefined } from '../utils/other.ts';
+import { ifDefined, isDefined } from '../utils/other.ts';
 import { toKebabCase, toTitleCase } from '../utils/strings.ts';
 import { getAbsoluteUrl } from '../utils/urls.ts';
 import { endLogGroup, info, panic, startLogGroup, warn } from './logger.ts';
@@ -20,36 +27,34 @@ import { endLogGroup, info, panic, startLogGroup, warn } from './logger.ts';
 // Types
 
 // Fields used to create a GithubRepo node
-type GithubRepoNodeProps = BaseProject & {
-	descriptionHtml: Nullable<string>;
-	forkCount: number;
-	homepageUrl: Nullable<string>;
-	isFork: boolean;
-	licenseInfo: Nullable<{
-		name: string;
-		spdxId: Nullable<string>;
-		url: Nullable<string>;
-	}>;
-	logoUrl: Nullable<string>;
-	openGraphImageUrl: string;
-	owner: string;
-	stargazerCount: number;
-	topics: string[];
-	url: string;
-	usesCustomOpenGraphImage: boolean;
-};
+type GithubRepoNodeProps = Omit<
+	Queries.GithubRepo,
+	| keyof Queries.Node
+	| 'childMarkdownRemark'
+	| 'childrenMarkdownRemark'
+	| 'children'
+	| 'id'
+	| 'internal'
+	| 'parent'
+>;
 
-type ParseReadmeDescriptionReturnValue = {
-	descriptionHtml: Nullable<string>;
-	exposition: Nullable<string>;
-};
-
-type TransformReadmeReturnValue = ParseReadmeDescriptionReturnValue & {
+type ParseMetadataReturnValue = {
 	name: Nullable<string>;
-	logoUrl: Nullable<string>;
+	background?: Nullable<string>;
+	logoPath?: Nullable<string>;
 	category: Nullable<string>;
+	languages: string[];
+	technologies: string[];
+	tools: string[];
+	topics: string[];
+	schema: {
+		type?: Nullable<SchemaType>;
+		applicationCategory?: Nullable<SchemaApplicationCategory>;
+		operatingSystem?: Nullable<string>;
+	};
 };
 
+// Return values for the transformRepoNode function
 type TransformRepoNodeReturnValue = {
 	githubRepo: Nullable<GithubRepoNodeProps>;
 	readmeText: Maybe<Nullable<string>>;
@@ -58,151 +63,134 @@ type TransformRepoNodeReturnValue = {
 // Constants
 
 const SITE_METADATA = getSiteMetadata();
-const GITHUB_CONTENT_BASE_URL: UrlString = 'https://raw.githubusercontent.com';
-const PROJECT_CATEGORY_REGEX = /type-([\w.]+)-(\w+)/;
+const GITHUB_CONTENT_BASE_URL: UrlString =
+	'https://raw.githubusercontent.com' as const;
 
-// Extract a project's name from its README
-function parseReadmeName(
-	fragment: DocumentFragment,
-): TransformReadmeReturnValue['name'] {
-	const linkElement = fragment.querySelector('.projectName > a');
-	const name =
-		linkElement?.getAttribute('title') ??
-		linkElement?.textContent ??
-		fragment.querySelector('.projectName')?.textContent;
+// Functions
 
-	if (isDefined(name)) {
-		return name.trim();
+/**
+ * Parse a project's metadata JSON file to extract background, category, languages, and more.
+ *
+ * @param projectMetadataResponse - The response from the GitHub GraphQL API for the repository's project metadata file
+ * @returns An object containing the parsed project metadata
+ */
+function parseProjectMetadata(
+	projectMetadataResponse: Queries.GithubDataDataUserRepositoriesNodes['projectMetadata'],
+): ParseMetadataReturnValue {
+	const metadataText = projectMetadataResponse?.text;
+
+	if (!isDefined(metadataText)) {
+		warn(
+			`${PROJECT_METADATA_PATH} not found, but it is required. Please add it to the GitHub repo`,
+		);
+
+		return {
+			name: null,
+			background: null,
+			logoPath: null,
+			category: null,
+			languages: [],
+			technologies: [],
+			tools: [],
+			topics: [],
+			schema: {
+				type: null,
+				applicationCategory: null,
+				operatingSystem: null,
+			},
+		};
 	}
 
-	warn('README name not found');
+	const metadata: unknown = JSON.parse(metadataText);
+	const parseResult = PROJECT_METADATA_SCHEMA.safeParse(metadata);
 
-	return null;
-}
-
-// Extract a project's exposition and description from its README
-function parseReadmeDescription(
-	fragment: DocumentFragment,
-): ParseReadmeDescriptionReturnValue {
-	const descriptionElement = fragment.querySelector('.projectDesc');
-	const descriptionHtml = descriptionElement?.innerHTML?.trim() ?? null;
-	const exposition =
-		descriptionElement?.getAttribute('data-exposition')?.trim() ?? null;
-
-	if (!isDefined(descriptionHtml)) {
-		warn('README description not found');
+	if (!parseResult.success) {
+		panic(fromError(parseResult.error));
 	}
 
-	if (!isDefined(exposition)) {
-		warn('README exposition not found');
-	}
+	const { background, logoPath, schema, ...remainingProps } = parseResult.data;
 
+	// Reconstruct the object using conditional properties because Zod doesn't support exactOptionalPropertyTypes
 	return {
-		descriptionHtml,
-		exposition,
+		...remainingProps,
+		...ifDefined({ background }),
+		...ifDefined({ logoPath }),
+		schema: {
+			...ifDefined({ type: schema?.type }),
+			...ifDefined({ applicationCategory: schema?.applicationCategory }),
+			...ifDefined({ operatingSystem: schema?.operatingSystem }),
+		},
 	};
 }
 
-// Extract a project's logo URL from its README
-function parseReadmeLogoUrl(
-	slug: string,
-	owner: string,
-	fragment: DocumentFragment,
-): TransformReadmeReturnValue['name'] {
-	const logoUrl = fragment.querySelector('.projectLogo')?.getAttribute('src');
+/**
+ * Transform the languages object into a simple array of strings and add any additional languages passed in.
+ *
+ * @param languagesResponse The languages object from the GitHub API.
+ * @param additionalLanguages Any additional languages to add to the list.
+ * @returns A sorted array of strings representing the languages.
+ */
+function transformLanguages(
+	languagesResponse: Queries.GithubDataDataUserRepositoriesNodes['languages'],
+	additionalLanguages: string[],
+): string[] {
+	const nodes = languagesResponse?.nodes;
+	const languages = new Set(additionalLanguages);
 
-	if (isDefined(logoUrl)) {
-		if (logoUrl.startsWith('http')) {
-			return logoUrl;
+	if (isDefined(nodes)) {
+		for (const node of nodes) {
+			if (isDefined(node?.name)) {
+				languages.add(node.name);
+			} else {
+				warn('languages.nodes[].name is undefined');
+			}
+		}
+	} else {
+		warn('languages.nodes is undefined');
+	}
+
+	return Array.from(languages).sort();
+}
+
+/**
+ * Transform a logo path into an absolute URL.
+ *
+ * @param owner The owner of the repository.
+ * @param slug The slug of the repository.
+ * @param logoPath The logo path from the project metadata.
+ * @returns The absolute URL of the logo, or null if the logo path is not defined.
+ */
+function transformLogoPath(
+	owner: string,
+	slug: string,
+	logoPath: Maybe<Nullable<string>>,
+): Nullable<string> {
+	if (isDefined(logoPath)) {
+		if (logoPath.startsWith('http')) {
+			return logoPath;
 		}
 
-		const relativeLogoPath = `${owner}/${slug}/HEAD/${logoUrl}`;
+		const relativeLogoPath = `${owner}/${slug}/HEAD/${logoPath}`;
 
 		return getAbsoluteUrl(relativeLogoPath, GITHUB_CONTENT_BASE_URL).toString();
 	}
 
-	warn('README logo not found');
+	warn(`logoPath not found in ${PROJECT_METADATA_PATH}`);
 
 	return null;
 }
 
-// Extract a project's category from its README
-function parseReadmeCategory(
-	fragment: DocumentFragment,
-): TransformReadmeReturnValue['category'] {
-	const badgeImgUrl = fragment
-		.querySelector('.projectBadges > img[alt="Project type"]')
-		?.getAttribute('src');
-
-	if (!isDefined(badgeImgUrl)) {
-		return null;
-	}
-
-	const categoryMatches = PROJECT_CATEGORY_REGEX.exec(badgeImgUrl);
-
-	if (!categoryMatches || categoryMatches.length < 3) {
-		return null;
-	}
-
-	return toTitleCase(categoryMatches[1]);
-}
-
-// Parse a project's README to extract its name, description, and category
-function transformReadme(
-	slug: string,
-	owner: string,
-	readmeResponse: Queries.GithubDataDataUserRepositoriesNodes['readme'],
-): TransformReadmeReturnValue {
-	if (!isDefined(readmeResponse?.text)) {
-		warn('README not found');
-
-		return {
-			name: null,
-			descriptionHtml: null,
-			exposition: null,
-			logoUrl: null,
-			category: null,
-		};
-	}
-
-	const fragment = JSDOM.fragment(readmeResponse.text);
-	const { descriptionHtml, exposition } = parseReadmeDescription(fragment);
-
-	return {
-		name: parseReadmeName(fragment),
-		descriptionHtml,
-		exposition,
-		logoUrl: parseReadmeLogoUrl(slug, owner, fragment),
-		category: parseReadmeCategory(fragment),
-	};
-}
-
-// Transform the languages object into a simple array of strings
-function transformLanguages(
-	languagesResponse: Queries.GithubDataDataUserRepositoriesNodes['languages'],
-): string[] {
-	const nodes = languagesResponse?.nodes;
-	const languages: string[] = [];
-
-	if (!isDefined(nodes)) {
-		warn('languages.nodes is undefined');
-
-		return languages;
-	}
-
-	for (const node of nodes) {
-		if (isDefined(node?.name)) {
-			languages.push(node.name);
-		} else {
-			warn('languages.nodes[].name is undefined');
-		}
-	}
-
-	return languages.sort();
-}
-
-// Transform the topics object into a simple array of strings
-function transformTopics(
+/**
+ * Transform the topics (tags) object into a simple array of strings
+ *
+ * @remarks
+ *
+ * GitHub calls this field `topics`, but we rename it to `tags` to prevent confusion with the `topics` field extracted from project READMEs.
+ *
+ * @param topicsResponse The topics object from the GitHub API.
+ * @returns A sorted array of strings representing the topics.
+ */
+function transformTags(
 	topicsResponse: Queries.GithubDataDataUserRepositoriesNodes['repositoryTopics'],
 ): string[] {
 	const nodes = topicsResponse?.nodes;
@@ -225,28 +213,42 @@ function transformTopics(
 	return topics.sort();
 }
 
-// Return true if the repo should be included in the list of repos
-function excludeRepo(
+/**
+ * A filter function for a GitHub repo project. Returns true if the repo should be excluded from the list of repos
+ *
+ * @param slug The slug of the repo on GitHub
+ * @param description The description of the repo on GitHub
+ * @param category The category of the repo
+ * @returns True if the repo should be excluded from the list of repos, false otherwise
+ */
+function doExcludeRepo(
 	slug: string,
-	githubRepoNode: Queries.GithubDataDataUserRepositoriesNodes,
-	readmeInfo: TransformReadmeReturnValue,
-) {
+	description: string,
+	category: string,
+): description is string;
+function doExcludeRepo(
+	slug: string,
+	description: Nullable<string>,
+	category: Nullable<string>,
+): description is null;
+function doExcludeRepo(
+	slug: string,
+	description: Nullable<string>,
+	category: Nullable<string>,
+): boolean {
 	// Skip repos with missing descriptions as these are hard to work with
-	if (!isDefined(githubRepoNode.description)) {
+	if (!isDefined(description)) {
 		warn(
-			'Description not found. Please add a description to the repo on GitHub',
+			'description not found, but it is required. Please add one to the GitHub repo',
 		);
 
 		return true;
 	}
 
 	// Skip repos with unknown categories, unless it's the author's profile repo
-	if (
-		!isDefined(readmeInfo.category) &&
-		slug !== SITE_METADATA.author.username.github
-	) {
+	if (!isDefined(category) && slug !== SITE_METADATA.author.username.github) {
 		warn(
-			'README project category badge not found. Please add a project category badge to the README',
+			`category not found, but it is required. Please add one to ${PROJECT_METADATA_PATH}`,
 		);
 
 		return true;
@@ -255,63 +257,73 @@ function excludeRepo(
 	return false;
 }
 
+/**
+ * Build a unique slug for the repo
+ *
+ * @param name The name of the repo on GitHub
+ * @param ownerUsername The username of the owner of the repo on GitHub
+ * @returns A unique slug for the repo
+ */
+function buildSlug(name: string, ownerUsername: string) {
+	const defaultSlug = toKebabCase(name);
+
+	// If the repo is not owned by the author, include the owner in the slug to avoid naming conflicts
+	if (ownerUsername !== SITE_METADATA.author.username.github) {
+		return `${ownerUsername}/${defaultSlug}`;
+	}
+
+	return defaultSlug;
+}
+
 // Transform the repo object into a format we can use
 function transformGithubRepoNode(
 	githubRepoNode: Queries.GithubDataDataUserRepositoriesNodes,
 ): TransformRepoNodeReturnValue {
-	let slug: string = toKebabCase(githubRepoNode.name);
+	const {
+		name: repoName,
+		owner: { login: repoOwnerUsername },
+		repositoryTopics: repoTags,
+		createdAt: repoCreatedAt,
+		updatedAt: repoUpdatedAt,
+		projectMetadata: repoProjectMetadata,
+		readme: repoReadme,
+		description: repoDescription,
+		languages: repoLanguages,
+		...remainingRepoProps
+	} = githubRepoNode;
+	const slug = buildSlug(repoName, repoOwnerUsername);
+	const {
+		name: metadataName,
+		category: metadataCategory,
+		languages: metadataLanguages,
+		logoPath: metadataLogoPath,
+		...remainingMetadataProps
+	} = parseProjectMetadata(repoProjectMetadata);
 
-	// If the repo is not owned by the author, include the owner in the slug to avoid naming conflicts
-	if (githubRepoNode.owner.login !== SITE_METADATA.author.username.github) {
-		slug = `${githubRepoNode.owner.login}/${slug}`;
-	}
-
-	const languages = transformLanguages(githubRepoNode?.languages);
-	const topics = transformTopics(githubRepoNode?.repositoryTopics);
-	const createdAt = new Date(githubRepoNode.createdAt);
-	const updatedAt = new Date(githubRepoNode.updatedAt);
-	const readmeInfo = transformReadme(
-		slug,
-		githubRepoNode.owner.login,
-		githubRepoNode.readme,
-	);
-	// Use the name from the README if it exists as it's more likely to be formatted correctly
-	const name = readmeInfo.name || toTitleCase(githubRepoNode.name);
-
-	if (excludeRepo(slug, githubRepoNode, readmeInfo)) {
+	if (doExcludeRepo(slug, repoDescription, metadataCategory)) {
 		return {
 			githubRepo: null,
 			readmeText: null,
 		};
 	}
 
-	// If description is null, it will be caught by excludeRepo
-	const description: string = githubRepoNode.description as string;
-
 	const githubRepo: GithubRepoNodeProps = {
-		exposition: readmeInfo.exposition,
-		createdAt: createdAt,
-		description: description,
-		descriptionHtml: readmeInfo.descriptionHtml,
-		forkCount: githubRepoNode.forkCount,
-		homepageUrl: githubRepoNode.homepageUrl,
-		isFork: githubRepoNode.isFork,
-		languages: languages,
-		logoUrl: readmeInfo.logoUrl,
-		licenseInfo: githubRepoNode.licenseInfo,
-		name,
-		openGraphImageUrl: githubRepoNode.openGraphImageUrl,
-		owner: githubRepoNode.owner.login,
+		...remainingRepoProps,
+		...remainingMetadataProps,
+		createdAt: repoCreatedAt,
+		description: repoDescription,
+		languages: transformLanguages(repoLanguages, metadataLanguages),
+		logoUrl: transformLogoPath(repoOwnerUsername, repoName, metadataLogoPath),
+		tags: transformTags(repoTags),
+		// Use the name from the README if it exists as it's more likely to be formatted correctly
+		name: metadataName || toTitleCase(repoName),
 		slug,
-		stargazerCount: githubRepoNode.stargazerCount,
-		topics,
+		updatedAt: repoUpdatedAt,
+		owner: repoOwnerUsername,
 		category: {
-			color: getProjectCategoryColor(readmeInfo.category),
-			name: readmeInfo.category,
+			color: getProjectCategoryColor(metadataCategory),
+			name: metadataCategory,
 		},
-		updatedAt,
-		url: githubRepoNode.url,
-		usesCustomOpenGraphImage: githubRepoNode.usesCustomOpenGraphImage,
 	};
 
 	return {
@@ -329,7 +341,7 @@ function createGithubRepoNode(
 	createContentDigest: NodePluginArgs['createContentDigest'],
 ) {
 	if (!isDefined(githubRepo)) {
-		info('🚫 Skipping repo node creation...');
+		warn('🚫 Skipping repo node creation...');
 
 		return;
 	}

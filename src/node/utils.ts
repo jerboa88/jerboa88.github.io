@@ -2,7 +2,9 @@
  * Utility functions for use in Gatsby Node API functions
  */
 
-import { join } from 'node:path';
+import { createWriteStream } from 'node:fs';
+import { mkdir as mkdirAsync } from 'node:fs/promises';
+import { dirname, join, sep } from 'node:path';
 import type { Actions, Page } from 'gatsby';
 import { createImage } from 'gatsby-plugin-component-to-image';
 import { INDEX_PATH, SOCIAL_IMAGES_PATH } from '../config/constants.ts';
@@ -12,7 +14,7 @@ import type { AbsolutePathString } from '../types/strings.ts';
 import type { Maybe } from '../types/utils.ts';
 import { assertIsDefined } from '../utils/other.ts';
 import { removeTrailingSlash } from '../utils/urls.ts';
-import { info } from './logger.ts';
+import { info, panic } from './logger.ts';
 
 // Runtime variables
 
@@ -53,6 +55,21 @@ export function setGatsbyNodeHelpers(
 	gatsbyCreatePage = createPage;
 	gatsbyDeletePage = deletePage;
 	gatsbyCreateRedirect = createRedirect;
+}
+
+/**
+ * Recursively create directories for a given path
+ *
+ * @param path The path to create directories for. If the path ends with a slash, it will be treated as a directory. Otherwise, it will be treated as a file.
+ * @returns A promise that resolves when the directories have been created
+ * @example
+ * await createDirs('/path/to/dir/file.txt'); // Creates /path/to/dir/
+ * await createDirs('another/path/to/dir/'); // Creates /another/path/to/dir/
+ */
+export async function createDirs(path: string) {
+	const dirName = path.endsWith(sep) ? path : dirname(path);
+
+	await mkdirAsync(dirName, { recursive: true });
 }
 
 /** Generate a single social image for a page
@@ -102,32 +119,36 @@ function createSocialImages(options: CreateSocialImagesOptions) {
  * @param socialImageComponent The component to use for the social images
  * @param context The context to pass to the page
  */
-export function createPage({
+export async function createPage({
 	path,
 	component,
 	socialImageComponent,
 	context,
 }: CreatePageOptions) {
-	info(`Creating page at ${path}`);
+	return new Promise((resolve) => {
+		info(`Creating page at ${path}`);
 
-	assertIsDefined(
-		gatsbyCreatePage,
-		'Expected gatsbyCreatePage to be defined, but it was not',
-	);
+		assertIsDefined(
+			gatsbyCreatePage,
+			'Expected gatsbyCreatePage to be defined, but it was not',
+		);
 
-	const socialImagesMetadata = createSocialImages({
-		path: path,
-		component: socialImageComponent,
-		context: context,
-	});
+		const socialImagesMetadata = createSocialImages({
+			path: path,
+			component: socialImageComponent,
+			context: context,
+		});
 
-	gatsbyCreatePage({
-		path: path,
-		component: component,
-		context: {
-			...context,
-			socialImagesMetadata: socialImagesMetadata,
-		},
+		gatsbyCreatePage({
+			path: path,
+			component: component,
+			context: {
+				...context,
+				socialImagesMetadata: socialImagesMetadata,
+			},
+		});
+
+		resolve(undefined);
 	});
 }
 
@@ -138,6 +159,8 @@ export function createPage({
  * deletePage(page);
 */
 export function deletePage(page: Page) {
+	info(`Deleting page at ${page.path}`);
+
 	assertIsDefined(
 		gatsbyDeletePage,
 		'Expected gatsbyDeletePage to be defined, but it was not',
@@ -153,15 +176,54 @@ export function deletePage(page: Page) {
  * @example
  * createRedirect('/old-path', '/new-path');
  */
-export function createRedirect(fromPath: string, toPath: string) {
-	assertIsDefined(
-		gatsbyCreateRedirect,
-		'Expected gatsbyCreateRedirect to be defined, but it was not',
-	);
+export async function createRedirect(fromPath: string, toPath: string) {
+	return new Promise((resolve) => {
+		info(`Creating redirect from ${fromPath} to ${toPath}`);
 
-	gatsbyCreateRedirect({
-		fromPath: fromPath,
-		toPath: toPath,
-		isPermanent: true,
+		assertIsDefined(
+			gatsbyCreateRedirect,
+			'Expected gatsbyCreateRedirect to be defined, but it was not',
+		);
+
+		gatsbyCreateRedirect({
+			fromPath,
+			toPath,
+			isPermanent: true,
+		});
+
+		resolve(undefined);
 	});
+}
+
+/**
+ * Fetch an image from a URL and save it to a file
+ *
+ * @param imageUrl The URL of the image to fetch
+ * @param outputPath The path to save the image to
+ * @example
+ * await fetchAndSaveImage('https://example.com/image.png', './public/image.png');
+ */
+export async function fetchAndSaveImage(
+	imageUrl: string,
+	outputPath: string,
+): Promise<void> {
+	info(`Saving image from ${imageUrl} to ${outputPath}`);
+
+	try {
+		const response = await fetch(imageUrl);
+
+		if (!response.ok) {
+			panic(
+				`Failed to fetch image: ${response.status} - ${response.statusText}`,
+			);
+		}
+
+		const arrayBuffer = response.arrayBuffer();
+		const writeStream = createWriteStream(outputPath);
+
+		writeStream.write(Buffer.from(await arrayBuffer));
+		writeStream.end();
+	} catch (error) {
+		panic(`Error fetching and saving image: ${error}`);
+	}
 }

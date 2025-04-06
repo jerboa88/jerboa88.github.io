@@ -9,7 +9,7 @@ import {
 	type RoleConfig,
 	RoleType,
 } from '../../types/content/roles.ts';
-import { keysOf, objectFrom } from '../../utils/other.ts';
+import { ifDefined, keysOf } from '../../utils/other.ts';
 import { getPageContentConfig } from '../config.ts';
 import { filterEntries } from './utils.ts';
 
@@ -34,16 +34,17 @@ type RoleSubsets = {
  * @param roleConfig The role config object.
  * @returns The role object.
  */
-function buildRole(roleConfig: RoleConfig): Role {
+function buildRole({
+	category,
+	startDate,
+	endDate,
+	...remainingProps
+}: RoleConfig): Role {
 	return {
-		...objectFrom(roleConfig, 'category'),
-		title: roleConfig.title,
-		company: roleConfig.company,
-		companyUrl: roleConfig.companyUrl,
-		startDate: new Date(roleConfig.startDate),
-		endDate: new Date(roleConfig.endDate),
-		location: roleConfig.location,
-		bullets: roleConfig.bullets,
+		...remainingProps,
+		...ifDefined({ category }),
+		startDate: new Date(startDate),
+		endDate: new Date(endDate),
 	};
 }
 

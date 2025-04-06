@@ -8,6 +8,8 @@ import type { GatsbyConfig } from 'gatsby';
 import {
 	COVER_LETTER_PATH,
 	INDEX_PATH,
+	PROJECT_METADATA_PATH,
+	PROJECT_README_PATH,
 	SOCIAL_IMAGES_PATH,
 } from './src/config/constants.ts';
 import {
@@ -144,7 +146,7 @@ const config: GatsbyConfig = {
 				token: process.env.GH_TOKEN,
 				// biome-ignore lint/style/useNamingConvention: Naming convention is enforced by the plugin
 				graphQLQuery: `
-					query ($author: String = "", $repoLimit: Int = 0, $topicLimit: Int = 0, $languageLimit: Int = 0) {
+					query ($projectMetadataPath: String, $readmePath: String, $author: String = "", $repoLimit: Int = 0, $topicLimit: Int = 0, $languageLimit: Int = 0) {
 						user(login: $author) {
 							repositories(first: $repoLimit, orderBy: {field: STARGAZERS, direction: DESC}) {
 								nodes {
@@ -163,12 +165,17 @@ const config: GatsbyConfig = {
 										name
 										url
 									}
+									projectMetadata: object(expression: $projectMetadataPath) {
+										... on Blob {
+											text
+										}
+									}
 									name
 									openGraphImageUrl
 									owner {
 										login
 									}
-									readme: object(expression: "HEAD:README.md") {
+									readme: object(expression: $readmePath) {
 										... on Blob {
 											text
 										}
@@ -190,10 +197,14 @@ const config: GatsbyConfig = {
 					}
 				`,
 				variables: {
+					// Required
+					author: SITE_METADATA.author.username.github,
+					projectMetadataPath: `HEAD:${PROJECT_METADATA_PATH}`,
+					readmePath: `HEAD:${PROJECT_README_PATH}`,
+					// Optional
 					repoLimit: 100,
 					topicLimit: 20,
 					languageLimit: 6,
-					author: SITE_METADATA.author.username.github,
 				},
 			},
 		},

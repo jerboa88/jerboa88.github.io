@@ -9,7 +9,7 @@ import type { PageSection } from '../types/components.ts';
 import { Tab } from './tab.tsx';
 
 interface Props {
-	sections: PageSection[];
+	sections: readonly PageSection[];
 	hideIndicator?: boolean;
 }
 

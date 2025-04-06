@@ -3,25 +3,22 @@
 	---------------------------------------------------
 */
 
+import { ProjectCategory } from '../types/content/projects.ts';
 import { RoleCategory } from '../types/content/roles.ts';
 import type { ColorMappingsConfig } from '../types/other.ts';
 
 export const COLOR_MAPPINGS_CONFIG: ColorMappingsConfig = {
 	default: 'bg-rose-600',
 	projectCategory: {
-		'android app': 'bg-lime-600',
-		'cli app': 'bg-red-600',
-		'docker container': 'bg-blue-600',
-		extension: 'bg-amber-600',
-		'gatsby plugin': 'bg-purple-600',
-		'gimp plugin': 'bg-orange-600',
-		'js library': 'bg-green-600',
-		markdown: 'bg-purple-600',
-		'node.js module': 'bg-green-600',
-		other: 'bg-rose-600',
-		'web app': 'bg-sky-600',
-		'web interface': 'bg-sky-600',
-		website: 'bg-sky-600',
+		[ProjectCategory.App]: 'bg-red-600',
+		[ProjectCategory.Container]: 'bg-blue-600',
+		[ProjectCategory.Document]: 'bg-purple-600',
+		[ProjectCategory.Extension]: 'bg-amber-600',
+		[ProjectCategory.Library]: 'bg-green-600',
+		[ProjectCategory.Other]: 'bg-rose-600',
+		[ProjectCategory.Plugin]: 'bg-orange-600',
+		[ProjectCategory.Script]: 'bg-lime-600',
+		[ProjectCategory.Website]: 'bg-sky-600',
 	},
 	roleCategory: {
 		[RoleCategory.Internship]: 'bg-rose-600',

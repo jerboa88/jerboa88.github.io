@@ -4,6 +4,7 @@
 */
 
 import type { CreatePagesArgs } from 'gatsby';
+import { PROJECT_METADATA_PATH } from '../../config/constants.ts';
 import { PROJECTS_CONFIG } from '../../config/content/projects.ts';
 import { githubReposQuery } from '../../node/graphql.ts';
 import { info, panic } from '../../node/logger.ts';
@@ -17,14 +18,22 @@ import {
 	type OtherProject,
 	type OtherProjectConfig,
 	type Project,
+	ProjectCategory,
 	ProjectType,
+	SchemaApplicationCategory,
+	SchemaType,
 } from '../../types/content/projects.ts';
 import { SkillType } from '../../types/content/skills.ts';
 import type { Maybe } from '../../types/utils.ts';
-import { findIndexOfSubstringInArray, objectFrom } from '../../utils/other.ts';
+import {
+	callIfDefined,
+	findIndexOfSubstringInArray,
+	ifDefined,
+	toEnum,
+} from '../../utils/other.ts';
 import { assertIsDefined } from '../../utils/other.ts';
 import { prettify } from '../../utils/other.ts';
-import { toSentence } from '../../utils/strings.ts';
+import { assertIsDateString, toSentence } from '../../utils/strings.ts';
 import { assertIsUrlString } from '../../utils/urls.ts';
 import { getPageContentConfig, getProjectCategoryColor } from '../config.ts';
 import { getSiteMetadata } from '../config.ts';
@@ -38,7 +47,7 @@ const SITE_METADATA = getSiteMetadata();
 
 let cachedGithubRepoProjects: GithubRepoProject[] = [];
 let cachedOtherProjects: OtherProject[] = [];
-let cachedAuthorBioHtml: Maybe<string>;
+let cachedAuthorBio: Maybe<string>;
 
 // Types
 
@@ -59,14 +68,47 @@ type GithubReposQueryData = {
 function buildGithubRepoProject(
 	githubRepoNode: Queries.GithubRepo,
 ): GithubRepoProject {
-	// Prevent exposition from being included in the result
-	const { exposition, ...remainingProps } = githubRepoNode;
+	const {
+		createdAt,
+		description,
+		background: nodeBackground,
+		category,
+		schema,
+		updatedAt,
+		url,
+		...remainingProps
+	} = githubRepoNode;
+
+	const background = callIfDefined(toSentence, nodeBackground);
+	const categoryName = callIfDefined(
+		(value: string) => toEnum(ProjectCategory, value),
+		category.name,
+	);
+	const type = callIfDefined(
+		(value: string) => toEnum(SchemaType, value),
+		schema?.type,
+	);
+	const applicationCategory = callIfDefined(
+		(value: string) => toEnum(SchemaApplicationCategory, value),
+		schema?.applicationCategory,
+	);
 
 	return {
 		...remainingProps,
-		...objectFrom(githubRepoNode, 'exposition', toSentence),
-		description: toSentence(githubRepoNode.description),
-		url: assertIsUrlString(githubRepoNode.url),
+		...ifDefined({ background }),
+		schema: {
+			...ifDefined({ type }),
+			...ifDefined({ applicationCategory }),
+			...ifDefined({ operatingSystem: schema?.operatingSystem }),
+		},
+		category: {
+			color: category.color,
+			...ifDefined({ name: categoryName }),
+		},
+		createdAt: assertIsDateString(createdAt),
+		updatedAt: assertIsDateString(updatedAt),
+		description: toSentence(description),
+		url: assertIsUrlString(url),
 		type: ProjectType.GithubRepo,
 	};
 }
@@ -77,15 +119,16 @@ function buildGithubRepoProject(
  * @param projectConfig An {@link OtherProjectConfig} object.
  * @returns An {@link OtherProject} object.
  */
-function buildOtherProject(projectConfig: OtherProjectConfig): OtherProject {
+function buildOtherProject({
+	category,
+	...remainingProps
+}: OtherProjectConfig): OtherProject {
 	return {
-		...projectConfig,
+		...remainingProps,
 		type: ProjectType.Other,
-		createdAt: new Date(projectConfig.createdAt),
-		updatedAt: new Date(projectConfig.updatedAt),
 		category: {
-			color: getProjectCategoryColor(projectConfig.category),
-			name: projectConfig.category,
+			color: getProjectCategoryColor(category),
+			name: category,
 		},
 	};
 }
@@ -152,7 +195,7 @@ function fetchOtherProjects(): OtherProject[] {
  */
 function doHideProject(project: Project) {
 	return (
-		project.category.name === 'Markdown' ||
+		project.category.name === ProjectCategory.Document ||
 		(project.type === ProjectType.GithubRepo && project.isFork)
 	);
 }
@@ -190,38 +233,40 @@ function doPinProject(
 }
 
 /**
- * Find the GitHub profile repo in a list of GithubRepoProjects and extract the author bio HTML from it.
+ * Find the GitHub profile repo in a list of GithubRepoProjects and extract the author bio from it.
  *
  * @param graphql The Gatsby GraphQL function.
- * @returns A string containing the author bio HTML.
+ * @returns A string containing the author bio.
  */
-export async function getAuthorBioHtml(graphql: CreatePagesArgs['graphql']) {
-	if (cachedAuthorBioHtml) {
-		return cachedAuthorBioHtml;
+export async function getAuthorBio(graphql: CreatePagesArgs['graphql']) {
+	if (cachedAuthorBio) {
+		return cachedAuthorBio;
 	}
 
-	const githubRepos = await fetchGithubRepoProjects(graphql);
-	const profileReadmeRepo = githubRepos.find(
+	const githubRepoProjects = await fetchGithubRepoProjects(graphql);
+	const profileRepo = githubRepoProjects.find(
 		({ slug }) => slug === SITE_METADATA.author.username.github,
 	);
 
 	assertIsDefined(
-		profileReadmeRepo,
-		`Failed to find GitHub profile repo in list:\n${prettify(githubRepos.map((repo) => repo.slug))}`,
+		profileRepo,
+		`Failed to find GitHub profile repo in list:\n${prettify(githubRepoProjects.map((repo) => repo.slug))}`,
 	);
 
-	const authorBioHtml = profileReadmeRepo?.descriptionHtml;
+	const authorBio = profileRepo.background;
 
 	assertIsDefined(
-		authorBioHtml,
-		`Failed to extract author bio HTML from GitHub profile repo:\n${prettify(profileReadmeRepo)}`,
+		authorBio,
+		`Failed to extract author bio from GitHub profile repo. background not found, but it is required. Please add one to ${PROJECT_METADATA_PATH}: ${prettify(profileRepo)}`,
 	);
 
-	info(`Extracted author bio HTML from GitHub profile repo:\n${authorBioHtml}`);
+	info(
+		`Found author bio in GitHub profile repo: '${authorBio.slice(0, 64)}'...`,
+	);
 
-	cachedAuthorBioHtml = authorBioHtml;
+	cachedAuthorBio = authorBio;
 
-	return authorBioHtml;
+	return authorBio;
 }
 
 /**

@@ -71,7 +71,7 @@ export function BaseInput<T extends FieldValues>({
 			<label htmlFor={name} {...labelClassNameProps}>
 				{label}
 			</label>
-			<div className="backdrop-blur bg-glass">{inputElement}</div>
+			<div className="backdrop-blur-sm bg-glass">{inputElement}</div>
 			<GhostAlert
 				type={AlertType.Error}
 				text={errorMsg}
