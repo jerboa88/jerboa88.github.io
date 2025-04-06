@@ -9370,10 +9370,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["dompurify", [\
-      ["npm:3.2.3", {\
-        "packageLocation": "./.yarn/cache/dompurify-npm-3.2.3-4fa119eef7-aad472bcdf.zip/node_modules/dompurify/",\
+      ["npm:3.2.5", {\
+        "packageLocation": "./.yarn/cache/dompurify-npm-3.2.5-d9af707abe-03974f1885.zip/node_modules/dompurify/",\
         "packageDependencies": [\
-          ["dompurify", "npm:3.2.3"],\
+          ["dompurify", "npm:3.2.5"],\
           ["@types/trusted-types", "npm:2.0.7"]\
         ],\
         "linkType": "HARD"\
@@ -14277,7 +14277,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/isomorphic-dompurify-npm-2.19.0-4f6eb49402-42fb8a4d5e.zip/node_modules/isomorphic-dompurify/",\
         "packageDependencies": [\
           ["isomorphic-dompurify", "npm:2.19.0"],\
-          ["dompurify", "npm:3.2.3"],\
+          ["dompurify", "npm:3.2.5"],\
           ["jsdom", "virtual:4f6eb49402d57125d5cf48460f30c10a4ff6a99a4e5dffdd9a9ee0a9fda2b718fc10f27c00b17b2ccf9903ca3eeb929daeebb65105f95ee0464bccea851d6f98#npm:25.0.1"]\
         ],\
         "linkType": "HARD"\
