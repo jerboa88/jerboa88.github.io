@@ -31,7 +31,8 @@
 		"clean": "gatsby clean",
 		"typecheck": "tsc --noEmit --skipLibCheck",
 		"lint": "biome lint --write",
-		"format": "biome format --write"
+		"format": "biome format --write",
+		"upgrade-interactive": "bunx npm-check-updates -i --format group -p bun"
 	},
 	"dependencies": {
 		"@botpoison/browser": "^0.1.30",
