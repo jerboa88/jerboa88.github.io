@@ -24,14 +24,14 @@
 	},
 	"license": "MIT",
 	"scripts": {
-		"develop": "yarn gatsby develop -H 0.0.0.0",
-		"start": "yarn gatsby develop -H 0.0.0.0",
-		"build": "yarn gatsby build",
-		"serve": "yarn gatsby serve -H 0.0.0.0",
-		"clean": "yarn gatsby clean",
-		"typecheck": "yarn tsc --noEmit --skipLibCheck",
-		"lint": "yarn biome lint --write",
-		"format": "yarn biome format --write"
+		"develop": "gatsby develop -H 0.0.0.0",
+		"start": "gatsby develop -H 0.0.0.0",
+		"build": "gatsby build",
+		"serve": "gatsby serve -H 0.0.0.0",
+		"clean": "gatsby clean",
+		"typecheck": "tsc --noEmit --skipLibCheck",
+		"lint": "biome lint --write",
+		"format": "biome format --write"
 	},
 	"dependencies": {
 		"@botpoison/browser": "^0.1.30",
