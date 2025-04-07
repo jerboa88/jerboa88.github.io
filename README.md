@@ -57,7 +57,7 @@ The UI is styled with [Tailwind CSS] and [daisyUI]. [TypeScript] is used for typ
 		```
 
    2. The site is configured to fetch repository data from the `jerboa88` GitHub account by default. If you want to fetch data for a different user, replace the `username.github` value with your own username in [src/config/metadata/site.ts].
-5. Use `bun develop` to start the development server or `bun build` to build the site for production.
+5. Use `bun develop` to start the development server or `bun run build` to build the site for production.
 
 
 ## Advanced Usage
@@ -82,7 +82,7 @@ Currently, these values are only used for the contact section of the resume.
 
 ### Useful Commands
 - `bun develop`: Run the app in development mode, rebuilding and hot-reloading as changes are made. The site can be viewed at [localhost:8000] (by default).
-- `bun build`: Generate a production build of the app, which you can then serve with `bun serve`. The site can be viewed at [localhost:9000] (by default).
+- `bun run build`: Generate a production build of the app, which you can then serve with `bun serve`. The site can be viewed at [localhost:9000] (by default). Note that `run` is required here because `bun build` is a reserved command.
 - `bun clean`: Clear the local Gatsby cache. Use this if you encounter any issues with stale data/dependencies.
 - `bun typecheck`: Perform type checking using TypeScript.
 - `bun lint` and `bun format`: Apply linting and formatting fixes (respectively) to the codebase using Biome.js.
