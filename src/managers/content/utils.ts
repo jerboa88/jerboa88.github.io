@@ -49,7 +49,8 @@ export function filterEntries<T>(
 	doHideEntry?: FilterFn<T>,
 ) {
 	const sortFn = pageContentEntryConfig?.sortFn;
-	const allSortedEntries = allEntries.toSorted(sortFn);
+	// Polyfill for Array.prototype.toSorted()
+	const allSortedEntries = [...allEntries].sort(sortFn);
 
 	// If config isn't provided, return all entries
 	if (!pageContentEntryConfig) {
