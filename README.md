@@ -35,16 +35,21 @@ The UI is styled with [Tailwind CSS] and [daisyUI]. [TypeScript] is used for typ
 
 
 ## Getting Started
+
+> [!NOTE]
+> This project uses [Bun] to speed up installation and build times. If you want to use Node.js instead, you can do so by replacing `bun` with your package manager of choice in the commands below — everything should work the same. For example, `bun install` can be replaced with `npm install` , `pnpm install`, or `yarn install`.
+>
+> If you are using the included GitHub Actions workflows, you'll need to update them to use Node.js and your preferred package manager.
+
 ### Prerequisites
-- [Node.js]
-- [Yarn 4]
+- [Bun] (or [Node.js] and your package manager of choice)
 - A [GitHub personal access token] (PAT) that can be used to access the GitHub API. This token should have public (read-only) access to all repositories as it is used to fetch repository data for the projects section.
 
 ### Installation
 1. Clone the repo with `https://github.com/jerboa88/jerboa88.github.io.git`. Alternatively, you can download the repository as a zip file and extract it.
 2. Enter the project root with `cd jerboa88.github.io`.
-4. Use `yarn install` to install the app and all of its dependencies.
-5. Configure required environment variables and constants:
+3. Use `bun install` to install the app and all of its dependencies.
+4. Configure required environment variables and constants:
    1. The `GH_TOKEN` environment variable must be set to your GitHub PAT in order to fetch repository data, otherwise the build will fail. An easy way to do this is to create an `.env.development` or `.env.production` file in the project root like so:
 		```sh
 		# .env.development
@@ -52,7 +57,7 @@ The UI is styled with [Tailwind CSS] and [daisyUI]. [TypeScript] is used for typ
 		```
 
    2. The site is configured to fetch repository data from the `jerboa88` GitHub account by default. If you want to fetch data for a different user, replace the `username.github` value with your own username in [src/config/metadata/site.ts].
-6. Use `yarn develop` to start the development server or `yarn build` to build the site for production.
+5. Use `bun develop` to start the development server or `bun build` to build the site for production.
 
 
 ## Advanced Usage
@@ -75,14 +80,18 @@ AUTHOR_EMAIL='email@example.org'
 
 Currently, these values are only used for the contact section of the resume.
 
-### Commands
-- `yarn develop` runs the app in development mode. This will start the development server at [localhost:8000] (by default). The project will automatically be rebuilt when changes are made.
-- `yarn build` generates a production build of the app, which you can then serve with `yarn serve`. The site can be viewed at [localhost:9000] (by default).
-- `yarn clean` can be used to clear the local Gatsby cache if you encounter any issues with stale data/dependencies.
-- `yarn typecheck` can be used to perform type checking using TypeScript.
-- `yarn lint` and `yarn format` can be used to apply linting and formatting fixes to the codebase using Biome.js.
+### Useful Commands
+- `bun develop`: Run the app in development mode, rebuilding and hot-reloading as changes are made. The site can be viewed at [localhost:8000] (by default).
+- `bun build`: Generate a production build of the app, which you can then serve with `bun serve`. The site can be viewed at [localhost:9000] (by default).
+- `bun clean`: Clear the local Gatsby cache. Use this if you encounter any issues with stale data/dependencies.
+- `bun typecheck`: Perform type checking using TypeScript.
+- `bun lint` and `bun format`: Apply linting and formatting fixes (respectively) to the codebase using Biome.js.
+- `bun upgrade-interactive`: Upgrade dependencies interactively. If you don't have Bun installed, use one of the following commands instead for a similar experience:
+  - `npx npm-check-updates -i --format group`
+  - `pnpx npm-check-updates -i --format group -p pnpm`
+  - `yarn upgrade-interactive`
 
-See the [Gatsby CLI docs] for additional commands and options. To run an arbitrary command, prefix it with `yarn` (ex. `yarn gatsby repl`).
+See the [Gatsby CLI docs] for additional commands and options. To run an arbitrary command, prefix it with `bun run` (ex. `bun run gatsby repl`).
 
 ### Stack
 - [Gatsby] is a [React]-based static site generator that runs on [Node.js]. It uses [GraphQL] to query data from various sources.
@@ -137,6 +146,7 @@ This project is licensed under the MIT License. See [LICENSE] for details. This 
 
 [Biome.js]: https://biomejs.dev/
 [Botpoison]: https://botpoison.com/
+[Bun]: https://bun.sh/
 [daisyUI]: https://daisyui.com/
 [Formspark]: https://www.formspark.io/
 [Gatsby CLI docs]: https://www.gatsbyjs.com/docs/reference/gatsby-cli/
@@ -165,4 +175,3 @@ This project is licensed under the MIT License. See [LICENSE] for details. This 
 [src/types]: /src/types/
 [Tailwind CSS]: https://tailwindcss.com/
 [TypeScript]: https://www.typescriptlang.org/
-[Yarn 4]: https://yarnpkg.com/
