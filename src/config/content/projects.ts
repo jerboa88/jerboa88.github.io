@@ -73,5 +73,24 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 			createdAt: '2022-11-11',
 			updatedAt: '2022-12-11',
 		},
+		{
+			slug: 'email-alias-generator',
+			name: 'Email Alias Generator',
+			description:
+				'A browser extension to generate custom email address aliases based on site names.',
+			background:
+				'A browser extension that generates custom email address aliases based on the name of the current site. This extension was designed to be used alongside password managers to create unique email addresses for each site you visit to improve privacy and security.',
+			category: ProjectCategory.Extension,
+			subcategory: 'Browser',
+			schema: {
+				type: SchemaType.Software,
+				applicationCategory: SchemaApplicationCategory.Browser,
+				operatingSystem: 'Any',
+			},
+			languages: ['CSS', 'HTML', 'JavaScript'],
+			tools: ['Chrome', 'Firefox', 'Edge', 'Opera', 'VS Code'],
+			createdAt: '2022-03-18',
+			updatedAt: '2024-03-24',
+		},
 	],
 } as const;
