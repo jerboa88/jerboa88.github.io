@@ -24,15 +24,18 @@ function UnmemoizedParticlesBackground() {
 	const [init, setInit] = useState(false);
 
 	const classNameProps = getClassNameProps(
-		'fixed h-lvh w-lvh mix-blend-overlay transition-opacity ease-out duration-[2s]',
+		'fixed h-lvh w-lvw mix-blend-overlay transition-opacity ease-out duration-[2s]',
 		init ? 'opacity-100' : 'opacity-0', // Hide until loaded
 	);
-	const tsParticlesConfig: RecursivePartial<IOptions> = {
+	const tsParticlesOptions: RecursivePartial<IOptions> = {
 		fpsLimit: 30,
 		smooth: false,
 		pauseOnBlur: true,
 		pauseOnOutsideViewport: true,
 		detectRetina: true,
+		fullScreen: {
+			enable: false,
+		},
 		particles: {
 			color: {
 				value: THEME.neutral,
@@ -84,7 +87,7 @@ function UnmemoizedParticlesBackground() {
 		});
 	}, []);
 
-	return <Particles options={tsParticlesConfig} {...classNameProps} />;
+	return <Particles options={tsParticlesOptions} {...classNameProps} />;
 }
 
 // Never re-render this component
