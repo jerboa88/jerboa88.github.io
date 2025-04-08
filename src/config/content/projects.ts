@@ -110,5 +110,24 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 			createdAt: '2019-01-25',
 			updatedAt: '2024-03-16',
 		},
+		{
+			slug: 'view-image-transparency',
+			name: 'View Image Transparency',
+			description:
+				'A Chrome extension that displays a checkered background behind transparent images.',
+			background:
+				'A Chrome extension that displays a checkered background behind transparent images. At the time this extension was made, Chrome displayed transparent images with a solid background, making it difficult to tell whether the background of an image was actually transparent or not. This extension fixed that issue and is one of the first Chrome extensions I ever made.',
+			category: ProjectCategory.Extension,
+			subcategory: 'Browser',
+			schema: {
+				type: SchemaType.Software,
+				applicationCategory: SchemaApplicationCategory.Browser,
+				operatingSystem: 'Any',
+			},
+			languages: ['CSS', 'HTML', 'JavaScript'],
+			tools: ['Sublime Text', 'Chrome'],
+			createdAt: '2015-02-20',
+			updatedAt: '2015-02-26',
+		},
 	],
 } as const;
