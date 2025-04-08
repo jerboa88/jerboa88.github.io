@@ -148,5 +148,24 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 			createdAt: '2020-12-06',
 			updatedAt: '2020-12-06',
 		},
+		{
+			slug: 'mips-variable-replacer',
+			name: 'MIPS Variable Replacer',
+			description:
+				'A command-line tool to simplify development in MIPS assembly. Use easy to remember variable names in MIPS and map them to actual registers before assembling.',
+			background:
+				'A command-line tool to simplify development in MIPS assembly. While taking a computer architecture course in University, I though it would be interesting to have a tool for debugging MIPS assembly that would allow me to use variable names instead of having to remember which registers were available and what they were storing. Written in Python, this tool acts like a preprocessor for MIPS that lets you use custom register names and map them to actual registers before assembling.',
+			category: ProjectCategory.App,
+			subcategory: 'CLI',
+			schema: {
+				type: SchemaType.Software,
+				applicationCategory: SchemaApplicationCategory.Developer,
+				operatingSystem: 'Any',
+			},
+			languages: ['Python', 'MIPS'],
+			tools: ['VS Code'],
+			createdAt: '2019-03-11',
+			updatedAt: '2019-03-14',
+		},
 	],
 } as const;
