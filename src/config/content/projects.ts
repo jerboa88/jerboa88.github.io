@@ -167,5 +167,24 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 			createdAt: '2019-03-11',
 			updatedAt: '2019-03-14',
 		},
+		{
+			slug: 'reactive-led-controller',
+			name: 'Reactive LED Controller',
+			description:
+				'A program that lets you control the Cooler Master Masterkeys series of keyboards and RGB LED strips via an Arduino. The primary purpose of this app is to make the lights react to music but there are other functions as well.',
+			background:
+				'A program that lets you control certain keyboards and RGB LED strips via an Arduino. This primary purpose of this application was to make lights react to music but there are many other functions available at this point. This project had a big focus on code efficiency and the integration of physical electronic parts into a software solution.',
+			category: ProjectCategory.App,
+			subcategory: 'CLI',
+			schema: {
+				type: SchemaType.Software,
+				applicationCategory: SchemaApplicationCategory.Multimedia,
+				operatingSystem: 'Windows',
+			},
+			languages: ['C++'],
+			tools: ['VS Code', 'Arduino IDE'],
+			createdAt: '2019-11-22',
+			updatedAt: '2019-12-21',
+		},
 	],
 } as const;
