@@ -129,5 +129,24 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 			createdAt: '2015-02-20',
 			updatedAt: '2015-02-26',
 		},
+		{
+			slug: 'tools-for-jira',
+			name: 'Tools for Jira',
+			description:
+				'A browser extension that provides context menu tools to make working with Jira tickets easier.',
+			background:
+				'A browser extension that provides context menu tools to make working with Jira tickets easier. During my internship at Haemonetics, I noticed that we were wasting time manually copying and pasting information from Jira tickets into other tools. I created this extension in my free time and distributed it to the team in order to improve efficiency and reduce developer frustration.',
+			category: ProjectCategory.Extension,
+			subcategory: 'Browser',
+			schema: {
+				type: SchemaType.Software,
+				applicationCategory: SchemaApplicationCategory.Browser,
+				operatingSystem: 'Any',
+			},
+			languages: ['JavaScript'],
+			tools: ['Jira', 'Chrome', 'Firefox', 'Edge', 'Opera', 'VS Code'],
+			createdAt: '2020-12-06',
+			updatedAt: '2020-12-06',
+		},
 	],
 } as const;
