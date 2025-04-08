@@ -92,5 +92,23 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 			createdAt: '2022-03-18',
 			updatedAt: '2024-03-24',
 		},
+		{
+			slug: 'resume',
+			name: 'Resume (v1)',
+			description:
+				'My personal resume, made using Jekyll and the Liquid template language.',
+			background:
+				'A previous version of my resume, made using Jekyll and the Liquid template language. To build the resume, past jobs, schools, and projects are defined in Markdown files, a Liquid template is used to conditionally include and format them, and finally, Jekyll is used to render the template into a static HTML file. This allows for easier updates when compared to a resume made with a word processor.',
+			category: ProjectCategory.Website,
+			schema: {
+				type: SchemaType.Web,
+				applicationCategory: SchemaApplicationCategory.Lifestyle,
+				operatingSystem: 'Any',
+			},
+			languages: ['HTML', 'SCSS', 'Liquid'],
+			tools: ['VS Code'],
+			createdAt: '2019-01-25',
+			updatedAt: '2024-03-16',
+		},
 	],
 } as const;
