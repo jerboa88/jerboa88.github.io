@@ -21,6 +21,7 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 			background:
 				'A web application designed to assist young individuals in discovering and pursuing potential career pathways. Created as part of a class project with 5 other team members, this React-based web app was written with Django on the backend and Next.js on the frontend.',
 			category: ProjectCategory.App,
+			subcategory: 'Web',
 			schema: {
 				type: SchemaType.Web,
 				applicationCategory: SchemaApplicationCategory.Educational,
@@ -28,8 +29,8 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 			},
 			languages: ['CSS', 'JavaScript', 'Python'],
 			technologies: ['React', 'Django', 'Next.js', 'OpenStack'],
-			tools: [],
-			topics: [],
+			tools: ['VS Code'],
+			topics: ['Agile'],
 			createdAt: '2023-01-17',
 			updatedAt: '2023-04-10',
 			url: 'https://cmput401.ca/projects/1a890021-cf4c-48d6-93c0-666ca1125373',
@@ -42,6 +43,7 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 			background:
 				'A command line implementation of a ride sharing app written for a class project. Collaborated with teammates to integrate a command line interface with a SQL database via the SQLite library in Python.',
 			category: ProjectCategory.App,
+			subcategory: 'CLI',
 			schema: {
 				type: SchemaType.Software,
 				applicationCategory: SchemaApplicationCategory.Travel,
@@ -49,8 +51,6 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 			},
 			languages: ['Python', 'SQL'],
 			technologies: ['SQLite'],
-			tools: [],
-			topics: [],
 			createdAt: '2018-11-01',
 			updatedAt: '2018-12-01',
 		},
@@ -62,15 +62,14 @@ export const PROJECTS_CONFIG: ProjectsConfig = {
 			background:
 				'A decision support system that generates forecasts of time-series data using triple exponential smoothing. Created as part of a class project with 3 other team members, this Excel add-in was written using Visual Basic for Applications (VBA) and the Solver library.',
 			category: ProjectCategory.Plugin,
+			subcategory: 'Excel',
 			schema: {
 				type: SchemaType.Software,
 				applicationCategory: SchemaApplicationCategory.Business,
 				operatingSystem: 'Windows',
 			},
 			languages: ['VBA'],
-			technologies: [],
-			tools: ['Excel'],
-			topics: [],
+			tools: ['Excel', 'VS Code'],
 			createdAt: '2022-11-11',
 			updatedAt: '2022-12-11',
 		},
