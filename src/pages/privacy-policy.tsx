@@ -3,16 +3,18 @@
 	-------------------
 */
 
+import { faIgloo } from '@fortawesome/free-solid-svg-icons';
 import type { HeadProps, PageProps } from 'gatsby';
 import { graphql } from 'gatsby';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { PageLayout } from '../components/layout/page-layout.tsx';
 import { Section } from '../components/layout/section.tsx';
-import { SolidButtonLink } from '../components/links/solid-button-link.tsx';
+import { GhostButtonLink } from '../components/links/ghost-button-link.tsx';
 import { PageHead } from '../components/seo/page-head.tsx';
 import { Article } from '../components/text/article.tsx';
 import { AUTHOR_SCHEMA_PATH } from '../config/constants.ts';
 import { getSiteMetadata } from '../managers/config.ts';
+import type { ButtonElementRenderFn } from '../types/components.ts';
 import type { SocialImagesMetadataProp } from '../types/other.ts';
 import type { PrivacyPageContext } from '../types/page-context.ts';
 import { getAbsoluteUrl } from '../utils/urls.ts';
@@ -32,6 +34,19 @@ export default function PrivacyPolicyPage({
 }: PageProps<Queries.PrivacyPolicyPageQuery, PageContext>) {
 	const articleHtml = data?.file?.childMarkdownRemark?.html;
 	const sectionRef = useRef<HTMLElement>(null);
+	const sectionButton = useCallback(
+		((remainingProps) => (
+			<GhostButtonLink
+				text="Home"
+				icon={faIgloo}
+				to="/"
+				responsive
+				isInternal
+				{...remainingProps}
+			/>
+		)) as ButtonElementRenderFn,
+		[],
+	);
 
 	return (
 		<PageLayout>
@@ -40,11 +55,11 @@ export default function PrivacyPolicyPage({
 			<Section
 				title={pageMetadata.title}
 				ref={sectionRef}
+				renderButton={sectionButton}
 				className="items-center"
 			>
 				<div className="flex flex-col gap-8 items-center">
 					{articleHtml && <Article html={articleHtml} />}
-					<SolidButtonLink text="Home" to="/" isInternal />
 				</div>
 			</Section>
 		</PageLayout>
