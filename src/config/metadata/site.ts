@@ -22,6 +22,7 @@ export const SITE_METADATA_CONFIG: SiteMetadataConfig = {
 			linkedin: 'johngoodliff',
 			github: 'jerboa88',
 			x: 'jerboa88',
+			patreon: 'jerboa88',
 		},
 		location: {
 			city: 'Edmonton',

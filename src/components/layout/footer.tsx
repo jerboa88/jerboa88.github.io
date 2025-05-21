@@ -3,12 +3,12 @@
 	-------------------------------
 */
 
-import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { PRIVACY_POLICY_PATH } from '../../config/constants.ts';
+import { FUNDING_PATH, PRIVACY_POLICY_PATH } from '../../config/constants.ts';
 import { getSiteMetadata } from '../../managers/config.ts';
 import { TooltipPosition } from '../../types/components.ts';
 import { Divider } from '../divider.tsx';
 import { GhostButtonLink } from '../links/ghost-button-link.tsx';
+import { SignatureGhostButton } from '../seo/signature-ghost-button.tsx';
 
 // Constants
 
@@ -28,6 +28,13 @@ export function Footer() {
 							tooltipPosition={TooltipPosition.Right}
 						/>
 						<GhostButtonLink
+							to={FUNDING_PATH}
+							text="Funding"
+							tooltipText="View funding options"
+							tooltipPosition={TooltipPosition.Right}
+							isInternal
+						/>
+						<GhostButtonLink
 							to={PRIVACY_POLICY_PATH}
 							text="Privacy"
 							tooltipText="View the Privacy Policy"
@@ -36,20 +43,7 @@ export function Footer() {
 							isInternal
 						/>
 					</nav>
-					<nav className="flex flex-row justify-center">
-						<GhostButtonLink
-							to={SITE_METADATA.author.url.linkedin}
-							icon={faLinkedin}
-							tooltipText="View my profile on LinkedIn"
-							tooltipPosition={TooltipPosition.Left}
-						/>
-						<GhostButtonLink
-							to={SITE_METADATA.author.url.github}
-							icon={faGithub}
-							tooltipText="View my profile on GitHub"
-							tooltipPosition={TooltipPosition.Left}
-						/>
-					</nav>
+					<SignatureGhostButton />
 				</div>
 			</div>
 		</footer>

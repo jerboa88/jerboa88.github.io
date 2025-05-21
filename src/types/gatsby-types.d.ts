@@ -1419,11 +1419,8 @@ type GithubDataSortInput = {
 type GithubRepo = Node & {
   readonly background: Maybe<Scalars['String']>;
   readonly category: ProjectCategory;
-  /** Returns the first child node of type MarkdownRemark or null if there are no children of given type on this node */
   readonly childMarkdownRemark: Maybe<MarkdownRemark>;
   readonly children: ReadonlyArray<Node>;
-  /** Returns all children nodes filtered by type MarkdownRemark */
-  readonly childrenMarkdownRemark: Maybe<ReadonlyArray<Maybe<MarkdownRemark>>>;
   readonly createdAt: Scalars['Date'];
   readonly description: Scalars['String'];
   readonly forkCount: Scalars['Int'];
@@ -1500,7 +1497,6 @@ type GithubRepoFieldSelector = {
   readonly category: InputMaybe<ProjectCategoryFieldSelector>;
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkFieldSelector>;
   readonly children: InputMaybe<NodeFieldSelector>;
-  readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkFieldSelector>;
   readonly createdAt: InputMaybe<FieldSelectorEnum>;
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly forkCount: InputMaybe<FieldSelectorEnum>;
@@ -1532,7 +1528,6 @@ type GithubRepoFilterInput = {
   readonly category: InputMaybe<ProjectCategoryFilterInput>;
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkFilterInput>;
   readonly children: InputMaybe<NodeFilterListInput>;
-  readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkFilterListInput>;
   readonly createdAt: InputMaybe<DateQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly forkCount: InputMaybe<IntQueryOperatorInput>;
@@ -1605,7 +1600,6 @@ type GithubRepoSortInput = {
   readonly category: InputMaybe<ProjectCategorySortInput>;
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkSortInput>;
   readonly children: InputMaybe<NodeSortInput>;
-  readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkSortInput>;
   readonly createdAt: InputMaybe<SortOrderEnum>;
   readonly description: InputMaybe<SortOrderEnum>;
   readonly forkCount: InputMaybe<SortOrderEnum>;
@@ -2234,7 +2228,6 @@ type Query_githubRepoArgs = {
   category: InputMaybe<ProjectCategoryFilterInput>;
   childMarkdownRemark: InputMaybe<MarkdownRemarkFilterInput>;
   children: InputMaybe<NodeFilterListInput>;
-  childrenMarkdownRemark: InputMaybe<MarkdownRemarkFilterListInput>;
   createdAt: InputMaybe<DateQueryOperatorInput>;
   description: InputMaybe<StringQueryOperatorInput>;
   forkCount: InputMaybe<IntQueryOperatorInput>;
@@ -3197,25 +3190,33 @@ type SiteSiteMetadataAuthorSortInput = {
 
 type SiteSiteMetadataAuthorUrl = {
   readonly github: Maybe<Scalars['String']>;
+  readonly githubSponsors: Maybe<Scalars['String']>;
   readonly linkedin: Maybe<Scalars['String']>;
+  readonly patreon: Maybe<Scalars['String']>;
   readonly x: Maybe<Scalars['String']>;
 };
 
 type SiteSiteMetadataAuthorUrlFieldSelector = {
   readonly github: InputMaybe<FieldSelectorEnum>;
+  readonly githubSponsors: InputMaybe<FieldSelectorEnum>;
   readonly linkedin: InputMaybe<FieldSelectorEnum>;
+  readonly patreon: InputMaybe<FieldSelectorEnum>;
   readonly x: InputMaybe<FieldSelectorEnum>;
 };
 
 type SiteSiteMetadataAuthorUrlFilterInput = {
   readonly github: InputMaybe<StringQueryOperatorInput>;
+  readonly githubSponsors: InputMaybe<StringQueryOperatorInput>;
   readonly linkedin: InputMaybe<StringQueryOperatorInput>;
+  readonly patreon: InputMaybe<StringQueryOperatorInput>;
   readonly x: InputMaybe<StringQueryOperatorInput>;
 };
 
 type SiteSiteMetadataAuthorUrlSortInput = {
   readonly github: InputMaybe<SortOrderEnum>;
+  readonly githubSponsors: InputMaybe<SortOrderEnum>;
   readonly linkedin: InputMaybe<SortOrderEnum>;
+  readonly patreon: InputMaybe<SortOrderEnum>;
   readonly x: InputMaybe<SortOrderEnum>;
 };
 
@@ -3308,6 +3309,11 @@ type CoverLetterPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type CoverLetterPageQuery = { readonly file: { readonly childMarkdownRemark: { readonly html: string | null } | null } | null };
+
+type FundingPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type FundingPageQuery = { readonly file: { readonly childMarkdownRemark: { readonly html: string | null } | null } | null };
 
 type PrivacyPolicyPageQueryVariables = Exact<{ [key: string]: never; }>;
 

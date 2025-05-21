@@ -33,6 +33,7 @@ export interface SiteMetadataConfig {
 			linkedin: string;
 			github: string;
 			x: string;
+			patreon: string;
 		};
 		location: {
 			city: Capitalize<string>;

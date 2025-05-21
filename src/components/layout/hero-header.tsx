@@ -3,12 +3,14 @@
 	---------------------------------------------------------------
 */
 
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { motion } from 'motion/react';
 import { Heading } from '../../components/text/heading.tsx';
 import { TITLE_LAYOUT_ID } from '../../config/constants.ts';
 import { getSiteMetadata } from '../../managers/config.ts';
-import { Breakpoint } from '../../types/components.ts';
+import { Breakpoint, TooltipPosition } from '../../types/components.ts';
 import { getStartIndexOfLastWord } from '../../utils/strings.ts';
+import { GhostButtonLink } from '../links/ghost-button-link.tsx';
 import { ResponsiveText } from '../text/responsive-text.tsx';
 
 // Types
@@ -52,6 +54,20 @@ export function HeroHeader({ expandTitle = false }: Props) {
 		<>
 			{titleWrapperElement}
 			<span className="m-4">{SITE_METADATA.tagline}</span>
+			<nav className="flex flex-row justify-center">
+				<GhostButtonLink
+					to={SITE_METADATA.author.url.linkedin}
+					icon={faLinkedin}
+					tooltipText="View my profile on LinkedIn"
+					tooltipPosition={TooltipPosition.Left}
+				/>
+				<GhostButtonLink
+					to={SITE_METADATA.author.url.github}
+					icon={faGithub}
+					tooltipText="View my profile on GitHub"
+					tooltipPosition={TooltipPosition.Left}
+				/>
+			</nav>
 		</>
 	);
 }

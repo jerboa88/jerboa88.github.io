@@ -49,6 +49,11 @@ export type ResumePageContext = PageContext<{
 export type CoverLetterPageContext = PageContext;
 
 /**
+ * Page context for the funding page
+ */
+export type FundingPageContext = PageContext;
+
+/**
  * Page context for the privacy policy page
  */
 export type PrivacyPageContext = PageContext;

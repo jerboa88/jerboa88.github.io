@@ -45,6 +45,7 @@ export const PROJECTS_PATH_SHORT: AbsolutePathString = '/p';
 export const CONTACT_PATH: AbsolutePathString = '/contact';
 export const RESUME_PATH: AbsolutePathString = '/resume';
 export const COVER_LETTER_PATH: AbsolutePathString = '/cover-letter';
+export const FUNDING_PATH: AbsolutePathString = '/funding';
 export const PRIVACY_POLICY_PATH: AbsolutePathString = '/privacy-policy';
 export const NOT_FOUND_PATH: AbsolutePathString = '/404';
 export const SOCIAL_IMAGES_PATH: AbsolutePathString =

@@ -6,12 +6,18 @@
 import type { PagesMetadataConfig } from '../../types/other.ts';
 import {
 	COVER_LETTER_PATH,
+	FUNDING_PATH,
 	NOT_FOUND_PATH,
 	PRIVACY_POLICY_PATH,
 	RESUME_PATH,
 } from '../constants.ts';
 
 export const PAGES_METADATA_CONFIG: PagesMetadataConfig = {
+	[FUNDING_PATH]: {
+		title: 'Funding',
+		shortTitle: 'Funding',
+		description: 'Ways to support my open-source work and other projects.',
+	},
 	[PRIVACY_POLICY_PATH]: {
 		title: 'Privacy Policy',
 		shortTitle: 'Privacy',

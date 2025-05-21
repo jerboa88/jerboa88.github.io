@@ -55,6 +55,8 @@ type SiteMetadata = {
 			linkedin: UrlString;
 			github: UrlString;
 			x: UrlString;
+			githubSponsors: UrlString;
+			patreon: UrlString;
 		};
 		location: {
 			city: Capitalize<string>;
@@ -116,6 +118,8 @@ export function getSiteMetadata(): SiteMetadata {
 				linkedin: `https://linkedin.com/in/${config.author.username.linkedin}`,
 				github: `https://github.com/${config.author.username.github}`,
 				x: `https://x.com/${config.author.username.x}`,
+				githubSponsors: `https://github.com/sponsors/${config.author.username.github}`,
+				patreon: `https://patreon.com/${config.author.username.patreon}`,
 			},
 			location: {
 				city: config.author.location.city,
