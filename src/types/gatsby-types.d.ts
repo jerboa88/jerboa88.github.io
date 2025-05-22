@@ -3189,6 +3189,7 @@ type SiteSiteMetadataAuthorSortInput = {
 };
 
 type SiteSiteMetadataAuthorUrl = {
+  readonly braveCreators: Maybe<Scalars['String']>;
   readonly github: Maybe<Scalars['String']>;
   readonly githubSponsors: Maybe<Scalars['String']>;
   readonly linkedin: Maybe<Scalars['String']>;
@@ -3197,6 +3198,7 @@ type SiteSiteMetadataAuthorUrl = {
 };
 
 type SiteSiteMetadataAuthorUrlFieldSelector = {
+  readonly braveCreators: InputMaybe<FieldSelectorEnum>;
   readonly github: InputMaybe<FieldSelectorEnum>;
   readonly githubSponsors: InputMaybe<FieldSelectorEnum>;
   readonly linkedin: InputMaybe<FieldSelectorEnum>;
@@ -3205,6 +3207,7 @@ type SiteSiteMetadataAuthorUrlFieldSelector = {
 };
 
 type SiteSiteMetadataAuthorUrlFilterInput = {
+  readonly braveCreators: InputMaybe<StringQueryOperatorInput>;
   readonly github: InputMaybe<StringQueryOperatorInput>;
   readonly githubSponsors: InputMaybe<StringQueryOperatorInput>;
   readonly linkedin: InputMaybe<StringQueryOperatorInput>;
@@ -3213,6 +3216,7 @@ type SiteSiteMetadataAuthorUrlFilterInput = {
 };
 
 type SiteSiteMetadataAuthorUrlSortInput = {
+  readonly braveCreators: InputMaybe<SortOrderEnum>;
   readonly github: InputMaybe<SortOrderEnum>;
   readonly githubSponsors: InputMaybe<SortOrderEnum>;
   readonly linkedin: InputMaybe<SortOrderEnum>;

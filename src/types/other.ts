@@ -34,6 +34,7 @@ export interface SiteMetadataConfig {
 			github: string;
 			x: string;
 			patreon: string;
+			braveCreators: string;
 		};
 		location: {
 			city: Capitalize<string>;

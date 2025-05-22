@@ -3,7 +3,7 @@
 	------------
 */
 
-import { faPatreon } from '@fortawesome/free-brands-svg-icons';
+import { faBrave, faPatreon } from '@fortawesome/free-brands-svg-icons';
 import { faHeart, faIgloo } from '@fortawesome/free-solid-svg-icons';
 import type { HeadProps, PageProps } from 'gatsby';
 import { graphql } from 'gatsby';
@@ -63,7 +63,7 @@ export default function FundingPage({
 				<div className="flex flex-col gap-8">
 					{articleHtml && <Article html={articleHtml} />}
 
-					<div className="flex flex-row gap-2">
+					<div className="flex flex-col sm:flex-row gap-2 flex-wrap">
 						<SolidButtonLink
 							to={SITE_METADATA.author.url.githubSponsors}
 							icon={faHeart}
@@ -74,7 +74,13 @@ export default function FundingPage({
 							to={SITE_METADATA.author.url.patreon}
 							icon={faPatreon}
 							text="Patreon"
-							tooltipText="Sponsor me on Patreon"
+							tooltipText="Become a member on Patreon"
+						/>
+						<SolidButtonLink
+							to={SITE_METADATA.author.url.braveCreators}
+							icon={faBrave}
+							text="Brave Creators"
+							tooltipText="Contribute BAT via Brave Creators"
 						/>
 					</div>
 				</div>

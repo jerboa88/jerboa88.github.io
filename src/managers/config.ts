@@ -57,6 +57,7 @@ type SiteMetadata = {
 			x: UrlString;
 			githubSponsors: UrlString;
 			patreon: UrlString;
+			braveCreators: UrlString;
 		};
 		location: {
 			city: Capitalize<string>;
@@ -120,6 +121,7 @@ export function getSiteMetadata(): SiteMetadata {
 				x: `https://x.com/${config.author.username.x}`,
 				githubSponsors: `https://github.com/sponsors/${config.author.username.github}`,
 				patreon: `https://patreon.com/${config.author.username.patreon}`,
+				braveCreators: `https://publishers.basicattentiontoken.org/en/c/${config.author.username.braveCreators}`,
 			},
 			location: {
 				city: config.author.location.city,

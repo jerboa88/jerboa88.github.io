@@ -23,6 +23,7 @@ export const SITE_METADATA_CONFIG: SiteMetadataConfig = {
 			github: 'jerboa88',
 			x: 'jerboa88',
 			patreon: 'jerboa88',
+			braveCreators: 'johng',
 		},
 		location: {
 			city: 'Edmonton',
