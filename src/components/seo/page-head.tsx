@@ -56,7 +56,6 @@ export function PageHead({
 			<title>{pageMetadata.title}</title>
 			<meta name="author" content={SITE_METADATA.author.name.full} />
 			<meta name="description" content={pageMetadata.description} />
-			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 			{/* OpenGraph meta tags */}
 			<meta property="og:title" content={pageMetadata.title} />
@@ -103,11 +102,7 @@ export function PageHead({
 						image: SITE_METADATA.author.imageUrl,
 						alumniOf: SITE_METADATA.author.alumniOf,
 						jobTitle: SITE_METADATA.author.jobTitle,
-						sameAs: [
-							SITE_METADATA.author.url.linkedin,
-							SITE_METADATA.author.url.github,
-							SITE_METADATA.author.url.x,
-						],
+						sameAs: Object.values(SITE_METADATA.author.url),
 						address: {
 							'@type': 'PostalAddress',
 							addressLocality: SITE_METADATA.author.location.city,
