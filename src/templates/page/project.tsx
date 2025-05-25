@@ -141,14 +141,14 @@ export const Head = ({
 			],
 		},
 		mainEntity: {
-			'@type': project.schema?.type ?? SchemaType.Software,
+			'@type': buildAppSchemaValue(project.schema?.type ?? SchemaType.Software),
 			...ifDefined({
 				applicationCategory: buildAppSchemaValue(
 					project.schema?.applicationCategory,
 				),
 			}),
 			...ifDefined({
-				operatingSystem: buildAppSchemaValue(project.schema?.operatingSystem),
+				operatingSystem: project.schema?.operatingSystem,
 			}),
 			...(project.type === ProjectType.GithubRepo && {
 				image: project.openGraphImageUrl,
