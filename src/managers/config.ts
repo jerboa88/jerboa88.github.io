@@ -67,10 +67,9 @@ type SiteMetadata = {
 	};
 };
 
-// Functions
+// Constants
 
-// Returns metadata for the site
-export function getSiteMetadata(): SiteMetadata {
+const SITE_METADATA: SiteMetadata = (() => {
 	const config = SITE_METADATA_CONFIG;
 	const authorFullName: Capitalize<string> =
 		`${config.author.name.first} ${config.author.name.last}` as typeof config.author.name.first;
@@ -130,6 +129,13 @@ export function getSiteMetadata(): SiteMetadata {
 			},
 		},
 	};
+})();
+
+// Functions
+
+// Returns metadata for the site
+export function getSiteMetadata() {
+	return SITE_METADATA;
 }
 
 // Returns the metadata for a given page
