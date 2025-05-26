@@ -23,7 +23,13 @@ export function LinkWrapper({
 	const classNameProps = getClassNameProps(className);
 
 	return isInternal ? (
-		<GatsbyLink to={to} rel={rel} {...classNameProps}>
+		<GatsbyLink
+			to={to}
+			rel={rel}
+			aria-label={ariaLabel}
+			aria-description={ariaDescription}
+			{...classNameProps}
+		>
 			{children}
 		</GatsbyLink>
 	) : (
