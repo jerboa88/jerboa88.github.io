@@ -11,7 +11,7 @@ import { getClassNameProps } from '../utils/other.ts';
 // Types
 
 interface Props extends PropsWithClassName, PropsWithChildren {
-	text: string | number;
+	text: string;
 	position?: TooltipPosition;
 }
 

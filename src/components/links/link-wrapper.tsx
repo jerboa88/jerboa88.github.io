@@ -16,6 +16,8 @@ export function LinkWrapper({
 	to,
 	isInternal = false,
 	rel = '',
+	ariaLabel,
+	ariaDescription,
 	children,
 }: Props) {
 	const classNameProps = getClassNameProps(className);
@@ -25,10 +27,13 @@ export function LinkWrapper({
 			{children}
 		</GatsbyLink>
 	) : (
+		// biome-ignore lint/a11y/useValidAriaProps: aria-description is a draft rn but will likely be added to the spec
 		<a
 			href={to}
 			target="_blank"
 			rel={`noopener external ${rel}`}
+			aria-label={ariaLabel}
+			aria-description={ariaDescription}
 			{...classNameProps}
 		>
 			{children}

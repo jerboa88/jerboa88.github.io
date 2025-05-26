@@ -64,6 +64,8 @@ export interface Link {
 	to: string;
 	isInternal?: boolean;
 	rel?: string;
+	ariaLabel?: string;
+	ariaDescription?: string;
 }
 
 /**
@@ -86,7 +88,7 @@ export interface Button extends PropsWithClassName, PropsWithLayoutAnimations {
 	isNotInteractive?: boolean;
 	type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
 	icon?: IconDefinition;
-	text?: string | number;
+	text?: string;
 	tooltipText?: string;
 	tooltipPosition?: TooltipPosition;
 	disabled?: boolean;

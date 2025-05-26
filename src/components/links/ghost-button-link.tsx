@@ -14,14 +14,35 @@ export function GhostButtonLink({
 	to,
 	isInternal,
 	rel,
+	text,
+	tooltipText,
 	...remainingProps
 }: Props) {
+	const ariaLabel = text ?? tooltipText;
 	const isInternalProp = isDefined(isInternal) ? { isInternal } : {};
 	const relProp = isDefined(rel) ? { rel } : {};
+	const textProp = isDefined(text) ? { text } : {};
+	const tooltipTextProp = isDefined(tooltipText) ? { tooltipText } : {};
+	const ariaLabelProp = isDefined(ariaLabel) ? { ariaLabel } : {};
+	const ariaDescriptionProp = isDefined(tooltipText)
+		? { ariaDescription: tooltipText }
+		: {};
 
 	return (
-		<LinkWrapper to={to} className="contents" {...isInternalProp} {...relProp}>
-			<GhostButton {...remainingProps} isNotInteractive />
+		<LinkWrapper
+			to={to}
+			className="contents"
+			{...{
+				...ariaLabelProp,
+				...ariaDescriptionProp,
+				...isInternalProp,
+				...relProp,
+			}}
+		>
+			<GhostButton
+				{...{ ...textProp, ...tooltipTextProp, ...remainingProps }}
+				isNotInteractive
+			/>
 		</LinkWrapper>
 	);
 }
