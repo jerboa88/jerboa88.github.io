@@ -4,48 +4,56 @@
 
 /* poppins-latin-400-normal */
 @font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400;
-  src: url('@fontsource/poppins/files/poppins-latin-400-normal.woff2') format('woff2');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+	font-family: "Poppins";
+	font-style: normal;
+	font-display: swap;
+	font-weight: 400;
+	src: url("@fontsource/poppins/files/poppins-latin-400-normal.woff2")
+		format("woff2");
+	unicode-range:
+		U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 /* poppins-latin-500-normal */
 @font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 500;
-  src: url('@fontsource/poppins/files/poppins-latin-500-normal.woff2') format('woff2');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+	font-family: "Poppins";
+	font-style: normal;
+	font-display: swap;
+	font-weight: 500;
+	src: url("@fontsource/poppins/files/poppins-latin-500-normal.woff2")
+		format("woff2");
+	unicode-range:
+		U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 /* poppins-latin-700-normal */
 @font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 700;
-  src: url('@fontsource/poppins/files/poppins-latin-700-normal.woff2') format('woff2');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+	font-family: "Poppins";
+	font-style: normal;
+	font-display: swap;
+	font-weight: 700;
+	src: url("@fontsource/poppins/files/poppins-latin-700-normal.woff2")
+		format("woff2");
+	unicode-range:
+		U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 /* roboto-flex-latin-wght-normal */
 @font-face {
-  font-family: 'Roboto Flex Variable';
-  font-style: normal;
-  font-weight: 100 1000;
+	font-family: "Roboto Flex Variable";
+	font-style: normal;
+	font-weight: 100 1000;
 	font-display: swap;
-  src: url('@fontsource-variable/roboto-flex/files/roboto-flex-latin-wght-normal.woff2') format('woff2-variations');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+	src: url("@fontsource-variable/roboto-flex/files/roboto-flex-latin-wght-normal.woff2")
+		format("woff2-variations");
+	unicode-range:
+		U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
 
 /* These styles to the base layer so that component styles can override them as necessary */
 @layer base {
-	html, body {
+	html,
+	body {
 		@apply bg-base-300;
 	}
 	/* Override flex-row and flex-col to also change the display type so we don't have to specify this manually every time */
@@ -86,9 +94,7 @@
 	}
 }
 
-
 @layer components {
-
 	/* Override the default font size for footer components */
 	.footer {
 		@apply text-base;
@@ -136,7 +142,8 @@
 	body {
 		overflow: overlay;
 		scrollbar-width: thin;
-		scrollbar-color: var(--fallback-p, oklch(var(--p))) var(--fallback-b2, oklch(var(--b2)));
+		scrollbar-color: var(--fallback-p, oklch(var(--p)))
+			var(--fallback-b2, oklch(var(--b2)));
 	}
 
 	*::-webkit-scrollbar {
@@ -150,13 +157,12 @@
 		border: 6px transparent solid;
 		/* Set background color using box-shadow because background doesn't work with above hack */
 		/* Emboss style from tailwind.config.ts */
-		box-shadow: inset 0 2px 1px 0 oklch(var(--n) / .2), inset 0 0 99px var(--fallback-p, oklch(var(--p)));
+		box-shadow: inset 0 2px 1px 0 oklch(var(--n) / 0.2), inset 0 0 99px
+			var(--fallback-p, oklch(var(--p)));
 	}
 }
 
-
 @layer utilities {
-
 	/* A custom class to make text interact on hover and click */
 	.interactive-text {
 		@apply motion-safe:transition;
