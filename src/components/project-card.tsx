@@ -119,42 +119,34 @@ function ForkCountBadge({ project }: Props) {
 }
 
 export function ProjectCard({ project }: Props) {
-	const cardContentsElement = (
-		<div className="flex flex-col justify-between items-start p-6 align-middle size-full text-ellipsis group">
-			<div className="flex flex-row justify-between items-center pr-2 w-full">
-				<Pill
-					text={project.category.name ?? 'Unknown'}
-					className={project.category.color}
-				/>
-				<ViewSourceButton project={project} />
-			</div>
-			<div className="flex flex-row justify-center w-full">
-				<div className="flex flex-col justify-center gap-4 p-10 h-full rounded-2xl z-16 text-wrap">
-					<SubsectionHeading className="font-semibold">
-						{project.name}
-					</SubsectionHeading>
-					<span className="text-wrap">{project.description}</span>
+	return (
+		<Card outerClassName="size-full">
+			<LinkWrapper to={`${PROJECTS_PATH}/${project.slug}`} isInternal>
+				<div className="flex flex-col justify-between items-start p-6 align-middle size-full text-ellipsis group">
+					<div className="flex flex-row justify-between items-center pr-2 w-full">
+						<Pill
+							text={project.category.name ?? 'Unknown'}
+							className={project.category.color}
+						/>
+						<ViewSourceButton project={project} />
+					</div>
+					<div className="flex flex-row justify-center w-full">
+						<div className="flex flex-col justify-center gap-4 p-10 h-full rounded-2xl z-16 text-wrap">
+							<SubsectionHeading className="font-semibold">
+								{project.name}
+							</SubsectionHeading>
+							<span className="text-wrap">{project.description}</span>
+						</div>
+					</div>
+					<div className="flex flex-row justify-between items-center gap-2 pr-2 w-full">
+						<LanguagePills languages={project.languages} />
+						<div className="flex flex-row gap-6 justify-start items-center flex-wrap">
+							<ForkCountBadge project={project} />
+							<StargazerCountBadge project={project} />
+						</div>
+					</div>
 				</div>
-			</div>
-			<div className="flex flex-row justify-between items-center gap-2 pr-2 w-full">
-				<LanguagePills languages={project.languages} />
-				<div className="flex flex-row gap-6 justify-start items-center flex-wrap">
-					<ForkCountBadge project={project} />
-					<StargazerCountBadge project={project} />
-				</div>
-			</div>
-		</div>
+			</LinkWrapper>
+		</Card>
 	);
-
-	if (project.url) {
-		return (
-			<Card outerClassName="size-full">
-				<LinkWrapper to={`${PROJECTS_PATH}/${project.slug}`} isInternal>
-					{cardContentsElement}
-				</LinkWrapper>
-			</Card>
-		);
-	}
-
-	return <Card outerClassName="size-full">{cardContentsElement}</Card>;
 }
