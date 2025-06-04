@@ -74,13 +74,17 @@ export enum SchemaApplicationCategory {
  * @param category.name - The name of the project category (ex. 'Website', 'App', etc.)
  * @param createdAt - The date the project was created
  * @param description - A brief description of the project
+ * @param homepageUrl - The URL of the project's homepage
  * @param languages - A list of programming languages used in the project
+ * @param logoUrl - The URL of the project's logo
  * @param name - The name of the project
  * @param schema.applicationCategory - The schema.org application category of the project
  * @param schema.operatingSystem - The schema.org operating system of the project
  * @param schema.type - The schema.org type of the project
  * @param slug - The slug of the project
  * @param stargazerCount - The number of stars the project has
+ * @param subcategory - The subcategory of the project (ex. 'Web', 'Android', etc.)
+ * @param tagline - A short tagline for the project
  * @param technologies - A list of technologies used in the project
  * @param tools - A list of tools used in the project
  * @param topics - A list of topics related to the project
@@ -96,7 +100,9 @@ export type BaseProject<T extends ProjectType> = {
 	};
 	createdAt: DateString;
 	description: SentenceString;
+	homepageUrl?: UrlString;
 	languages: readonly string[];
+	logoUrl?: UrlString;
 	name: string;
 	schema?: {
 		applicationCategory?: SchemaApplicationCategory;
@@ -105,6 +111,8 @@ export type BaseProject<T extends ProjectType> = {
 	};
 	slug: string;
 	stargazerCount?: number;
+	subcategory?: Capitalize<string>;
+	tagline?: Capitalize<string>;
 	technologies: readonly string[];
 	tools: readonly string[];
 	topics: readonly string[];
@@ -156,6 +164,10 @@ export type OtherProjectConfig = Overwrite<
 	Omit<OtherProject, 'type'>,
 	{
 		category: ProjectCategory;
+		languages?: readonly string[];
+		technologies?: readonly string[];
+		tools?: readonly string[];
+		topics?: readonly string[];
 	}
 >;
 

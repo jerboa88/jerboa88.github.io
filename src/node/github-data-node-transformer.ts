@@ -40,17 +40,18 @@ type GithubRepoNodeProps = Omit<
 
 type ParseMetadataReturnValue = {
 	name: Nullable<string>;
-	background?: Nullable<string>;
-	logoPath?: Nullable<string>;
+	background: Nullable<string>;
+	logoPath: Nullable<string>;
 	category: Nullable<string>;
+	// TODO: Add subcategory
 	languages: string[];
 	technologies: string[];
 	tools: string[];
 	topics: string[];
 	schema: {
-		type?: Nullable<SchemaType>;
-		applicationCategory?: Nullable<SchemaApplicationCategory>;
-		operatingSystem?: Nullable<string>;
+		type: Nullable<SchemaType>;
+		applicationCategory: Nullable<SchemaApplicationCategory>;
+		operatingSystem: Nullable<string>;
 	};
 };
 
@@ -113,12 +114,12 @@ function parseProjectMetadata(
 	// Reconstruct the object using conditional properties because Zod doesn't support exactOptionalPropertyTypes
 	return {
 		...remainingProps,
-		...ifDefined({ background }),
-		...ifDefined({ logoPath }),
+		background: background ?? null,
+		logoPath: logoPath ?? null,
 		schema: {
-			...ifDefined({ type: schema?.type }),
-			...ifDefined({ applicationCategory: schema?.applicationCategory }),
-			...ifDefined({ operatingSystem: schema?.operatingSystem }),
+			type: schema?.type ?? null,
+			applicationCategory: schema?.applicationCategory ?? null,
+			operatingSystem: schema?.operatingSystem ?? null,
 		},
 	};
 }
@@ -163,7 +164,7 @@ function transformLanguages(
 function transformLogoPath(
 	owner: string,
 	slug: string,
-	logoPath: Maybe<Nullable<string>>,
+	logoPath: Nullable<string>,
 ): Nullable<string> {
 	if (isDefined(logoPath)) {
 		if (logoPath.startsWith('http')) {

@@ -72,6 +72,8 @@ function buildGithubRepoProject(
 		createdAt,
 		description,
 		background: nodeBackground,
+		logoUrl: nodeLogoUrl,
+		homepageUrl: nodeHomepageUrl,
 		category,
 		schema,
 		updatedAt,
@@ -80,6 +82,9 @@ function buildGithubRepoProject(
 	} = githubRepoNode;
 
 	const background = callIfDefined(toSentence, nodeBackground);
+	// For some reason, homepageUrl can be an empty string in some cases, so replace it with undefined if that's the case
+	const homepageUrl = callIfDefined(assertIsUrlString, nodeHomepageUrl || undefined);
+	const logoUrl = callIfDefined(assertIsUrlString, nodeLogoUrl);
 	const categoryName = callIfDefined(
 		(value: string) => toEnum(ProjectCategory, value),
 		category.name,
@@ -96,6 +101,8 @@ function buildGithubRepoProject(
 	return {
 		...remainingProps,
 		...ifDefined({ background }),
+		...ifDefined({ logoUrl }),
+		...ifDefined({ homepageUrl }),
 		schema: {
 			...ifDefined({ type }),
 			...ifDefined({ applicationCategory }),
@@ -121,10 +128,18 @@ function buildGithubRepoProject(
  */
 function buildOtherProject({
 	category,
+	languages,
+	technologies,
+	tools,
+	topics,
 	...remainingProps
 }: OtherProjectConfig): OtherProject {
 	return {
 		...remainingProps,
+		languages: languages ?? [],
+		technologies: technologies ?? [],
+		tools: tools ?? [],
+		topics: topics ?? [],
 		type: ProjectType.Other,
 		category: {
 			color: getProjectCategoryColor(category),

@@ -99,6 +99,12 @@ export const PROJECT_METADATA_SCHEMA = z
 			.min(1)
 			.max(128)
 			.describe('A human-readable name for the project'),
+		tagline: z
+			.string()
+			.min(1)
+			.max(128)
+			.optional()
+			.describe('A short clarifying description for the project'),
 		background: z
 			.string()
 			.min(1)
@@ -120,6 +126,12 @@ export const PROJECT_METADATA_SCHEMA = z
 		category: z
 			.nativeEnum(ProjectCategory)
 			.describe('The general type of the project'),
+		subcategory: z
+			.string()
+			.min(1)
+			.max(128)
+			.optional()
+			.describe('A more specific type of the project'),
 		languages: z
 			.array(z.string().min(1).max(128))
 			.nonempty()
