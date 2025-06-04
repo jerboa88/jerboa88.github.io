@@ -90,7 +90,8 @@ export const SPRING_TRANSITION_PROPS = {
 	},
 } as const;
 
-export const SENTENCE_REGEX = /[\.!?…]$/;
+// Closing parenthesis is included to allow us to end sentences with smiley faces :)
+export const SENTENCE_REGEX = /[.!?…)]$/;
 
 export const PROJECT_METADATA_SCHEMA = z
 	.object({
@@ -108,7 +109,7 @@ export const PROJECT_METADATA_SCHEMA = z
 		background: z
 			.string()
 			.min(1)
-			.max(1024)
+			.max(2048)
 			.regex(
 				SENTENCE_REGEX,
 				'Invalid sentence. Expected the string to end with a period, comma, exclamation mark, or ellipsis',
