@@ -7,6 +7,8 @@ import { motion, useInView } from 'motion/react';
 import { USE_IN_VIEW_OPTIONS } from '../config/constants.ts';
 import type { PageSection } from '../types/components.ts';
 import { Tab } from './tab.tsx';
+import { useEffect } from 'react';
+import { toKebabCase } from '../utils/strings.ts';
 
 interface Props {
 	sections: readonly PageSection[];
@@ -22,6 +24,19 @@ export function Tabs({ sections, hideIndicator = false }: Props) {
 	const currentSectionIndex = hideIndicator
 		? -1
 		: sectionInViewHooks.findIndex((inView) => inView);
+
+	// When the current section changes, update the page URL hash
+	useEffect(() => {
+		let sectionHash = '/';
+
+		if (currentSectionIndex > -1) {
+			const sectionTitle = sections[currentSectionIndex].title;
+
+			sectionHash = `#${toKebabCase(sectionTitle)}`;
+		}
+
+		window.history.replaceState(null, '', sectionHash);
+	}, [currentSectionIndex, sections]);
 
 	return (
 		<motion.nav layout="position" className="flex flex-row justify-center tabs">
