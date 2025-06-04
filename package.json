@@ -27,7 +27,7 @@
 		"develop": "gatsby develop -H 0.0.0.0",
 		"start": "gatsby develop -H 0.0.0.0",
 		"build": "gatsby build",
-		"serve": "gatsby serve -H 0.0.0.0",
+		"serve": "gatsby serve -H 0.0.0.0 -p 8000",
 		"clean": "gatsby clean",
 		"typecheck": "tsc --noEmit --skipLibCheck",
 		"lint": "biome lint --write",
