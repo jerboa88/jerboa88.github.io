@@ -1419,11 +1419,8 @@ type GithubDataSortInput = {
 type GithubRepo = Node & {
   readonly background: Maybe<Scalars['String']>;
   readonly category: ProjectCategory;
-  /** Returns the first child node of type MarkdownRemark or null if there are no children of given type on this node */
   readonly childMarkdownRemark: Maybe<MarkdownRemark>;
   readonly children: ReadonlyArray<Node>;
-  /** Returns all children nodes filtered by type MarkdownRemark */
-  readonly childrenMarkdownRemark: Maybe<ReadonlyArray<Maybe<MarkdownRemark>>>;
   readonly createdAt: Scalars['Date'];
   readonly description: Scalars['String'];
   readonly forkCount: Scalars['Int'];
@@ -1441,6 +1438,8 @@ type GithubRepo = Node & {
   readonly schema: Schema;
   readonly slug: Scalars['String'];
   readonly stargazerCount: Scalars['Int'];
+  readonly subcategory: Maybe<Scalars['String']>;
+  readonly tagline: Maybe<Scalars['String']>;
   readonly tags: ReadonlyArray<Scalars['String']>;
   readonly technologies: ReadonlyArray<Scalars['String']>;
   readonly tools: ReadonlyArray<Scalars['String']>;
@@ -1500,7 +1499,6 @@ type GithubRepoFieldSelector = {
   readonly category: InputMaybe<ProjectCategoryFieldSelector>;
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkFieldSelector>;
   readonly children: InputMaybe<NodeFieldSelector>;
-  readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkFieldSelector>;
   readonly createdAt: InputMaybe<FieldSelectorEnum>;
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly forkCount: InputMaybe<FieldSelectorEnum>;
@@ -1518,6 +1516,8 @@ type GithubRepoFieldSelector = {
   readonly schema: InputMaybe<SchemaFieldSelector>;
   readonly slug: InputMaybe<FieldSelectorEnum>;
   readonly stargazerCount: InputMaybe<FieldSelectorEnum>;
+  readonly subcategory: InputMaybe<FieldSelectorEnum>;
+  readonly tagline: InputMaybe<FieldSelectorEnum>;
   readonly tags: InputMaybe<FieldSelectorEnum>;
   readonly technologies: InputMaybe<FieldSelectorEnum>;
   readonly tools: InputMaybe<FieldSelectorEnum>;
@@ -1532,7 +1532,6 @@ type GithubRepoFilterInput = {
   readonly category: InputMaybe<ProjectCategoryFilterInput>;
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkFilterInput>;
   readonly children: InputMaybe<NodeFilterListInput>;
-  readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkFilterListInput>;
   readonly createdAt: InputMaybe<DateQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly forkCount: InputMaybe<IntQueryOperatorInput>;
@@ -1550,6 +1549,8 @@ type GithubRepoFilterInput = {
   readonly schema: InputMaybe<SchemaFilterInput>;
   readonly slug: InputMaybe<StringQueryOperatorInput>;
   readonly stargazerCount: InputMaybe<IntQueryOperatorInput>;
+  readonly subcategory: InputMaybe<StringQueryOperatorInput>;
+  readonly tagline: InputMaybe<StringQueryOperatorInput>;
   readonly tags: InputMaybe<StringQueryOperatorInput>;
   readonly technologies: InputMaybe<StringQueryOperatorInput>;
   readonly tools: InputMaybe<StringQueryOperatorInput>;
@@ -1605,7 +1606,6 @@ type GithubRepoSortInput = {
   readonly category: InputMaybe<ProjectCategorySortInput>;
   readonly childMarkdownRemark: InputMaybe<MarkdownRemarkSortInput>;
   readonly children: InputMaybe<NodeSortInput>;
-  readonly childrenMarkdownRemark: InputMaybe<MarkdownRemarkSortInput>;
   readonly createdAt: InputMaybe<SortOrderEnum>;
   readonly description: InputMaybe<SortOrderEnum>;
   readonly forkCount: InputMaybe<SortOrderEnum>;
@@ -1623,6 +1623,8 @@ type GithubRepoSortInput = {
   readonly schema: InputMaybe<SchemaSortInput>;
   readonly slug: InputMaybe<SortOrderEnum>;
   readonly stargazerCount: InputMaybe<SortOrderEnum>;
+  readonly subcategory: InputMaybe<SortOrderEnum>;
+  readonly tagline: InputMaybe<SortOrderEnum>;
   readonly tags: InputMaybe<SortOrderEnum>;
   readonly technologies: InputMaybe<SortOrderEnum>;
   readonly tools: InputMaybe<SortOrderEnum>;
@@ -2234,7 +2236,6 @@ type Query_githubRepoArgs = {
   category: InputMaybe<ProjectCategoryFilterInput>;
   childMarkdownRemark: InputMaybe<MarkdownRemarkFilterInput>;
   children: InputMaybe<NodeFilterListInput>;
-  childrenMarkdownRemark: InputMaybe<MarkdownRemarkFilterListInput>;
   createdAt: InputMaybe<DateQueryOperatorInput>;
   description: InputMaybe<StringQueryOperatorInput>;
   forkCount: InputMaybe<IntQueryOperatorInput>;
@@ -2252,6 +2253,8 @@ type Query_githubRepoArgs = {
   schema: InputMaybe<SchemaFilterInput>;
   slug: InputMaybe<StringQueryOperatorInput>;
   stargazerCount: InputMaybe<IntQueryOperatorInput>;
+  subcategory: InputMaybe<StringQueryOperatorInput>;
+  tagline: InputMaybe<StringQueryOperatorInput>;
   tags: InputMaybe<StringQueryOperatorInput>;
   technologies: InputMaybe<StringQueryOperatorInput>;
   tools: InputMaybe<StringQueryOperatorInput>;
