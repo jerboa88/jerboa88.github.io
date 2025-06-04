@@ -4,7 +4,10 @@
 */
 
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons';
+import {
+	faArrowUpRightFromSquare,
+	faCode
+} from '@fortawesome/free-solid-svg-icons';
 import type { HeadProps, PageProps } from 'gatsby';
 import { useCallback, useRef } from 'react';
 import { PageLayout } from '../../components/layout/page-layout.tsx';
@@ -22,6 +25,7 @@ import type { Maybe } from '../../types/utils.ts';
 import { ifDefined, isDefined } from '../../utils/other.ts';
 import { toSentence } from '../../utils/strings.ts';
 import { getAbsoluteUrl } from '../../utils/urls.ts';
+import type { ComponentProps } from 'react';
 
 // Types
 
@@ -37,28 +41,61 @@ function getSectionButtonRenderFn(
 	project: PageContext['project'],
 ): ButtonElementRenderFn {
 	const projectUrl = project.url;
+	const homepageUrl = project.homepageUrl;
+	const buttonsProps: Pick<
+		ComponentProps<typeof GhostButtonLink>,
+		'text' | 'tooltipText' | 'icon' | 'to'
+	>[] = [];
 
-	if (!isDefined(projectUrl)) {
+	if (isDefined(projectUrl)) {
+		const text = 'Source';
+
+		let tooltipText = 'View source code';
+		let icon = faCode;
+
+		if (project.type === ProjectType.GithubRepo) {
+			tooltipText = 'View source code on GitHub';
+			icon = faGithub;
+		}
+
+		buttonsProps.push({
+			text,
+			tooltipText,
+			icon,
+			to: projectUrl,
+		});
+	}
+
+	// If the homepage URL is pointing to an external site, add a link to it
+	if (isDefined(homepageUrl)) {
+		const homepageHost = new URL(homepageUrl).host;
+
+		if (homepageHost !== getAbsoluteUrl('/').host) {
+			buttonsProps.push({
+				text: 'Visit',
+				tooltipText: `Visit site at ${homepageHost}`,
+				icon: faArrowUpRightFromSquare,
+				to: homepageUrl,
+			});
+		}
+	}
+
+	if (buttonsProps.length === 0) {
 		return () => null;
 	}
 
-	let buttonText = 'View project page';
-	let buttonIcon = faGlobe;
-
-	if (project.type === ProjectType.GithubRepo) {
-		buttonText = 'View source code on GitHub';
-		buttonIcon = faGithub;
-	}
-
 	return (remainingProps) => (
-		<GhostButtonLink
-			text={buttonText}
-			icon={buttonIcon}
-			to={projectUrl}
-			responsive
-			flip
-			{...remainingProps}
-		/>
+		<div>
+			{buttonsProps.map((buttonProps) => (
+				<GhostButtonLink
+					key={buttonProps.to}
+					responsive
+					flip
+					{...buttonProps}
+					{...remainingProps}
+				/>
+			))}
+		</div>
 	);
 }
 
