@@ -6,6 +6,7 @@
 import type { PropsWithChildren } from 'react';
 import type { PropsWithClassName } from '../../types/components.ts';
 import { getClassNameProps } from '../../utils/other.ts';
+import { BaseLayout } from '../layout/base-layout.tsx';
 
 interface Props extends PropsWithClassName, PropsWithChildren {
 	size: {
@@ -21,11 +22,13 @@ export function SocialImage({ className, size, children }: Props) {
 	);
 
 	return (
-		<div
-			style={{ maxWidth: size.width, maxHeight: size.height }}
-			className="fixed size-full bg-base-300"
-		>
-			<div {...classNameProps}>{children}</div>
-		</div>
+		<BaseLayout>
+			<div
+				style={{ maxWidth: size.width, maxHeight: size.height }}
+				className="fixed size-full"
+			>
+				<div {...classNameProps}>{children}</div>
+			</div>
+		</BaseLayout>
 	);
 }

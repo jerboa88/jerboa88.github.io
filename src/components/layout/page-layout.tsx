@@ -1,16 +1,15 @@
 /*
-	Layout component that provides basic styles for the whole page
-	--------------------------------------------------------------
+	A layout component for pages that applies basic styles and adds headers and footers
+	-----------------------------------------------------------------------------------
 */
 
-import { MotionConfig } from 'motion/react';
-import { type PropsWithChildren, StrictMode, lazy } from 'react';
-import { SPRING_TRANSITION_PROPS } from '../../config/constants.ts';
+import { type PropsWithChildren } from 'react';
 import type { PageSection } from '../../types/components.ts';
 import type { PropsWithClassName } from '../../types/components.ts';
 import { getClassNameProps } from '../../utils/other.ts';
 import { Footer } from './footer.tsx';
 import { Header } from './header.tsx';
+import { BaseLayout } from './base-layout.tsx';
 
 // Types
 
@@ -19,31 +18,13 @@ interface Props extends PropsWithClassName, PropsWithChildren {
 	sections?: readonly PageSection[];
 }
 
-// Constants
-
-const BG_GRADIENT_PROPS = {
-	style: {
-		background:
-			'radial-gradient(100% 100% at 0% 0%,oklch(var(--a)),oklch(var(--b2)),transparent),radial-gradient(100% 100% at 100% 100%,oklch(var(--a)),oklch(var(--b2)),transparent)',
-	},
-};
-
-const ParticlesBackground = lazy(() =>
-	import('./particles-background.tsx').then((module) => ({
-		default: module.ParticlesBackground,
-	})),
-);
-
 export function PageLayout({
 	className,
 	expandTitle,
 	sections = [],
 	children,
 }: Props) {
-	const classNameProps = getClassNameProps(
-		'flex-col gap-32 justify-between items-center mx-auto text-base min-h-svh scroll-smooth selection:bg-primary selection:text-primary-content',
-		className,
-	);
+	const classNameProps = getClassNameProps(className);
 
 	// const lsKeyForTheme = 'is-dark-theme';
 	// const lsKeyForMotion = 'is-motion-allowed';
@@ -113,16 +94,10 @@ export function PageLayout({
 	// </DarkThemeContext.Provider>
 
 	return (
-		<StrictMode>
-			<MotionConfig {...SPRING_TRANSITION_PROPS} reducedMotion="user">
-				{/* Page body */}
-				<div {...BG_GRADIENT_PROPS} {...classNameProps}>
-					<ParticlesBackground />
-					<Header {...{ expandTitle, sections }} />
-					{children}
-					<Footer />
-				</div>
-			</MotionConfig>
-		</StrictMode>
+		<BaseLayout {...{ classNameProps }}>
+			<Header {...{ expandTitle, sections }} />
+			{children}
+			<Footer />
+		</BaseLayout>
 	);
 }
