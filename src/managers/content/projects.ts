@@ -83,7 +83,10 @@ function buildGithubRepoProject(
 
 	const background = callIfDefined(toSentence, nodeBackground);
 	// For some reason, homepageUrl can be an empty string in some cases, so replace it with undefined if that's the case
-	const homepageUrl = callIfDefined(assertIsUrlString, nodeHomepageUrl || undefined);
+	const homepageUrl = callIfDefined(
+		assertIsUrlString,
+		nodeHomepageUrl || undefined,
+	);
 	const logoUrl = callIfDefined(assertIsUrlString, nodeLogoUrl);
 	const categoryName = callIfDefined(
 		(value: string) => toEnum(ProjectCategory, value),

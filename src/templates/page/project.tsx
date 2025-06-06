@@ -6,7 +6,7 @@
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import {
 	faArrowUpRightFromSquare,
-	faCode
+	faCode,
 } from '@fortawesome/free-solid-svg-icons';
 import type { HeadProps, PageProps } from 'gatsby';
 import { useCallback, useRef } from 'react';

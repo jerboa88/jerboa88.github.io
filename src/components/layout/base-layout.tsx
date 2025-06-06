@@ -11,9 +11,7 @@ import { getClassNameProps } from '../../utils/other.ts';
 
 // Types
 
-interface Props extends PropsWithClassName, PropsWithChildren {
-
-}
+interface Props extends PropsWithClassName, PropsWithChildren {}
 
 // Constants
 
@@ -30,10 +28,7 @@ const ParticlesBackground = lazy(() =>
 	})),
 );
 
-export function BaseLayout({
-	className,
-	children,
-}: Props) {
+export function BaseLayout({ className, children }: Props) {
 	const classNameProps = getClassNameProps(
 		'flex-col gap-32 justify-between items-center mx-auto text-base min-h-svh scroll-smooth selection:bg-primary selection:text-primary-content',
 		className,
