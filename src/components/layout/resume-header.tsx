@@ -39,7 +39,7 @@ export function ResumeHeader() {
 	const location: CityAndStateString = `${SITE_METADATA.author.location.city}, ${SITE_METADATA.author.location.state}`;
 
 	return (
-		<header className="flex flex-col gap-8 sm:flex-row justify-between items-center w-full">
+		<header className="flex flex-col gap-8 sm:flex-row justify-between items-start w-full">
 			<div className="flex flex-col gap-2">
 				<Heading className="text-5xl text-primary">
 					<ResponsiveText
@@ -53,7 +53,7 @@ export function ResumeHeader() {
 					/>
 				</Heading>
 				<Divider />
-				<div className="flex flex-col gap-2 justify-between sm:flex-row">
+				<div className="flex flex-col gap-2 justify-between items-start sm:flex-row">
 					<GhostButton
 						text={role}
 						icon={faSquareBinary}

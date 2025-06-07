@@ -29,7 +29,7 @@ export function BaseButton({
 	layoutRoot,
 }: Button) {
 	const buttonClassNameProps = getClassNameProps(
-		'flex flex-row justify-center items-center self-center gap-2 z-20 text-sm font-button uppercase',
+		'flex flex-row justify-center items-center gap-2 z-20 text-sm font-button uppercase',
 		flip && 'flex-row-reverse', // Button flip styles
 		className,
 	);
