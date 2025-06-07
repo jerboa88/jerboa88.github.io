@@ -8,6 +8,7 @@ import {
 	faEnvelopeSquare,
 	faLocationArrow,
 	faPhoneSquare,
+	faSquareBinary,
 } from '@fortawesome/free-solid-svg-icons';
 import { CONTACT_PATH } from '../../config/constants.ts';
 import { getSiteMetadata } from '../../managers/config.ts';
@@ -19,6 +20,7 @@ import { GhostButton } from '../input/ghost-button.tsx';
 import { GhostButtonLink } from '../links/ghost-button-link.tsx';
 import { Heading } from '../text/heading.tsx';
 import { ResponsiveText } from '../text/responsive-text.tsx';
+import { Divider } from '../divider.tsx';
 
 // Constants
 
@@ -31,23 +33,42 @@ const COMMON_GHOST_BUTTON_LINK_PROPS = {
 };
 
 export function ResumeHeader() {
+	const role = SITE_METADATA.tagline.split(' & ')[0];
 	const phone = SITE_METADATA.author.phone;
 	const email = SITE_METADATA.author.email;
 	const location: CityAndStateString = `${SITE_METADATA.author.location.city}, ${SITE_METADATA.author.location.state}`;
 
 	return (
 		<header className="flex flex-col gap-8 sm:flex-row justify-between items-center w-full">
-			<Heading className="text-5xl text-primary text-right">
-				<ResponsiveText
-					text={SITE_METADATA.author.name.full}
-					breakpoints={{
-						[Breakpoint.Default]: getStartIndexOfLastWord(
-							SITE_METADATA.author.name.full,
-						),
-						[Breakpoint.Sm]: undefined,
-					}}
-				/>
-			</Heading>
+			<div className="flex flex-col gap-2">
+				<Heading className="text-5xl text-primary">
+					<ResponsiveText
+						text={SITE_METADATA.author.name.full}
+						breakpoints={{
+							[Breakpoint.Default]: getStartIndexOfLastWord(
+								SITE_METADATA.author.name.full,
+							),
+							[Breakpoint.Sm]: undefined,
+						}}
+					/>
+				</Heading>
+				<Divider />
+				<div className="flex flex-col gap-2 justify-between sm:flex-row">
+					<GhostButton
+						text={role}
+						icon={faSquareBinary}
+						tooltipText={`I'm a ${role}`}
+						{...COMMON_GHOST_BUTTON_LINK_PROPS}
+						disabled
+					/>
+					<GhostButton
+						text={location}
+						icon={faLocationArrow}
+						{...COMMON_GHOST_BUTTON_LINK_PROPS}
+						disabled
+					/>
+				</div>
+			</div>
 			<ul>
 				{phone && (
 					<li>
@@ -85,14 +106,6 @@ export function ResumeHeader() {
 						icon={faLinkedin}
 						tooltipText="View my profile on LinkedIn"
 						{...COMMON_GHOST_BUTTON_LINK_PROPS}
-					/>
-				</li>
-				<li>
-					<GhostButton
-						text={location}
-						icon={faLocationArrow}
-						{...COMMON_GHOST_BUTTON_LINK_PROPS}
-						disabled
 					/>
 				</li>
 			</ul>
