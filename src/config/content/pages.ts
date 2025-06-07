@@ -127,6 +127,9 @@ export const PAGES_CONTENT_CONFIG: PagesContentConfig = {
 			[EntryVisibility.Show]: [],
 			[EntryVisibility.Hide]: [
 				'168421',
+				'actions-sandbox',
+				'actions-sandbox-2',
+				'actions-sandbox-3',
 				'CMPUT301W20T24-H03/on-my-way',
 				'cringe-craft',
 				'custom-url-shortener',
