@@ -1,6 +1,9 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
 	"files": {
+		"include": [
+			"**/*"
+		],
 		"ignore": [
 			"node_modules/**/*",
 			"public/**/*",
