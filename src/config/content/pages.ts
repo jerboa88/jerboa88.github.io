@@ -8,8 +8,7 @@ import { ContentType, EntryVisibility } from '../../types/content/content.ts';
 import type { Project } from '../../types/content/projects.ts';
 import { type Role, RoleType } from '../../types/content/roles.ts';
 import { SkillType } from '../../types/content/skills.ts';
-import { RESUME_PATH } from '../constants.ts';
-import { INDEX_PATH } from '../constants.ts';
+import { INDEX_PATH, RESUME_PATH } from '../constants.ts';
 
 const startDateSortFn = (a: Role, b: Role) =>
 	new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
@@ -127,22 +126,28 @@ export const PAGES_CONTENT_CONFIG: PagesContentConfig = {
 			[EntryVisibility.Show]: [],
 			[EntryVisibility.Hide]: [
 				'168421',
-				'actions-sandbox',
 				'actions-sandbox-2',
 				'actions-sandbox-3',
+				'actions-sandbox',
 				'CMPUT301W20T24-H03/on-my-way',
 				'cringe-craft',
+				'custom-pi-hole-interface',
 				'custom-url-shortener',
 				'dotfiles',
+				'email-alias-generator',
 				'game-maps',
 				'image-signer',
 				'internal-domain-name-calculator-for-true-charts-apps',
 				'jerboa88-github-io',
 				'jerboa88',
+				'resume',
 				'rtg-for-outlook',
 				'shared-file-finder-for-google-drive',
+				'short-end',
+				'tally-extension',
 				'tinyi18n',
 				'watch-history-exporter-for-amazon-prime-video',
+				'gitmojito'
 			],
 		},
 	},
