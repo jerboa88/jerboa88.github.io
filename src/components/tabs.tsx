@@ -27,7 +27,7 @@ export function Tabs({ sections, hideIndicator = false }: Props) {
 
 	// When the current section changes, update the page URL hash
 	useEffect(() => {
-		let sectionHash = '/';
+		let sectionHash = '';
 
 		if (currentSectionIndex > -1) {
 			const sectionTitle = sections[currentSectionIndex].title;
@@ -35,7 +35,10 @@ export function Tabs({ sections, hideIndicator = false }: Props) {
 			sectionHash = `#${toKebabCase(sectionTitle)}`;
 		}
 
-		window.history.replaceState(null, '', sectionHash);
+		const currentUrl = window.location.href.split('#')[0];
+		const newUrl = `${currentUrl}${sectionHash}`;
+
+		window.history.replaceState(null, '', newUrl);
 	}, [currentSectionIndex, sections]);
 
 	return (
