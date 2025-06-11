@@ -85,7 +85,7 @@ function getSectionButtonRenderFn(
 	}
 
 	return (remainingProps) => (
-		<div>
+		<div className="flex flex-row">
 			{buttonsProps.map((buttonProps) => (
 				<GhostButtonLink
 					key={buttonProps.to}
