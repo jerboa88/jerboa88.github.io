@@ -23,6 +23,7 @@ export type LanguageSkill =
 	| 'HTML'
 	| 'Java'
 	| 'JavaScript/TypeScript'
+	| 'JSX/TSX'
 	| 'Kotlin'
 	| 'Liquid Template Language'
 	| 'Lisp'
@@ -31,6 +32,7 @@ export type LanguageSkill =
 	| 'Nix'
 	| 'Python'
 	| 'R'
+	| 'Regular Expressions'
 	| 'SASS/SCSS'
 	| 'SQL'
 	| 'VBA';
@@ -39,6 +41,9 @@ export type LanguageSkill =
  * A union of string literals representing all technology skills
  */
 export type TechnologySkill =
+	| 'Astro'
+	| 'AVA'
+	| 'Bun'
 	| 'CUDA'
 	| 'Cypress'
 	| 'Django'
@@ -52,6 +57,7 @@ export type TechnologySkill =
 	| 'Gulp'
 	| 'Jekyll'
 	| 'Jest'
+	| 'Joi'
 	| 'JSP'
 	| 'JUnit'
 	| 'Kubernetes'
@@ -59,15 +65,19 @@ export type TechnologySkill =
 	| 'Node.js'
 	| 'NumPy'
 	| 'Oracle DB'
+	| 'Parcel'
+	| 'PostCSS'
 	| 'PostgreSQL'
 	| 'Puppeteer'
 	| 'React'
-	| 'Regular Expressions'
+	| 'SolidJS'
 	| 'Spring Framework'
 	| 'SQLite'
 	| 'Tailwind CSS'
+	| 'Vite'
 	| 'Vue'
-	| 'Webpack';
+	| 'Webpack'
+	| 'Zod';
 
 /**
  * A union of string literals representing all tool skills
