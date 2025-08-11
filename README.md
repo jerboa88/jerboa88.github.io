@@ -144,8 +144,12 @@ This project is not open to code contributions, but feedback and bug reports are
 This project is licensed under the MIT License. See [LICENSE] for details. This project includes various resources which carry their own copyright notices and license terms. See [LICENSE-THIRD-PARTY.md] for more details.
 
 
-## 💕 Funding
+## 🖇️ Related
+- **[jerboa88](https://github.com/jerboa88)**: My GitHub profile README
+- **[Gatsby Plugin: Component to Image][gatsby-plugin-component-to-image]**: A Gatsby plugin to generate images and PDFs from React components. Useful for dynamically generating Open Graph images, favicons, and more!
 
+
+## 💕 Funding
 Find this project useful? [Sponsoring me](https://johng.io/funding) will help me cover costs and **_commit_** more time to open-source.
 
 If you can't donate but still want to contribute, don't worry. There are many other ways to help out, like:
