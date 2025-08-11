@@ -26,7 +26,7 @@
 </div>
 
 
-## About
+## 👋 About
 This portfolio site is designed to showcase my work and provide a way to contact me.
 
 It uses [React] on top of the [Gatsby] framework for static site generation. At build time, it fetches repository data from the [GitHub API] to display a selection of my public repositories.
@@ -34,7 +34,7 @@ It uses [React] on top of the [Gatsby] framework for static site generation. At 
 The UI is styled with [Tailwind CSS] and [daisyUI]. [TypeScript] is used for type checking, and [Biome.js] is used for linting and formatting. [gatsby-plugin-component-to-image] is used to dynamically generate social images from React components.
 
 
-## Getting Started
+## 🚀 Getting Started
 
 > [!NOTE]
 > This project uses [Bun] to speed up installation and build times. If you want to use Node.js instead, you can do so by replacing `bun` with your package manager of choice in the commands below — everything should work the same. For example, `bun install` can be replaced with `npm install` , `pnpm install`, or `yarn install`.
@@ -60,7 +60,7 @@ The UI is styled with [Tailwind CSS] and [daisyUI]. [TypeScript] is used for typ
 5. Use `bun develop` to start the development server or `bun run build` to build the site for production.
 
 
-## Advanced Usage
+## 🤖 Advanced Usage
 This project can be a bit unwieldy, so here's some more details that may help you adapt it to your own needs.
 
 ### Configuration
@@ -136,11 +136,11 @@ Generated with `lsd --tree --icon-theme=unicode -I node_modules -I ".*" -I "*.ts
 x.1 releases mark the final update for a given design, while x.0 releases are reserved for major redesigns. Changes between the first and last release of a design are not explicitly versioned.
 
 
-## Contributing
+## 🤝 Contributing
 This project is not open to code contributions, but feedback and bug reports are always welcome.
 
 
-## License
+## 🧾 License
 This project is licensed under the MIT License. See [LICENSE] for details. This project includes various resources which carry their own copyright notices and license terms. See [LICENSE-THIRD-PARTY.md] for more details.
 
 
